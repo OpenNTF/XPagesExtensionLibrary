@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<!--
+		TODO the different doc types are translated when the teamroom is
+		translated but these selectedValue property literals are not and
+		should not be automatically translated, so should extract the
+		selectedValue literals to the strings.properties file
+	-->
+	<xe:multiImage styleClass="docIcon" id="multiImage1">
+		<xe:this.value><![CDATA[#{javascript://
+
+			var formType = viewEntry.getColumnValue("Form");
+			var docType = viewEntry.getColumnValue("DocType");
+			if( docType instanceof java.util.List && ! docType.isEmpty() ){
+				// when multiple doc types, only use the first one.
+				docType = docType.get(0);
+			}
+			
+			if (("MainTopic" == formType) && ("Event" == docType || "Announcement" == docType || "Status" == docType || "Profile" == docType))
+			{
+				return "Discussion";
+			}
+			
+			
+			return docType;
+		}]]></xe:this.value>
+		<xe:this.icons>
+			<xe:iconEntry styleClass="docIcon" url="discussion_16px_8bit.png"
+				selectedValue="Discussion" alt="Discussion Document">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="reference_16px_8bit.png"
+				selectedValue="Reference" alt="File Entry">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="task_16px_8bit.png"
+				selectedValue="Action Item" alt="Action Item">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="ftCalendar16.png"
+				selectedValue="Meeting" alt="Meeting or Event">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="ftDefault16.png" selectedValue="Chat"
+				alt="Chat Entry">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="/announcement.png"
+				selectedValue="Announcement" alt="Announcement">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="statusreport_16px_8bit.png"
+				selectedValue="Status" alt="Status Report">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="thumbNoPhoto.png"
+				selectedValue="Profile" alt="Profile"
+				style="width:16px;height:16px">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="ftEvents16.png" selectedValue="Event"
+				alt="Event">
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="Comment16.png"
+				alt="Response Document">
+				<xe:this.selected><![CDATA[#{javascript://
+					// else DocType does not match any selectedValue
+					var formName = viewEntry.getDocument().getItemValueString('form');
+					if( 'Response' == formName || formName == 'ResponseToResponse' ){
+						return true;
+					}
+					// else is an unknown DocType and not a response
+					return false;
+				}]]></xe:this.selected>
+			</xe:iconEntry>
+			<xe:iconEntry styleClass="docIcon" url="discussion_16px_8bit.png"
+				alt="Discussion Document">
+				<xe:this.selected><![CDATA[#{javascript://
+					var docType = viewEntry.getColumnValue("DocType");
+					if( docType instanceof java.util.List && ! docType.isEmpty() ){
+						// when multiple doc types, only use the first one.
+						docType = docType.get(0);
+					} 
+					return ("Meeting" != docType && "Event" != docType &&
+						"Announcement" != docType && "Discussion" != docType &&
+							"Status" != docType && "Action Item" != docType &&
+								"File Entry" != docType && "Chat" != docType);
+				}]]></xe:this.selected>
+			</xe:iconEntry>
+		</xe:this.icons>
+	</xe:multiImage>
+</xp:view>

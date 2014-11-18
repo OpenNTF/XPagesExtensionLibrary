@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:ccLayout navigationPath="/JDBC/REST_DojoGridJsonRest">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold"
+				value="This shows a Dojo grid calling the 'JSON' JDBC Query REST services">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService1">
+				<xe:this.service>
+					<xe:jdbcQueryJsonService connectionName="derby1"
+						sqlTable="users" contentType="application/json" >
+					</xe:jdbcQueryJsonService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+			
+			<xp:br></xp:br>
+			<xe:djxDataGrid id="djxDataGrid1"
+				style="width: 85em;height: 25em;padding: 1px" storeComponentId="restService1">
+				<!--
+					style="width: 85em;height: 25em;padding: 1px"
+					storeComponentId="restService1"> style="width: 85em;height:
+					25em;padding: 1px" store="restService3">
+				-->
+				<xe:this.dojoAttributes>
+					<xp:dojoAttribute name="updateDelay" value="0"></xp:dojoAttribute>
+				</xe:this.dojoAttributes>
+				<xe:djxDataGridColumn id="djxDataGridColumn1"
+					field="ID" width="auto" label="ID">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn6"
+					field="FIRSTNAME" width="auto" label="First Name">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn7"
+					field="LASTNAME" width="auto" label="Last Name">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn8"
+					field="CITY" width="auto" label="City">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn9"
+					field="STATE" width="auto" label="State">
+				</xe:djxDataGridColumn>
+			</xe:djxDataGrid>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>
+

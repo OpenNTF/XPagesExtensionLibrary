@@ -1,0 +1,594 @@
+/*
+	=BEGIN
+	Document Library Specific
+*/
+
+.documentAttachmentIcon {
+	display: inline;
+	padding-right: 25px;
+	background-image: url('xpAttachment.gif');
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+
+.mainWindow {
+	background-color: #FFF;
+	color: #000;
+}
+
+.mblDocument {
+	margin-top: 5px;
+	padding: 0 2px 0 2px;
+}
+
+.mblDocumentSubject {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.mblDocumentMeta {
+	font-size: 15px;
+	color: #666;
+}
+
+.mblDocumentBody {
+	margin: 30px 0 30px 0;
+}
+
+.mblDocumentDownloads {
+	padding-bottom: 5px;
+}
+
+.mblSmallFormFooterButton.mblCenterButton {
+	font-size: 12px;
+	position: absolute;
+	margin-left: 26.8%;
+	width: 45%;
+}
+
+.mblSmallFormFooterButton.mblLeftButton {
+	float: left;
+}
+
+.mblSmallFormFooterButton.mblRightButton {
+	float: right;
+}
+
+.mblCategoryBarTable {
+	clear: both;
+	width: 100%;
+}
+
+.mblCategoryBar td {
+	border-top: 1px solid #E6E6E6;
+}
+
+.mblReplyPerson {
+	display: block;
+}
+
+.mobileFormTable .formRow .mblReviewSelectBox {
+	height: 25px;
+	width: 100%;
+	margin-top: 3px;
+	display: block;
+}
+
+.mblTimeLimitInDaysField {
+	display: block;
+	font-size: 15px;
+	width: 95%;
+}
+
+.mblAbstract {
+	color:rgb(120,120,120);
+}
+
+.mblReplyBody {
+	font-size: 18px;
+	font-family: Helvetica;
+}
+
+.mblSearchInput {
+	font-size: 14px;
+}
+
+.mblFilePanel {
+	width: 100%;
+}
+
+.mblFilePanel .label {
+	font-size:12px; font-weight:bold;
+}
+
+/*
+	=END
+	Document Library Specific
+*/
+
+a
+{
+	text-decoration: none;
+}
+
+.mblLoginText a 
+{
+	float:right;
+	margin-top:6px;
+	margin-right:15px;
+	height: 25px;
+	width: 50px;
+	padding: 2px 2px 0px 2px;
+	text-decoration: none;
+	border-style: inset; 
+	font-family: Helvetica; 
+	font-size:13px;
+	color: white;
+	line-height:21px;
+	border-style: solid;
+	border-width:1px;
+	border-color: #9CACC0;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px;
+	-webkit-border-radius: 5px;  
+	background-color: #5877A2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#8EA4C1), to(#4A6C9B), color-stop(0.5, #5877A2), color-stop(0.5, #476999));
+	background: -webkit-gradient(linear, left top, left bottom, from(#8EA4C1), to(#4A6C9B), color-stop(0.5, #5877A2), color-stop(0.5, #476999));
+	-webkit-tap-highlight-color: transparent;
+}
+
+.android .mblLoginText a 
+{
+	border-color: #3F3E3E; 
+	background-color: #ADADAD;
+	background: -webkit-gradient(linear, left top, left bottom, from(#E5E5E5), to(#7F7F7F), color-stop(0.5, #ADADAD), color-stop(0.5, #909090)); 
+}
+
+.mblSearchBar
+{
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(225,226,230)), to(rgb(151,167,188))); 
+	height:42px; 
+	vertical-align:middle; 
+	line-height:42px;
+	position: relative;
+}
+
+.android .mblSearchBar
+{	
+	border-color: #9CACC0;
+	background-color: #5877A2;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(237, 239, 243)), to(rgb(200, 202, 204)));
+}
+
+.mblSearchBar input
+{
+	padding-left: 8px;
+	border-radius: 16px;
+	position: absolute;
+	border:1px solid #9CACC0;	
+	left:5px;
+	right: 50px; 
+	top: 3px;
+	bottom: 2px;
+	font-size:18px;
+}
+
+.android .mblSearchBar input
+{	
+	bottom: 1px;
+	line-height: 33px;
+	border-radius: 7px;
+}
+
+.mblSearchBar button
+{
+	position: absolute;
+	top: 5px;
+	right: 9px;
+	width:33px; 
+	height:33px;
+	padding-left:6px;	
+	border-style: inset; 
+	border-color: #9CACC0; 
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	background-color: #5877A2; 
+	background: -webkit-gradient(linear, left top, left bottom, from(#8EA4C1), to(#4A6C9B), color-stop(0.5, #5877A2), color-stop(0.5, #476999)); 
+	-webkit-tap-highlight-color: transparent;
+}
+
+.android .mblSearchBar button
+{
+	border: 1px solid #3F3E3E;
+	background-color: #ADADAD;
+	background: -webkit-gradient(linear, left top, left bottom, from(#E5E5E5), to(#7F7F7F), color-stop(0.5, #ADADAD), color-stop(0.5, #909090));
+}
+
+.mblFormFooterButton
+{
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(225,226,230)), to(rgb(151,167,188)));
+	width: 30%;
+	padding: 5px 0px 5px 0px;
+	font-size: 16px;
+}
+
+/*.mblSmallFormFooterButton
+{
+	border-style: inset; 
+	border-color: #9CACC0; 
+	font-family: Helvetica; 
+	font-size: 13px;
+	font-weight:bold;
+	color: black;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background-color: #5877A2;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(237, 239, 243))); 
+	width: 25%;
+	font-size: 14px;
+	padding-top:2px;
+	padding-bottom:2px;
+}*/
+
+.mblSmallFormFooterButton
+{
+	border: 1px solid #A0A0A0;
+	font-family: Arial; 
+	font-size: 12px;
+	/*font-weight:bold;*/
+	color: #405870;
+	text-shadow: #98A0B0 1px 1px 0px;
+	-webkit-border-radius: 3px;
+	background-color: #F0F0F0;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(200, 200, 200))); 
+	width: 13%;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+
+.mblCategoryBar
+{
+	color: black;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(255, 255, 255)), to(rgb(213, 215, 222)));
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-family: Helvetica;
+	font-size: 14px;
+	text-align: left;
+}
+
+.xvwDocView .mblListItemIcon{
+	postion: relative;
+	top: 10px;
+	left: 10px;
+}
+
+.mblListItemIcon{
+	postion: relative;
+	top: 10px;
+	left: 10px;
+}
+
+body.iphone
+{
+	background: white !important;
+}
+
+li.mblListItem a.mblListItemAnchorNoIcon 
+{ 
+	font-weight:normal;
+	padding-left:10px;
+	padding-right:22px; 
+	padding-top:0px;
+}
+
+hr 
+{
+	height:1px;
+	border:none;
+	color:#AEAEAE;
+	background-color:#AEAEAE;
+}
+
+/*.expandReply
+{
+	background-position: 0 -2352px;
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+	background-image: url(/oneuiv2.1/images/lotusSprite-8bit.png);
+}
+
+.collapseReply
+{
+	background-position: 0 -2404px;
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+	background-image: url(/oneuiv2.1/images/lotusSprite-8bit.png);
+}*/
+ 
+legend
+{
+	display:hidden;
+}
+
+.mblFormTable
+{
+	font-size:14px; 
+	font-weight:normal;
+}
+
+.mblListItemTextBox, .mobileFormHeader, .mblDataViewTextTitle, .mblResponseParentSub
+{
+	word-wrap: break-word;
+}
+
+.mblFormRowInput
+{
+	width:95%;
+}
+
+.mblFormRowTextArea
+{
+	font-size:18px; 
+	font-family: Helvetica;
+	margin-left:1px;
+}
+
+.mblSearchInput
+{
+	font-size:14px;
+}
+
+.mblHeading
+{
+	text-align:center;
+}
+
+.mblThreadPanel
+{
+	background-color:#ffffff; 
+	color:#000000; 
+	width:100%;
+}
+
+.mblThreadDiv
+{
+	color:rgb(140, 140, 140);
+	font-size:11pt
+}
+
+.mblThreadDivText
+{
+	color: black; 
+	font-weight:bold;
+	font-size:16pt
+}
+
+.mblThreadRichText
+{
+	color: black; 
+	font-weight:normal;
+	font-size:14pt
+}
+
+.mblThreadKeyThought
+{
+	color: black; 
+	font-weight:bold;
+	font-size:11pt; 
+	line-height:30px;
+}
+
+.mblThreadSmallText
+{
+	font-size:10pt;
+}
+
+.mblThreadFileDownload
+{
+	padding-bottom:5px;
+}
+
+.mblThreadRightButton
+{
+	float:right;
+}
+
+.mblThreadExpandImage
+{
+	float:right; 
+	margin-top:-25px;
+}
+
+.mblDetailTextBold
+{
+	font-size:10pt; 
+	font-weight:bold
+}
+
+.mblDetailTextNormal
+{
+	font-size:10pt; 
+	font-weight:normal;
+	word-wrap:break-word;
+}
+
+.mblMemberViewImage
+{
+	height:25px; 
+	width:25px;
+}
+
+.mblNewButtonDiv div
+{
+	position: relative !important; 
+	top: -1px !important; 
+	font-size:22px !important; 
+	line-height:10px !important;
+}
+
+.mblFileDownloadPanel
+{
+	width:100% !important;
+}
+
+.mblFileDownloadlbl
+{
+	fonst-size:12px; 
+	font-weight:bold;
+}
+
+.xlEmptyFacet
+{
+	display:block; 
+	width:200px !important; 
+	text-align:center; 
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+.xlTableWidth
+{
+	width:100%;
+}
+
+.xlThreadStatusTable
+{
+	width:100% !important; 
+	word-wrap: break-word; 
+	overflow:hidden;
+}
+
+.xlThreadStatusDetail
+{
+	border-top: solid; 
+	border-top-size: 1px; 
+	border-top-color:rgb(192,192,192);
+}
+
+.xlThreadTable
+{
+	width:100% !important; 
+	word-wrap: break-word;
+}
+
+.xlThreadBody
+{
+	border-top: solid; 
+	border-top-size: 1px; 
+	border-top-color:rgb(192,192,192);
+}
+
+.xlReplyBar
+{
+	/*border-top: 1px solid #E6E6E6;*/
+}
+
+
+/*.xlHeadingBackground
+{
+	background-color: #EAEAEA;
+	padding-bottom:2px;
+}*/
+
+.xlTableRowBackground
+{
+	border-top: 1px solid #D6DADF;
+	border-bottom: 1px solid #D6DADF;
+	display: block;
+}
+
+.xlButtonSpacing
+{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
+
+.mblThreadReponseTopic
+{
+	display: inline-block;
+	/*color: #105CB6;*/
+	color: black;
+	font-weight: bold;
+	font-size: 13pt;
+	width: 98%;
+}
+.android .mblThreadReponseTopic
+{
+	color: white;
+}
+
+.xlReplyContentDiv
+{
+	/*background-color: #E8E8E8;
+	background: -webkit-gradient(linear, left top, left bottom, from(#F0F0F0), to(#D0D0D0));
+	-webkit-border-radius: 3px;
+	padding:2px;
+	border:1px solid #A0A0A0;
+	margin:2px;*/
+}
+
+.xlReplyPadding1
+{
+	padding-left:20px;
+}
+.xlReplyPadding2
+{
+	padding-left:40px;
+}
+.xlReplyPadding3
+{
+	padding-left:60px;
+}
+.xlReplyPadding4
+{
+	padding-left:80px;
+}
+
+.xlReplyMargin1
+{
+	margin-left:20px;
+}
+.xlReplyMargin2
+{
+	margin-left:40px;
+}
+.xlReplyMargin3
+{
+	margin-left:60px;
+}
+.xlReplyMargin4
+{
+	margin-left:80px;
+}
+
+.xlReplyImage1
+{
+	padding-left:0px;
+	float:left;
+}
+.xlReplyImage2
+{
+	padding-left:20px;
+	float:left;
+}
+.xlReplyImage3
+{
+	padding-left:40px;
+	float:left;
+}
+.xlReplyImage4
+{
+	padding-left:60px;
+	float:left;
+}
+
+.xlHidden
+{
+	display:none;
+}

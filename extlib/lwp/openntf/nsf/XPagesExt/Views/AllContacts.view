@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579240032FA74'>
+<noteinfo noteid='2aa' unid='CD40A953ABDE036A8525786500660C27' sequence='7'>
+<created><datetime dst='true'>20110401T143437,83-04</datetime></created>
+<modified><datetime dst='true'>20111025T214849,29-04</datetime></modified>
+<revised><datetime dst='true'>20111025T214849,28-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20111025T214849,29-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20111009T103908,59+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>AllContacts</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+MAECACAACQBGaXJzdE5hbWUABQAJAEZpcnN0TmFtZQADAAIAHAAIAExhc3ROYW1lBQAIAExhc3RO
+YW1lAwACABgABQBFTWFpbAAFAAUARU1haWwAAwACABQABABDaXR5BQAEAENpdHkDAAIAEgAHAENy
+ZWF0ZWQAaQADAAIAMAADACQxMAAFAAkARmlyc3ROYW1lAAEAAQAgACICBQAIAExhc3ROYW1lIgID
+AAUAVABQAAoAAgAJAAgABQAEAAUABwADAAkABABJZEZpcnN0TmFtZUxhc3ROYW1lRU1haWxDaXR5
+U3RhdGVDcmVhdGVkJDEwJENvbmZsaWN0JFJFRgQABAAAACAABQAEAEZvcm0BAAcAQ29udGFjdAAK
+AgQABAADAAcADAAFAAkzUzRTAA==
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+MQADAABEgGYAAAAJAIBmAAkACACYZgARAAUARmlyc3ROYW1lTGFzdE5hbWVTdGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation1' summary='true'>
+<rawitemdata type='2'>
+IgACAABEgGYAAAAJABhmAAkABQBGaXJzdE5hbWVTdGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation2' summary='true'>
+<rawitemdata type='2'>
+IgACAABEgWYAAAAJABhmAAkABQBGaXJzdE5hbWVTdGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation3' summary='true'>
+<rawitemdata type='2'>
+IQACAABEgGYAAAAIABhmAAgABQBMYXN0TmFtZVN0YXRl
+</rawitemdata></item>
+<item name='$Collation4' summary='true'>
+<rawitemdata type='2'>
+IQACAABEgWYAAAAIABhmAAgABQBMYXN0TmFtZVN0YXRl
+</rawitemdata></item>
+<item name='$Collation5' summary='true'>
+<rawitemdata type='2'>
+HQACAABEgWYAAAAEABhmAAQABQBDaXR5U3RhdGU=
+</rawitemdata></item>
+<item name='$Collation6' summary='true'>
+<rawitemdata type='2'>
+HAACAABEgGYAAAADABhmAAMABQAkMTBTdGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation7' summary='true'>
+<rawitemdata type='2'>
+HAACAABEgWYAAAADABhmAAMABQAkMTBTdGF0ZQ==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>PY</text></item>
+<item name='$WebFlags'><text>A</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$SelQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAAif8TAAAAAAABAAcAQ29udGFjdAA=
+</rawitemdata></item>
+<item name='$ViewFormat' sign='true'>
+<rawitemdata type='5'>
+AQAJAA0ACAAAAFZDAAACAAEACgAKACQAAQAACgAAAAAAAAAAAAICAAAAVkMAAAIAAgAAAAAAUAAB
+AAAKAAAAAAAAAAAAAgIAAABWQwEDCQAKACIAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAQMIAAkA
+HgAAAGUAAQAACgAAAAAAAAAAAAICAAAAVkMAAAUABQAaAAAAhQABAAAKAAAAAAAAAAAAAgIAAABW
+QwACBAAEABYAAABQAAEAAAoAAAAAAAAAAAACAgAAAFZDAAAFAAUAAAAAAHQAAQAACgABAAAAAAAA
+AAICAAAAVkMAAAcABwAUAAAAcgABAAAKAAAAAAAAAAAAAgIAAABWQwADAwAEAD4AAADcAAEAAAoA
+AAAAAAAAAAACAgAAACQwIwoAAAAIAJIAAwABBQEABAB/QTD/SWRJZEZpcnN0TmFtZUZpcnN0IE5h
+bWUiAAIAIAAJAEZpcnN0TmFtZQAFAAkARmlyc3ROYW1lAAMATGFzdE5hbWVMYXN0IE5hbWUeAAIA
+HAAIAExhc3ROYW1lBQAIAExhc3ROYW1lAwBFTWFpbEVNYWlsGgACABgABQBFTWFpbAAFAAUARU1h
+aWwAAwBDaXR5Q2l0eRYAAgAUAAQAQ2l0eQUABABDaXR5AwBTdGF0ZVN0YXRlQ3JlYXRlZENyZWF0
+ZWQUAAIAEgAHAENyZWF0ZWQAaQADACQxME5hbWU+AAIAMAADACQxMAAFAAkARmlyc3ROYW1lAAEA
+AQAgACICBQAIAExhc3ROYW1lIgIDAAcADAAFAAkwUzBFACYAAQAAAAEBAAkBAAAKAQEOCgAAAQCt
+KwEAAQABAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAA
+AAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkA
+AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAA
+AAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEACQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA
+AP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAD//wAAAAAAAAAA
+AAAAAAAAV0MBAQAJAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQEA
+CQAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEBAAkAAAAAAAAAAAAA
+AAAAAAAAAAAEAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQD///8AAQAAAAAAAAAA
+AAAAAAABAP///wABAP///wAAAAEAAAAAAAEAAAAAAAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item></note>
+

@@ -1,0 +1,10 @@
+*.copyarea.db
+compxref-info.xml-frag
+feFeatureBuildCallbacks.xml
+felement.xml
+fePluginBuildCallbacks.xml
+plugin_directory.xml
+rest-ext.txt
+/build/
+/logs/
+build.log

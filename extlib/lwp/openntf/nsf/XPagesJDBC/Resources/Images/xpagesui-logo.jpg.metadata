@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="85257832000E6E8B" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ca" sequence="10" unid="9A6B2A9B47A89CA185257834007904EB">
+<created><datetime>20110211T170151,15-05</datetime></created>
+<modified><datetime dst="true">20110629T164132,25-04</datetime></modified>
+<revised><datetime dst="true">20110629T164132,24-04</datetime></revised>
+<lastaccessed><datetime dst="true">20110629T164132,25-04</datetime></lastaccessed>
+<addedtofile><datetime>20110211T170151,18-05</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>xpagesui-logo.jpg</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime>20110124T170245,86-05</datetime></item>
+<item name="$ImageNames" sign="true"><text>xpagesui-logo.jpg</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

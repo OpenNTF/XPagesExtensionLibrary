@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="39e" sequence="21" unid="C8CF278AD979B14A802579670054CFFF">
+<created><datetime>20111215T152622,71+00</datetime></created>
+<modified><datetime>20120227T111942,57+00</datetime></modified>
+<revised><datetime>20120227T111942,56+00</datetime></revised>
+<lastaccessed><datetime>20120227T111942,57+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152622,74+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></updatedby>
+<wassignedby><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>rtaForm</text></item>
+<item name="$Flags"><text>.5834Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

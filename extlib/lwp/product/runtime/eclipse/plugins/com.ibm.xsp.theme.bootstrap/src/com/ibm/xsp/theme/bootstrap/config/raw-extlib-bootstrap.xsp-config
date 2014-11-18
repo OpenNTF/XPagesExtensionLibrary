@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+	</faces-config-extension>
+    
+	<!-- RESPONSIVE LAYOUT -->
+	<complex-type>
+	    <!-- # "Bootstrap" should not be translated anywhere in this file -->
+    	<description>Responsive application layout configuration that supports additional Bootstrap specific properties</description>
+    	<display-name>Responsive Bootstrap Configuration</display-name>
+    	<complex-id>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-id>
+    	<complex-class>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-class>
+		
+  		<property>
+	   		<!-- # "navbar" should not be translated -->
+			<description>Indicates if the navbar is inverted, using the style navbar-inverse. False by default.</description>
+			<display-name>Inverted Navigation Bar</display-name>
+			<property-name>invertedNavbar</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		
+		<property>
+	   		<!-- # "navbar", "fixed-top", "fixed-bottom", "unfixed-top" should not be translated -->
+			<description>Indicates the position of the navbar. There are three options: fixed-top, fixed-bottom, unfixed-top. Unfixed to top is the default.</description>
+			<display-name>Fixed Navigation Bar</display-name>
+			<property-name>fixedNavbar</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<localizable>false</localizable>
+		        <designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>fixed-top
+						fixed-bottom
+						unfixed-top
+					</editor-parameter>
+		        </designer-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Indicates if the left column should be collapsed on smaller screens.</description>
+			<display-name>Collapse Left Column</display-name>
+			<property-name>collapseLeftColumn</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		
+		<property>
+	   		<!-- # "jQuery", "CSS" should not be translated -->
+			<description>By default the dropdown button for a collapsed left column is attached to the left column. Optionally you can enter a selector here (jQuery syntax, see http://api.jquery.com/category/selectors/) to which the button should be attached. Sample values: ".applayout-column-left" (place the menu button after the element with the CSS class "applayout-column-left"), or ".navbar-brand" (place the menu in the banner next to the element with CSS class "navbar-brand"), or ".applayout .applayout-titlebar-inner" (place the menu inside the footer)</description>
+			<display-name>Collapse Left Column Target</display-name>
+			<property-name>collapseLeftTarget</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<localizable>false</localizable>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>.applayout-column-left
+						.navbar-brand
+						.applayout-footer .applayout-titlebar-inner
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Label on the menu button shown when the left column is collapsed. "Menu" by default.</description>
+			<display-name>Collapsed Left Column Menu Label</display-name>
+			<property-name>collapseLeftMenuLabel</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+		
+		<property>
+			<!-- # When inside quotes: "full", "fluid", "fixed" should not be translated -->
+			<description>Determines the width of the page: "full" means full width, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width.</description>
+			<display-name>Page Width</display-name>
+			<property-name>pageWidth</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+				<localizable>false</localizable>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>full
+						fluid
+						fixed
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<layout-extension>
+                <responsive>true</responsive>
+                <layout-image>extlib/designer/markup/layout/bootstrapLayout.jpg</layout-image>
+            </layout-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
+      		<tag-name>bootstrapResponsiveConfiguration</tag-name>
+			<since>9.0.1.v00_10</since>
+    	</complex-extension>
+  	</complex-type>
+</faces-config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:panel themeId="Panel.actionsBar" loaded="${javascript:getDisplayFormType() == null}">
+		<xp:button value="New Topic" id="buttonNewTopic">
+			<xp:this.rendered>
+				<![CDATA[#{javascript:userBean.canCreateDocs}]]>
+			</xp:this.rendered>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" execMode="partial" immediate="true">
+				<xp:this.action><![CDATA[#{javascript:
+					setDisplayFormType(1);
+					context.reloadPage();
+				}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+	</xp:panel>
+</xp:view>

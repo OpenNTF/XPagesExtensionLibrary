@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="582" sequence="10" unid="04CF190ADC3770F08025791700505E2C">
+<created><datetime dst="true">20110926T153749,88+01</datetime></created>
+<modified><datetime>20120207T095555,84+00</datetime></modified>
+<revised><datetime dst="true">20111026T132745,93+01</datetime></revised>
+<lastaccessed><datetime>20120207T095555,84+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095555,84+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T153749,88+01</datetime><datetime dst="true">20110926T153749,90+01</datetime><datetime dst="true">20110926T153750,10+01</datetime><datetime dst="true">20110926T153750,13+01</datetime><datetime dst="true">20111006T144130,88+01</datetime><datetime dst="true">20111006T144130,90+01</datetime><datetime dst="true">20111006T160524,70+01</datetime><datetime dst="true">20111014T083944,44+01</datetime><datetime dst="true">20111026T132734,91+01</datetime></revisions>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>homeTeamRoomPurpose.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>homeTeamRoomPurpose.xsp</text></item></note>

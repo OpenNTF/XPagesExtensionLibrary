@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/JDBC/Query">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold" value="Dynamic SQL Query">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a quick demo of a user defined SQL query displayed using the DumpObject control.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:table>
+				<xp:tr>
+					<xp:td valign="top">SQL Query</xp:td>
+					<xp:td>
+						<xp:inputTextarea id="inputTextarea1" cols="120"
+							rows="6" style="font-family:Courier New">
+						</xp:inputTextarea>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td colspan="2">
+						<xp:button value="Execute" id="button1">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete">
+							</xp:eventHandler>
+						</xp:button>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td colspan="2">
+						<xe:dumpObject id="dumpObject1"
+							title="SQL Result" maxGridRows="20">
+							<xe:this.value><![CDATA[#{javascript:var sql = getComponent("inputTextarea1").getValue()
+if(sql) {
+	var st = dbUtil.getConnection().createStatement();
+	return st.executeQuery(sql);
+}
+return null}]]></xe:this.value>
+						</xe:dumpObject>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>

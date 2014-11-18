@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+
+	<xp:this.resources>
+		<xp:script src="/constants.jss" clientSide="false"></xp:script>
+		<xp:styleSheet href="/mobile.css"></xp:styleSheet>
+		<xp:bundle src="/strings.properties" var="strings"></xp:bundle>
+		<xp:metaData name="viewport" content="width=device-width, maximum-scale=1.0">
+		</xp:metaData>
+	</xp:this.resources>
+
+	<xe:singlePageApp id="docLibApp" selectedPageName="home">
+		<xe:appPage resetContent="true" id="home" pageName="home">
+			<xc:mobileHome></xc:mobileHome>
+		</xe:appPage>
+		
+		<xe:appPage resetContent="true" id="allDocs" pageName="allDocs">
+			<xc:mobileAllDocs></xc:mobileAllDocs>
+		</xe:appPage>
+		
+		<xe:appPage resetContent="true" id="appPage2" pageName="byAuthor">
+			<xc:mobileByAuthor></xc:mobileByAuthor>
+		</xe:appPage>
+		
+		<xe:appPage resetContent="true" id="appPage3" pageName="byTags">
+			<xc:mobileByTags></xc:mobileByTags>
+		</xe:appPage>
+		
+		<xe:appPage resetContent="true" id="appPage4" pageName="reviewStatus">
+			<xc:mobileReviewStatus></xc:mobileReviewStatus>
+		</xe:appPage>
+		
+		<xe:appPage resetContent="true" id="appPage5" pageName="document">
+			<xc:mobileViewDocument></xc:mobileViewDocument>
+		</xe:appPage>
+		
+<!--		<xe:appPage resetContent="true" id="newDoc" pageName="newDoc">-->
+<!--			<xc:mobileRtaForm></xc:mobileRtaForm>-->
+<!--		</xe:appPage>-->
+		
+		<xe:appPage resetContent="true" id="appPage1" pageName="reply">
+			<xc:mobileReply></xc:mobileReply>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="appPage6" pageName="reviewers">
+			<xc:mobileReviewers></xc:mobileReviewers>
+		</xe:appPage>
+		
+	</xe:singlePageApp>
+</xp:view>

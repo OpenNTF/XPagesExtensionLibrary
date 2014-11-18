@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='15e' unid='67DC86F6AD9AED358525658E0067738F' sequence='38'>
+<created><datetime>19980116T134957,91-05</datetime></created>
+<modified><datetime>20120207T095544,61+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122247,83+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,61+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,61+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121637,52+01</datetime><datetime
+ dst='true'>20110830T205052,57-04</datetime><datetime dst='true'>20111006T160523,96+01</datetime><datetime
+ dst='true'>20111014T083943,68+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE' sign='true'><text>Database Script</text></item>
+<item name='$PublicAccess' sign='true'><text>1</text></item>
+<item name='$Flags'><text>t34Q</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

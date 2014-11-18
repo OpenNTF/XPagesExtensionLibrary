@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojo.layout</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+<!-- TODO ensure consistency of default values across description, getter, render, CS dojo property default -->
+
+    <!-- Start of Dojo Layout Controls -->
+    <component>
+        <!-- # "iframe" should not be translated, it is a technical term-->
+        <description>Similar to an iframe, the Content Pane will render any controls placed inside it and fits in with the Dojo theme.</description>
+        <display-name>Dojo Content Pane</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoContentPane</component-class>
+        
+        <property>
+            <description>Used to designate the external data the pane should load.</description>
+            <display-name>Hypertext Reference URL</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+                    <!-- TODO Update description refer to usage of href vs partialRefresh -->
+                    <!-- TODO Investigate server side behaviour for href prefetch possibly -->
+                    <!-- TODO Introduce new property for loading of xpage snippet from current page -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <!-- # "BODY" should not be translated -->
+            <description>If true, the visible content between the BODY tags of the document the Content Pane retrieves is extracted from it and placed into the pane. false by default.</description>
+            <display-name>Extract Content</display-name>
+            <property-name>extractContent</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>If true, any Dojo controls returned in the content area are automatically displayed. This is true by default.</description>
+            <display-name>Enable Parse On Load</display-name>
+            <property-name>parseOnLoad</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>dojo</category>
+                    <!-- This defaults to true at runtime, so it will only
+                    be possible to set the value in a theme file
+                    in release 8.5.3 or later using the baseValue attribute.
+                    runtime-default-true prevents a fail in BooleanPropertyDefaultTest -->
+                    <tags>
+                        runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Acts just like the "preventCache" parameter for a Dojo "xhrGet" request. If true, an additional parameter is passed that changes with each request to prevent caching from occurring. false by default.</description>
+            <display-name>Prevent Cache</display-name>
+            <property-name>preventCache</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Used to force the pane to load content, even if it is not initially visible. (If the node is styled with display:none then content may not load unless preload is set to true.) false by default.</description>
+            <display-name>Preload</display-name>
+            <property-name>preload</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Used to indicate whether the pane should reload every time the pane goes from a hidden state to a visible state. false by default.</description>
+            <display-name>Refresh On Show</display-name>
+            <property-name>refreshOnShow</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <!-- # "Loading..." is translated in the Dojo translation memory, value here should reflect that -->
+            <description>Provides a message to the user while a load is in process. "Loading..." by default.</description>
+            <display-name>Loading Message</display-name>
+            <property-name>loadingMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Provides a message to the user when a load fails. "Sorry, an error occurred" by default.</description>
+            <display-name>Error Message</display-name>
+            <property-name>errorMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed after this control has been loaded and parsed</description>
+            <display-name>Load Script</display-name>
+            <property-name>onLoad</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed before the content of this control is cleared</description>
+            <display-name>Unload Script</display-name>
+            <property-name>onUnload</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed before a download starts and which returns a message to be displayed while loading</description>
+            <display-name>Download Start Script</display-name>
+            <property-name>onDownloadStart</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed when an error occurs in the content of this control and which returns a message to be displayed</description>
+            <display-name>Content Error Script</display-name>
+            <property-name>onContentError</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed when error occurs during a download and which returns a message to be displayed</description>
+            <display-name>Download Error Script</display-name>
+            <property-name>onDownloadError</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>JavaScript code executed when a download has completed</description>
+            <display-name>Download End Script</display-name>
+            <property-name>onDownloadEnd</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Defines if the panel should use partial refresh to refresh its content. This is an XPages extension to the Dojo content pane.</description>
+            <display-name>Partial Refresh</display-name>
+            <property-name>partialRefresh</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Introduce new property partialExecute, since partialRefresh is present -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</renderer-type>
+            <tag-name>djContentPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Contains multiple panes each with its own tab with a label, but only one will be showed at a time.</description>
+        <display-name>Tab Container</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.TabContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoTabContainer</component-class>
+        
+        <property>
+            <description>This property determines the position of the tabs relative to the content area.</description>
+            <display-name>Tab Position</display-name>
+            <property-name>tabPosition</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        top
+                        bottom
+                        left-h
+                        right-h
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Defines whether the tab list gets an extra style class for layout or putting a border shading around the set of tabs</description>
+            <display-name>Tab Strip</display-name>
+            <property-name>tabStrip</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!--  Note, defaults to false (only changes 
+                the appearance of the tab area, not the presence. -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>True if a menu should be used to select tabs when they are too wide to fit the Tab Container, false otherwise</description>
+            <display-name>Use Menu</display-name>
+            <property-name>useMenu</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!-- Note, this defaults to true in Dojo. -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>True if a slider should be used to select tabs when they are too wide to fit the Tab Container, false otherwise</description>
+            <display-name>Use Slider</display-name>
+            <property-name>useSlider</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!-- Note, this defaults to true in Dojo. -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Define the default content name when creating a new tab.</description>
+            <display-name>Default Tab Content</display-name>
+            <property-name>defaultTabContent</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Editor required -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.TabContainer</renderer-type>
+            <tag-name>djTabContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Each tab pane will be a new tab for the Tab Container and can have other controls placed on to it.</description>
+        <display-name>Tab Pane</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.TabPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoTabPane</component-class>
+        
+        <property>
+          <!-- Reusing the description from the XPages runtime tabPanel label property -->
+          <!--    <description>Label of the tab</description> -->
+          <description>%/com.ibm.xsp.UITabPanel/label/descr%</description>
+          <!-- Reusing the description from the accessibility title property -->
+          <!--    <display-name>Advisory Title</display-name> -->
+          <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
+          <property-name>title</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+            <localizable>true</localizable>
+            <designer-extension>
+              <category>basics</category>
+              <!-- TODO get the Designer team to provide a translatable
+              default-value like "Tab 1" "Tab 2" etc. -->
+              <!-- Bad description, this is not an accessibility title, 
+              it is the dojo tab panel's tab label. -->
+              <tags>
+                  todo
+                  not-accessibility-title
+              </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+        
+        <property>
+            <description>Indicates whether the tab associated with the control has a close icon on it. By clicking the icon, the tab (and its contents) will be removed from the Tab Container.</description>
+            <display-name>Closable</display-name>
+            <property-name>closable</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Defines a unique value to identify this tab pane. This is used to identify a tab and select it instead of reopening a second instance if it already exists.</description>
+            <display-name>Tab Unique Key</display-name>
+            <property-name>tabUniqueKey</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specify whether partial execute and partial refresh should be automatically applied to event within this tree. Defaults to false.</description>
+            <display-name>Partial Events</display-name>
+            <property-name>partialEvents</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Investigate BreakingChange -->
+                    <!-- TODO Remove this property when superclass provides partial execute and refresh -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.TabPane</renderer-type>
+            <tag-name>djTabPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>A control with multiple children but only one will be displayed at a time. Similar to the tab container without the tabs.</description>
+        <display-name>Stack Container</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoStackContainer</component-class>
+
+        <property>
+            <description>Refers to the ID of the selected tab control</description>
+            <display-name>Selected Tab</display-name>
+            <property-name>selectedTab</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|djStackPane
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies whether to set a cookie to remember the selected child across sessions</description>
+            <display-name>Persist</display-name>
+            <property-name>persist</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Used to change the size of the currently displayed child to match the container size, true by default.</description>
+            <display-name>Do Layout</display-name>
+            <property-name>doLayout</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</renderer-type>
+            <tag-name>djStackContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+                    <!-- TODO Introduce simple action behaviour for switching current stack pane -->
+                    <tags>
+                       todo
+                    </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Similar to the tab pane, it can display other controls and will be displayed by the stack container without a tab.</description>
+        <display-name>Stack Pane</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.StackPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoStackPane</component-class>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.StackPane</renderer-type>
+            <tag-name>djStackPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>A container with up to five sections: left, right, top, bottom and a center which must be included.</description>
+        <display-name>Border Container</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.BorderContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoBorderContainer</component-class>
+
+        <property>
+            <!-- # "headline", "sidebar" should not be translated -->
+            <description>Specifies which layout design should be used, either "headline" or "sidebar". The "headline" design has the top and bottom regions span the full width of the container. The "sidebar" design has the left and right regions span the full height of the container.</description>
+            <display-name>Design</display-name>
+            <property-name>design</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        headline
+                        sidebar
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies whether to give each pane a border and margin.</description>
+            <display-name>Gutters</display-name>
+            <property-name>gutters</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies whether splitters resize while being dragged. Otherwise, resize is performed when the splitter is dropped.</description>
+            <display-name>Live Splitters</display-name>
+            <property-name>liveSplitters</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies whether to set a cookie to save splitter positions</description>
+            <display-name>Persist</display-name>
+            <property-name>persist</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.BorderContainer</renderer-type>
+            <tag-name>djBorderContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Similar to the tabbed pane, the border pane is used to hold additional controls and is display by the border container.</description>
+        <display-name>Border Pane</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.BorderPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoBorderPane</component-class>
+
+        <property>
+            <description>Specifies the minimum size of this control measured in pixels</description>
+            <display-name>Minimum Size</display-name>
+            <property-name>minSize</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the maximum size of this control measured in pixels</description>
+            <display-name>Maximum Size</display-name>
+            <property-name>maxSize</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <default-value>2147483647</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies whether a splitter appears on the edge of the Border Pane so that resizing can occur.</description>
+            <display-name>Splitter</display-name>
+            <property-name>splitter</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <!-- # "top", "bottom", "leading", "trailing", "left", "right", "center" should not be translated -->
+            <description>Specifies where to position this control within its parent container. Valid values include "top", "bottom", "left", "right", and "center". Values of "leading" and "trailing" are also possible and differ from "left" and "right" in that they are relative to the Bidirectional orientation.</description>
+            <display-name>Region</display-name>
+            <property-name>region</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        top
+                        bottom
+                        leading
+                        trailing
+                        left
+                        right
+                        center
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Border Panes with a higher Layout Priority will be placed closer to the Border Container center than Border Panes with a lower Layout Priority.</description>
+            <display-name>Layout Priority</display-name>
+            <property-name>layoutPriority</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.BorderPane</renderer-type>
+            <tag-name>djBorderPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <description>Similar to the tab container, accordion container displays a list of panes and titles but only one is displayed at a time. When one is clicked it slides up to cover the previous displayed pane.</description>
+        <display-name>Accordion Container</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.AccordionContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoAccordionContainer</component-class>
+        
+        <property>
+            <description>Specifies the duration in number of milliseconds that it takes to slide between panes</description>
+            <display-name>Duration</display-name>
+            <property-name>duration</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Define the index of the selected tab.</description>
+            <display-name>Selected Tab</display-name>
+            <property-name>selectedTab</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Confirm whether this is the initially selected tab -->
+                    <!-- TODO Confirm does not overwrite current open tab on partial refresh -->
+                    <!-- TODO Investigate behaviour when used in custom control with wrapping outer div -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.AccordionContainer</renderer-type>
+            <tag-name>djAccordionContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Similar to the tab pane, the accordion pane is used to hold other controls that will be displayed by the accordion container.</description>
+        <display-name>Accordion Pane</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.AccordionPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoAccordionPane</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.AccordionPane</renderer-type>
+            <tag-name>djAccordionPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+    <!-- End of Dojo Layout Controls -->
+
+</faces-config>

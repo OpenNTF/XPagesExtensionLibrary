@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579670054C522'>
+<noteinfo noteid='1c6' unid='72D141A530E9F1AF802579670054CD49' sequence='10'>
+<created><datetime>20111215T152615,77+00</datetime></created>
+<modified><datetime>20120227T095732,66+00</datetime></modified>
+<revised><datetime>20120227T095732,65+00</datetime></revised>
+<lastaccessed><datetime>20120227T095732,66+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152615,78+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name
+>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name
+>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name='$Flags'><text>m34</text></item>
+<item name='$TITLE'><textlist><text>SubscriptionFormOutline</text><text>SubscriptionFormOutline</text></textlist></item>
+<item name='$SiteMapList' sign='true'>
+<rawitemdata type='1a'>
+AQEBAAEAAgBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAACAEgAZAAAAAAAAQAAAAAAAAAIAAAAXAAAAAAAAAAAAAAAAAAAAAAA
+BQAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRm9ybQDdAQD2/1oAAQAAAAUADgBA
+AAAAAAAAAAAAAAAAAEAAAwAWAAcAJFRhYmxlMQABAAEAMQADAAcADAAFAAkxUzNTAAAAEgACAF4b
+AAAAAAAA7QEDAAcACgADAAkwUgBIAGQAAAAAAAIAAAAAAAAACAAAAFwAAAAAAAAAAAAAAAAAAAAA
+AAUADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABUluZm8A3QEA9v9aAAEAAAAFAA4A
+QAAAAAAAAAAAAAAAAABAAAMAFgAHACRUYWJsZTEAAQABADMAAwAHAAwABQAJMVMzUwAAABIAAgBe
+GwAAAAAAAO0BAwAHAAoAAwAJMFIA
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$POID'><datetime>20110209T084609,86-05</datetime></item></note>
+

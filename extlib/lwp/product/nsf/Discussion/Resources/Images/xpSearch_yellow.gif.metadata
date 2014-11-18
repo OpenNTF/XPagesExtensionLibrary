@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2ce" sequence="12" unid="D9F9FB7042341BD985257487001E59E6">
+<created><datetime dst="true">20080715T013130,94-04</datetime></created>
+<modified><datetime>20120305T082318,58+00</datetime></modified>
+<revised><datetime>20120305T082318,57+00</datetime></revised>
+<lastaccessed><datetime>20120305T082318,58+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,79+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>xpSearch_yellow.gif</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080715T014246,37-04</datetime></item>
+<item name="$ImageNames" sign="true"><text>xpSearch_yellow.gif</text></item>
+<item name="$Flags"><text>D34CiQ</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

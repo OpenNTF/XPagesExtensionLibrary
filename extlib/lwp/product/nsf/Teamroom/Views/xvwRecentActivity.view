@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE view SYSTEM 'xmlschemas/domino_8_5_4.dtd'>
+<view name='xvwRecentActivity' alias='xvwRecentActivity' xmlns='http://www.lotus.com/dxl'
+ version='8.5' maintenanceversion='4.0' replicaid='80257A6E00345EEE' showinmenu='false'
+ allowdocselection='true' publicaccess='false' designerversion='8.5.4' language='en'
+ unreadmarks='standard' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='simple' opencollapsed='true' showresponsehierarchy='false' showmargin='true'
+ shrinkrows='true' extendlastcolumn='true' showhierarchies='false' unreadcolor='maroon'
+ rowlinecount='4' headerlinecount='1' rowspacing='1' bgcolor='white' altrowcolor='#efefef'
+ totalscolor='blue' headerbgcolor='#a8cfd4' boldunreadrows='false' evaluateactions='true'
+ allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
+ marginwidth='0px 0px 1px' marginbgcolor='white' uniquekeys='false' initialbuildrestricted='false'
+ noemptycategories='true'>
+<noteinfo noteid='15e' unid='B75D5FD8F0649D5C802577C2003DF3C9' sequence='87'>
+<created><datetime dst='true'>20101020T121641,05+01</datetime></created>
+<modified><datetime dst='true'>20121004T163015,10+01</datetime></modified>
+<revised><datetime dst='true'>20121004T163015,09+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20121004T163015,10+01</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20120903T103203,14+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=a admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=a admin/O=dubmob</name></wassignedby><code event='selection'><formula
+>SELECT  ((form = "MainTopic" | form = "announcement" | form = "Event" | form="Meeting" | form="IndStat" | form = "Status" | form="SubteamStatus") &amp; Status != "0" &amp; FileThisStatusDoc != "1") | @IsResponseDoc</formula></code><code
+ event='helprequest'><formula>REM {DNT};
+@Command([OpenHelpDocument]; [ClientHelp]; "(Help)"; "TeamRoomVActiveDocs")</formula></code>
+<actionbar useappletinbrowser='true' bgcolor='#78b4bc' bordercolor='black'><actionbarstyle
+ height='4.7500ex'><font size='9pt' name='multilingual'/></actionbarstyle>
+<actionbuttonstyle margintype='fixed' margin='5' bgcolor='#c4dee1' displayborder='notesstyle'
+ widthtype='background'/><font size='9pt' name='multilingual'/><border width='0px 0px 1px'/>
+<action title='_Forward' showinbar='false' hide='web' systemcommand='forward'/>
+<action title='_Edit Document' showinbar='false' hide='web' systemcommand='edit'/>
+<action title='New Document' hide='preview previewedit'><code event='click'><formula
+>@PostedCommand([Compose];"MainTopic")</formula></code></action>
+<action title='New Response' hide='preview edit previewedit'><code event='click'><formula
+>@SetProfileField("TempVars"; "viewtitle"; @Subset(@ViewTitle; -1));
+@PostedCommand([Compose];"Response")</formula></code><code event='hidewhen'><formula
+>REM {hide from web if it's in a view};
+@ClientType != "Notes" &amp; !@IsAvailable(form)</formula></code></action>
+<action title='New Response to Response' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {notes only};
+@PostedCommand([Compose];"ResponseToResponse")</formula></code></action>
+<action title='Delete\Move to Trash' showinmenu='false' hide='notes'><code
+ event='click'><formula>@Command([MoveToTrash])</formula></code></action>
+<action title='Delete\Empty Trash' showinmenu='false' hide='notes'><code event='click'><formula
+>@Command([EmptyTrash])</formula></code></action>
+<action title='Search' showinmenu='false' hide='notes'><code event='click'><formula
+>REM {Web only - used in Views};
+@Command([ViewShowSearchBar])</formula></code></action>
+<action title='Chat\Chat with Author' hide='preview edit previewedit web'><code
+ event='click'><formula>@Command([SendInstantMessage]; From)</formula></code><code
+ event='hidewhen'><formula>!@IsAvailable(form)  | @LowerCase(form) = @LowerCase("EveNt")</formula></code></action>
+<action title='Chat\Chat with Assignee(s)' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {variables to translate};
+xTitle := "Chat";
+xNoAssign := "There are no assignees on this document.";
+xNoSelected := "No names were selected.";
+xSelect := "Select name(s) to chat with";
+AllTxt  := "-- Chat with all assignees --";
+REM {END variables to translate};
+
+
+listChat := AllTxt : @Name([Abbreviate]; People);
+@If(People = ""; @Return(@Prompt([Ok]; xtitle; xNoAssign)); "");
+AskChat := @Prompt([OkCancelListMult]; xtitle; xSelect; ""; listChat);
+@If(!@IsText(Askchat); @Return(@Prompt([Ok]; xtitle; xNoSelected)); "");
+ChatList := @If(@Contains(askchat; AllTxt); People; AskChat);
+@Command([SendInstantMessage]; ChatList)</formula></code><code event='hidewhen'><formula
+>!@IsAvailable(form) | DocType != DefaultDocType2 |  @IsResponseDoc | @LowerCase(form) = @LowerCase("EveNt")</formula></code></action>
+<action title='Chat\Chat with Attendee(s)' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {variables to translate};
+xTitle := "Chat";
+xNoAssign := "There are no attendees on this document.";
+xNoSelected := "No names were selected.";
+xSelect := "Select name(s) to chat with";
+AllTxt  := "-- Chat with all attendees --";
+REM {END variables to translate};
+
+listChat :=
+AllTxt : @Name([Abbreviate]; People);
+@If(People = ""; @Return(@Prompt([Ok]; xTitle; xNoAssign)); "");
+AskChat := @Prompt([OkCancelListMult]; xTitle; xSelect; ""; listChat);
+@If(!@IsText(Askchat); @Return(@Prompt([Ok]; xtitle; xNoSelected)); "");
+ChatList := @If(@Contains(askchat; AllTxt); People; AskChat);
+@Command([SendInstantMessage]; ChatList)</formula></code><code event='hidewhen'><formula
+>!@IsAvailable(form) | DocType != DefaultDocType3 | @IsResponseDoc | @LowerCase(form) = @LowerCase("EveNt")</formula></code></action>
+<action title='Chat\Chat with Reviewer(s)' hide='preview edit previewedit web'><code
+ event='click'><formula>REM {variables to translate};
+xTitle := "Chat";
+xNoAssign := "There are no reviewers on this document.";
+xNoSelected := "No names were selected.";
+xSelect := "Select name(s) to chat with";
+AllTxt  := "-- Chat with all reviewers --";
+REM {END variables to translate};
+
+listChat :=
+AllTxt : @Name([Abbreviate]; People);
+@If(People = ""; @Return(@Prompt([Ok];xTitle; xNoAssign)); "");
+AskChat := @Prompt([OkCancelListMult]; xTitle; xSelect; ""; @Trim(listChat));
+@If(!@IsText(Askchat); @Return(@Prompt([Ok]; xtitle; xNoSelected)); "");
+ChatList := @If(@Contains(askchat; AllTxt); People; AskChat);
+@Command([SendInstantMessage]; ChatList)</formula></code><code event='hidewhen'><formula
+>!@IsAvailable(form) | DocType = DefaultDocType2 | DocType = DefaultDocType3 | @LowerCase(form) = @LowerCase("EveNt")</formula></code></action>
+<action title='Database Help'><code event='click'><formula>@Command([HelpUsingDatabase])</formula></code></action></actionbar>
+<column sort='descending' hidedetailrows='false' itemname='ActivityDate' width='8.8750'
+ resizable='true' separatemultiplevalues='true' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' categorized='true' formatdatatype='datetime'><font size='9pt'
+ color='teal' style='bold'/><columnheader title='ActivityDate'><font size='9pt'
+ name='multilingual'/></columnheader><datetimeformat show='date' date='yearmonthday'
+ fourdigityear='true' time='hourminute' zone='never' dateformat='weekdaydaymonthyear'
+ dayformat='twodigitday' monthformat='twodigitmonth' yearformat='fourdigityear'
+ weekdayformat='shortname' dateseparator1=' ' dateseparator2='/' dateseparator3='/'
+ timeseparator=':' timeformat24='true' preference='usersetting'/><numberformat
+ legacy='true' format='general' varying='true' digits='1' punctuated='false'
+ parens='false' percent='false' bytes='false'/><code event='value'><formula
+>yyyy := @Year(@Modified);
+mm := @Month(@Modified);
+dd := @Day(@Modified);
+
+@Date(yyyy; mm; dd)</formula></code></column>
+<column hidedetailrows='false' itemname='$153' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Form'><font size='9pt'/></columnheader><code event='value'><formula
+>@If(form="Status";"Status";@If(form="SubteamStatus";"Status";@If(form="IndStat";"Status";form)))</formula></code></column>
+<column hidedetailrows='false' itemname='$47' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='DocType'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@If(form = "MainTopic" | @IsResponseDoc; DocType; @If(form = "announcement"; "Announcement"; @If(form="Event"; "Event"; @If(form="Status"; "Status"; @If(form="Meeting";"Meeting"; @If(form="SubteamStatus";"Status";@If(form="IndStat";"Status"; "")))))))</formula></code></column>
+<column hidedetailrows='false' itemname='From' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='From'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Subject' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Subject'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='descending' hidedetailrows='false' itemname='$46' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
+ showaslinks='false'><columnheader title='dateWithTime'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Modified</formula></code></column>
+<column hidedetailrows='false' listseparator='comma' itemname='$34' width='24.7500'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false' twisties='true'><font size='9pt'/><columnheader title='Topic'><font
+ size='9pt' name='multilingual'/></columnheader><datetimeformat show='date'
+ date='yearmonthday' fourdigityearfor21stcentury='true' time='hourminutesecond'
+ zone='never' dateformat='weekdaymonthdayyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='/'
+ dateseparator3='/' timeseparator=':' preference='usersetting'/><numberformat
+ format='general' varying='true' digits='2' punctuated='false' parens='false'
+ percent='false' bytes='false' decimalsym='.' thousandssep=',' currencysymtype='custom'
+ currencysym='$' usecustomsym='false'/><columnnamesformat showonline='true'
+ columncontainsname='false' columnname='SametimeInfo' verticalorientation='top'/><code
+ event='value'><formula>REM {Translatable variables};
+InactiveTxt := "[INACTIVE] ";
+PrivateTxt := "PRIVATE: ";
+ExpiredTxt := "EXPIRED: ";
+ParticTxt := "Participant Profile: ";
+EventTxt := "Event: ";
+SubteamTxt := "Subteam: ";
+StatusTxt := "Team Status Report: ";
+STstatusTxt := "Subteam Status Report: ";
+REM {End translatable variables};
+
+AuthorTxt := " (" + @Name([Abbreviate]; From) + ")";
+Author := @If(form = "Mission"; ""; form = "ParticipantProfile"; ""; form = "Interest Profile"; ""; form = "Event"; ""; form = "Subteam"; ""; AuthorTxt);
+Stat := @If(
+Status = "0"  ; InactiveTxt; "");
+RptDate := @If(@Contains(form; "Status"); @Text(@Date(ReportDate)) + " - "; "");
+RespSubj := @If(form = "ResponseToResponse"; ImmediateParentSubject; form = "Response"; OriginalSubject;"");
+Subj := @If( form = "ParticipantProfile"; @Name([Abbreviate]; Who); RptDate + Subject);
+Type := @If(form = "ParticipantProfile"; ParticTxt; form = "Event"; EventTxt; Form = "Subteam"; SubteamTxt; form = "Status"; StatusTxt; form = "SubteamStatus"; STstatusTxt; "");
+
+@If(readers != ""; PrivateTxt; ExpireDate != ""; ExpiredTxt; "") + Stat +Type +  Subj + @If(@IsResponseDoc;  " (RE: " + RespSubj + ")"; Author)</formula></code></column>
+<column hidedetailrows='false' itemname='Abstract' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Abstract'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$48' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@DocNumber</formula></code></column></view>
+

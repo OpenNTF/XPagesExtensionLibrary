@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="27a" sequence="10" unid="DEF031C37580B5CD802579670054CE2D">
+<created><datetime>20111215T152618,05+00</datetime></created>
+<modified><datetime>20120106T115149,73+00</datetime></modified>
+<revised><datetime>20120106T115149,72+00</datetime></revised>
+<lastaccessed><datetime>20120106T115149,73+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152618,56+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name></updatedby>
+<wassignedby><name>CN=arthur-server/O=dubmob</name></wassignedby>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImageNames" sign="true"><text>solid header.gif</text></item>
+<item name="$ImagesColorize" sign="true"><number>1</number></item>
+<item name="$TITLE" sign="true"><textlist><text>bg_DIALOGBAND</text><text>bg_DIALOGBAND</text></textlist></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+</note>

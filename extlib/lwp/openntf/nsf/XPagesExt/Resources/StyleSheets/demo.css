@@ -1,0 +1,47 @@
+/*
+
+//#formTable div:first-child{
+//	color: black;
+//}
+//
+
+.mobileFormContainer div:first-child{
+	margin-top:0px;
+} 
+
+.mobileFormContainer div div{
+	color: black;
+} 
+
+.mobileFormTable input[type=text]{
+	border: 0px;
+}
+
+.mobileFormTable .labelCell{
+	padding: 0px;
+}
+
+//#formTable button{
+//	margin: 0.25em;
+//	color: black;
+//}
+
+#mobileRoundRectList button {
+	color: black;
+}
+
+.footer button{
+	margin: 0.25em;
+	color: black;
+}
+
+#formTable button{
+	margin: 0.25em;
+	color: black;
+}
+
+#formTable{
+	border: none;
+}
+
+*/

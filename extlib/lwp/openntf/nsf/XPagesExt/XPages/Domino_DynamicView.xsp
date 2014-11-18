@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+    xmlns:xc="http://www.ibm.com/xsp/custom">
+
+
+    <xc:OneUILayout id="cc4cconeuilayout" navigationPath="/Domino/DynamicView">
+        <xp:this.facets>
+            <xp:panel xp:key="LeftColumn" id="panel4">
+                <xc:LeftDomino id="cc4ccLeftDomino"></xc:LeftDomino>
+            </xp:panel>
+        </xp:this.facets>
+        <xp:panel>
+            <xp:label value="This demonstrates the use of a dynamic view panel"
+                id="label5" style="font-weight:bold">
+            </xp:label>
+            <xp:br></xp:br>
+            <xp:tabbedPanel id="tabbedPanel1">
+                <xp:this.selectedTab>
+                    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+                </xp:this.selectedTab>
+                <xp:tabPanel label="Regular Link" id="tabPanel1">
+                    <xp:label value="Regular Link" for="comboBox1"></xp:label>
+                    <xp:comboBox id="comboBox1" value="#{viewScope.viewName}">
+                        <xp:selectItems>
+                            <xp:this.value><![CDATA[#{javascript:var v = database.getViews();
+var a = []
+for(var i=0; i<v.size(); i++) {
+    a[i] = v[i].getName()
+}
+return a}]]></xp:this.value>
+                        </xp:selectItems>
+                        <xp:eventHandler event="onchange" submit="true"
+                            refreshMode="partial" refreshId="dynamicViewPanel1">
+                        </xp:eventHandler>
+                    </xp:comboBox>
+                    <br />
+                    <xp:div style="overflow-y : auto">
+                        <xe:dynamicViewPanel rows="10" id="dynamicViewPanel1">
+                            <xe:this.facets>
+                                <xp:pager partialRefresh="true" layout="Previous Group Next"
+                                    xp:key="headerPager" id="pager1">
+                                </xp:pager>
+                            </xe:this.facets>
+                            <xe:this.data>
+                                <xp:dominoView var="view1" viewName="#{viewScope.viewName}">
+                                </xp:dominoView>
+                            </xe:this.data>
+                        </xe:dynamicViewPanel>
+                    </xp:div>
+                </xp:tabPanel>
+                <xp:tabPanel label="Custom Event Handler" id="tabPanel2">
+                    <xp:label value="Custom Event Handler" for="comboBox2"></xp:label>
+                    <xp:comboBox id="comboBox2" value="#{viewScope.viewName}">
+                        <xp:selectItems>
+                            <xp:this.value><![CDATA[#{javascript:var v = database.getViews();
+var a = []
+for(var i=0; i<v.size(); i++) {
+    a[i] = v[i].getName()
+}
+return a}]]></xp:this.value>
+                        </xp:selectItems>
+                        <xp:eventHandler event="onchange" submit="true">
+                        </xp:eventHandler>
+                    </xp:comboBox>
+                    <br />
+                    <xe:dynamicViewPanel rows="10"
+                        id="dynamicViewPanel2" var="viewEntry">
+                        <xe:this.facets>
+                            <xp:pager partialRefresh="true"
+                                layout="Previous Group Next" xp:key="headerPager" id="pager2">
+                            </xp:pager>
+                        </xe:this.facets>
+                        <xe:this.data>
+                            <xp:dominoView var="view1"
+                                viewName="#{viewScope.viewName}">
+                            </xp:dominoView>
+                        </xe:this.data>
+                        <xp:eventHandler event="onColumnClick"
+                            submit="true" refreshMode="complete">
+                            <xp:this.action><![CDATA[#{javascript:print("Column clicked, id="+viewEntry.getNoteID())
+}]]></xp:this.action>
+                        </xp:eventHandler>
+                    </xe:dynamicViewPanel>
+                </xp:tabPanel>
+            </xp:tabbedPanel>
+        </xp:panel>
+    </xc:OneUILayout>
+</xp:view>

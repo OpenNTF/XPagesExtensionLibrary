@@ -1,0 +1,467 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2014                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<!-- 
+    This ant script is to generate flattened .xsp-config files
+    from the raw-*.xsp-config files.
+    The flattening process extracts the translatable strings to an _en.properties
+    file, and inserts references to the properties keys in the flattened xml file,
+    where the translatable strings used to be located.
+-->
+
+<project name="configFlattener" default="flattenAll" basedir=".">
+
+	<import file="flattenFile.xml"/>
+
+	<target name="setup" depends="setupFlattener">
+	
+        <!-- Check the extlib plugins folder exists so specify where it is located
+        eg: c:\snaps\git\testRepo\extlib\lwp\product\runtime\eclipse
+        -->
+        <property name="xsp.runtime.extlib" value="" />
+	      
+        <available property="xsp.runtime.extlib.exists" file="${xsp.runtime.extlib}" type="dir" />
+        <fail unless="xsp.runtime.extlib.exists" message="The product/runtime plugins folder was not found at ${basedir}/${xsp.runtime.extlib}" />
+		
+		<!-- Set up some common variables used in the targets below. -->
+		<property name="extlibSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.controls/src/com/ibm/xsp/extlib/config" />
+		<property name="extlibDominoSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.domino/src/com/ibm/xsp/extlib/config" />
+		<property name="extlibMobileSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.mobile/src/com/ibm/xsp/extlib/config" />
+		<property name="extlibOneUiSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.oneui/src/com/ibm/xsp/extlib/config" />
+		<property name="extlibRelationalSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.relational/src/com/ibm/xsp/extlib/relational/config" />
+		<property name="extlibBootstrapSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.theme.bootstrap/src/com/ibm/xsp/theme/bootstrap/config" />
+	</target>
+	
+	<!-- Flatten all files -->
+	<target name="flattenAll" depends="
+			setup,
+			startControlsPlugin,
+			flatten_extlib-clientaction,
+			flatten_extlib-common,
+			flatten_extlib-containers,
+			flatten_extlib-data-formlayout,
+			flatten_extlib-data-pagers,
+			flatten_extlib-data-viewpanels,
+			flatten_extlib-datasource,
+			flatten_extlib-dialog,
+			flatten_extlib-dojo-base,
+			flatten_extlib-dojo-form,
+			flatten_extlib-dojo-fx-actions,
+			flatten_extlib-dojo-layout,
+			flatten_extlib-dojo-grid,
+			flatten_extlib-dynamiccontent,
+			flatten_extlib-dynamicview,
+			flatten_extlib-form,
+			flatten_extlib-layout,
+			flatten_extlib-misc,
+			flatten_extlib-outline,
+			flatten_extlib-picker,
+			flatten_extlib-rest,
+			flatten_extlib-rpc,
+			flatten_extlib-tagcloud,
+			flatten_extlib-tooltip,
+			flatten_extlib-redirect,
+			startDominoPlugin,
+			flatten_dwa-calendar,
+			flatten_dwa-listview,
+			flatten_domino-outline,
+			flatten_domino-picker,
+			flatten_domino-rest,
+			flatten_domino-tagcloud,
+			startMobilePlugin,
+			flatten_extlib-mobile,
+			startOneuiPlugin,
+			flatten_extlib-oneui-layout,
+			startRelationalPlugin,
+			flatten_relational-jdbc,
+			flatten_relational-jdbc-rest,
+			startBootstrapPlugin,
+			flatten_extlib-bootstrap,
+			cleanup">
+	</target>
+	
+
+	<target name="startControlsPlugin">
+		<echo level="info" message="############################################" />
+		<echo level="info" message="## Flattening com.ibm.xsp.extlib.controls/ files" />
+		<echo level="info" message="############################################" />
+	</target>
+	<target name="startDominoPlugin">
+		<echo level="info" message="############################################" />
+        <echo level="info" message="## Flattening com.ibm.xsp.extlib.domino/ files" />
+        <echo level="info" message="############################################" />
+	</target>
+	<target name="startMobilePlugin">
+		<echo level="info" message="############################################" />
+        <echo level="info" message="## Flattening com.ibm.xsp.extlib.mobile/ files" />
+        <echo level="info" message="############################################" />
+	</target>
+	<target name="startOneuiPlugin">
+		<echo level="info" message="############################################" />
+        <echo level="info" message="## Flattening com.ibm.xsp.extlib.oneui/ files" />
+        <echo level="info" message="############################################" />
+	</target>
+	<target name="startRelationalPlugin">
+		<echo level="info" message="############################################" />
+        <echo level="info" message="## Flattening com.ibm.xsp.extlib.relational/ files" />
+        <echo level="info" message="############################################" />
+	</target>
+	<target name="startBootstrapPlugin">
+		<echo level="info" message="############################################" />
+        <echo level="info" message="## Flattening com.ibm.xsp.theme.bootstrap/ files" />
+        <echo level="info" message="############################################" />
+	</target>
+
+	<!-- The targets that flatten individual files: -->
+	
+    <target name="flatten_extlib-clientaction" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-clientaction.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-clientaction.xsp-config" />
+            <property name="out.props" value="extlib-clientaction_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-common" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-common.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-common.xsp-config" />
+            <property name="out.props" value="extlib-common_en.properties" />
+        </ant>
+    </target>
+
+    <target name="flatten_extlib-containers" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-containers.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-containers.xsp-config" />
+            <property name="out.props" value="extlib-containers_en.properties" />
+        </ant>
+    </target> 
+
+    <target name="flatten_extlib-data-formlayout" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-data-formlayout.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-data-formlayout.xsp-config" />
+            <property name="out.props" value="extlib-data-formlayout_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-data-pagers" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-data-pagers.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-data-pagers.xsp-config" />
+            <property name="out.props" value="extlib-data-pagers_en.properties" />
+        </ant>
+    </target>
+
+    <target name="flatten_extlib-data-viewpanels" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-data-viewpanels.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-data-viewpanels.xsp-config" />
+            <property name="out.props" value="extlib-data-viewpanels_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-datasource" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-datasource.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-datasource.xsp-config" />
+            <property name="out.props" value="extlib-datasource_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-dialog" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dialog.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dialog.xsp-config" />
+            <property name="out.props" value="extlib-dialog_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-dojo-base" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dojo-base.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dojo-base.xsp-config" />
+            <property name="out.props" value="extlib-dojo-base_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-dojo-form" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dojo-form.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dojo-form.xsp-config" />
+            <property name="out.props" value="extlib-dojo-form_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-dojo-fx-actions" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dojo-fx-actions.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dojo-fx-actions.xsp-config" />
+            <property name="out.props" value="extlib-dojo-fx-actions_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-dojo-layout" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dojo-layout.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dojo-layout.xsp-config" />
+            <property name="out.props" value="extlib-dojo-layout_en.properties" />
+        </ant>
+    </target>
+
+    <target name="flatten_extlib-dojo-grid" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dojox-grid.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dojox-grid.xsp-config" />
+            <property name="out.props" value="extlib-dojox-grid_en.properties" />
+        </ant>
+    </target>
+	
+	
+    <target name="flatten_extlib-dynamiccontent" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dynamiccontent.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dynamiccontent.xsp-config" />
+            <property name="out.props" value="extlib-dynamiccontent_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-dynamicview" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-dynamicview.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-dynamicview.xsp-config" />
+            <property name="out.props" value="extlib-dynamicview_en.properties" />
+        </ant>
+    </target>
+
+    <target name="flatten_extlib-form" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-form.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-form.xsp-config" />
+            <property name="out.props" value="extlib-form_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-layout" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-layout.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-layout.xsp-config" />
+            <property name="out.props" value="extlib-layout_en.properties" />
+        </ant>
+    </target>
+
+    <target name="flatten_extlib-misc" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-misc.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-misc.xsp-config" />
+            <property name="out.props" value="extlib-misc_en.properties" />
+        </ant>
+    </target>	
+
+    <target name="flatten_extlib-outline" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-outline.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-outline.xsp-config" />
+            <property name="out.props" value="extlib-outline_en.properties" />
+        </ant>
+    </target>  
+    
+    <target name="flatten_extlib-picker" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-picker.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-picker.xsp-config" />
+            <property name="out.props" value="extlib-picker_en.properties" />
+        </ant>
+    </target>    
+
+    <target name="flatten_extlib-rest" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-rest.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-rest.xsp-config" />
+            <property name="out.props" value="extlib-rest_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-rpc" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-rpc.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-rpc.xsp-config" />
+            <property name="out.props" value="extlib-rpc_en.properties" />
+        </ant>
+    </target>
+    
+    <target name="flatten_extlib-tagcloud" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-tagcloud.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-tagcloud.xsp-config" />
+            <property name="out.props" value="extlib-tagcloud_en.properties" />
+        </ant>
+    </target>  
+    
+    <target name="flatten_extlib-tooltip" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-tooltip.xsp-config" />
+            <property name="out.folder" value="${extlibSrcMeta}/" />
+            <property name="out.name" value="extlib-tooltip.xsp-config" />
+            <property name="out.props" value="extlib-tooltip_en.properties" />
+        </ant>
+    </target>
+	
+	<target name="flatten_extlib-redirect" depends="setup">
+	        <ant antfile="flattenFile.xml">
+	            <property name="in.file" value="${extlibSrcMeta}/raw-extlib-redirect.xsp-config" />
+	            <property name="out.folder" value="${extlibSrcMeta}/" />
+	            <property name="out.name" value="extlib-redirect.xsp-config" />
+	            <property name="out.props" value="extlib-redirect_en.properties" />
+	        </ant>
+	    </target>
+	
+    <target name="flatten_dwa-calendar" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-dwa-calendar.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="dwa-calendar.xsp-config" />
+            <property name="out.props" value="dwa-calendar_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_dwa-listview" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-dwa-listview.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="dwa-listview.xsp-config" />
+            <property name="out.props" value="dwa-listview_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_domino-outline" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-extlib-domino-outline.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="extlib-domino-outline.xsp-config" />
+            <property name="out.props" value="extlib-domino-outline_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_domino-picker" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-extlib-domino-picker.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="extlib-domino-picker.xsp-config" />
+            <property name="out.props" value="extlib-domino-picker_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_domino-rest" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-extlib-domino-rest.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="extlib-domino-rest.xsp-config" />
+            <property name="out.props" value="extlib-domino-rest_en.properties" />
+        </ant>
+    </target>   
+	
+    <target name="flatten_domino-tagcloud" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibDominoSrcMeta}/raw-extlib-domino-tagcloud.xsp-config" />
+            <property name="out.folder" value="${extlibDominoSrcMeta}/" />
+            <property name="out.name" value="extlib-domino-tagcloud.xsp-config" />
+            <property name="out.props" value="extlib-domino-tagcloud_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-mobile" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibMobileSrcMeta}/raw-extlib-mobile.xsp-config" />
+            <property name="out.folder" value="${extlibMobileSrcMeta}/" />
+            <property name="out.name" value="extlib-mobile.xsp-config" />
+            <property name="out.props" value="extlib-mobile_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_extlib-oneui-layout" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibOneUiSrcMeta}/raw-extlib-oneui-layout.xsp-config" />
+            <property name="out.folder" value="${extlibOneUiSrcMeta}/" />
+            <property name="out.name" value="extlib-oneui-layout.xsp-config" />
+            <property name="out.props" value="extlib-oneui-layout_en.properties" />
+        </ant>
+    </target>
+	
+    <target name="flatten_relational-jdbc" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibRelationalSrcMeta}/raw-relational-jdbc.xsp-config"/>
+            <property name="out.folder" value="${extlibRelationalSrcMeta}/" />
+            <property name="out.name" value="relational-jdbc.xsp-config" />
+            <property name="out.props" value="relational-jdbc_en.properties" />
+       </ant>
+    </target>
+
+    <target name="flatten_relational-jdbc-rest" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibRelationalSrcMeta}/raw-relational-jdbc-rest.xsp-config"/>
+            <property name="out.folder" value="${extlibRelationalSrcMeta}/" />
+            <property name="out.name" value="relational-jdbc-rest.xsp-config" />
+            <property name="out.props" value="relational-jdbc-rest_en.properties" />
+       </ant>
+    </target>
+	
+	<target name="flatten_extlib-bootstrap" depends="setup">
+        <ant antfile="flattenFile.xml">
+            <property name="in.file" value="${extlibBootstrapSrcMeta}/raw-extlib-bootstrap.xsp-config"/>
+            <property name="out.folder" value="${extlibBootstrapSrcMeta}/" />
+            <property name="out.name" value="extlib-bootstrap.xsp-config" />
+            <property name="out.props" value="extlib-bootstrap_en.properties" />
+       </ant>
+    </target>
+	
+	<!-- 
+	<target name="" depends="setup">
+		<ant antfile="flattenFile.xml">
+			<property name="in.file" value=""/>
+			<property name="out.folder" value="${extlibSrcMeta}/" />
+			<property name="out.name" value="xml.xsp-config" />
+			<property name="out.props" value="xml_en.properties" />
+		</ant>
+	</target>
+	-->
+</project>

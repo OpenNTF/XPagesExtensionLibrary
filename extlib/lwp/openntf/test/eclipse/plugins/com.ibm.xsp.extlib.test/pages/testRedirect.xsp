@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+    xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:redirect>
+		<xe:this.rules>
+			<xe:redirectPhoneRule url="/testRedirectMobileTarget.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectPhoneRule>
+			<xe:redirectTabletRule url="/testRedirectMobileTarget.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectTabletRule>
+		</xe:this.rules>
+	</xe:redirect>
+	
+	testRedirect.xsp - only displayed in web/notes<xp:br/> 
+	(phone and tablet would redirect to testRedirectMobile.xsp)
+	
+	
+</xp:view>

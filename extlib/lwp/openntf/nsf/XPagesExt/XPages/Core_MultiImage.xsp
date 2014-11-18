@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/MultiImage">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label
+				value="This shows a control that displays an image based on a selection value"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:table role="presentation">
+				<xp:tr>
+					<xp:td>
+						Read Icon:
+					</xp:td>
+					<xp:td>
+						<xe:multiImage id="multiImage1" value='read'>
+							<xe:this.icons>
+								<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+									alt="Already read post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpPostUnread.gif" selectedValue="unread"
+									alt="Unread post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpResponseRead.gif" selected="true"
+									alt="Read response - default">
+								</xe:iconEntry>
+							</xe:this.icons>
+						</xe:multiImage>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						Unread Icon:
+					</xp:td>
+					<xp:td>
+						<xe:multiImage id="multiImage2" value='unread'>
+							<xe:this.icons>
+								<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+									alt="Already read post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpPostUnread.gif" selectedValue="unread"
+									alt="Unread post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpResponseRead.gif" selected="true"
+									alt="Read response - default">
+								</xe:iconEntry>
+							</xe:this.icons>
+						</xe:multiImage>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						Response Read (default icon)
+					</xp:td>
+					<xp:td>
+						<xe:multiImage id="multiImage3" value='responseRead'>
+							<xe:this.icons>
+								<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+									alt="Already read post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpPostUnread.gif" selectedValue="unread"
+									alt="Unread post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpResponseRead.gif" selected="true"
+									alt="Read response - default">
+								</xe:iconEntry>
+							</xe:this.icons>
+						</xe:multiImage>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						Response Unread (fixed url)
+					</xp:td>
+					<xp:td>
+						<xe:multiImage id="multiImage4" url="/xpResponseUnread.gif" alt="Unread response - fixed url">
+							<xe:this.icons>
+								<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+									alt="Already read post">
+								</xe:iconEntry>
+								<xe:iconEntry url="xpPostUnread.gif" selectedValue="unread"
+									alt="Unread post">
+								</xe:iconEntry>
+							</xe:this.icons>
+						</xe:multiImage>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

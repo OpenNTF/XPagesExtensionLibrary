@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="316" sequence="17" unid="60E0069B305E6A0C802579170050B7C6">
+<created><datetime dst="true">20110926T154139,26+01</datetime></created>
+<modified><datetime>20120207T095547,92+00</datetime></modified>
+<revised><datetime dst="true">20111026T142020,22+01</datetime></revised>
+<lastaccessed><datetime>20120207T095547,92+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095547,92+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=dubMob</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T154139,28+01</datetime><datetime dst="true">20111006T160525,32+01</datetime><datetime dst="true">20111010T115935,72+01</datetime><datetime dst="true">20111010T135001,21+01</datetime><datetime dst="true">20111010T135026,81+01</datetime><datetime dst="true">20111010T135558,66+01</datetime><datetime dst="true">20111011T195939,80+01</datetime><datetime dst="true">20111011T200002,14+01</datetime><datetime dst="true">20111013T160105,43+01</datetime><datetime dst="true">20111013T160111,51+01</datetime><datetime dst="true">20111013T162541,39+01</datetime><datetime dst="true">20111014T083945,09+01</datetime><datetime dst="true">20111014T103823,48+01</datetime><datetime dst="true">20111014T103836,40+01</datetime><datetime dst="true">20111014T104011,26+01</datetime><datetime dst="true">20111026T142007,18+01</datetime></revisions>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>mobile-server</text></item>
+<item name="$Flags"><text>.5834QP</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

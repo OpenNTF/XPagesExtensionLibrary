@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoView viewName="PeopleLookup" var="peopleLookup" dataCache="id"></xp:dominoView>
+	</xp:this.data>
+	<xe:widgetContainer id="wgtMembers"
+		titleBarText="Team Members" scrollable="true">
+		<xe:this.facets>
+			<xp:panel xp:key="footer" id="panel6">
+				<xp:text escape="true" id="membersCount"
+					style="padding-right:10px;">
+					<xp:this.value><![CDATA[#{javascript:
+var v:NotesView = database.getView("PeopleLookup");
+var count = v.getEntryCount();
+return I18n.format(strings.getString("n.members"), java.lang.Integer.valueOf(count.intValue()));
+}]]></xp:this.value>
+				</xp:text>
+				<xp:link escape="true" text="View All" id="link1"
+					value="/members.xsp">
+				</xp:link>
+			</xp:panel>
+		</xe:this.facets>
+		<xp:repeat id="membersRepeat" rows="6" var="person"
+			indexVar="idx" value="#{peopleLookup}">
+			<xp:image url="#{javascript:peopleBean.getPerson(person.getColumnValue('$3')).thumbnailUrl}" id="profileImage"
+				style="height:32px;width:32px;padding:0px 5px 3px 0px;" alt="" title="">
+			</xp:image>
+			<xp:link id="memberLink">
+				<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(person.getColumnValue("$3")).displayName}]]></xp:this.text>
+				<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + person.getColumnValue("$3")}]]></xp:this.value>
+			</xp:link>
+			<xp:br></xp:br>
+		</xp:repeat>
+		<xp:eventHandler event="onScrollUp" submit="true"
+			refreshMode="partial" refreshId="membersRepeat" id="evtUp" execMode="partial" execId="wgtMembers">
+			<xp:this.action><![CDATA[#{javascript:var r = getComponent("membersRepeat")
+		r.setFirst(Math.max(r.getFirst() - 6, 0))}]]></xp:this.action>
+		</xp:eventHandler>
+		<xp:eventHandler event="onScrollDown" submit="true"
+			refreshMode="partial" refreshId="membersRepeat" id="evtDown" execMode="partial" execId="wgtMembers">
+			<xp:this.action><![CDATA[#{javascript:var r = getComponent("membersRepeat")
+		r.setFirst(Math.min(r.getFirst() + 6, r.getRowCount()))}]]></xp:this.action>
+		</xp:eventHandler>
+	</xe:widgetContainer>
+</xp:view>

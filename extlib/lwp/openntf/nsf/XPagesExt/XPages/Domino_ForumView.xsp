@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/ForumView">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="This shows the forum view component" id="label5"
+			style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel id="panel1">
+			<xp:tabbedPanel id="DetailsOnClient">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="Only Summary" id="tabPanel5">
+					<xp:button value="Refresh Page" id="button2">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:pagerSaveState id="pagerSaveState2" for="dataView5"
+						globalRows="true">
+					</xe:pagerSaveState>
+					<xe:forumView id="dataView5" var="viewEntry" rows="10" pageName="/Domino_ViewStateForm.xsp">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xp:pager layout="Previous Group Next" id="pager5"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel9" xp:key="detail">
+								<xe:forumPost id="forumPost1">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image1" height="45" width="45">
+										</xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField12">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField13">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" style="margin:0"
+											id="computedField8" tagName="h4">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField7">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField11">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link11">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label4">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link12">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel10">
+								<xe:pagerSizes id="pagerSizes3">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Only Details" id="tabPanel1">
+					<xp:button value="Refresh Page" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:pagerSaveState id="pagerSaveState1" for="dataView5"
+						globalRows="true">
+					</xe:pagerSaveState>
+					<xe:forumView id="forumView1" var="viewEntry" rows="10"
+						expandedDetail="true" pageName="/Domino_ViewStateForm.xsp">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xp:pager layout="Previous Group Next" id="pager1"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel2" xp:key="detail">
+								<xe:forumPost id="forumPost2">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image2" height="45" width="45"></xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField1">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField2">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" style="margin:0"
+											id="computedField14" tagName="h4">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField15">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField16">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link1">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label1">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link2">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel3">
+								<xe:pagerSizes id="pagerSizes1">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Both Initially Collapsed" id="tabPanel2">
+					<xp:button value="Refresh Page" id="button3">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:forumView id="forumView2" var="viewEntry"
+						collapsibleDetail="true" rows="10" pageName="/Domino_ViewStateForm.xsp">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerExpand2" xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next" id="pager2"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel5" xp:key="detail">
+								<xe:forumPost id="forumPost3">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image3" height="45" width="45"></xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField3">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField4">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" style="margin:0"
+											id="computedField17" tagName="h4">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField18">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField19">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link3">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label2">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link4">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel6">
+								<xe:pagerSizes id="pagerSizes2">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Both Initially Collapsed, Details On Client"
+					id="tabPanel4">
+					<xp:button value="Refresh Page" id="button5">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:forumView id="forumView4" var="viewEntry"
+						collapsibleDetail="true" rows="10" detailsOnClient="true" pageName="/Domino_ViewStateForm.xsp">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerExpand5" xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next" id="pager4"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel11" xp:key="detail">
+								<xe:forumPost id="forumPost4">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image5" height="45" width="45"></xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField9">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField10">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" style="margin:0"
+											id="computedField20" tagName="h4">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField21">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField22">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link7">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label6">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link8">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel12">
+								<xe:pagerSizes id="pagerSizes5">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Both Initially Expanded" id="tabPanel3">
+					<xp:button value="Refresh Page" id="button4">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:forumView id="forumView3" var="viewEntry"
+						collapsibleDetail="true" rows="10" expandedDetail="true" pageName="/Domino_ViewStateForm.xsp">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerExpand4" xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next" id="pager3"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel7" xp:key="detail">
+								<xe:forumPost id="forumPost5">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image4" height="45" width="45"></xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField5">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField6">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" id="computedField23"
+											tagName="h4" style="margin:0">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField24">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField25">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link5">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label3">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link6">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel8">
+								<xe:pagerSizes id="pagerSizes4">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Flat view with add rows" id="tabPanel6">
+					<xp:button value="Refresh Page" id="button6">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:forumView id="forumView5" var="viewEntry"
+						collapsibleDetail="true" rows="10" expandedDetail="true"
+						showItemsFlat="true">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="16">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerDetail id="pagerDetail1" xp:key="pagerTopLeft">
+							</xe:pagerDetail>
+							<xp:pager layout="Previous Group Next" id="pager6"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel13" xp:key="detail">
+								<xe:forumPost id="forumPost6">
+									<xp:this.facets>
+										<xp:image xp:key="authorAvatar" url="/NoPhoto.png"
+											id="image6" height="45" width="45">
+										</xp:image>
+										<xp:text xp:key="authorName" escape="true" id="computedField26">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="authorMeta" escape="true" id="computedField27">
+											<xp:this.value><![CDATA[#{viewEntry["Author"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text escape="true" xp:key="postTitle" id="computedField28"
+											tagName="h4" style="margin:0">
+											<xp:this.value><![CDATA[#{viewEntry["Title"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postDetails" escape="true" id="computedField29">
+											<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+										</xp:text>
+										<xp:text xp:key="postMeta" escape="true" id="computedField30">
+											<xp:this.value><![CDATA[#{javascript:return "Created on "+viewEntry.getColumnValue("Date")}]]></xp:this.value>
+										</xp:text>
+										<xp:div xp:key="postActions">
+											<xp:link escape="true" text="Reply" id="link13">
+											</xp:link>
+											<xp:label value=" | Tags: " id="label7">
+											</xp:label>
+											<xp:link escape="true" text="See them" id="link14">
+											</xp:link>
+										</xp:div>
+									</xp:this.facets>
+								</xe:forumPost>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel14">
+								<xe:pagerSizes id="pagerSizes6">
+								</xe:pagerSizes>
+							</xp:panel>
+							<xp:link escape="true" text="Add 3 rows" id="link15"
+								xp:key="pagerBottomRight">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script>
+										<xe:addRows rowCount="3" for="forumView5">
+										</xe:addRows>
+									</xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+						</xp:this.facets>
+					</xe:forumView>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

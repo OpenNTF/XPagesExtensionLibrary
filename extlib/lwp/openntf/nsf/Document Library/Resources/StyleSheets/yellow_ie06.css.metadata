@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00051190" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="286" sequence="22" unid="733137BC34B966268025795D003E1975">
+<created><datetime>20111205T111817,49+00</datetime></created>
+<modified><datetime>20120309T010152,08+00</datetime></modified>
+<revised><datetime>20120229T112437,42-05</datetime></revised>
+<lastaccessed><datetime>20120309T010152,08+00</datetime></lastaccessed>
+<addedtofile><datetime>20120215T120459,26+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<item name="$TITLE"><text>yellow_ie06.css</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080813T110634,35+01</datetime></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>yellow_ie06.css</text></item>
+<item name="$Class"><text>StdXLDiscussion</text></item>
+<item name="$Flags"><text>D34C=Q</text></item></note>

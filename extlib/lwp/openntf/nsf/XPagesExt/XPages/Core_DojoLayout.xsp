@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/DojoLayout">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:br></xp:br>
+		<xp:button value="Roundtrip" id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+			</xp:eventHandler>
+		</xp:button>
+		<xp:text escape="true" id="computedField1"
+			value="#{javascript:(new Date()).toISOString()}">
+		</xp:text>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel>
+			<xp:span style="font-weight:bold">
+				Simple Content Pane
+			</xp:span>
+			<xp:br></xp:br>
+			<xe:djContentPane id="djContentPane2"
+				partialRefresh="true">
+				I'm in a Content Pane, refreshed using an Ajax call!
+				<xp:button value="Click Me!" id="button2">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[alert("You clicked djContentPane2")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xe:djContentPane>
+			<xe:djContentPane id="djContentPane3"
+				partialRefresh="true">
+				I'm in another Content Pane, refreshed using an Ajax call!
+				<xp:button value="Click Me!" id="button16">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[alert("You clicked djContentPane3")]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xe:djContentPane>
+			<br />
+			<br />
+
+			<xp:span style="font-weight:bold">Stack Container</xp:span>
+			<xe:djStackContainer id="djStackContainer1"
+				style="width:350px; height:100px;">
+				<xe:djStackPane id="djStackTabPane3">
+					Stack panel #1
+					<xp:button value="Click Me!" id="button3">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djStackTabPane3")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djStackPane>
+				<xe:djStackPane id="djStackTabPane4" partialRefresh="true">
+					Stack
+					panel #2 - Refreshed using Ajax
+					<xp:button value="Click Me!" id="button4">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djStackTabPane4")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djStackPane>
+			</xe:djStackContainer>
+			<br />
+			<xe:djButton id="djButton1" label="Back">
+				<xp:eventHandler event="onClick" submit="false">
+					<xp:this.script><![CDATA[dijit.byId("#{id:djStackContainer1}").back();]]></xp:this.script>
+				</xp:eventHandler>
+			</xe:djButton>
+			<xe:djButton id="djButton2" label="Forward">
+				<xp:eventHandler event="onClick" submit="false">
+					<xp:this.script><![CDATA[dijit.byId("#{id:djStackContainer1}").forward();]]></xp:this.script>
+				</xp:eventHandler>
+			</xe:djButton>
+			<br />
+			<br />
+
+
+			<xp:span style="font-weight:bold">Tab Container</xp:span>
+			<xe:djTabContainer id="djContentPane1" tabPosition="top"
+				style="width:500px; height:100px; margin:5px;">
+				<xe:djTabPane id="djTabPane1" title="Tab 1">
+					Tab panel #1
+					<xp:button value="Click Me!" id="button5">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djTabPane1")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djTabPane>
+				<xe:djTabPane id="djTabPane2" title="Tab 2"
+					partialRefresh="true">
+					Tab panel #2 - Refreshed using Ajax
+					<xp:button value="Click Me!" id="button6">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djTabPane2")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djTabPane>
+			</xe:djTabContainer>
+			<br />
+			<br />
+
+
+			<xp:span style="font-weight:bold">Border Container</xp:span>
+			<xe:djBorderContainer id="djTabContainer1"
+				style="width:800px; height:400px;" liveSplitters="true">
+				<xe:djBorderPane id="djBorderPane0" region="top">
+					Pane Top
+					<xp:button value="Click Me!" id="button7">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djBorderPane0")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane1" region="bottom">
+					Pane
+					Bottom
+					<xp:button value="Click Me!" id="button8">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djBorderPane1")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane3" region="left"
+					splitter="true">
+					Pane Left
+					<xp:button value="Click Me!" id="button9">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djBorderPane3")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane4" region="right"
+					splitter="true">
+					Pane Right
+					<xp:button value="Click Me!" id="button10">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djBorderPane4")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djBorderPane>
+				<xe:djBorderPane id="djBorderPane2" region="center">
+					Pane
+					Center
+					<xp:button value="Click Me!" id="button11">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djBorderPane2")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djBorderPane>
+			</xe:djBorderContainer>
+			<br />
+			<br />
+
+
+			<xp:span style="font-weight:bold">Accordion Container</xp:span>
+			<xe:djAccordionContainer id="djBorderContainer1"
+				style="width:100px; height:200px;">
+				<xe:djAccordionPane id="djAccordionPane0" title="Pane 1">
+					Accordion Pane #1
+					<xp:button value="Click Me!" id="button15">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djAccordionPane0")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djAccordionPane>
+				<xe:djAccordionPane id="djAccordionPane1" title="Pane 2">
+					Accordion Pane #2
+					<xp:button value="Click Me!" id="button14">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djAccordionPane1")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djAccordionPane>
+				<xe:djAccordionPane id="djAccordionPane2" title="Pane 3">
+					Accordion Pane #3
+					<xp:button value="Click Me!" id="button13">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djAccordionPane2")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djAccordionPane>
+				<xe:djAccordionPane id="djAccordionPane3" title="Pane 4">
+					Accordion Pane #4
+					<xp:button value="Click Me!" id="button12">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[alert("You clicked djAccordionPane3")]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djAccordionPane>
+			</xe:djAccordionContainer>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

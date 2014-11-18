@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="48a" sequence="39" unid="9B36CDD8EAF3C558852564CE00701789">
+<created><datetime dst="true">19970708T162420,57-04</datetime></created>
+<modified><datetime>20120305T082325,58+00</datetime></modified>
+<revised><datetime>20120305T082325,57+00</datetime></revised>
+<lastaccessed><datetime>20120305T082325,58+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100338,47+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>wStringResource</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item>
+
+</note>

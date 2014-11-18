@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="JDBC_Home"
+				label="Home" selection="/JDBC/Home">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_StaticViewPanelTable"
+				label="Static View Panel - Table" selection="/JDBC/StaticViewPanelTable">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_StaticViewPanelQuery"
+				label="Static View Panel - Query" selection="/JDBC/StaticViewPanelQuery">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_StaticViewPanelQueryCount"
+				label="Static View Panel - Query+Count" selection="/JDBC/StaticViewPanelQueryCount">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_StaticViewPanelFile"
+				label="Static View Panel - SQL File" selection="/JDBC/StaticViewPanelFile">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_StaticViewPanelParam"
+				label="Static View Panel - Parameter" selection="/JDBC/StaticViewPanelParam">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_DynamicViewPanel"
+				label="Dynamic View Panel" selection="/JDBC/DynamicViewPanel">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="JDBC_RowSetDatasource"
+				label="Cached RowSet Read/Write data source" selection="/JDBC/RowSetDatasource">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="JDBC_Query" label="SQL Query"
+				selection="/JDBC/Query">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_MetaData" label="Database Meta Data"
+				selection="/JDBC/MetaData">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_TableMetaData" label="Table Meta Data"
+				selection="/JDBC/TableMetaData">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_AtFunctions" label="@Functions()"
+				selection="/JDBC/AtFunctions">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="JDBC_REST_DojoGridJsonRest" label="Dojo Grid using JDBC JSON Rest"
+				selection="/JDBC/REST_DojoGridJsonRest">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

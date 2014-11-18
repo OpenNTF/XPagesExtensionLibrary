@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+    <xe:appPage id="document" pageName="document" resetContent="true" preload="true">
+		<xe:djxmHeading id="mHeader8" label="Document"
+			back="Back" moveTo="dataView">
+		</xe:djxmHeading>
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="Contact">
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xe:formTable id="formTable1" xp:key="form"
+				formDescription="Edit the document's properties below.">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel1">
+						<xp:button value="Submit" id="button2">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xe:moveTo forceFullRefresh="true"
+										saveDocument="true" targetPage="dataView"
+										transitionType="slide" direction="Right to Left">
+									</xe:moveTo>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow1" label="Title:">
+					<xp:inputText id="title" required="true"
+						value="#{document1.Title}">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Title is a required field.">
+						</xp:validateRequired>
+					</xp:this.validators></xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow2" label="Author:">
+					<xp:inputText id="author" required="true"
+						disableClientSideValidation="true" value="#{document1.Author}">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Author is a required field.">
+						</xp:validateRequired>
+					</xp:this.validators></xp:inputText>
+				</xe:formRow>
+				<xe:formRow id="formRow3" label="Abstract:">
+					<xe:djTextarea id="abstract" required="true"
+						value="#{document1.Abstract}">
+					<xp:this.validators>
+						<xp:validateRequired
+							message="Abstract is a required field.">
+						</xp:validateRequired>
+					</xp:this.validators>
+					</xe:djTextarea>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xe:appPage>
+</xp:view>

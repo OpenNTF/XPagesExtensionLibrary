@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<artifactId>product.runtime.eclipse.features</artifactId>
+<packaging>pom</packaging>
+<groupId>com.ibm.xsp.extlib</groupId>
+
+<parent>
+<groupId>com.ibm.xsp.extlib</groupId>
+<artifactId>com.ibm.xsp.extlib.parent</artifactId>
+<version>9.0.1.v00_10-SNAPSHOT</version>
+<relativePath>../../../../</relativePath>
+</parent>
+
+
+<modules>
+<module>org.openntf.extlib.wink.feature</module>
+<module>org.openntf.extlib.apache.wink.feature</module>
+<module>org.openntf.extlib.domino.das.feature</module>
+<module>org.openntf.extlib.feature</module>
+<module>org.openntf.extlib.relational.feature</module>
+
+</modules>
+
+
+</project>
+

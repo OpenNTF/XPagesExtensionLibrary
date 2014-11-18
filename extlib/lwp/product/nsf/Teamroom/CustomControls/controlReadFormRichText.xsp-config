@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>controlReadFormRichText</component-type>
+    <composite-name>controlReadFormRichText</composite-name>
+    <composite-file>/controlReadFormRichText.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:div&gt;&#xd;
+      &lt;xp:label &#xd;
+        value="&lt;%=this.label?this.label:'{label}'%&gt;"&#xd;
+        id="label1" &#xd;
+        for="#{javascript:compositeData.inputId}"&#xd;
+        style="font-weight:bold;font-size:13pt"&gt;&#xd;
+      &lt;/xp:label&gt;&#xd;
+      &lt;xp:div style="margin:5px; margin-bottom:10px"&gt;&#xd;
+        &lt;xp:callback id="cb1"&gt;&#xd;
+        &lt;/xp:callback&gt;&#xd;
+      &lt;/xp:div&gt;&#xd;
+    &lt;/xp:div&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>label</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <required>false</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>inputId</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <required>false</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>attachEL</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

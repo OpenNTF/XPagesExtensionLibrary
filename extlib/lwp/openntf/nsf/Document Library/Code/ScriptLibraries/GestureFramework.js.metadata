@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="74a" sequence="14" unid="AD90A427E92C485B802579970055265A">
+<created><datetime>20120201T153003,78+00</datetime></created>
+<modified><datetime>20120201T163052,80+00</datetime></modified>
+<revised><datetime>20120201T163052,79+00</datetime></revised>
+<lastaccessed><datetime>20120201T163052,80+00</datetime></lastaccessed>
+<addedtofile><datetime>20120201T153003,79+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name="$TITLE" sign="true"><text>GestureFramework</text></item>
+<item name="$Flags"><text>h534Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

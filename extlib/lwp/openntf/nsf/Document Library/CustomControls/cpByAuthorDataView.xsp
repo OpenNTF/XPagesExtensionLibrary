@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:pagerSaveState for="dataView1"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	<xe:dataView id="dataView1" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" columnTitles="true"
+		openDocAsReadonly="false"
+		collapsibleRows="true" collapsibleDetail="true"
+		rowStyleClass="xspHtmlTrView" detailsOnClient="true" rows="25" pageName="/viewDocument.xsp">
+		
+		<xe:this.data>
+			<xp:dominoView var="view1" viewName="ByAuthor"
+				dataCache="full" search="#{requestScope.searchQuery}" expandLevel="1">
+			</xp:dominoView>
+		</xe:this.data>
+		<xp:this.facets>
+			<xe:pagerExpand xp:key="pagerTopLeft"></xe:pagerExpand>
+			<xp:pager layout="Previous Group Next"
+				xp:key="pagerTopRight" partialRefresh="true"
+				partialExecute="true" disableTheme="true">
+			</xp:pager>
+			<xe:pagerSizes sizes="10|25|50|100"
+				xp:key="pagerBottomLeft">
+			</xe:pagerSizes>
+			<xp:pager layout="Previous Group Next"
+				xp:key="pagerBottomRight" partialRefresh="true"
+				partialExecute="true" disableTheme="true">
+			</xp:pager>
+			
+			<xp:panel xp:key="categoryRow" id="categoryRow">
+				<xp:label styleClass="categoryRow">
+					<xp:this.value>
+						<![CDATA[#{javascript:
+										var text = viewEntry.getColumnValue(' ');
+										return text || "*No Author*";
+						}]]></xp:this.value>
+				</xp:label>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Topic" columnTitle="Title">
+				<xp:this.styleClass><![CDATA[#{javascript:
+					var hasAttachments = viewEntry.getColumnValue('Attachments') !== 0;
+					if(hasAttachments) {
+						return 'documentAttachmentIcon';
+					}
+				}]]></xp:this.styleClass>
+				
+				<xp:this.value><![CDATA[#{javascript:
+					var document = viewEntry.getDocument(),
+						msg = document.getItemValueString('Subject');
+					
+					if (document.getItemValue('readers').length > 0) {
+						msg = I18n.format(strings.getString('document.prefix.private'), msg);
+					}
+					return msg;
+				}]]></xp:this.value>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn columnName="Date" columnTitle="Date">
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+	</xe:dataView>
+</xp:view>

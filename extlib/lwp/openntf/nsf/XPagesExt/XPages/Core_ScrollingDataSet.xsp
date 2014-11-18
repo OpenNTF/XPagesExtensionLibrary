@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.DataIterator"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/ScrollingDataSet">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:button value="Reload the page" id="button2">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:context.reloadPage()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:span style="font-weight:bold">
+				This page shows how to send an Ajax request to
+				a Repeat
+				or DataTable.
+			</xp:span>
+			<xp:br></xp:br>
+			<xp:table>
+			    <xp:tr>
+                    <th>Repeat</th>
+                    <th>Data Table</th>
+			    </xp:tr>
+				<xp:tr valign="top">
+					<xp:td style='width:200px'>
+						<xp:repeat id="repeat1" value="#{javascript:100}"
+							indexVar="idx" rows="5">
+							<xp:text escape="true" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:"Row: "+idx}]]></xp:this.value>
+							</xp:text>
+							<xp:br></xp:br>
+						</xp:repeat>
+						<xp:br></xp:br>
+						<xe:pagerAddRows id="pagerAddRows1"
+							for='repeat1' text="Client side" rowCount="3" state="true">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xe:pagerAddRows id="pagerAddRows2"
+							for='repeat1' text="Server side" refreshPage="true" rowCount="3"
+							partialRefresh="false">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xe:pagerAddRows id="pagerAddRows6"
+							for='repeat1' text="Server side - partial refresh"
+							refreshPage="true" rowCount="3" partialRefresh="true">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xp:link escape="true" text="Simple Action - Client side" id="link1">
+							
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script>
+								<xe:addRows rowCount="3" for="repeat1"
+									state="true">
+								</xe:addRows>
+							</xp:this.script></xp:eventHandler></xp:link>
+					</xp:td>
+					<xp:td>
+						<xp:dataTable id="dataTable1" value="#{javascript:100}"
+							indexVar="idx" rows="5">
+							<xp:column id="column1">
+								<xp:this.facets>
+									<xp:span xp:key="header">
+										Header
+									</xp:span>
+								</xp:this.facets>
+								<xp:text escape="true" id="computedField3">
+									<xp:this.value><![CDATA[#{javascript:"Row: "+idx}]]></xp:this.value>
+								</xp:text>
+								<xp:this.facets>
+									<xp:span xp:key="footer">
+										Footer
+									</xp:span>
+								</xp:this.facets>
+							</xp:column>
+						</xp:dataTable>
+						<xp:br></xp:br>
+						<xe:pagerAddRows id="pagerAddRows3"
+							for='dataTable1' text="Client side" rowCount="3" state="true">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xe:pagerAddRows id="pagerAddRows4"
+							for='dataTable1' text="Server side" refreshPage="true"
+							rowCount="3" partialRefresh="false">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xe:pagerAddRows id="pagerAddRows5"
+							for='dataTable1' text="Server side - partial refresh"
+							refreshPage="true" rowCount="3" partialRefresh="true">
+						</xe:pagerAddRows>
+						<xp:br/>
+						<xp:link escape="true" text="Simple Action - Client side" id="link2">
+							
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script>
+								<xe:addRows rowCount="3" for="dataTable1"
+									state="true">
+								</xe:addRows>
+							</xp:this.script></xp:eventHandler></xp:link>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

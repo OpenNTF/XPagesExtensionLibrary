@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xe:jdbcRowSet connectionName="derby1" var="jdbcData1"
+			sqlTable="users" showDeleted="true">
+		</xe:jdbcRowSet>
+	</xp:this.data>
+	<xc:ccLayout navigationPath="/JDBC/RowSetDatasource">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:label id="label5" style="font-weight:bold" value="Read/Write data source">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		The runtime is featuring a new data source leveraging a standard JDBC
+		CachedRowSet. This data
+		source can be displayed using a regular view
+		panel, but its records can also
+		be edited and then
+		committed back to the
+		RDBMS. When you click on a
+		record link, then a popup dialog allows you
+		to modify the record,
+		while a
+		click on the 'insert' button creates a new
+		record.
+		<xp:br></xp:br>
+		But the changes are not committed to the database unless the save()
+		action is triggered.
+		<xp:br></xp:br>
+		This data source also displays the deleted rows, using the showDeleted property.
+		<xp:br></xp:br>
+		Be careful when using this data source as all the records, up to the
+		maxRows property value, are
+		extracted from the database and kept as
+		part of the data source. You must then use this data
+		source with
+		limited data sets.<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel id="main">
+			<xp:viewPanel rows="10" id="viewPanel1" var="user"
+				value="#{jdbcData1}" indexVar="idx">
+				<xp:this.facets>
+					<xp:pager partialRefresh="true" layout="Previous Group Next"
+						xp:key="headerPager" id="pager1">
+					</xp:pager>
+				</xp:this.facets>
+				<xp:viewColumn id="viewColumn1" showCheckbox="true">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader1" value="">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+					<xp:this.iconSrc><![CDATA[#{javascript:if(user.isRowInserted()) return "row_new.jpg"
+if(user.isRowDeleted()) return "row_delete.jpg"
+if(user.isRowUpdated()) return "row_edit.jpg"
+return "row_blank.jpg"}]]></xp:this.iconSrc>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn7" columnName="id"
+					displayAs="link">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader7" value="ID">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog('#{id:userDialog}',null,{row:'#{javascript:idx}'})]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn3" columnName="firstName">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader3" value="First Name">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn2" columnName="lastName">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader2" value="Last Name">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn4" columnName="city">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader4" value="City">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn5" columnName="State">
+					<xp:this.facets>
+						<xp:viewColumnHeader xp:key="header"
+							id="viewColumnHeader5" value="State">
+						</xp:viewColumnHeader>
+					</xp:this.facets>
+				</xp:viewColumn>
+			</xp:viewPanel>
+		</xp:panel>
+		<xp:panel>
+			<xp:button value="Save Changes" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:jdbcData1.acceptChanges()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Insert New Record" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:userDialog}");]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Delete Selected Records" id="button3">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="main">
+					<xp:this.action>
+						<xp:deleteSelectedDocuments view="viewPanel1"
+							message="Are you sure?">
+						</xp:deleteSelectedDocuments>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+		<xe:dialog id="userDialog" title="User Record">
+			<xp:panel>
+				<xp:this.data>
+					<xe:objectData var="row"
+						saveObject="#{javascript:jdbcData1.saveRow(row)}">
+						<xe:this.createObject><![CDATA[#{javascript:var p = param.row
+return p ? jdbcData1.getRow(parseInt(p)) : jdbcData1.newRow(getComponent('viewPanel1').getFirst())}]]></xe:this.createObject>
+					</xe:objectData>
+				</xp:this.data>
+				<xp:panel id="formPanel" style='padding: 10px'>
+					<xe:formTable id="formTable1" formDescription="Enter here the data for the user"
+						labelWidth="20%" formTitle="User Record">
+						<xe:formRow id="formRow3" label="Id:">
+							<xp:inputText id="inputText3" value="#{row.Id}"
+								size="8" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow1" label="First Name:">
+							<xp:inputText id="inputText1" value="#{row.FirstName}"
+								size="40" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow2" label="Last Name:">
+							<xp:inputText id="inputText2" value="#{row.LastName}"
+								size="40" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow4" label="City:">
+							<xp:inputText id="inputText4" value="#{row.City}"
+								size="24" required="true">
+							</xp:inputText>
+						</xe:formRow>
+						<xe:formRow id="formRow5" label="State:">
+							<xp:inputText id="inputText5" value="#{row.State}"
+								size="4" required="true">
+							</xp:inputText>
+						</xe:formRow>
+					</xe:formTable>
+				</xp:panel>
+				<xe:dialogButtonBar>
+					<xp:button value="Ok" id="button15" styleClass="lotusFormButton">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument var="row"></xp:saveDocument>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:var c = getComponent("userDialog")
+c.hide('main')}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+						<xp:eventHandler event="onclick" submit="true"
+							immediate="true">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:var c = getComponent("userDialog")
+c.hide()}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xe:dialogButtonBar>
+			</xp:panel>
+		</xe:dialog>
+	</xc:ccLayout>
+</xp:view>

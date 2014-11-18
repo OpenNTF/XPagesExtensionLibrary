@@ -1,0 +1,83 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Function GetString ( StringType As Integer) As String
+
+'++LotusScript Development Environment:2:5:(Declarations):0:2
+
+'++LotusScript Development Environment:2:1:GetString:1:8
+Function GetString ( StringType As Integer) As String
+     '
+	Select Case StringType
+	Case 1  ' WebAddtopic, WebExpire
+		GetString = "Back to Previous Document"
+	Case 2  ' WebAddtopic, WebExpire, WebRemoveThread
+		GetString = "All Documents"
+	Case 3  ' WebAddtopic, WebExpire, WebRemoveThread
+		GetString = "by Category"
+	Case 4  ' WebAddtopic, WebExpire, WebRemoveThread
+		GetString = "by Author"
+	Case 5  ' WebAddtopic, WebExpire, WebRemoveThread
+		GetString = "by Alternate Name"
+	Case 6  ' WebAddtopic
+		GetString = "This document is not identified as a thread.  Contact the database manager if you want all threads initialized."
+	Case 7  ' WebAddtopic
+		GetString = "This topic is already in your Interest Profile."
+	Case 8  ' WebAddtopic
+		GetString = "has been added to your Interest Profile.  You will be notified by mail when new responses appear in this topic."
+	Case 9  ' WebArchiveSaveSettings
+		GetString = "You have successfully updated the Archive settings for this database. "
+	Case 10 'WebArchiveSaveSettings
+		getString = "Done"		
+'	Case 11  ' WebDelete
+'		GetString = "The document has been deleted."
+	Case 12  ' WebExpire
+		GetString = " cannot be marked for expiration."   ' leave the leading space..
+	Case 13  ' WebExpire
+		GetString = "The document's expiration date has been removed." 
+	Case 14  ' WebExpire
+		GetString = "The current document has been marked for expiration."
+	Case 15  ' WebRemoveThread
+		GetString = "Back to Interest Profile"
+	Case 16  ' WebRemoveThread
+		GetString = "Profile document could not be found."
+	Case 17  ' WebRemoveThread
+		GetString = "The requested thread(s) have been removed from your Interest Profile."   
+	Case 18  ' WebArchiveSubmit
+		GetString = "A problem was encountered while creating the archive database.  Specified database may already exist or your database creation rights are limited."
+	Case 19 'WebArchiveSubmit
+		GetString = "You can only create an archive database on the Domino server that you are currently running on via a web browser.  To create a database on a different server, use the Domino Designer client."
+	Case 20 'WebArchiveSubmit
+		GetString = "Archive Profile has been updated."
+	Case 21 'WebArchiveSave
+		GetString = "You will need to specify a location of the archive database before you can archive documents."
+	Case 22   'An error that we are not specifically handling
+		GetString = Err & " - " & Error
+	Case 23 'WebEditArchiveProfile
+		GetString = "Manager or Designer access is required to perform Archiving tasks."
+	Case 24  'Error message in WebRemoveThread agent for empty selection
+		GetString = "No threads were selected to remove from the Interest Profile."
+	Case 25 'Used in WebAddTopic agent
+		GetString = "Untitled - "
+	Case 26  'Used in WebAddTopic agent
+		GetString =  "Untitled topic "
+'	Case 27  'used in WebDelete agent
+'		GetString = "You are not authorized to delete the document."
+	Case 28   'used for Web navigation
+		GetString =  "By Date"
+	Case 29  'used for Web navigation
+		getString  = "Mission/Team Members"
+	Case 30  'used for Web navigation
+		getString = "Go Back"
+'	Case 31  'used in WebDelete agent
+'		getstring = "You are not authorized to delete the document because you are not the document's original author."
+'	Case 32  'used in WebDelete agent
+'		getstring =  "You have successfully deleted the document entitled: "
+	Case 33  'used in Send Newsletters agent
+		getstring =  "Documents you requested from: "
+		
+		
+	End Select
+	
+End Function

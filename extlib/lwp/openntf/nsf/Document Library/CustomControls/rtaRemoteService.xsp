@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:jsonRpcService id="jsonRpcService1" serviceName="CalendarService">
+		<xe:this.methods>
+			<xe:remoteMethod name="calculateDays">
+				<xe:this.script><![CDATA[
+					var currentDate = new java.util.Date(),
+						startDate = java.util.Calendar.getInstance(),
+						endDate = java.util.Calendar.getInstance(),
+						sdf = new java.text.SimpleDateFormat("yyyy-MM-dd"),
+						ONE_DAY = 1000 * 60 * 60 * 24,
+						result = 0;
+						
+					startDate.setTime(currentDate);
+					endDate.setTime(sdf.parse(date));
+					
+					var tDate = startDate.clone();
+					while(tDate.before(endDate)) {
+						tDate.add(java.util.Calendar.DAY_OF_MONTH, 1);
+						result++;
+					}
+					
+					return result;
+				]]></xe:this.script>
+				<xe:this.arguments>
+					<xe:remoteMethodArg name="date" type="string"></xe:remoteMethodArg>
+				</xe:this.arguments>
+			</xe:remoteMethod>
+		</xe:this.methods>
+	</xe:jsonRpcService>
+
+</xp:view>

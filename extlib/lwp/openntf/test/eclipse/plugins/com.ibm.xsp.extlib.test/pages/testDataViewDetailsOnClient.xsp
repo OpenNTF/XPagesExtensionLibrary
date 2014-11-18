@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dataView id="dataView1" var="rowData" indexVar="rowIndex"
+		collapsibleDetail="true" detailsOnClient="true">
+		<xp:this.facets>
+			<xp:panel xp:key="detail">
+				&#160;&#160;&#160;&#160;
+				<xp:text escape="true" id="computedField1"
+					value="#{javascript:rowData.col2}">
+				</xp:text>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:this.value><![CDATA[#{javascript:var values = [
+	{col1:"aaa", col2:"AAA"},
+	{col1:"bbb", col2:"BBB"},
+	{col1:"ccc", col2:"CCC"}
+];
+return values;}]]></xe:this.value>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn value="#{javascript:rowData.col1}"></xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+	</xe:dataView>
+</xp:view>

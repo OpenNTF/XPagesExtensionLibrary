@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="com.ibm.pvc.jndi.provider.java.binding">
+	    <binding 
+	        jndi-name="java:comp/env/jdbc/NSFDefinedStore"
+	        objectFactory-id="com.ibm.domino.jndi.NSFGenericObjectFactory">
+	    </binding>
+	 </extension>
+	 
+	<extension point="com.ibm.pvc.jndi.provider.java.objectfactory">
+      <objectfactory
+            class="com.ibm.domino.jndi.factory.NSFGenericObjectFactory"
+            id="com.ibm.domino.jndi.NSFGenericObjectFactory"/>
+   </extension>
+	 
+	 <extension point="com.ibm.pvc.jndi.provider.java.genericobject">
+  		<object 
+		    jndi-name="java:comp/env/jdbc/bookstore"
+    		class="org.apache.commons.dbcp.BasicDataSource">
+    		<method name="setUrl">
+      			<method-parameter
+         			type="String"
+         			value="jdbc:derby:${_workspace}/sample;create=true">
+      			</method-parameter>
+    		</method>
+  		</object>
+	</extension>
+	 
+
+</plugin>

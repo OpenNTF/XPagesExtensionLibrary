@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+		xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:panel>
+		<xp:this.rendered><![CDATA[#{javascript://
+			// the xc:controlPagerArea publishes a different compositeData,
+			// so compute whether to show the Expand/Collapse links here, 
+			// outside of the xc:controlPagerArea
+			requestScope.isCollapseExpandable = (null == compositeData.isCollapseExpandable)?
+				true : compositeData.isCollapseExpandable;
+			true
+		}]]></xp:this.rendered>
+		<xc:controlPagerArea id="pagerArea">
+			<xp:this.facets>
+				<xe:pagerExpand xp:key="left" id="pagerExpand1"
+					rendered="#{javascript:requestScope.isCollapseExpandable}">
+				</xe:pagerExpand>
+				<xp:pager layout="Previous Group Next" id="pager3"
+					xp:key="right" partialRefresh="true"
+					partialExecute="true">
+				</xp:pager>
+			</xp:this.facets>
+		</xc:controlPagerArea>
+	</xp:panel>
+</xp:view>

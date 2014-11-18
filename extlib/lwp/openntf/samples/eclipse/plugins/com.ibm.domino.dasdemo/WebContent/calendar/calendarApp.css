@@ -1,0 +1,35 @@
+/* 
+ * The application container shared by the calendar, event and notice pages 
+ */
+.c-app-container {
+	width:850px;
+	height:635px
+}
+
+/* 
+ * The header. 
+ * 
+ * Ideally, this class should include the background color, but it's ignored here.
+ * I had to repeat the background color in each element's style (see the calendar,
+ * event and notice pages).
+ */
+.c-app-header {
+    font-weight:bold;
+    height:20px
+}
+
+/*
+ * The footer.
+ *
+ * See the header note above.
+ */
+.c-app-footer {
+	height:20px
+}
+
+/*
+ * The navigator.
+ */
+.c-app-navigator {
+	width:200px
+}

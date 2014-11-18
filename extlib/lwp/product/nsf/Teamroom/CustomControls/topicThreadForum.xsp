@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Author: Tony McGuckin, IBM -->
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:script src="/xpTopicThreadState.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		TopicThreadState.init();
+		if( !param.documentId && param.parentId ){
+			TopicThreadState.initNewReply();
+		}
+	}]]></xp:this.beforePageLoad>
+	
+	<div class="lotusForum">
+		<xp:panel loaded="${javascript: requestScope.rootAncestorUNID? false : true }"
+			style="margin-top:7px; margin-bottom:7px">
+		<xc:controlPagerArea id="replyCountArea">
+			<xp:this.facets>
+				<xp:panel xp:key="left">
+					<xp:label id="threadReplyCount">
+						<xp:this.value><![CDATA[#{javascript://
+							// if the number of replies is < computeLimit, calculate the exact count
+							// and display "{0} replies", else display "{0} or more replies"
+							var replyCount;
+							var viewPanel = getComponent('forumView1');
+							var dataModel = viewPanel.getDataModel();
+							var replyCount = dataModel.getRowCount();
+							if( replyCount >= viewPanel.getRows() ){
+								if( dataModel.canHaveMoreRows() ){
+									var computeLimit = 500;
+									var currentDisplayableRows = viewPanel.getRows();
+									computeLimit = currentDisplayableRows > computeLimit ? 
+										currentDisplayableRows : computeLimit;
+									replyCount = dataModel.hasMoreRows(computeLimit);
+									if( replyCount >= computeLimit ){
+										// "500 or more replies"
+										var limitStr = java.lang.Integer.toString((computeLimit).intValue());
+										var msg = strings.topicThread_replies_limit;
+										return I18n.format(msg, limitStr);
+									}
+								}
+							}
+							if( replyCount == 0 ){
+								return strings.topicThread_replies_count_zero;
+							}
+							if( replyCount == 1 ){
+								return strings.topicThread_replies_count_one;
+							}
+							var countStr = java.lang.Integer.toString((replyCount).intValue());
+							return I18n.format(strings.topicThread_replies_count, countStr);
+						}]]></xp:this.value>
+					</xp:label>
+				</xp:panel>
+			</xp:this.facets>
+		</xc:controlPagerArea>
+		</xp:panel>
+		
+		<xp:panel>
+			<!-- Main document area -->
+			<!-- area to reload when (edit current)? changes -->
+			<xe:dynamicContent id="currentDocArea">
+				<xe:this.defaultFacet><![CDATA[#{javascript://
+					if( TopicThreadState.isCurrentEdit() ){
+						var form;
+						if( requestScope.currentDocForm ){ 
+							// published by the Edit action
+							form = requestScope.currentDocForm;
+						}else{
+							form = database.getDocumentByUNID(viewScope.documentId).getItemValueString('form');
+						}
+						if( form == 'MainTopic' ){
+							return 'editTopic';
+						}
+						if( form == 'ResponseToResponse' ){
+							return 'editResponseToResponse'
+						}
+						return 'editResponse';
+					}
+					return 'read';
+				}]]></xe:this.defaultFacet>
+				<xe:this.facets>
+					<xp:panel xp:key="read">
+						<!-- area to reload when (show current body/abstract)? changes -->
+						<xe:dynamicContent id="currentDetailArea">
+							<xc:topicPost id="postCurrentCC"
+								loadedType="document">
+							</xc:topicPost>
+						</xe:dynamicContent>
+					</xp:panel>
+					<xp:panel xp:key="editTopic">
+						<xc:homeMainTopic
+							id="editCurrentMainCC"
+							documentId="#{viewScope.documentId}">
+						</xc:homeMainTopic>
+					</xp:panel>
+					<xp:panel xp:key="editResponse">
+						<xc:topicThreadNewResponse
+							id="editCurrentResponseCC"
+							documentId="#{viewScope.documentId}"
+							parentId="#{javascript: null}"
+							formName="Response">
+						</xc:topicThreadNewResponse>
+					</xp:panel>
+					<xp:panel xp:key="editResponseToResponse">
+						<xc:topicThreadNewResponse
+							id="editCurrentResponse2CC"
+							documentId="#{viewScope.documentId}"
+							parentId="#{javascript: null}"
+							formName="ResponseToResponse">
+						</xc:topicThreadNewResponse>
+					</xp:panel>
+				</xe:this.facets>
+			</xe:dynamicContent>
+		</xp:panel>
+		
+		<xp:table style="width:100%"
+			rendered="#{javascript:getComponent('forumView1').getDataModel().isRowAvailable()}">
+			<xp:tr>
+				<xp:td>
+					<xe:pagerDetail id="pagerDetail1" for="forumView1"
+						partialExecute="false">
+					</xe:pagerDetail>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+
+		<xp:div id="newReplyToCurrentDiv">
+			<!-- area to reload when create/save new reply -->
+			<xe:dynamicContent id="newReplyToCurrentArea">
+				<xc:topicThreadNewResponse
+					id="newReplyToCurrentCC"
+					parentId="#{javascript: viewScope.documentId }"
+					loaded="${javascript: TopicThreadState.isCurrentNewReply() }">
+					<xc:this.formName><![CDATA[${javascript://
+						var form;
+						if( requestScope.currentDocForm ){ 
+							// published by the Reply action
+							form = requestScope.currentDocForm;
+						}else{
+							form = database.getDocumentByUNID(viewScope.documentId).getItemValueString('form');
+						}
+						if( 'MainTopic' == form ){
+							return 'Response';
+						}
+						return 'ResponseToResponse';
+					}]]></xc:this.formName>
+				</xc:topicThreadNewResponse>
+			</xe:dynamicContent>
+		</xp:div>
+		
+		<xe:forumView id="forumView1" var="item"
+			collapsibleDetail="true" expandedDetail="true"
+			detailsOnClient="false" rows="200">
+			<xe:this.data>
+				<xp:dominoView var="view1" viewName="ActiveDate"
+					ignoreRequestParams="true" dataCache="id"
+					parentId="#{viewScope.documentId}" expandLevel="0">
+				</xp:dominoView>
+			</xe:this.data>
+			<xe:this.facets>
+				<xp:panel xp:key="summary">
+					<xc:topicPost id="rowSummaryCC"
+						loadedType="rowSummary">
+					</xc:topicPost>
+				</xp:panel>
+				<xp:panel xp:key="detail">
+					<xe:switchFacet defaultFacet="read">
+						<xe:this.selectedFacet><![CDATA[#{javascript://
+							if( TopicThreadState.isRowEdit(item.getPosition())){
+								return 'edit';
+							}
+						}]]></xe:this.selectedFacet>
+						<xe:this.facets>
+							<xp:panel xp:key="read">
+								<!-- area to reload when (show row body or abstract)? changes -->
+								<xe:dynamicContent id="rowDetailArea">
+									<xc:topicPost id="postRowCC"
+										loadedType="rowDetail">
+									</xc:topicPost>
+								</xe:dynamicContent>
+							</xp:panel>
+							<xp:panel xp:key="edit">
+								<!-- area to reload when (edit any row)? changes or when the edited row changes -->
+								<xe:dynamicContent id="rowEditArea">
+									<xc:topicThreadNewResponse
+										id="editRowCC"
+										documentId="#{javascript: item.getUniversalID() }"
+										parentId="#{javascript: null}"
+										loaded="${javascript: TopicThreadState.isRowEditAny() }">
+										<xc:this.formName><![CDATA[${javascript://
+											var rowDoc = database.getDocumentByUNID(item.getUniversalID());
+											return rowDoc.getItemValueString('form');
+										}]]></xc:this.formName>
+									</xc:topicThreadNewResponse>
+								</xe:dynamicContent>
+							</xp:panel>
+						</xe:this.facets>
+					</xe:switchFacet>
+
+					<!-- New Response Area -->
+					<xp:panel
+						rendered="#{javascript: TopicThreadState.isRowNewReply(item.getPosition()) }">
+						<!-- area to reload when (new reply to any row)? changes -->
+						<xe:dynamicContent id="rowReplyArea">
+							<xc:topicThreadNewResponse
+								id="newRowResponseCC" documentId="#{javascript: null}"
+								parentId="#{javascript: item.getUniversalID() }"
+								loaded="${javascript: TopicThreadState.isRowNewReplyAny() }"
+								formName="ResponseToResponse">
+							</xc:topicThreadNewResponse>
+						</xe:dynamicContent>
+						<xp:br />
+					</xp:panel>
+				</xp:panel>
+			</xe:this.facets>
+			<xp:this.facets>
+				<xp:link text="Show more..." id="showMoreLink"
+					xp:key="footer">
+					<xp:this.rendered><![CDATA[#{javascript://
+						var forumView1:com.ibm.xsp.component.UIDataIterator = getComponent("forumView1");
+						forumView1.getRows() <= forumView1.getRowCount()
+					}]]></xp:this.rendered>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript://
+							var addCount = 100;
+							var forumView1:com.ibm.xsp.component.UIDataIterator = getComponent("forumView1");
+							forumView1.setRows(forumView1.getRows()+addCount);
+						}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:this.facets>
+		</xe:forumView>
+	</div>
+</xp:view>

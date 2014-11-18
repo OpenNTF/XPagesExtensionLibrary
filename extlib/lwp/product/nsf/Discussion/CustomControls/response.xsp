@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+ xmlns:xc="http://www.ibm.com/xsp/custom"
+ xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="responseDoc" formName="Response"
+			computeWithForm="onsave" parentId="#{javascript:param.parentNoteID}"
+			ignoreRequestParams="true" action="newDocument">
+			<xp:this.postNewDocument><![CDATA[#{javascript:
+// get the parent doc and check if the parent is a response or a main doc
+var parent:NotesDocument = database.getDocumentByID(responseDoc.getParentId());
+//if(null != parent){
+	var isResponse:boolean = parent.isResponse();
+	
+	viewScope.parentSubject = parent.getItemValue("Subject");
+	viewScope.parentTags = parent.getItemValue("Categories");
+	
+	// inherit these items from the parent doc into the response doc
+	responseDoc.setValue("MainID", parent.getItemValue("MainID"));
+	responseDoc.setValue("ParentSubject", parent.getItemValue("Subject"));
+	responseDoc.setValue("Readers", parent.getItemValue("Readers"));
+	responseDoc.setValue("ParentForm", parent.getItemValue("Form"));
+	responseDoc.setValue("ThreadId", parent.getItemValue("ThreadId"));
+	responseDoc.setValue("ExpireDate", parent.getItemValue("ExpireDate"));
+	responseDoc.setValue("Categories", parent.getItemValue("Categories"));
+	responseDoc.setValue("ImmediateParentSubject", parent.getItemValue("Subject"));
+	
+	// this item below depends on the type of parent...
+	if (isResponse == false) {
+		responseDoc.setValue("OriginalSubject", parent.getItemValue("Subject"));	
+	} else {
+		responseDoc.setValue("OriginalSubject", parent.getItemValue("OriginalSubject"));
+	}
+//}
+}]]></xp:this.postNewDocument>
+			<xp:this.querySaveDocument><![CDATA[#{javascript:// store user CGI variables
+var cgi = new CGIVariables();
+responseDoc.replaceItemValue("Remote_User", cgi.get("REMOTE_USER"));
+responseDoc.replaceItemValue("Remote_Addr", cgi.get("REMOTE_ADDR"));
+cgi = null;}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:djxmHeading id="djxmHeading1" label="Reply"
+		loaded="${javascript:isMobile()}" back="Cancel"
+		moveTo="document#{javascript:sessionScope.backURL}">
+		<xp:this.facets>
+			<xp:button value="Save" id="button3" xp:key="actionFacet">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+						<xp:actionGroup>
+							<xe:moveTo
+								transitionType="slide" direction="Left to Right"
+								saveDocument="true" forceFullRefresh="true">
+								<xp:this.targetPage><![CDATA[#{javascript:
+									return "document" + sessionScope.backURL;
+								}]]></xp:this.targetPage>
+							</xe:moveTo>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:this.facets>
+	</xe:djxmHeading>
+	
+	<xp:br></xp:br>
+	<xp:label loaded="${javascript:!isMobile()}" value="Reply"
+		styleClass="xspComputedFieldHeaderSubtitle">
+	</xp:label>
+	<xe:formTable id="formTable3" legend="Create a reply">
+		<xe:formRow id="formRow9" label="Subject">
+			<xp:inputText id="inputText15" required="true"
+				disableClientSideValidation="#{javascript:!isMobile()}"
+				value="#{responseDoc.Subject}" size="15"
+				styleClass="mblFormRowInput">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow10" label="Tags">
+			<xp:inputText id="inputText5"
+				value="#{responseDoc.WebCategories}"
+				defaultValue="#{javascript:viewScope.parentTags}"
+				multipleSeparator="," size="15" style="display:none">
+			</xp:inputText>
+			<xp:label value="#{viewScope.parentTags}" for="formRow10">
+				<xp:this.style><![CDATA[#{javascript:
+					if(isAndroidCheck())
+					{
+						return "color:white"
+					}
+					else
+					{
+						return "color:black";
+					}
+				}]]></xp:this.style>
+			</xp:label>
+		</xe:formRow>
+		<xe:formRow id="formRow11" label=" "
+			loaded="${javascript:isMobile()}">
+			<xp:inputTextarea id="documentBody" required="true"
+				disableClientSideValidation="false" value="#{responseDoc.Body}"
+				styleClass="mblFormRowTextArea" rows="5" htmlFilterIn="acf"
+				htmlFilter="acf" role="input" title="enter text to document body">
+			</xp:inputTextarea>
+		</xe:formRow>
+		<xe:formRow id="formRow1" labelPosition="none"
+			loaded="${javascript:!isMobile()}">
+			<xp:inputRichText id="rtBody" value="#{responseDoc.Body}"
+				role="input" title="enter text into document body">
+			</xp:inputRichText>
+		</xe:formRow>
+	</xe:formTable>
+
+	<xp:panel id="panel1" styleClass="attachFilePanel" loaded="${javascript:!isMobile()}">
+		<xp:link escape="true" id="link1" text=" Attach File"
+			styleClass="attachFileLink" role="button"
+			title="expand area to attach a file to document">
+			<xp:eventHandler event="onclick" submit="false"
+				id="eventHandler4">
+				<xp:this.script><![CDATA[
+					var fileContainer = document.getElementById("#{id:fileContainer}");
+					var upload = document.getElementById("#{id:fileUpload}");
+					if(null != fileContainer)
+					{
+						var displayStyle = fileContainer.style.height;
+						if (displayStyle == "0px")
+						{
+							fileContainer.style.height = '50px';
+							fileContainer.style.width = '250px';
+							upload.style.height = '25px';
+							upload.style.width = '200px';
+						} 
+						else 
+						{
+							fileContainer.style.height = '0px';
+							fileContainer.style.width = '0px';
+							upload.style.height = '0px';
+							upload.style.width = '0px';
+						}
+					}
+				]]></xp:this.script>
+			</xp:eventHandler>
+			<xp:image id="image2" url="/xpAttachment.gif"
+				alt="Add Attachment">
+			</xp:image>
+		</xp:link>
+		<xp:fileDownload rows="30" id="fileDownload1"
+			displayLastModified="false" styleClass="mainTopicDownload" allowDelete="true"
+			hideWhen="true" value="#{responseDoc.Body}">
+		</xp:fileDownload>
+	</xp:panel>
+	
+	<xp:panel id="fileContainer" styleClass="webFileContainer"
+		loaded="${javascript:!isMobile()}" role="upload"
+		title="upload file with document">
+		<xp:br></xp:br>
+		<xp:fileUpload id="fileUpload" value="#{responseDoc.Body}"
+			styleClass="webFileContainerUpload" role="upload"
+			title="upload a file">
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:// kick off round-trip...}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:fileUpload>
+	</xp:panel>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	
+	<xp:panel id="panel16" styleClass="xlFormFooterContainer" loaded="${javascript:!isMobile()}">
+		<xp:button value="Save" id="button2"
+			styleClass="lotusFormButton" title="Save Button">
+			<xp:this.attrs>
+				<xp:attr name="name" value="Save Button"></xp:attr>
+			</xp:this.attrs>
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:save>
+							<xp:this.name>
+								<![CDATA[#{javascript:
+								var page = compositeData.gotoPage;
+								if("/topicThread.xsp" == page){
+									page += "?action=openDocument&documentId=" + responseDoc.getNoteID();
+								}
+								return(page);}]]>
+							</xp:this.name>
+						</xp:save>
+					</xp:actionGroup>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+
+		<xp:link id="linkCancel" text="Cancel"
+			themeId="Link.action" role="button"
+			loaded="${javascript:!isMobile()}" title="Cancel Button">
+			<!-- style="zoom:1" -->
+			<xp:this.attrs>
+				<xp:attr name="name" value="Cancel Button"></xp:attr>
+			</xp:this.attrs>
+			<xp:this.value>
+				<![CDATA[#{javascript:
+					var page = compositeData.gotoPage;
+					if("/topicThread.xsp" == page){
+					page += "?action=openDocument&documentId=" + context.getUrlParameter("parentNoteID");
+					}
+					return(page);
+				}]]>
+			</xp:this.value>
+		</xp:link>
+	</xp:panel>
+</xp:view>

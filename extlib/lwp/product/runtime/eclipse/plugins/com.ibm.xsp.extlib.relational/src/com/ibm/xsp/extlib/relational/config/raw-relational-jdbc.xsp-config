@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>jdbc</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+    <group>
+        <!-- key-suffix: connection-->
+        <group-type>com.ibm.xsp.extlib.relational.group.connection</group-type>
+         <property>
+            <description>Provides the JDBC Connection name, as defined by JNDI or other connection provider. See the JNDI specification for more details.</description>
+            <display-name>Connection Name</display-name>
+            <property-name>connectionName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- Note, dataSource props do not have a category: <category>jdbc</category> -->
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        java:comp/env/jdbc/databaseName
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # debugging means investigating a problem to determine the cause. A connection pool is a technical term, see http://en.wikipedia.org/wiki/Connection_pool -->
+            <description>Provides the JDBC Connection URL, which overrides the Connection Name. The Connection URL does not use a connection pool, it should only be used for debugging or other situations where performance is not a concern.</description>
+            <display-name>Connection URL</display-name>
+            <property-name>connectionUrl</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        jdbc:db2:databaseName
+                        jdbc:db2//server/database
+                        jdbc:db2//server:port/database
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <!-- 
+        Note, this is the same as 
+        the group com.ibm.xsp.extlib.relational.group.connection
+        except that it is used in a control instead of in a dataSource,
+        so the properties should have category's
+        -->
+        <group-type>com.ibm.xsp.extlib.relational.group.connection_control</group-type>
+         <property>
+            <description>Provides the JDBC Connection name, as defined by JNDI or other connection provider. See the JNDI specification for more details.</description>
+            <display-name>Connection Name</display-name>
+            <property-name>connectionName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- Note, control properties need a category: -->
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        java:comp/env/jdbc/databaseName
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # debugging means investigating a software problem to determine the cause. -->
+            <description>Provides the JDBC Connection URL, which overrides the Connection Name. The Connection URL does not use a connection pool, it should only be used for debugging or other situations where performance is not a concern.</description>
+            <display-name>Connection URL</display-name>
+            <property-name>connectionUrl</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- Note, control properties need a category: -->
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        jdbc:db2:databaseName
+                        jdbc:db2//server/database
+                        jdbc:db2//server:port/database
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <group-type>com.ibm.xsp.extlib.relational.group.connectionManager</group-type>
+
+        <!--  Properties -->
+        <property>
+            <description>Provides the JDBC Connection Manager, defined as a control in the page. This allows multiple data sources to execute in a common transaction.</description>
+            <display-name>Connection Manager ID</display-name>
+            <property-name>connectionManager</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|jdbcConnectionManager
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <group-type>com.ibm.xsp.extlib.relational.group.query</group-type>
+        <property>
+            <!-- # "sqlTable" and "sqlQuery" should not be translated -->
+            <description>Provides the reference to a file containing the SQL query to execute, if neither "sqlTable" nor "sqlQuery" have been specified.</description>
+            <display-name>SQL File Name</display-name>
+            <property-name>sqlFile</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "sqlTable" should not be translated -->
+            <description>SQL query to execute, if no "sqlTable" has been specified.</description>
+            <display-name>SQL Query</display-name>
+            <property-name>sqlQuery</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.std.MultiLine</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "sqlQuery" and "sqlFile" should not be translated -->
+            <description>SQL table, view, or stored procedure to browse. This overrides the "sqlQuery" or the "sqlFile" properties.</description>
+            <display-name>SQL Table</display-name>
+            <property-name>sqlTable</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # the "?" is a special marker and should not be translated -->
+            <description>Provides a list of runtime parameters values to the query. The order of the parameters in the list must match the "?" in the SQL query.</description>
+            <display-name>SQL Parameters</display-name>
+            <property-name>sqlParameters</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</property-item-class>
+                <property-add-method>addSqlParameter</property-add-method>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <component>
+        <description>JDBC Connection Manager used to execute multiple data sources within the same JDBC transaction.</description>
+        <display-name>JDBC Connection Manager</display-name>
+        <component-type>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</component-type>
+        <component-class>com.ibm.xsp.extlib.relational.component.jdbc.UIJdbcConnectionManager</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection_control</group-type-ref>
+
+        <property>
+            <description>Automatically commits every update to the database, so that the changes are immediately permanent. The default value is false (not auto commit), which includes updates in a transaction. The entire transaction of many updates will later be committed.</description>
+            <display-name>Automatically Commit</display-name>
+            <property-name>autoCommit</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # The "Transaction Isolation" in quotes should not be translated. Transaction Isolation is a technical term. -->
+            <description>Sets the Transaction Isolation mode to one of the pre-defined options. For more details, see the JDBC documentation for "Transaction Isolation".</description>
+            <display-name>Transaction Isolation</display-name>
+            <property-name>transactionIsolation</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        TRANSACTION_NONE
+                        TRANSACTION_READ_COMMITTED
+                        TRANSACTION_READ_UNCOMMITTED
+                        TRANSACTION_REPEATABLE_READ
+                        TRANSACTION_SERIALIZABLE
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "connection" in quote marks should not be translated. -->
+            <description>Gets triggered after the JDBC connection is initialized to process further initialization. The connection object is available using the "connection" symbol while evaluating the expression.</description>
+            <display-name>After Initialize Connection Method Binding</display-name>
+            <property-name>initConnection</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+           	   
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+            <component-family>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</renderer-type>
+			<tag-name>jdbcConnectionManager</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Data Access</category>
+                <tags>
+                	no-faces-config-renderer
+                	no-rendered-output
+                </tags>
+      		</designer-extension>
+		</component-extension>        
+    </component>
+
+	<complex-type>
+		<description>Specifies the data source that accesses relational data using an SQL query. This data source is read only.</description>
+		<display-name>JDBC Query</display-name>
+		<complex-id>com.ibm.xsp.extlib.relational.jdbc.model.JdbcDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.relational.jdbc.model.JdbcDataSource</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connectionManager</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+		
+        <property>
+            <description>Indicates if the ResultSet count should be computed to get an accurate number of pages in the pagers. A specific SQL query can be provided to optimize this computation.</description>
+            <display-name>Calculate Count</display-name>
+            <property-name>calculateCount</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+		<property>
+			<description>SQL query to calculate the size of the result set.</description>
+			<display-name>SQL Count Query</display-name>
+			<property-name>sqlCountQuery</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.std.MultiLine</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Reference to a file containing the SQL query to calculate the size of the result set.</description>
+			<display-name>SQL Count Query File Name</display-name>
+			<property-name>sqlCountFile</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Contains the order by clause, as a list of column names separated by a comma, used to set the ordering sequence of the query.</description>
+			<display-name>Default Order By</display-name>
+			<property-name>defaultOrderBy</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<tag-name>jdbcQuery</tag-name>
+			<base-complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</base-complex-id>
+		</complex-extension>
+	</complex-type>
+	
+  	<complex-type>
+    	<description>Specifies the parameter value for a SQL query.</description>
+    	<display-name>SQL Parameter</display-name>
+    	<complex-id>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</complex-class>
+    	<property>
+      		<description>Specifies the value of the parameter.</description>
+      		<display-name>Parameter Value</display-name>
+      		<property-name>value</property-name>
+      		<property-class>java.lang.Object</property-class>
+      		<property-extension>
+      		</property-extension>
+    	</property>
+    	<complex-extension>
+      		<tag-name>sqlParameter</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+    <complex-type>
+        <!-- # RowSet should not be translated, as it is a class name -->
+        <description>Specifies the data source that accesses relational data using a JDBC RowSet</description>
+        <display-name>JDBC RowSet</display-name>
+        <complex-id>com.ibm.xsp.extlib.relational.jdbc.model.JdbcRowSetSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.relational.jdbc.model.JdbcRowSetSource</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connectionManager</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+
+        <property>
+            <description>Specifies the Java class name for the RowSet. If empty, then it uses the default provided by the JRE (CachedRowSetImpl).</description>
+            <display-name>RowSet Java Class Name</display-name>
+            <property-name>rowSetJavaClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- This property is not a CSS style class, it is a Java class -->
+                    <tags>
+                        not-css-class
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+  		<property>
+			<description>Defines the maximum number of rows retrieved by the RowSet. Default to 0, which means all the rows. -1 means no rows.</description>
+			<display-name>Maximum Number of Rows</display-name>
+			<property-name>maxRows</property-name>
+			<property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the deleted rows should be displayed.</description>
+            <display-name>Show Deleted Rows</display-name>
+            <property-name>showDeleted</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>jdbcRowSet</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+	
+</faces-config>

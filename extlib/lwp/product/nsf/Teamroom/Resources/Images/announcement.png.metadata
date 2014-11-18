@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="40e" sequence="8" unid="D315FA9A49652A30802577E600487C4C">
+<created><datetime>20101125T131144,12+00</datetime></created>
+<modified><datetime>20120207T095550,38+00</datetime></modified>
+<revised><datetime dst="true">20111026T122247,01+01</datetime></revised>
+<lastaccessed><datetime>20120207T095550,38+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095550,38+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20110120T085540,04+00</datetime><datetime dst="true">20110830T205050,65-04</datetime><datetime dst="true">20111006T160523,14+01</datetime><datetime dst="true">20111014T083942,86+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>announcement.png</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$FileModDT" sign="true"><datetime>20101123T151707,57+00</datetime></item>
+<item name="$ImageNames" sign="true"><text>announcement.png</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+<item name="$Flags"><text>34CiQ</text></item></note>

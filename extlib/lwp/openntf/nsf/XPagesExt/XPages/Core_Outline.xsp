@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/Core/Outline">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore"></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="This shows the in Ouline and menu component"
+			id="label5" style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:tabbedPanel id="tabbedPanel1">
+			<xp:this.selectedTab>
+			    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+			</xp:this.selectedTab>
+			<xp:tabPanel label="Basic Outline" id="tabPanel1">
+				<xp:panel id="panel1">
+					Current Choice #1 (full refresh):
+					<xp:text escape="true" id="computedField1" value="#{javascript:viewScope.choice1}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xe:outline id="outline1">
+						<xe:this.treeNodes>
+							<xe:basicLeafNode label="Choice = 1"
+								submitValue="v1">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Choice = 2"
+								submitValue="v2">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Choice = 3"
+								submitValue="v3">
+							</xe:basicLeafNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:viewScope.choice1=context.getSubmittedValue()
+}]]></xp:this.action>
+							<xp:this.script><![CDATA[if(XSP.getSubmitValue) { // Post 8.5.2
+	console.log("Submitted Value'"+XSP.getSubmitValue());
+}
+]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:outline>
+				</xp:panel>
+				<xp:panel id="panel2">
+					Current Choice #2 (partial refresh):
+					<xp:text escape="true" id="computedField2" value="#{javascript:viewScope.choice2}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xe:outline id="outline2">
+						<xe:this.treeNodes>
+							<xe:basicLeafNode label="Choice = 1"
+								submitValue="v1">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Choice = 2"
+								submitValue="v2">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Choice = 3"
+								submitValue="v3">
+							</xe:basicLeafNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick" submit="true"
+							refreshMode="partial" refreshId="panel2">
+							<xp:this.action><![CDATA[#{javascript:viewScope.choice2=context.getSubmittedValue()
+}]]></xp:this.action>
+
+							<xp:this.script><![CDATA[if(XSP.getSubmitValue) { // Post 8.5.2
+	console.log("Submitted Value'"+XSP.getSubmitValue());
+}
+]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:outline>
+				</xp:panel>
+				<xp:panel id="panel3">
+					Outline reading its content from a managed bean:
+					<xp:text escape="true" id="computedField6" value="#{javascript:viewScope.choice3}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xe:outline id="outline3">
+						<xe:this.treeNodes>
+							<xe:beanTreeNode nodeBean="extlib.tree.SimpleTreeNode">
+							</xe:beanTreeNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick" submit="false"
+							refreshMode="partial" refreshId="panel3">
+							<xp:this.script><![CDATA[if(XSP.getSubmitValue) { // Post 8.5.2
+	console.log("Submitted Value'"+XSP.getSubmitValue());
+}
+]]></xp:this.script>
+							<xp:this.action><![CDATA[#{javascript:viewScope.choice3=context.getSubmittedValue()}]]></xp:this.action>
+						</xp:eventHandler>
+					</xe:outline>
+				</xp:panel>
+			</xp:tabPanel>
+			<xp:tabPanel label="Accordion" id="tabPanel2">
+				Current Choice from the Accordion:
+				<xp:text escape="true" id="computedField3" value="#{javascript:viewScope.acChoice}">
+				</xp:text>
+				<xp:br></xp:br>
+				<xe:accordion id="accordion1" style="width: 300px; height:400px">
+					<xe:this.treeNodes>
+						<xe:basicContainerNode label="Choice 1">
+							<xe:this.children>
+								<xe:basicLeafNode label="Menu 1-1" submitValue="Menu 11">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 1-2" submitValue="Menu 12">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 1-3" submitValue="Menu 13">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+						<xe:basicContainerNode label="Choice 2">
+							<xe:this.children>
+								<xe:basicLeafNode label="Menu 2-1" submitValue="Menu 21">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 2-2" submitValue="Menu 22">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 2-3" submitValue="Menu 23">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+						<xe:basicContainerNode label="Hierarchical Choice 3">
+							<xe:this.children>
+								<xe:basicContainerNode label="SubChoice 1">
+									<xe:this.children>
+										<xe:basicLeafNode label="Menu 3-1-1"
+											submitValue="Menu 311">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-1-2"
+											submitValue="Menu 312">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-1-3"
+											submitValue="Menu 313">
+										</xe:basicLeafNode>
+									</xe:this.children>
+								</xe:basicContainerNode>
+								<xe:basicContainerNode label="SubChoice 2">
+									<xe:this.children>
+										<xe:basicLeafNode label="Menu 3-2-1"
+											submitValue="Menu 321">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-2-2"
+											submitValue="Menu 322">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-2-3"
+											submitValue="Menu 323">
+										</xe:basicLeafNode>
+									</xe:this.children>
+								</xe:basicContainerNode>
+								<xe:basicLeafNode label="Menu 3-2" submitValue="Menu 32">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 3-3" submitValue="Menu 33">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+					</xe:this.treeNodes>
+					<xp:eventHandler event="onItemClick" submit="true"
+						refreshMode="partial" refreshId="computedField3">
+						<xp:this.action><![CDATA[#{javascript:viewScope.acChoice=context.getSubmittedValue()
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xe:accordion>
+			</xp:tabPanel>
+			<xp:tabPanel label="Toolbar" id="tabPanel4">
+				Current Choice from the Toolbar bellow:
+				<xp:text escape="true" id="computedField5" value="#{javascript:viewScope.acChoice}">
+				</xp:text>
+				<xp:br></xp:br>
+				<xe:toolbar id="toolbar1">
+					<xe:this.treeNodes>
+						<xe:basicContainerNode label="Choice 1">
+							<xe:this.children>
+								<xe:basicLeafNode label="Menu 1-1" submitValue="Menu 11">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 1-2" submitValue="Menu 12">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 1-3" submitValue="Menu 13">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+						<xe:basicContainerNode label="Choice 2">
+							<xe:this.children>
+								<xe:basicLeafNode label="Menu 2-1" submitValue="Menu 21">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 2-2" submitValue="Menu 22">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 2-3" submitValue="Menu 23">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+						<xe:basicContainerNode label="Hierarchical Choice 3">
+							<xe:this.children>
+								<xe:basicContainerNode label="SubChoice 1">
+									<xe:this.children>
+										<xe:basicLeafNode label="Menu 3-1-1"
+											submitValue="Menu 311">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-1-2"
+											submitValue="Menu 312">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-1-3"
+											submitValue="Menu 313">
+										</xe:basicLeafNode>
+									</xe:this.children>
+								</xe:basicContainerNode>
+								<xe:basicContainerNode label="SubChoice 2">
+									<xe:this.children>
+										<xe:basicLeafNode label="Menu 3-2-1"
+											submitValue="Menu 321">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-2-2"
+											submitValue="Menu 322">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode label="Menu 3-2-3"
+											submitValue="Menu 323">
+										</xe:basicLeafNode>
+									</xe:this.children>
+								</xe:basicContainerNode>
+								<xe:basicLeafNode label="Menu 3-2" submitValue="Menu 32">
+								</xe:basicLeafNode>
+								<xe:basicLeafNode label="Menu 3-3" submitValue="Menu 33">
+								</xe:basicLeafNode>
+							</xe:this.children>
+						</xe:basicContainerNode>
+					</xe:this.treeNodes>
+					<xp:eventHandler event="onItemClick" submit="true"
+						refreshMode="partial" refreshId="computedField5">
+						<xp:this.action><![CDATA[#{javascript:viewScope.acChoice=context.getSubmittedValue()
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xe:toolbar>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				Icon toolbar with labels
+				<xe:toolbar id="toolbar2">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="Cut"
+							styleClass="dijitEditorIcon dijitEditorIconCut">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="Copy"
+							styleClass="dijitEditorIcon dijitEditorIconCopy">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="Paste"
+							styleClass="dijitEditorIcon dijitEditorIconPaste">
+						</xe:basicLeafNode>
+						<xe:separatorTreeNode></xe:separatorTreeNode>
+						<xe:basicLeafNode label="Search xxx"
+							image="/.ibmxspres/.extlib/icons/iconValuePicker.png"
+							imageAlt="Search 'xxx' string" 
+							href="/OneUI_SearchPage.xsp?search=xxx">
+						</xe:basicLeafNode>
+						<xe:pageTreeNode label="Search yyy" 
+							image="/.ibmxspres/.extlib/icons/iconValuePicker.png"
+							imageAlt="Search 'yyy' string"
+							page="OneUI_SearchPage.xsp" queryString="search=yyy">
+						</xe:pageTreeNode>
+					</xe:this.treeNodes>
+				</xe:toolbar>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				Icon toolbar without labels
+				<xe:toolbar id="toolbar3" showButtonLabels="false">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="Cut"
+							styleClass="dijitEditorIcon dijitEditorIconCut">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="Copy"
+							styleClass="dijitEditorIcon dijitEditorIconCopy">
+						</xe:basicLeafNode>
+						<xe:basicLeafNode label="Paste"
+							styleClass="dijitEditorIcon dijitEditorIconPaste">
+						</xe:basicLeafNode>
+						<xe:separatorTreeNode></xe:separatorTreeNode>
+						<xe:basicLeafNode label="Pickup Value"
+							image="/.ibmxspres/.extlib/icons/iconValuePicker.png"
+							imageAlt="Pickup Value">
+						</xe:basicLeafNode>
+					</xe:this.treeNodes>
+				</xe:toolbar>
+			</xp:tabPanel>
+			<xp:tabPanel label="Menu" id="tabPanel3">
+				Current Choice from the popup menu:
+				<xp:text escape="true" id="computedField4" value="#{javascript:viewScope.ppChoice}">
+				</xp:text>
+				<xp:br></xp:br>
+				<xp:table role="presentation">
+					<xp:tr>
+						<xp:td>
+							Simple Button With JavaScript:
+						</xp:td>
+						<xp:td>
+							<xp:button value="Display Popup Menu" id="button1">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.openMenu(thisEvent,#{javascript:getComponent('popupMenu1').getMenuCtor()})
+]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+							<xe:popupMenu id="popupMenu1">
+								<xe:this.treeNodes>
+									<xe:basicContainerNode label="Choice 1">
+										<xe:this.children>
+											<xe:basicLeafNode label="Menu 1-1"
+												submitValue="Menu 11">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 1-2"
+												submitValue="Menu 12">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 1-3"
+												submitValue="Menu 13">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+									<xe:basicContainerNode label="Choice 2">
+										<xe:this.children>
+											<xe:basicLeafNode label="Menu 2-1"
+												submitValue="Menu 21">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 2-2"
+												submitValue="Menu 22">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 2-3"
+												submitValue="Menu 23">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+									<xe:basicContainerNode label="Hierarchical Choice 3">
+										<xe:this.children>
+											<xe:basicContainerNode label="SubChoice 1">
+												<xe:this.children>
+													<xe:basicLeafNode label="Menu 3-1-1"
+														submitValue="Menu 311">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-1-2"
+														submitValue="Menu 312">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-1-3"
+														submitValue="Menu 313">
+													</xe:basicLeafNode>
+												</xe:this.children>
+											</xe:basicContainerNode>
+											<xe:basicContainerNode label="SubChoice 2">
+												<xe:this.children>
+													<xe:basicLeafNode label="Menu 3-2-1"
+														submitValue="Menu 321">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-2-2"
+														submitValue="Menu 322">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-2-3"
+														submitValue="Menu 323">
+													</xe:basicLeafNode>
+												</xe:this.children>
+											</xe:basicContainerNode>
+											<xe:basicLeafNode label="Menu 3-2"
+												submitValue="Menu 32">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 3-3"
+												submitValue="Menu 33">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+								</xe:this.treeNodes>
+								<xp:eventHandler event="onItemClick" submit="true"
+									refreshMode="partial" refreshId="computedField4">
+									<xp:this.action><![CDATA[#{javascript:viewScope.ppChoice=context.getSubmittedValue()
+}]]></xp:this.action>
+								</xp:eventHandler>
+							</xe:popupMenu>
+						</xp:td>
+					</xp:tr>
+					<xp:tr>
+						<xp:td>
+							Drop Down Buttons:
+						</xp:td>
+						<xp:td>
+							<xe:dropDownButton id="dropDownButton1">
+								<xe:this.treeNodes>
+									<xe:basicContainerNode label="Choice 1">
+										<xe:this.children>
+											<xe:basicLeafNode label="Menu 1-1"
+												submitValue="Menu 11">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 1-2"
+												submitValue="Menu 12">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 1-3"
+												submitValue="Menu 13">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+									<xe:basicContainerNode label="Choice 2">
+										<xe:this.children>
+											<xe:basicLeafNode label="Menu 2-1"
+												submitValue="Menu 21">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 2-2"
+												submitValue="Menu 22">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 2-3"
+												submitValue="Menu 23">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+									<xe:basicContainerNode label="Hierarchical Choice 3">
+										<xe:this.children>
+											<xe:basicContainerNode label="SubChoice 1">
+												<xe:this.children>
+													<xe:basicLeafNode label="Menu 3-1-1"
+														submitValue="Menu 311">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-1-2"
+														submitValue="Menu 312">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-1-3"
+														submitValue="Menu 313">
+													</xe:basicLeafNode>
+												</xe:this.children>
+											</xe:basicContainerNode>
+											<xe:basicContainerNode label="SubChoice 2">
+												<xe:this.children>
+													<xe:basicLeafNode label="Menu 3-2-1"
+														submitValue="Menu 321">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-2-2"
+														submitValue="Menu 322">
+													</xe:basicLeafNode>
+													<xe:basicLeafNode label="Menu 3-2-3"
+														submitValue="Menu 323">
+													</xe:basicLeafNode>
+												</xe:this.children>
+											</xe:basicContainerNode>
+											<xe:basicLeafNode label="Menu 3-2"
+												submitValue="Menu 32">
+											</xe:basicLeafNode>
+											<xe:basicLeafNode label="Menu 3-3"
+												submitValue="Menu 33">
+											</xe:basicLeafNode>
+										</xe:this.children>
+									</xe:basicContainerNode>
+								</xe:this.treeNodes>
+								<xp:eventHandler event="onItemClick" submit="true"
+									refreshMode="partial" refreshId="computedField4">
+									<xp:this.action><![CDATA[#{javascript:viewScope.ppChoice=context.getSubmittedValue()
+}]]></xp:this.action>
+								</xp:eventHandler>
+							</xe:dropDownButton>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xp:tabPanel>
+			<xp:tabPanel label="Repeated Tree Node" id="tabPanel5">
+				<xp:panel id="panel5">
+					<xp:span style="font-weight:bold">Repeat through a JavaScript array
+					</xp:span>
+					<xp:br />
+					Value clicked:&#160;
+					<xp:text escape="true" id="computedField7" value="#{viewScope.dynamicValue}">
+					</xp:text>
+					<xp:br />
+					<xe:outline id="outline4">
+						<xe:this.treeNodes>
+							<xe:repeatTreeNode var="val">
+								<xe:this.children>
+									<xe:basicLeafNode>
+										<xe:this.submitValue><![CDATA[#{javascript:return val[1]}]]></xe:this.submitValue>
+										<xe:this.label><![CDATA[#{javascript:return val[0]}]]></xe:this.label>
+									</xe:basicLeafNode>
+								</xe:this.children>
+								<xe:this.value><![CDATA[#{javascript:return [
+	["Home","home"],
+	["Domino","domino"],
+	["OneUI","oneui"]
+];}]]></xe:this.value>
+							</xe:repeatTreeNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick" submit="true"
+							refreshMode="partial" refreshId="panel5">
+							<xp:this.action><![CDATA[#{javascript:viewScope.dynamicValue = context.getSubmittedValue()}]]></xp:this.action>
+						</xp:eventHandler>
+					</xe:outline>
+					<xp:br />
+					<xp:span style="font-weight:bold">Repeat a number of times</xp:span>
+					<xp:br />
+					<xe:outline id="outline5">
+						<xe:this.treeNodes>
+							<xe:repeatTreeNode var="val" indexVar="idx"
+								value="#{javascript:return 11}">
+								<xe:this.children>
+									<xe:basicLeafNode rendered="#{javascript:(idx%2)==0}">
+										<xe:this.submitValue><![CDATA[#{javascript:function f(){
+	switch(val) {
+		case 0:	return "zero"
+		case 1:	return "one"
+		case 2:	return "two"
+		case 3:	return "three"
+		case 4:	return "four"
+		case 5:	return "five"
+		case 6:	return "six"
+		case 7:	return "seven"
+		case 8:	return "eight"
+		case 9:	return "nine"
+	}
+	return "Unknown Number"
+} 
+return f()}]]></xe:this.submitValue>
+										<xe:this.label><![CDATA[#{javascript:function f() {
+	switch(val) {
+		case 0:	return "Zero"
+		case 1:	return "One"
+		case 2:	return "Two"
+		case 3:	return "Three"
+		case 4:	return "Four"
+		case 5:	return "Five"
+		case 6:	return "Six"
+		case 7:	return "Seven"
+		case 8:	return "Eight"
+		case 9:	return "Nine"
+	}
+	return "Unknown Number"
+}
+return f()+" ["+idx+"]"	}]]></xe:this.label>
+									</xe:basicLeafNode>
+									<xe:basicLeafNode rendered="#{javascript:(idx%2)!=0}">
+										<xe:this.submitValue><![CDATA[#{javascript:function f(){
+	switch(val) {
+		case 0:	return "zero /2"
+		case 1:	return "one /2"
+		case 2:	return "two /2"
+		case 3:	return "three /2"
+		case 4:	return "four /2"
+		case 5:	return "five /2"
+		case 6:	return "six /2"
+		case 7:	return "seven /2"
+		case 8:	return "eight /2"
+		case 9:	return "nine /2"
+	}
+	return "Unknown Number"
+} 
+return f()}]]></xe:this.submitValue>
+										<xe:this.label><![CDATA[#{javascript:function f() {
+	switch(val) {
+		case 0:	return "Zero /2"
+		case 1:	return "One /2"
+		case 2:	return "Two /2"
+		case 3:	return "Three /2"
+		case 4:	return "Four /2"
+		case 5:	return "Five /2"
+		case 6:	return "Six /2"
+		case 7:	return "Seven /2"
+		case 8:	return "Eight /2"
+		case 9:	return "Nine /2"
+	}
+	return "Unknown Number"
+}
+return f()+" ["+idx+"]"	}]]></xe:this.label>
+									</xe:basicLeafNode>
+								</xe:this.children>
+
+							</xe:repeatTreeNode>
+						</xe:this.treeNodes>
+						<xp:eventHandler event="onItemClick" submit="true"
+							refreshMode="partial" refreshId="panel5">
+							<xp:this.action><![CDATA[#{javascript:viewScope.dynamicValue = context.getSubmittedValue()}]]></xp:this.action>
+						</xp:eventHandler>
+					</xe:outline>
+				</xp:panel>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xc:OneUILayout>
+</xp:view>

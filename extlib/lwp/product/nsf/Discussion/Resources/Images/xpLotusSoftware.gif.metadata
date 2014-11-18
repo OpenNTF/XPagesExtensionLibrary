@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="332" sequence="17" unid="5DBA2957D2610BDF8525745C00071E39">
+<created><datetime dst="true">20080601T211744,89-04</datetime></created>
+<modified><datetime>20120305T082320,02+00</datetime></modified>
+<revised><datetime>20120305T082320,01+00</datetime></revised>
+<lastaccessed><datetime>20120305T082320,02+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,32+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080416T110642,15+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>lotus-logo2.gif</text></item>
+<item name="$EditFilePath" sign="true"><text>C:\Temp\notes592048\~lotus-logo2.gif</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$TITLE" sign="true"><text>xpLotusSoftware.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

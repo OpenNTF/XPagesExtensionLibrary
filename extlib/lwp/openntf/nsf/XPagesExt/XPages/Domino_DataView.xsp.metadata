@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579240032FA74" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="35e" sequence="31" unid="6F2E5C3BC4896EC58025792000450A8B">
+<created><datetime dst="true">20111005T133406,83+01</datetime></created>
+<modified><datetime>20111119T181052,75-05</datetime></modified>
+<revised><datetime>20111119T181052,74-05</datetime></revised>
+<lastaccessed><datetime>20111119T181052,75-05</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20111009T103912,42+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=priandvm/O=renovations</name></updatedby>
+<wassignedby><name>CN=priandvm/O=renovations</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE" sign="true"><text>Domino_DataView.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>Domino_DataView.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+
+
+
+</note>

@@ -1,0 +1,15 @@
+.dj_ie7 .lotusui30 .lotusMenu .lotusMenuHeader .lotusHeading a {margin:0;display:block;padding:3px 10px 5px 5px;}  
+.lotusui30 .lotusMenu .lotusMenuHeader a.lotusArrow{position:relative;right:4px;top:4px;}
+.dj_rtl .dijitTextBox .dijitSpinnerButtonContainer{float: left;text-align: center;}
+.dj_rtl .dijitTextBox .dijitArrowButtonContainer{float: left;text-align: center;}
+.dj_rtl .dijitValidationTextBox .dijitValidationContainer {float: left; text-align: center;}
+.lotusui30dojo .dijitComboBox .dijitArrowButtonContainer {padding: 2px 0 2px 2px;}
+.lotusui30 .lotusBanner ul.lotusUtility {float:left;}
+.dijitTextBox .dijitArrowButtonContainer{float: left;text-align: center;position: relative;left: inherit;right: 0px;width: 18px;}
+.lotusui30 .lotusForm td.lotusFormLabel {font-weight: bold;padding-right: 80px;padding-top: 1px;text-align: right;vertical-align: top;}
+.lotusBanner .lotusRightCorner .lotusInner .lotusBannerLogo{float:right;vertical-align:middle;margin-left: 5px;}
+.dj_ie7 .dijitComboBox .dijitInputContainer{float:none !important;clear: none; display:inline-block !important;}
+.dijitTextBox INPUT{float:right;}
+.xspDataTableRowUnread td:first-child{padding-right:0px !important; background:none !important;}
+.xspColumnUnreadImage{padding-left:0px; margin-right:0px; padding-right:5px; margin-left:5px;}
+.xspDataTableRowRead td:first-child{padding-right: 20px !important;}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ca" sequence="8" unid="387DAED2DD8C1CED802577CE0048B9F3">
+<created><datetime>20101101T131421,95+00</datetime></created>
+<modified><datetime>20120207T095545,20+00</datetime></modified>
+<revised><datetime dst="true">20111026T122249,84+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,20+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,20+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20101101T131422,13+00</datetime><datetime dst="true">20110830T205048,79-04</datetime><datetime dst="true">20111006T160525,86+01</datetime><datetime dst="true">20111014T083945,71+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>mustread_16px_8bit.png</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$FileModDT" sign="true"><datetime>20101101T110507,39+00</datetime></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+<item name="$FileNames" sign="true"><text>mustread_16px_8bit.png</text></item></note>

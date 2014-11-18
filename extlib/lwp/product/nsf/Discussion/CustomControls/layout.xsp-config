@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>layout</component-type>
+    <composite-name>layout</composite-name>
+    <composite-file>/layout.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&#xd;
+         xmlns:xc="http://www.ibm.com/xsp/custom"&gt;&#xd;
+&lt;xp:div style="background-color:#CEE1FC; padding:5px"&gt;&#xd;
+	&lt;xp:table style="width: 98%; background-color:#FFFFFF"&gt;&#xd;
+		&lt;xp:tr&gt;&#xd;
+			&lt;xp:td colspan="3" style="background-color:#4586D3"&gt;&lt;/xp:td&gt;&#xd;
+		&lt;/xp:tr&gt;&#xd;
+		&lt;xp:tr&gt;&#xd;
+			&lt;xp:td colspan="3" style="background-color:#E4E8EF"&gt;&lt;/xp:td&gt;&#xd;
+		&lt;/xp:tr&gt;&#xd;
+		&lt;xp:tr&gt;&#xd;
+			&lt;xp:td style="width:123px" valign="top"&gt;&#xd;
+				&lt;xp:div&#xd;
+					style="background-color:#EEFEE1; border:#CCEBB5 solid 1px; -moz-border-radius:4px; width:122px "&gt;&#xd;
+					Outline&#xd;
+				&lt;xp:div&gt;&amp;#160;...&lt;/xp:div&gt;&#xd;
+				&lt;xp:div&gt;&amp;#160;...&lt;/xp:div&gt;&#xd;
+				&lt;xp:div&gt;&amp;#160;...&lt;/xp:div&gt;&#xd;
+				&lt;xp:div&gt;&amp;#160;...&lt;/xp:div&gt;&#xd;
+				&lt;/xp:div&gt;&#xd;
+				&lt;xc:tagCloud&gt;&lt;/xc:tagCloud&gt;&#xd;
+				&lt;xp:callback id="LeftColumn" facetName="LeftColumn"/&gt;&#xd;
+				&lt;xp:callback id="RightColumn" facetName="RightColumn" /&gt;&#xd;
+			&lt;/xp:td&gt;&#xd;
+			&lt;xp:td valign="top"&gt;&#xd;
+				&lt;xp:callback id="callback1"/&gt;&#xd;
+			&lt;/xp:td&gt;&#xd;
+			&lt;xp:td style="width:5px" valign="top"&gt;&#xd;
+			&lt;/xp:td&gt;&#xd;
+		&lt;/xp:tr&gt;&#xd;
+	&lt;/xp:table&gt;&#xd;
+	&lt;/xp:div&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>navigationPath</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

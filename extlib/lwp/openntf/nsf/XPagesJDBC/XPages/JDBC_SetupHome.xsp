@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:ccLayout navigationPath="/JDBC/Setup/Home">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel>
+			Connection Name:&#160;
+			<xp:text escape="true" id="computedField1" value="#{dbUtil.connectionName}"></xp:text>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button value="Test Connection" id="button1">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:try {
+	var c = dbUtil.getConnection();
+	requestScope.testConnection = "Connection Successfull"
+} catch(e) {
+	requestScope.testConnection ="Connection failed, "+e.toString()
+}
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:text escape="true" id="computedField2">
+				<xp:this.value><![CDATA[#{javascript:var v = requestScope.testConnection
+if(v) {
+	return v
+}
+return "";}]]></xp:this.value>
+			</xp:text>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Database Initialized:&#160;
+			<xp:text escape="true" id="computedField3" value="#{javascript:dbUtil.isDatabaseInitialized()}"></xp:text>
+			<xp:br></xp:br>
+			<xp:button value="Initialize Database" id="button2">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:var d = new xpages.DataInitializer()
+d.initializeDatabase()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button value="Reset Data" id="button3">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:var d = new xpages.DataInitializer()
+d.resetData()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Clear Data Tables" id="button4">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:var d = new xpages.DataInitializer()
+d.emptyTables()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>

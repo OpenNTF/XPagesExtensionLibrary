@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Avbryt",
+PickerList_OK: "OK",
+PickerList_Cancel: "Avbryt",
+PickerListSearch_Search: "S\u00f8k",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "Avbryt",
+PickerListSearch_Value: "Verdi",
+PickerListSearch_Values: "Verdier",
+PickerName_Search: "S\u00f8k",
+PickerName_Add: "Legg til",
+PickerName_Remove: "Fjern",
+PickerName_RemoveAll: "Fjern alle",
+PickerName_OK: "OK",
+PickerName_Cancel: "Avbryt",
+PickerName_SearchIn: "S\u00f8k i",
+PickerName_SearchFor: "S\u00f8k etter",
+PickerName_unSelectedListLabel: "Liste med verdier som kan velges",
+PickerName_selectedListLabel: "Liste med valgte verdier"
+})

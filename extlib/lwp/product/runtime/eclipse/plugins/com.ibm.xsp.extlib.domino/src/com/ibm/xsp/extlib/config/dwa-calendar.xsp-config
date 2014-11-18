@@ -1,0 +1,402 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>calendar</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type>
+		<property>
+			<description>%property.storeTitle.descr%</description>
+			<display-name>%property.storeTitle.name%</display-name>
+			<property-name>storeTitle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <localizable>true</localizable>
+				<designer-extension>
+                    <category>accessibility</category>
+                    
+                    
+                    <tags>
+                        not-server-variable-name
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.calendar.jsId</group-type>
+		<property>
+			
+			<description>%property.jsId.component.calendarView.descr%</description>
+			<display-name>%property.jsId.component.calendarView.name%</display-name>
+			<property-name>jsId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    
+                    
+                    
+                    
+                    
+                    <tags>
+                        not-control-id-reference
+                        not-server-variable-name
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<group-extension>
+			<designer-extension>
+				<tags>group-in-control</tags>
+			</designer-extension>
+		</group-extension>
+	</group>
+
+	<component>
+		<description>%component.calendarView.descr%</description>
+		<display-name>%component.calendarView.name%</display-name>
+		<component-type>com.ibm.xsp.extlib.calendar.CalendarView</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UICalendarView</component-class>
+		<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+		<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+  		
+			<description>%property.type.descr%</description>
+			<display-name>%property.type.name%</display-name>
+			<property-name>type</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+						D
+						T
+						F
+						W
+						2
+						M
+						Y
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>%property.storeComponentId.descr%</description>
+			<display-name>%property.storeComponentId.name%</display-name>
+			<property-name>storeComponentId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|notesCalendarStore
+                        http://www.ibm.com/xsp/coreex|iCalReadStore
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.summarize.descr%</description>
+			<display-name>%property.summarize.name%</display-name>
+			<property-name>summarize</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.date.descr%</description>
+			<display-name>%property.date.name%</display-name>
+			<property-name>date</property-name>
+			<property-class>java.util.Date</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onNewEntry.descr%</description>
+			<display-name>%property.onNewEntry.name%</display-name>
+			<property-name>onNewEntry</property-name>
+			
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onOpenEntry.descr%</description>
+			<display-name>%property.onOpenEntry.name%</display-name>
+			
+			<property-name>onOpenEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onSelectEntry.descr%</description>
+			<display-name>%property.onSelectEntry.name%</display-name>
+			
+			<property-name>onSelectEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onDeleteEntry.descr%</description>
+			<display-name>%property.onDeleteEntry.name%</display-name>
+			<property-name>onDeleteEntry</property-name>
+			
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onContextMenu.descr%</description>
+			<display-name>%property.onContextMenu.name%</display-name>
+			
+			<property-name>onContextMenu</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+ 		<property>
+			<description>%property.onRescheduleEntry.descr%</description>
+			<display-name>%property.onRescheduleEntry.name%</display-name>
+			
+			<property-name>onRescheduleEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.onChangeView.descr%</description>
+			<display-name>%property.onChangeView.name%</display-name>
+			<property-name>onChangeView</property-name>
+			
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarView</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.CalendarView</renderer-type>
+			<tag-name>calendarView</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		
+        		<tags>
+        		  todo
+        		</tags>
+        		<category>iNotes</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+
+
+	<component>
+		<description>%component.notesCalendarStore.descr%</description>
+		
+		<display-name>%component.notesCalendarStore.name%</display-name>
+		
+		<component-type>com.ibm.xsp.extlib.calendar.NotesCalendarStore</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UINotesCalendarStore</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+			<description>%property.databaseName.descr%</description>
+			<display-name>%property.databaseName.name%</display-name>
+			<property-name>databaseName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    
+                     
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarStore</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.NotesCalendarStore</renderer-type>
+			<tag-name>notesCalendarStore</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		
+        		
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+	<component>
+		<description>%component.iCalReadStore.descr%</description>
+		
+		<display-name>%component.iCalReadStore.name%</display-name>
+		<component-type>com.ibm.xsp.extlib.calendar.iCalReadStore</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UIiCalReadStore</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+			<description>%property.url.descr%</description>
+			<display-name>%property.url.name%</display-name>
+			<property-name>url</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    
+                    
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>%property.bgColorMeeting.descr%</description>
+			<display-name>%property.bgColorMeeting.name%</display-name>
+			<property-name>bgColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+					
+					
+					
+					
+					<tags>
+					   todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>%property.borderColorMeeting.descr%</description>
+			<display-name>%property.borderColorMeeting.name%</display-name>
+			<property-name>borderColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>%property.fontColorMeeting.descr%</description>
+			<display-name>%property.fontColorMeeting.name%</display-name>
+			<property-name>fontColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarStore</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.iCalReadStore</renderer-type>
+			<tag-name>iCalReadStore</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		
+        		
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+</faces-config>

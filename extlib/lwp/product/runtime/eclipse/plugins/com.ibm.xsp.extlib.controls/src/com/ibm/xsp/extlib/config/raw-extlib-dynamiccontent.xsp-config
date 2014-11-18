@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dynamiccontent</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+    <group>
+        <!-- key-suffix: dynamiccontent -->
+        <group-type>com.ibm.xsp.extlib.dynamiccontent.events</group-type>
+
+        <!--  Properties -->
+        <property>
+            <!-- TODO description should explain what is meant by content loaded, 
+            and how often this would be triggered, and under what conditions. -->
+            <description>Triggered before the content is loaded</description>
+            <display-name>Before Content Method Binding</display-name>
+            <property-name>beforeContentLoad</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+                <designer-extension>
+                    <category>events</category>
+                    <subcategory>container-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- TODO description should explain what is meant by content loaded, and how often this would be triggered, and under what conditions. -->
+            <description>Triggered after the content is loaded</description>
+            <display-name>After Content Method Binding</display-name>
+            <property-name>afterContentLoad</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+                <designer-extension>
+                    <category>events</category>
+                    <subcategory>container-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+	
+<!-- Abstract in-place container -->
+	<component>
+        <!-- TODO description needs work - not all dynamic contents type controls are used for in-place editing -->
+		<description>Abstract in-place editing container</description>
+		<display-name>Abstract Dynamic Control</display-name>
+		<component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicControl</component-class>
+
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+            <designer-extension>
+                <!-- TODO the component-class should not contain "Control"-->
+                <!-- TODO JUnit test that the component-class, tag-name and complex-type 
+                should not contain Control. -->
+                <!-- TODO UITooltip is also inheriting from this, maybe move it into this file,
+                or make it not dynamic -  do you really want a round-trip to the server
+                for a hover event? -->
+                <!-- TODO if possible merge the 2 abstract classes, AbstractDynamicContent 
+                and UIDynamicControl (the impl is UIDynamicContent). -->
+                <!-- TODO UIDynamicControl implementation is confusing, consider refactor to be less
+                confusing, and to push common code from all the subclasses up. -->
+                <!-- TODO once the extlib is signed, will it have permission to load classes,
+                and do other page loading stuff through the dynamic content? -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+		</component-extension>
+	</component>
+	
+<!-- In Place form -->
+	<component>
+        <!-- TODO description needs work - should explain what is meant by in place editing,
+        what "dynamic" means in this context, whether it actually generates a HTML FORM tag -->
+		<description>A panel used to display a dynamic form</description>
+		<display-name>In Place Form</display-name>
+		<component-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIInPlaceForm</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+		
+    	<property>
+      		<description>Specifies that partial execute and partial refresh should be automatically applied to all events on controls contained within this area. All such events are also modified to target this container control as the partially updated area. Defaults to false.</description>
+      		<display-name>Inner Controls to Use Partial Events</display-name>
+      		<property-name>partialEvents</property-name>
+      		<property-class>boolean</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+                    <!-- TODO this is not consistent with the XPages runtime Tabbed Panel, 
+                    which requires 2 props: refreshId, partialRefresh, partialExecute.-->
+                    <!-- TODO this isn't just effecting the events on this control,
+                    it is effecting all the events on any control within this container,
+                    that behavior is dangerous, and it should be changed - at present
+                    it will cause the entire in-place form to be refreshed,
+                    instead, if the inner control is already configured to do a partial
+                    refresh of an area within the in-place form, then that inner area
+                    should be refresh-able. Not sure how it should work if the inner
+                    control is configured to do a partial refresh of an area larger than
+                    the in-place form - think it should either fail with an error,
+                    or the control should be updated to handle having the outer area
+                    refreshed while the in-place form is shown. -->
+                    <!-- TODO description should not contain "/"-->
+                    <!-- TODO Changed display-name from "Partial Events" 
+                    to "Inner Controls To Use Partial Events", should have a better display-name.-->
+                    <!-- TODO when this is enabled, should make it easier for people
+                    to debug which control on the page is causing the change in behavior. -->
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
+			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</renderer-type>
+			<tag-name>inPlaceForm</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+        		<!-- TODO see description todo above -->
+        		<!-- TODO How to translate palette category "Extension Library" -->
+                <tags>
+                    todo
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	
+<!-- Dynamic Content -->
+	<component>
+		<description>A panel used to display a dynamic page part. It creates its children from a facet definition, based on the facet name.</description>
+		<display-name>Dynamic Content</display-name>
+		<component-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicContent</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+		
+    	<property>
+      		<description>Specifies that partial execute and partial refresh should be automatically applied to all events on controls contained within this area. All such events are also modified to target this container control as the partially updated area. Defaults to false.</description>
+            <display-name>Inner Controls to Use Partial Events</display-name>
+      		<property-name>partialEvents</property-name>
+      		<property-class>boolean</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+                    <!-- TODO this is not consistent with the XPages runtime Tabbed Panel, 
+                    which requires 2 props: refreshId, partialRefresh, partialExecute.-->
+                    <!-- TODO this isn't just effecting the events on this control,
+                    it is effecting all the events on any control within this container,
+                    that behavior is dangerous, and it should be changed - at present
+                    it will cause the entire in-place form to be refreshed,
+                    instead, if the inner control is already configured to do a partial
+                    refresh of an area within the in-place form, then that inner area
+                    should be refresh-able. Not sure how it should work if the inner
+                    control is configured to do a partial refresh of an area larger than
+                    the in-place form - think it should either fail with an error,
+                    or the control should be updated to handle having the outer area
+                    refreshed while the in-place form is shown. -->
+                    <!-- TODO description should not contain "/"-->
+                    <!-- TODO Changed display-name from "Partial Events" 
+                    to "Inner Controls To Use Partial Events", should have a better display-name.-->
+                    <!-- TODO when this is enabled, should make it easier for people
+                    to debug which control on the page is causing the change in behavior. -->
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	<property>
+            <!-- TODO better description of what this means - and include the # symbol in the description 
+            as the word hash is european - it's known as pound in the USA,
+            explain that it isn't just #facetName, it's #value=facetName
+            which is weird actually - maybe should configure that? -->
+      		<description>Indicate that the control should manage its state using a URL hash, that is some text after a "#" symbol in the URL, like: /page1.xsp#detail</description>
+      		<display-name>Use URL Hash</display-name>
+      		<property-name>useHash</property-name>
+      		<property-class>boolean</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	<property>
+            <!-- TODO description should explain "facet", also why is it talking about a parameter, what does that mean?-->
+      		<description>Defines the name of the facet to use when none is passed as a parameter</description>
+      		<display-name>Default Facet</display-name>
+      		<property-name>defaultFacet</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+                    <!-- TODO see ChangeDynamicContentAction facetName below, which talks about the pseudo-facets
+                    are any of them in common use so that they should be described here?-->
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+		
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
+			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</renderer-type>
+			<!-- TODO the word "Dynamic" is very ambiguous, try to find a new display-name -->
+			<tag-name>dynamicContent</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+                <!-- TODO talk to Designer about the difference between the dynamicContent control,
+                and the switchFacet control. Maybe talk to Lorcan first,
+                try to pin down exactly how many different functionalities are in the dynamicContent control, 
+                which of them overlap with the switchFacet, and which are independednt. 
+                Should these 2 controls be merged to a single tag-name, like UIDataIterator and UIRepeat? -->
+                <!-- TODO verify that QE are testing client-side switching of dynamic content,
+                and maybe update the XPagesExt.nsf demo app to verify all the use-cases-->
+                <!-- TODO find out how many supported use-cases there are for switching the
+                dynamic content facet? and add them all to the demo app. -->
+                <tags>
+                    todo
+                </tags>
+        		<render-markup>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;xp:view xmlns:xp=&quot;http://www.ibm.com/xsp/core&quot;&gt;
+&lt;%
+var facetName=&quot;#{facetName}&quot;
+var defaultFacet = this.defaultFacet
+function isDefaultFacetAttrComputed(){
+   if(defaultFacet .substring(0,2) == &quot;#{&quot;){
+      return true
+   }
+   return false
+}
+function isDefaultFacetAttrSet(){
+   if(null != defaultFacet &amp;&amp; defaultFacet != &quot;&quot; ){
+      return true
+   }
+   return false
+}
+if(isDefaultFacetAttrSet() &amp;&amp; isDefaultFacetAttrComputed()){
+        
+   %&gt;
+   &lt;xp:panel&gt;
+    &lt;xp:callback id=&quot;callback2&quot;&gt;
+    &lt;xp:this.facetName&gt;&lt;![CDATA[&lt;%=defaultFacet%&gt;]]&gt;&lt;/xp:this.facetName&gt;
+    &lt;/xp:callback&gt;
+    &lt;xp:br&gt;&lt;/xp:br&gt;
+    &lt;xp:callback id=&quot;callback1&quot;&gt;&lt;/xp:callback&gt;
+   &lt;/xp:panel&gt;
+   &lt;%
+
+}
+else{
+   
+   if(isDefaultFacetAttrSet()){
+    facetName = &#39;#{&#39; + defaultFacet + &#39;}&#39;
+   }
+
+   %&gt;
+   &lt;xp:panel&gt;
+    &lt;xp:callback facetName=&quot;&lt;%=facetName%&gt;&quot;
+        id=&quot;callback2&quot;&gt;
+    &lt;/xp:callback&gt;
+    &lt;xp:br&gt;&lt;/xp:br&gt;
+        &lt;xp:callback id=&quot;callback1&quot;&gt;&lt;/xp:callback&gt;
+    
+   &lt;/xp:panel&gt;
+   &lt;%    
+}
+%&gt;
+&lt;/xp:view&gt;
+             </render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	
+<!-- Switch Facet -->
+	<component>
+        <!-- TODO talk to Designer team, ask if it should be called something other than Switch?
+        as that's a technical term, familiar to programmers, where as normal people would think of a 
+        light switch which has 2 possible states on/off.
+        Maybe name it Choice or something.  -->
+        <!-- TODO description. Old description was lies, said it was a dynamic include page control, but it doesn't have a pageName property -->
+        <!-- TODO the UISwitchFacet is in the dynamiccontent package, even though it is not dynamic-->
+		<description>Panel that displays a dynamic page part. It conditionally renders a child control.</description>
+		<display-name>Switch</display-name>
+		<component-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UISwitchFacet</component-class>
+		
+    	<property>
+            <!-- TODO description to explain when you would use selected facet, vs default facet,
+            and that this property is usually computed. -->
+      		<description>Defines the name of the facet to use</description>
+      		<display-name>Selected Facet</display-name>
+      		<property-name>selectedFacet</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	<property>
+      		<description>Defines the name of the default facet to use when no facet actually matches the selected one.</description>
+      		<display-name>Default Facet</display-name>
+      		<property-name>defaultFacet</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+		
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</renderer-type>
+			<tag-name>switchFacet</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+                <!-- TODO talk to Designer about the difference between the dynamicContent control,
+                and the switchFacet control. Maybe talk to Lorcan first,
+                try to pin down exactly how many different functionalities are in the dynamicContent control, 
+                which of them overlap with the switchFacet, and which are independednt. 
+                Should these 2 controls be merged to a single tag-name, like UIDataIterator and UIRepeat? -->
+                <!-- This doesn't have a renderer - it is just gets the default container
+                output - no tag and render contents. -->
+                <tags>
+                    todo
+                    no-faces-config-renderer
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	<complex-type>
+		<description>An action to change the state of a Dynamic Content control so that a different facet control is displayed within the dynamically loaded area.</description>
+		<display-name>Change Dynamic Content</display-name>
+		<complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
+		<complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
+		<property>
+			<description>The ID of the Dynamic Content control whose state will be changed by this action. If empty, it uses the closest Dynamic Content Control in the parent hierarchy.</description>
+			<display-name>For</display-name>
+			<property-name>for</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|dynamicContent
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- # The quoted values "-empty-", "-children-" and "-default-" should not be translated. -->
+			<description>The name of the facet to display within the Dynamic Content control, or one of the 3 predefined facets: "-empty-" meaning that the reloaded control will have no contents, "-children-" meaning that the nested contents of the control in the XPage source will be loaded, or "-default-" meaning that the default facet of the control will be recomputed and the resulting named facet will be loaded. If the facet name is not supplied for this action, the default facet will be used.</description>
+			<display-name>Facet Name</display-name>
+			<property-name>facetName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+					 -empty-
+					 -children-
+					 -default-
+					</editor-parameter>
+                    <!-- TODO talk to the Designer team about these pseudo-facets,
+                    and how well they're supported in the editor -->
+                    <tags>
+                        todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- # "requestScope" should not be translated -->
+			<description>A list of name and value pairs to make available in the requestScope map while the facet is loading</description>
+			<display-name>Parameters</display-name>
+			<property-name>parameters</property-name>
+			<property-class>java.util.List</property-class>
+			<property-extension>
+				<collection-property>true</collection-property>
+				<property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
+				<property-add-method>addParameter</property-add-method>
+				<allow-run-time-binding>false</allow-run-time-binding>
+                <!-- TODO investigate, do these have the same problem as the eventHandler parameters values,
+                whereby the parameters list is computed on the initial page display,
+                and these values are not re-computed during the invoke application
+                phase while the facet is being loaded?
+                If so, consider deleting this parameters property,
+                or ask Phil to explain the use-case so it can be solved
+                with out the stale-computed-value problem. -->
+                <tags>
+                    todo
+                </tags>
+			</property-extension>
+		</property>
+		<complex-extension>
+			<tag-name>changeDynamicContentAction</tag-name>
+			<base-complex-id>simpleActionInterface</base-complex-id>
+			<designer-extension>
+                <category>%complex-category.basic%</category>
+				<!-- TODO there is no simple action for the client-side changing of the dynamicContent,
+				but it is possible using special scripts. maybe add that client-side simple action? -->
+				<tags>todo</tags>
+			</designer-extension>
+		</complex-extension>
+	</complex-type>
+</faces-config>

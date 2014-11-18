@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='326' unid='133A96141C9A6D15802577E600458535' sequence='40'>
+<created><datetime>20101125T123920,85+00</datetime></created>
+<modified><datetime>20120207T095548,16+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122302,32+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20120417T104533,26+01</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095548,16+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20101215T153821,26+00</datetime><datetime dst='true'>20110830T205054,65-04</datetime><datetime
+ dst='true'>20111006T160543,03+01</datetime><datetime dst='true'>20111010T140849,83+01</datetime><datetime
+ dst='true'>20111010T161635,22+01</datetime><datetime dst='true'>20111014T083958,27+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>xvwSubteams|xvwSubteams</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
++AACACwADABTVE5hbWVOb3RlSUQFAAYAU1ROYW1lAQABADoAIgJ+AFYBIgIDAAIAHAAIAFBvc2l0
+aW9uBQAIAFBvc2l0aW9uAwAFADwAOAAFAAwACQAIAAkABABTVE5hbWVOb3RlSURTVE1lbWJlcnNQ
+b3NpdGlvbiRDb25mbGljdCRSRUYEAAQAAABMAAUABABmb3JtAQAKAERlZlN1YlRlYW0KAgUABABm
+b3JtAQAHAFN1YnRlYW0ACgIdAgQABQAGAFN0YXR1cwEAAQAxAAoCHAIDAAcAIgAcAAlMMVMzUzRT
+NVM2UzdTOFMxMFMxMVMxMlMxM1M=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+KQACAABECGYHAAAMAAhmAAwACQBTVE5hbWVOb3RlSURTVE1lbWJlcnM=
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAQACEAAAFZDAwQMAAwAPgAAAMAAAQAACgABAAAAAAAAAAICAAAAVkMBAAkABwAAAAAAGQEB
+AAAKAAEAAAAAAAAAAgIAAABWQwAACAAEAB4AAADxAAEAAAoAAAAAAAAAAAACAgAAAFNUTmFtZU5v
+dGVJRFNUTmFtZU5vdGVJRD4AAgAsAAwAU1ROYW1lTm90ZUlEBQAGAFNUTmFtZQEAAQA6ACICfgBW
+ASICAwAHABAACQAJMVMyUzNTNFMAU1RNZW1iZXJzTWVtYmVyc1Bvc2l0aW9uUm9sZR4AAgAcAAgA
+UG9zaXRpb24FAAgAUG9zaXRpb24DACYAAQAAAAEBAAkBAAAKAQEECgAAAACtKwEAAQABAAAAAAAA
+AAAAV0MBAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQAACQAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEAAAkAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAQgAAAAAAAQD///8ABQAAAAAAAQAAAAAAAAAAAAAA
+AAABAP///wABAP///wAAAAEAAAAAAAEAAAD/AAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRwPAAAAAQABAAAAAAAAAAAAAAAAAAAACAAAAHn/bAABAMDAwAABAAAAAAABAAAAAAABAMDAwAAA
+AB8AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAC+/yYAAAAFAAAAnAEAAAsAAAAAAAAAQ2F0ZWdvcmlfemUH
+AQBOfL7/KAAAAAUAAACdAQAADgAAAAAAAABfRWRpdCBEb2N1bWVudAIAAgq+/ygAAAAFAAAAnQEA
+AA4AAAAAAAAAU2VuZCBEb2N1X21lbnQDAAMKvv8iAAAABQAAAJ0BAAAIAAAAAAAAAF9Gb3J3YXJk
+BAAECr7/LAAAAAUAAACdAQAAEgAAAAAAAABfTW92ZSBUbyBGb2xkZXIuLi4FAD18vv8uAAAABQAA
+AJ0BAAATAAAAAAAAAF9SZW1vdmUgRnJvbSBGb2xkZXIHBgA+fL7/QAAAAAEAAACfAQAACgAAAAAA
+AABDbG9zZSBWaWV3IAAAABIAAgD8EQAAAAAAAO0BAwAHAAwABQAJMFMwRQA=
+</rawitemdata></item></note>
+

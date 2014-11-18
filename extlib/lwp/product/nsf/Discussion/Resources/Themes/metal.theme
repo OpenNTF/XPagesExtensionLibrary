@@ -1,0 +1,942 @@
+<theme extends="oneuiv2_metal">
+
+	<!-- Author: Tony McGuckin, IBM -->
+
+	<resource>
+		<content-type>text/css</content-type>
+		<href>blue.css</href>
+	</resource>
+
+	<resource rendered="#{javascript:context.getUserAgent().isIE(0, 6) == true}">
+		<content-type>text/css</content-type>
+		<href>blue_ie06.css</href>
+	</resource>
+
+	<resource rendered="#{javascript:context.getUserAgent().isIE(7, 8) == true}">
+		<content-type>text/css</content-type>
+		<href>blue_ie78.css</href>
+	</resource>
+	
+    <resource rendered="#{javascript:context.isDirectionRTL()}">
+        <content-type>text/css</content-type>
+        <href>commonRTL.css</href>
+    </resource>
+	
+	<resource rendered="#{javascript:(context.getUserAgent().isIE() == true || context.getUserAgent().isFirefox(0, 2) == true) &amp;&amp; context.isDirectionRTL()}">
+		<content-type>text/css</content-type>
+		<href>pagerRTL.css</href>
+	</resource>
+	
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>xpDocLinks.js</href>
+	</resource>
+	
+	<!-- TitleBar -->
+	
+	<control>
+		<name>Panel.TitleBar</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusTitleBar</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.TitleBar.RightCorner</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusRightCorner</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.TitleBar.Inner</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusInner</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.TitleBar.Tabs</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusTabs</value>
+		</property>
+	</control>
+	
+	<!-- PlaceBar -->
+	
+	<control>
+		<name>Panel.PlaceBar</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusPlaceBar</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.PlaceBar.RightCorner</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusRightCorner</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.PlaceBar.Inner</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusInner</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.PlaceBar.ButtonContainer</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusBtnContainer</value>
+		</property>
+	</control>
+	<control>
+		<name>Panel.PlaceBar.Title</name>
+		<property>
+			<name>style</name>
+			<value>float:left;font-size:1.4em;font-weight:normal;line-height:2em;padding:2px 0 0 20px;</value>
+		</property>
+	</control>
+	
+	<!-- Repeats -->
+	
+	<control>
+		<name>Repeat.Tags</name>
+		<property>
+			<name>style</name>
+			<value>display:inline;</value>
+		</property>
+	</control>
+	
+	<!-- Pagers -->
+	
+	<control>
+		<name>Pager.view.header</name>
+		<property>
+			<name>outerStyleClass</name>
+			<value>xspPagerContainerViewHeader</value>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerViewHeader</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>PagerControl.Pager.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewHeader</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Group.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewHeader xspGroupViewHeader</value>
+		</property>
+		<property>
+			<name>currentStyleClass</name>
+			<value>xspCurrentItem</value>
+		</property>
+		<property>
+			<name>firstStyleClass</name>
+			<value>xspFirstItem</value>
+		</property>
+		<property>
+			<name>lastStyleClass</name>
+			<value>xspLastItem</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Separator.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewHeader xspSeparator</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Previous.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewHeader xspPreviousViewHeader</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Next.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewHeader xspNextViewHeader</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Pager.view.footer</name>
+		<property>
+			<name>outerStyleClass</name>
+			<value>xspPagerContainerViewFooter</value>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerViewFooter</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>PagerControl.Pager.view.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewFooter</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Separator.view.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewFooter xspSeparator</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Previous.view.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewFooter xspPreviousViewFooter</value>
+		</property>
+	</control>
+
+	<control>
+		<name>PagerControl.Pager.Next.view.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPagerNavViewFooter xspNextViewFooter</value>
+		</property>
+	</control>
+	
+	<!-- Form Table -->
+	
+	<control>
+		<name>HtmlTable.form</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTableForm</value> 
+		</property>
+		<property mode="override">
+			<name>border</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellpadding</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellspacing</name>
+			<value>0</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTr.form.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspHtmlTrFormHeader</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTr.form.body</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspHtmlTrFormBody</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.form.header</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdFormHeader</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.form.body</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdFormBody</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.form.footer.slimline</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdFormFooterSlimline</value> 
+		</property>
+	</control>
+	
+	<!-- View Table -->
+	
+	<control>
+		<name>HtmlTable.view</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTableView</value> 
+		</property>
+		<property mode="override">
+			<name>border</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellpadding</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellspacing</name>
+			<value>0</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTr.view</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspHtmlTrView</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.view</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdView</value> 
+		</property>
+	</control>
+	
+	<!-- View Table Header -->
+	
+	<control>
+		<name>HtmlTable.view.header</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTableViewHeader</value> 
+		</property>
+		<property mode="override">
+			<name>border</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellpadding</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellspacing</name>
+			<value>0</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTr.view.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspHtmlTrViewHeader</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.view.header.top</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdViewHeaderTop</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.view.header.bottom</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdViewHeaderBottom</value> 
+		</property>
+	</control>
+	
+	<!-- View Table Footer -->
+	
+	<control>
+		<name>HtmlTable.view.footer</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTableViewFooter</value> 
+		</property>
+		<property mode="override">
+			<name>border</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellpadding</name>
+			<value>0</value> 
+		</property>
+		<property mode="override">
+			<name>cellspacing</name>
+			<value>0</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTr.view.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspHtmlTrViewFooter</value> 
+		</property>
+	</control>
+	
+	<control>
+		<name>HtmlTd.view.footer</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspHtmlTdViewFooter</value> 
+		</property>
+	</control>
+	
+	<!-- Vertical Bar Separators -->
+	
+	<control>
+		<name>Text.largeSeparator</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextLargeSeparator</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Text.mediumSeparator</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextMediumSeparator</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Text.smallSeparator</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextSmallSeparator</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Text.searchInfo</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextSearchInfo</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Text.table.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextTableHeader</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Text.table.label</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspTextTableLabel</value>
+		</property>
+	</control>
+	
+	<!-- Images -->
+	
+	<control>
+		<name>Image.branding</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspImageBranding</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Image.file</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspImageFile</value>
+		</property>
+		<property mode="override">
+			<name>height</name>
+			<value>19</value>
+		</property>
+		<property mode="override">
+			<name>width</name>
+			<value>16</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Image.searchButton</name>
+		<property mode="override">
+			<name>url</name>
+			<value>/.ibmxspres/domino/oneuiv2/images/iconSearch16.png</value>
+		</property>
+		<property>
+			<name>style</name>
+			<value>border:1px solid #c0c0c0</value>
+		</property>
+	</control>	
+	
+	<!-- Links -->
+	
+	<control>
+		<name>Link.collapse</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:(sessionScope.ec == null || sessionScope.ec == 0) ? "xspDisabledCollapse" : "xspEnabledCollapse"}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.expand</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:(sessionScope.ec == 1) ? "xspDisabledExpand" : "xspEnabledExpand"}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.view.topicTitle</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLinkViewTopicTitle</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.logout</name>
+		<property mode="override">
+			<name>styleClass</name>
+			<value>xspLinkLogout</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.title</name>
+		<property mode="override">
+			<name>styleClass</name>
+			<value>xspLinkTitle</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.person</name>
+		<property mode="override">
+			<name>styleClass</name>
+			<value>xspLinkPerson</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.action</name>
+		<property mode="override">
+			<name>styleClass</name>
+			<value>xspLinkAction</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Link.more</name>
+		<property mode="override">
+			<name>styleClass</name>
+			<value>xspLinkMore</value>
+		</property>
+	</control>
+	
+	<!-- Panels -->
+	
+	<control>
+		<name>Panel.topicThread</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelTopicThread</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.actionsBar</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelActionsBar</value>
+		</property>
+	</control>
+
+	<!-- Tag Cloud START -->
+
+	<control>
+		<name>tagCloud.outerPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>tagCloudOuterPanel</value>
+		</property>
+	</control>
+
+	<control>
+		<name>tagCloud.section</name>
+		<property>
+			<name>styleClass</name>
+			<value>tagCloudSection</value>
+		</property>
+	</control>
+
+	<control>
+		<name>tagCloud.slider</name>
+		<property>
+			<name>styleClass</name>
+			<value>tagCloudSlider</value>
+		</property>
+	</control>
+
+	<control>
+		<name>tagCloud.innerPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>tagCloudInnerPanel</value>
+		</property>
+	</control>
+
+	<!-- Tag Cloud END -->
+	
+	<control>
+		<name>Panel.left</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLeft</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.right</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspRight</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.noWrap</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspNoWrap</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.leftNoWrap</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLeft xspNoWrap</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.rightNoWrap</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspRight xspNoWrap</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.leftAlignNoWrap</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLeft xspNoWrap xspLeftAlign</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.rightAlignNoWrap</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspRight xspNoWrap xspRightAlign</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.banner</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelBanner</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.banner.left</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelBannerLeft</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.banner.right</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelBannerRight</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.frame</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelFrame</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.titleBar</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelTitleBar</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.rightCorner</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelRightCorner</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.inner</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelInner</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.search</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelSearch</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.header</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelHeader</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.main</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelMain</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.content</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelContent</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.columnLeft</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelColumnLeft</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.columnRight</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelColumnRight</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelFooter</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.footer.left</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelFooterLeft</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.footer.right</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelFooterRight</value>
+		</property>
+	</control>
+	
+	<!-- Main Navigation Menu -->
+	
+	<control>
+		<name>Panel.menu.navigation.top</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelNavigationMenuTop</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.bottom</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelNavigationMenuBottom</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.inner</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelNavigationMenuInner</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.items</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspPanelNavigationMenuItems</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.item.allDocuments</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:sessionScope.historyPageName == '/allDocuments.xsp' ? 'xspPanelNavigationMenuItem xspPanelNavigationMenuItemSelected' : 'xspPanelNavigationMenuItem'}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.item.byMostRecent</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:sessionScope.historyPageName == '/byMostRecent.xsp' ? 'xspPanelNavigationMenuItem xspPanelNavigationMenuItemSelected' : 'xspPanelNavigationMenuItem'}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.item.byAuthor</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:sessionScope.historyPageName == '/byAuthor.xsp' ? 'xspPanelNavigationMenuItem xspPanelNavigationMenuItemSelected' : 'xspPanelNavigationMenuItem'}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.item.byTag</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:sessionScope.historyPageName == '/byTag.xsp' ? 'xspPanelNavigationMenuItem xspPanelNavigationMenuItemSelected' : 'xspPanelNavigationMenuItem'}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Panel.menu.navigation.item.myDocuments</name>
+		<property>
+			<name>styleClass</name>
+			<value>#{javascript:sessionScope.historyPageName == '/myDocuments.xsp' ? 'xspPanelNavigationMenuItem xspPanelNavigationMenuItemSelected' : 'xspPanelNavigationMenuItem'}</value>
+		</property>
+	</control>
+	
+	<!-- Computed Text Fields -->
+	
+	<control>
+		<name>ComputedField.searchInfo</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldSearchInfo</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>ComputedField.title</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldTitle</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>ComputedField.header.subtitle</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldHeaderSubtitle</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>ComputedField.view.generic</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldViewGeneric</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>ComputedField.view.meta</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldViewMeta</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>ComputedField.footer</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspComputedFieldFooter</value>
+		</property>
+	</control>
+	
+	<!-- Input Fields -->
+	
+	<control>
+		<name>InputField.EditBox.search</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspInputFieldEditBoxSearch</value>
+		</property>
+	</control>
+	
+	<control override="true">
+		<name>InputField.FileUpload</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspInputFieldFileUploadEx</value>
+		</property>
+	</control>
+	
+</theme>

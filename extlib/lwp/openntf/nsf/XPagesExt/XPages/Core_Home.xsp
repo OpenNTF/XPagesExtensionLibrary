@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/Home">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
+			<xp:label value="XPages Extension Library Demonstration Application"
+				id="label5" style="font-size:24pt;font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+		</xp:div>
+		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:image url="/xpagesui-logo.jpg" id="image2"></xp:image>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="Exceptional Web UI" id="label1">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="@" id="label3">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="Exceptional Speed" id="label2">
+			</xp:label>
+			<xp:br></xp:br>
+		</xp:div>
+		<xp:div style="color:rgb(255,0,0);padding-left:50px;font-weight:bold"
+			rendered="#{javascript:database.getAllDocuments().getCount()==0}">
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			The runtime detected that the database is not initialized
+			with data.
+			<xp:br />
+			Click on the following button in the header to create a data
+			set.
+			<xp:br />
+			<xp:image url="/dbsetup.jpg" id="image1"></xp:image>
+		</xp:div>
+	</xc:OneUILayout>
+</xp:view>
+

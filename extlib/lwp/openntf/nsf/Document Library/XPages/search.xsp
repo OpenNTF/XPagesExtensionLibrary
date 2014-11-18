@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:
+		sessionScope.webFromName = "Search Results";
+		sessionScope.webFrom = context.getUrl().toString();
+	}]]></xp:this.afterPageLoad>
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="MiddleColumn">
+				<xp:text escape="true" id="titleField" tagName="h1" styleClass="viewHeader">
+					<xp:this.value><![CDATA[#{javascript:
+						return "Search Results for " + param.search;
+					}]]></xp:this.value>
+				</xp:text>
+				<xp:button value="New Document" id="button2" themeId="Button.Cancel">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && (@UserName() !== "Anonymous")}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								for="dynamicContent" facetName="newDocView">
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xe:dataView id="searchResultsView" var="viewEntry"
+					binding="#{viewStateBean.dataIterator}" collapsibleRows="false"
+					collapsibleDetail="true" columnTitles="true"
+					rowStyleClass="xspHtmlTrView" pageName="/viewDocument.xsp"
+					openDocAsReadonly="true" rows="25" detailsOnClient="true">
+
+					<xe:this.data>
+						<xp:dominoView var="view1" viewName="AllThreads"
+							expandLevel="1" dataCache="full" search="#{param.search}">
+						</xp:dominoView>
+					</xe:this.data>
+					
+					<xp:this.facets>
+						<xe:pagerExpand xp:key="pagerTopLeft"></xe:pagerExpand>
+						<xp:pager layout="Previous Group Next"
+							xp:key="pagerTopRight" partialRefresh="true"
+							partialExecute="true" disableTheme="true">
+						</xp:pager>
+						<xe:pagerSizes sizes="10|25|50|100"
+							xp:key="pagerBottomLeft">
+						</xe:pagerSizes>
+						<xp:pager layout="Previous Group Next"
+							xp:key="pagerBottomRight" partialRefresh="true"
+							partialExecute="true" disableTheme="true">
+						</xp:pager>
+					</xp:this.facets>
+					
+					<xe:this.summaryColumn>
+						<xe:viewSummaryColumn columnName="Title" columnTitle="Title">
+							<xp:this.styleClass><![CDATA[#{javascript:
+								var hasAttachments = viewEntry.getColumnValue('Attachments') !== 0;
+								if(hasAttachments) {
+									return 'documentAttachmentIcon';
+								}
+							}]]></xp:this.styleClass>
+							<xe:this.value><![CDATA[#{javascript:
+								var document = viewEntry.getDocument(),
+									msg = viewEntry.getColumnValue('Title');
+								
+								if (document.getItemValue('readers').length > 0) {
+									msg = I18n.format(strings.getString('document.prefix.private'), msg);
+								}
+								return msg;
+							}]]></xe:this.value>
+						</xe:viewSummaryColumn>
+					</xe:this.summaryColumn>
+					
+					<xe:this.extraColumns>
+						<xe:viewExtraColumn columnName="Date" columnTitle="Date">
+						</xe:viewExtraColumn>
+						<xe:viewExtraColumn columnName="Author" 
+							columnTitle="Author" styleClass="searchAuthorColumn">
+							<xe:this.value><![CDATA[#{javascript:
+								if (typeof(viewEntry) !== "undefined") {
+									var author = viewEntry.getColumnValue('Author');
+									return peopleBean.getPerson(author).displayName;
+								}
+							}]]></xe:this.value>
+						</xe:viewExtraColumn>
+					</xe:this.extraColumns>
+
+				</xe:dataView>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+</xp:view>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Simon McLoughlin, IBM -->
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:panel>
+		<xp:this.rendered><![CDATA[#{javascript:
+			var expanded = false;
+			return true;
+		}]]></xp:this.rendered>
+		<xp:panel styleClass="mblFileDownloadPanel">
+			<xp:this.rendered><![CDATA[#{javascript:
+				var al:java.util.List = currentDocument.getAttachmentList(compositeData.field);
+				var num = al.size();
+				if(al.isEmpty())
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}}]]></xp:this.rendered>
+			<xp:label id="label1" styleClass="mblFileDownloadlbl">
+				<xp:this.value><![CDATA[#{javascript:
+					var text = num + " Attachments ";
+					return text;
+				}]]></xp:this.value>
+			</xp:label>
+			<xp:image id="expandImage" styleClass="xlMobileAttachExpand"
+				url="expand.png" height="16px" width="12px">
+				<xp:this.rendered><![CDATA[#{javascript:
+					if(!expanded)
+						return true;
+					else
+						return false;
+				}]]></xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xp:executeClientScript>
+							<xp:this.script><![CDATA[
+								dojo.byId('#{id:repeatList}').style.display = 'inline';
+								dojo.byId('#{id:collapseImage}').style.display = 'inline';
+								dojo.byId('#{id:expandImage}').style.display = 'none';
+							]]></xp:this.script>
+						</xp:executeClientScript>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:image>
+
+			<xp:image id="collapseImage"
+				styleClass="xlMobileAttachExpand xlHidden" url="collapse.png"
+				height="16px" width="12px">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xp:executeClientScript>
+							<xp:this.script><![CDATA[
+								dojo.byId('#{id:repeatList}').style.display = 'none';
+								dojo.byId('#{id:collapseImage}').style.display = 'none';
+								dojo.byId('#{id:expandImage}').style.display = 'inline';
+							]]></xp:this.script>
+						</xp:executeClientScript>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:image>
+		</xp:panel>
+		
+		<xp:repeat id="repeatList" value="#{javascript:currentDocument.getAttachmentList(compositeData.field)}"
+			var="attachData" indexVar="attachIndex" styleClass="xlHidden xlAttachRepeat"
+			rendered="#{javascript:var lastlevel=0;}" rows="300" first="0">	
+			
+			<xp:div styleClass="xlAttachmentRow">
+				<xp:link id="label4" styleClass="xlAttachmentLink">
+					<xp:this.text><![CDATA[#{javascript:
+						var al:java.util.List = currentDocument.getAttachmentList(compositeData.field);
+						if(!al.isEmpty())
+						{
+							var eo:NotesEmbeddedObject = al.get(attachIndex);
+							return eo.getName();
+						}
+					}]]></xp:this.text>
+					<xp:this.value><![CDATA[#{javascript:
+						var al:java.util.List = currentDocument.getAttachmentList(compositeData.field);
+						var eo:NotesEmbeddedObject = "";
+						if(!al.isEmpty())
+						{
+							eo = al.get(attachIndex);
+							return eo.getHref();
+						}
+						else
+						{
+							return "";
+						}
+					}]]></xp:this.value>
+				</xp:link>
+				
+				<xp:text styleClass="xlAttachFileSize">
+					<xp:this.value><![CDATA[#{javascript:					
+						var al:java.util.List = currentDocument.getAttachmentList(compositeData.field);
+						var eo:NotesEmbeddedObject = "";
+						if(!al.isEmpty())
+						{
+							eo = al.get(attachIndex);
+							var bytes = eo.getLength();
+							var fileSize = (parseInt(bytes) / 1024).toFixed(2) + " kb";
+							return fileSize;
+						}
+						else
+						{
+							return "";
+						}
+					}]]></xp:this.value>
+				</xp:text>
+			</xp:div>
+		</xp:repeat>
+	</xp:panel>
+</xp:view>

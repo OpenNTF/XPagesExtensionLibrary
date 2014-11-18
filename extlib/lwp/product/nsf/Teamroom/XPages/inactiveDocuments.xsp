@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:// load navigation map...
+		viewScope.docTypeDetails = {
+			Mission: {xsp: false, parameter: 'documentId',  displayName: strings.getString('document.display.name.mission')},
+			ParticipantProfile: {xsp:'/members.xsp', parameter: 'status=0&profile', displayName: strings.getString('document.display.name.participant.profile')},
+			Subteam: {xsp:'/members.xsp', parameter: 'subteam', displayName: strings.getString('document.display.name.subteam')},
+			announcement: {xsp:'/announcements.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.announcement')},
+			Status: {xsp: '/statusReports.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.status')},
+			IndStat: {xsp: '/statusReports.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.indStat')},
+			SubteamStatus: {xsp: '/statusReports.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.subteamStatus')},
+			Event: {xsp: '/events.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.event')},
+			MainTopic: {xsp: '/topicThread.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.mainTopic')},
+			Response: {xsp: '/topicThread.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.response')},
+			ResponseToResponse: {xsp: '/topicThread.xsp', parameter: 'documentId', displayName: strings.getString('document.display.name.responseToResponse')}
+		}
+	}]]></xp:this.afterPageLoad>
+	<xc:layout navigationPath="/inactiveDocuments">
+		<xp:div id="inactiveView" styleClass="inactiveView">
+			<xp:text escape="true" id="titleField" tagName="h1">
+				<xp:this.value><![CDATA[#{javascript:
+					sessionScope.webFrom = "/inactiveDocuments.xsp";
+					sessionScope.webFromName = strings.getString('inactive.documents');
+					return strings.getString('inactive.documents');
+				}]]></xp:this.value>
+			</xp:text>
+			<xp:button value="Mark Active" id="button1" themeId="Button.Cancel">
+				<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="vwInactiveDocs">
+					<xp:this.action>
+						<xp:actionGroup>
+							<xp:confirm message="Proceed to mark active selected documents?">
+							</xp:confirm>
+							<xp:executeScript>
+								<xp:this.script><![CDATA[#{javascript:var viewPanel=getComponent('vwInactiveDocs');
+var docIDArray = viewPanel.getSelectedIds();
+var docs = [];
+for(var i in docIDArray){
+	var doc = database.getDocumentByID(i);
+	doc.removeItem("FileByDate");	
+	doc.removeItem("DateFiled");	
+	doc.removeItem("ViewDateFiled");
+	doc.replaceItemValue('FileThisStatusDoc', '0');
+	
+	doc.replaceItemValue("Status", "1")
+	doc.replaceItemValue("NeverFile", "1")
+	
+	doc.save(true, false, true);
+	docs.push(doc.getItemValue('Status'));
+}}]]></xp:this.script>
+							</xp:executeScript>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xp:br />
+			<xp:br />
+
+			<xp:viewPanel rows="30" id="vwInactiveDocs" var="rowData"
+				viewStyle="width:100%"
+				summary="A collection of documents that shows documents marked as inactive"
+				title="Inactive documents view">
+				<xp:this.facets>
+					<xp:pager partialRefresh="true"
+						layout="Previous Group Next" style="float:right"
+						xp:key="headerPager" id="pager1">
+					</xp:pager>
+					<xp:pager partialRefresh="true"
+						layout="Previous Group Next" style="float:right"
+						xp:key="footerPager" id="pager2">
+					</xp:pager>
+				</xp:this.facets>
+				<xp:this.data>
+					<xp:dominoView var="inactiveDocs" dataCache="id"
+						viewName="xvwInactiveDocuments">
+					</xp:dominoView>
+				</xp:this.data>
+				<xp:viewColumn id="viewColumn4"
+					style="width:50%;padding:4px;" value="#{rowData.Subject}"
+					columnName="subject" displayAs="link" showCheckbox="true">
+					<xp:this.pageUrl><![CDATA[#{javascript://
+var form = rowData.getColumnValue('Form');
+var detailObj = viewScope.docTypeDetails[form];
+if(form == 'Subteam')
+{
+	var url = detailObj? detailObj.xsp : '/topicThread.xsp';
+	var param = detailObj ?detailObj.parameter : 'documentId'; 
+	var subteamName =  rowData.getColumnValue('STName');
+	return url += '?' + param + '=' + subteamName;
+}else if(form == 'ParticipantProfile'){
+	var url = detailObj? detailObj.xsp : '/topicThread.xsp';
+	var param = detailObj ?detailObj.parameter : 'documentId';
+	var subteamName =  rowData.getColumnValue('rawSubject');
+	return url += '?' + param + '=' + subteamName;
+}else{
+	var url = detailObj? detailObj.xsp : '/topicThread.xsp';
+	var param = detailObj ?detailObj.parameter : 'documentId';
+	return url += '?' + param + '=' + rowData.getUniversalID() + '&action=openDocument';
+}
+	
+}]]>
+
+					</xp:this.pageUrl>
+					<xp:viewColumnHeader id="viewColumnHeader4"
+						styleClass="xspPanelViewColumnHeader xwvInactiveSubject"
+						sortable="true" value="Subject">
+					</xp:viewColumnHeader>
+				</xp:viewColumn>
+				<xp:viewColumn columnName="author" id="viewColumn1"
+					displayAs="link">
+					<xp:viewColumnHeader value="Author"
+						id="viewColumnHeader1" sortable="true">
+					</xp:viewColumnHeader>
+					<xp:this.pageUrl><![CDATA[#{javascript:"/members.xsp?profile=" + rowData.getColumnValue("author")}]]>
+					</xp:this.pageUrl>
+				</xp:viewColumn>
+				<xp:viewColumn columnName="dateFiled"
+					id="viewColumn2">
+					<xp:viewColumnHeader value="Date Filed"
+						id="viewColumnHeader2" sortable="true">
+					</xp:viewColumnHeader>
+				</xp:viewColumn>
+				<xp:viewColumn columnName="dateCreated"
+					id="viewColumn3">
+					<xp:viewColumnHeader value="Date Created"
+						id="viewColumnHeader3" sortable="true">
+					</xp:viewColumnHeader>
+				</xp:viewColumn>
+				<xp:viewColumn id="viewColumn5" columnName="form">
+					<xp:this.value>
+						<![CDATA[#{javascript:var form = rowData.getColumnValue('form'); var detailObj = viewScope.docTypeDetails[form]; detailObj? detailObj.displayName : strings.getString("unknown")}]]>
+					</xp:this.value>
+					<xp:viewColumnHeader id="viewColumnHeader5"
+						sortable="true" value="Form">
+					</xp:viewColumnHeader>
+				</xp:viewColumn>
+			</xp:viewPanel>
+		</xp:div>
+	</xc:layout>
+</xp:view>

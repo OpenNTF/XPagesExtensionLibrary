@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2012                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>misc</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+			
+	
+<!-- Redirect Control -->
+	<component>
+		<description>A control that redirects to a different page when the browser or a request header matches one of the configured redirection rules</description>
+		<display-name>Redirect</display-name>
+		<component-type>com.ibm.xsp.extlib.misc.Redirect</component-type>
+		<component-class>com.ibm.xsp.extlib.component.misc.UIRedirect</component-class>
+		<property>
+			<description>Redirection rules list. The order of the rules list is significant, as the first matching rule determines the redirect page.</description>
+			<display-name>Redirection Rules</display-name>
+			<property-name>rules</property-name>
+			<property-class>java.util.List</property-class>
+			<property-extension>
+				<allow-run-time-binding>false</allow-run-time-binding>
+				<collection-property>true</collection-property>
+				<property-item-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</property-item-class>
+				<property-add-method>addRule</property-add-method>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+			<base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.misc.Redirect</component-family>
+			<renderer-type>com.ibm.xsp.extlib.misc.Redirect</renderer-type>
+			<tag-name>redirect</tag-name>
+			<since>8.5.32003</since>
+			<designer-extension>
+				<in-palette>true</in-palette>
+				<category>Extension Library</category>
+				<tags>
+					no-faces-config-renderer
+					no-rendered-output
+				</tags>
+			</designer-extension>
+		</component-extension>
+	</component>
+	
+	<complex-type>
+		<description>Abstract class that all redirect rules inherit from</description>
+		<display-name></display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-class>
+		
+		<complex-extension>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>
+	
+	<complex-type>
+		<description>Abstract class that inherits from AbstractRedirectRule and all redirect rules inherit from</description>
+		<display-name></display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-class>
+		
+		<property>
+			<!-- # ".xsp" should not be translated -->
+			<description>Redirection URL page to be opened, usually with the ".xsp" extension.</description>
+			<display-name>Redirection URL</display-name>
+			<property-name>url</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<required>true</required>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- # "#topic" and "#document" should not be translated -->
+			<description>Redirection URL hash. Value specified here will be prefixed with "#" when added to the Redirection URL, like "#document" or "#topic".</description>
+			<display-name>Redirection URL Hash</display-name>
+			<property-name>urlHash</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<!-- tag not-xpage-name prevents a fail in PageEditorTest,
+					as this property's value is not a path to an XPage,
+					but is some anchor suffix appended to the XPage path. -->
+					<tags>
+						not-xpage-name
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>By default the request parameters for the initially opened page are copied into the URL for the redirect target page. When this property is set, the request parameters are no longer automatically appending to the redirect URL. It is still possible to programmatically append the parameters, by computing the value of the Redirection URL property.</description>
+			<display-name>Disable Request Parameters</display-name>
+			<property-name>disableRequestParams</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Extra parameters list to be appended to the Redirection URL.</description>
+			<display-name>Extra Parameters</display-name>
+			<property-name>extraParams</property-name>
+			<property-class>java.util.List</property-class>
+			<property-extension>
+				<allow-run-time-binding>false</allow-run-time-binding>
+				<collection-property>true</collection-property>
+				<property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
+				<property-add-method>addExtraParam</property-add-method>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</base-complex-id>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>
+	
+	
+	<!-- Redirect Phone rule -->
+	<complex-type>
+		<description>A rule used by the Redirect control to redirect to another page when the browser is on a mobile device</description>
+		<display-name>Redirect Phone Rule</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-class>
+
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+			<tag-name>redirectPhoneRule</tag-name>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>	
+	
+	<!-- Redirect Tablet rule -->
+	<complex-type>
+		<description>A rule used by the Redirect control to redirect to another page when the browser is on a tablet device</description>
+		<display-name>Redirect Tablet Rule</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-class>
+
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+			<tag-name>redirectTabletRule</tag-name>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>	
+	
+	<!-- Redirect Header rule -->
+	<complex-type>
+		<description>A rule used by the Redirect control to redirect to another page when a header matches a specified pattern</description>
+		<display-name>Redirect Header Rule</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-class>
+		<property>
+			<!-- "custom" and "User-Agent" should not be translated. -->
+			<description>Request header to be analyzed for matching against specified header pattern. This is only used when the rule type is "custom". The default header is "User-Agent".</description>
+			<display-name>Request Header</display-name>
+			<property-name>header</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						User-Agent
+						Accept
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Pattern of a request header as a regular expression</description>
+			<display-name>Request Header Pattern</display-name>
+			<property-name>headerPattern</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+			<tag-name>redirectHeaderRule</tag-name>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>
+	
+	<!-- Redirect Custom rule -->
+	<complex-type>
+		<description>A rule used by the Redirect control to redirect to another page when the redirect property evaluates to true</description>
+		<display-name>Redirect Custom Rule</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-class>
+		
+		<property>
+			<description>An property to allow you to decide when you want to redirect. Can be computed for any condition, will redirect if value is true. Default is false.</description>
+			<display-name>Redirect</display-name>
+			<property-name>redirect</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+			<tag-name>redirectCustomRule</tag-name>
+			<since>8.5.32003</since>
+		</complex-extension>
+	</complex-type>	
+</faces-config>

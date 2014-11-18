@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xe:formTable disableErrorSummary="true">
+		<xe:formRow label="Priority:">
+				<xp:comboBox id="fieldPriority"
+					value="#{document1.AIPriority}" defaultValue="3">
+					<xp:selectItem itemLabel="1 (Highest)" itemValue="1"></xp:selectItem>
+					<xp:selectItem itemLabel="2" itemValue="2"></xp:selectItem>
+					<xp:selectItem itemLabel="3" itemValue="3"></xp:selectItem>
+					<xp:selectItem itemLabel="4" itemValue="4"></xp:selectItem>
+					<xp:selectItem itemLabel="5 (Lowest)" itemValue="5"></xp:selectItem>
+				</xp:comboBox>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

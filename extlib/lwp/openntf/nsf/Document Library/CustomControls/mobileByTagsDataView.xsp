@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.resources>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xe:pagerSaveState for="dataView1"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	<xc:mobileSearchBox dataView="dataView1"></xc:mobileSearchBox>
+	<xe:dataView id="dataView1" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" columnTitles="true"
+		openDocAsReadonly="false"
+		collapsibleRows="true" collapsibleDetail="true"
+		rowStyleClass="xspHtmlTrView" detailsOnClient="true" rows="10" pageName="document">
+		
+		<xe:this.data>
+			<xp:dominoView var="view1" viewName="ByCategory"
+				dataCache="full" categoryFilter="#{requestScope.searchQuery}" expandLevel="2">
+			</xp:dominoView>
+		</xe:this.data>
+		<xp:this.facets>
+			
+			<xp:link escape="true" text="More..." id="link6"
+				xp:key="pagerBottom">
+				<xp:this.style>
+					<![CDATA[#{javascript:
+						if(isAndroidCheck())
+						{
+							return "background-color:black; color:white;";
+						}
+						else
+						{
+							return "background-color:white; color:black;";
+						}
+					}]]>
+				</xp:this.style>
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+						var dv = getComponent("dataView1");
+						if(dv.getRowCount() > 10)
+							return true;
+						else
+							return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView1" disableId="link6">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+			
+			<xp:panel xp:key="categoryRow" id="categoryRow">
+				<xp:label>
+					<xp:this.value>
+						<![CDATA[#{javascript:
+										var text = viewEntry.getColumnValue(' ');
+										return text || "*Not Tagged*";
+									}
+									]]>
+					</xp:this.value>
+				</xp:label>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Topic" columnTitle="Title">
+				<xp:this.styleClass><![CDATA[#{javascript:
+					var hasAttachments = viewEntry.getColumnValue('Attachments') !== 0;
+					if(hasAttachments) {
+						return 'summaryColumn documentAttachmentIcon';
+					} else {
+						return 'summaryColumn';
+					}
+				}]]></xp:this.styleClass>
+				<xe:this.value><![CDATA[#{javascript:
+					var document = viewEntry.getDocument(),
+						msg = viewEntry.getColumnValue('Topic');
+					
+					if (document.getItemValue('readers').length > 0) {
+						msg = "PRIVATE: " + msg;
+					}
+					return msg;
+				}]]></xe:this.value>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+	</xe:dataView>
+</xp:view>

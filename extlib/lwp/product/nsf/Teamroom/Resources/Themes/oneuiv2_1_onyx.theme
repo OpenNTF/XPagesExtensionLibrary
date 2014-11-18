@@ -1,0 +1,58 @@
+
+<theme extends="oneuiv2.1_onyx">
+	<resource>
+		<content-type>text/css</content-type>
+		<href>oneuiv2_1.css</href>
+	</resource>
+	
+	<resource rendered="#{javascript:context.getUserAgent().isIE(0,6)}">
+		<content-type>text/css</content-type>
+		<href>stylesIE06.css</href>
+	</resource>
+	<resource rendered="#{javascript:context.getUserAgent().isIE(7,8)}">
+		<content-type>text/css</content-type>
+		<href>stylesIE78.css</href>
+	</resource>
+	<resource rendered="#{javascript:context.getUserAgent().isFirefox()}">
+		<content-type>text/css</content-type>
+		<href>stylesFF.css</href>
+	</resource>
+	
+	<resources>
+		<bundle src="/strings.properties" var="strings"></bundle>
+		<dojoModule name="extlib.dijit.ExtLib"></dojoModule>
+		<script src="/xpDocLinks.js" clientSide="true"></script>
+	</resources>
+	
+	<control>
+		<name>ViewRoot</name>
+		<property>
+			<name>pageIcon</name>
+			<value>/favicon.ico</value>
+		</property>
+		<property>
+			<name>pageTitle</name>
+			<value>#{javascript:var teamname = strings.getString("teamroom.name");
+var vw:NotesView = database.getView("MissionLookup");
+var vc:NotesViewEntryCollection = vw.getAllEntries();
+var ve:NotesViewEntry = vc.getFirstEntry();
+if(null != ve){
+	var v:java.util.Vector = ve.getColumnValues();
+	if(!v.isEmpty()){
+		// get the teamroom name
+		teamname = v.get(1);
+	}
+}
+return teamname;}</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Command</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusFormButton</value>
+		</property>
+	</control>
+	
+</theme>

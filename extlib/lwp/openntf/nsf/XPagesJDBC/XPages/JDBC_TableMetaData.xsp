@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/JDBC/TableMetaData">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold" value="Dynamic View Panel">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This page displays the meta for the available tables.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:jdbcConnectionManager id="jdbcConnectionManager1"
+				connectionName="derby1">
+			</xe:jdbcConnectionManager>
+			Select a Table:
+			<xp:comboBox id="comboBox1" value="#{viewScope.tableName}">
+				<xp:selectItem itemLabel="&lt;Table&gt;" />
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:dbUtil.listTables();
+}]]></xp:this.value>
+				</xp:selectItems>
+				<xp:eventHandler event="onchange" submit="true">
+				</xp:eventHandler>
+			</xp:comboBox>
+			<br />
+			<br />
+			<xe:dumpObject id="dumpObject1" title="Table MetaData"
+				maxGridRows="20">
+
+				<xe:this.value><![CDATA[#{javascript:var tb = viewScope.tableName
+if(tb) {
+	var sql = "select * from "+tb;
+	var rs = @JdbcExecuteQuery('derby1',sql);
+	return rs.getMetaData();
+}
+return null}]]></xe:this.value>
+			</xe:dumpObject>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/REST/Custom">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST"></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold"
+				value="This shows how dedicated custom REST services can be quickly created using script">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService1" pathInfo="text">
+				<xe:this.service>
+					<xe:customRestService requestVar="post">
+						<xe:this.doGet><![CDATA[#{javascript:var v = "GET: This is a sample text. The current time is "+(new Date()).toLocaleString()
+return v}]]></xe:this.doGet>
+						<xe:this.doPost><![CDATA[#{javascript:// Get the value as text
+var text = "POST :"+post+", param="+param['param']
+return text}]]></xe:this.doPost>
+						<xe:this.doPut><![CDATA[#{javascript:// Get the value as text
+var text = "PUT :"+post+", param="+param['param']
+return text}]]></xe:this.doPut>
+						<xe:this.doDelete><![CDATA[#{javascript:var text = "DELETE, param="+param['param']
+return res}]]></xe:this.doDelete>
+					</xe:customRestService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button1" value="Text Service">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_Custom.xsp/text"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:restService id="restService2" pathInfo="xml">
+				<xe:this.service>
+					<xe:customRestService>
+						<xe:this.doGet><![CDATA[#{javascript:var doc:DOMDocument = DOMUtil.createDocument()
+doc.setXMLString(I18n.format("<root><title>{0}</title><time>{1}</time></root>","This is a XMl document","The current time is "+(new Date()).toLocaleString()));
+return doc}]]></xe:this.doGet>
+					</xe:customRestService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button2" value="XML Service">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_Custom.xsp/xml"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:restService id="restService3" pathInfo="json">
+				<xe:this.service>
+					<xe:customRestService>
+						<xe:this.doGet><![CDATA[#{javascript:var o = new Object()
+o.title = "This is a JSON object"
+o.time = "And the current time is "+(new Date()).toLocaleString()
+return o}]]></xe:this.doGet>
+					</xe:customRestService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button3" value="Json Service">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_Custom.xsp/json"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:restService id="restService4" pathInfo="imagedisplay">
+				<xe:this.service>
+					<xe:customRestService contentType="image/jpeg">
+						<xe:this.doGet><![CDATA[#{javascript:var img = "xpagesui-logo.jpg"
+return facesContext.getExternalContext().getResourceAsStream(img);}]]></xe:this.doGet>
+					</xe:customRestService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button4" value="Binary Image Service">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_Custom.xsp/imagedisplay/myimage.png"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:restService id="restService5" pathInfo="imagedownload">
+				<xe:this.service>
+					<xe:customRestService contentType="image/jpeg"
+						contentDisposition="attachment">
+						<xe:this.doGet><![CDATA[#{javascript:var img = "xpagesui-logo.jpg"
+return facesContext.getExternalContext().getResourceAsStream(img);}]]></xe:this.doGet>
+					</xe:customRestService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button5" value="Binary Image Service - download">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_Custom.xsp/imagedownload/myimage.png"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='19a' unid='C06693679EE9519B802577C2003DF836' sequence='7'>
+<created><datetime dst='true'>20101020T121652,38+01</datetime></created>
+<modified><datetime>20120207T095544,96+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122250,40+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,96+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,96+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121652,40+01</datetime><datetime
+ dst='true'>20110830T205045,71-04</datetime><datetime dst='true'>20111006T160526,42+01</datetime><datetime
+ dst='true'>20111014T083946,27+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE'><text>QUERY_STRING_DECODED</text></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAAAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='QUERY_STRING_DECODED' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>QUERY_STRING_DECODED</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1IAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJQHAAAAAAAAAAAAAAAAgwQBAIX/CAABAAAK3QYAAIr//v9QAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAACK/0QAigAABQAwAgAAAAAAAAIBAA4JAAAMAAAAAAAUAAAAAAAMAAAACgABAAAA
+AwBRVUVSWV9TVFJJTkdfREVDT0RFRN4GAACK/4X/CAABAAAK
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

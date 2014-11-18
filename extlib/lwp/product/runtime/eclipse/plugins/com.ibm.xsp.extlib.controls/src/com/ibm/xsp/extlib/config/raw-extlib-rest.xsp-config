@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2012                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  	<faces-config-extension>
+    	<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    	<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>rest</control-subpackage-name>
+        </designer-extension>
+  	</faces-config-extension>
+	
+	
+  <!--
+  	Common formatting groups.
+  -->
+	<group>
+        <!-- key-suffix: rest_json -->
+		<group-type>com.ibm.xsp.extlib.rest.json.options</group-type>
+        <property>
+        <!-- TODO more explicit description re type of compacting -->
+            <description>Specifies if the JSON stream should be compacted</description>
+            <display-name>Compact</display-name>
+            <property-name>compact</property-name>
+            <property-class>boolean</property-class>
+          	<property-extension>
+            	<designer-extension>
+                	
+            	</designer-extension>
+          	</property-extension>
+        </property>
+    	<property>
+    	   <!-- TODO research content types (standard MIME types ?) and improve description -->  
+      		<description>Response content type</description>
+      		<display-name>Content Type</display-name>
+      		<property-name>contentType</property-name>
+      		<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                	
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        application/json
+                        text/json
+                        text/plain
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+    	</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+	<group>
+        <!-- key-suffix: rest_xml -->
+		<group-type>com.ibm.xsp.extlib.rest.xml.options</group-type>
+        <property>
+         <!-- TODO more explicit description re type of compacting -->
+            <description>Specifies if the XML stream should be compacted</description>
+            <display-name>Compact</display-name>
+            <property-name>compact</property-name>
+            <property-class>boolean</property-class>
+          	<property-extension>
+            	<designer-extension>
+            	</designer-extension>
+          	</property-extension>
+        </property>
+    	<property>
+    	   <!-- TODO research content type and improve desc -->
+      		<description>Response content type</description>
+      		<display-name>Content Type</display-name>
+      		<property-name>contentType</property-name>
+      		<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        application/xml
+                        text/xml
+                        text/plain
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+    	</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+	
+	
+  <!-- Rest Service Component -->
+	<component>
+	<!-- TODO MWD explain REST service, pathinfo -->
+		<description>A control that exposes REST services using the path info information from the URL</description>
+		<display-name>REST Service</display-name>
+		<component-type>com.ibm.xsp.extlib.rest.RestService</component-type>
+		<component-class>com.ibm.xsp.extlib.component.rest.UIRestService</component-class>
+
+  		<property>
+  		    <!-- TODO MWD explain property properly ( pathinfo an identifier in a request that this service will handle) -->
+  		    <!-- # Do not translate these:  ".xsp" "/getRows" /page1.xsp/getRows?first=30 -->
+			<description>Path info that identifies the REST service. The Path Info is remaining piece of the URL after ".xsp" and before the query, like "/getRows" in: /page1.xsp/getRows?first=30</description>
+			<display-name>Path Info</display-name>
+			<property-name>pathInfo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        <property>
+            <!-- TODO Improve description -->
+          <description>Specifies the service implementation</description>
+          <display-name>Service</display-name>
+          <property-name>service</property-name>
+          <property-class>com.ibm.xsp.extlib.component.rest.IRestService</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+  		<property>
+            <!-- TODO usual JS id issues -->
+			<description>A browser JavaScript ID that can be used to refer to and to invoke the service</description>
+			<display-name>JavaScript Identifier</display-name>
+			<property-name>jsId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- This is not a control reference, it is a declaration of a JavaScript variable -->
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        <property>
+            <!-- TODO improve description - avoid reference to request map (same as ignoreRequestParams ???) -->
+            <description>Ignores parameters placed on the request map</description>
+            <display-name>Ignore Request Parameters</display-name>
+            <property-name>ignoreRequestParams</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <!-- investigate expected behavior when true - i.e. what happens when dojo store is prevented --> 
+            <description>Disables the automatic generation of a Dojo data store in the HTML page</description>
+            <display-name>Prevent Dojo Store Generation</display-name>
+            <property-name>preventDojoStore</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <!-- TODO MWD Ask Phil about this behavior and how to test -->
+            <description>Indicate if the page state, after getting the AJAX request, should be saved on the server</description>
+            <display-name>Save State on Server</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+		<component-extension>
+		      <!-- TODO Change from Data Access category to Ext Lib category ??? -->
+			<component-family>com.ibm.xsp.extlib.RestService</component-family>
+			<renderer-type>com.ibm.xsp.extlib.rest.RestService</renderer-type>
+			<tag-name>restService</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+                <category>Data Access</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:image url="/extlib/designer/markup/RestService.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+  <!-- Rest Service Implementation -->
+    <complex-type>
+        <description>Abstract type which is extended by all REST service implementations</description>
+        <display-name>REST Service Interface</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rest.IRestService</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rest.IRestService</complex-class>
+    </complex-type>
+    
+    <group>
+         <!-- re-declaration of the group com.ibm.xsp.group.FacesDojoComponent 
+              for use in complex-types. <property>s used in complex-types 
+              do not have <category>s. The FacesDojoComponent interface 
+              applies to UIComponent instances, but those properties are being 
+              used here within the AbstractRestService complex-type.
+         -->
+        <group-type>com.ibm.xsp.extlib.group.FacesDojoComponent.complex</group-type>
+        <property>
+            <!--  this is using the label reference mechanism 
+                  to reuse the existing translated description,
+                  that is supplied by the xsp core FacesDojoComponent group definition. -->
+            <description>%/com.ibm.xsp.group.FacesDojoComponent/dojoType/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent/dojoType/name%</display-name>
+            <property-name>dojoType</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        <property>
+            <description>%/com.ibm.xsp.group.FacesDojoComponent/dojoAttributes/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent/dojoAttributes/name%</display-name>
+            <property-name>dojoAttributes</property-name>
+            <property-class>java.util.ArrayList</property-class>
+            <property-extension>
+                <!-- Property allows a list of complex-type tags within
+                the xp:this.dojoAttributes property tag. -->
+                <collection-property>true</collection-property>
+                <!-- Each item will be set onto the runtime object using a method like 
+                     addDojoAttribute(com.ibm.xsp.dojo.DojoAttribute attr)
+                    so the items should be DojoAttribute instances. -->
+                <property-item-class>com.ibm.xsp.dojo.DojoAttribute</property-item-class>
+                <property-add-method>addDojoAttribute</property-add-method>
+                <!-- There is no addDojoAttribute(ValueBinding computedItem) method -->
+                <allow-run-time-binding>false</allow-run-time-binding>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+	<complex-type>
+	   <!-- TODO Why do they all have dojoType and dojoAttr ? -->
+	   <!-- TODO Why are these on the complex type rather than the control -->
+    	<description>Base class for all the REST based services</description>
+    	<display-name>Abstract Rest Service</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.rest.AbstractRestService</complex-class>
+    	<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent.complex</group-type-ref>
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.rest.IRestService</base-complex-id>
+    		            <designer-extension>
+                <tags>todo</tags>
+            </designer-extension>
+    	</complex-extension>
+  	</complex-type>
+
+
+    <complex-type>
+        <description>Custom Script service, delegating to user defined methods</description>
+        <display-name>Custom Script REST Service</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rest.CustomService</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rest.CustomService</complex-class>
+
+        <property>
+            <!-- # "HTTP GET" is a technical term and should not be translated -->
+            <description>Code to execute when the HTTP GET method is triggered</description>
+            <!-- # "HTTP GET" is a technical term and should not be translated -->
+            <display-name>Execute HTTP GET Method</display-name>
+            <property-name>doGet</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "HTTP POST" is a technical term and should not be translated -->
+            <description>Code to execute when HTTP POST method is triggered</description>
+            <!-- # "HTTP POST" is a technical term and should not be translated -->
+            <display-name>Execute HTTP POST Method</display-name>
+            <property-name>doPost</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "HTTP PUT" is a technical term and should not be translated -->
+            <description>Code to execute when HTTP PUT method is triggered</description>
+            <!-- # "HTTP PUT" is a technical term and should not be translated -->
+            <display-name>Execute HTTP PUT Method</display-name>
+            <property-name>doPut</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "HTTP DELETE" is a technical term and should not be translated -->
+            <description>Code to execute when HTTP DELETE method is triggered</description>
+            <!-- # "HTTP DELETE" is a technical term and should not be translated -->
+            <display-name>Execute HTTP DELETE Method</display-name>
+            <property-name>doDelete</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            <description>Name of a class or a managed bean, used to render the REST service. If it specified, then it takes precedence over the script methods.</description>
+            <display-name>Custom Service Bean</display-name>
+            <property-name>serviceBean</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+            </property-extension>
+        </property>
+        <property>
+         <description>Defines how the response should be formatted</description>
+         <display-name>Content Type</display-name>
+         <property-name>contentType</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+                 <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                 <editor-parameter>
+                     application/json
+                     application/octet-stream
+                     text/xml
+                     text/plain
+                     image/gif
+                     image/jpeg
+                 </editor-parameter>
+             </designer-extension>
+         </property-extension>
+     </property>
+        <property>
+         <description>Response content disposition</description>
+         <display-name>Content Disposition</display-name>
+         <property-name>contentDisposition</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+             </designer-extension>
+         </property-extension>
+     </property>
+        <property>
+            <!-- # "view1", "view1.getName()", "submitValue" should not be translated -->
+            <description>Request scope variable name under which the posted content will be made available. Its type actually depends on the requestContentType value.</description>
+            <display-name>Request Var</display-name>
+            <property-name>requestVar</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+         <description>Defines how the request content should be parsed and made available into the requestVar variable</description>
+         <display-name>Request Content Type</display-name>
+         <property-name>requestContentType</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+                 <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                 <editor-parameter>
+                     application/json
+                     text/xml
+                     text/plain
+                 </editor-parameter>
+             </designer-extension>
+         </property-extension>
+     </property>
+
+        <complex-extension>
+            <tag-name>customRestService</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</base-complex-id>
+            <since>8.5.32001</since>
+        </complex-extension>
+    </complex-type>
+
+</faces-config>

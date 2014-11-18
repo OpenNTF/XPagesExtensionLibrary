@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="document1"
+			formName="#{param.formName}" action="openDocument"
+			computeWithForm="onsave">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:link escape="true" id="backLink">
+		<xp:this.value><![CDATA[#{javascript:
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				return "/allDocuments.xsp";
+			}
+			else
+			{
+				return sessionScope.webFrom;
+			}
+		}]]></xp:this.value>
+		<xp:this.text><![CDATA[#{javascript:
+			viewStateBean.restoreState = true;
+			var text;
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				text = "All Documents";
+			}
+			else
+			{
+				text = sessionScope.webFromName;
+			}
+			return I18n.format(strings.getString("back.to"), text);
+		}]]></xp:this.text>
+	</xp:link>
+	
+	<xp:br></xp:br>
+	<div class="xvwForm">
+	<xe:formTable loaded="${javascript: document1.isEditable() }"
+		disableRequiredMarks="true" legend="Subteam Status report">
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<h2 id="h2">
+					<xp:panel
+						rendered="#{javascript: 'SubteamStatus' == document1.getForm()}">
+						Subteam Status Report
+					</xp:panel>
+					<xp:panel
+						rendered="#{javascript: 'Status' == document1.getForm()}">
+						Team Status Report
+					</xp:panel>
+				</h2>
+			</xp:panel>
+		</xe:this.facets>
+
+		<xe:formRow label="Key thought:">
+			<xp:inputText style="width:100%"
+				value="#{document1.Subject}" id="subjectIn"
+				disableClientSideValidation="true">
+				<!-- Note the Report Date is not required in the Notes Client, so not required here -->
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Subteam:"
+			loaded="${javascript:document1.getForm() == 'SubteamStatus'}">
+			<xp:comboBox value="#{document1.SubTeamName}" id="subteamIn"
+				required="true" style="width:100%">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="The Subteam name is required.">
+					</xp:validateRequired>
+				</xp:this.validators>
+				<xp:selectItem itemLabel=""></xp:selectItem>
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:@DbColumn(@DbName(), "SubteamLookup", 1);}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>
+		</xe:formRow>
+
+		<xc:statusCommonFields id="commonFields"></xc:statusCommonFields>
+
+		<xe:formRow label="Summary:" labelPosition="left"
+			helpId="summaryIn">
+			<xp:inputRichText value="#{document1.Summary}"
+				id="summaryIn">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+			<xc:controlAttachArea id="attachSummary"
+				valueEL="document1.Summary">
+			</xc:controlAttachArea>
+		</xe:formRow>
+
+		<xe:formRow label="Body:" labelPosition="left"
+			helpId="bodyIn">
+			<xp:inputRichText value="#{document1.Body}" id="bodyIn">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+			<xc:controlAttachArea id="attachBody"
+				valueEL="document1.Body">
+			</xc:controlAttachArea>
+		</xe:formRow>
+
+		<xe:this.facets>
+			<xc:statusCommonEditActions id="editActions"
+				xp:key="footer" />
+		</xe:this.facets>
+	</xe:formTable>
+	</div>
+
+	<xc:controlReadForm id="read" loaded="${javascript: !document1.isEditable()}" >
+		<xc:this.title><![CDATA[${javascript://
+			var msg; 
+			if( 'SubteamStatus' == document1.getForm() ){
+				var subteam = document1.getItemValueString('SubTeamName');
+				msg = strings.status_report_title_for_subteam; //"Subteam Status Report for {0}"
+				msg = I18n.format(msg, subteam);
+			}else{
+				msg = strings.status_report_title_for_team; //"Team Status"
+			}
+			return msg;
+		}]]></xc:this.title>
+		<xp:this.facets>
+			<xc:statusCommonSubheading id="subheading" xp:key="subheading"/>
+			<xc:statusCommonMeta id="meta" xp:key="meta"/>
+		</xp:this.facets>
+		
+		<xp:label value="Key thought:"
+			style="font-weight:bold;font-size:larger">
+		</xp:label>
+		<xc:controlReadFormRichText id="subject">
+			<xp:text id="subjectOut" value="#{document1.Subject}">
+			</xp:text>
+		</xc:controlReadFormRichText>
+		
+		<xp:label value="Summary:"
+			style="font-weight:bold;font-size:larger">
+		</xp:label>
+		<xc:controlReadFormRichText id="summary" attachEL="document1.Summary">
+			<xp:inputRichText value="#{document1.Summary}"
+				id="Summary2" readonly="true">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+		</xc:controlReadFormRichText>
+		
+		<xp:label value="Details:"
+			style="font-weight:bold;font-size:larger">
+		</xp:label>
+		<xc:controlReadFormRichText id="body" attachEL="document1.Body">
+			<xp:inputRichText value="#{document1.Body}" id="Body2"
+				readonly="true">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+		</xc:controlReadFormRichText>
+		<xp:this.facets>
+			<xc:statusCommonReadActions id="readActions" xp:key="actions"/>
+		</xp:this.facets>
+	</xc:controlReadForm>
+</xp:view>

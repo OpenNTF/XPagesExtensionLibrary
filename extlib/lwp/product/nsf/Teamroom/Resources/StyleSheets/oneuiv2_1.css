@@ -1,0 +1,291 @@
+legend
+{
+	visibility:hidden;
+}
+
+.xspInputFieldRichText td{border:1px solid #c0c0c0;}
+
+.xspDetailPanel{/*background-color:#b4d5fc;*/padding-top:5px;}
+
+.xspPagerRight{font-size:inherit;padding:0px 4px 0px 4px;}
+.xspHtmlTrViewSelected{background-color:#eefee1;}
+.xspHtmlTrView:hover{background-color:#ffffc8;}
+
+.xspPaddingLR5{padding:0px 5px 0px 5px;}
+
+/* todo: hide the branding logo */
+.lotusui .lotusLogo, .lotusLoginLogo {background-image:url("blank.gif");background-repeat:no-repeat;height:18px;width:126px;}
+
+.lotusForum .lotusPostContent .postDetailArea{border-top:thin solid #CCCCCC; border-bottom:thin solid #CCCCCC; padding-top:2px; padding-bottom: 2px; margin-top: 2px; margin-bottom: 2px;}
+.lotusForum .lotusPostContent .postMetaExtraArea{
+	color:#666666; 
+	font-size:0.9em; 
+	/*border-top:thin dashed #CCCCCC;*/ 
+	padding-top:2px; padding-bottom: 2px; 
+	margin-top: 2px; margin-bottom: 2px;
+}
+.lotusForum .lotusPostContent .postMetaExtraArea .xspSection-header a .xspSection-header-underline {
+	font-weight: normal;
+	color:#666666;
+}
+.lotusForum .lotusPostContent .postMetaExtraArea .xspSection-header a:hover .xspSection-header-underline {
+	color: #05386B; /*hover link blue*/
+}
+
+/* dojo slider */
+.dijitSlider{padding:3px 0px 3px 0px;}
+.dijitSliderBar{border-style:none !important;}
+.dijitSliderBumperH{width:2px !important;}
+.dijitSlider .dijitButtonNode{display:none !important;}
+
+.dijitSliderImageHandle{border:0px !important;background-position:left bottom !important;background-repeat:no-repeat !important;width:10px !important;height:11px !important;}
+.dijitSliderImageHandleH{top:-3px !important;background:transparent url(xpTagSliderHandle.gif) no-repeat scroll center top !important;}
+
+.dijitSliderProgressBar{background-color:#a5c0ec !important;}
+.dijitSliderRemainingBar{background-color:#e3e3e3 !important;}
+.dijitSliderBottomBumper, .dijitSliderLeftBumper{background-color:#a5c0ec !important;}
+
+.inactiveView .xspDataTable tbody tr:hover
+{
+	background: #ffffc8;
+}
+.inactiveView .xspDataTableViewPanel,
+.inactiveView .xspDataTable
+{
+	width: 100%;
+	/*table-layout: fixed;*/
+}
+.inactiveView .xspDataTable thead th {
+	font-weight: bold;
+}
+.inactiveView .xspDataTable thead th:first-child
+{
+	width: 20px;
+}
+.lotusForm td.lotusFormLabel{
+	text-align: left;
+	padding: 0 0 0 25px;
+}
+
+.xvwFilterList
+{
+	line-height: 1.8em;
+}
+.xvwFilterList .xspTextLabel,
+.xvwFilterList .lotusInlinelist{
+	float: left;
+}
+.xvwFilterList .xspTextLabel{
+	margin-right: 0.5em;	
+}
+input.lotusBtn, button.lotusBtn{
+	margin-right: 5px;
+}
+.lotusForm td label,
+.xspDataTable th,
+.xspDataTable th .xspPanelViewColumnHeader,
+.xvwLinkSelectListItem,
+h4 a {
+	font-weight: normal !important;	
+}
+
+.xwvInactiveSubject
+{
+	width: 12em;
+}
+.xvwMembersListViewTable td.lotusFirstCell
+{
+	width: 20px !important;
+}
+.xvwMembersListViewTable td
+{
+	width: auto !important;
+	
+}
+
+.lotusTable td,
+.lotusTable th,
+.xspDataTable td,
+.xspDataTable th
+{
+	padding-left: 15px;
+}
+.xspPanelViewColumnHeader 
+{
+	padding: 4px 0;
+}
+
+th div.xwvInactiveSubject
+{
+	padding-left: 10px;
+}
+
+.xspHtmlTrView img.lotusFirstCell
+{
+	position: relative;
+	left: -5px;
+}
+.lotusSort .lotusAscending,
+.lotusSort .lotusDescending{
+	padding-right: 15px;
+}
+
+.lotusSpritesOn .lotusSort .lotusAscending{
+	background: url(/domjava/xsp/theme/common/images/sort_normal.gif) no-repeat right;
+}
+
+.lotusSpritesOn .lotusSort .lotusDescending{
+	background: url(/domjava/xsp/theme/common/images/sort_reverse.gif) no-repeat right;
+}
+/*
+.tagsField span{
+	float: left;	
+}
+*/
+.xspPager{
+	padding-top: 0;
+	float: none;
+	font-size: inherit;
+}
+
+.xvwBasicSetup td{
+	padding: 0 0.5em 0.5em 0;
+}
+.xvwBasicSetup td textarea,
+.xvwBasicSetup td input{
+	width: 537px;
+}
+.xvwBasicSetup td textarea{
+	position: relative;
+	left: 1px;
+}
+.xvwMemberDetails{
+	float: left;
+	width:50%;
+}
+.xvwMemberPhoto{
+	float: right;
+	padding-right:30px;
+}
+
+.cke_toolbar{
+	height: 32px !important;
+}
+
+.xspHtmlTrView img{
+	float: left;
+}
+
+.xvwForm .lotusFormTable .lotusFormFieldRow .lotusFormLabel{
+	width: 20%;
+	min-width: 10em;
+}
+.xvwForm .lotusFormTable .lotusFormFieldRow td{
+	width: 80%;
+}
+
+.dj_webkit .xspInputFieldRichText{
+	max-width: 800px;
+}
+
+
+.dj_ie6 .lotusMain{
+	position: relative;
+	width: 100%;
+}
+
+.dj_ie6 .lotusColLeft{
+	position: absolute;
+	top: 0;
+	left:0;
+}
+.dj_ie6 .lotusContent{
+	margin-left: 210px;	
+}
+
+.xvwDisplayChoice{
+	line-height: 23px;
+}
+
+.lotusui h1 {
+    margin: 0px 0px 8px 0px;
+}
+
+.ie6Shim{
+	display: none;
+}
+.dj_ie6 .ie6Shim{
+	display: block;
+	height: 200px;	
+}
+
+.xvwForm .lotusFormTable .lotusFormFieldRow .xspRadioButton td{
+	width: 50%;
+}
+
+.xvwForm .lotusFormTable .lotusFormFieldRow .xspRadioButton{	
+	position: relative;
+	top: -3px;
+	left: -3px;
+}
+.xvwForm .lotusFormTable .lotusFormFieldRow .xspRadioButton input{
+	position: relative;
+	top: 3px;
+}
+
+.xvwForm .lotusFormTable .lotusFormFieldRow .xspTextLabel{
+	position: relative;	
+	left: 1px;
+	margin-right: 2px;
+}
+
+.xspDetailPanel{
+	clear: left;
+}
+
+h1{ margin: 0 0 1em 0;}
+
+.xspDataTable th{
+	font-size: 0.9em;
+	}
+.xspPanelViewColumnHeader{
+	font-size: 0.965em;	
+} 
+
+.xvwFilterLabel{
+	 float: left;
+	padding: 0 0.5em;
+
+}
+.xvwFilterList .lotusInlinelist li {
+	border: 1px solid #CCC;
+	border-width: 0 ;  	
+}
+.xvwFilterList .lotusInlinelist .lotusInlinelist li{
+	border-width: 0 1px 0 0;  	
+} 
+#title{
+	margin: 0 !important;
+}
+
+/* 
+*							*
+* 	Teamroom custom styles	*
+*							*
+*/
+
+.xlEmptyFacet
+{
+	display:block; 
+	width:250px; 
+	text-align:center; 
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+.xlSpanSpacer
+{
+	display: inline-block;
+	width: 10px;
+	height: 15px;
+}

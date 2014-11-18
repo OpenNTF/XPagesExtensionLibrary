@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<plugin>
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.controls.DynamicColumnBuilderFactory" class="com.ibm.xsp.extlib.component.dynamicview.DominoDynamicColumnBuilderFactory" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.designer.runtime.extensions.JavaScriptProvider" class="com.ibm.xsp.extlib.javascript.ExtendedDominoJSFunctions" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.beans.DominoUserBeanDataProvider" />
+   </extension>
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.social.PersonDataProvider" class="com.ibm.xsp.extlib.beans.DominoDBUserBeanDataProvider" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.GlobalResourceProvider" class="com.ibm.xsp.extlib.resources.domino.DominoResourceProvider" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.DumpAccessorFactory" class="com.ibm.xsp.extlib.debug.DominoDumpFactory" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service
+            type="com.ibm.xsp.resource.DojoModulePathResource"
+            class="com.ibm.xsp.extlib.resources.domino.DominoModulePath" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.minifier.loader" class="com.ibm.xsp.extlib.minifier.DWALoader" />
+   </extension>
+</plugin>

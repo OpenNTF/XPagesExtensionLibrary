@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+		<xp:table style="#{javascript: 'width:100%;'+ compositeData.containerStyle}"
+		styleClass="#{javascript: compositeData.containerStyleClass}">
+			<xp:tr>
+				<xp:td valign="top">
+					<!--  the upload TD -->
+					<xp:panel id="panel2" style="padding: 4px; margin-bottom:1em">
+					<xp:link escape="true" id="link2" text="Attach File"
+						role="button" title="expand area to attach a file to document">
+						<xp:this.style><![CDATA[#{javascript:
+								if(context.isDirectionRTL())
+								{
+									return "float:right;";
+								}
+								else
+								{
+									return "float:left;";
+								}
+							}]]></xp:this.style>
+						<xp:eventHandler event="onclick"
+							submit="false">
+							<xp:this.script><![CDATA[
+									var fileContainer = document.getElementById("#{id:fileContainer}");
+									var upload = document.getElementById("#{id:fileUpload1}");
+									if(null != fileContainer)
+									{
+										var displayStyle = fileContainer.style.height;
+										if (displayStyle == "0px")
+										{
+											fileContainer.style.height = '50px';
+											fileContainer.style.width = '250px';
+											upload.style.height = '25px';
+											upload.style.width = '200px';
+										} 
+										else 
+										{
+											fileContainer.style.height = '0px';
+											fileContainer.style.width = '0px';
+											upload.style.height = '0px';
+											upload.style.width = '0px';
+										}
+									}
+								]]></xp:this.script>
+						</xp:eventHandler>
+						<xp:image id="image1"
+							url="/.ibmxspres/global/theme/oneui/images/iconGenericFile.gif"
+							alt="Add Attachment">
+						</xp:image>
+					</xp:link>
+					</xp:panel>
+					<xp:panel id="fileContainer" style="height:0px; width:0px;">
+						<xp:fileUpload id="fileUpload1" value="${javascript: '#{'+ compositeData.valueEL+'}' }"
+							style="margin-top:5px; height:0px; width:0px;" role="upload"
+							title="used to attachfiles to the document">
+							<xp:eventHandler event="onchange" submit="true"
+								refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:// kick off round-trip...}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:fileUpload>
+					</xp:panel>
+				</xp:td>
+				<xp:td valign="top">
+					<!--  the download TD -->
+					<xp:fileDownload rows="30" id="fileDownload2"
+						displayLastModified="false" style="float:right" allowDelete="true"
+						hideWhen="true" value="${javascript: '#{'+ compositeData.valueEL+'}' }">
+					</xp:fileDownload>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+</xp:view>

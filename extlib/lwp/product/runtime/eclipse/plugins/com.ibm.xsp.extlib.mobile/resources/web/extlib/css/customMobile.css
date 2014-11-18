@@ -1,0 +1,494 @@
+/****
+ * Global Styles
+ ****/
+.mblHeading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+	font-weight: bold;
+}
+.mblHeading .mblTabPanelHeader {
+	margin: auto;
+}
+
+.mblListItemIcon {
+	max-width: 35px;
+	max-height: 35px;
+}
+
+.mblListItem {
+	padding-left: 0;
+}
+
+.mblArrowButtonText {
+	text-overflow: ellipsis;
+	max-width: 100px;
+	overflow: hidden;
+}
+.mobile body {
+	min-height: 0px;
+	-webkit-user-select: none;
+}
+
+
+.mblHeading .actionFacet {
+	z-index: 3;
+	position: absolute;
+	right: 5px;
+}
+
+/** these have something to do with popup.js **/
+.customRightArrow {
+	position: relative;
+	-webkit-transform: rotate(45deg) !important;
+}
+.customArrowDown {
+	-webkit-transform: rotate(135deg) !important;
+}
+
+/****
+ * Accordion Menu
+ ****/
+.menuCreated {
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+}
+.menuHidden {
+	opacity: 0;
+	overflow: hidden;
+	margin: 0;
+	border-width: 0;
+    -webkit-transition-property: opacity, height, margin-top, margin-bottom, margin-left, margin-right, border-width;
+    -webkit-transition-duration: .75s, .75s, .75s, .75s, 0s, 0s, 0s;
+    -webkit-transition-delay: 0s, 0s, 0s, 0s, .75s, .75s, .75s;
+    -webkit-transition-timing-function: ease-out, ease-out, ease-out, ease-out, ease-out, ease-out, ease-out;
+}
+.menuShown {
+	margin-top: 0;
+	overflow: hidden;
+    -webkit-transition-property: opacity, height;
+    -webkit-transition-duration: .75s, .75s;
+    -webkit-transition-delay: 0s, 0s;
+    -webkit-transition-timing-function: ease-out, ease-out;
+}
+.nodeHidden {
+	display: none;
+}
+.mblArrowDown, .mblArrowUp {
+	position: absolute;
+	top: 18px;
+	right: 12px;
+	width: 6px;
+	height: 6px;
+	font-size: 1px;
+	border-width: 3px 3px 0px 0px;
+	border-style: solid;
+}
+.mblArrowDown {
+	-webkit-transform: rotate(135deg);
+}
+.mblArrowUp {
+	-webkit-transform: rotate(-45deg);
+}
+
+/****
+ * Business Card
+ ****/
+.businessCardBox {
+	padding: 5px;
+	margin: 5px;
+	margin-right: 10px;
+	border-radius: 15px;
+}
+.businessCardBox .bCardBold {
+	font-weight: bold;
+}
+.businessCardBox .bCardMain {
+	float: left;
+	font-size: 16px;
+	margin-left: 10px;
+	margin-top: 4px;
+}
+.businessCardBox .bCardMain label, .businessCardBox .bCardMain a {
+	display: block;
+}
+.businessCardBox .bCardTime {
+	float: right;
+	font-size: 13px;
+	padding-right: 5px;
+}
+.businessCardBox .bCardPicture {
+	border-radius: 5px;
+	float: left;
+	height: 118px;
+	width: 118px;
+}
+.businessCardBox .bCardStatus {
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+/****
+ * Data View
+ ****/
+.mblDataView .mblDataViewCategoryRow {
+	position: relative;
+	height: 24px;
+	margin: 0;
+	padding: 2px 0 0 18px;
+	font-family: Helvetica;
+	font-size: 16px;
+	text-align: left;
+	line-height: auto;
+	text-shadow: rgba(0,0,0,0.6) 0px -1px 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.mblDataView {
+	border: none !important;
+	width: 100%;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+.mblDataView .mblListItem,
+.mblDataView .mblListItem:first-child,
+.mblDataView .mblListItem:last-child {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+.mblDataView div:last-child>.mblListItem {
+	border-bottom: none;
+}
+.mblDataView li.mblListItem.mblVariableHeight {
+	padding: 8px;
+}
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter{
+	padding: 0px;
+
+}
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter .mblFooterText {
+    padding-top: 8px;
+}
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter .mblFooterText a{
+    margin: 0 8px 8px;
+}
+
+.mblDataView li.mblListItem a.mblListItemAnchorNoIcon {
+	font-weight: normal;
+	padding-top: 10px
+	padding-bottom: 10px;
+}
+.mblDataView .mblDataViewTextTitle {
+	margin: 0;
+	font-weight: bold;
+	font-size: 16px;
+}
+.mblDataView .mblDataViewTextContent {
+	font-size: 13px;
+}
+.mblDataView .mblFooterText {
+	font-size: 16px;
+	text-align: center;
+	-webkit-border-radius: 8px;
+}
+.mblDataView .mblFooterText a {
+	display: block;
+	padding: 5px;
+}
+.mblDataView .mblRightFooterText {
+	font-size: 16px;
+}
+
+/**
+ * All forms
+ **/
+.mobileFormContainer {
+	margin: 0 10px 10px;
+	border: none;
+}
+.mobileFormContainer > .footer button {
+	-webkit-border-radius: 8px;
+	padding: 8px 0px;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: content-box;
+	margin: 0;
+	height: auto;
+}
+.mobileFormContainer .mobileFormHeader {
+	padding: 10px 8px 4px 8px;
+	font-size: 14px;
+}
+.mobileFormContainer .mobileFormTable {
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	list-style-type: none;
+	padding: 0;
+	width: 100%;
+	margin: 8px 0;
+}
+.mobileFormContainer .mobileFormTable .formRow {
+	padding: 0px;
+	height: auto;
+}
+.mobileFormContainer .mobileFormTable .dataCell input[type="text"] {
+	background: none;
+	font-size: 1em;
+	padding: 0;
+}
+.mobileFormContainer .mobileFormTable select, .mobileFormContainer .mobileFormTable input[type="text"] {
+	width: 100%;
+	height: 100%;
+}
+.mobileFormContainer .mobileFormTable .multiColumnRow {
+	height: auto;
+}
+.mobileFormContainer .multiColumnRow ul {
+	border: none;
+	display: inline-block;
+	list-style-type: none;
+}
+.mobileFormContainer div:first-child {
+}
+.mobileFormContainer .labelCell {
+	display: inline-block;
+	font-weight: bold;
+	padding:0px;
+	margin: 8px;	
+	white-space: nowrap;
+}
+.mobileFormContainer .dataCell {
+	display: inline-block;
+	overflow: hidden;
+	height: 100%;
+}
+.mobileFormContainer .dataCellNoLabel {
+	display: block;
+	overflow: hidden;
+	height: 100%;
+}
+.mobileFormContainer .textareaDataCell {
+	display: block;
+	padding-right: 8px;
+}
+.mobileFormContainer .errorTitle {
+	text-align: center;
+	width: 100%;
+	font-size: 2em;
+}
+.mobileFormContainer .errorItem {
+	text-align: center;
+	width: 100%;
+	font-size: 13px;
+}
+.mobileFormContainer .mobileFormTableErrorDiv {
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-webkit-box-shadow: 0 5px 5px #888;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	padding: 10px;
+	text-align: center;
+	width: 80%;
+	z-index: 100;
+}
+.mobileFormContainer .mobileFormTableErrorDiv input[type="button"] {
+	width: 120px;
+	height: 40px;
+	font-size: 20px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	margin-top: 10px;
+}
+.mobileFormContainer .mobileFormTableErrorDiv h1, #form .mobileFormTableErrorDiv h2 {
+	text-align: center;
+	margin: 0;
+}
+.mobileFormContainer .mobileFormTableErrorDiv ul {
+	padding: 0;
+}
+.mobileFormContainer .mobileFormTableErrorShade {
+	height: 100%;
+	left: 0;
+	opacity: 0.4;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+.mobileFormContainer .vanish {
+	visibility: hidden;
+}
+.mobileFormContainer textarea {
+	width: 100%;
+}
+.buttonLinkContainer {
+	margin: 8px;
+}
+.buttonLinkContainer .buttonLink {
+	display: block;
+	padding: 8px;
+	-webkit-border-radius: 8px;
+	text-align: center;
+	text-decoration: none;
+}
+.buttonLinkContainer .buttonLink:hover {
+	text-decoration: none;
+}
+
+.mblListItemIcon{
+	top: 0;
+	left: 0;
+}
+.mblArrowButton{
+    position: absolute;
+    top: 0; 
+    left: 0;
+}
+
+
+
+.mblHeadingActionFacet
+{
+	position: absolute;
+	top: 6px;
+	right: 6px;	
+}
+
+.mblHeadingActionFacet button{
+	border-width: 1px;
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border-style: inset;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 25px;
+	color: white;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0px;
+	-webkit-tap-highlight-color: transparent;
+	
+}
+.mblHeadingActionFacet button{
+	padding: 0 9px;
+	height: 31px;
+	border-color: #9CACC0;
+	background-color: #5877A2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#8EA4C1), to(#4A6C9B), color-stop(0.5, #5877A2), color-stop(0.5, #476999));
+}
+
+.mblHeadingActionFacet div
+{
+    position: relative; 
+    top: -1px; 
+    font-size:22px; 
+    line-height:10px;
+}
+
+.mblHeadingActionFacet a 
+{
+    float:right;
+    margin-right:15px;
+    height: 25px;
+    width: 50px;
+    padding: 2px 2px 0px 2px;
+    text-decoration: none;
+    border-style: inset; 
+    font-family: helvetica, arial, sans-serif; 
+    font-size:13px;
+    color: white;
+    line-height:21px;
+    border-style: solid;
+    border-width:1px;
+    text-shadow: rgba(0, 0, 0, 0.6) 0px -1px;
+    -webkit-border-radius: 5px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile .mblView.mblIn
+{
+	display: block;
+}
+
+/* BiDi CSS styles */
+html[dir=rtl] .mblListItemIcon {
+    float: right !important;
+    margin: 0 !important;
+}
+
+html[dir=rtl] .mblListItemRightIcon {
+    float: left !important;
+}
+
+html[dir=rtl] .mblListItemTextBox {
+    padding-right: 11px !important;
+}
+
+html[dir=rtl] .mblDomButtonGrayArrow > div, html[dir=rtl] .mblDomButtonArrow > div {
+    -webkit-transform: rotate(225deg);
+}
+
+html[dir=rtl] .mblListItemRightText {
+    float: left !important;
+}
+
+/* CSS workaround for list items issue introduced by Dojo 1.8 */
+.mblDataView .mblDataViewTextContent {
+    display: inline-block;
+}
+
+.mblListItemIcon {
+    position: static;
+    margin-bottom: 0 !important;
+}
+
+/* Workaround to fix toolbar button position in the action facet */
+.mblHeadingActionFacet .mblToolBarButton {
+    top: -8px;
+}
+
+/* SPR#BGLN9F5FX7: Unread marks dont display correctly using default mobile theme */
+.xspDataTable .xspDataTableRowUnread * {
+	font-weight: bold;
+}
+.xspDataTable .xspDataTableRowRead td:first-child {
+	background: none;
+}
+.xspDataTableRowRead td:first-child {
+	padding-left: 22px !important;
+}
+.xspColumnUnreadImage {
+	padding-left: 5px;
+	margin-right: 5px;
+}
+
+/* >>SPR#TMGN9J6GEP: Mobile FormTable responsive resizing to manage label column positioning/layout */
+
+.mobileFormContainer .mobileFormTable {
+	overflow: hidden;
+}
+
+.mobileFormContainer .labelCell .dataCell {
+	font-weight: normal;
+	white-space: normal;
+	word-wrap: break-word;
+	margin: 4px 0px;
+	max-width: 100%;
+	overflow: hidden;
+	-webkit-box-shadow: inset -20px 0px 17px 0px rgba(255, 255, 255, 0.9);
+	-moz-box-shadow:    inset -20px 0px 17px 0px rgba(255, 255, 255, 0.9);
+	box-shadow:         inset -20px 0px 17px 0px rgba(255, 255, 255, 0.9);
+}
+
+/* <<SPR#TMGN9J6GEP */
+

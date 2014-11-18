@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579240032FA74'>
+<noteinfo noteid='4ce' unid='B76AEA0D6568DA0780257925007A083C' sequence='4'>
+<created><datetime dst='true'>20111010T231255,00+01</datetime></created>
+<modified><datetime dst='true'>20111025T214852,77-04</datetime></modified>
+<revised><datetime dst='true'>20111025T214852,76-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20111025T214852,77-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20111010T231255,03+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name='$TITLE'><text>$DBIcon</text></item>
+<item name='$Flags'><text>34Ci~Q</text></item>
+<item name='$ImagesWide' sign='true'><number>1</number></item>
+<item name='$ImagesHigh' sign='true'><number>1</number></item>
+<item name='$ImagesColorize' sign='true'><number>0</number></item>
+<item name='$FileSize' sign='true'><number>1283</number></item>
+<item name='$ImageData' sign='true'>
+<rawitemdata type='1'>
+mQAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAH0AHAAAAAIAAAAAAAMFAAABAAAAAQAAAAAAAAB8
+AA0FAAADBQQFiVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2Fy
+ZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABKVJREFUeNrUV3tMW1UY/922tIW+eIw3lREwULaprKMG
+Jk4XzWBJNZgJauY/msW00WBi1AAZCy6icYn+4RSVmMyEGMNA4siGMcRQsbiwyaNOR20UgYk8xrMF
++sbv3m6lHZ1CARe/5OTec+537ved3/c8zMrKCu4k8XCHSbAeprq6txyh1quqKkX/iQJEQq1Wi/n5
+BW6iUMjR1taG+vqPl29l1OleiAxLAb3+JfvtmBiGgdVqIwXmfXbj+Sx35MiT4kC+5uazm0JAdOzY
+87DZFoMYpFIJGho+hdH4vf8bu8YSn8/fWh9YWlrG4mKwAjdPW1i4H3Nzc9x7dHQ0DIZO7n10dJR7
+KpXKzSuQlpYKp9MZbHyhkHt2dxvXIBCKTpx4I8iUtbU14nUrwNo6lP3/CYFbT67R5ItYZ2Udtafn
+0pZFwbqJFT4zM+OfnzxZt8a5jx+vEm+bAgkJOyAWiyCXy2A2m3H06DOi5WWfDpGRYjQ2fr69CExO
+ThECs7DbfUKTkhLh8XhuGzW8rUcgHikpydyTpcBSE6rsbDsCG3JCNqYXFqxBDKwtN0PDwyP+3CKR
+SLYfgfUQ85B+6xVoMvShovknsGnj6b2piJp2oqFrAu90f4DqsiIU52VuXx7weL14veEcVGXl3Pxs
+SxN7TuSWP8XNT7V+ubUKnL7wI1p+uIbqbyq5+bOP5MNFoWbqu8rNo2h4yeX9c48Xr57pQOeVP/wB
+QaMe2jJ9WAq09pjhKn4CpTmJcLhX0NVngt3tRYRlABEU66wJpFIpPuocIEk8OBgexlKyUHKwGFEC
+PlosU0Bbk47tAsJSoFSTjS8uGdHq1gARQhTlqiBJTMaQwYAHEiKwMy4KfLEYu+IjYeHFIL2oCAq5
+BO2/XSd7UVK60gcOATJdWAq8eFiN8b++Qud3HcC9+ehye5AdJ4HqcAlMAyZ0fG0Cw+MjWa2GSpWD
+WbsLxmGqD4s2oP8iYLO+i0Olr4D2he2Ej2YpUK4tgO79ZuDuXJjdGdz6/vvuwW5VJhi+AEsCEYwj
+074N438CgyaUZErRrtSScPfmU3HZgTx0v1eB5zKkgIlKr8MB09gsBm1eXJ134uIwQe6kfvbnXhQL
+59H4cikKlMTLCr8xghCYmpqmNDodJMThcPr7Ao3mfu7dYvnV/93udMHJ/oz8WkbHsdrsNFb3i1fc
+XFqWRsqRGCPF7+yiyx06DNPTlYiLi13TE7Ikk0mpvA76u2KWPjlvRPWZdiTu2gP1g4UYmqGU63aR
+jal5FUSQ9CgkxUgQ+/ABdFFpbqn5DI9nKyCPZ7BAfsEd7ObN6F+6YlFqanJQr3bBPCe8TGAp8/Yi
+IT4W3UPXfeVugnrE8RFwKTFlJxCf6uuoMnZgcmIao/29cCzaTt118NBrI7NLqwpsMJd/iJgE3e59
+eRAIBOi/Rh7uIluPWsjTraeJ5U0WKBoVkEXrkJbFIaJWxhH6LnKXXmB2qh57CvQbVoCEK8DjzyFH
+vbq4QAqMDVH681QiV/N20IZfemrAF9QihaJEFhO4DuJlwkeALkGBdxIuseTs+zbkhsHLxTf4HwtY
+Zfn1zGZvx4Gl9X95O/5bgAEApvXFWSOes3MAAAAASUVORK5CYIIA
+</rawitemdata></item>
+<item name='$FileModDT' sign='true'><datetime dst='true'>20111004T194219,00+01</datetime></item>
+<item name='$ImageNames' sign='true'><text>C:\Documents and Settings\Andrejus Chaliapinas\My Documents\IBM\OpenNTF\XPagesLibrary_r1_32.png</text></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item></note>
+

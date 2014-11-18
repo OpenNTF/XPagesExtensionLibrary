@@ -1,0 +1,64 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Sub Initialize
+Declare Function GetDBPath
+Declare Sub InstantiateObjects
+
+'++LotusScript Development Environment:2:5:(Declarations):0:10
+Dim s As NotesSession 
+Dim db As NotesDatabase
+Dim dbpath As String
+Dim note As NotesDocument
+Dim IsWebUser As Integer
+
+'++LotusScript Development Environment:2:2:Initialize:1:10
+Sub Initialize
+	
+End Sub
+
+
+'++LotusScript Development Environment:2:1:GetDBPath:1:8
+Function GetDBPath
+'check to see if the database is in a directory and swap the slash directions
+'use @Webdbname for Rnext and db.filename for pre-Rnext 
+	
+	Dim session As New NotesSession
+	Dim tmpPath As String
+	Dim vtmppath As Variant
+	Dim tmpvers As Long
+	
+	tmpvers=session.Notesbuildversion
+	
+	If tmpvers>174 Then
+		vtmppath=Evaluate("@WebDbName")
+		tmpPath=vtmppath(0)
+	Else
+		Set db = session.currentdatabase
+		vtmpPath = db.filepath
+		tmpPath=vtmppath
+	End If
+	
+	
+	
+	Do While Instr(tmpPath,"\") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath,"\")-1) + "/" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath,"\"))
+	Loop
+	
+'check and see if there are any embedded spaces and replace them with +     
+	Do While Instr(tmpPath," ") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath," ")-1) + "+" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath," "))
+	Loop
+	
+	GetDbPath = tmpPath
+	
+End Function
+
+'++LotusScript Development Environment:2:2:InstantiateObjects:1:8
+Sub InstantiateObjects
+	Set s = New NotesSession
+	Set db = s.CurrentDatabase
+	Set note = s.documentcontext
+End Sub

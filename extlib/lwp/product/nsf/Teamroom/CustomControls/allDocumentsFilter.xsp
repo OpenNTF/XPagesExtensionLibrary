@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+    <xe:switchFacet defaultFacet="chooseFilterArea"
+		selectedFacet="#{javascript: if( viewScope.allDocsFilterEnabled ){ return 'filteredArea'; } }">
+		<xe:this.facets>
+			<xp:panel xp:key="chooseFilterArea" styleClass="xvwFilterList">
+				<xe:list rendererType="com.ibm.xsp.extlib.OneUIInlineList">
+					<xe:this.firstItemStyle><![CDATA[#{javascript://
+	                    // workaround for issue where there's extra whitespace
+	                    // at the end of the xe:djextLinkSelect, change the trailing
+	                    // side of the first item to not have any spacing.
+	
+	                    var trailingSide = !context.isDirectionRTL()? 'right' : 'left'; 
+	
+	                    'padding-'+trailingSide+':0'
+	                    }]]></xe:this.firstItemStyle>
+
+					<xp:panel style="float: left;">
+						<xp:label value="Show: "></xp:label>
+						<xe:djextLinkSelect id="djextLinkSelect1"
+							value="#{sessionScope.allDocsSelectedTab}" defaultValue="tabAll"
+							alt="select filter" title="all documents filter"
+							waiRole="link">
+
+							<xe:this.dojoAttributes>
+								<xp:dojoAttribute
+									name="enabledLinkStyle" value="font-weight: normal;" loaded="true">
+								</xp:dojoAttribute>
+								<xp:dojoAttribute
+									name="enabledLinkClass" value="xvwLinkSelectListItem" loaded="true">
+								</xp:dojoAttribute>
+							</xe:this.dojoAttributes>
+
+							<xp:eventHandler event="onchange"
+								submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xe:changeDynamicContentAction
+											for="dynamicView">
+										</xe:changeDynamicContentAction>
+										<xe:changeDynamicContentAction
+											for="dynamicFilter">
+										</xe:changeDynamicContentAction>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+							<xp:selectItem itemLabel="All"
+								itemValue="tabAll" itemDescription="link">
+								<xp:this.attrs>
+									<xp:attr name="role" value="link"></xp:attr>
+								</xp:this.attrs>
+							</xp:selectItem>
+							<xp:selectItem itemLabel="All by date"
+								itemValue="tabAllByDate">
+							</xp:selectItem>
+							<xp:selectItem itemLabel="All by author"
+								itemValue="tabAllByAuthor">
+							</xp:selectItem>
+							<xp:selectItem itemLabel="All by team"
+								itemValue="tabAllByTeam">
+							</xp:selectItem>
+						</xe:djextLinkSelect>
+					</xp:panel>
+				</xe:list>
+
+				<xp:panel>
+
+					<xp:label styleClass="xvwFilterLabel" value="Filter by: "></xp:label>
+					<xp:comboBox style="float: left;"
+						value="#{viewScope.allDocsFilter}" id="comboBox3" role="listbox"
+						title="filter data by">
+						<xp:selectItem itemLabel="" />
+						<xp:selectItem itemLabel="Author"
+							itemValue="authors" />
+						<xp:selectItem itemLabel="Team"
+							itemValue="teams" />
+						<xp:selectItem itemLabel="Tag" itemValue="tags" />
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xe:changeDynamicContentAction
+									for="dynamicFilter">
+								</xe:changeDynamicContentAction>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:comboBox>
+					<xp:div style="float: left;">
+						<xe:dynamicContent id="dynamicFilter">
+							<xe:this.defaultFacet><![CDATA[#{javascript:
+return {
+	'authors':'authors',
+	'teams':'teams',
+	'tags':'tags'
+}[viewScope.allDocsFilter] || 'none';
+
+}]]></xe:this.defaultFacet>
+							<xp:this.facets>
+								<xp:panel xp:key="none" />
+
+								<xp:comboBox id="comboBox2"
+									xp:key="authors"
+									value="#{viewScope.allDocsFilterColumnValue}">
+									<xp:selectItem itemLabel="">
+									</xp:selectItem>
+									<xp:selectItems>
+										<xp:this.value><![CDATA[#{javascript://
+												var colNum = 1; // Author
+												return @DbColumn(@DbName(), "xvwDocsByAuthor", colNum);	
+											}]]></xp:this.value>
+									</xp:selectItems>
+								</xp:comboBox>
+								<xp:comboBox id="comboBox1"
+									xp:key="teams"
+									value="#{viewScope.allDocsFilterColumnValue}">
+									<xp:selectItem itemLabel="">
+									</xp:selectItem>
+									<xp:selectItem
+										itemValue="Team Status" itemLabel="Team Status">
+									</xp:selectItem>
+									<xp:selectItems>
+										<xp:this.value><![CDATA[#{javascript://						
+												var colNum = 0; // Team
+												return @DbColumn(@DbName(), "xvwTeams", colNum);
+											}]]></xp:this.value>
+									</xp:selectItems>
+								</xp:comboBox>
+								<xp:comboBox xp:key="tags"
+									value="#{viewScope.allDocsFilterColumnValue}">
+									<xp:selectItem
+										itemLabel="[All tags]" itemValue="All tags">
+									</xp:selectItem>
+									<xp:selectItems>
+										<xp:this.value><![CDATA[#{javascript://						
+												var colNum = 0; // Tags
+												return @DbColumn(@DbName(), "xvwActiveCategory", colNum);
+											}]]></xp:this.value>
+									</xp:selectItems>
+								</xp:comboBox>
+							</xp:this.facets>
+						</xe:dynamicContent>
+					</xp:div>
+					<xp:link text="Go" style="float: left; margin-left: 0.5em;" rendered="#{javascript:
+return {
+	'authors':true,
+	'teams':true,
+	'tags':true
+}[viewScope.allDocsFilter] || false;
+					}">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:executeScript
+										script="#{javascript:
+								viewScope.allDocsFilterEnabled = true;
+								sessionScope.allDocsSelectedTab =({ authors: 'tabAllByAuthor'
+                                                  , teams: 'tabAllByTeam'
+                                                  , tags: 'tabAllByTag'
+								})[viewScope.allDocsFilter];
+								
+}">
+									</xp:executeScript>
+									<xe:changeDynamicContentAction
+										for="dynamicView">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+							
+					</xp:link>
+				</xp:panel>
+			</xp:panel><!-- end chooseFilterArea -->
+			<xp:panel xp:key="filteredArea">
+				<xp:label value="Filtered by: " id="label1">
+				</xp:label>
+		
+				<xe:djextListTextBox id="filteredByValue"
+					value="#{viewScope.allDocsFilterColumnValue}">
+					<xe:this.dojoAttributes>
+						<xp:dojoAttribute name="enabledLinkStyle" value="font-weight:normal">
+						</xp:dojoAttribute>
+						<xp:dojoAttribute name="closable" value="true">
+						</xp:dojoAttribute>
+					</xe:this.dojoAttributes>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript://								
+	                                    viewScope.remove('allDocsFilterEnabled');
+	                                    viewScope.remove('filterType');
+	                                    viewScope.remove('allDocsFilterColumnValue');
+	                                    viewScope.selectedTab = viewScope.remove('filterOldSelectedTab');
+	                                    }]]></xp:this.script>
+								</xp:executeScript>
+								<xe:changeDynamicContentAction
+									for="dynamicView">
+								</xe:changeDynamicContentAction>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xe:djextListTextBox>
+			</xp:panel><!-- end filteredArea -->
+		</xe:this.facets>
+	</xe:switchFacet>
+</xp:view>

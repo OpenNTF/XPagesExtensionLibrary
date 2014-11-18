@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="752" sequence="11" unid="D0B1A7AD0C8942D9802579990049CCBF">
+<created><datetime>20120203T132605,43+00</datetime></created>
+<modified><datetime>20120203T134227,20+00</datetime></modified>
+<revised><datetime>20120203T134227,19+00</datetime></revised>
+<lastaccessed><datetime>20120203T134227,20+00</datetime></lastaccessed>
+<addedtofile><datetime>20120203T132605,50+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></updatedby>
+<wassignedby><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>mobileRtaForm</text></item>
+<item name="$Flags"><text>.5834Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

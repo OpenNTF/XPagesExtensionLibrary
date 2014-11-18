@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div>
+		<xp:div style="#{javascript:compositeData.attachEL? 'margin:5px;' : 'margin:5px; margin-bottom:10px' }">
+			<xp:callback id="cb1">
+			</xp:callback>
+		</xp:div>
+		<xp:div loaded="${javascript:compositeData.attachEL}"
+			style="margin:5px; margin-bottom:10px">
+			<xp:fileDownload
+				id="fileDownload1" rows="#{javascript:java.lang.Integer.MAX_VALUE}"
+				displayLastModified="false" style="margin-top:3px" allowDelete="false"
+				hideWhen="true" value="${javascript:'#{'+compositeData.attachEL+'}'}">
+			</xp:fileDownload>
+		</xp:div>
+	</xp:div>
+</xp:view>

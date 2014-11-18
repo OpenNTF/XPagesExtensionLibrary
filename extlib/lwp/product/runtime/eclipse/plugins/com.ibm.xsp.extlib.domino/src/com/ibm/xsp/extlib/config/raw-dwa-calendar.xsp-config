@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>calendar</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type>
+		<property>
+			<description>The accessibilty title of this data source, used when there are multiple data sources providing calendar entries. When entries from this data source receive focus, this title will be made available to accessibility tools (like screen reader software). This is supplemental to the practice of using different colors for entries from different data sources.</description>
+			<display-name>Provider Title</display-name>
+			<property-name>storeTitle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <localizable>true</localizable>
+				<designer-extension>
+                    <category>accessibility</category>
+                    <!--  This is a screen reader accessibility title for this data source,
+                    dynamically set as a title attribute whenever 
+                    an entry from this data source receives focus. 
+                    (see the function getTitleForScreenReader in the calendar widget) -->
+                    <!-- This is not a server requestScope variable name
+                    (junit test detects the description contains 'will be made available') -->
+                    <tags>
+                        not-server-variable-name
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.calendar.jsId</group-type>
+		<property>
+			<!-- key: property.jsId.component.calendarView. -->
+			<description>Overrides the default browser JavaScript variable name for this control</description>
+			<display-name>JavaScript ID</display-name>
+			<property-name>jsId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- Note, we should probably document for the users: 
+                    the jsId is not clientId namespaced, so if you include 2 calendarStores 
+                    with the same jsId on the same page, it won't work. -->
+                    <!-- This is declaring a jsId (not referencing an existing jsId that's declared elsewhere) -->
+                    <!-- Should maybe have need some kind of editor. Not sure such editors have been provided
+                    by the Designer team - maybe ask them to build editor extensions. -->
+                    <!-- This is not a control reference, it is a declaration of a JavaScript variable -->
+                    <!-- This is not a server requestScope variable name,
+                    it's a client-side browser variable name.-->
+                    <tags>
+                        not-control-id-reference
+                        not-server-variable-name
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<group-extension>
+			<designer-extension>
+				<tags>group-in-control</tags>
+			</designer-extension>
+		</group-extension>
+	</group>
+<!-- View Grid -->
+	<component>
+		<description>A control that displays an iNotes calendar</description>
+		<display-name>iNotes Calendar</display-name>
+		<component-type>com.ibm.xsp.extlib.calendar.CalendarView</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UICalendarView</component-class>
+		<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+		<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+  		<!--# Do not translate quoted letters, "D", "T", ... etc ... , "Y"-->
+			<description>Identifies which calendar display format to use, where "D" = one day, "T" = two days, "F" = five day week, "W"= full week, 2 = two weeks, "M" = month, "Y" = year</description>
+			<display-name>Type</display-name>
+			<property-name>type</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+						D
+						T
+						F
+						W
+						2
+						M
+						Y
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Identifies the control used as the calendar data store. The nominated control will be used to populate the calendar control.</description>
+			<display-name>Calendar Data Store Identifier</display-name>
+			<property-name>storeComponentId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|notesCalendarStore
+                        http://www.ibm.com/xsp/coreex|iCalReadStore
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Show only the entries in a list, instead of the grid showing all of the possible timeslots where entry meetings may occur</description>
+			<display-name>Summarize</display-name>
+			<property-name>summarize</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>The date initially selected in the calendar. Defaults to today.</description>
+			<display-name>Date</display-name>
+			<property-name>date</property-name>
+			<property-class>java.util.Date</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be created</description>
+			<display-name>New Entry Action</display-name>
+			<property-name>onNewEntry</property-name>
+			<!-- Needs better description and Designer support has issues - xp v xe and EventHandler support -->
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be opened</description>
+			<display-name>Open Entry Action</display-name>
+			<!-- Needs better description and Designer support has issues - xp v xe and EventHandler support -->
+			<property-name>onOpenEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is selected</description>
+			<display-name>Select Entry Action</display-name>
+			<!-- Needs better description and Designer support has issues - xp v xe and EventHandler support -->
+			<property-name>onSelectEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be deleted</description>
+			<display-name>Delete Entry Action</display-name>
+			<property-name>onDeleteEntry</property-name>
+			<!-- Needs better description and Designer support has issues - xp v xe and EventHandler support -->
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when context menu needs to be launched</description>
+			<display-name>Handle Context Menu</display-name>
+			<!-- Needs better description and investigate feature behaviour -->
+			<property-name>onContextMenu</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+ 		<property>
+			<description>The event when an entry is going to be rescheduled</description>
+			<display-name>On Reschedule Entry</display-name>
+			<!-- Needs better description and investigate feature behaviour -->
+			<property-name>onRescheduleEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>The event when the view is going to be changed (e.g. yearview)</description>
+			<display-name>On Change View</display-name>
+			<property-name>onChangeView</property-name>
+			<!-- Needs better description and investigate feature behaviour -->
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<tags>todo</tags>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarView</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.CalendarView</renderer-type>
+			<tag-name>calendarView</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<!--TODO update description with more detail-->
+        		<tags>
+        		  todo
+        		</tags>
+        		<category>iNotes</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+
+<!-- Data Store -->
+	<component>
+		<description>Data store for Notes calendar view</description>
+		<!--TODO *** WHAT IS THIS AND DO WE NEED IT ??? *** -->
+		<display-name>Notes Calendar Store</display-name>
+		<!--TODO update description with more detail - 2 or 3 lines are okay -->
+		<component-type>com.ibm.xsp.extlib.calendar.NotesCalendarStore</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UINotesCalendarStore</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+			<description>Domino database name</description>
+			<display-name>Database Name</display-name>
+			<property-name>databaseName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- TODO is this the same as the xe:dominoView databaseName - allowing server prefixes etc? 
+                    if so should reuse a common group as this is used elsewhere, 
+                    also description should be updated to explain different values allowable here
+                    also if the Designer team have any editor for this property, should be used here 
+                     -->
+                     <!-- TODO why doesn't this have a viewName property?-->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarStore</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.NotesCalendarStore</renderer-type>
+			<tag-name>notesCalendarStore</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		<!-- TODO description doesn't explain what a "Store" is - that it's a Dojo
+        		object used in the browser to access data, usually retrieving it from serverside
+        		in a lazy manner, as different days/weeks/months are displayed. -->
+        		<!-- TODO using category>iNotes<, would probably be best if it didn't reference iNotes,
+        		as you don't need iNotes enabled serverside for this data store to work.-->
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+	<component>
+		<description>Data store for iCal store</description>
+		<!--TODO *** WHAT IS THIS AND DO WE NEED IT ??? *** -->
+		<display-name>iCal Store</display-name>
+		<component-type>com.ibm.xsp.extlib.calendar.iCalReadStore</component-type>
+		<component-class>com.ibm.xsp.extlib.component.calendar.UIiCalReadStore</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.storeTitle</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.calendar.jsId</group-type-ref>
+  		<property>
+			<description>URL for iCal repository</description>
+			<display-name>URL</display-name>
+			<property-name>url</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- TODO description should have more detail. -->
+                    <!-- TODO should have an editor - I believe we use the FilePicker 
+                    editor as the generic resource editor. - talk To Dan O'Connor
+                    who is working on resource properties. -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Background color for the calendar events</description>
+			<display-name>Background Color</display-name>
+			<property-name>bgColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+					<!-- TODO this description is using "event" to mean, meeting or appointment or other calendar entry,
+					but that is confusing in the XPages context, where "event" usually means event property
+					appearing in the Events view, like onClick, onSelect, onMouseOver, etc.
+					Same problem applies to the next 2 descriptions -->
+					<!-- TODO should get this property and the next 2 properties merged into 
+					properties for meetingStyle, meetingStyleClass, as the bgcolor, borderColor and fontColor
+					are all part of styles, so if the style/styleClass properties are used, then 
+					there will be available editors for editing them in Designer.
+					Else need to figure out editors for these 3 properties. -->
+					<!-- TODO are these properties re-computed for every meeting, so that different meetings
+					can be in different colors, or are they only computed once?
+					If they are re-computable, then the description should mention it.-->
+					<!-- TODO for accessibility (blind people) information cannot be conveyed solely
+					by color - there has to be some textual prefix or other text hint for screen
+					readers. Are these colors intended to provide information? (e.g. that the event
+					is a meeting or appointment, that they are in the past, disabled, etc)
+					If so then there needs to be some other way of providing that information. -->
+					<tags>
+					   todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Border color for the event</description>
+			<display-name>Border Color</display-name>
+			<property-name>borderColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Font color for the event</description>
+			<display-name>Font Color</display-name>
+			<property-name>fontColorMeeting</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.calendar.CalendarStore</component-family>
+			<renderer-type>com.ibm.xsp.extlib.calendar.iCalReadStore</renderer-type>
+			<tag-name>iCalReadStore</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		<!-- TODO description doesn't explain what iCal is - that it is a data interchange format
+        		for calendar and appointment passing between different programs, and is used to allow
+        		calendar data to be displayed from non-Notes web servers and from 3rd party programs, like Google Calendar.-->
+        		<!-- TODO why is it called iCalReadStore - why Read - is it read-only? if so, is there support
+        		in the calendar widget for read-only stores, or it allow you to drag and drop to reschedule an event
+        		and you get some sort of error when it can't reschedule? If we're supplying a read-only store,
+        		then the calendar UI widget should support read-only display, and should detect
+        		from the store that the store is read-only. -->
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+</faces-config>

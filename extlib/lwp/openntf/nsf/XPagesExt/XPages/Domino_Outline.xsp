@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/Outline">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="Domino Dedicated Outline Tree Providers"
+				id="label5" style="font-weight:bold"></xp:label>
+			<xp:br></xp:br>
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="List of Views/Folders" id="tabPanel1">
+					<xp:table>
+					    <xp:tr>
+					        <th>List of Views and Folders</th>
+                            <th>List of Views</th>
+                            <th>List of Folders</th>
+                            <th>Empty List</th>
+					    </xp:tr>
+						<xp:tr valign="top">
+							<xp:td>
+								<xe:outline id="outline1">
+									<xe:this.treeNodes>
+										<xe:dominoViewListTreeNode></xe:dominoViewListTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline2">
+									<xe:this.treeNodes>
+										<xe:dominoViewListTreeNode folders="false"></xe:dominoViewListTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline3">
+									<xe:this.treeNodes>
+										<xe:dominoViewListTreeNode views="false"></xe:dominoViewListTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline4">
+									<xe:this.treeNodes>
+										<xe:dominoViewListTreeNode views="false" folders="false"></xe:dominoViewListTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+					<xp:table>
+                        <xp:tr>
+                            <th>List of Views and Folders, within a title</th>
+                            <th>
+                                List of 'clickable' views, you clicked:
+                                <xp:text escape="true" id="computedField1"
+                                    value="#{javascript:viewScope.clickedView}">
+                                </xp:text>
+                            </th>
+                        </xp:tr>
+						<xp:tr valign="top">
+							<xp:td>
+								<xe:outline id="outline5">
+									<xe:this.treeNodes>
+										<xe:basicContainerNode label="List of Views">
+											<xe:this.children>
+												<xe:dominoViewListTreeNode folders="false">
+												</xe:dominoViewListTreeNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+
+										<xe:basicContainerNode label="List of Folders">
+											<xe:this.children>
+												<xe:dominoViewListTreeNode
+													views="false">
+												</xe:dominoViewListTreeNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline6">
+									<xe:this.treeNodes>
+										<xe:dominoViewListTreeNode folders="false" var="vv"
+											submitValue="#{javascript:return vv.getName()}">
+										</xe:dominoViewListTreeNode>
+									</xe:this.treeNodes>
+									<xp:eventHandler event="onItemClick" submit="true"
+										refreshMode="partial" refreshId="computedField1">
+										<xp:this.action><![CDATA[#{javascript:viewScope.clickedView = context.getSubmittedValue()}]]></xp:this.action>
+									</xp:eventHandler>
+								</xe:outline>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</xp:tabPanel>
+				<xp:tabPanel label="Views/Folders Entries" id="tabPanel2">
+					<xp:table>
+                        <xp:tr>
+                            <th>
+                                Here is the list of states Keys
+                                <xp:text escape="true" id="computedField5"
+                                    value="#{javascript:viewScope.clickedView}">
+                                </xp:text>
+                            </th>
+                            <th>
+                                Here is the list of states Names
+                                <xp:text escape="true" id="computedField3"
+                                    value="#{javascript:viewScope.clickedView}">
+                                </xp:text>
+                            </th>
+                            <th>
+                                Here is the list of computed states Key&amp;Name
+                                <xp:text escape="true" id="computedField4"
+                                    value="#{javascript:viewScope.clickedView}">
+                                </xp:text>
+                            </th>
+                        </xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xe:outline id="outline7">
+									<xe:this.treeNodes>
+										<xe:dominoViewEntriesTreeNode viewName="AllStates"
+											labelColumn="Key">
+										</xe:dominoViewEntriesTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline8">
+									<xe:this.treeNodes>
+										<xe:dominoViewEntriesTreeNode viewName="AllStates"
+											labelColumn="Name">
+										</xe:dominoViewEntriesTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+							<xp:td>
+								<xe:outline id="outline9">
+									<xe:this.treeNodes>
+										<xe:dominoViewEntriesTreeNode
+											viewName="AllStates" var="viewEntry">
+											<xe:this.label><![CDATA[#{javascript:var v = viewEntry.getColumnValues()
+return v[0]+" = "+v[1]}]]></xe:this.label>
+										</xe:dominoViewEntriesTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</xp:tabPanel>
+				<xp:tabPanel label="Filtered View Entries" id="tabPanel3">
+					<xp:table>
+					    <xp:tr>
+					        <th>States Names (click to see associated people)</th>
+                            <th>
+                                People of that state:&#160;
+                                <xp:text escape="true" id="computedField6"
+                                    value="#{viewScope.clickedState}">
+                                </xp:text>
+                            </th>
+					    </xp:tr>
+						<xp:tr>
+							<xp:td valign="top">
+								<xe:outline id="outline10">
+									<xe:this.treeNodes>
+										<xe:dominoViewEntriesTreeNode var="viewEntry"
+											viewName="AllStates" labelColumn="Name">
+											<xe:this.submitValue><![CDATA[#{javascript:var v = viewEntry.getColumnValues(); return v[0]}]]></xe:this.submitValue>
+										</xe:dominoViewEntriesTreeNode>
+									</xe:this.treeNodes>
+									<xp:eventHandler event="onItemClick"
+										submit="true" refreshMode="partial">
+										<xp:this.action><![CDATA[#{javascript:viewScope.clickedState = context.getSubmittedValue()}]]></xp:this.action>
+									</xp:eventHandler>
+								</xe:outline>
+							</xp:td>
+							<xp:td valign="top" style="padding-left:30.0px">
+								<xe:outline id="outline11">
+									<xe:this.treeNodes>
+										<xe:dominoViewEntriesTreeNode var="viewEntry"
+											viewName="AllContactsByState" keys="#{javascript:viewScope.clickedState == null ? ['NON-EXIST']:[viewScope.clickedState]}">
+											<xe:this.label><![CDATA[#{javascript:var v = viewEntry.getColumnValues();
+												return v[2]+" "+v[3]}]]>
+											</xe:this.label>											
+										</xe:dominoViewEntriesTreeNode>
+									</xe:this.treeNodes>
+								</xe:outline>
+							</xp:td>
+						</xp:tr>
+					</xp:table>				
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

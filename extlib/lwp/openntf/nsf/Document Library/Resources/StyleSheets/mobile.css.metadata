@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="232" sequence="44" unid="28BB294E86FC2094802579670054CDDF">
+<created><datetime>20111215T152617,27+00</datetime></created>
+<modified><datetime>20120209T101505,99+00</datetime></modified>
+<revised><datetime>20120209T101505,98+00</datetime></revised>
+<lastaccessed><datetime>20120209T101505,99+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152617,48+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name><name>CN=admin/O=dubmob</name><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name="$TITLE"><text>mobile.css</text></item>
+<item name="$MimeType" sign="true"><text>text/css</text></item>
+<item name="$MimeCharSet" sign="true"><text>UTF-8</text></item>
+<item name="$Flags"><text>34C=Q</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>mobile.css</text></item></note>

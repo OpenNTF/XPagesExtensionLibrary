@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "\ud655\uc778",
+PickerCheckBox_Cancel: "\ucde8\uc18c",
+PickerList_OK: "\ud655\uc778",
+PickerList_Cancel: "\ucde8\uc18c",
+PickerListSearch_Search: "\uac80\uc0c9",
+PickerListSearch_OK: "\ud655\uc778",
+PickerListSearch_Cancel: "\ucde8\uc18c",
+PickerListSearch_Value: "\uac12",
+PickerListSearch_Values: "\uac12",
+PickerName_Search: "\uac80\uc0c9",
+PickerName_Add: "\ucd94\uac00",
+PickerName_Remove: "\uc81c\uac70",
+PickerName_RemoveAll: "\ubaa8\ub450 \uc81c\uac70",
+PickerName_OK: "\ud655\uc778",
+PickerName_Cancel: "\ucde8\uc18c",
+PickerName_SearchIn: "\uac80\uc0c9",
+PickerName_SearchFor: "\uac80\uc0c9 \ub300\uc0c1",
+PickerName_unSelectedListLabel: "\uc120\ud0dd\ud560 \uac12\uc758 \ubaa9\ub85d",
+PickerName_selectedListLabel: "\uc120\ud0dd\ub41c \uac12\uc758 \ubaa9\ub85d"
+})

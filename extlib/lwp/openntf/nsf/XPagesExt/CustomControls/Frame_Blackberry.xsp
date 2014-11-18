@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<style type="text/css">
+		.viewPort5 {
+			width: 340px;
+			height: 445px;
+			background-color: #000;
+			overflow-y: hidden;
+			display: inline;
+		}
+		.viewPort6 {
+			width: 443px;
+			height: 341px;
+			background-color: #000;
+			overflow-y: hidden;
+			display: inline;
+		}
+		.iDate {
+			position:absolute;
+			top:255px;
+			padding-left:185px;
+			font-family:Helvetica;
+			font-weight:bold;
+			font-size:10pt;
+			display:block;
+		}
+		.phoneTable {
+			float:left;
+		}
+		.landscapeTable {
+			margin-left:20px;
+			margin-top:92px;
+		}
+		#bottom {
+			-webkit-box-reflect:below 5px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(white));
+		}
+	</style>
+	<xp:div>
+		<xp:table cellpadding="0" cellspacing="0" border="0"
+			styleClass="phoneTable" role="presentation">
+			<xp:tr>
+				<xp:td colspan="3" style="position:relative">
+					<xp:image style="position:relative; bottom: -2px;" url="/blackberry_top.jpg" id="image21"></xp:image>					
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:image url="/blackberry_left.jpg" id="image22">
+					</xp:image>
+				</xp:td>
+				<xp:td>
+					<iframe title="Blackberry Portrait Orientation" class="viewPort5" id="iframe5" frameborder="0"
+						src="${javascript:@FullUrl(compositeData.page)+'?platform=blackberry'}">
+					</iframe>
+				</xp:td>
+				<xp:td>
+					<xp:image url="/blackberry_right.jpg" id="image23"></xp:image>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td colspan="3">
+					<xp:image url="/blackberry_bottom.jpg" style="position:relative; top:-3px;" id="image24"></xp:image>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+		<xp:table cellpadding="0" cellspacing="0" border="0"
+			styleClass="phoneTable landscapeTable" role="presentation">
+			<xp:tr>
+				<xp:td rowspan="3">
+					<xp:image url="/blackberry_top_l.jpg" id="image17"></xp:image>
+				</xp:td>
+				<xp:td>
+					<xp:image url="/blackberry_right_l.jpg" style="margin:-1px 0;" id="image18"></xp:image>
+				</xp:td>
+				<xp:td rowspan="3">
+					<xp:image url="/blackberry_bottom_l.jpg" id="image19"></xp:image>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+				
+					<iframe title="Blackberry Landscape Orientation" class="viewPort6" id="iframe4" frameborder="0"
+						src="${javascript:@FullUrl(compositeData.page)+'?platform=blackberry'}">
+					</iframe>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:image url="/blackberry_left_l.jpg" style="margin-top:-3px;" id="image20"></xp:image>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:div>
+</xp:view>

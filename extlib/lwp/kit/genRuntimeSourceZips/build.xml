@@ -1,0 +1,72 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2005, 2012                                     -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="kit/genRuntimeSourceZips" default="development" basedir=".">
+
+	<import file="${env.WPLC_IMPORT}/std_props.xml" />
+	<import file="${env.WPLC_IMPORT}/std_dirs.xml" />
+	<import file="${env.WPLC_IMPORT}/copyright.xml" /> 
+	<import file="${env.WPLC_IMPORT}/nojavadoc.xml"/>
+	<import file="${env.WPLC_IMPORT}/site_xml_validator2.xml" />
+	<import file="${env.WPLC_IMPORT}/signupdatesite.xml" />
+	
+	<target name="development" depends="generate-source-zips" />
+	<target name="production" depends="generate-source-zips" />
+
+	<property name="local.clean" value="local.clean.target" />
+	
+	<target name="generate-source-zips">
+		
+		<!-- Create srcOpenNTF.zip file. -->
+		<mkdir dir="${dir.build}/srcOpenNTF" />
+		<echo message="Copy product and openntf runtime + test source files, to create srcOpenNTF.zip."/>
+		<copy todir="${dir.build}/srcOpenNTF/eclipse">
+			<fileset dir="${wsbld}/product/runtime/eclipse">
+				<exclude name="**/*.class"/>
+				<exclude name="**/features-product/**"/>
+			</fileset>
+			<fileset dir="${wsbld}/openntf/test/eclipse">
+				<exclude name="**/*.class"/>
+			</fileset>
+		</copy>
+		<zip destfile="${dir.build}/srcOpenNTF.zip">
+			<zipfileset dir="${dir.build}/srcOpenNTF" prefix="" />
+		</zip>
+		<delete dir="${dir.build}/srcOpenNTF" />
+
+		<!-- Create srcOpenNTFSamples.zip file. -->
+		<mkdir dir="${dir.build}/srcOpenNTFSamples" />
+		<echo message="Copy openntf samples source files, to create srcOpenNTFSamples.zip."/>
+		<copy todir="${dir.build}/srcOpenNTFSamples/eclipse">
+		    <fileset dir="${wsbld}/openntf/samples/eclipse">
+				<exclude name="**/*.class"/>
+		    </fileset>
+		</copy>
+		<zip destfile="${dir.build}/srcOpenNTFSamples.zip">
+			<zipfileset dir="${dir.build}/srcOpenNTFSamples" prefix="" />
+		</zip>
+		<delete dir="${dir.build}/srcOpenNTFSamples" />
+		
+
+	</target>
+
+	<target name="local.clean.target">
+		<!-- all the generated files are under dir.build so nothing extra to delete -->
+	</target>
+	
+</project>

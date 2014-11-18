@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="newResponseDoc"
+			documentId="#{javascript:param.documentId}" formName="Document"
+			computeWithForm="both">
+			<xp:this.postSaveDocument><![CDATA[#{javascript:
+				var agent:NotesAgent = database.getAgent("webSubmitDocument"),
+					document:NotesDocument = newResponseDoc.getDocument(),
+					submitNow = document.getItemValueString('SubmitNow') === DocLib.Review.SubmitNow,
+					isSubmitted = document.getItemValueString("SUBMITTED") === DocLib.Review.Submitted;
+				
+				if (agent !== null && !isSubmitted && submitNow) {
+					try {
+						document.replaceItemValue('CurrentUser', @UserName());
+						agent.runWithDocumentContext(document);
+						document.save();
+					} catch(e) {
+						print("Error: " + e);
+					}
+					
+				}
+			}]]></xp:this.postSaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:djxmHeading id="djxmHeading1" label="Review" transition="slide" back="Cancel"
+		moveTo="#{javascript: sessionScope.mobileFrom || 'home'}">
+		<xe:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:button value="Save" id="button1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:this.condition><![CDATA[#{javascript:
+									var userName = peopleBean.getPerson(@UserName()).canonicalName;
+									//viewScope.reviewerList = viewScope.reviewerList || [];
+									
+									if(viewScope.reviewerList.length < 1) {
+										var errorAlert = "alert('At least one reviewer must be selected');";
+										view.postScript(errorAlert);
+										return false;
+									}
+									print('=========' + userName);
+									if(viewScope.reviewerList.contains(userName)) {
+										var errorAlert = "alert('Originator cannot be on the Reviewers list');";
+										view.postScript(errorAlert);
+										return false;
+									}
+									var reviewWindow = newResponseDoc.getItemValueString('ReviewWindow');
+									if(reviewWindow === '1' || reviewWindow === '2') {
+										var reviewTime = newResponseDoc.getItemValueInteger('ReviewTime');
+										if(reviewTime < 1) {
+											var errorAlert = "alert('Time limit in options must be greater than 0');";
+											view.postScript(errorAlert);
+											return false; 
+										}
+									}
+									newResponseDoc.setValue('ReviewerList', viewScope.reviewerList);
+									newResponseDoc.setValue('SubmitNow', DocLib.Review.SubmitNow);
+									return true;
+								}]]></xp:this.condition>
+								<xe:moveTo direction="Right to Left"
+									forceFullRefresh="true" saveDocument="true"
+									targetPage="#{javascript:sessionScope.mobileFrom || 'home'}"
+									transitionType="slide">
+								</xe:moveTo>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:djxmHeading>
+	
+	<xp:this.resources>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+		<xp:script src="/mobileRtaForm.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xe:formTable id="reviewersID" labelPosition="none">
+		<xe:formRow>
+			<xp:section initClosed="true" header="Reviewers">
+				<xc:mobile_tagSelector variable="reviewerList">
+					<xp:this.data><![CDATA[#{javascript:
+						var result = [];
+						var nabs = session.getAddressBooks();
+						
+						for(var nab in nabs) {
+							var nabFileName = nab.getFileName();
+							var nabServer = nab.getServer();
+							var data;
+							
+							if(nabServer !== ""){
+								nabFileName = @Name("[ABBREVIATE]", nabServer) + "!!" + nabFileName;
+							}
+							result = result.concat(@DbColumn(nabFileName, "($People)", 2));
+						}
+						
+						for(var i = 1, resultLength = result.length; i <= resultLength; i++) {
+							result = result.splice(i, 1);
+						}
+						
+						return result;
+					}]]></xp:this.data>
+				</xc:mobile_tagSelector>
+			</xp:section>
+		</xe:formRow>
+		
+		<xe:formRow>
+			<xp:label value="Type of review"></xp:label>
+			<xp:listBox id="typeOfReviewField" size="1"
+				styleClass="mblReviewSelectBox" value="#{newResponseDoc.ReviewType}"
+				 defaultValue="1"
+				immediate="false" disableValidators="true">
+				
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="reviewersID">
+				</xp:eventHandler>
+				
+				<xp:selectItem
+					itemLabel="One reviewer at a time" itemValue="1">
+				</xp:selectItem>
+				<xp:selectItem
+					itemLabel="All reviewers simultaneously" itemValue="2">
+				</xp:selectItem>
+			</xp:listBox>
+		</xe:formRow>
+		
+		<xe:formRow>
+			<xp:label value="Time limit options"></xp:label>
+			<xp:listBox size="1"
+				value="#{newResponseDoc.ReviewWindow}"
+				styleClass="mblReviewSelectBox" defaultValue="0"
+				id="timeLimitOptions_A" immediate="true" disableValidators="false">
+				<xp:this.rendered><![CDATA[#{javascript:
+					var typeOfReview = getComponent('typeOfReviewField').getValue();
+					return typeOfReview === '1';
+				}]]></xp:this.rendered>
+
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="reviewersID">
+					<xp:this.action><![CDATA[#{javascript:viewScope.timeLimitOptions = getComponent('timeLimitOptions_A').getValue();}]]></xp:this.action>
+				</xp:eventHandler>
+
+				<xp:selectItem itemValue="0"
+					itemLabel="No time limit for each review">
+				</xp:selectItem>
+				<xp:selectItem itemValue="1"
+					itemLabel="Move to next reviewer after time limit expires">
+				</xp:selectItem>
+				<xp:selectItem itemValue="2"
+					itemLabel="Keep sending reminders after time limit expires">
+				</xp:selectItem>
+			</xp:listBox>
+
+			<xp:listBox size="1" styleClass="mblReviewSelectBox" id="timeLimitOptions_B"
+				value="#{newResponseDoc.ReviewWindow}" immediate="true"
+				disableValidators="false" defaultValue="0">
+				<xp:this.rendered><![CDATA[#{javascript:
+					var typeOfReview = getComponent('typeOfReviewField').getValue();
+					return typeOfReview === '2';
+				}]]></xp:this.rendered>
+
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="reviewersID">
+				</xp:eventHandler>
+
+				<xp:selectItem itemValue="0"
+					itemLabel="No time limit for each review">
+				</xp:selectItem>
+				<xp:selectItem itemValue="2"
+					itemLabel="Keep sending reminders after time limit expires">
+				</xp:selectItem>
+			</xp:listBox>
+		</xe:formRow>
+		
+		<xe:formRow>
+			<xp:label value="Time limit in days"></xp:label>
+			<xp:this.rendered><![CDATA[#{javascript:
+				var target = getComponent('timeLimitOptions_A').isRendered() ? 'timeLimitOptions_A' : 'timeLimitOptions_B',
+					value = getComponent(target).getValue();
+				if(value === '1' || value === '2') {
+					return true;
+				}
+				return false;
+			}]]></xp:this.rendered>
+			<xp:inputText defaultValue="0" styleClass="mblTimeLimitInDaysField"
+				id="timeLimitInDaysField" value="#{newResponseDoc.ReviewTime}"
+				size="3">
+				<xp:this.validators>
+					<xp:validateConstraint
+						message="Time Limit should be a positive number">
+						<xp:this.regex><![CDATA[^[0-9]+$]]></xp:this.regex>
+					</xp:validateConstraint>
+				</xp:this.validators>
+				<xp:this.converter>
+					<xp:convertNumber integerOnly="true">
+					</xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+		</xe:formRow>
+		
+		<xe:formRow>
+			<xp:label value="Notify originator after"></xp:label>
+			<xp:listBox defaultValue="0" size="1" styleClass="mblReviewSelectBox"
+			id="notifyAfterField" value="#{newResponseDoc.NotifyAfter}">
+				<xp:selectItem
+					itemLabel="Final reviewer" itemValue="0">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Each reviewer"
+					itemValue="1">
+				</xp:selectItem>
+			</xp:listBox>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

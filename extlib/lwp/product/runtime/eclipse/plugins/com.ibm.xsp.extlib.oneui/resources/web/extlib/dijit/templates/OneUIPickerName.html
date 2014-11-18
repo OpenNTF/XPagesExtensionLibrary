@@ -1,0 +1,75 @@
+<div>
+<style>
+.xspPicker .dijitBorderContainer { width: auto; height: auto;}
+.xspPicker { height:100%; width:100%; }
+.xspPickerBodyWrapper {padding:1px; border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerBody { margin:0; padding:0; background:#fff; }
+.xspPickerBody.xspPickerBodyEmpty { display:none; }
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none}
+.xspPickerItemSelected { background:#b7cdee !important; border: 1px dotted #b7b7b7;}
+.xspPickerItemHover { /*border:1px dotted #b7b7b7*/ }
+.xspPickerBody li {padding:2px 0px 2px 0px; }
+.xspPickerButton{margin:0 8px 0 5px;}
+.xspPickerButton2{margin:0 8px 0 5px}
+.xspPickerButton3{margin:0 8px 0 5px}
+</style>
+	<div style="padding:10px">
+<table role="presentation">
+  <tr>
+    <td colspan='3'>
+	<table role="presentation">
+  <tr dojoAttachPoint="pnSources">
+  <td>
+    <label dojoAttachPoint="tdSearchIn" for="searchSelect"></label>
+    </td>
+    <td>
+    <select dojoAttachPoint="cbSources" dojoAttachEvent="onchange: _onSrcChange" id="searchSelect"></select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <label dojoAttachPoint="tdSearchFor" for="searchText"></label>
+    </td>
+    <td>
+    <input dojoAttachPoint="edSearch" type="text" id="searchText"></input>
+    <button dojoAttachPoint="btSearch" class="xspPickerButton2" >${PickerName_Search}</button>
+    </td>
+  </tr>
+  </table>
+  </td>
+  </tr>
+  <tr>
+    <td>
+	<div class="list1">
+		<div dojoAttachPoint="list1Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list1Set, onmouseout: _list1Unset, onclick:_list1Click, ondblclick:_list1DblClick, onkeypress:_list1KeyPress, onscroll:_list1OnScroll, onfocus:_list1OnFocus">
+			<ul dojoAttachPoint="list1Container" class="xspPickerBody" style="width:99%" dojoAttachEvent="onfocus:_list1OnFocus" role="listbox" aria-label="${PickerName_unSelectedListLabel}" tabindex="0"></ul>
+		</div>
+	</div>
+	</td>
+    <td>
+    <button dojoAttachPoint="btAdd" class="xspPickerButton2">${PickerName_Add}</button>
+	</td>
+    <td>
+	<div class="list2">
+		<div dojoAttachPoint="list2Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list2Set, onmouseout: _list2Unset, onclick:_list2Click, ondblclick:_list2DblClick, onkeypress:_list2KeyPress, onfocus:_list2OnFocus">
+		  <ul dojoAttachPoint="list2Container" class="xspPickerBody" style="width: 100%" dojoAttachEvent="onfocus:_list2OnFocus" role="listbox" aria-label="${PickerName_selectedListLabel}"></ul>
+		</div>
+	</div>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">
+	  <div style="text-align:right">
+	    <button dojoAttachPoint="btRemove" class="xspPickerButton3">${PickerName_Remove}</button>
+        <button dojoAttachPoint="btRemoveAll" class="xspPickerButton3">${PickerName_RemoveAll}</button>
+	  </div>
+	</td>
+  </tr>
+</table>
+</div>
+	<div class="lotusDialogFooter">
+	  <button dojoAttachPoint="pkOk" class="lotusFormButton">${PickerName_OK}</button>
+	  <a href='javascript:;' role="button" dojoAttachPoint="pkCancel" class="lotusAction">${PickerName_Cancel}</a>
+	</div>
+
+</div>

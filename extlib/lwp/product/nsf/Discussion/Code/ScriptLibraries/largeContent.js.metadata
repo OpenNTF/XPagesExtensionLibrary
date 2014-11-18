@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="372" sequence="9" unid="75B1C2BBD1B9972280257917004BF460">
+<created><datetime dst="true">20110926T144937,60+01</datetime></created>
+<modified><datetime>20120305T082325,88+00</datetime></modified>
+<revised><datetime>20120305T082325,87+00</datetime></revised>
+<lastaccessed><datetime>20120305T082325,88+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,77+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>largeContent</text></item>
+<item name="$Flags"><text>h534QP</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+<item name="$Comment"><text>dojo class for dealing with large content</text></item></note>

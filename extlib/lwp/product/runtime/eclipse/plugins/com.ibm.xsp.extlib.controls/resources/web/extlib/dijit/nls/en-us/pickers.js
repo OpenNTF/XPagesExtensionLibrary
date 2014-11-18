@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Cancel",
+PickerList_OK: "OK",
+PickerList_Cancel: "Cancel",
+PickerListSearch_Search:"Search",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel:"Cancel",
+PickerListSearch_Value: "Value",
+PickerListSearch_Values: "Values",
+PickerName_Search:"Search",
+PickerName_Add:"Add",
+PickerName_Remove:"Remove",
+PickerName_RemoveAll:"Remove All",
+PickerName_OK:"OK",
+PickerName_Cancel:"Cancel",
+PickerName_SearchIn:"Search in",
+PickerName_SearchFor:"Search for",
+PickerName_unSelectedListLabel: "List of values to select",
+PickerName_selectedListLabel: "List of selected values"
+})

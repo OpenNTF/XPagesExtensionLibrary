@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='332' unid='942020B034335255802577C2003DF5DC' sequence='9'>
+<created><datetime dst='true'>20101020T121646,36+01</datetime></created>
+<modified><datetime>20120207T095548,36+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122303,24+01</datetime></revised>
+<lastaccessed><datetime>20120207T095548,36+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095548,36+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101029T143022,78+01</datetime><datetime
+ dst='true'>20110830T205053,93-04</datetime><datetime dst='true'>20111006T160543,95+01</datetime><datetime
+ dst='true'>20111014T083959,19+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE' sign='true'><text>(Threads)</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+MgECABgABAAkMTU1BQAGAE1haW5JRFYBAwAHAAwABQAJMFMwRQACAJ4ABAAkMTU3BQAMAHRocmVh
+ZGluZGVudAEACgBbPGEgaHJlZj0iIgKQAFYBIgIBABEAP09wZW5Eb2N1bWVudCI+XSAAIgIFAAcA
+U3ViamVjdAAiAgEAAgAgKCICAgAFAAAAAAAAAAUABABmcm9ttAIiAgEAAgApICICAQAKAFs8L2E+
+IDwhLS0iApAAVgEiAgEABAAtLT5dIgIDAAcALAAmAAkwUzFTMlMzUzRTOFM5UzEwUzExUzJFMTJT
+MjRTMjVTMjZTMzFTBQAsACcABAAEAAQACgAJACQxNTUkMTU3VGhyZWFkU29ydCRDb25mbGljdAAE
+AAQAAAAIAGYAAwAHAAoABAAJTDFT
+</formula></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+IgACAABEAGYAAAAEAABmAAQACgAkMTU1VGhyZWFkU29ydA==
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAJ4AjggAAFZDAQAEAAIAJgAAAL4AAQAACQAAAAAAAAAAAAICAAAAVkMAAAQAAADMAAAA+AEB
+AAAJAAAAAAAAAAAAAgIAAABWQwEACgAAAAAAAAAGAQEAAAkAAAAAAAAAAAACAgAAACQxNTVJRCYA
+AgAYAAQAJDE1NQUABgBNYWluSURWAQMABwAMAAUACTBTMEUAJDE1N8wAAgCeAAQAJDE1NwUADAB0
+aHJlYWRpbmRlbnQBAAoAWzxhIGhyZWY9IiICkABWASICAQARAD9PcGVuRG9jdW1lbnQiPl0gACIC
+BQAHAFN1YmplY3QAIgIBAAIAICgiAgIABQAAAAAAAAAFAAQAZnJvbbQCIgIBAAIAKSAiAgEACgBb
+PC9hPiA8IS0tIgKQAFYBIgIBAAQALS0+XSICAwAHACwAJgAJMFMxUzJTM1M0UzhTOVMxMFMxMVMy
+RTEyUzI0UzI1UzI2UzMxU1RocmVhZFNvcnQmAAEAAAABAQAJAQACCgEBBAoAABIArSsCAAEAAQAA
+AAAAAAAAAFdDAQAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABXQwEA
+AAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAV0MBAAAJAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAEA///CAAEAAAAAAAAA
+AAAAAAAAAQD///8AAQD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRwPAAAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAHn/bAABAMDAwAABAAAAAAAAAAAAAAABAMDAwAAA
+AB8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAL7/JgAAAAUAAACcAQAACwAAAAAAAABDYXRlZ29yaV96ZaoB
+AE58vv8oAAAABQAAAJ0BAAAOAAAAAAAAAF9FZGl0IERvY3VtZW50AgACCr7/KAAAAAUAAACcAQAA
+DgAAAAAAAABTZW5kIERvY3VfbWVudAMAAwq+/yIAAAAFAAAAnQEAAAgAAAAAAAAAX0ZvcndhcmQE
+AAQKvv8sAAAABQAAAJ0BAAASAAAAAAAAAF9Nb3ZlIHRvIEZvbGRlci4uLgUAPXy+/zAAAAAFAAAA
+nQEAABYAAAAAAAAAX1JlbW92ZSBmcm9tIEZvbGRlci4uLgYAPnw=
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

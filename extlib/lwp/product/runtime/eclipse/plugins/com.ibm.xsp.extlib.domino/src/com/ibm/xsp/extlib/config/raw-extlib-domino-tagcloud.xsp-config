@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>tagcloud</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+	
+<!--  Domino View tag cloud data -->	
+	<complex-type>
+    	<description>Tag Cloud data coming from a Domino view</description>
+    	<display-name>Domino View Tag Cloud Data Provider</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-class>
+
+        <!-- databaseName property is not supported as of 8.5.3 for security reasons --> 
+		<property>
+            <description>Required: The name of a Domino categorized view to use as a tag cloud data source. The view requires just one categorized column. You do not need to compute document or category counts.</description>
+            <display-name>View Name</display-name>
+			<property-name>viewName</property-name>
+			<property-class>string</property-class>
+			<property-extension>
+			    <designer-extension>
+                   <editor>com.ibm.xsp.extlib.designer.tooling.editor.ViewNameEditor</editor>
+                </designer-extension>
+        		<required>true</required>
+      		</property-extension>
+    	</property>
+    	<property>
+    	    <!-- TODO clarify description -->
+            <description>The number or index of the view column which is categorized. Value defaults to "0".</description>
+            <display-name>Category Column Number</display-name>
+      		<property-name>categoryColumn</property-name>
+      		<property-class>int</property-class>
+    	</property>
+    	<property>
+    	    <!--# Please do not translate "alphabet" or "weight" -->
+            <description>Optional: How the tags should be sorted. Valid values are "alphabet", for alphabetic sorting, and "weight" for sorting by occurrence count. Default value is "alphabet".</description>
+            <display-name>Sort Tags</display-name>
+      		<property-name>sortTags</property-name>
+      		<property-class>string</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          			<editor-parameter>
+          			   alphabet
+          			   weight
+					</editor-parameter>
+        		</designer-extension>
+        		<required>false</required>
+      		</property-extension>
+    	</property>
+    	<property>
+            <description>Optional: The maximum number of tags to be displayed in the tag cloud. Value defaults to 50.</description>
+            <display-name>Maximum Tag Limit</display-name>
+      		<property-name>maxTagLimit</property-name>
+      		<property-class>int</property-class>
+    	</property>
+    	<property>
+    	    <!-- TODO clarify description - e.g. how does this work with cacheRefreshInterval below (include default value) -->
+            <description>Number of new tags that triggers the cloud to be recomputed</description>
+            <display-name>Tag Threshold</display-name>
+      		<property-name>tagThreshold</property-name>
+      		<property-class>int</property-class>
+    	</property>
+    	<property>
+            <description>The minimum number of entries a tag must have to be considered for inclusion in the tag cloud. By default the value is automatically computed based on the number of documents in the view.</description>
+            <display-name>Minimum Entry Count</display-name>
+      		<property-name>minEntryCount</property-name>
+      		<property-class>int</property-class>
+    	</property>
+    	
+      	<property>
+      	    <!--# Do not translate "auto", "manual", "off" and "cacheRefreshInterval" within description --> 
+            <description>When set to "auto" (automatic), the cache refresh interval is dynamically computed based on the number of entries in the view. When set to "manual", you can specify the cache refresh interval in the "cacheRefreshInterval" property. Valid values are "auto", "manual" and "off". Value defaults to "auto". It is not recommended to apply the "off" setting, thus disabling caching, except for debug purposes.</description>
+            <display-name>Cache Mode</display-name>
+        	<property-name>cacheMode</property-name>
+        	<property-class>string</property-class>
+        	<property-extension>
+          		<designer-extension>
+            		<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+            		<editor-parameter>
+                          off
+                          auto
+                          manual
+                    </editor-parameter>
+          		</designer-extension>
+        	</property-extension>
+      	</property>
+      	<property>
+      	    <!--# Do not translate "manual" --> 
+            <description>The cache refresh interval in seconds when the cache mode is set to "manual"</description>
+            <display-name>Manual Cache Refresh Interval</display-name>
+        	<property-name>cacheRefreshInterval</property-name>
+        	<property-class>int</property-class>
+      	</property>
+      	        
+      	<property>
+            <description>Name of the XPage to open when clicking on a tag in the cloud</description>
+            <display-name>Tag Link Page</display-name>
+        	<property-name>linkTargetPage</property-name>
+        	<property-class>string</property-class>
+        	<property-extension>
+          		<designer-extension>
+            		<editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+          		</designer-extension>
+          		<required>false</required>
+        	</property-extension>
+      	</property>
+      	
+      	<property>
+      	     <!-- TODO Improve description after investigation of linkMetaSeparator -->
+            <description>An optional URL request parameter which, if provided, is included as an argument on the generated tag links, e.g. tagName</description>
+            <display-name>URL Request Parameter</display-name>
+        	<property-name>linkRequestParam</property-name>
+        	<property-class>string</property-class>
+      	</property>
+      	
+      	<property>
+      	     <!-- TODO MWD Description needs improving -->
+            <description>An optional character which acts as a delimiter between tag data and metadata, to be used in conjunction with the "linkRequestParam" value. Using a "linkMetaSeparator" character requires the backend categorized view column to output the data in the format "xxx | yyy", where "xxx" is the tag name, "|" is the "linkMetaSeparator" character, and "yyy" is the metadata used as the request parameter. If no "linkMetaSeparator" is specified, the actual tag value will be used for the request parameter value.</description>
+            <display-name>Metadata Separation Character</display-name>
+        	<property-name>linkMetaSeparator</property-name>
+        	<property-class>string</property-class>
+        	<property-extension>
+                <designer-extension>
+                    <tags>todo</tags>
+                 </designer-extension>
+            </property-extension>
+      	</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</base-complex-id>
+      		<tag-name>dominoViewCloudData</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+</faces-config>

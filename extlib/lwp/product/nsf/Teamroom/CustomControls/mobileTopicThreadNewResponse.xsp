@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="newResponseDoc" formName="Response"
+			ignoreRequestParams="true" computeWithForm="both"
+			documentId="#{param.documentId}" action="newDocument"
+			parentId="#{param.parentId}">
+		</xp:dominoDocument>
+	</xp:this.data>	
+	<xp:br></xp:br>
+	
+	<xe:djxmHeading id="djxmHeading7" label="Reply"
+		back="Cancel" moveTo="#{javascript:sessionScope.backURL}">
+		<xp:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:button value="Save" id="button1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:
+										//var parentId = newResponseDoc.getParentId();
+										//var pDoc = database.getDocumentByID(parentId);
+										//var parentName = pDoc.getItemValueString('From');
+										var parentDoc:NotesDocument = database.getDocumentByID(newResponseDoc.getParentId());
+										
+										newResponseDoc.setValue('Subject', getComponent('inputText1').getValue());
+										newResponseDoc.setValue("ImmediateParentSubject", parentDoc.getItemValue("Subject"));
+										//newResponseDoc.setValue('DocLinkParent', parentName);
+									}]]></xp:this.script>
+								</xp:executeScript>
+								<xe:moveTo direction="Left to Right"
+									saveDocument="true" targetPage="#{javascript:sessionScope.backURL}"
+									transitionType="slide">
+								</xe:moveTo>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:djxmHeading>
+	
+	<xe:formTable id="newTopicResponse" disableRowError="false">
+		<xe:formRow label="Subject:">
+			<xp:inputText id="inputText1" styleClass="mblFormRowInput"
+				value="Re: " required="true"
+				autocomplete="off">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Please provide a subject">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow label="Content:">
+			<xp:inputTextarea id="body" value="#{newResponseDoc.Body}"
+				styleClass="mblFormRowTextArea" rows="8"
+				htmlFilterIn="acf" htmlFilter="acf">
+			</xp:inputTextarea>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

@@ -1,0 +1,5 @@
+Re:   Localization - DO NOT TRANSLATE
+
+Date: Jun 27, 2013
+
+This project doesn't need localization because it's in the openntf package, it contains some NLS comments because was ported in from another source tree.

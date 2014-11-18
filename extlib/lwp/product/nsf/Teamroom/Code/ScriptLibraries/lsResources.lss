@@ -1,0 +1,31 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+Option Declare
+
+'strings for exception handling UI
+Const ERR_CAPTION				= "Notes error in '%s1':"
+Const ERR_FORMAT_LOCATION		= "%s1 (#%s2) in:"
+Const ERR_FORMAT_MODULE			= "%s1: %s2 (line %s3)"
+Const ERR_FORMAT_CLASS			= "%s1: %s2::%s3 (line %s4)"
+Const ERR_ADDITIONAL_INFO		= "Additional Info: %s1"
+
+Const ERR_VIEW_NOT_FOUND			= "Unable to open view %s1: View not found"
+
+Const UPGRADE_PROGRESS			= "Upgrading %s1 of %s2 documents, please wait..."
+Const UPGRADE_COMPLETED			= "Upgrade sucessfully completed."
+Const UPGRADE_ALREADY_DONE		= "All documents were already up to date."
+Const UPGRADE_NOT_AGAIN			= "Note: You do not need to run this upgrade agent again."
+Const ABSTRACT_ELLIPSIS			= "%s1 ..."
+Const NEED_DESIGNER_ACCESS		= "You must have at least 'Designer' ACL rights in order to run this upgrade"
+
+'used in "($Subscription)" and "($Replication)" forms
+Const COMPILE_SUCCESS_TITLE		= "Compiled Successfully"
+Const COMPILE_SUCCESS_BODY		= "There are no syntax errors, the formula compiled successfully."
+Const COMPILE_FAILURE_TITLE		= "Syntax Error"
+Const COMPILE_FAILURE_BODY		= "There is at least one syntax error in the formula. It did not compile."
+Const COMPILE_FAILURE_SAVE_BODY	= "There is at least one syntax error in the formula. This document could not be saved."
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+
+'++LotusScript Development Environment:2:5:(Declarations):0:2
+

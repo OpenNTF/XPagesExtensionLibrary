@@ -1,0 +1,64 @@
+.s-popup {
+	background-color: rgb(228,228,241);
+	border: solid gray 1px;
+	position: absolute;
+	padding: 4px;
+	overflow-x: visible;
+	overflow-y: auto;
+	font-size: medium;
+}
+
+.s-list-selected {
+	background-color: rgb(10,36,106);
+}
+
+.s-list-text-selected {
+	color: #FFFFFF;
+}
+
+td.s-bold {
+    font-weight: bold;
+}
+
+.s-menu-item {
+	padding: 2px 3px;
+}
+
+.s-outline-text {
+	cursor: pointer;
+	font-family: lucida grande,helvetica,arial,sans-serif;
+	font-size: 70%;
+	font-weight: normal;
+	vertical-align: middle;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.s-img-display {
+	display: block;
+}
+
+.s-nodisplay {
+	display: none;
+}
+
+.s-hidden {
+	visibility:hidden;
+}
+
+.s-menu-overflow-hidden {
+	overflow: hidden;
+}
+
+.s-menu-text-disabled {
+	color: gray;
+}
+
+.s-menu-text-disabled td {
+	cursor: default;
+}
+
+.dijit_a11y .s-menu-text-disabled td {
+	opacity: 0.3;
+	filter: alpha(opacity=35);
+}

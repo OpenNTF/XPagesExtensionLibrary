@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/OneUI/Outline">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI" ></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This demos the OneUI outline capability"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br />
+			<xp:table>
+                <xp:tr>
+                    <th>Basic Navigator</th>
+                    <th>Collapsible Navigator</th>
+                    <th>Collapsible Navigator - Wipe Effect</th>
+                </xp:tr>
+				<xp:tr valign="top">
+					<xp:td>
+						<xe:navigator id="outline">
+							<xe:this.treeNodes>
+										<xe:basicLeafNode label="Leaf 1"></xe:basicLeafNode>
+										<xe:basicLeafNode
+											label="Leaf 2">
+											<xe:this.selected><![CDATA[#{javascript:print("this="+this)
+return true}]]></xe:this.selected>
+										</xe:basicLeafNode>
+										<xe:separatorTreeNode></xe:separatorTreeNode>
+										<xe:basicContainerNode label="Container 1">
+											<xe:this.children>
+												<xe:basicLeafNode label="Leaf 3-1"></xe:basicLeafNode>
+												<xe:basicLeafNode label="Leaf 3-2"></xe:basicLeafNode>
+												<xe:basicContainerNode label="Container 2">
+													<xe:this.children>
+														<xe:basicLeafNode label="Leaf 3-1-1"></xe:basicLeafNode>
+														<xe:basicLeafNode label="Leaf 3-2-2"></xe:basicLeafNode>
+													</xe:this.children>
+												</xe:basicContainerNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+							</xe:this.treeNodes>
+						</xe:navigator>
+					</xp:td>
+					<xp:td>
+						<xe:navigator id="navigator1" expandable="true">
+							<xe:this.treeNodes>
+										<xe:basicLeafNode label="Leaf 1"></xe:basicLeafNode>
+										<xe:basicLeafNode label="Leaf 2"></xe:basicLeafNode>
+										<xe:separatorTreeNode></xe:separatorTreeNode>
+										<xe:basicContainerNode label="Container 1">
+											<xe:this.children>
+												<xe:basicLeafNode label="Leaf 3-1">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="Leaf 3-2">
+												</xe:basicLeafNode>
+												<xe:basicContainerNode label="Container 2">
+													<xe:this.children>
+														<xe:basicLeafNode label="Leaf 3-1-1">
+														</xe:basicLeafNode>
+														<xe:basicLeafNode label="Leaf 3-2-2">
+														</xe:basicLeafNode>
+													</xe:this.children>
+												</xe:basicContainerNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+							</xe:this.treeNodes>
+						</xe:navigator>
+					</xp:td>
+					<xp:td>
+						<xe:navigator id="navigator2" expandable="true"
+							expandEffect="wipe">
+							<xe:this.treeNodes>
+										<xe:basicLeafNode
+											label="Leaf 1">
+										</xe:basicLeafNode>
+										<xe:basicLeafNode
+											label="Leaf 2">
+										</xe:basicLeafNode>
+										<xe:separatorTreeNode></xe:separatorTreeNode>
+										<xe:basicContainerNode
+											label="Container 1">
+											<xe:this.children>
+												<xe:basicLeafNode
+													label="Leaf 3-1">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode
+													label="Leaf 3-2">
+												</xe:basicLeafNode>
+												<xe:basicContainerNode
+													label="Container 2">
+													<xe:this.children>
+														<xe:basicLeafNode
+															label="Leaf 3-1-1">
+														</xe:basicLeafNode>
+														<xe:basicLeafNode
+															label="Leaf 3-2-2">
+														</xe:basicLeafNode>
+													</xe:this.children>
+												</xe:basicContainerNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+							</xe:this.treeNodes>
+						</xe:navigator>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

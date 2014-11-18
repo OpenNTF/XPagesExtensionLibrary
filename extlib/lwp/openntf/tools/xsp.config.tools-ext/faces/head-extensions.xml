@@ -1,0 +1,76 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2013                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- 
+	elements that should be defined in the head of the config-*.xml files
+ -->
+ 
+	<!-- description formatting elements -->
+    <!ELEMENT a                       ANY>
+    <!ATTLIST a            name CDATA #IMPLIED>
+    <!ATTLIST a            href CDATA #IMPLIED>
+    <!ELEMENT br                      EMPTY>
+    <!ELEMENT code                    ANY>
+    <!ELEMENT em                      ANY>
+    <!ELEMENT hr                      EMPTY>
+    <!ELEMENT li                      ANY>
+    <!ELEMENT ol                      ANY>
+    <!ELEMENT p                       ANY>
+    <!ELEMENT pre                     ANY>
+    <!ELEMENT strong                  ANY>
+    <!ELEMENT ul                      ANY>
+	<!-- /end description formatting elements -->
+    
+    <!-- RI and JWL -extension elements -->
+    <!ELEMENT exclude-attributes      (#PCDATA)>
+    <!ELEMENT pass-through            (#PCDATA)>
+    <!ELEMENT read-only               (#PCDATA)>
+    <!ELEMENT renders-children        (#PCDATA)>
+
+ 	<!--  designer-extension elements  -->
+    <!ELEMENT designer-extension        ANY>
+    
+    <!ELEMENT tags                      (#PCDATA)>
+    <!ELEMENT category                  (#PCDATA)>
+    <!ELEMENT editor                    (#PCDATA)>
+    <!ELEMENT editor-parameter          (#PCDATA)>
+    <!ELEMENT event                     (#PCDATA)>
+    <!ELEMENT is-deprecated           	(#PCDATA)>
+    <!ELEMENT is-style-class            (#PCDATA)>
+    <!ELEMENT long-description          ANY>
+    <!ELEMENT priority                  (#PCDATA)>
+    <!ELEMENT property-to-display	    (#PCDATA)>
+    <!ELEMENT selected-event            (#PCDATA)>
+    <!ELEMENT styles-excluded           (#PCDATA)>
+    <!ELEMENT subcategory               (#PCDATA)>
+    <!ELEMENT visible                   (#PCDATA)>
+    <!ELEMENT generate-id               (#PCDATA)>
+    <!ELEMENT in-palette               (#PCDATA)>
+    <!ELEMENT action-type               (#PCDATA)>
+    <!ELEMENT render-markup             (#PCDATA)>
+    <!ELEMENT control-subpackage-name   (#PCDATA)>
+ 	<!-- /end designer-extension elements  -->
+ 	
+ 	<!-- javadoc description tag  -->
+ 	
+ 	<!ELEMENT javadoc-description              ANY>
+ 	
+    <!-- Not published property-extension elements -->
+    <!ELEMENT array-property            (#PCDATA)>
+    <!-- /end Not published -->
+
+ 	

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Contact">
+			</xp:dominoDocument>
+		<xp:dominoDocument var="document2" formName="Contact"
+			action="openDocument">
+			<xp:this.documentId><![CDATA[#{javascript:var doc = database.getAllDocuments().getFirstDocument()
+return doc ? doc.getNoteID() : null}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/Debug">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This shows some new debugging capability"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+
+			<xp:tabbedPanel id="tabs">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="Dump Object" id="tabPanel1">
+					This shows how to use the dumpObject control. This control takes
+					either a object name or a computed
+					value and displays its content in
+					a table. It understands basic Java and
+					JavaScript objects, plus some
+					higher level objects as shown with the different options bellow.
+					<xp:table role="presentation">
+						<xp:tr>
+							<xp:td valign="top">
+								<xe:navigator id="navigator1" expandable="true">
+									<xe:this.treeNodes>
+										<xe:basicContainerNode label="Document">
+											<xe:this.children>
+												<xe:basicLeafNode label="Document 1 (new)"
+													submitValue="document1">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="Document 2 (open)"
+													submitValue="document2">
+												</xe:basicLeafNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+										<xe:basicContainerNode label="JavaScript">
+											<xe:this.children>
+												<xe:basicLeafNode label="Simple Object"
+													submitValue="jsSimple">
+												</xe:basicLeafNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+										<xe:basicContainerNode label="Social API">
+											<xe:this.children>
+												<xe:basicLeafNode label="userBean"
+													submitValue="userBean">
+												</xe:basicLeafNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+										<xe:basicContainerNode label="JSF - XPages">
+											<xe:this.children>
+												<xe:basicLeafNode label="Main Page"
+													submitValue="view">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="HttpServletRequest"
+													submitValue="httpServletRequest">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="HttpSession"
+													submitValue="httpSession">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="requestScope"
+													submitValue="requestScope">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="sessionScope"
+													submitValue="sessionScope">
+												</xe:basicLeafNode>
+												<xe:basicLeafNode label="applicationScope"
+													submitValue="applicationScope">
+												</xe:basicLeafNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+										<xe:basicContainerNode label="Java">
+											<xe:this.children>
+												<xe:basicLeafNode label="System properties"
+													submitValue="systemProperties">
+												</xe:basicLeafNode>
+											</xe:this.children>
+										</xe:basicContainerNode>
+									</xe:this.treeNodes>
+									<xp:eventHandler event="onItemClick"
+										submit="true" refreshMode="complete">
+										<xp:this.action><![CDATA[#{javascript:viewScope.dumpName = context.getSubmittedValue()
+}]]></xp:this.action>
+									</xp:eventHandler>
+								</xe:navigator>
+							</xp:td>
+							<xp:td valign="top">
+							<xp:panel rendered="#{javascript:viewScope.dumpObject || viewScope.dumpName}">
+								<xp:label value="Filter:" for="inputText1"></xp:label>
+								<xp:inputText id="inputText1" value="#{viewScope.filter}">
+									<xp:eventHandler event="onkeypress" submit="true"
+										refreshMode="partial" refreshId="dumpObject1">
+									</xp:eventHandler>
+								</xp:inputText>
+								<xp:label value="Levels:" for="comboBox1"></xp:label>
+								<xp:comboBox id="comboBox1" value="#{viewScope.levels}">
+									<xp:selectItem itemLabel="All" itemValue="">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="1" itemValue="1">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="2" itemValue="2">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="3" itemValue="3">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="4" itemValue="4">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="5" itemValue="5">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="6" itemValue="6">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="7" itemValue="7">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="8" itemValue="8">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="9" itemValue="9">
+									</xp:selectItem>
+									<xp:eventHandler event="onchange" submit="true"
+										refreshMode="partial" refreshId="dumpObject1">
+									</xp:eventHandler>
+								</xp:comboBox>
+								<xp:br></xp:br>
+								<xe:dumpObject id="dumpObject1"
+									startFilter="#{viewScope.filter}"
+									title="#{viewScope.dumpName}">
+									<xe:this.levels><![CDATA[#{javascript:var l = viewScope.levels
+return l ? parseInt(l) : 0}]]></xe:this.levels>
+									<xe:this.value><![CDATA[#{javascript:var s = viewScope.dumpName
+if(!s) {
+	return null;
+}
+if(s=="jsSimple") {
+	var o = new Object()
+	o.propNull = null 
+	o.propUndefined = undefined 
+	o.propString = "a String" 
+	o.propNumber = 79
+	o.propBoolean = true
+	return o;	
+} else if(s=="httpServletRequest") { 
+	return facesContext.getExternalContext().getRequest()	
+} else if(s=="httpSession") { 
+	return facesContext.getExternalContext().getSession(true)	
+} else if(s=="document1") {
+	document1.getDocument().replaceItemValue("dateTime",session.createDateTime(new Date()))
+	document1.getDocument().replaceItemValue("dateRange",session.createDateRange(new Date(),new Date()))
+	return document1
+} else if(s=="systemProperties") {
+	return java.lang.System.getProperties();
+} else {
+	// Assume this is just the object name 
+	// Issue with 8.5.2 when the eval parem is a Java String (need to convert it to a JS object before)
+	return eval((new String(s)).toString()) 
+}
+}]]></xe:this.value>
+								</xe:dumpObject>
+							</xp:panel>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</xp:tabPanel>
+				<xp:tabPanel label="FireBug Lite" id="tabPanel2">
+					There is a new component that allows you to
+					integrate FireBug Lite (
+					<xp:link escape="true" text="FireBug Lite" id="link1"
+						value="http://getfirebug.com/firebuglite">
+					</xp:link>
+					). This works similarly with all the browsers (IE, FireFox, Safari,
+					Chrome...), including
+					the Notes Client XPages browser.
+					<xp:br></xp:br>
+					Click the link in the header and you'll see an icon at the bottom
+					right
+					of the page. Then click it to show FireBug.
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:image url="/FireBug.jpg" id="image1" style="padding-left:40.0px">
+					</xp:image>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

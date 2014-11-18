@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='426' unid='8BAA14B1AE21EEAA802577C2006B16F1' sequence='7'>
+<created><datetime dst='true'>20101020T202942,25+01</datetime></created>
+<modified><datetime>20120207T095550,73+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122303,50+01</datetime></revised>
+<lastaccessed><datetime>20120207T095550,73+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095550,73+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T202951,60+01</datetime><datetime
+ dst='true'>20110830T205052,37-04</datetime><datetime dst='true'>20111006T160544,21+01</datetime><datetime
+ dst='true'>20111014T083959,45+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>(WebInterestProfileSave)</text></item>
+<item name='$AssistType' sign='true'><number>65413</number></item>
+<item name='$AssistLastRun' sign='true'>
+<rawitemdata type='400'>
+AAAAAAAAAAA=
+</rawitemdata></item>
+<item name='$AssistDocCount' sign='true'><number>0</number></item>
+<item name='$Comment' sign='true'><text>Web Query Save agent for Interest Profile form</text></item>
+<item name='$FlagsExt' sign='true'><text/></item>
+<item name='$AssistFlags' sign='true'><text>EHu</text></item>
+<item name='$AssistTrigger' sign='true'><text>4</text></item>
+<item name='$AssistInfo' sign='true'>
+<rawitemdata type='11'>
+AQAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</rawitemdata></item>
+<item name='$AssistQuery' sign='true'>
+<rawitemdata type='f'>
+gQYAAAAA
+</rawitemdata></item>
+<item name='$AssistAction' sign='true'>
+<rawitemdata type='10'>
+gQKF/0QCAAAAADgCAAAnKytMb3R1c1NjcmlwdCBEZXZlbG9wbWVudCBFbnZpcm9ubWVudDoyOjU6
+KE9wdGlvbnMpOjA6NzQKT3B0aW9uIFB1YmxpYwpVc2UgIkRpc2N1c3Npb25Sb3V0aW5lcyIKCgon
+KytMb3R1c1NjcmlwdCBEZXZlbG9wbWVudCBFbnZpcm9ubWVudDoyOjU6KEZvcndhcmQpOjA6MQpE
+ZWNsYXJlIFN1YiBJbml0aWFsaXplCgonKytMb3R1c1NjcmlwdCBEZXZlbG9wbWVudCBFbnZpcm9u
+bWVudDoyOjU6KERlY2xhcmF0aW9ucyk6MDoxMApEaW0gd2VidXNlciBBcyBub3Rlc25hbWUKJysr
+TG90dXNTY3JpcHQgRGV2ZWxvcG1lbnQgRW52aXJvbm1lbnQ6MjoyOkluaXRpYWxpemU6MToxMApT
+dWIgSW5pdGlhbGl6ZQoJCglJbnN0YW50aWF0ZU9iamVjdHMKCUlzV2ViVXNlciA9IFRydWUKCVNl
+dCB3ZWJ1c2VyID0gTmV3IG5vdGVzbmFtZShub3RlLnBlcnNvbm5hbWUoMCkpICAKCQoJSWYgbm90
+ZS5pc25ld25vdGUgVGhlbgoJCW5vdGUuU3ViamVjdCA9ICJOZXdzbGV0dGVyIFByb2ZpbGUgZm9y
+ICIgJiB3ZWJ1c2VyLmNvbW1vbgoJCW5vdGUuUHJvdGVjdEZyb21BcmNoaXZlID0gMQoJRW5kIElm
+CgkKRW5kIFN1YgBs
+</rawitemdata></item>
+<item name='$Restricted' sign='true'><number>1</number></item>
+<item name='$Flags'><text>fL3u</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='$AssistRunInfo' summary='true'>
+<rawitemdata type='3'>
+BgAAAgAACAAiBAAAAAAAAAUAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAsptTAOdqJYUdpz0AD2olhQAAAAAAAAAAAAAAAAAAAAAAAAAAqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+qqqqqqqqqqqqqqqqqqqqqqqq
+</rawitemdata></item>
+<item name='$AssistAction_Ex' sign='true'>
+<rawitemdata type='14'>
+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
+/wEAAwAGAAAACQBEAAsACgAAAA==
+</rawitemdata></item>
+<item name='$AssistVersion'><datetime dst='true'>20111026T122257,54+01</datetime></item></note>
+

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/UserBean">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This demonstrates the Domino userBean:" id="label5"
+				style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:table>
+                <xp:tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </xp:tr>
+				<xp:tr>
+					<xp:td>Picture</xp:td>
+					<xp:td>
+						<xp:image url="#{userBean.thumbnailUrl}" id="image1"></xp:image>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Owner (owner)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField20" value="#{userBean.owner}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Viewer (viewer)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField21" value="#{userBean.viewer}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Common Name (displayName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField4" value="#{userBean.displayName}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Common Name (commonName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField8" value="#{userBean.commonName}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Canonical Name (id)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField2" value="#{userBean.id}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Canonical Name (canonicalName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField7" value="#{userBean.canonicalName}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Distinguished Name (distinguishedName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField9" value="#{userBean.distinguishedName}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Abbreviated Name (abbreviatedName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField3" value="#{userBean.abbreviatedName}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>Effective User Name (effectiveUserName)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField10" value="#{userBean.effectiveUserName}">
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td colspan="2">
+						<xp:label value="ACL Privileges"
+							id="label2" style="font-weight:bold">
+						</xp:label>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_CREATE_DOCS (canCreateDocs)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField11" value="#{userBean.canCreateDocs}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_DELETE_DOCS (canDeleteDocs)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField12" value="#{userBean.canDeleteDocs}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_CREATE_PRIV_AGENTS
+						(canCreatePrivAgents)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField13"
+							value="#{userBean.canCreatePrivAgents}"></xp:text>
+					</xp:td>
+				</xp:tr>
+
+				<xp:tr>
+					<xp:td>DBACL_CREATE_PRIV_FOLDERS_VIEWS
+						(canCreatePrivFoldersViews)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField14"
+							value="#{userBean.canCreatePrivFoldersViews}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_CREATE_SHARED_FOLDERS_VIEWS
+						(canCreateSharedFoldersViews)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField15"
+							value="#{userBean.canCreateSharedFoldersViews}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_CREATE_SCRIPT_AGENTS (canCreateScriptAgents)
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField16"
+							value="#{userBean.canCreateScriptAgents}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_READ_PUBLIC_DOCS (canReadPublicDocs)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField17" value="#{userBean.canReadPublicDocs}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_WRITE_PUBLIC_DOCS (canWritePublicDocs)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField18" value="#{userBean.canWritePublicDocs}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>DBACL_REPLICATE_COPY_DOCS (canReplicateCopyDocs)
+					</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField19"
+							value="#{userBean.canReplicateCopyDocs}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td colspan="2">
+						<xp:label value="ACL Level"
+							id="label3" style="font-weight:bold">
+						</xp:label>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>ACL_LEVEL (accessLevel)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField22" value="#{userBean.accessLevel}"></xp:text>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>ACL_LEVEL_AS_STRING (accessLevelAsString)</xp:td>
+					<xp:td>
+						<xp:text escape="true" id="computedField23" value="#{userBean.accessLevelAsString}"></xp:text>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label
+				value="This demonstrates the PeopleService peopleBean with custom data (picture...):"
+				id="label1" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Just Frank Adams display name:
+			<xp:text escape="true" id="computedField24" value="#{javascript:peopleBean.getPerson('CN=Frank Adams/O=renovations').displayName}"></xp:text>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:repeat id="repeat1" rows="30" var="person">
+				<xp:this.value><![CDATA[#{javascript:[
+	peopleBean.getPerson('CN=Frank Adams/O=renovations'),
+	peopleBean.getPerson('CN=Betty Zechman/O=renovations'),
+	peopleBean.getPerson('CN=Ted Amado/O=renovations'),
+	peopleBean.getPerson('CN=Unknown/O=whoami')
+]
+}]]></xp:this.value>
+				<xp:panel>
+					<xp:table role="presentation">
+						<xp:tr>
+							<xp:td>
+								<xp:span style="font-weight:bold">Name:</xp:span>
+							</xp:td>
+							<xp:td>
+								<xp:text escape="true" id="computedField1" value="#{person.displayName}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								, 
+								<xp:span style="font-weight:bold"> Owner:</xp:span>
+								<xp:text escape="true" id="computedField5" value="#{person.owner}">
+								</xp:text>
+							</xp:td>
+							<xp:td>
+								, 
+								<xp:span style="font-weight:bold">Viewer:</xp:span>
+								<xp:text escape="true" id="computedField6" value="#{person.viewer}">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:span style="font-weight:bold">Picture:</xp:span>
+							</xp:td>
+							<xp:td colspan="3">
+								<xp:image url="#{person.thumbnailUrl}" id="image2"></xp:image>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+				</xp:panel>
+			</xp:repeat>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

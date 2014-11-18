@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:djxmHeading id="djxmHeading1" back="Views" moveTo="views" label="Inactive">
+		<xp:this.rendered><![CDATA[#{javascript:
+			sessionScope.from = "inactiveDocs";
+			return true;
+		}]]></xp:this.rendered>
+	</xe:djxmHeading>
+
+	<xc:mobileSearch dataView="dataView2">
+		<xp:this.rendered><![CDATA[#{javascript:// only show the search panel if the db is full text indexed
+			return database.isFTIndexed();
+		}]]></xp:this.rendered>
+	</xc:mobileSearch>
+	
+	<xe:dataView id="dataView2" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" columnTitles="true" rows="10">
+		<xp:this.pageName><![CDATA[#{javascript:
+			var type = viewEntry.getColumnValue("Form");
+			if(type == "announcement")
+			{
+				return type;
+			}
+			else if(type == "IndStat" || type == "Status" || type == "SubteamStatus")
+			{
+				return "status";
+			}
+			else if(type == "Event")
+			{
+				return "event";
+			}
+			else if(type == "MainTopic")
+			{
+				return "document";
+			}
+			else if(type == "ParticipantProfile")
+			{
+				return "memberProfile";
+			}
+			else if(type == "Subteam")
+			{
+				return "subteam";
+			}
+			else
+			{
+				return "";
+			}
+		}]]></xp:this.pageName>
+		
+		<xe:this.data>
+			<xp:dominoView var="view1"
+				viewName="xvwInactiveDocuments"
+				expandLevel="2" search="#{requestScope.searchQuery}">
+			</xp:dominoView>
+		</xe:this.data>
+		
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn
+				columnName="#{javascript: compositeData.get('titleColumn')}"
+				columnTitle="Subject">
+				<xe:this.href><![CDATA[#{javascript:
+					var type = viewEntry.getColumnValue("Form");
+					if(type == "Subteam")
+					{
+						var name = viewEntry.getColumnValue("STName");
+						var url = "#subteam&subteam=" + name;
+						return url;
+					}
+					else if(type == 'ParticipantProfile')
+					{
+						var name = viewEntry.getColumnValue("rawSubject");
+						var url = "#memberProfile&profile=" + name + "&status=0";
+						return url;
+					}
+				}]]></xe:this.href>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.categoryColumn>
+			<xe:viewCategoryColumn columnName="Date"
+				columnTitle="Date">
+			</xe:viewCategoryColumn>
+		</xe:this.categoryColumn>
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:panel id="panel2" xp:key="detail">
+				<xp:text escape="true" id="computedField2"
+					styleClass="mblDetailTextBold" value="From: ">
+				</xp:text>
+				<xp:text escape="true" id="computedField1"
+					styleClass="mblDetailTextNormal"
+					value="#{javascript: viewEntry.getColumnValue('Author')}">
+				</xp:text>
+				<xp:text escape="true" id="computedField3"
+					styleClass="mblDetailTextBold" value=" | Date: ">
+				</xp:text>
+				<xp:text escape="true" id="computedField4"
+					styleClass="mblDetailTextNormal"
+					value="#{javascript: viewEntry.getColumnValue('dateCreated')}">
+
+				</xp:text>
+
+			</xp:panel>
+			
+			<xp:link escape="true" text="More..." id="link1"
+				xp:key="pagerBottom">
+				<xp:this.style>
+					<![CDATA[#{javascript:
+						if(isAndroidCheck())
+						{
+							return "background-color:black; color:white;";
+						}
+					}]]>
+				</xp:this.style>
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+						var dv = getComponent("dataView2");
+						if(dv.getRowCount() > 10)
+							return true;
+						else
+							return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView2" disableId="link1">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

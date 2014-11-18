@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:viewColumn id="colSubject" value="&#173;">
+		<!-- 173 is shy, soft hyphen-->
+		<xp:viewColumnHeader value="Key thought" id="viewColumnHeader27" themeId="TeamRoom.Panel.ViewColumnHeader">
+		</xp:viewColumnHeader>
+		<!--
+			Note, having difficulty using h4 because it is a block level element 
+			and the nbsp span after it acts as a newline. Workaround is to 
+			use value=shy. TODO log column h4 SPR
+		-->
+		<h4 style="margin:0px">
+			<xp:link id="subjectLink" value="/statusReports.xsp">
+				<xp:this.parameters>
+					<xp:parameter name="documentId"
+						value="#{javascript: rowData.getUniversalID() }">
+					</xp:parameter>
+					<xp:parameter name="action" value="openDocument">
+					</xp:parameter>
+				</xp:this.parameters>
+				<xp:this.text><![CDATA[${javascript://
+					if( !compositeData.columnName ){
+						return "#{rowData['$Subject']}";
+					}
+					return "#{rowData['" + compositeData.columnName+ "']}";
+				}]]></xp:this.text>
+				<xp:label rendered="#{javascript: !getComponent('subjectLink').getText() }"
+					disableTheme="true" value="#{strings.subject_untitled}">
+					<!-- Note, the status report Subject field is not required  -->
+				</xp:label>
+			</xp:link>
+		</h4>
+	</xp:viewColumn>
+</xp:view>

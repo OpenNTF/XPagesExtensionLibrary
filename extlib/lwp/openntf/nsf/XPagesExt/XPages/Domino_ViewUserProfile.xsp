@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/DataView">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="Display a user profile" id="label5"
+			style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="document1" formName="Contact"
+					action="openDocument">
+					<xp:this.documentId><![CDATA[${javascript:var v = database.getView("AllNames")
+var name = param['name']
+if(name) {
+	var e = v.getEntryByKey(name)
+	if(e) {
+		return e.getNoteID()
+	}
+}
+
+return null}]]></xp:this.documentId>
+
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xp:panel rendered="#{javascript:document1.isNewNote()}">
+				Cannot find the user name:&#160;
+				<xp:text escape="true" id="computedField1"><xp:this.value><![CDATA[#{javascript:param['name']}]]></xp:this.value></xp:text></xp:panel>
+			<xp:table role="presentation" rendered="#{javascript:!document1.isNewNote()}">
+				<xp:tr>
+					<xp:td>
+						<xp:label value="First name:" id="firstName_Label1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.FirstName}"
+							id="firstName1">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Last name:" id="lastName_Label1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.LastName}"
+							id="lastName1">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="E mail:" id="eMail_Label1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.EMail}"
+							id="eMail1">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="City:" id="city_Label1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.City}"
+							id="city1">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+			<xp:br></xp:br>
+			<xp:button value="Back" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="true" save="false">
+					<xp:this.action><![CDATA[#{javascript:return context.getHistoryUrl(1)
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			</xp:panel>
+	</xc:OneUILayout>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="/Domino_ViewState.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:djxmHeading id="djxmHeading0" styleClass="mblLoginText">
+		<xe:this.label><![CDATA[#{javascript:
+			@DbTitle();
+		}]]></xe:this.label>
+		<xp:link xp:key="actionFacet" id="link1">
+			<xp:this.rendered><![CDATA[#{javascript:
+				var _request = facesContext.getExternalContext().getRequest();
+				var _cookies = _request.getHeader("Cookie");
+				var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+				
+				if ((userBean.canonicalName !== "Anonymous") && (isSessionAuth === false)) 
+				{
+					return false;
+				} else {
+					return true;
+				}
+			}]]></xp:this.rendered>
+			<xp:this.text><![CDATA[#{javascript:
+				var _request = facesContext.getExternalContext().getRequest();
+				var _cookies = _request.getHeader("Cookie");
+				var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+			
+				if(userBean.canonicalName === 'Anonymous')
+				{
+					return res.getString("banner.login");
+				}
+				else if(isSessionAuth === true)
+				{
+					return res.getString("banner.logout");
+				}
+			}]]></xp:this.text>
+			<xp:this.value>
+				<![CDATA[#{javascript:
+					if(userBean.canonicalName === 'Anonymous')
+					{
+						return facesContext.getExternalContext().getRequestContextPath() + "?opendatabase&login";
+					}
+					else
+					{
+						return facesContext.getExternalContext().getRequestContextPath() + "?logout";
+					}
+				}]]>
+			</xp:this.value>
+		</xp:link>
+	</xe:djxmHeading>
+
+	<xe:outline>
+		<xe:this.treeNodes>
+			<xe:basicLeafNode href="#allDocs"
+				label="All Documents">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode label="Most Recent"
+				href="#mostRecent">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode label="By Author" href="#docsByAuthor">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode label="By Tag"
+				href="#tags">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode label="My Documents"
+				href="#myDocs">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode href="#profile" style="overflow: hidden;"
+				label="#{javascript: I18n.format(res.getString('my.profile'), userBean.commonName)}">
+				<xp:this.rendered><![CDATA[#{javascript:
+					userBean.canonicalName !== "Anonymous";
+				}]]></xp:this.rendered>
+			</xe:basicLeafNode>
+		</xe:this.treeNodes>
+	</xe:outline>
+</xp:view>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+xmlns:xc="http://www.ibm.com/xsp/custom" 
+xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:text escape="true" id="titleField" tagName="h1">
+		<xp:this.value><![CDATA[#{javascript:
+			sessionScope.webFrom = "/announcements.xsp";
+			sessionScope.webFromName = strings.getString('announcements');
+			return strings.getString('announcements');
+		}]]></xp:this.value>
+	</xp:text>
+
+	<xp:button value="New Announcement" id="newAnnouncement" themeId="Button.Cancel">
+		<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+		<xp:this.rendered><![CDATA[#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.rendered><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:openPage name="/announcements.xsp" target="newDocument"></xp:openPage>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="Remove" id="btnRemove" themeId="Button.Cancel">
+		<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xp:this.loaded>
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" immediate="true" save="false">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:confirm message="Delete selected announcements?">
+					</xp:confirm>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+						
+var dv = getComponent("allAnnouncementsNewAnnouncement");
+if(null != dv){	
+	var ids = dv.getSelectedIds();
+	if(null != ids && !ids.equals("")){
+		ids = @Explode(ids, ",");
+		try{
+			for(var i = 0; i < ids.length; i++){
+				var forRemoval = database.getDocumentByID(ids[i]);				
+				if(null != forRemoval){
+					forRemoval.remove(false);
+				}
+			}
+		}catch(e){
+			print(e.toString());
+		}
+	}
+}						
+						}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	
+	<xe:pagerSaveState for="allAnnouncementsNewAnnouncement"
+		globalRows="false" id="pagerSaveState1">
+	</xe:pagerSaveState>
+
+	<xe:dataView id="allAnnouncementsNewAnnouncement"
+		var="viewEntry" binding="#{viewStateBean.dataIterator}"
+		collapsibleRows="false" collapsibleDetail="false"
+		columnTitles="true" rowStyleClass="xspHtmlTrView"
+		pageName="/announcements.xsp" openDocAsReadonly="true"
+		rows="25">
+
+		<xe:this.showCheckbox><![CDATA[#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xe:this.showCheckbox>
+		
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="$191"
+				columnTitle="Title">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+
+		<xe:this.data>
+			<xp:dominoView var="AnnouncementsView"
+				viewName="Announcements" dataCache="id">
+			</xp:dominoView>
+		</xe:this.data>
+
+		<!-- CMC: Icon Column #1 -->
+		<xe:this.iconColumn>
+			<xe:viewIconColumn>
+				<xe:this.icons>
+					<!-- CMC: Must read icon -->
+					<xe:iconEntry
+						url="/announcementMustRead.png" selectedValue="89"
+						alt="Must Read">
+					</xe:iconEntry>
+					<!-- CMC: Informational icon -->
+					<xe:iconEntry
+						url="/announcementInformational.png" selectedValue=""
+						alt="Informational">
+					</xe:iconEntry>
+					<!-- CMC: Announcement icon -->
+				</xe:this.icons>
+				<xe:this.value><![CDATA[#{javascript://
+					""+viewEntry.getColumnValue("$189")
+				}]]></xe:this.value>
+			</xe:viewIconColumn>
+		</xe:this.iconColumn>
+
+		<!-- CMC: Date Column -->
+		<xe:this.extraColumns>
+
+			<xe:viewExtraColumn columnName="$190"
+				columnTitle="Date">
+			</xe:viewExtraColumn>
+
+		</xe:this.extraColumns>
+		<xp:this.facets>
+			
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:pager layout="Previous Group Next"
+				id="pager3" xp:key="pagerTopRight" partialRefresh="true"
+				partialExecute="true">
+			</xp:pager>
+
+			<xp:panel xp:key="pagerBottomLeft"
+				id="panel3">
+				<xe:pagerSizes id="pagerSizes1"
+					sizes="10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next"
+				id="pager1" xp:key="pagerBottomRight" partialRefresh="true"
+				partialExecute="true">
+			</xp:pager>
+
+		</xp:this.facets>
+
+	</xe:dataView>
+
+</xp:view>

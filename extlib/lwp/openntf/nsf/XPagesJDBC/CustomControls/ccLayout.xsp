@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+	<xe:applicationLayout id="oneUILayout1">
+		<xe:this.facets>
+			<xp:callback id="Navigator" xp:key="LeftColumn"
+				facetName="LeftColumn">
+			</xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+			<xe:applicationConfiguration
+				placeBarName="XPages Relational Data Access Demo" legalLogoAlt="IBM Corp" legalText="(c) 2010-2011 IBM Corp."
+				productLogo="XPagesLogo.png" navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}">
+				<xe:this.bannerApplicationLinks>
+					<xe:basicLeafNode label="Home" selected="true"
+						href="/">
+					</xe:basicLeafNode>
+				</xe:this.bannerApplicationLinks>
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode page="JDBC_SetupHome"
+						label="Setup">
+					</xe:pageTreeNode>
+				</xe:this.placeBarActions>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode></xe:userTreeNode>
+					<xe:basicLeafNode label="Help"></xe:basicLeafNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+			</xe:applicationConfiguration>
+		</xe:this.configuration>
+		<xp:callback id="OneUIMainAreaCallback"></xp:callback>
+	</xe:applicationLayout>
+</xp:view>

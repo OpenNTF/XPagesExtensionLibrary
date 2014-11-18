@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:label id="label1">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.message"));}]]></xp:this.value>
+	</xp:label>
+	<xp:br></xp:br>
+	<xp:br></xp:br>	
+
+	<xp:table border="0">
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label2" for="inputText1">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location1"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>	
+			<xp:td>
+				<xp:inputText id="inputText1" disabled="true">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.outline"));}]]></xp:this.value>
+				</xp:inputText>
+			</xp:td>
+			<xp:td rowspan="5"><xp:image url="/TeamroomSetupDiagram_png8.png" id="image1"></xp:image></xp:td>
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label3" for="listBoxLocation2">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location2"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:comboBox id="listBoxLocation2" defaultValue="5">
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option1')}" 
+						itemValue="#{javascript:'1'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option2')}" 
+						itemValue="#{javascript:'2'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option3')}" 
+						itemValue="#{javascript:'3'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option4')}" 
+						itemValue="#{javascript:'4'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option5')}" 
+						itemValue="#{javascript:'5'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option6')}" 
+						itemValue="#{javascript:'6'}">
+					</xp:selectItem>
+				</xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label4" for="inputText2">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location3"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="inputText2" disabled="true">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.recentactivity"));}]]></xp:this.value>
+				</xp:inputText>
+			</xp:td>	
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label5" for="listBoxLocation4">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location4"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:comboBox id="listBoxLocation4" defaultValue="2">
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option1')}" 
+						itemValue="#{javascript:'1'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option2')}" 
+						itemValue="#{javascript:'2'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option3')}" 
+						itemValue="#{javascript:'3'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option4')}" 
+						itemValue="#{javascript:'4'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option5')}" 
+						itemValue="#{javascript:'5'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option6')}" 
+						itemValue="#{javascript:'6'}">
+					</xp:selectItem>
+				</xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label6" for="listBoxLocation5">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location5"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>		
+			<xp:td>
+				<xp:comboBox id="listBoxLocation5" defaultValue="3">
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option1')}" 
+						itemValue="#{javascript:'1'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option2')}" 
+						itemValue="#{javascript:'2'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option3')}" 
+						itemValue="#{javascript:'3'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option4')}" 
+						itemValue="#{javascript:'4'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option5')}" 
+						itemValue="#{javascript:'5'}">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="#{javascript:strings.getString('setup.homepage.option6')}" 
+						itemValue="#{javascript:'6'}">
+					</xp:selectItem>
+				</xp:comboBox>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td colspan="3">
+				<xp:label id="label7">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location2title"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>			
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label10" for="location2title">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.titlebar"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">
+				<xp:inputText id="location2title" size="80"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label13" for="location2contents">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.contents"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">			
+				<xp:inputRichText id="location2contents">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>			
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td colspan="3">
+				<xp:label id="label8">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location4title"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label11" for="location4title">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.titlebar"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">
+				<xp:inputText id="location4title" size="80"></xp:inputText>
+			</xp:td>
+		</xp:tr>
+		
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label14" for="location4contents">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.contents"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">
+				<xp:inputRichText id="location4contents">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+				</xp:inputRichText>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td colspan="3">
+				<xp:label id="label9">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.location5title"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label12" for="location5title">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.titlebar"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">
+				<xp:inputText id="location5title" size="80"></xp:inputText>
+			</xp:td>			
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label15" for="location5contents">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.homepage.contents"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td colspan="2">
+				<xp:inputRichText id="location5contents">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+				</xp:inputRichText>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+</xp:view>

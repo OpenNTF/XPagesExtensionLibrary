@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dialog</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+	<component>
+		<description>The Dialog control is a modal dialog that displays its content in a popup dialog</description>
+		<display-name>Dialog</display-name>
+		<component-type>com.ibm.xsp.extlib.dialog.Dialog</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialog</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+
+  		<property>
+			<description>Defines if the controls (JSF components) should be kept in the server-side control tree after the dialog is closed</description>
+			<display-name>Keep Controls</display-name>
+			<property-name>keepComponents</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+	        	<default-value>true</default-value>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dialog.Dialog</renderer-type>
+			<tag-name>dialog</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	
+	<component>
+	    <!-- if we can't make it accessible,possible delete it as we won't release it-->
+		<description>A tooltip dialog is a modal dialog that can contain controls and is closed by clicking anywhere on screen</description>
+		<display-name>Tooltip Dialog</display-name>
+		<component-type>com.ibm.xsp.extlib.dialog.TooltipDialog</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dialog.UITooltipDialog</component-class>
+
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.dialog.Dialog</base-component-type>
+			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dialog.TooltipDialog</renderer-type>
+			<tag-name>tooltipDialog</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+        		<tags>todo</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	<component>
+		<description>The bottom panel in a dialog that holds the dialog buttons which you need to add as children to this control</description>
+		<display-name>Dialog Button Bar</display-name>
+		<component-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialogButtonBar</component-class>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</renderer-type>
+			<tag-name>dialogButtonBar</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+        		<tags>todo</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+	<component>
+		<description>The content panel in a dialog. It is automatically styled with the appropriate theme.</description>
+		<display-name>Dialog Content</display-name>
+		<component-type>com.ibm.xsp.extlib.dialog.DialogContent</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialogContent</component-class>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
+			<renderer-type>com.ibm.xsp.extlib.dialog.DialogContent</renderer-type>
+			<tag-name>dialogContent</tag-name>
+			<since>8.5.32001</since>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+        		<tags>todo</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+</faces-config>

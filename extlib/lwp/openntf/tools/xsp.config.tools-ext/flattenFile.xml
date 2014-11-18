@@ -1,0 +1,192 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2014                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="flattenFile" default="flatten" basedir=".">
+	<description>
+		Expects 'in.file' to contain the name and location of the input file.
+		The input file should exist.
+		Expects 'out.folder' to contain the location of the folder 
+		where the output file will be written.
+		The output folder should exist.
+		Expects 'out.name' to contain the filename of the output file.
+		The output file may exist.
+		
+		Note, this will overwrite read-only files with non-read-only
+		files, if the generated file is different from the existing one.
+		It uses a temp folder to generate the output, before comparing 
+		the generated output and existing file at the output location.
+	</description>
+	<target name="setupFlattener">
+
+		<!-- === Set up the classpath === -->
+		<!-- set up the location of the xpages core -->
+		<!-- XSP plugin version eg:com.ibm.xsp.core_9.0.1.20131206-1400 would be 9.0.1.20131206-1400-->
+		<property name="xsp.plugin.version" value="" />
+		<!-- WCT install directory should be <Notes_dir>/IBM/Notes/framework/shared/eclipse/plugins -->
+		<property name="wct.install.dir" value="" />
+
+		<property name="xsp.lib.jsf" value="${wct.install.dir}/com.ibm.designer.lib.jsf_${xsp.plugin.version}" />				
+		<property name="xsp.core" value="${wct.install.dir}/com.ibm.xsp.core_${xsp.plugin.version}" />
+		<property name="xsp.extsn" value="${wct.install.dir}/com.ibm.xsp.extsn_${xsp.plugin.version}" />
+		<property name="xsp.commons" value="${wct.install.dir}/com.ibm.commons_${xsp.plugin.version}" />
+		<property name="xsp.commons.xml" value="${wct.install.dir}/com.ibm.commons.xml_${xsp.plugin.version}" />
+					
+		<available property="xsp.core.exists" file="${xsp.core}" type="dir" />
+		<fail unless="xsp.core.exists" message="The folder pointing to the lwp04.wct-des/lwp/Source does not exist: ${xsp.core}" />
+		<!-- check jsf-api.jar exists -->
+		<property name="lib.jsf" value="${xsp.lib.jsf}/lib" />
+		<available property="lib.jsf.exists" file="${lib.jsf}" type="dir" />
+		<fail unless="lib.jsf.exists" message="The folder containing jsf-api.jar and jsf-impl.jar does not exist: ${basedir}/${lib.jsf}" />
+		<available property="jsf-api_Exists" file="${lib.jsf}/jsf-api.jar" type="file" />
+		<fail unless="jsf-api_Exists" message="The jsf-api.jar was not found at ${ri-libs}" />
+
+		<!-- setup properties referencing the core and extsn bins within runtime -->
+		<property name="coreBin" value="${xsp.core}/lwpd.xsp.core.jar" />
+		<property name="extsnBin" value="${xsp.extsn}/lwpd.xsp.extsn.jar" />
+		<property name="commons.bin" value="${xsp.commons}/lwpd.commons.jar" />
+		<property name="commons.xml.bin" value="${xsp.commons.xml}/lwpd.commons.xml.jar" />
+					
+		
+		<!-- set up the classpath variable that'll be used by referencing targets -->
+		<path id="run.classpath">
+			<pathelement location="${lib.jsf}/jsf-api.jar" />
+			<pathelement location="${lib.jsf}/jsf-impl.jar" />
+			<!--<pathelement location="${xercesJar}"/>-->
+			<pathelement location="${commons.bin}"/> 
+			<pathelement location="${commons.xml.bin}"/>
+			<pathelement location="${coreBin}" />
+			<pathelement location="${extsnBin}" />
+			<pathelement location="${basedir}/bin" />
+		</path>
+		<property name="run.path" refid="run.classpath" />
+		<!-- === done setting up the classpath === -->
+		
+		<!-- === Set up the temp folder for doing the compare === -->
+		<tempfile property="temp.folder" prefix="tempdir" />
+		
+	</target>
+	
+	<target name="flattenAndCompare">
+		<!-- === check inputs === -->
+		<condition property="isClassPathSet">
+			<isset property="run.path" />
+		</condition>
+		<fail unless="isClassPathSet" message="The classpath isn't set. It should be in 'run.path', configured by setupFlattener target" />
+
+		<condition property="isInFileSet">
+			<isset property="in.file" />
+		</condition>
+		<fail unless="isInFileSet" message="The input file isn't set. It should be in the property 'in.file'." />
+
+		<available property="isInFileExisting" file="${in.file}" />
+		<fail unless="isInFileExisting" message="The input file doesn't exist. The file specified was ${in.file}" />
+
+		<condition property="isOutFileSet">
+			<isset property="out.name" />
+		</condition>
+		<fail unless="isOutFileSet" message="The output file name isn't set. It should be in the property 'out.name'. in.file is ${in.file}" />
+		<condition property="isOutFolderSet">
+			<isset property="out.folder" />
+		</condition>
+		<fail unless="isOutFolderSet" message="The output file folder isn't set. It should be in the property 'out.folder'. in.file is ${in.file} out.name is ${out.name}" />
+		
+		<!-- <echo message="checkInputs passed."/> -->
+		<!-- === end check inputs === -->
+		
+		<!-- === Run flattener === -->
+		<!--
+		<java classname="com.ibm.xsp.tools.DTDWriter" failonerror="true">
+			<classpath path="${run.path}" />
+			<arg value="${in.file}" />
+			<arg value="${temp.folder}/dtd-${out.name}" />
+		</java>		
+		<touch file="${temp.folder}/dtd-${out.name}"/> 
+		-->
+		<java classname="com.ibm.xsp.tools.ConfigFlattener" failonerror="true">
+			<classpath path="${run.path}" />
+			<arg value="--in" />
+			<arg value="${in.file}" />
+			<arg value="--outFolder" />
+			<arg value="${temp.folder}/" />
+			<arg value="--outFileName" />
+			<arg value="${out.name}" />
+			<arg value="--mode" />
+			<arg value="${flatten.mode}" />
+			<arg value="--extraPropsFolder" />
+			<arg value="${out.folder}" />
+			<arg value="--ignoreWarnings" />
+			<arg value="${ignoreWarnings}" />
+			<arg value="--doNotTranslate" />
+			<arg value="${doNotTranslate}" />
+		</java>
+		<touch file="${temp.folder}/${out.name}"/> 
+		<!-- === end Run flattener === -->
+		
+		<!-- === Check output === -->
+		<!-- if old and new are the same, not save file.-->
+		<!-- IgnoreHeaderCompare compares ignoring the copyright header -->
+        <java classname="com.ibm.xsp.tools.IgnoreHeaderCompare" failonerror="true" 
+             outputproperty="compareXml">
+            <classpath path="${run.path}" />
+            <arg value="--type" /> <arg value="xml" />
+            <arg value="--old" />  <arg value="${out.folder}${out.name}" />
+            <arg value="--new" />  <arg value="${temp.folder}/${out.name}" />
+        </java>
+        <condition property="notSaveFile">
+            <equals arg1="true" arg2="${compareXml}"/>
+        </condition>
+		
+        <java classname="com.ibm.xsp.tools.IgnoreHeaderCompare" failonerror="true"
+             outputproperty="compareProps">
+            <classpath path="${run.path}" />
+            <arg value="--type" /> <arg value="props" />
+            <arg value="--old" />  <arg value="${out.folder}${out.props}" />
+            <arg value="--new" />  <arg value="${temp.folder}/${out.props}" />
+        </java>
+        <condition property="notSaveProps">
+            <equals arg1="true" arg2="${compareProps}"/>
+        </condition>
+		<!-- will print either true or the value with the $ (if there's a change)
+		<echo message="notSaveFile is ${notSaveFile}. notSaveProps is ${notSaveProps}"/>
+		-->
+		<!-- === end Check output === -->
+	</target>
+
+	<target name="saveGenerated" unless="notSaveFile">
+		<echo message="Saving the changed file to ${out.name}" />
+		<attrib file="${out.folder}${out.name}" readonly="false"/>
+		<move file="${temp.folder}/${out.name}" tofile="${out.folder}${out.name}" />
+	</target>
+	
+	<target name="saveProperties" unless="notSaveProps">
+		<echo message="Saving the changed props to ${out.props}" />
+		<attrib file="${out.folder}${out.props}" readonly="false"/>
+		<move file="${temp.folder}/${out.props}" tofile="${out.folder}${out.props}" />
+	</target>
+
+	<target name="cleanup">
+		<delete dir="${temp.folder}" />
+	</target>
+
+	<target name="flatten" depends="
+		flattenAndCompare,
+		saveGenerated, 
+		saveProperties">
+	</target>
+
+</project>

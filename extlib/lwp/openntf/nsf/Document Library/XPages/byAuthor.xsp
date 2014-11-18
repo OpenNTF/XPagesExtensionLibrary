@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xc:layout navigationPath="/byAuthor">
+		<xp:this.facets>
+			<xp:panel xp:key="MiddleColumn">
+				<xp:text escape="true" id="titleField" tagName="h1" value="By Author" styleClass="viewHeader"></xp:text>
+				<xc:breadcrumb pageTitle="byAuthor" pageUrl="/byAuthor.xsp"></xc:breadcrumb>
+				<xp:button value="New Document" id="button2" themeId="Button.Cancel">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && (@UserName() !== "Anonymous")}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dynamicContent">
+						<xp:this.action>
+							<xe:changeDynamicContentAction
+								for="dynamicContent" facetName="newDocView">
+							</xe:changeDynamicContentAction>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				
+				<!--		DataView		-->
+				<xc:cpByAuthorDataView></xc:cpByAuthorDataView>
+								
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+</xp:view>

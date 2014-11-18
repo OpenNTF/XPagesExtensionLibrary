@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Annuleren",
+PickerList_OK: "OK",
+PickerList_Cancel: "Annuleren",
+PickerListSearch_Search: "Zoeken",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "Annuleren",
+PickerListSearch_Value: "Waarde",
+PickerListSearch_Values: "Waarden",
+PickerName_Search: "Zoeken",
+PickerName_Add: "Toevoegen",
+PickerName_Remove: "Verwijderen",
+PickerName_RemoveAll: "Alle verwijderen",
+PickerName_OK: "OK",
+PickerName_Cancel: "Annuleren",
+PickerName_SearchIn: "Zoeken in",
+PickerName_SearchFor: "Zoeken naar",
+PickerName_unSelectedListLabel: "Lijst van te selecteren waarden",
+PickerName_selectedListLabel: "Lijst van geselecteerde waarden"
+})

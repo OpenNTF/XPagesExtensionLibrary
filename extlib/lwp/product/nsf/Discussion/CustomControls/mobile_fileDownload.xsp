@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:panel styleClass="mblFileDownloadPanel">
+		<xp:this.rendered><![CDATA[#{javascript:
+			var al:java.util.List = dominoDoc.getAttachmentList("Body");
+			if(al.isEmpty())
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}]]></xp:this.rendered>
+		<xp:label value="Attachments:" id="label1" styleClass="mblFileDownloadlbl" for="repeatList">
+		</xp:label>
+	</xp:panel>
+		
+	<xp:repeat id="repeatList" value="#{javascript:dominoDoc.getAttachmentList('Body')}"
+		var="attachData" indexVar="attachIndex"
+		rendered="#{javascript:var lastlevel=0;}" rows="300" first="0">	
+		
+		<xp:link id="label4">
+			<xp:this.text><![CDATA[#{javascript:
+				var al:java.util.List = dominoDoc.getAttachmentList("Body");
+				if(!al.isEmpty())
+				{
+					var eo:NotesEmbeddedObject = al.get(attachIndex);
+					return eo.getName();
+				}
+			}]]></xp:this.text>
+			<xp:this.value><![CDATA[#{javascript:
+				var al:java.util.List = dominoDoc.getAttachmentList("Body");
+				var eo:NotesEmbeddedObject = "";
+				if(!al.isEmpty())
+				{
+					eo = al.get(attachIndex);
+					return eo.getHref();
+				}
+				else
+				{
+					return "";
+				}
+			}]]></xp:this.value>
+		</xp:link>
+		<xp:br></xp:br>
+	</xp:repeat>
+</xp:view>

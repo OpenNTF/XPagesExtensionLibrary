@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:label id="label1" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.title"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:label id="label2">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.message1"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:table border="0" cellpadding="0" cellspacing="0">
+		<xp:tr>
+			<xp:td>
+				<xp:inputText id="fieldDocumentTagsHidden"
+					value="#{document1.Categories}" multipleSeparator=","
+					multipleTrim="true" rendered="false">
+				</xp:inputText>
+			</xp:td>
+
+			<xp:td>
+				<xp:inputTextarea id="fieldDocumentTags" cols="40"
+					rows="10" role="input"
+					title="input tags that will be provided as options to users">
+
+					<xp:this.defaultValue><![CDATA[#{javascript:
+
+var items = getComponent("fieldDocumentTagsHidden").getValue();
+return @Implode(items,"\n");
+
+}]]></xp:this.defaultValue>
+				</xp:inputTextarea>
+
+			</xp:td>
+
+			<xp:td>
+				<xp:text escape="false" id="computedField1">
+					<xp:this.value><![CDATA[#{javascript:return "&nbsp;";}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+
+			<xp:td valign="top">
+				<xp:button id="sortDocumentTags" themeId="Button.Cancel">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.sort"));}]]></xp:this.value>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:
+				
+updateFieldsOnSave("fieldDocumentTags", "fieldDocumentTagsHidden", true, null);
+
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label3" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.mapcategories"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label4">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.message2"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label5" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.note"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:label id="label6">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.message3"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:button id="mapCategoriesButton" themeId="Button.Cancel">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.mapcategories"));}]]></xp:this.value>
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script><![CDATA[XSP.openDialog("#{id:dialogMapTags}");]]></xp:this.script>
+		</xp:eventHandler>
+	</xp:button>
+	
+	<xc:setupMapTags id="mapTags"></xc:setupMapTags>
+</xp:view>

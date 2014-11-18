@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.DateTextBox"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.TimeTextBox"></xp:dojoModule>
+	</xp:this.resources>
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	
+	<xc:layout navigationPath="/calendar">
+		<xc:homeMainTopic id="eventCalendar"
+			documentId="#{javascript:return param.documentId;}">
+		</xc:homeMainTopic>
+	</xc:layout>
+</xp:view>

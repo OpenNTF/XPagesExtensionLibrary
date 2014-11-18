@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:pagerSaveState for="membersSubteamsDataView"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	
+	<!-- xe:dumpObject id="dumpObject1">
+		<xe:this.value><![CDATA[#{javascript:peopleBean.getPerson("Simon")}]]></xe:this.value>
+	</xe:dumpObject-->
+
+	<xe:dataView xp:key="tileView" id="membersSubteamsDataView" var="viewEntry"
+		collapsibleRows="false" binding="#{viewStateBean.dataIterator}"
+		collapsibleDetail="false" rowStyleClass="xspHtmlTrView"
+		openDocAsReadonly="true" rows="25" multiColumnCount="2"
+		expandedDetail="true">
+		<xe:this.showCheckbox><![CDATA[#{javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xe:this.showCheckbox>
+		<xe:this.data>
+			<xp:dominoView var="viewData" viewName="xvwMembers" dataCache="id">
+			</xp:dominoView>
+		</xe:this.data>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn>
+				<xe:this.value><![CDATA[#{javascript:viewEntry.getColumnValue('FullName')}]]></xe:this.value>
+				<!-- xe:this.value><![CDATA[#{javascript:peopleBean.getPerson(viewEntry.getColumnValue("$3")).displayName}]]></xe:this.value-->
+				<!-- xe:this.href><![CDATA[#{javascript:"/members.xsp?profile=" + peopleBean.getPerson(viewEntry.getColumnValue("$3")).abbreviatedName}]]></xe:this.href-->
+				<xe:this.href><![CDATA[#{javascript:"/members.xsp?profile=" + viewEntry.getColumnValue('FullName')}]]></xe:this.href>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.iconColumn>
+			<xe:viewIconColumn>
+				<xe:this.icons>
+					<xe:iconEntry style="height:35px;width:35px" alt="" title="">
+						<!-- xe:this.url><![CDATA[#{javascript:
+							var url = peopleBean.getPerson(viewEntry.getColumnValue("$3")).thumbnailUrl;
+							return url;
+						}]]></xe:this.url-->
+						<xe:this.url><![CDATA[#{javascript:
+							var picture = "";
+							var url = "";
+							
+							if(viewEntry.getColumnValue("thumbnailUrl") == "")
+							{
+								url = "profileNoPhoto-118px.png";
+							}
+							else
+							{
+								picture = viewEntry.getColumnValue("thumbnailUrl");
+								url = "/.ibmmodres/" + viewEntry.getColumnValue("DocUNID") + "/$file/" + picture;
+							}
+							
+							return url;
+						}]]></xe:this.url>
+					</xe:iconEntry>
+				</xe:this.icons>
+			</xe:viewIconColumn>
+		</xe:this.iconColumn>
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			<xp:div id="detailRow" xp:key="detail">
+				<xp:link id="lkMailto">
+					<xp:this.rendered>
+						<![CDATA[#{javascript:
+							try //seems to throw an error when switching to subteams, believe to be a refresh issue
+							{
+								var email = viewEntry.getColumnValue("Email Address");
+								if(email == null || email == "")
+								{return false;}
+								else
+								{return true;}
+							}
+							catch(e)
+							{}
+						}]]>
+					</xp:this.rendered>
+					<!-- xp:this.value><![CDATA[#{javascript:"mailto:" + peopleBean.getPerson(viewEntry.getColumnValue("$3")).internetEmail}]]></xp:this.value>
+					<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(viewEntry.getColumnValue("$3")).internetEmail}]]></xp:this.text-->
+					<xp:this.value><![CDATA[#{javascript:"mailto:" + viewEntry.getColumnValue("Email Address")}]]></xp:this.value>
+					<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Email Address")}]]></xp:this.text>
+				</xp:link>
+			</xp:div>
+			<xp:pager layout="Previous Group Next" id="pager1" xp:key="pagerTopRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+			<xp:panel xp:key="pagerBottomLeft" id="panel3">
+				<xe:pagerSizes id="pagerSizes1" sizes="10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next" id="pager2" xp:key="pagerBottomRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

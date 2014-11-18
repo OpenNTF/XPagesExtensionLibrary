@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DataServicesContacts">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			Hello, I'm a REST service page!
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Domino legacy services
+			<xp:br></xp:br>
+			<xp:button value="ReadViewEntries as XML" id="button3">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("AllContacts?ReadViewEntries&start=1&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="ReadViewEntries as JSON" id="button4">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("AllContacts?ReadViewEntries&start=1&count=4&outputformat=JSON"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xp:br></xp:br>
+			This is a view Rest service, extended using the custom
+			servlet API
+			<xp:br></xp:br>
+
+			<xp:button value="Custom Servlet" id="button6">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect("xsp/services/AllContacts?start=0&count=4")}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, using JSON for the dojox
+			RestStore: /contactjson
+			<xp:br></xp:br>
+			<xp:checkBox text="Compact JSON" id="checkBox2"
+				value="#{sessionScope.CompactJson}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="JSON for Dojo REST data source"
+				id="button7">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesContacts.xsp/contactjson?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService1" pathInfo="contactjson">
+				<xe:this.service>
+					<xe:viewJsonService viewName="AllContacts"
+						defaultColumns="true" var="entry" contentType="text/plain">
+						<xe:this.columns>
+							<xe:restViewColumn name="MyColumn"
+								columnName="FirstName">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="MyComputedCol"
+								value="#{javascript:45+98}">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="sname">
+								<xe:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xe:this.value>
+							</xe:restViewColumn>
+						</xe:this.columns>
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson=="true"}]]></xe:this.compact>
+					</xe:viewJsonService>
+				</xe:this.service>
+			</xe:restService>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, using&#160;Item File&#160;JSON:
+			/contactfile
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact JSON" id="ckJson"
+				value="#{sessionScope.CompactFile}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Item File format - JSON" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesContacts.xsp/contactsfile?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService4" pathInfo="contactsfile">
+				<xe:this.service>
+					<xe:viewItemFileService viewName="AllContacts"
+						defaultColumns="true" var="entry" contentType="text/plain">
+						<xe:this.columns>
+							<xe:restViewColumn name="MyColumn"
+								columnName="FirstName">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="MyComputedCol"
+								value="#{javascript:45+98}">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="sname">
+								<xe:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xe:this.value>
+							</xe:restViewColumn>
+						</xe:this.columns>
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactFile=="true"}]]></xe:this.compact>
+					</xe:viewItemFileService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service,using Legacy&#160;XML:
+			/legacyxml
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact XML View" id="ckXmlView"
+				value="#{sessionScope.CompactXmlView}">
+			</xp:checkBox>
+
+			<xp:checkBox text="As Text" id="ckXmlText"
+				value="#{sessionScope.AsTextXmlView}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Legacy XML ReadEntries Emulation"
+				id="button2">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesContacts.xsp/legacyxml?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService5" pathInfo="legacyxml">
+				<xe:this.service>
+					<xe:viewXmlLegacyService viewName="AllContacts"
+						defaultColumns="true" var="entry">
+						<xe:this.columns>
+							<xe:restViewColumn name="MyColumn"
+								columnName="FirstName">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="MyComputedCol"
+								value="#{javascript:45+98}">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="sname">
+								<xe:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xe:this.value>
+							</xe:restViewColumn>
+						</xe:this.columns>
+
+						<xe:this.contentType><![CDATA[#{javascript:sessionScope.AsTextXmlView=="true" ? "text/plain" : "text/xml"
+}]]></xe:this.contentType>
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactXmlView=="true"}]]></xe:this.compact>
+					</xe:viewXmlLegacyService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, using Legacy&#160;JSON:
+			/legacyjson
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact JSON" id="checkBox1"
+				value="#{sessionScope.CompactJson2}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Legacy JSON ReadEntries Emulation"
+				id="button5">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesContacts.xsp/legacyjson?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService6" pathInfo="legacyjson">
+				<xe:this.service>
+					<xe:viewJsonLegacyService viewName="AllContacts"
+						defaultColumns="true" var="entry" contentType="text/plain">
+						<xp:this.columns>
+							<xe:restViewColumn name="MyColumn"
+								columnName="FirstName">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="MyComputedCol"
+								value="#{javascript:45+98}">
+							</xe:restViewColumn>
+							<xe:restViewColumn name="sname">
+								<xe:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xe:this.value>
+							</xe:restViewColumn>
+						</xp:this.columns>
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson2=="true"}]]></xe:this.compact>
+					</xe:viewJsonLegacyService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

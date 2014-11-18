@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+		xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:controlPagerArea id="pagerArea">
+		<xe:this.facets>
+			<xe:pagerSizes style="float:left;"
+				xp:key="left" id="pagerSizes1">
+			</xe:pagerSizes>
+			<xp:pager xp:key="right" style="float:right;"
+				partialRefresh="true" layout="Previous Separator Next"
+				id="pager3">
+			</xp:pager>
+		</xe:this.facets>
+	</xc:controlPagerArea>
+</xp:view>

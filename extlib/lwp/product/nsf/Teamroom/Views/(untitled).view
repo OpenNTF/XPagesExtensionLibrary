@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='15a' unid='F222A55384D62A238025786F0059FA87' sequence='7'>
+<created><datetime dst='true'>20110411T172248,39+01</datetime></created>
+<modified><datetime>20120207T095544,59+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122303,91+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,59+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,59+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name
+>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20110830T205053,63-04</datetime><datetime
+ dst='true'>20111006T160544,60+01</datetime><datetime dst='true'>20111014T083959,86+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE'><text/></item>
+<item name='$Formula' summary='true'><formula compiled='true'>
+HAAFAA4ACgABAAQAJCQkJAQABAAAAAgAZgADAA==
+</formula></item>
+<item name='$FormulaClass'><text>1</text></item></note>
+

@@ -1,0 +1,143 @@
+.documentAttachmentIcon:first-child a {
+	padding-right: 25px;
+	background-image: url('xpAttachment.gif');
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.lotusTitleBar h2.lotusEllipsis {
+	margin: 0;
+	font-size: 15px;
+}
+
+h1.viewHeader {
+	margin-bottom: 10px;
+}
+
+.lotusTable .authorColumn {
+	padding: 0 17px 0 17px;
+}
+
+.tagCloud {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.lotusFormTable .lotusFormFieldRow {
+	width: 100%;
+}
+
+.lotusFormTable .lotusFormFieldRow .formRowFieldContainer {
+	width: 99%;
+	padding: 0;
+	margin: 0;
+}
+
+.lotusFormTable .lotusFormFieldRow .formRowFieldContainer .formRowFieldLabel {
+	width: 10%;
+}
+
+.lotusFormTable .lotusFormFieldRow .formRowFieldContainer .formRowFieldValue {
+	width: 90%;
+}
+
+.lotusFormTable .lotusFormFieldRow .formRowFieldContainer .formRowFieldValue .xspInputFieldEditBox {
+	width: 100%;
+}
+
+.lotusFormTable .timeLimitInDaysField {
+	width: 0px;
+	border: none;
+	margin-top: -5px;
+}
+
+.lotusFormTable .xspInputFieldRichText {
+	width: 99%;
+}
+
+.lotusFormTable .attachLink {
+	float: left;
+}
+
+/*.fileContainer .xspInputFieldFileUpload {
+	display: none;
+	margin-top:5px;
+}*/
+
+.lotusFormFooter .markPrivatePublic {
+	margin-right: 10px;
+}
+
+.replyCount {
+	margin: 10px;
+}
+
+.documentSubject {
+	margin: 0;
+}
+
+.documentBody {
+	border-top: 1px #CCC solid;
+	border-bottom: 1px #CCC solid;
+	margin: 5px 0 5px 0;
+	padding: 5px 0 5px 0;
+}
+.documentFiles {
+	margin-top:8px;font-size:11px;
+}
+
+.documentAuthor {
+	color:#333;
+}
+
+.documentTags {
+	display: inline;
+}
+
+.documentShowHideDetails {
+	margin-left:10px;
+}
+
+.topicSubject {
+	font-weight: bold;
+	font-size: 14px;
+	height: 16px;
+}
+
+.topicBody {
+	border-top: 1px #CCC solid;
+	border-bottom: 1px #CCC solid;
+	margin: 5px 0 5px 0;
+	padding: 5px 0 5px 0;
+}
+
+.topicBody .files {
+	margin-top: 8px;
+	font-size: 11px;
+}
+
+.topicActionsFirstItem {
+	padding-left: 0 !important;
+	padding-right: 7px !important;
+}
+
+.categoryRow {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.reviewDueColumn {
+	padding: 0 30px 0 30px !important;
+}
+
+.reviewReviewerColumn {
+	padding: 0 40px 0 40px !important;
+}
+
+.searchAuthorColumn {
+	padding: 0 17px 0 17px !important;
+}
+
+.summaryColumn {
+	padding-left: 10px !important;
+}

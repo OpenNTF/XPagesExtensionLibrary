@@ -1,0 +1,1209 @@
+JUnit results, running against Notes 9.0.1
+using the Notes JVM
+Test ran 2014-02-21T16:52
+Lines in file: 1210
+
+~ ExtlibTestSuite
+xsp.extlib.test.ExtlibTestSuite
+xsp.extlib.test.registry.ExtlibBooleanPropertyDefaultTest
+testPropertyDefaultValue(xsp.extlib.test.registry.ExtlibBooleanPropertyDefaultTest)
+junit.framework.AssertionFailedError: 32 fail(s). :
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UIDialog] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UITooltipDialog] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config UIOutlineNavigator.isExpandable() Getter value (false) not matching description default (true), found: Default is "true"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on AbstractDojoExtListTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoExtListTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoExtNameTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoExtLinkSelect] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoExtImageSelect] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoContentPane.isPartialRefresh() boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UIDojoTabPane] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UIDojoStackPane] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UIDojoBorderPane] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoContentPane.isPartialRefresh()[Called on UIDojoAccordionPane] boolean property default problem. Test configured with all props named partialRefresh to default to true. This defaults to: false
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoValidationTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoMappedTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoRangeBoundTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoNumberTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoNumberSpinner] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoCurrencyTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoDateTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoTimeTextBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoComboBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoFilteringSelect] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoTextarea] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoSimpleTextarea] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoButton] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoToggleButton] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoCheckBox] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoRadioButton] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoHorizontalSlider] boolean property with unexpected default value: true (expected false)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoVerticalSlider] boolean property with unexpected default value: true (expected false)
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.BooleanPropertyDefaultTest.testPropertyDefaultValue(BooleanPropertyDefaultTest.java:310)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.ExtlibExtlibGroupReuseTest
+testGroupReuse(xsp.extlib.test.registry.ExtlibExtlibGroupReuseTest)
+junit.framework.AssertionFailedError: 5 fail(s). :
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:restViewColumn value Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:restDocumentItem value Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config xe:dominoViewCloudData viewName Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.viewNameProp, com.ibm.xsp.extlib.group.viewFolderNameProp
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:repeatTreeNode value Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewIconColumn value Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.GroupReuseTest.testGroupReuse(GroupReuseTest.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.ExtlibPropertyDefaultValueTest
+testPropertyDefaultValue(xsp.extlib.test.registry.ExtlibPropertyDefaultValueTest)
+junit.framework.AssertionFailedError: 50 fail(s). :
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config UIListViewColumn.getSequenceNumber() int property with unexpected primitive default value: -2147483648 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getGlobalValues()[Called on DominoViewJsonLegacyService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSystemColumns()[Called on DominoViewJsonLegacyService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getCount()[Called on DominoViewJsonLegacyService] int property with unexpected primitive default value: 10 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getExpandLevel()[Called on DominoViewJsonLegacyService] int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSearchMaxDocs()[Called on DominoViewJsonLegacyService] int property with unexpected primitive default value: 32 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getGlobalValues()[Called on DominoViewItemFileService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSystemColumns()[Called on DominoViewItemFileService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getCount()[Called on DominoViewItemFileService] int property with unexpected primitive default value: 10 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getExpandLevel()[Called on DominoViewItemFileService] int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSearchMaxDocs()[Called on DominoViewItemFileService] int property with unexpected primitive default value: 32 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getGlobalValues()[Called on DominoViewJsonService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSystemColumns()[Called on DominoViewJsonService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getCount()[Called on DominoViewJsonService] int property with unexpected primitive default value: 10 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getExpandLevel()[Called on DominoViewJsonService] int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSearchMaxDocs()[Called on DominoViewJsonService] int property with unexpected primitive default value: 32 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getGlobalValues()[Called on DominoViewXmlLegacyService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSystemColumns()[Called on DominoViewXmlLegacyService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getCount()[Called on DominoViewXmlLegacyService] int property with unexpected primitive default value: 10 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getExpandLevel()[Called on DominoViewXmlLegacyService] int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoViewService.getSearchMaxDocs()[Called on DominoViewXmlLegacyService] int property with unexpected primitive default value: 32 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoDocumentService.getGlobalValues()[Called on DominoDocumentJsonService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoDocumentService.getSystemItems()[Called on DominoDocumentJsonService] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config DominoDocumentService.getSearchMaxDocs()[Called on DominoDocumentJsonService] int property with unexpected primitive default value: 32 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config ViewTagCloudData.getMaxTagLimit() int property with unexpected primitive default value: 50 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config ViewTagCloudData.getTagThreshold() int property with unexpected primitive default value: 5 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config ViewTagCloudData.getMinEntryCount() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config ViewTagCloudData.getCacheRefreshInterval() int property with unexpected primitive default value: 120 (expected 0)
+com/ibm/xsp/extlib/config/extlib-domino-outline.xsp-config LoginTreeNode.getLabel() non-primitive property with non-null default value: Logout
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config UIOutlineNavigator.getExpandLevel() int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-fx-actions.xsp-config AnimatePropertyAction.getRepeat() int property with unexpected primitive default value: -2147483648 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-fx-actions.xsp-config AnimatePropertyAction.getRate() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-fx-actions.xsp-config SlideToAction.getLeft() int property with unexpected primitive default value: -2147483648 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-fx-actions.xsp-config SlideToAction.getTop() int property with unexpected primitive default value: -2147483648 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config UIDojoDataGrid.getUpdateDelay() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config UIDojoDataGrid.getRowsPerPage() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoBorderPane.getMaxSize() int property with unexpected primitive default value: 2147483647 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config UIDojoAccordionContainer.getDuration() int property with unexpected primitive default value: 250 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config NumberConstraints.getMin() double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config NumberConstraints.getMax() double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config NumberConstraints.getPlaces() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoNumberSpinner.getTimeoutChangeRate() double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoNumberSpinner.getSmallDelta() double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoNumberSpinner.getLargeDelta() double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoTextarea.getCols() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoTextarea.getRows() int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoTextarea.getCols()[Called on UIDojoSimpleTextarea] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoTextarea.getRows()[Called on UIDojoSimpleTextarea] int property with unexpected primitive default value: -1 (expected 0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideDuration()[Called on UIDojoHorizontalSlider] double property with unexpected primitive default value: NaN (expected 0.0)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideDuration()[Called on UIDojoVerticalSlider] double property with unexpected primitive default value: NaN (expected 0.0)
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.PropertyDefaultValueTest.testPropertyDefaultValue(PropertyDefaultValueTest.java:300)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.annotate.ExtlibDisplayNameDuplicateTest
+testDisplayNameDuplicate(xsp.extlib.test.registry.annotate.ExtlibDisplayNameDuplicateTest)
+junit.framework.AssertionFailedError: 1 fail(s). :
+com/ibm/xsp/extlib/config/extlib-dojo-base.xsp-config xe:com.ibm.xsp.extlib.dojo.WidgetBase  Duplicate def description/display-name. Existing: com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:com.ibm.xsp.extlib.dojo.WidgetBaseEx(Dojo Widget Base|"The base Dojo widget that all widgets inherit from")
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.DisplayNameDuplicateTest.testDisplayNameDuplicate(DisplayNameDuplicateTest.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest
+testTableAccessibility(com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest)
+junit.framework.AssertionFailedError: 10 fail(s). :
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected summary attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected summary attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected summary attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected summary attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected caption attribute in table tag for accessibility does not exist.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:199)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.annotate.ExtlibInputAccessibilityTest
+testInputAccessibility(xsp.extlib.test.registry.annotate.ExtlibInputAccessibilityTest)
+junit.framework.AssertionFailedError: 35 fail(s). :
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton Expected accesskey="a" attribute in input tag for accessibility. Found null
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expected tabindex attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected accesskey attribute in input tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected tabindex attribute in input tag for accessibility does not exist.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.annotate.ExtlibInputDefaultValueDisabledTest
+testDefaultValueDisabledCategory(xsp.extlib.test.registry.annotate.ExtlibInputDefaultValueDisabledTest)
+junit.framework.AssertionFailedError: 3 fail(s). :
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton Expected default value for input tag does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton Submitted value not saved in viewScope, expected >Default_djRadioButton1(String)<, was>(String)<
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton Expected redisplayed value (Default_djRadioButton1) not present in page after POST request
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.InputDefaultValueDisabledTest.testDefaultValueDisabledCategory(InputDefaultValueDisabledTest.java:312)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.registry.annotate.BaseInputReadOnlyPropertyTest
+testInputReadOnlyProperty(com.ibm.xsp.test.framework.registry.annotate.BaseInputReadOnlyPropertyTest)
+junit.framework.AssertionFailedError: 17 fail(s). :
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.ListTextBox" readOnly="true" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.NameTextBox" readOnly="true" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.LinkSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.ImageSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.InputReadOnlyPropertyTest.testInputReadOnlyProperty(InputReadOnlyPropertyTest.java:314)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.registry.annotate.BaseInputReadOnlyRendererTest
+testReadOnlyRendererExists(com.ibm.xsp.test.framework.registry.annotate.BaseInputReadOnlyRendererTest)
+junit.framework.AssertionFailedError: 6 fail(s). :
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Expected '.ReadOnly' renderer not found. (Runtime will fallback to normal renderer).
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.InputReadOnlyRendererTest.testReadOnlyRendererExists(InputReadOnlyRendererTest.java:97)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.annotate.ExtlibRoleAccessibilityTest
+testRoleAccessibility(xsp.extlib.test.registry.annotate.ExtlibRoleAccessibilityTest)
+junit.framework.AssertionFailedError: 90 fail(s). :
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:singlePageApp Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmHeading Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmRoundRectList Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmLineItem Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:appPage Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:tabBar Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:tabBarButton Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmSwitch Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewStore Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewDesign Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config xe:tooltip Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialog Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:tooltipDialog Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogButtonBar Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogContent Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:inPlaceForm Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:switchFacet Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-rpc.xsp-config xe:jsonRpcService Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-rest.xsp-config xe:restService Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-tagcloud.xsp-config xe:tagCloud Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:valuePicker Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:namePicker Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:breadCrumbs Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:sortLinks Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:linksList Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:outline Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:dropDownButton Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formColumn Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumView Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumPost Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSizes Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerExpand Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerDetail Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerAddRows Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSaveState Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridRow Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djContentPane Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackPane Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djBorderContainer Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djBorderPane Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionPane Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRule Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list Expected role property for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline Expected role property for accessibility does not exist.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.RoleAccessibilityTest.testRoleAccessibility(RoleAccessibilityTest.java:162)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.registry.annotate.BaseTodoTaggedTest
+testTodoTaggedDefsAndProps(com.ibm.xsp.test.framework.registry.annotate.BaseTodoTaggedTest)
+junit.framework.AssertionFailedError: 173 fail(s). :
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmLineItem  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:tabBarButton transition  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView storeComponentId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView structureComponentId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView canBeNarrowMode  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView alternateRows  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView onNewEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView onCellClick  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView onCellDblClick  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewDesign  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn width  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn showGradient  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn narrowDisplay  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn sequenceNumber  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn icon  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onNewEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onOpenEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onSelectEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onDeleteEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onContextMenu  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onRescheduleEntry  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView onChangeView  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore databaseName  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore url  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore bgColorMeeting  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoViewService sortColumn  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoViewService sortOrder  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoViewService search  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoViewService computeWithForm  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoViewService queryNewDocument  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:restViewColumn  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:viewJsonLegacyService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:viewItemFileService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:calendarJsonLegacyService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:calendarJsonLegacyService colCalendarDate  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService documentUnid  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService parentId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService formName  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService computeWithForm  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService markRead  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService since  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService search  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService searchMaxDocs  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService strongType  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService items  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService queryNewDocument  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.DominoDocumentService postDeleteDocument  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:restDocumentItem  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:viewCollectionJsonService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-rest.xsp-config xe:databaseCollectionJsonService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-domino-tagcloud.xsp-config xe:dominoViewCloudData linkMetaSeparator  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout onItemClick  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration defaultNavigationPath  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration navigationPath  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration productLogo  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration bannerApplicationLinks  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration bannerUtilityLinks  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration legalLogoClass  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationConfiguration legalLogoHeight  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar pageName  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar queryParam  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar inactiveText  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar options  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar optionsParam  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:appSearchBar rendered  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:tooltipDialog  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogButtonBar  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogContent  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel customizerBean  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:com.ibm.xsp.extlib.dynamiccontent.Dynamic  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:inPlaceForm  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:inPlaceForm partialEvents  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent partialEvents  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent useHash  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent defaultFacet  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:switchFacet  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:changeDynamicContentAction  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:changeDynamicContentAction facetName  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-rest.xsp-config xe:com.ibm.xsp.extlib.component.rest.AbstractRestService  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:com.ibm.xsp.extlib.picker.AbstractPicker  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:com.ibm.xsp.extlib.picker.AbstractPicker pickerIcon  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:com.ibm.xsp.extlib.picker.AbstractPicker listWidth  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:com.ibm.xsp.extlib.picker.AbstractPicker listHeight  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:valuePicker  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:valuePicker dataProvider  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator expandable  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:com.ibm.xsp.extlib.data.FormLayout formDescription  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:com.ibm.xsp.extlib.data.FormLayout fieldHelp  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:com.ibm.xsp.extlib.data.FormLayout labelPosition  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable labelWidth  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow helpId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow labelPosition  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formColumn colSpan  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.data.DataSourceIterator expandedDetail  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:multiImage  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.data.AbstractDataView  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.data.AbstractDataView rowStyleClass  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.data.AbstractDataView summaryColumn  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView columnTitles  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView extraColumns  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.component.data.ValueColumn  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:com.ibm.xsp.extlib.component.data.ValueColumn contentType  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewSummaryColumn  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewIconColumn  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewIconColumn value  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:iconEntry  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumPost  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSizes  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSizes sizes  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerExpand  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerDetail  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerAddRows  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerAddRows refreshPage  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:addRows  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:addRows disableId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox dataProvider  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect dataProvider  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:selectImage  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-fx-actions.xsp-config xe:com.ibm.xsp.extlib.group.FadeEffect easing  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid jsId  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid autoHeight  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn editable  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djContentPane href  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djContentPane partialRefresh  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer defaultTabContent  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane title  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane partialEvents  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer selectedTab  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberConstraints locale  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTimeConstraints locale  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox constraints  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect labelType  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect labelFunc  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels labelStyle  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-dojo-base.xsp-config xe:com.ibm.xsp.extlib.group.dojo.widget  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer titleBarHref  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer scrollable  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer onScrollUp  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer onScrollDown  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:com.ibm.xsp.extlib.group.listStyle itemStyle  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:com.ibm.xsp.extlib.group.listStyle itemStyleClass  Property tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list  Definition tagged with <tags>todo< needs investigation
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline  Definition tagged with <tags>todo< needs investigation
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.annotate.TodoTaggedTest.testTodoTaggedDefsAndProps(TodoTaggedTest.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.render.ExtlibDojoTypeTest
+testDojoType(xsp.extlib.test.render.ExtlibDojoTypeTest)
+junit.framework.AssertionFailedError: 47 fail(s). :
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config UINotesCalendarStore Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config UITooltip Output wrong dojoType= when setDojoType called: dijit.Tooltip, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config UITooltip dojoType= not as expected when userId set: dijit.Tooltip, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config UITooltip dojoType= not as expected when compute dojoType: dijit.Tooltip, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config UITooltip Computed dojoType, expected compute once, was 0 times
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog rootEx.isDojoParseOnLoad not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog rootEx.isDojoTheme not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog Output an id= when !HtmlUtil.isUserId(String) and dojoType not present
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog Output wrong dojoType= when setDojoType called: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog rootEx.isDojoTheme not as expected when render dojoType control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog DojoAttribute was output when dojoType absent
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog DojoAttribute was output when dojoType absent
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog dojoType= not as expected when userId set: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog dojoType= not as expected when compute dojoType: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UIDialog Computed dojoType, expected compute once, was 0 times
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog rootEx.isDojoParseOnLoad not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog rootEx.isDojoTheme not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog Output an id= when !HtmlUtil.isUserId(String) and dojoType not present
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog Output wrong dojoType= when setDojoType called: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog rootEx.isDojoTheme not as expected when render dojoType control: true
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog DojoAttribute was output when dojoType absent
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog DojoAttribute was output when dojoType absent
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog dojoType= not as expected when userId set: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog dojoType= not as expected when compute dojoType: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config UITooltipDialog Computed dojoType, expected compute once, was 0 times
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker rootEx.isDojoParseOnLoad not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker rootEx.isDojoTheme not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker Output wrong dojoType= when setDojoType called: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker rootEx.isDojoTheme not as expected when render dojoType control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker Did not force an id= when a dojoType was set
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker DojoAttribute not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker DojoAttribute not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker id not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker id not output as expected when dojoType present: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker dojoType= not as expected when userId set: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UIValuePicker dojoType= not as expected when compute dojoType: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker rootEx.isDojoParseOnLoad not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker rootEx.isDojoTheme not as expected when render un-modified blank control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker Output wrong dojoType= when setDojoType called: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker rootEx.isDojoTheme not as expected when render dojoType control: true
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker Did not force an id= when a dojoType was set
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker DojoAttribute not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker DojoAttribute not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker id not output as expected: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker id not output as expected when dojoType present: null
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker dojoType= not as expected when userId set: null, expected com.example.test.SomeDijit
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker dojoType= not as expected when compute dojoType: null, expected com.example.test.SomeDijit
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.DojoTypeTest.testDojoType(DojoTypeTest.java:423)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.render.BaseInputSaveValueTest
+testInputSaveValue(com.ibm.xsp.test.framework.render.BaseInputSaveValueTest)
+junit.framework.AssertionFailedError: 8 fail(s). :
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoButton Submitted value not saved in viewScope, expected >test-submitted-value<, was>null<
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoButton Expected redisplayed value (test-submitted-value) not present in page after POST request
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoToggleButton Submitted value not saved in viewScope, expected >test-submitted-value<, was>false<
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoToggleButton Expected redisplayed value (test-submitted-value) not present in page after POST request
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoCheckBox Submitted value not saved in viewScope, expected >test-submitted-value<, was>true<
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoCheckBox Expected redisplayed value (test-submitted-value) not present in page after POST request
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoRadioButton Submitted value not saved in viewScope, expected >test-submitted-value<, was>null<
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoRadioButton Expected redisplayed value (test-submitted-value) not present in page after POST request
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.InputSaveValueTest.testInputSaveValue(InputSaveValueTest.java:160)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.render.BaseRenderControlTest
+testRenderId(com.ibm.xsp.test.framework.render.BaseRenderControlTest)
+junit.framework.AssertionFailedError: 20 fail(s). :
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewStore Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewDesign Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn No output rendered.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore Problem rendering page: com.ibm.xsp.FacesExceptionEx: No URL specified for iCalReadStoreRenderer
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive No output rendered.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite No output rendered.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:switchFacet No output rendered.
+com/ibm/xsp/extlib/config/extlib-rpc.xsp-config xe:jsonRpcService No output rendered.
+com/ibm/xsp/extlib/config/extlib-rest.xsp-config xe:restService No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:breadCrumbs No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:sortLinks No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:linksList No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:outline No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:dropDownButton No output rendered.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow No output rendered.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formColumn No output rendered.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSaveState No output rendered.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridRow No output rendered.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn No output rendered.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderControlTest.testRenderId(RenderControlTest.java:118)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.render.ExtlibRenderDojoPropertyTest
+testRenderDojoPropertyTest(xsp.extlib.test.render.ExtlibRenderDojoPropertyTest)
+junit.framework.AssertionFailedError: 89 fail(s). :
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:appPage pageName  Property absent in .xsp, should be absent in HTML output. Was pageName="view:_id1:_id101"
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:toolBarButton href  Property href="testString" in .xsp, not as expected in HTML output for render-with-request-path-prefix. Was href="/xsptestString", expected href="/xsp/testString".
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:toolBarButton url  Property url="testString" in .xsp, not as expected in HTML output for render-with-request-path-prefix. Was url="/xsptestString", expected url="/xsp/testString".
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView jsId  Property absent in .xsp, should be absent in HTML output. Was jsId="view__id1__id101_default_view_design_jsid"
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView jsId  Property jsId="testString" in .xsp, not as expected in HTML output. Was jsId="testString_default_view_design_jsid"
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView jsId  Property jsId="" in .xsp not as expected in HTML output. Was jsId="view__id1__id101_default_view_design_jsid"
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView jsId  Property absent in .xsp, should be absent in HTML output. Was jsId="view__id1__id101"
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView jsId  Property jsId="" in .xsp not as expected in HTML output. Was jsId="view__id1__id101"
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config xe:tooltip showDelay  Property showDelay="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox type  Property absent in .xsp, should be absent in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox type  Property type="testString" in .xsp, not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox type  Property type="" in .xsp not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox type  Property absent in .xsp, should be absent in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox type  Property type="testString" in .xsp, not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox type  Property type="" in .xsp not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect type  Property absent in .xsp, should be absent in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect type  Property type="testString" in .xsp, not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect type  Property type="" in .xsp not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect type  Property absent in .xsp, should be absent in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect type  Property type="testString" in .xsp, not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect type  Property type="" in .xsp not as expected in HTML output. Was type="text"
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid waiRole  Property absent in .xsp, should be absent in HTML output. Was waiRole="presentation"
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid waiRole  Property waiRole="" in .xsp not as expected in HTML output. Was waiRole="presentation"
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid jsId  Property absent in .xsp, should be absent in HTML output. Was jsId="_id101"
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid autoHeight  Property autoHeight="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane tabUniqueKey  Property absent in .xsp, should be absent in HTML output. Was tabUniqueKey="_id101"
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane tabUniqueKey  Property tabUniqueKey="" in .xsp not as expected in HTML output. Was tabUniqueKey="_id101"
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djBorderPane minSize  Property minSize="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djBorderPane layoutPriority  Property layoutPriority="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djValidationTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djNumberSpinner defaultTimeout  Property defaultTimeout="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCurrencyTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djDateTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox pageSize  Property pageSize="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djComboBox searchDelay  Property searchDelay="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect pageSize  Property pageSize="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djFilteringSelect searchDelay  Property searchDelay="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextarea maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSimpleTextarea maxLength  Property maxLength="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djButton tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton value  Property value="testObject" in .xsp, not as expected in HTML output. Was value="on"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton value  Property value="testObject2" in .xsp not as expected in HTML output. Was value="on"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton type  Property absent in .xsp, should be absent in HTML output. Was type="hidden"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton type  Property type="" in .xsp not as expected in HTML output. Was type="hidden"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox type  Property absent in .xsp, should be absent in HTML output. Was type="checkbox"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox type  Property type="testString" in .xsp, not as expected in HTML output. Was type="checkbox"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox type  Property type="" in .xsp not as expected in HTML output. Was type="checkbox"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton type  Property absent in .xsp, should be absent in HTML output. Was type="radio"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton type  Property type="testString" in .xsp, not as expected in HTML output. Was type="radio"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton type  Property type="" in .xsp not as expected in HTML output. Was type="radio"
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider minimum  Property minimum="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider maximum  Property maximum="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider discreteValues  Property discreteValues="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider pageIncrement  Property pageIncrement="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider tabIndex  Property tabIndex="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider minimum  Property minimum="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider maximum  Property maximum="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider discreteValues  Property discreteValues="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider pageIncrement  Property pageIncrement="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRule count  Property count="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels count  Property count="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels numericMargin  Property numericMargin="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels minimum  Property minimum="0" in .xsp not as expected in HTML output. Was (absent)
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels maximum  Property maximum="0" in .xsp not as expected in HTML output. Was (absent)
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderDojoPropertyTest.testRenderDojoPropertyTest(RenderDojoPropertyTest.java:271)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.render.ExtlibRenderIdTest
+testRenderId(xsp.extlib.test.render.ExtlibRenderIdTest)
+junit.framework.AssertionFailedError: 32 fail(s). :
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView Expected id= attribute not present in HTML. Should be present because there is a default dojoType.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons. Also, the control should not be outputting the clientId because there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialog Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:tooltipDialog Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogButtonBar Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogContent Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons. Also, the control should not be outputting the clientId because there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Wrong id= attribute in HTML, was: id="view:_id1:control1_OUTER_TABLE" expected: id="view:_id1:control1" 
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:inPlaceForm Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:valuePicker Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:namePicker Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:multiImage Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumView Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumPost Expected id= attribute not present in HTML. Should be present because the id is set in the XPage source.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djStackContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djAccordionContainer Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderIdTest.testRenderId(RenderIdTest.java:218)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.render.ExtlibRenderThemeControlTest
+testRenderControlsInThemes(xsp.extlib.test.render.ExtlibRenderThemeControlTest)
+junit.framework.AssertionFailedError: 15 fail(s). :
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:android] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:iphone] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blackberry] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.render.MobileRenderThemeControlTest
+testRenderControlsInThemes(xsp.extlib.test.render.MobileRenderThemeControlTest)
+junit.framework.AssertionFailedError: 23 fail(s). :
+META-INF/jsf-xtnd.xsp-config xp:view [theme:android] Problem rendering page: com.ibm.xsp.exception.EvaluationExceptionEx: Error while executing JavaScript computed expression
+META-INF/ibm-extended.xsp-config xp:viewTitle [theme:android] No output rendered.
+META-INF/ibm-extended.xsp-config xp:viewTitle [theme:iphone] No output rendered.
+META-INF/ibm-extended.xsp-config xp:viewTitle [theme:blackberry] No output rendered.
+META-INF/ibm-common.xsp-config xp:view [theme:android] Problem rendering page: com.ibm.xsp.exception.EvaluationExceptionEx: Error while executing JavaScript computed expression
+META-INF/ibm-common.xsp-config xp:text [theme:android] No output rendered.
+META-INF/ibm-common.xsp-config xp:text [theme:iphone] No output rendered.
+META-INF/ibm-common.xsp-config xp:text [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:android] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:iphone] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:android] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:iphone] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blackberry] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+com.ibm.xsp.test.framework.render.BaseRenderTitleTest
+testRenderTitle(com.ibm.xsp.test.framework.render.BaseRenderTitleTest)
+junit.framework.AssertionFailedError: 52 fail(s). :
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:singlePageApp No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:appPage No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewStore No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewDesign No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore No title property for accessibility.
+com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-redirect.xsp-config xe:redirect No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected title= attribute not present in HTML. 
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-tooltip.xsp-config xe:tooltip No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogButtonBar No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dialog.xsp-config xe:dialogContent No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected title= attribute not present in HTML. 
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:inPlaceForm No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:dynamicContent No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:switchFacet No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-rpc.xsp-config xe:jsonRpcService No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-rest.xsp-config xe:restService No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-tagcloud.xsp-config xe:tagCloud No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:valuePicker No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-picker.xsp-config xe:namePicker No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:breadCrumbs No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:sortLinks No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:linksList No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:toolbar No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:popupMenu No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:outline No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:dropDownButton No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formRow No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formColumn No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumView No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumPost No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSizes No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerExpand No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerDetail No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerAddRows No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSaveState No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridRow No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list No title property for accessibility.
+com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline No title property for accessibility.
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:144)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+

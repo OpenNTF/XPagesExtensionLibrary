@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:println("before render response")}]]></xp:this.beforeRenderResponse>
+	<xp:this.afterRenderResponse><![CDATA[#{javascript:println("after render response")}]]></xp:this.afterRenderResponse>
+	<xp:panel id="panel1">
+		<xp:this.data>
+			<xe:objectData var="objectData1">
+				<xe:this.createObject><![CDATA[#{javascript:
+var log;
+var value;
+if( null == requestScope.timeFormat ){
+	requestScope.timeFormat = java.text.DateFormat.getTimeInstance(2/*medium format*/);
+}
+if( null == viewScope.backup ){
+	viewScope.backup=new java.util.ArrayList();
+	log = "The initial time is "+requestScope.timeFormat.format(new java.util.Date());
+	println(log);
+	viewScope.backup.add(log);
+}
+value = new java.util.ArrayList(viewScope.backup);
+log = "The read time is "+requestScope.timeFormat.format(new java.util.Date());
+println(log);
+value.add(log);
+return value;
+}]]></xe:this.createObject>
+				<xe:this.saveObject><![CDATA[#{javascript:
+if( null == requestScope.timeFormat ){
+	requestScope.timeFormat = java.text.DateFormat.getTimeInstance(2/*medium format*/);
+}
+var copyToSave = new java.util.ArrayList(value);
+var log;
+// param: Object value
+log = "The save time is "+requestScope.timeFormat.format(new java.util.Date());
+println(log);
+copyToSave.add(log);
+viewScope.backup = copyToSave;
+return true;
+}]]></xe:this.saveObject>
+			</xe:objectData>
+		</xp:this.data>
+
+		<xp:br></xp:br>
+		<xp:button value="Save" id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" immediate="false" save="true"></xp:eventHandler>
+		</xp:button>
+
+		<xp:button value="Refresh" id="button2">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:
+if( null == requestScope.timeFormat ){
+	requestScope.timeFormat = java.text.DateFormat.getTimeInstance(2/*medium format*/);
+}
+var dataSource = getComponent('panel1').getData().get(0);
+dataSource.refresh();
+var log;
+log = "The added after refresh time is "+requestScope.timeFormat.format(new java.util.Date());
+println(log);
+objectData1.add(log);
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button value="Add" id="button3">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:if( null == requestScope.timeFormat ){
+	requestScope.timeFormat = java.text.DateFormat.getTimeInstance(2/*medium format*/);
+}
+var log;
+// param: Object value
+log = "The added time is "+requestScope.timeFormat.format(new java.util.Date());
+println(log);
+objectData1.add(log);
+}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		The current data:
+		<xp:repeat id="repeat1" rows="30" value="#{javascript:objectData1}"
+			var="rowData">
+			<xp:text escape="true" id="computedField1" value="#{javascript:rowData}"></xp:text><xp:br></xp:br>
+		</xp:repeat>
+		<xp:br></xp:br>
+		The backed up data:
+		<xp:repeat id="repeat2" rows="30" value="#{javascript:viewScope.backup}" var="rowData">
+			<xp:text escape="true" id="computedField2" value="#{javascript:rowData}"></xp:text><xp:br></xp:br>
+		</xp:repeat>
+		<xp:br></xp:br>
+	</xp:panel>
+</xp:view>

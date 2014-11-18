@@ -1,0 +1,15 @@
+config.name=Extlib Projects (Product)
+product\runtime\eclipse\plugins\com.ibm.domino.commons
+product\runtime\eclipse\plugins\com.ibm.domino.das
+product\runtime\eclipse\plugins\com.ibm.domino.services
+product\runtime\eclipse\plugins\com.ibm.wink
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.controls
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.core
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.domino
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.mobile
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.oneui
+product\runtime\eclipse\plugins\com.ibm.xsp.extlib.relational
+product\runtime\eclipse\plugins\com.ibm.xsp.mum.gadget.opensocial
+product\runtime\eclipse\plugins\org.apache.james.mime4j
+product\runtime\eclipse\plugins\org.apache.wink

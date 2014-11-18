@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2013                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+    <faces-config-extension>
+        <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+        <default-prefix>xe</default-prefix>
+    </faces-config-extension>
+	
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.databaseNameProp</group-type>
+        <property>
+            <description>Name of Domino application</description>
+            <display-name>Database Name</display-name>
+            <property-name>databaseName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>        
+    <group>
+        <!-- key-suffix: viewNameProp-->
+        <group-type>com.ibm.xsp.extlib.group.viewNameProp</group-type>
+        <property>
+            <description>Name of Domino view</description>
+            <display-name>Database View</display-name>
+            <property-name>viewName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <required>true</required>
+                <designer-extension>
+                   <editor>com.ibm.xsp.extlib.designer.tooling.editor.ViewNameEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>  
+    <group>
+        <!-- key-suffix: viewFolderNameProp-->
+        <group-type>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type>
+        <property>
+            <description>Name of Domino view or folder</description>
+            <display-name>Database View or Folder</display-name>
+            <property-name>viewName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <required>true</required>
+                <designer-extension>
+                   <editor>com.ibm.xsp.extlib.designer.tooling.editor.ViewAndFolderNameEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+        <!-- key-suffix: aria-->
+        <group-type>com.ibm.xsp.extlib.group.aria_role</group-type>
+        <!-- Same as the XPages runtime group com.ibm.xsp.group.aria.role
+             except that it is not marked as since 8.5.2 -->
+        <property>
+            <description>%/com.ibm.xsp.group.aria.role/role/descr%</description>
+            <display-name>%/com.ibm.xsp.group.aria.role/role/name%</display-name>
+            <property-name>role</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.aria.role.deprecated</group-type>
+        <!-- Same as the XPages runtime group com.ibm.xsp.group.aria.role.deprecated -->
+        <property>
+            <!-- key: property.role.group.ariaRole.deprecated. -->
+            <!-- # "9.0.1" should not be translated -->
+            <description>This property is obsolete starting with 9.0.1. When omitted the appropriate compliant value will be used by default. Describes the role of the current UI element or area. It can be used by assistive technologies to determine its purpose.</description>
+            <display-name>Obsolete: Role</display-name>
+            <property-name>role</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>accessibility</category>
+                    <is-deprecated>true</is-deprecated>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <!-- key-suffix: aria-->
+        <group-type>com.ibm.xsp.extlib.group.aria_label</group-type>
+        <property>
+            <description>Defines a textual description to support assistive technologies to provide a recognizable label for the control.</description>
+            <display-name>ARIA Label</display-name>
+            <property-name>ariaLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.0.v00_03</since>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+     <!-- Same as the XPages runtime com.ibm.xsp.group.FacesDojoComponent.prop.dojoType,
+          except that it does not have a since version -->
+        <group-type>com.ibm.xsp.extlib.group.FacesDojoComponent.prop.dojoType</group-type>
+        <property>
+            <description>%/com.ibm.xsp.group.FacesDojoComponent.prop.dojoType/dojoType/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent.prop.dojoType/dojoType/name%</display-name>
+            <property-name>dojoType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <pass-through>true</pass-through>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+     <!-- Same as the XPages runtime com.ibm.xsp.group.FacesDojoComponent.prop.dojoAttributes,
+          except that it does not have a since version -->
+        <group-type>com.ibm.xsp.extlib.group.FacesDojoComponent.prop.dojoAttributes</group-type>
+        <property>
+            <description>%/com.ibm.xsp.group.FacesDojoComponent.prop.dojoAttributes/dojoAttributes/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent.prop.dojoAttributes/dojoAttributes/name%</display-name>
+            <property-name>dojoAttributes</property-name>
+            <property-class>java.util.ArrayList</property-class>
+            <property-extension>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.dojo.DojoAttribute</property-item-class>
+                <property-add-method>addDojoAttribute</property-add-method>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <!-- Dojo default properties --> 
+    <group>
+     <!-- Same as the XPages runtime com.ibm.xsp.group.FacesDojoComponent,
+          except that the property's do not have a since version -->
+          <!-- key-suffix: FacesDojoComponent-->
+        <group-type>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type>
+        <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent.prop.dojoType</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent.prop.dojoAttributes</group-type-ref>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type>
+        <!-- note, this like the main style property,
+                com.ibm.xsp.group.core.prop.style
+            except that it is intended to be used in complex-types
+            so the property has no <category>.
+            If the main style property changes, this should probably 
+            be updated to reflect those changes. 
+        -->
+        <property>
+            <!-- Note, using the label reference mechanism, as described here:
+            http://www-10.lotus.com/ldd/ddwiki.nsf/dx/XPages_configuration_file_format#label-reference-mechanism
+            -->
+            <description>%/com.ibm.xsp.group.core.prop.style/style/descr%</description>
+            <display-name>%/com.ibm.xsp.group.core.prop.style/style/name%</display-name>
+            <property-name>style</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <javadoc-description><p>XPages Styling Category - style </p></javadoc-description>
+                <pass-through>true</pass-through>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type>
+        <!-- note, this like the main styleClass property,
+                com.ibm.xsp.group.core.prop.styleClass
+            except that it is intended to be used in complex-types
+            so the property has no <category>.
+            If the main styleClass property changes, this should probably 
+            be updated to reflect those changes. 
+        -->
+        <property>
+            <!-- Note, using the label reference mechanism, as described here:
+            http://www-10.lotus.com/ldd/ddwiki.nsf/dx/XPages_configuration_file_format#label-reference-mechanism
+            -->
+            <description>%/com.ibm.xsp.group.core.prop.styleClass/styleClass/descr%</description>
+            <display-name>%/com.ibm.xsp.group.core.prop.styleClass/styleClass/name%</display-name>
+            <property-name>styleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <pass-through>false</pass-through>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+        <!-- Note, this is the same as group-type>com.ibm.xsp.group.core.prop.title<,
+        except that it is intended to be used in a complex-type,
+        so there is no <category> in the designer-extension.
+        It corresponds to one of the HTML core attributes, as defined in:
+            http://www.w3.org/TR/html4/sgml/dtd.html#coreattrs
+         -->
+        <group-type>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type>
+        <property>
+            <!-- key: property.title. -->
+            <description>%/com.ibm.xsp.group.core.prop.title/title/descr%</description>
+            <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
+            <property-name>title</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <pass-through>true</pass-through>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <tags>is-accessibility-title</tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value</group-type>
+        <!-- note, this like the main ValueHolder value property,
+                javax.faces.component.group.ValueHolder.prop.value
+            except that it is intended to be used in complex-types
+            so the property has no <category>.
+            If the main property changes, this should probably 
+            be updated to reflect those changes. 
+        -->
+        <!-- one of the properties in the interface javax.faces.component.ValueHolder -->
+        <property>
+            <description>%/javax.faces.component.group.ValueHolder.prop.value/value/descr%</description>
+            <display-name>%/javax.faces.component.group.ValueHolder.prop.value/value/name%</display-name>
+            <property-name>value</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.property.editors.DataEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+      
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+        <group-type>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.converter</group-type>
+        <!-- note, this like the main ValueHolder converter property,
+                javax.faces.component.group.ValueHolder.prop.converter
+            except that it is intended to be used in complex-types
+            so the property has no <category>.
+            If the main property changes, this should probably 
+            be updated to reflect those changes. 
+        -->
+        <!-- one of the properties in the interface javax.faces.component.ValueHolder -->
+        <property>
+            <description>%/javax.faces.component.group.ValueHolder.prop.converter/converter/descr%</description>
+            <display-name>%/javax.faces.component.group.ValueHolder.prop.converter/converter/name%</display-name>
+            <property-name>converter</property-name>
+            <property-class>javax.faces.convert.Converter</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+  <group>
+    <!-- This is the same as the group 
+    com.ibm.xsp.group.FacesAttrsObject.component
+    in jsf-xtnd.xsp-config (in the com.ibm.xsp.core plugin)
+    except that it has <since>9.0.0.v00_03</ instead
+    of 8.5.3
+     -->
+    <group-type>com.ibm.xsp.extlib.group.FacesAttrsObject.component.since900v_00_03</group-type>
+    <property>
+      <description>%/com.ibm.xsp.group.FacesAttrsObject.component/attrs/descr%</description>
+      <display-name>%/com.ibm.xsp.group.FacesAttrsObject.component/attrs/name%</display-name>
+      <property-name>attrs</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.complex.Attr</property-item-class>
+        <property-add-method>addAttr</property-add-method>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <allow-load-time-binding>false</allow-load-time-binding>
+        <since>9.0.0.v00_03</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-control</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+    
+</faces-config>

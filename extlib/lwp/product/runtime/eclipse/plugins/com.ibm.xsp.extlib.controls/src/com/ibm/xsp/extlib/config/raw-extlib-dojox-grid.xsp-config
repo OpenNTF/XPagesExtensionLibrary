@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012	                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojo.grid</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+    <!-- Start of Dojo Extension Controls -->
+    <component>
+        <description>A grid similar to a spreadsheet.</description>
+        <display-name>Dojo Data Grid</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGrid</component-class>
+        
+        <property>
+            <description>The name of a JavaScript variable that will be created that will hold the grid object. This can then be referenced in scripts.</description>
+            <display-name>JavaScript Variable ID</display-name>
+            <property-name>jsId</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO BreakingChange Change default behaviour when absent to provide clientId replacing colons with underscores -->
+                    <!-- This is not a control reference, it is a declaration of a JavaScript variable -->
+                    <tags>
+                        todo
+                        not-control-id-reference
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>The name of JavaScript variable that holds the Dojo data store object used to get data for the grid.</description>
+            <display-name>Store</display-name>
+            <property-name>store</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <!--  This is a JavaScript variable reference. -->
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifying this table option adds a selection area on the left of the table to make row selection easier. The value of this option is a width to be used for the selector.</description>
+            <display-name>Row Selector</display-name>
+            <property-name>rowSelector</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <!-- # "none", "single", "multiple", "extended" should not be translated. -->
+            <description>Specifies how row selection is handled.</description>
+            <display-name>Selection Mode</display-name>
+            <property-name>selectionMode</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        none
+                        single
+                        multiple
+                        extended 
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies a menu to be used as a context menu for the grid headers.</description>
+            <display-name>Header Menu</display-name>
+            <property-name>headerMenu</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the number of rows to display</description>
+            <display-name>Auto Height</display-name>
+            <property-name>autoHeight</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Introduce new boolean property autoHeightEnabled -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies whether a single click is needed to enter cell editing mode. By default this property is false meaning a double click is required to enter cell editing mode.</description>
+            <display-name>Single Click Edit</display-name>
+            <property-name>singleClickEdit</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the message shown while the content of the control is loading.</description>
+            <display-name>Loading Message</display-name>
+            <property-name>loadingMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the message shown if the control encountered an error while loading the content of the control.</description>
+            <display-name>Error Message</display-name>
+            <property-name>errorMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies whether text selection is enabled within this control.</description>
+            <display-name>Selectable</display-name>
+            <property-name>selectable</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the number of milliseconds to delay before updating this control after receiving notifications from the data store.</description>
+            <display-name>Update Delay</display-name>
+            <property-name>updateDelay</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the initial width of this control when "autoWidth" is enabled.</description>
+            <display-name>Initial Width</display-name>
+            <property-name>initialWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the number of rows to be displayed.</description>
+            <display-name>Rows Per Page</display-name>
+            <property-name>rowsPerPage</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <default-value>20</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Specifies the query used to fetch items from the data store.</description>
+            <display-name>Query</display-name>
+            <property-name>query</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies whether to enable protection against malicious content in data. This is enabled by default.</description>
+            <display-name>Escape HTML In Data</display-name>
+            <property-name>escapeHTMLInData</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when this control performs row styling on a given row.</description>
+            <display-name>Style Row Script</display-name>
+            <property-name>onStyleRow</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>container-event</subcategory>
+                    <!-- This is an event, not a CSS style (property-name 
+                    contains "Style" so need to explicitly mark it as not style) -->
+                    <tags>
+                        not-css-style
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is clicked over a row in this control</description>
+            <display-name>Row Click Script</display-name>
+            <property-name>onRowClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>container-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is double clicked over a row in this control</description>
+            <display-name>Row Double Click Script</display-name>
+            <property-name>onRowDblClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>container-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when the context menu of a row in this control is accessed by a pointer control</description>
+            <display-name>Row Context Menu Script</display-name>
+            <property-name>onRowContextMenu</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>container-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>The REST Service control ID. This supersedes the "store" property to refer to the actual store ID.</description>
+            <display-name>Control Store ID</display-name>
+            <property-name>storeComponentId</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|restService
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</renderer-type>
+            <tag-name>djxDataGrid</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+                <!-- TODO Investigate event handler behaviour -->
+                <!-- TODO Introduce ACF htmlFilter to all data store controls -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>This control is used when the grid displays multiple rows. Else, it can be omitted.</description>
+        <display-name>Dojo Data Grid Row</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridRow</component-class>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</renderer-type>
+            <tag-name>djxDataGridRow</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+                <!-- This is rendererd by the parent grid, so no row renderer -->
+                <tags>
+                    no-faces-config-renderer
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Defines the content of a column. Can be inserted into a Data Grid Row in case of multiple rows grid, or directly into a Data Grid.</description>
+        <display-name>Dojo Data Grid Column</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridColumn</component-class>
+        
+        <property>
+            <description>Specifies the name of the field from the data store to be displayed.</description>
+            <display-name>Field</display-name>
+            <property-name>field</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the width of the column.</description>
+            <display-name>Column Width</display-name>
+            <property-name>width</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the type of cell for this control.</description>
+            <display-name>Cell Type</display-name>
+            <property-name>cellType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        dojox.grid.cells.Cell
+                        dojox.grid.cells.RowIndex
+                        dojox.grid.cells.Select
+                        dojox.grid.cells.AlwaysEdit
+                        dojox.grid.cells.Bool
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies a JavaScript function that is responsible for formatting the cell data prior to being displayed.</description>
+            <display-name>Formatter Function</display-name>
+            <property-name>formatter</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies a JavaScript function which returns the unformatted data for a cell when requested.</description>
+            <display-name>Get Function</display-name>
+            <property-name>get</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the list of allowable options for the "Select" cell type.</description>
+            <display-name>Select Cell Type Options</display-name>
+            <property-name>options</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies whether the contents of cell can be edited.</description>
+            <display-name>Editable</display-name>
+            <property-name>editable</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Investigate integration with XPages readonly -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>This boolean property can be used to hide a column in the table. If its value is true the column is hidden. If false the column is displayed.</description>
+            <display-name>Hidden</display-name>
+            <property-name>hidden</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the label for the column header</description>
+            <display-name>Label</display-name>
+            <property-name>label</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</renderer-type>
+            <tag-name>djxDataGridColumn</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+                <!-- This column is rendered by the parent grid, so no column renderer -->
+                <tags>
+                    no-faces-config-renderer
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    <!-- End of Dojo Extension Controls -->
+
+<!-- /end move to extlib-dojox-grid -->
+
+</faces-config>

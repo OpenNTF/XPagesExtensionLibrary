@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00051190" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ce" sequence="22" unid="09DBDAFFE6D271EF8025795D003E1C6D">
+<created><datetime>20111205T111825,09+00</datetime></created>
+<modified><datetime>20120309T010151,52+00</datetime></modified>
+<revised><datetime>20120229T112437,96-05</datetime></revised>
+<lastaccessed><datetime>20120309T010151,52+00</datetime></lastaccessed>
+<addedtofile><datetime>20120215T120458,32+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></updatedby>
+<wassignedby><name>CN=Lotus Notes Template Development/O=Lotus Notes</name></wassignedby>
+<item name="$TITLE"><text>pagerRTL.css</text></item>
+<item name="$MimeType" sign="true"><text>text/css</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>pagerRTL.css</text></item>
+<item name="$Class"><text>StdXLDiscussion</text></item>
+<item name="$Flags"><text>34C=Q</text></item></note>

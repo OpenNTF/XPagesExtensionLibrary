@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2014                                            -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<theme>
+
+	<!-- ====================  BEGIN::RESOURCES ================ -->
+	
+    <!-- xpages core styles -->
+    <resource>
+        <content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/xpages/css/xsp-core.css</href>
+    </resource>
+
+    <!-- bootstrap core styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap.css</href>
+	</resource>
+
+	<!-- Add the boostrap-theme css for additional 3d styling -->
+    <!-- bootstrap theme styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap-theme.css</href>
+	</resource>
+	
+	<!-- dbootstrap styles -->
+ 	<resource dojoTheme="true">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme/dbootstrap/dbootstrap.css</href>
+	</resource>
+	
+	<!-- dbootstrap main js -->
+	<!--
+	<resource dojoTheme="true">
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/main.js</href>
+	</resource>
+	-->
+	
+	<!-- xpages/bootstrap mixin styles -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/xpages/css/xsp-mixin.css</href>
+	</resource>
+	
+	<!-- xpages/bootstrap IE11 styles -->
+	<!-- TODO fix user agent check in 9.0.X to use proper method -->
+	<resource rendered="#{javascript:context.getUserAgent().getUserAgent().contains('Trident');}">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/responsive/xpages/css/xsp-ie11.css</href>
+	</resource>
+	
+	<!-- jquery core js -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/responsive/jquery/jquery-2.1.1/jquery-2.1.1.js</href>
+	</resource>
+
+	<!-- bootstrap core js -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/js/bootstrap.js</href>
+	</resource>
+ 
+	<!-- xpages/bootstrap mixin js -->
+	<resource>
+		<content-type>application/x-javascript</content-type>
+		<href>/.ibmxspres/.extlib/responsive/xpages/js/xsp-mixin.js</href>
+	</resource>
+	
+	<!-- META viewport -->
+	<resources>
+		<metaData>
+			<name>viewport</name>
+			<content>width=device-width, initial-scale=1.0</content>
+		</metaData>
+	</resources>
+	
+	<!-- ==================================================  END::RESOURCES ==================== -->
+	
+	<!-- ==================================================  BEGIN::CONTROLS =================== -->
+	
+	<!-- View Root -->
+	<control>
+		<name>ViewRoot</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xsp dbootstrap</value>
+		</property>
+		<property>
+			<name>docType</name>
+			<value>html</value>
+		</property>
+	</control>
+	
+	<!-- Basic Input Text -->
+	<control>
+		<name>InputField</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>	 
+	
+	<!-- Standard Edit Box -->
+	<control>
+		<name>InputField.EditBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Password Edit Box -->
+	<control>
+		<name>InputField.Secret</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Date Time Picker -->
+	<control>
+		<name>InputField.DateTimePicker</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- TextArea -->
+	<control>
+		<name>InputField.TextArea</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- Rich Text -->
+	<control>
+		<name>InputField.RichText</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>xspInputFieldRichText</value>
+		</property>
+	</control>
+	
+	<!-- Combo Box -->
+	<control>
+		<name>ComboBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- List Box -->
+	<control>
+		<name>ListBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+	
+	<!-- View Title -->
+	<control>
+		<name>Text.ViewTitle</name>
+	 		<property>
+			<name>styleClass</name>
+			<value>xspTextViewTitle</value>
+		</property>
+	</control>
+	
+	<!-- File Download Table -->
+	<control>
+		<name>DataTable.FileDownload</name>
+		<property>
+			<name>styleClass</name>
+			<value>table xspDataTableFileDownload</value>
+		</property>
+		<property>
+			<name>typeStyleClass</name>
+			<value>xspDataTableFileDownloadType</value>
+		</property>
+		<property>
+			<name>sizeStyleClass</name>
+			<value>xspDataTableFileDownloadSize</value>
+		</property>
+		<property>
+			<name>nameStyleClass</name>
+			<value>xspDataTableFileDownloadName</value>
+		</property>
+		<property>
+			<name>createdStyleClass</name>
+			<value>xspDataTableFileDownloadCreated</value>
+		</property>
+		<property>
+			<name>modifiedStyleClass</name>
+			<value>xspDataTableFileDownloadModified</value>
+		</property>
+		<property>
+			<name>deleteStyleClass</name>
+			<value>xspDataTableFileDownloadDelete</value>
+		</property>
+		<property>
+            <name>captionStyleClass</name>
+            <value>xspDataTableFileDownloadCaption</value>
+        </property>
+	</control>
+
+	<!-- File Download Link -->
+	<control>
+		<name>Link.FileDownload</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspLinkFileDownload</value>
+		</property>
+	</control>
+
+	<!-- XPages Buttons -->
+	<control>
+		<name>Button</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Command</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Submit</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-primary</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Default</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Cancel</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Primary</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-primary</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Danger</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-danger</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Warning</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-warning</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Success</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-success</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Info</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-info</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Link</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-link</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button.Inverse</name>
+		<property>
+			<name>styleClass</name>
+			<value>btn btn-inverse</value>
+		</property>
+	</control>
+
+	<!-- CheckBox -->
+	<control>
+		<name>CheckBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value></value>
+		</property>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.form.Checkbox</value>
+		</property>
+	</control>
+	
+	<!-- RadioButton -->
+	<control>
+		<name>RadioButton</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>radio</value>
+		</property>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.form.Radio</value>
+		</property>
+	</control>
+	
+	<!-- Bootstrap Images -->
+	<control>
+		<name>Image.Rounded</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-rounded</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Image.Circle</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-circle</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Image.Polaroid</name>
+		<property>
+			<name>styleClass</name>
+			<value>img-polaroid</value>
+		</property>
+	</control>
+	
+	<!-- Basic Message -->
+	<control>
+		<name>Message</name>
+		<property>
+			<name>styleClass</name>
+			<value>alert alert-warning</value>
+		</property>
+	</control>
+
+	<!-- Basic Messages -->
+	<control>
+		<name>Messages</name>
+		<property>
+			<name>styleClass</name>
+			<value>alert alert-warning</value>
+		</property>
+	</control>
+	
+	<!-- Section -->
+	<control>
+		<name>Section</name>
+		<property>
+			<name>styleClass</name>
+			<value>xspSection</value>
+		</property>
+		<property>
+			<name>expandedImage</name>
+			<value>/.ibmxspres/.extlib/responsive/xpages/img/section_expanded.png</value>
+		</property>
+		<property>
+			<name>collapsedImage</name>
+			<value>/.ibmxspres/.extlib/responsive/xpages/img/section_collapsed.png</value>
+		</property>
+	</control>
+	
+	<!--  Table  -->
+	<control>
+		<name>HtmlTable</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>table</value>
+		</property>
+	</control>
+	
+	<!-- DataTable -->
+	<control>
+		<name>DataTable</name>
+		<property>
+			<name>styleClass</name>
+			<value>table</value>
+		</property>
+		<property>
+			<name>unreadMarksClass</name>
+			<value>xspDataTableRowUnread</value>
+		</property>
+		<property>
+			<name>readMarksClass</name>
+			<value>xspDataTableRowRead</value>
+		</property>
+	</control>
+	
+	<!-- Column -->
+	<control>
+		<name>Column</name>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+	
+	<!-- View DataTable -->
+	<control>
+		<name>DataTable.ViewPanel</name>
+		<property>
+			<name>dataTableStyleClass</name>
+			<value>table xspDataTable</value>
+		</property>
+		<property>
+			<name>unreadMarksClass</name>
+			<value>xspDataTableRowUnread</value>
+		</property>
+		<property>
+			<name>readMarksClass</name>
+			<value>xspDataTableRowRead</value>
+		</property>
+		<property>
+            <name>captionStyleClass</name>
+            <value>xspDataTableViewPanelCaption</value>
+        </property>
+	</control>
+
+	<!-- View Column -->
+	<control>
+		<name>Column.View</name>
+		<property>
+			<name>viewCheckboxStyle</name>
+			<value>margin: 0px 6px; height: 12px;display:inline;</value>
+		</property>
+		<property>
+			<name>expandedImage</name>
+			<value>/.ibmxspres/.extlib/responsive/xpages/img/view_expanded.png</value>
+		</property>
+		<property>
+			<name>collapsedImage</name>
+			<value>/.ibmxspres/.extlib/responsive/xpages/img/view_collapsed.png</value>
+		</property>
+	 	<property>
+			<name>startStyleClass</name>
+			<value>xspBootstrapRowIcon</value>
+		</property>
+	</control>
+
+	<!-- View Column checkbox -->
+	<control>
+		<name>CheckBox.ViewColumn</name>
+		<property>
+			<name>styleClass</name>
+			<value>checkbox</value>
+		</property>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.form.Checkbox</value>
+		</property>
+	</control>
+
+	<!-- ================== View Column Header ================================ -->
+	
+	<!-- View Column Header checkbox -->
+	<control>
+		<name>CheckBox.ViewColumnHeader</name>
+		<property>
+			<name>styleClass</name>
+			<value>checkbox</value>
+		</property>
+		<property>
+			<name>style</name>
+			<value>display: inline;margin: 0 6px;min-height: 0;</value>
+		</property>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.form.Checkbox</value>
+		</property>
+	</control>
+		
+	<!-- =======================================================================
+		Tab panel controls
+		A tab has some virtual properties when dealing with themes:
+			startStyleClass: the style class to apply to the first tab
+			middleStyleClass: the style class to apply to the tab that are neither first or last
+			endStyleClass: the style class to apply to the tab column
+		Those properties take priority over the styleClass when defined in a theme
+	======================================================================= -->
+
+	<!-- Tabbed Panel -->
+	<control>
+		<name>TabbedPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>nav nav-tabs</value> 
+		</property>
+	</control>
+
+	<!-- Tab -->
+	<control>
+		<name>Tab.TabbedPanel</name>
+		<property>
+			<name>styleClass</name>
+			<value>tab-panel</value> 
+		</property>
+		<property>
+			<name>selectedTabStyleClass</name>
+			<value>active</value> 
+		</property>
+	</control>
+	
+
+	<!-- ================== Pager / PagerControl ================================ -->
+
+	<!-- Pager -->
+	<control>
+		<name>Pager</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.PagerRenderer</value>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+	
+	
+	<control>
+		<name>ApplicationLayout</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.layout.ResponsiveAppLayout</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Tooltip</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.tooltip.TooltipRenderer</value>
+		</property>
+	</control>
+	
+	<!-- Outline -->
+	<control>
+		<name>Outline.Navigator</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.OutlineMenu</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.BreadCrumbs</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.BreadCrumbs</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.Accordion</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.Accordion</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.SortLinks</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.SortLinks</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.LinksList</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.LinksList</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.Separator</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.outline.Separator</value>
+		</property>
+	</control>
+    <control>
+        <name>Outline.DropDownButton</name>
+        <property>
+            <name>rendererType</name>
+            <value>com.ibm.xsp.theme.bootstrap.outline.DropDownButton</value>
+        </property>
+    </control>
+
+	<!-- Container -->
+	<control>
+		<name>Container.Widget</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.containers.WidgetContainer</value>
+		</property>
+	</control>
+<!-- 	
+	<control>
+		<name>Container.List</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.containers.List</value>
+		</property>
+	</control>
+-->	
+	<control>
+		<name>Container.List.Inline</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.containers.InlineList</value>
+		</property>
+	</control>
+
+	<!-- Pager -->
+	<control>
+		<name>Pager.Sizes</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.PagerSizes</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Expand</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.PagerExpand</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Detail</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.PagerDetail</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.AddRows</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.PagerAddRows</value>
+		</property>
+	</control>
+	
+	<!-- DataIterator -->
+	<control>
+		<name>DataIterator.DataView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.DataView</value>
+		</property>
+	</control>
+	<control>
+		<name>DataIterator.ForumView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.ForumView</value>
+		</property>
+	</control>
+	
+	<!-- Form -->
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.FormTable</value>
+		</property>
+	</control>
+	<control>
+		<name>FormLayout.ForumPost</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.data.ForumPost</value>
+		</property>
+	</control>
+
+	<!-- TagCloud -->
+	<control>
+		<name>TagCloud</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.tagcloud.TagCloud</value>
+		</property>
+	</control>
+
+	<!-- Dialog -->
+	<control>
+		<name>Dialog.Modal</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dialog.Dialog</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogBar</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dialog.DialogButtonBar</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogContent</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dialog.DialogContent</value>
+		</property>
+	</control>
+	
+	<!-- Pickers -->
+	<control>
+		<name>Picker.Value</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.picker.ValuePicker</value>
+		</property>
+	</control>
+	<control>
+		<name>Picker.Name</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.picker.NamePicker</value>
+		</property>
+	</control>
+
+	<!-- Extended Dojo Controls -->
+	<control>
+		<name>Dojo.Form.ListTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dojoext.form.ListTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.NameTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dojoext.form.NameTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.LinkSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dojoext.form.LinkSelect</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.ImageSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.dojoext.form.ImageSelect</value>
+		</property>
+	</control>
+
+	<!-- ==================================================  END::CONTROLS =================== -->
+	
+</theme>
+

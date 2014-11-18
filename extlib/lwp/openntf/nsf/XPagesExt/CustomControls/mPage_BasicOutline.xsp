@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+    <xe:appPage id="basicOutline" pageName="basicOutline" resetContent="false" preload="true">
+			<xe:djxmHeading id="mHeader8" label="Basic Outline"
+				back="Home" moveTo="home"></xe:djxmHeading>
+			<xe:outline>
+				<xe:this.treeNodes>
+					<xe:basicLeafNode label="Data View 1"
+						href="#dataView">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Form 1" href="#form"></xe:basicLeafNode>
+					<xe:basicLeafNode label="Data View 2"
+						href="#dataView">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Form 2" href="#form"></xe:basicLeafNode>
+					<xe:basicLeafNode label="Data View 3"
+						href="#dataView">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Form 3" href="#form"></xe:basicLeafNode>
+					<xe:basicLeafNode label="Data View 4"
+						href="#dataView">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Form 4" href="#form"></xe:basicLeafNode>
+				</xe:this.treeNodes>
+
+
+
+				<xe:this.treeRenderer>
+					<xe:mobileAccordionMenu></xe:mobileAccordionMenu>
+				</xe:this.treeRenderer>
+			</xe:outline>
+    </xe:appPage>
+</xp:view>

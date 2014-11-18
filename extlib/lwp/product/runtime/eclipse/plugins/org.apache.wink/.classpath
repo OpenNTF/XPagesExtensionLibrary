@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/httpclient-4.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/httpcore-4.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jaxb-api-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jaxb-impl-2.2.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-simple-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/stax-api-1.0-2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/wink-client-1.1.2-incubating.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/wink-common-1.1.2-incubating.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/wink-server-1.1.2-incubating.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/JDBC/MetaData">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:label id="label5" style="font-weight:bold" value="Meta data accessor">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		This page displays information on the database meta data through the DumpObject debug control.
+		The runtime had been extended to support dumping JDBC objects, like a ResultSet or a MetaData
+		object.
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:tabbedPanel id="tabbedPanel1">
+			<xp:tabPanel label="Driver MetaData" id="tabPanel1">
+				<xe:dumpObject id="dumpObject1"
+					value="#{javascript:dbUtil.getConnection().getMetaData()}">
+					<xe:this.title><![CDATA[Database & driver meta data]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+			<xp:tabPanel label="Catalogs" id="tabPanel2">
+				<xe:dumpObject id="dumpObject2"
+					value="#{javascript:dbUtil.getConnection().getMetaData().getCatalogs()}">
+					<xe:this.title><![CDATA[Catalogs]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+			<xp:tabPanel label="Client Info Properties" id="tabPanel3">
+				<xe:dumpObject id="dumpObject3"
+					value="#{javascript:dbUtil.getConnection().getMetaData().getClientInfoProperties()}">
+					<xe:this.title><![CDATA[Client Info Properties]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+			<xp:tabPanel label="Schemas" id="tabPanel4">
+				<xe:dumpObject id="dumpObject4"
+					value="#{javascript:dbUtil.getConnection().getMetaData().getSchemas()}">
+					<xe:this.title><![CDATA[Schemas]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+			<xp:tabPanel label="Table Types" id="tabPanel6">
+				<xe:dumpObject id="dumpObject6"
+					value="#{javascript:dbUtil.getConnection().getMetaData().getTableTypes()}">
+					<xe:this.title><![CDATA[Table Types]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+			<xp:tabPanel label="Type Info" id="tabPanel5">
+				<xe:dumpObject id="dumpObject5"
+					value="#{javascript:dbUtil.getConnection().getMetaData().getTypeInfo()}">
+					<xe:this.title><![CDATA[Types Info]]></xe:this.title>
+				</xe:dumpObject>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xc:ccLayout>
+</xp:view>

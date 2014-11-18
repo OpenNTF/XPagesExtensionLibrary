@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="766" sequence="25" unid="AE8E0B447A87829580257917005058AA">
+<created><datetime dst="true">20110926T153735,78+01</datetime></created>
+<modified><datetime>20120207T095605,27+00</datetime></modified>
+<revised><datetime>20111121T222503,43+00</datetime></revised>
+<lastaccessed><datetime>20120207T095605,27+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095605,27+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T153744,90+01</datetime><datetime dst="true">20110926T153744,92+01</datetime><datetime dst="true">20110926T153744,95+01</datetime><datetime dst="true">20110926T153744,97+01</datetime><datetime dst="true">20111006T144132,40+01</datetime><datetime dst="true">20111006T144132,42+01</datetime><datetime dst="true">20111006T160522,62+01</datetime><datetime dst="true">20111010T205307,56+01</datetime><datetime dst="true">20111014T083942,34+01</datetime><datetime dst="true">20111026T114302,43+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>actionManager.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+
+
+
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>actionManager.xsp</text></item></note>

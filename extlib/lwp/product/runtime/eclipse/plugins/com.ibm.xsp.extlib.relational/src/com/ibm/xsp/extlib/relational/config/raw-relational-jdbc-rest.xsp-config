@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>jdbc</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+	<complex-type>
+	     
+    	<description>Base class for all the JDBC based services</description>
+    	<display-name>Abstract JDBC Service</display-name>
+    	<complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-class>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</base-complex-id>
+    	</complex-extension>
+  	</complex-type>
+  	
+  	<complex-type>
+    	<description>JDBC JSON Query service implementation</description>
+    	<display-name>JDBC Query As Standard JSON</display-name>
+    	<complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-class>
+    	<group-type-ref>com.ibm.xsp.extlib.rest.json.options</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+    	<complex-extension>
+      		<tag-name>jdbcQueryJsonService</tag-name>
+    		<base-complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</base-complex-id>
+    	</complex-extension>
+  	</complex-type>
+	
+</faces-config>

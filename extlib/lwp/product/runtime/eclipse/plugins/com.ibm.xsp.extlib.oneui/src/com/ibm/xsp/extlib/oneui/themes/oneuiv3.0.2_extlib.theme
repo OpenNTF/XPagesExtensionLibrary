@@ -1,0 +1,248 @@
+<theme>
+	
+	<resources>
+        <dojoModule name="extlib.theme.OneUIA11Y"></dojoModule>
+	</resources>
+	
+	<!-- extlib OneUIv3.0.2 Specific -->
+	<resource>
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/css/oneui302xsp.css</href>
+	</resource>
+	<resource  rendered="#{javascript:context.isDirectionRTL()}">
+		<content-type>text/css</content-type>
+		<href>/.ibmxspres/.extlib/css/oneui302xspRTL.css</href>
+	</resource>
+	
+	<!-- Application Layout -->
+	<control>
+		<name>ApplicationLayout</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.layout.OneUIv302ApplicationLayout</value>
+		</property>
+	</control>
+
+	<!-- Outline -->
+	<control>
+		<name>Outline.Navigator</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.outline.OneUIv302OutlineMenu</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.BreadCrumbs</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.outline.OneUIv302BreadCrumbs</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.SortLinks</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.outline.OneUIv302SortLinks</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.LinksList</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.outline.OneUIv302LinksList</value>
+		</property>
+	</control>
+	<control>
+		<name>Outline.Separator</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.outline.OneUISeparator</value>
+		</property>
+	</control>
+    <control>
+        <name>Outline.DropDownButton</name>
+        <property>
+            <name>rendererType</name>
+            <value>com.ibm.xsp.extlib.outline.OneUIv302DropDownButton</value>
+        </property>
+    </control>
+
+	<!-- Container -->
+	<control>
+		<name>Container.Widget</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.containers.OneUIv302WidgetContainer</value>
+		</property>
+	</control>
+<!-- 	
+	<control>
+		<name>Container.List</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.containers.List</value>
+		</property>
+	</control>
+-->	
+	<control>
+		<name>Container.List.Inline</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.containers.OneUIv302InlineList</value>
+		</property>
+	</control>
+	
+	<!-- TagCloud -->
+	<control>
+		<name>TagCloud</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.tagcloud.OneUIv302TagCloud</value>
+		</property>
+	</control>
+	
+	<!-- Pager -->
+	<control>
+		<name>Pager.Sizes</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIv302PagerSizes</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Expand</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIPagerExpand</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.Detail</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIv302PagerDetail</value>
+		</property>
+	</control>
+	<control>
+		<name>Pager.AddRows</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIPagerAddRows</value>
+		</property>
+	</control>
+	
+	<!-- DataIterator -->
+	<control>
+		<name>DataIterator.DataView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUICustomView</value>
+		</property>
+	</control>
+	<control>
+		<name>DataIterator.ForumView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIv302ForumView</value>
+		</property>
+	</control>
+	
+	<!-- Form -->
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIFormTable</value>
+		</property>
+		<property>
+			<name>styleClass</name>
+			<value>lotusForm</value>
+		</property>
+	</control>
+	<control>
+		<name>FormLayout.ForumPost</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.data.OneUIv302ForumPost</value>
+		</property>
+	</control>
+
+	<!-- Section -->
+	<control>
+		<name>Section</name>
+		<property>
+			<name>renderType</name>
+			<value>com.ibm.xsp.extlib.section</value>
+		</property>
+	</control>
+	<!-- Dialog -->
+	<control>
+		<name>Dialog.Modal</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dialog.OneUIv302Dialog</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogBar</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dialog.OneUIDialogButtonBar</value>
+		</property>
+	</control>
+	<control>
+		<name>DialogContent</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dialog.OneUIDialogContent</value>
+		</property>
+	</control>
+	
+	<!-- Pickers -->
+	<control>
+		<name>Picker.Value</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.picker.OneUIv302ValuePicker</value>
+		</property>
+	</control>
+	<control>
+		<name>Picker.Name</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.picker.OneUIv302NamePicker</value>
+		</property>
+	</control>
+
+	<!-- Extended Dojo Controls -->
+	<control>
+		<name>Dojo.Form.ListTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dojoext.form.OneUIListTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.NameTextBox</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dojoext.form.OneUINameTextBox</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.LinkSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dojoext.form.OneUILinkSelect</value>
+		</property>
+	</control>
+	<control>
+		<name>Dojo.Form.ImageSelect</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.dojoext.form.OneUIImageSelect</value>
+		</property>
+	</control>
+
+</theme>
+

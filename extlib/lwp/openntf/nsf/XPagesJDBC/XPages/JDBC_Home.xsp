@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:ccLayout navigationPath="/JDBC/Home">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
+			<xp:label value="XPages Relational Database Support"
+				id="label5" style="font-size:24pt;font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+		</xp:div>
+		<xp:div style="font-weight:bold;text-align:center;font-size:24pt">
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:image url="/xpagesui-logo.jpg" id="image2"></xp:image>
+		</xp:div>
+		<xp:div style="color:rgb(255,0,0);padding-left:50px;font-weight:bold"
+			rendered="#{javascript:!dbUtil.isDatabaseInitialized()}">
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			The runtime detected that the database is not initialized
+			with data.
+			<xp:br />
+			Click on the following button in the header to create a data
+			set.
+			<xp:br />
+			<xp:image url="/jdbcsetup.jpg" id="image1"></xp:image>
+		</xp:div>
+	</xc:ccLayout>
+</xp:view>

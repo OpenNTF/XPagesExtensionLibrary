@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+         "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Calendar Event</title>
+<style type="text/css">
+    @import "/xsp/.ibmxspres/dojoroot-1.8.3/dijit/themes/tundra/tundra.css";
+    @import "/xsp/.ibmxspres/dojoroot-1.8.3/dojo/resources/dojo.css";
+    @import "/xsp/.ibmxspres/.dwa/cv/themes/hannover/calendarView.css";
+    @import "calendarApp.css"
+</style>
+<script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true,
+            paths: {"dwa": "/xsp/.ibmxspres/.dwa"} 
+        };
+    </script>
+<script type="text/javascript" src="/xsp/.ibmxspres/dojoroot-1.8.3/dojo/dojo.js" >
+</script>
+<script>
+    dojo.require("dojo.parser");
+    dojo.require("dijit.layout.BorderContainer");
+    dojo.require("dijit.layout.ContentPane");
+    dojo.require("dijit.form.ValidationTextBox");
+    dojo.require("dijit.form.CheckBox");
+    dojo.require("dijit.form.SimpleTextarea");
+    dojo.require("dijit.form.Button");
+	dojo.require("dijit.form.RadioButton");
+	dojo.require("dijit.form.NumberTextBox");
+	dojo.require("dijit.form.DateTextBox");
+	dojo.require("dijit.form.TimeTextBox");	
+	dojo.require("dijit.Dialog");
+</script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="event.js"></script>
+
+<style>
+label {
+   width:100px;
+   font-weight:bold;
+   float:left;
+}
+</style>
+
+</head>
+<body class="tundra">
+
+<div dojoType="dijit.layout.BorderContainer" class="c-app-container">
+  <div id="header" dojoType="dijit.layout.ContentPane" region="top" class="c-app-header" style="background-color:lightgrey;padding:8px">
+    Header
+  </div>
+  <div dojoType="dijit.layout.ContentPane" region="center">
+      <div dojoType="dijit.layout.ContentPane" title="Event" id="content">
+
+          <a href="calendar.html">&lt;&lt; back to calendar</a>&nbsp;&nbsp;
+
+          <button dojoType="dijit.form.Button" type="button" name="save" id="save">
+              Save
+              <script type="dojo/method" event="onClick" args="evt">
+                  saveEvent(g_actualId);
+              </script>
+          </button>
+
+          <!-- button dojoType="dijit.form.Button" type="button">
+              Cancel
+              <script type="dojo/method" event="onClick" args="evt">
+                  document.location = "calendar.html";
+              </script>
+          </button -->
+
+          <button dojoType="dijit.form.Button" type="button" name="delete" id="delete">
+              Delete
+              <script type="dojo/method" event="onClick" args="evt">
+                  deleteEvent(g_actualId);
+              </script>
+          </button>
+
+          <button dojoType="dijit.form.Button" type="button" name="delegate" id="delegate">
+              Delegate ...
+              <script type="dojo/method" event="onClick">
+                  delegateDlg.show();
+              </script>
+          </button>
+
+          <br /><br />
+
+          <label for="summary">Summary:</label>
+          <input type="text" name="summary" id="summary" style="width:50em" 
+              dojoType="dijit.form.ValidationTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter an event summary" /><br/><br/>
+
+          <label for="location">Location:</label>
+          <input type="text" name="location" id="location" style="width:50em"
+              dojoType="dijit.form.ValidationTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter a location"/><br/><br/>
+
+          <label for="startDate">Start:</label>
+          <input type="text" name="startDate" id="startDate" style="width:8em"
+              dojoType="dijit.form.DateTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter a start date"/>
+          <input type="text" name="startTime" id="startTime" style="width:6em"
+              dojoType="dijit.form.TimeTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter a start time"/>
+          <br/><br/>
+
+          <label for="endDate">End:</label>
+          <input type="text" name="endDate" id="endDate" style="width:8em"
+              dojoType="dijit.form.DateTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter an end date"/>
+          <input type="text" name="endTime" id="endTime" style="width:6em"
+              dojoType="dijit.form.TimeTextBox" trim="true"
+              required="true" size="100"
+              invalidMessage="You must enter an end date"/>
+          <br/><br/>
+          
+		  <div id="repeatDiv">
+	          <label for="repeat">Repeat:</label>
+	          <input type="radio" name="repeat" id="none" checked dojoType="dijit.form.RadioButton"/> None  
+	          <input type="radio" name="repeat" id="daily" dojoType="dijit.form.RadioButton"/>Daily  
+	          <input type="radio" name="repeat" id="weekly" dojoType="dijit.form.RadioButton"/>Weekly  
+	          <input type="radio" name="repeat" id="monthly" dojoType="dijit.form.RadioButton"/>Monthly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count
+			  <input type="text" name="count" id="count" style="width:6em"
+				  dojoType="dijit.form.NumberTextBox" trim="true"
+				  required="false" size="100"
+				  invalidMessage="You must enter an valid number"/><br/><br/>	  
+	      </div> 
+
+          <div id="organizerDiv" style="visibility: hidden">
+	          <label for="organizer">Organizer:</label>
+	          <input type="text" name="organizer" id="organizer" style="width:15em"
+	              dojoType="dijit.form.ValidationTextBox" trim="true"
+	              size="100"/><br /><br />
+	      </div>
+          <div id="attendeesDiv" style="visibility: hidden">
+			  <label for="attendees">Attendees:</label>
+	          <input type="text" name="attendees" id="attendees" style="width:50em"
+	              dojoType="dijit.form.ValidationTextBox" trim="true"
+	              size="100"/><br /><br />
+          </div>
+
+          <label for="end">Description:</label><br /><br />
+          <textarea type="textarea" name="description" id="description"
+              dojoType="dijit.form.SimpleTextarea" 
+              rows="12" cols="84"></textarea><br/><br/>
+
+          <!-- <a href="calendar.html">&lt;&lt; back to calendar</a><br /><br /> -->
+
+      </div>
+  </div>
+  <div dojoType="dijit.layout.ContentPane" region="bottom" class="c-app-footer" style="background-color:lightgrey;padding:8px">
+    Footer
+  </div>
+</div>
+
+<!-- Dialogs -->
+
+<div dojoType="dijit.Dialog" jsId="delegateDlg">
+     Delegate meeting to<br>
+     <span dojoType="dijit.form.TextBox" id="delegateTo"></span><br><br>
+     <div dojoType="dijit.form.Button">
+         OK
+         <script type="dojo/method" event="onClick">
+             var delegateTo = dijit.byId("delegateTo");
+             delegate(g_eventId, delegateTo.getValue());
+             delegateDlg.hide();
+         </script>
+     </div>
+     <div dojoType="dijit.form.Button">
+         Cancel
+         <script type="dojo/method" event="onClick">
+             delegateDlg.hide();
+         </script>
+     </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="376" sequence="12" unid="33E7C0D162DE56718025785C0055804D">
+<created><datetime>20110323T153354,05+00</datetime></created>
+<modified><datetime>20120207T095549,02+00</datetime></modified>
+<revised><datetime dst="true">20111026T122250,00+01</datetime></revised>
+<lastaccessed><datetime>20120207T095549,02+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095549,02+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110830T205050,93-04</datetime><datetime dst="true">20111006T160526,02+01</datetime><datetime dst="true">20111014T083945,87+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$Flags"><text>34567Cg~`</text></item>
+<item name="$TITLE" sign="true"><text>oneuiv2_1_gold.theme</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>oneuiv2_1_gold.theme</text></item>
+<item name="$CSSFiles"><textlist><text>oneuiv2_1.css</text><text>stylesIE06.css</text><text>stylesIE78.css</text><text>stylesFF.css</text></textlist></item></note>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:djxmHeading id="djxmHeading1" label="Recent Activity"
+		back="Views" moveTo="views">
+	</xe:djxmHeading>
+	<xe:dataView id="dataView2" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" pageName="#{javascript: compositeData.get('pageName')}" columnTitles="true"
+		rows="10" rendererType="com.ibm.xsp.extlib.mobile.MobileView">
+		<xe:this.data>
+			<xp:dominoView var="view1"
+				viewName="#{javascript: compositeData.get('viewName')}" expandLevel="2">
+			</xp:dominoView>
+		</xe:this.data>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="#{javascript: compositeData.get('titleColumn')}"
+				columnTitle="Subject">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.categoryColumn>
+			<xe:viewCategoryColumn columnName="Date"
+				columnTitle="Date">
+			</xe:viewCategoryColumn>
+		</xe:this.categoryColumn>
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:panel id="panel2" xp:key="detail">				
+				<xp:text escape="true" id="computedField2"
+					styleClass="mblDetailTextBold" value="From: "> 
+				</xp:text>
+				<xp:text escape="true" id="computedField1"
+					styleClass="mblDetailTextNormal"
+					value="#{javascript: viewEntry.getColumnValue('From')}">
+				</xp:text>
+				
+				<xp:text escape="true" id="computedField3"
+					styleClass="mblDetailTextBold" value=" | Date: ">
+				</xp:text>
+				<xp:text escape="true" id="computedField4"
+					styleClass="mblDetailTextNormal"
+					value="#{javascript: viewEntry.getColumnValue('ActivityDate')}">
+				</xp:text>
+			</xp:panel>
+			
+			<xp:link escape="true" text="Show more..." id="link1"
+				xp:key="pagerBottomRight">
+				<xp:eventHandler event="onclick"
+					submit="false">
+					<xp:this.script>
+						<xe:addRows for="dataView2" rowCount="5"></xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

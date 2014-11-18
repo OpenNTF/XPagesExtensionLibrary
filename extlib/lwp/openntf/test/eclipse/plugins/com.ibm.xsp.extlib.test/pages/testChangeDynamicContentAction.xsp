@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:button value="a" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evt1">
+			<xp:this.action>
+				<xe:changeDynamicContentAction
+					facetName="a" for="dynamicContent1">
+				</xe:changeDynamicContentAction>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="b" id="button2">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evt2">
+			<xp:this.action>
+				<xe:changeDynamicContentAction
+					facetName="b" for="dynamicContent1">
+				</xe:changeDynamicContentAction>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="c" id="button3">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evt3">
+			<xp:this.action>
+				<xe:changeDynamicContentAction
+					facetName="c" for="dynamicContent1">
+				</xe:changeDynamicContentAction>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="None" id="button4">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evt4">
+			<xp:this.action>
+				<xe:changeDynamicContentAction for="dynamicContent1"></xe:changeDynamicContentAction>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:button value="a (action=foo)" id="button5">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evt5">
+			<xp:this.action>
+				<xe:changeDynamicContentAction
+					facetName="a" for="dynamicContent1">
+					<xe:this.parameters>
+						<xp:parameter name="action" value="foo"/>
+					</xe:this.parameters>
+				</xe:changeDynamicContentAction>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+
+	<xp:br></xp:br>
+	<xe:dynamicContent id="dynamicContent1">
+		<xe:this.facets>
+			<xp:panel xp:key="a">
+				aaa Load time:&#160;
+				<xp:text id="computedField1"
+					value="${javascript:@Now()}">
+					<xp:this.converter>
+						<xp:convertDateTime type="time"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text> 
+				&#160;
+				<div id="actionDiv">
+				Action:&#160;
+				<xp:text id="computedField4"
+					value="#{action}">
+				</xp:text>
+				</div>
+			</xp:panel>
+			<xp:panel xp:key="b">
+				bbb Load time:&#160;
+				<xp:text escape="true" id="computedField2" value="${javascript:@Now()}">
+					<xp:this.converter>
+						<xp:convertDateTime type="time"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+			</xp:panel>
+			<xp:panel xp:key="c">
+				ccc Load time:&#160;
+				<xp:text escape="true" id="computedField3" value="${javascript:@Now()}">
+					<xp:this.converter>
+						<xp:convertDateTime type="time"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:dynamicContent>
+
+</xp:view>
+

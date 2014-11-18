@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	dojoParseOnLoad="true">
+	<xp:this.resources>
+		<xp:script clientSide="true">
+			<xp:this.contents><![CDATA[
+var path = " ${javascript: // compute the path serverside
+	var value = '/'; // path relative to the application
+	var viewHandler:com.ibm.xsp.application.ViewHandlerEx = facesContext.getApplication().getViewHandler();
+	value = viewHandler.getResourceURL(facesContext,value);
+	value = facesContext.getExternalContext().encodeResourceURL(value);
+	if( value.endsWith('/') ){
+		value = value.substring(0, value.length - 1);
+	}
+	return value;
+} ".trim();
+dojo.registerModulePath('xpagesext', path);
+			]]></xp:this.contents>
+		</xp:script>
+		<!--
+			ensure the dwa module path is registered before attempt to load from
+			xpagesext module path
+		-->
+		<xp:dojoModule name="dwa.cv.calendarView"></xp:dojoModule>
+		<!--
+			Just referencing .js files just for ease of firebug debugging - not
+			needed because the modules auto-include.
+		-->
+		<xp:script clientSide="true" src="/.ibmxspres/.dwa/cv/calendarView.js">
+		</xp:script>
+		<xp:script clientSide="true"
+			src="/.ibmxspres/.dwa/cv/calendarDataStore.js">
+		</xp:script>
+		<xp:script clientSide="true" src="/CalendarStore.js"></xp:script>
+	</xp:this.resources>
+
+
+	<!--xe:ajaxBlock id="ajaxBlock1">
+
+				<![CDATA[
+ { 
+ entries:{]]>
+<![CDATA[
+	"@timestamp": 
+		]]>"
+		<xp:text disableTheme="true" value="#{javascript:@Now()}">
+			<xp:this.converter>
+				<xp:convertDateTime pattern="yyyyMMdd'T'hhmmss">
+				</xp:convertDateTime>
+			</xp:this.converter>
+		</xp:text>"<![CDATA[,
+ 	"@toplevelentries":
+ 		]]>"
+		<xp:text disableTheme="true"
+			value="#{javascript: getComponent('repeatChild').getParent().getRowCount()}" />"<![CDATA[,
+	"@rangeentries": "1000",
+	"viewentry": 
+	[
+		]]>
+
+		<xp:repeat value="#{meetingsView}" var="item" indexVar="itemIndex">
+			<xp:text rendered="false" id="repeatChild" />
+
+		<![CDATA[
+	{ 
+		"@position": 
+			]]>"
+			<xp:text disableTheme="true" value="#{itemIndex+1}" />"<![CDATA[,
+		"@unid": 
+			]]>"
+			<xp:text disableTheme="true" value="#{javascript: item.getUniversalID() }" />"<![CDATA[,
+		"@noteid": 
+			]]>"
+			<xp:text disableTheme="true" value="#{javascript: item.getNoteID() }" />"<![CDATA[,
+		"@siblings": 
+			]]>"
+			<xp:text disableTheme="true"
+				value="#{javascript: getComponent('repeatChild').getParent().getRowCount()}" />"<![CDATA[,
+		"entrydata": 
+		[
+			{
+				"@columnnumber": "0",
+				"@name": "$134",
+				"datetime": {
+					"0": 
+						]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.dateFieldName]}">
+				<xp:this.converter>
+					<xp:convertDateTime pattern="yyyyMMdd'T'hhmmss">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:text>"<![CDATA[
+				}
+			},
+			{
+				"@columnnumber": "1",
+				"@name": "$149",
+				"numberlist": {
+					"number": [
+						{
+							"0": "210"
+						},
+						{
+							"0": "0"
+						}
+					]
+				}
+			},
+			{
+				"@columnnumber": "2",
+				"@name": "$144",
+				"datetime": {
+					"0": 
+						]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.dateFieldName]}">
+				<xp:this.converter>
+					<xp:convertDateTime pattern="yyyyMMdd'T'hhmmss">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:text>"<![CDATA[
+				}
+			},
+			{
+				"@columnnumber": "3",
+				"@name": "$145",
+				"text": {
+					"0": "-"
+				}
+			},
+			{
+				"@columnnumber": "4",
+				"@name": "$146",
+				"datetime": {
+					"0": 
+						]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.dateFieldName]}">
+				<xp:this.converter>
+					<xp:convertDateTime pattern="yyyyMMdd'T'hhmmss">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:text>"<![CDATA[
+				}
+			},
+			{
+				"@columnnumber": "5",
+				"@name": "$147",
+				"textlist": {
+					"text": [
+						{
+							"0": 
+								]]>"
+			<xp:text disableTheme="true"
+				value="#{item[compositeData.descriptionFieldName]}" />"<![CDATA[
+						},
+						{
+							"0": 
+								]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.chairFieldName]}" />"<![CDATA[
+						}
+					]
+				}
+			},
+			{
+				"@columnnumber": "6",
+				"@name": "$151",
+				"textlist": {
+					"text": [
+						{
+							"0": 
+								]]>"
+			<xp:text disableTheme="true"
+				value="#{item[compositeData.descriptionFieldName]}" />"<![CDATA[
+						},
+						{
+							"0": 
+								]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.chairFieldName]}" />"<![CDATA[
+						}
+					]
+				}
+			},
+			{
+				"@columnnumber": "7",
+				"@name": "$152",
+				"text": {
+					"0": "3"
+				}
+			},
+			{
+				"@columnnumber": "8",
+				"@name": "$153",
+				"text": {
+					"0": 
+						]]>"
+			<xp:text disableTheme="true" value="#{item[compositeData.chairFieldName]}" />"<![CDATA[
+				}
+			},
+			{
+				"@columnnumber": "9",
+				"@name": "$154",
+				"number": {
+					"0": "0"
+				}
+			},
+			{
+				"@columnnumber": "10",
+				"@name": "$160",
+				"text": {
+					"0": "Accepted"
+				}
+			},
+			{
+				"@columnnumber": "11",
+				"@name": "$UserData",
+				"text": {
+					"0": ""
+				}
+			}
+		]
+	}]]>
+			<xp:text disableTheme="true"
+				rendered="#{javascript: (itemIndex+1) != getComponent('repeatChild').getParent().getRowCount() }"
+				value="," />
+
+
+		</xp:repeat>
+					<![CDATA[
+	]
+	}
+}]]>
+	</xe:ajaxBlock-->
+
+
+	<xe:notesCalendarStore id="${compositeData.storeComponentId}"
+		jsId="nstore1" dojoType="xpagesext.CalendarStore">
+		<xe:this.dojoAttributes>
+			<xp:dojoAttribute name="axtarget" value="#{id:ajaxBlock1}">
+			</xp:dojoAttribute>
+		</xe:this.dojoAttributes>
+	</xe:notesCalendarStore>
+
+	<!--			<span dojoType="dwa.data.NotesCalendarStore"-->
+	<!--				id="${compositeData.storeComponentId}" jsId="nstore1"-->
+	<!--
+		url="http://rincewind.mul.ie.ibm.com/mail/admin.nsf/iNotes/Proxy/" />
+	-->
+</xp:view>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="OneUI_Home" label="OneUI Home"
+				selection="/OneUI/Home">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_Outline" label="Outline"
+				selection="/OneUI/Outline">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_List" label="Lists"
+				selection="/OneUI/List">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_SearchPage" label="Search Results"
+				selection="/OneUI/SearchPage">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_BreadCrumb" label="Bread Crumbs"
+				selection="/OneUI/BreadCrumb">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_WidgetContainer" label="Widget Container"
+				selection="/OneUI/WidgetContainer">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_Form" label="Form Table"
+				selection="/OneUI/Form">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="OneUI_ForumPost" label="Forum Post"
+				selection="/OneUI/ForumPost">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

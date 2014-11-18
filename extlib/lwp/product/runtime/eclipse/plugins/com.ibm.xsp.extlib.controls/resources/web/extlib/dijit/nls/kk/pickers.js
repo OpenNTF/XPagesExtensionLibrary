@@ -1,0 +1,22 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "\u0411\u043e\u043b\u0434\u044b\u0440\u043c\u0430\u0443",
+PickerList_OK: "OK",
+PickerList_Cancel: "\u0411\u043e\u043b\u0434\u044b\u0440\u043c\u0430\u0443",
+PickerListSearch_Search: "\u0406\u0437\u0434\u0435\u0443",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "\u0411\u043e\u043b\u0434\u044b\u0440\u043c\u0430\u0443",
+PickerListSearch_Value: "\u041c\u04d9\u043d",
+PickerListSearch_Values: "\u041c\u04d9\u043d\u0434\u0435\u0440",
+PickerName_Search: "\u0406\u0437\u0434\u0435\u0443",
+PickerName_Add: "\u049a\u043e\u0441\u0443",
+PickerName_Remove: "\u0416\u043e\u044e",
+PickerName_RemoveAll: "\u0411\u0430\u0440\u043b\u044b\u0493\u044b\u043d \u0436\u043e\u044e",
+PickerName_OK: "OK",
+PickerName_Cancel: "\u0411\u043e\u043b\u0434\u044b\u0440\u043c\u0430\u0443",
+PickerName_SearchIn: "\u041a\u0435\u043b\u0435\u0441\u0456\u0434\u0435\u043d \u0456\u0437\u0434\u0435\u0443",
+PickerName_SearchFor: "\u0406\u0437\u0434\u0435\u0443",
+PickerName_unSelectedListLabel: "\u0422\u0430\u04a3\u0434\u0430\u043b\u0430\u0442\u044b\u043d \u043c\u04d9\u043d\u0434\u0435\u0440 \u0442\u0456\u0437\u0456\u043c\u0456",
+PickerName_selectedListLabel: "\u0422\u0430\u04a3\u0434\u0430\u0443\u043b\u044b \u043c\u04d9\u043d\u0434\u0435\u0440 \u0442\u0456\u0437\u0456\u043c\u0456"
+})
+

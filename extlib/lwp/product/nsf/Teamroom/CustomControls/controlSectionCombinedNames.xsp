@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xe:formTable disableErrorSummary="true">
+		<xe:formRow for="fieldReviewers">
+			<xe:this.label><![CDATA[#{javascript:
+if (viewScope.controlDocType==strings.getString("defaultdoctype1"))
+{
+	return strings.getString("individualreviewers");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype2"))
+{
+	return strings.getString("individualassignees");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype3"))
+{
+	return strings.getString("individualattendees");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype4"))
+{
+	return strings.getString("individualreviewers");
+}
+else
+{
+	return strings.getString("individualreviewers");
+}
+
+}]]></xe:this.label>
+			<xp:div style="width: 80%">
+				<xe:djextNameTextBox id="fieldReviewers"
+					multipleSeparator="," value="#{document1.PriNameSelection}"
+					style="width: 100% !important; word-wrap:break-word; overflow:hidden;"
+					waiRole="button" title="select individual reviewers">
+				</xe:djextNameTextBox>
+			</xp:div>
+
+			<xe:valuePicker id="fieldSubteamReviewersNamePicker"
+				for="fieldReviewers" dialogTitle="Select individuals"
+				dojoType="extlib.dijit.PickerCheckbox">
+				<xe:this.dataProvider>
+					<xe:dominoViewValuePicker viewName="PeopleLookup"
+						labelColumn="$3">
+					</xe:dominoViewValuePicker>
+				</xe:this.dataProvider>
+				<xe:this.pickerText><![CDATA[#{javascript:var buffer = getComponent("fieldReviewers").getValue();
+if ((buffer==null)||(buffer==""))
+{
+	return strings.picker_valueEmpty_select; // "Select"
+}
+else
+{
+	return strings.picker_valuePresent_add; // "Add"
+}
+
+}]]></xe:this.pickerText>
+			</xe:valuePicker>
+
+		</xe:formRow>
+		<xe:formRow for="fieldSubteamReviewers">
+			<xe:this.label><![CDATA[#{javascript:
+if (viewScope.controlDocType==strings.getString("defaultdoctype1"))
+{
+	return strings.getString("subteamreviewers");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype2"))
+{
+	return strings.getString("subteamassignees");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype3"))
+{
+	return strings.getString("subteamattendees");
+}
+else if (viewScope.controlDocType==strings.getString("defaultdoctype4"))
+{
+	return strings.getString("subteamreviewers");
+}
+else
+{
+	return strings.getString("subteamreviewers");
+}
+
+}]]></xe:this.label>
+			<xp:message id="message3" for="fieldSubteamReviewers"></xp:message>
+			<xp:div style="width: 80%">
+				<xe:djextNameTextBox id="fieldSubteamReviewers"
+					multipleSeparator="," value="#{document1.Subteam1}"
+					style="width:100% !important; word-wrap:break-word; overflow:hidden;"
+					waiRole="button" title="select subteam reviewers">
+				</xe:djextNameTextBox>
+			</xp:div>
+
+			<xe:valuePicker id="valuePicker1"
+				for="fieldSubteamReviewers" dialogTitle="Select subteams"
+				dojoType="extlib.dijit.PickerCheckbox">
+				<xe:this.dataProvider>
+					<xe:dominoViewValuePicker viewName="SubteamLookup"
+						labelColumn="STName">
+					</xe:dominoViewValuePicker>
+				</xe:this.dataProvider>
+				<xe:this.pickerText><![CDATA[#{javascript:
+
+var buffer = getComponent("fieldSubteamReviewers").getValue();
+if ((buffer==null)||(buffer==""))
+{
+	return strings.picker_valueEmpty_select; // "Select"
+}
+else
+{
+	return strings.picker_valuePresent_add; // "Add"
+}
+}]]></xe:this.pickerText>
+			</xe:valuePicker>
+
+		</xe:formRow>
+		<xe:formRow labelPosition="none">
+			<xp:label id="label1" rendered="#{javascript:return (param.documentId==null);}">
+				<xp:this.value><![CDATA[#{javascript:return strings.getString("link.notyetsaved");}]]></xp:this.value>
+			</xp:label>
+			<xp:panel id="reviewersPanel"
+				rendered="#{javascript:return (param.documentId!=null);}">
+				<xp:panel>
+					<xp:this.rendered><![CDATA[#{javascript:
+			
+// Get the individual reviewers			
+var individualReviewers = getComponent("fieldReviewers").getValue();
+
+// Get and resolve the subteam reviewers
+var subteamReviewers = getComponent("fieldSubteamReviewers").getValue();
+var resolvedSubteamReviewers = @DbLookup(@DbName(), "SubteamLookup", subteamReviewers, 2, "[FAILSILENT]");
+
+// Concatenate the individual reviewers	and the resolved subteam reviewers
+if ((individualReviewers!=null)&&(resolvedSubteamReviewers!=null))
+{	
+	var individualReviewersLength = @Explode(individualReviewers,",;").length;
+
+	// Create a one element array is there is only one individidual reviewer
+	if (individualReviewersLength==1)
+	{
+		individualReviewers = [individualReviewers];
+	}
+
+	combinedReviewers = individualReviewers.concat(resolvedSubteamReviewers);
+}
+
+if ((individualReviewers==null)&&(resolvedSubteamReviewers!=null))
+{
+	combinedReviewers = resolvedSubteamReviewers;
+}
+
+if ((individualReviewers!=null)&&(resolvedSubteamReviewers==null))
+{
+	combinedReviewers = individualReviewers;
+}
+
+if ((individualReviewers==null)&&(resolvedSubteamReviewers==null))
+{
+	combinedReviewers = "";
+}
+
+// Throw the combined names list into the requestScope
+var combinedReviewersLength = @Explode(combinedReviewers,",;").length;
+if (combinedReviewersLength>1)
+{
+	sessionScope.put("combinedNames",@Implode(@Unique(combinedReviewers),", "));
+}
+else
+{
+	if ((combinedReviewers!=null)&&(combinedReviewers[0]!=null))
+	{
+		sessionScope.put("combinedNames",combinedReviewers[0]);
+	}else{
+		sessionScope.remove("combinedNames");
+	}
+}
+
+// And return the empty string
+return true;
+			
+			}]]></xp:this.rendered>
+
+					<xe:jsonRpcService id="jsonRpcService1"
+						serviceName="reminderService" state="true">
+						<xe:this.methods>
+							<xe:remoteMethod name="sendLinks">
+								<xe:this.script>
+									<![CDATA[
+										var status = strings.getString("topicPostEdit_sendMailLink_problem");
+										try{
+											var doc:NotesDocument = database.getProfileDocument("TempVars", "");
+											var thisAgent:NotesAgent = database.getAgent("(wSendLink)");
+											if(null != thisAgent && null != doc){
+												doc.replaceItemValue('useXPageUrl', 'true');
+												thisAgent.runWithDocumentContext(document1.getDocument());
+												status = doc.getItemValueString('MailSent');
+												doc.removeItem('MailSent');
+												doc.replaceItemValue('useXPageUrl', '');
+											}
+										}catch(e){
+											print(e);
+										}finally{
+											return status;
+										}
+									]]>
+								</xe:this.script>
+							</xe:remoteMethod>
+						</xe:this.methods>
+					</xe:jsonRpcService>
+
+					<xp:link escape="true" id="sendNotificationsLink"
+						rendered="#{javascript:return (param.documentId!=null);}"
+						role="button" title="send notification link">
+						<xp:this.text><![CDATA[#{javascript:
+var combinedNames = sessionScope.get("combinedNames");
+if ((combinedNames==null)||(combinedNames==""))
+{
+	if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype1")))
+	{
+		return strings.getString("link.noreviewers");
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype2")))
+	{
+		return strings.getString("link.noassignees");
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype3")))
+	{
+		return strings.getString("link.noattendees");
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype4")))
+	{
+		return strings.getString("link.noreviewers");
+	}
+	else
+	{
+		return strings.getString("link.noreviewers");
+	}
+}
+else
+{		
+	if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype1")))
+	{
+		return I18n.format(strings.getString("link.reviewers"), combinedNames);
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype2")))
+	{
+		return I18n.format(strings.getString("link.assignees"), combinedNames);
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype3")))
+	{
+		return I18n.format(strings.getString("link.attendees"), combinedNames);
+	}
+	else if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype4")))
+	{
+		return I18n.format(strings.getString("link.reviewers"), combinedNames);
+	}
+	else
+	{
+		return I18n.format(strings.getString("link.reviewers"), combinedNames);
+	}
+}	}]]></xp:this.text>
+						<xp:eventHandler event="onclick"
+							submit="false">
+							<xp:this.script>
+								<![CDATA[
+									var deferred = reminderService.sendLinks();
+									deferred.addCallback(function(result) {
+										XSP.alert(result)
+									});
+								]]>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

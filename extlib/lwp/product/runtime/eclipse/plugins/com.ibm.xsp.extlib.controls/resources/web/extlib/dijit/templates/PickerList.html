@@ -1,0 +1,37 @@
+<div>
+<style>
+.xspPicker { height:100%; width:100%; }
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerBody { margin:0; padding:0; background:#fff; }
+.xspPickerItemSelected { background:#b7cdee !important; border: 1px dotted #b7b7b7; }
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none}
+.xspPickerItem:hover { background:#ffffc8; border:1px dotted #b7b7b7 }
+
+.xspHtmlTrViewSelected{background-color:#eefee1;}
+.xspHtmlTrView:hover{background-color:#ffffc8;}
+
+.xspPickerBody li {padding:2px 2px 2px 2px}
+.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
+</style>
+<table>
+  <tr>
+    <td>
+	<div class="xspPicker">
+		<div dojoAttachPoint="bodyWrapper" style="width:${listWidth};height:${listHeight};overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none;" class="xspPickerBodyWrapper" dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
+			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+		</div>
+	</div>
+	</td>
+    <td valign="top">
+	  <table>
+		<tr>
+		  <td><button dojoAttachPoint="pkOk" class="xspPickerButton">${PickerList_OK}</button></td>
+		</tr>
+		<tr>
+		  <td><button dojoAttachPoint="pkCancel" class="xspPickerButton">${PickerList_Cancel}</button></td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</div>

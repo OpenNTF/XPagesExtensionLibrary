@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:listInline
+		loaded="${javascript: (userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) &amp;&amp; userBean.canCreateDocs }">
+		<xp:link text="Edit" id="link5" value="/statusReports.xsp"
+			role="button" title="edit">
+			<xp:this.parameters>
+				<xp:parameter name="documentId"
+					value="#{javascript: document1.getDocument().getUniversalID() }">
+				</xp:parameter>
+				<xp:parameter name="action" value="editDocument">
+				</xp:parameter>
+			</xp:this.parameters>
+		</xp:link>
+		<xp:link escape="true" text="Delete" id="link9" role="button"
+			title="delete">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action>
+					<xp:deleteDocument name="/statusReports.xsp"
+						message="#{strings.delete_document}" />
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:link>
+	</xe:listInline>
+</xp:view>

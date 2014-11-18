@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.afterPageLoad><![CDATA[#{javascript://
+		sessionScope.mobileFrom = "reviewStatus";
+	}]]></xp:this.afterPageLoad>
+
+	<xe:djxmHeading id="djxmHeading1" label="Review Status" back="Views" moveTo="home">
+		<xe:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:userBean.canCreateDocs}]]>
+				</xp:this.rendered>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:djxmHeading>
+	<xc:mobileReviewStatusDataView></xc:mobileReviewStatusDataView>
+</xp:view>

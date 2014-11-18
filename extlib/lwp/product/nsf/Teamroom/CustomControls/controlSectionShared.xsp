@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:div id="moreOptionsOuterDiv">
+		<xp:section id="sectionMoreOptions" header="More options"
+			initClosed="true" disableTheme="true"
+			headerStyle="color:rgb(0,0,0);text-decoration:none" role="presentation">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" execMode="partial" execId="moreOptionsOuterDiv" refreshId="moreOptionsOuterDiv"
+				disableValidators="true">
+			</xp:eventHandler>
+		</xp:section>
+		<xp:div id="moreOptionsDiv" style="#{javascript: getComponent('sectionMoreOptions').isClosed()?  'display:none; padding:10px' : 'padding:10px' }">
+			<xe:formTable disableErrorSummary="true">
+				<xe:formRow id="associatedEventRow" label="Associated event:" labelWidth="75px">
+					<xp:comboBox id="fieldAssociatedEvent"
+						value="#{document1.Milestones}" style="width:300px">
+						<xp:selectItem itemLabel="#{''}"></xp:selectItem>
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:// Get the keywords from the appropriate view
+								@DbColumn(@DbName(), "EventLookup", 1);
+							}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:comboBox>
+				</xe:formRow>
+
+				<xe:formRow id="subteamsRow" label="Associated subteams:" labelWidth="75px">
+					<xp:listBox id="listboxAssociatedSubteams"
+						value="#{document1.SubteamInterest}" multiple="true"
+						style="width:300.0px">
+						<xp:selectItems>
+							<xp:this.value><![CDATA[#{javascript:// Get the keywords from the appropriate view
+								@DbColumn(@DbName(), "SubteamLookup", 1);
+							}]]></xp:this.value>
+						</xp:selectItems>
+					</xp:listBox>
+				</xe:formRow>
+
+				<xe:formRow id="rowMarkInactive" labelPosition="none">
+					<xp:checkBox text="Mark document inactive on: "
+						id="checkboxInactiveOn" value="#{requestScope.checkboxNeverFile}"
+						defaultChecked="#{javascript: document1.getItemValueString('NeverFile') != '1' }">
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="partial"
+							refreshId="moreOptionsOuterDiv" disableValidators="true">
+							<xp:this.script><![CDATA[//
+								var hiddenNeverFile = XSP.getElementById('#{id:hiddenNeverFile}');
+								var checkBox = XSP.getElementById('#{id:checkboxInactiveOn}');
+								if( checkBox.checked ){
+									hiddenNeverFile.value='';
+								}else{
+									hiddenNeverFile.value='1';
+								}
+							]]></xp:this.script>
+						</xp:eventHandler>
+					</xp:checkBox>
+					
+					<xp:text escape="false" id="spacer">
+						<xp:this.value><![CDATA[#{javascript:return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}]]></xp:this.value>
+					</xp:text>
+
+					<xp:inputHidden id="hiddenNeverFile" value="#{document1.NeverFile}">
+					</xp:inputHidden>
+
+					<xp:inputText id="fieldInactiveOn"
+						value="#{document1.FileByDate}" role="button"
+						title="used to select a date">
+						<xp:this.readonly><![CDATA[#{javascript://
+							var checkboxInactiveOn = getComponent("checkboxInactiveOn");
+							var state = checkboxInactiveOn.getSubmittedValue();
+							if( null == state ){
+								state = checkboxInactiveOn.getValue();
+							}
+							return (state=="false");
+						}]]></xp:this.readonly>
+						<xp:this.defaultValue><![CDATA[#{javascript://
+							//Get default filing interval choice from Advanced Options page
+							var defaultfiledate = @DbLookup(@DbName(), "MissionLookup", "Mission", 6); // column 6 is DefaultFilingInterval
+							
+							// Convert default to appropriate date.
+							// note, "1 week", "2 weeks" etc are not translated
+							var days = -1;
+							if( defaultfiledate == "1 week" ){
+								days = 7;
+							}else if( defaultfiledate == "2 weeks" ){
+								days = 14;
+							}else if( defaultfiledate == "3 weeks" ){
+								days = 21;
+							}else if( defaultfiledate == "1 month" ){
+								days = 30;
+							}else if( defaultfiledate == "2 months" ){
+								days = 60;
+							}else if( defaultfiledate == "3 months" ){
+								days = 90;
+							}// else team setup not done
+							if( days > 0 )
+							{
+								var date = java.util.Calendar.getInstance(context.getLocale());
+								date.add(java.util.Calendar.DATE, days);
+								return date.getTime();
+							}
+						}]]></xp:this.defaultValue>
+						<xp:dateTimeHelper
+							dojoType="dijit.form.DateTextBox" id="fieldInactiveOnHelper">
+						</xp:dateTimeHelper>
+						<xp:this.converter>
+							<xp:convertDateTime type="date"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:inputText>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:div>
+	</xp:div>
+</xp:view>

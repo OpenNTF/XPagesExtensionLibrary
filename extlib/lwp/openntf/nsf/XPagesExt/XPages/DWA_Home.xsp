@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/Home">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>Extension Library Demo - DWA</xp:panel>
+	</xc:OneUILayout></xp:view>
+

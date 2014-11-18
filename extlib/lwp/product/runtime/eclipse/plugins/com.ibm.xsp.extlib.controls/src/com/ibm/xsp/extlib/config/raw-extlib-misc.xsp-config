@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>misc</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+			
+<!-- Keep Session Alive -->
+	<component>
+		<description>Keep the server session alive until the browser page is closed</description>
+		<display-name>Keep Session Alive</display-name>
+		<component-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</component-type>
+		<component-class>com.ibm.xsp.extlib.component.misc.UIKeepSessionAlive</component-class>
+
+  		<property>
+			<description>Delay, in seconds, for calling the server. If this value is not set, or is less than or equal to 0, then it uses the current session timeout value minus 30 seconds</description>
+			<display-name>Delay</display-name>
+			<property-name>delay</property-name>
+			<property-class>int</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Misc</component-family>
+			<renderer-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</renderer-type>
+			<tag-name>keepSessionAlive</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+	
+<!-- Firebug Lite -->
+	<component>
+	   <!--#Firebug Lite is a product name and should not be translated-->
+		<description>Inserts Firebug Lite, a debugging tool into the current page</description>
+		<display-name>Firebug Lite</display-name>
+		<component-type>com.ibm.xsp.extlib.misc.FirebugLite</component-type>
+		<component-class>com.ibm.xsp.extlib.component.misc.UIFirebugLite</component-class>
+
+  		<property>
+			<description>Specify an alternate URL where a Firebug Lite script will be loaded from. Default is to load script packaged with the Extension Library which is version 1.3.2</description>
+			<display-name>URL</display-name>
+			<property-name>url</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+				<designer-extension>
+                    <category>basics</category>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						https://getfirebug.com/firebug-lite.js
+					</editor-parameter>
+				</designer-extension>
+            </property-extension>
+		</property>
+		
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Misc</component-family>
+			<renderer-type>com.ibm.xsp.extlib.misc.FirebugLite</renderer-type>
+			<tag-name>firebugLite</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+<!-- Dump Object -->
+	<component>
+	    <!--Investigate what objects are handled-->
+		<description>This control dumps out information from an object or a set of objects which allows you to see the properties belonging to that object in a grid display</description>
+		<display-name>Dump Object</display-name>
+		<component-type>com.ibm.xsp.extlib.misc.DumpObject</component-type>
+		<component-class>com.ibm.xsp.extlib.component.misc.UIDumpObject</component-class>
+
+		<property>
+			<description>Defines the object whose properties you wish to dump</description>
+			<display-name>Object to Dump</display-name>
+			<property-name>value</property-name>
+      		<property-class>java.lang.Object</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>	    
+			<description>List of objects that you want to dump, object names to be separated using a comma</description>
+			<display-name>Objects to Dump</display-name>
+			<property-name>objectNames</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>
+		    <!--Update to something more informative, also include information about default-->
+			<description>Defines the level at which you want to drill down in an objects child properties. Default is set to 999.</description>
+			<display-name>Depth Levels</display-name>
+			<property-name>levels</property-name>
+      		<property-class>int</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>
+			<description>Filters the properties in the object that start with this value</description>
+			<display-name>Property Start Filter</display-name>
+			<property-name>startFilter</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>
+		    <!-- propose breaking change to rename title to something else for accessbility - should be label-->
+			<description>Title to display as a header at the start of the table</description>
+			<display-name>Title</display-name>
+			<property-name>title</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+      			<!-- This not an accessibility title. 
+      			There is no accessibility title property yet (2011-12-06).
+      			There is an automatically generated summary in the HTML output
+      			that serves to make the control accessible. 
+      			We cannot rename this title property to allow an accessibility title 
+      			property, because it was present as a header in 8.5.3UpgradePack1,
+      			so we need to continue to support use of the title property
+      			as header text (rather than as screen reader text). -->
+      			<localizable>true</localizable>
+        		<designer-extension>
+                    <category>basics</category>
+                    <tags>
+                        not-accessibility-title
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>
+			<description>Maximum number of rows displayed for the grid displaying the results of the object that is being dumped</description>
+			<display-name>Maximum Grid Rows</display-name>
+			<property-name>maxGridRows</property-name>
+      		<property-class>int</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+		<property>
+			<description>Indicates if bean access to the properties should be used</description>
+			<display-name>Use Bean Properties</display-name>
+			<property-name>useBeanProperties</property-name>
+      		<property-class>boolean</property-class>
+      		<property-extension>
+        		<designer-extension>
+                    <category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+		</property>
+
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Misc</component-family>
+			<renderer-type>com.ibm.xsp.extlib.misc.DumpObject</renderer-type>
+			<tag-name>dumpObject</tag-name>
+			<designer-extension>
+			    <in-palette>true</in-palette>
+				<category>Extension Library</category>
+			</designer-extension>
+		</component-extension>
+	</component>
+	
+</faces-config>

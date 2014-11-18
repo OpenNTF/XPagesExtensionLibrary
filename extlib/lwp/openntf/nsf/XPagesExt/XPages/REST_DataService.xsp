@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DataService">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="panel1">
+			Domino Data Rest Service
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>Database Collection JSON Service
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService1" pathInfo="dbPathInfo">
+				<xe:this.service>
+					<xe:databaseCollectionJsonService></xe:databaseCollectionJsonService>
+				</xe:this.service>
+			</xe:restService>
+			
+			<xp:button id="button1" value="Database Collection">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataService.xsp/dbPathInfo"))}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService/dbPathInfo
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>View Collection JSON Service
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService2" pathInfo="viewPathInfo">
+				<xe:this.service>
+					<xe:viewCollectionJsonService></xe:viewCollectionJsonService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button id="button2" value="View Collection">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataService.xsp/viewPathInfo"))}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService/viewPathInfo
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br><xp:label value="View JSON Service" for="comboBox1"></xp:label><xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:comboBox id="comboBox1" value="#{viewScope.viewName}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:
+var v = database.getViews();
+var a = [];
+var n = 0;
+for(var i=0; i<v.size(); i++) {
+	var vn = v[i].getName();
+	if (vn.length > 0) {
+		a[n] = vn;
+		n++;
+	}
+}
+return a;
+					}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>			
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService3"
+				pathInfo="viewEntriesPathInfo">
+				<xe:this.service>
+					<xe:viewJsonService viewName="AllTypes"
+						defaultColumns="true">
+					</xe:viewJsonService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button value="View Entries Collection" id="button3">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action>
+						<![CDATA[#{javascript:
+var href = @FullUrl("REST_DataService.xsp/viewEntriesPathInfo?viewname=" + viewName);
+facesContext.getExternalContext().getResponse().sendRedirect(href);
+						}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService/viewEntriesPathInfo
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button id="button4" value="View Design Collection">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action><![CDATA[#{javascript:
+var href = @FullUrl("REST_DataService.xsp/viewEntriesPathInfo/design?viewname=" + viewName);
+facesContext.getExternalContext().getResponse().sendRedirect(href);
+					}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService/viewEntriesPathInfo/design
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br><xp:label value="Document JSON Service" for="comboBox2"></xp:label>
+			<xp:br></xp:br>
+			
+			<xp:br></xp:br>
+			<xp:comboBox id="comboBox2" value="#{viewScope.docUnid}">
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:
+var vn = "AllTypes";
+var v = database.getView(vn);
+var vec = v.getAllEntries();
+var a = [];
+var n = 0;
+for(var i=0; i<vec.getCount(); i++) {
+	var e = vec.getNthEntry(i);
+	if (e != null) {
+		a[n] = e.getUniversalID();
+		++n;
+	}
+}
+return a;					
+					}]]></xp:this.value>
+				</xp:selectItems>
+			</xp:comboBox>			
+			
+			&#160;
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService4"
+				pathInfo="documentPathInfo">
+				<xe:this.service>
+					<xe:documentJsonService defaultItems="true"></xe:documentJsonService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button value="Document" id="button5">
+				<xp:eventHandler event="onclick" submit="true">
+					<xp:this.action>
+						<![CDATA[#{javascript:
+var href = @FullUrl("REST_DataService.xsp/documentPathInfo/unid/" + docUnid);
+facesContext.getExternalContext().getResponse().sendRedirect(href);
+						}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService.xsp/documentPathInfo/unid/&lt;  docUnid&gt;
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="Document Collection JSON Service" for="inputText1"></xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:inputText id="inputText1" defaultValue="MA"></xp:inputText>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button value="Document Collection" id="button6">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:
+var txtControlValue = getComponent("inputText1").getValue();
+var href = @FullUrl("REST_DataService.xsp/documentPathInfo?search=" + txtControlValue);
+//var href = @FullUrl("REST_DataService.xsp/documentPathInfo?since=" + "2011-04-18");
+facesContext.getExternalContext().getResponse().sendRedirect(href);
+
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br><xp:br></xp:br>URL: http://&lt;domino server&gt;/XPagesExt.nsf/REST_DataService.xsp/documentPathInfo?search=&lt;text&gt;<xp:br></xp:br>
+			<xp:br></xp:br><xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

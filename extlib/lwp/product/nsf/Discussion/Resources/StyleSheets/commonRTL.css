@@ -1,0 +1,87 @@
+/** Author: Tony McGuckin, IBM **/
+
+.xspHtmlTdFormHeader{text-align:right;}
+.xspHtmlTdFormBodyLabel{width:40px;}
+
+/*slider*/
+.dijitSliderImageHandle{background-position:right bottom !important;}
+.dijitSliderProgressBarH{right:0px;}
+
+/* images */
+.xspImageBranding{float:right;}
+.xspImageFile{padding-left:3px;}
+
+/* computed text */
+.xspComputedFieldTitle{float:right;padding:3px 12px 0pt 0pt;}
+
+/* labels */
+.xspTextLargeSeparator{margin-right:5px;margin-left:5px;}
+.xspTextMediumSeparator{margin-right:3px;margin-left:3px;}
+.xspTextSmallSeparator{margin-right:3px;margin-left:3px;}
+
+/* input fields */
+.xspInputFieldEditBoxSearch{padding:3px 0px 4px 5px;}
+
+/* panels */
+.xspPanelBanner{padding:5px 30px 4px 15px;}
+.xspPanelBannerLeft{float:right;text-align:right;}
+.xspPanelBannerRight{float:left;padding-left:30px;text-align:left;}
+
+.xspPanelHeader img{margin-left:10px;}
+
+.xspPanelMain{background-position:top right;}
+.xspPanelFooterLeft{float:right;}
+.xspPanelFooterRight{float:left;}
+
+.xspPanelColumnLeft{float:right;}
+.xspPanelColumnRight{float:left;}
+.xspPanelColumnRight h2{padding-right:10px;}
+
+.xspPanelSearch{float:left;left:11px;right:0px;}
+
+/* tag clouds */
+.tagCloudOuterPanel{text-align:right;}
+
+/* header pager */
+.xspPagerContainerViewHeader{float:left;}
+.xspPagerViewHeader{float:left;}
+.xspPagerNavViewHeader{text-align:right;float:right;padding-right:5px;}
+
+.xspGroupViewHeader ul li{border-right-width:1px;border-right-style:solid;}
+.xspGroupViewHeader ul li.xspFirstItem{padding-right:0px;border-right-width:0px;}
+.xspGroupViewHeader ul li.xspLastItem{padding-right:7px;border-right-width:1px;}
+
+/* footer pager */
+.xspPagerContainerViewFooter{float:left;}
+.xspPagerViewFooter{float:left;}
+.xspPagerNavViewFooter{text-align:right;float:right;padding-right:5px;}
+
+/* form table */
+
+.xspHtmlTdFormHeader{text-align:right;}
+
+/* view table header */
+.xspHtmlTdViewHeaderTop{text-align:left;}
+
+/* view table footer */
+.xspHtmlTdViewFooter{text-align:left;}
+
+/* layout utils */
+.xspLeft{float:right;}
+.xspRight{float:left;}
+.xspLeftAlign{text-align:right;}
+.xspRightAlign{text-align:left;}
+
+/* links */
+a.xspEnabledCollapse:link, a.xspEnabledCollapse:visited, a.xspEnabledCollapse:hover, a.xspEnabledCollapse:active{padding:0px 0px 0px 5px;}
+a.xspDisabledCollapse:link, a.xspDisabledCollapse:visited, a.xspDisabledCollapse:hover, a.xspDisabledCollapse:active{padding:0px 0px 0px 5px;}
+
+a.xspEnabledExpand:link, a.xspEnabledExpand:visited, a.xspEnabledExpand:hover, a.xspEnabledExpand:active{padding:0px 9px 0px 7px;}
+a.xspDisabledExpand:link, a.xspDisabledExpand:visited, a.xspDisabledExpand:hover, a.xspDisabledExpand:active{padding:0px 9px 0px 7px;}
+
+a.xspLinkTitle:link, a.xspLinkTitle:visited, a.xspLinkTitle:hover, a.xspLinkTitle:focus, a.xspLinkTitle:active{float:right;padding:3px 12pt 0pt 0px;}
+
+/* main menu links */
+.xspPanelNavigationMenuItems{padding-right:0pt;}
+.xspPanelNavigationMenuItem a, .xspPanelNavigationMenuItem a:visited{padding:5px 13px 5px 0px;}
+.xspPanelNavigationMenuItemSelected a, .xspPanelNavigationMenuItemSelected a:visited{padding:5px 6px 5px 0px;}

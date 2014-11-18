@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="plugin_export" name="build">
+	<target name="plugin_export">
+		<pde.exportPlugins destination="C:\Domino\data\domino\workspace\applications\eclipse" exportSource="false" exportType="directory" plugins="com.ibm.xsp.extlib.controls" qualifier="20120113-1955" useJARFormat="true"/>
+	</target>
+</project>

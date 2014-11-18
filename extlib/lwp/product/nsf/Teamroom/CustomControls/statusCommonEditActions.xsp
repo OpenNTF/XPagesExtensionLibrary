@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:button value="Save" id="button2" styleClass="lotusFormButton">
+		<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>			
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" id="evtSave">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:executeScript
+						script="#{javascript:requestScope.isNewDoc = document1.isNewNote();}">
+					</xp:executeScript>
+					<xp:saveDocument var="document1"></xp:saveDocument>
+					<xp:openPage name="/statusReports.xsp"
+						target="#{javascript:requestScope.isNewDoc? null : 'openDocument'}"
+						documentId="#{javascript:requestScope.isNewDoc ? null : document1.getDocument().getUniversalID()}">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:link id="link6" text="Cancel" styleClass="lotusAction"
+		role="button" title="cancel">
+		<xp:eventHandler event="onclick" submit="true" save="false"
+			immediate="true" execMode="partial" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:confirm message="#{strings.cancel_editing}"></xp:confirm>
+					<xp:openPage name="/statusReports.xsp"
+						target="#{javascript:document1.isNewNote() ? null : 'openDocument'}"
+						documentId="#{javascript:document1.isNewNote() ? null : document1.getDocument().getUniversalID()}">
+					</xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+
+</xp:view>

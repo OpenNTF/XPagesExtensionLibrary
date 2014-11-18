@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3e2" sequence="19" unid="C3AAF4FFCFC7810B8525745900140A0C">
+<created><datetime dst="true">20080529T233852,92-04</datetime></created>
+<modified><datetime>20120305T082325,73+00</datetime></modified>
+<revised><datetime>20120305T082325,72+00</datetime></revised>
+<lastaccessed><datetime>20120305T082325,73+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100336,10+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$POID"><datetime>20051212T132214,46-05</datetime></item>
+<item name="$TITLE" sign="true"><text>lsResources</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+
+</note>

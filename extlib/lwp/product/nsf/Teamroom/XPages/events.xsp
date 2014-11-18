@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.DateTextBox"></xp:dojoModule>
+	</xp:this.resources>
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	
+	<xc:layout navigationPath="/events">
+		<xe:dynamicContent id="dynamicContent" useHash="false">
+			<xe:this.defaultFacet>
+				<![CDATA[#{javascript:if (param.documentId || param.action){
+	return "eventFormContent";
+}
+return "eventViewContent";}]]>
+			</xe:this.defaultFacet>
+			<xp:this.facets>
+				<xc:eventForm id="eventFormContent" xp:key="eventFormContent"></xc:eventForm>
+				<xc:eventView id="eventViewContent" xp:key="eventViewContent"></xc:eventView>
+			</xp:this.facets>
+		</xe:dynamicContent>
+	</xc:layout>
+</xp:view>

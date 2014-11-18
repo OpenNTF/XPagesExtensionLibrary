@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:navigator id="navigator1" expandable="true">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode label="Page1"
+				page="/Page1.xsp">
+			</xe:pageTreeNode>
+			<xe:basicContainerNode label="Grouping">
+				<xe:this.children>
+					<xe:pageTreeNode label="Grouping Page2"
+						page="/Page2.xsp"/>
+					<xe:pageTreeNode label="Grouping Page3"
+						page="/Page3.xsp"/>
+				</xe:this.children>
+			</xe:basicContainerNode>
+			<xe:pageTreeNode label="Page4"
+				page="/Page4.xsp">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

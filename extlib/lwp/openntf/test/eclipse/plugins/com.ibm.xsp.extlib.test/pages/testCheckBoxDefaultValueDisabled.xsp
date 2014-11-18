@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[toggleCheckbox = function toggleCheckbox(id){
+    var elem = dojo.byId(id);
+    if( elem.hasAttribute("checked") ){
+    	elem.removeAttribute("checked");
+    }else{
+    	elem.setAttribute("checked", "checked");
+    }
+};]]></xp:this.value>
+	</xp:scriptBlock>
+	<xp:table>
+		<xp:tr>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>EditBox (defaultValue=aaa) :</xp:td>
+			<xp:td>
+				<xp:inputText id="inputText1" value="#{viewScope.value1}"
+					defaultValue="aaa">
+				</xp:inputText>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField1" value="#{viewScope.value1}">
+				</xp:text>
+			</xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>EditBox (defaultValue=aaa, disabled=true) :</xp:td>
+			<xp:td>
+				<xp:inputText id="inputText2" value="#{viewScope.value2}"
+					disabled="true" defaultValue="aaa">
+				</xp:inputText>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField2" value="#{viewScope.value2}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button value="Client Change Value" id="button2">
+					<xp:eventHandler event="onclick" submit="false"
+						id="eventHandler1">
+						<xp:this.script><![CDATA[dojo.byId("#{id:inputText2}").value="bbb";]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox1" title="Selected or Unselected"
+					value="#{viewScope.value3}" checkedValue="Selected" uncheckedValue="NotSelected"
+					label="Selected or Unselected">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField3" value="#{viewScope.value3}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button3" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox1}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox2" title="True or False"
+					value="#{viewScope.value4}" label="True or False">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField4" value="#{viewScope.value4}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button4" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox2}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected,
+				defaultValue=Selected)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox3" title="Selected or Unselected"
+					value="#{viewScope.value5}" checkedValue="Selected" uncheckedValue="NotSelected"
+					label="Selected or Unselected" defaultValue="Selected">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField5" value="#{viewScope.value5}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button5" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox3}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false, defaultValue=true)
+			</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox4" title="True or False"
+					value="#{viewScope.value6}" label="True or False" defaultValue="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField6" value="#{viewScope.value6}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button6" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox4}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected,
+				defaultValue=NotSelected)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox5" title="Selected or Unselected"
+					value="#{viewScope.value7}" checkedValue="Selected" uncheckedValue="NotSelected"
+					label="Selected or Unselected" defaultValue="NotSelected">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField7" value="#{viewScope.value7}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button7" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox5}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false, defaultValue=false)
+			</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox6" title="True or False"
+					value="#{viewScope.value8}" label="True or False" defaultValue="false">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField8" value="#{viewScope.value8}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button8" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox6}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected, disabled=true)
+			</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox7" title="Selected or Unselected"
+					value="#{viewScope.value9}" checkedValue="Selected" uncheckedValue="NotSelected"
+					label="Selected or Unselected" disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField9" value="#{viewScope.value9}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button9" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox7}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false, disabled=true)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox8" title="True or False"
+					value="#{viewScope.value10}" label="True or False" disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField10" value="#{viewScope.value10}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button10" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox8}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected,
+				defaultValue=Selected, disabled=true)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox9" title="Selected or Unselected"
+					value="#{viewScope.value11}" checkedValue="Selected"
+					uncheckedValue="NotSelected" label="Selected or Unselected"
+					defaultValue="Selected" disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField11" value="#{viewScope.value11}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button11" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox9}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false, defaultValue=true,
+				disabled=true)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox10" title="True or False"
+					value="#{viewScope.value12}" label="True or False" defaultValue="true"
+					disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField12" value="#{viewScope.value12}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button12" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox10}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (Selected|NotSelected,
+				defaultValue=NotSelected, disabled=true)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox11" title="Selected or Unselected"
+					value="#{viewScope.value13}" checkedValue="Selected"
+					uncheckedValue="NotSelected" label="Selected or Unselected"
+					defaultValue="NotSelected" disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField13" value="#{viewScope.value13}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button13" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox11}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>DojoCheckBox (true|false, defaultValue=false,
+				disabled=true)</xp:td>
+			<xp:td>
+				<xe:djCheckBox id="djCheckBox12" title="True or False"
+					value="#{viewScope.value14}" label="True or False" defaultValue="false"
+					disabled="true">
+				</xe:djCheckBox>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="true" id="computedField14" value="#{viewScope.value14}">
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:button id="button14" value="Client Toggle">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[toggleCheckbox('#{id:djCheckBox12}')]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:button value="Submit" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" immediate="false" save="true">
+		</xp:eventHandler>
+	</xp:button>
+	<xp:br></xp:br>
+	<xp:messages id="messages1"></xp:messages>
+</xp:view>

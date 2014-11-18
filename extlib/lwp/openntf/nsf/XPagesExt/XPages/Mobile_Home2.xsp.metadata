@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="852578CF0059BB65" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4ea" sequence="15" unid="ACCB29B341F3B271852578E800583DAF">
+<created><datetime dst="true">20110810T120349,59-04</datetime></created>
+<modified><datetime dst="true">20110824T171010,30-04</datetime></modified>
+<revised><datetime dst="true">20110824T171010,29-04</datetime></revised>
+<lastaccessed><datetime dst="true">20110824T171010,30-04</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110810T120349,61-04</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE" sign="true"><text>Mobile_Home2.xsp</text></item>
+
+
+
+<item name="$FileNames" sign="true"><text>Mobile_Home2.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+</note>

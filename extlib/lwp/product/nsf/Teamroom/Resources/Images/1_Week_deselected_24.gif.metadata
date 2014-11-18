@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="25a" sequence="7" unid="897E31486823B319802577E0004D1765">
+<created><datetime>20101119T140202,61+00</datetime></created>
+<modified><datetime>20120207T095545,94+00</datetime></modified>
+<revised><datetime dst="true">20111026T122246,29+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,94+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,94+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20110120T085509,31+00</datetime><datetime dst="true">20110830T205049,51-04</datetime><datetime dst="true">20111006T160522,42+01</datetime><datetime dst="true">20111014T083942,14+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>1_Week_deselected_24.gif</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20091008T214556,00+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>1_Week_deselected_24.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+<item name="$Flags"><text>D34CiQ</text></item></note>

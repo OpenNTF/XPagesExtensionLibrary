@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+    xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	testRedirectMobileTarget.xsp<xp:br/>
+	If you open <xp:link value="/testRedirect.xsp">/testRedirect.xsp</xp:link> 
+	on a phone or tablet browser you'll be redirected to this page. 
+	
+</xp:view>

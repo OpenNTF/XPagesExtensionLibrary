@@ -1,0 +1,61 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2005, 2012                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="kit/generateTransJsZip" default="development" basedir=".">
+
+	<import file="${env.WPLC_IMPORT}/std_props.xml" />
+	<import file="${env.WPLC_IMPORT}/std_dirs.xml" />
+	<import file="${env.WPLC_IMPORT}/copyright.xml" /> 
+	<import file="${env.WPLC_IMPORT}/nojavadoc.xml"/>
+	<import file="${env.WPLC_IMPORT}/site_xml_validator2.xml" />
+	<import file="${env.WPLC_IMPORT}/signupdatesite.xml" />
+	
+	<target name="development" depends="collect-locale-js-files" />
+	<target name="production" depends="collect-locale-js-files" />
+
+	<property name="local.clean" value="local.clean.target" />
+	
+	<target name="collect-locale-js-files">
+		<mkdir dir="${env.LWP_HOME}/setup" />
+		<property name="dir.setup" value="${env.LWP_HOME}/setup" />
+
+		<!-- The globalization js zip files with files /nls/*.js -->
+		<mkdir dir="${dir.build}/trans_js_GAUI" />
+		<property name="runtime.plugins" value="extlib/lwp/product/runtime/eclipse/plugins"/>
+		<copy todir="${dir.build}/trans_js_GAUI/">
+			<fileset dir="../../../../${runtime.plugins}">
+				<include name="com.ibm.xsp.extlib.controls/resources/web/**/nls/**/*.js"/>
+				<include name="com.ibm.xsp.extlib.domino/resources/web/**/nls/**/*.js"/>
+				<!-- 9.0.0 2012-06-15: at present there are mobile js files but no mobile nls folders -->
+				<include name="com.ibm.xsp.extlib.mobile/resources/web/**/nls/**/*.js"/>
+				<!-- 9.0.0 2012-06-15: at present there are oneui js files but no oneui nls folders -->
+				<include name="com.ibm.xsp.extlib.oneui/resources/web/**/nls/**/*.js"/>
+			</fileset>
+		</copy>
+		<zip destfile="${dir.setup}/trans_js_GAUI.zip">
+			<zipfileset dir="${dir.build}/trans_js_GAUI" prefix="${runtime.plugins}" />
+		</zip>
+		<delete dir="${dir.build}/trans_js_GAUI"/>
+		<!-- end the globalization js zip files. -->
+	</target>
+
+	<target name="local.clean.target">
+		<delete dir="${dir.build}/trans_js_GAUI"/>
+	</target>
+	
+</project>

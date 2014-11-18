@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>layout</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+	<component>
+		<description>A control that provides layout and positioning for areas in an XPages application</description>
+		<display-name>Application Layout</display-name>
+		<component-type>com.ibm.xsp.extlib.layout.ApplicationLayout</component-type>
+		<component-class>com.ibm.xsp.extlib.component.layout.UIApplicationLayout</component-class>
+
+		<property>
+			<!-- # "OneUI" should not be translated. -->
+			<description>The configuration options controlling how this application layout will be structured. This configuration object is specific to which type of layout framework is used, for example there is a configuration for the OneUI application layout.</description>
+			<display-name>Application Configuration</display-name>
+			<property-name>configuration</property-name>
+			<property-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</property-class>
+			<property-extension>
+				<required>true</required>
+				<allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+		<property>
+			<description>Event triggered after a click on some node in the Application Configuration</description>
+			<display-name>On Item Click</display-name>
+			<property-name>onItemClick</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+                    <!-- TODO description is wrong as it is not related to the outline, and need to 
+                    explain the mechanism for figuring out which outline entry was clicked -->
+                    <!-- TODO what does the eventHandler for this listen to? 
+                    when any link node is clicked? what if it's a URL link node?
+                    is it when any node with a submittedValue is clicked? -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.layout.ApplicationLayout</component-family>
+			<renderer-type>com.ibm.xsp.extlib.layout.OneUIApplicationLayout</renderer-type>
+			<tag-name>applicationLayout</tag-name>
+			<designer-extension>
+				<in-palette>true</in-palette>
+				<category>Extension Library</category>
+                <!-- TODO how to localize the "Extension Library" category. -->
+                <!-- TODO renderer-type should not contain OneUI-->
+                <!-- TODO should have a default rendering if no applicationConfiguration specified. -->
+                <tags>
+                   todo
+                </tags>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;&#xd;
+&lt;xp:callback id="MastHeader" facetName="MastHeader"/&gt;&#xd;&#xd;
+&lt;xp:div style="background-color:#CEE1FC; padding:5px"&gt;&#xd;
+&lt;table width="98%"&gt;&lt;tr&gt;&lt;td&gt;&#xd;
+  {logo} &amp;#160; {bannerApplicationLinks}&#xd;
+&lt;/td&gt;&lt;td align="right"&gt;{bannerUtilityLinks}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xd;
+  &lt;xp:table style="width: 98%; background-color:#FFFFFF"&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td colspan="3" style="background-color:#4586D3"&gt;&#xd;
+        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&#xd;
+          &lt;table&gt;&lt;tr&gt;&#xd;
+            &lt;td style="background-color:#4372A9;color:#FFFFFF"&gt;&#xd;
+              {titleBarTabs}&lt;/td&gt;&#xd;
+            &lt;td style="background-color:#E4E8EF"&gt;&#xd;
+              selected&lt;/td&gt;&#xd;
+          &lt;/tr&gt;&lt;/table&gt;&#xd;
+        &lt;/td&gt;&lt;td&gt;&#xd;
+          &lt;div style="float:right;background:#FFFFFF"&gt;&#xd;
+        &lt;xp:callback id="SearchBar" facetName="SearchBar"/&gt;&#xd;&#xd;
+                {searchBar}&lt;/div&gt;&#xd;
+        &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td colspan="3" style="background-color:#E4E8EF"&gt;&#xd;
+        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&lt;h2&gt;{placeBarName}&lt;/h2&gt;&lt;/td&gt;&#xd;
+          &lt;td&gt; &#xd;
+              &lt;div style="float:right;border:thin solid #C0C7CD"&gt;&#xd;
+                {placeBarActions}&lt;/div&gt;&lt;/td&gt;&#xd;
+        &lt;/tr&gt;&lt;/table&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td style="width:123px" valign="top"&gt;&#xd;
+        &lt;xp:callback id="LeftColumn" facetName="LeftColumn"/&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+      &lt;xp:td valign="top"&gt;&#xd;
+        &lt;xp:callback id="callback1"/&gt;&#xd;
+&lt;xp:br/&gt;&lt;xp:br/&gt;&lt;xp:br/&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+      &lt;xp:td style="width:123px" valign="top"&gt;&#xd;
+        &lt;xp:callback id="RightColumn" facetName="RightColumn" /&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+  &lt;/xp:table&gt;&#xd;
+  &lt;xp:table style="width: 98%; background-color:#FFFFFF; margin-top:5px"&gt;&#xd;
+  &lt;xp:tr&gt;&lt;xp:td&gt; {footerLinks}&lt;/xp:td&gt;&lt;/xp:tr&gt;&#xd;
+  &lt;/xp:table&gt;&#xd;
+  {legalText}&#xd;
+  &lt;/xp:div&gt;&#xd;&#xd;
+&lt;xp:callback id="MastFooter" facetName="MastFooter"/&gt;&#xd;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+	<complex-type>
+    	<description>Base definition for the application layout configuration objects implementing this interface</description>
+    	<display-name>Base Application Configuration</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-class>
+  	</complex-type>
+
+	<complex-type>
+    	<description>A basic configuration for the application layout control</description>
+    	<display-name>Basic Application Configuration</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-class>
+
+  		<property>
+			<description>The navigation path to use if the "navigationPath" property is not set or evaluates to null. This property is usually configured in a shared layout Custom Control, while the "navigationPath" property is configured in an individual page.</description>
+			<display-name>Default Navigation Path</display-name>
+			<property-name>defaultNavigationPath</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			     <designer-extension>
+			         <!-- TODO add an editor with suggestions, or request Designer make one -->
+			         <tags>
+			             todo
+			         </tags>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						/tab1/link1
+						/tab1/link2
+						/tab2/link1
+						/tab2/link2
+					</editor-parameter>
+			     </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<!-- # "titleBarTabs" should not be translated. These examples should not be translated: "/tab2/link3" selection="/tab2/.*" selection="/tab2/link3" "/tab2/link1"  -->
+			<description>The nagivation path can be used to control the currently selected title bar tab (related to the "titleBarTabs" property), and the selection appearance of any Navigator control on the page. Navigation paths are typically in the format of "/tab2/link3". For example, if there is a title bar tab configured with selection="/tab2/.*" and there is also a Navigator control with a Page Link Node configured with selection="/tab2/link3". Then if the navigation path property is set to "/tab2/link1", the title bar tab will appear as the currently selected tab, but the Navigator item link will not appear selected. If the navigation path is changed to "/tab2/link3", the title bar tab and Navigator item link will then both appear as selected.</description>
+			<display-name>Navigation Path</display-name>
+			<property-name>navigationPath</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <designer-extension>
+                     <!-- TODO add an editor with suggestions, or request Designer make one -->
+                     <!-- Update 2012-06-19: This proposed rewrite is not going to happen,
+                     as people can use it successfully now, once they see some examples. -->
+                     <!-- To make this more usable, this navigationPath
+                     should be just an exact match to one of the title bar tab selection
+                     and the xe:navigator control should have its own navigationPath
+                     whose value will be an exact match to the page selection.
+                     We can still continue to support the old behavior, but it won't
+                     be the default way thats suggested to people.
+                     Also, the selection won't necessarily have to be set,
+                     it can just use the pageName if it's a pageTreeNode,
+                     and there can be an option on the xe:navigator control
+                     to use the page name as the navigationPath value,
+                     instead of requiring it to be explicitly set.
+                     xe:navigator selectionSource=applicationLayout|pageName|navigationPath|auto,
+                     then the custom control gets 2 properties instead of just one. 
+                     This would involve a (possibly) breaking change to the xe:navigator
+                     so that instead of defaulting to reading from the applicationLayout,
+                     it would default to auto - meaning if navigationPath is set, use that (even if evaluates to null),
+                     else if the applicationLayout contains /something1/something2
+                     use the something2, else use the pageName. 
+                     This would allow Designer to provide editors for the navigation path properties,
+                     for the appLayout it would allow choosing between the selection values of the placeBar nodes,
+                     for the navigator, it would allow choosing between the selection | pageName of the treeNodes. -->
+                     <tags>
+                         todo
+                     </tags>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						/tab1/link1
+						/tab1/link2
+						/tab2/link1
+						/tab2/link2
+					</editor-parameter>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "true" should not be translated -->
+			<description>Indicates if the banner area should be displayed. The banner area is an area at the top of the application layout control. It contains the application logo, links to other application URLs and the link to log in. This defaults to "true", displaying the area.</description>
+			<display-name>Banner Visible</display-name>
+			<property-name>banner</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it as banner defaulting to true, 
+                     instead of as disableBanner defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "MastHeader" and "OneUI" should not be translated -->
+			<description>Indicates if the mast header should be displayed. A control is supplied for the mast header by specifying a facet with the name "MastHeader". A mast header control will be output before the main application layout, not in any containing area. It is not part of the normal OneUI layout, and is provided to allow application designers to customize their layout. This defaults to "true", displaying the mast header control if it is present.</description>
+			<display-name>Mast Header Visible</display-name>
+			<property-name>mastHeader</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it as mastHeader defaulting to true, 
+                     instead of as disableMastHeader defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<!-- # "MastFooter" and "OneUI" should not be translated -->
+			<description>Indicates if the mast footer should be displayed. A control is supplied for the mast footer by specifying a facet with the name "MastFooter". A mast footer control will be output after the main application layout, not in any containing area. It is not part of the normal OneUI layout, and is provided to allow application designers to customize their layout. This defaults to "true", displaying the mast footer control if it is present.</description>
+			<display-name>Mast Footer Visible</display-name>
+			<property-name>mastFooter</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it as defaulting to true, 
+                     instead of as disable* defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The product logo is a logo or branding image for the product or company that the application is associated with. It appears in the banner area at the top of the layout. This property supplies a path to an image for the logo.</description>
+			<display-name>Product Logo</display-name>
+			<property-name>productLogo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <designer-extension>
+                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                     <!-- TODO needs description-->
+                     <!-- TODO should probably add productLogo facet -->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Similar to the Product Logo Style this can provide the product logo as a background image, in this case using a CSS style class reference, rather than a style directly in the page.</description>
+			<display-name>Product Logo Class</display-name>
+			<property-name>productLogoClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The product logo can be provided here as a background image, as an alternative to using an image tag which would be generated when using the "productLogo" property.</description>
+			<display-name>Product Logo Style</display-name>
+			<property-name>productLogoStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+	      		</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Alternate text for the "productLogo" image, used by screen reading software</description>
+			<display-name>Product Logo Alternate Text</display-name>
+			<property-name>productLogoAlt</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The width of the image provided in the "productLogo" property</description>
+			<display-name>Product Logo Width</display-name>
+			<property-name>productLogoWidth</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+					<!-- This is not actually an image path, 
+					it just refers to an image in the description, 
+					so the tag not-image-path 
+					prevents a fail in ImageEditorTest -->
+                    <tags>
+						not-image-path
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The height of the image provided in the "productLogo" property</description>
+			<display-name>Product Logo Height</display-name>
+			<property-name>productLogoHeight</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+					<!-- This is not actually an image path, 
+					it just refers to an image in the description, 
+					so the tag not-image-path 
+					prevents a fail in ImageEditorTest -->
+                    <tags>
+						not-image-path
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Application links in the banner</description>
+			<display-name>Application Links</display-name>
+			<property-name>bannerApplicationLinks</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addBannerApplicationLink</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+        	</property-extension>
+		</property>
+  		<property>
+			<description>Utility links in the banner</description>
+			<display-name>Utility Links</display-name>
+			<property-name>bannerUtilityLinks</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addBannerUtilityLink</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+        	</property-extension>
+		</property>
+  		<property>
+  			<!-- "titleBarName" and "placeBarName" should not be translated. -->
+			<description>Indicates if the title bar area should be displayed, defaults to true. The title bar generally contains navigation tabs, used to group multiple pages together, where clicking on the tab opens the first page in a group, and the other pages are linked in a Navigator control. The application name may be specified in the "titleBarName" so that it appears in the title bar area, but it is more normal to supply the name in the "placeBarName". The search bar area is within the title bar.</description>
+			<display-name>Title Bar Visible</display-name>
+			<property-name>titleBar</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it defaulting to true, 
+                     instead of as disable* defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines text to be displayed as title bar name, so that it appears in the title bar area. It is more normal to supply the name in the "placeBarName".</description>
+			<display-name>Title Bar Name</display-name>
+			<property-name>titleBarName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <localizable>true</localizable>
+			</property-extension>
+		</property>
+        <property>
+            <description>Defines a textual description for the Title Bar to support assistive technologies to provide a recognizable label.</description>
+            <display-name>Title Bar Label</display-name>
+            <property-name>titleBarLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <since>9.0.0.v00_03</since>
+                 <localizable>true</localizable>
+            </property-extension>
+        </property>
+  		<property>
+			<description>Tabs in the title bar, used for navigation. The tabs are used to group multiple pages together, where clicking on a tab opens the first page in a group, and the other pages are linked in a Navigator control.</description>
+			<display-name>Title Bar Tabs</display-name>
+			<property-name>titleBarTabs</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addTitleBarTab</property-add-method>
+        	</property-extension>
+		</property>
+  		<property>
+			<!-- # "SearchBar" should not be translated -->
+			<description>Enables and configures the search area in the Title Bar. This can be overridden by a facet named "SearchBar".</description>
+			<display-name>Search Bar</display-name>
+			<property-name>searchBar</property-name>
+			<property-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</property-class>
+			<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <!-- Note, the SearchBar complex-type has impl in the package name,
+                but it cannot be changed, as it would break existing applications. -->
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "true" and "placeBarName" should not be translated -->
+			<description>Indicates if the place bar area should be displayed, defaults to "true", displaying the place bar. The place bar is just above the main content area. It usually displays text provided in the "placeBarName" property.</description>
+			<display-name>Place Bar Visible</display-name>
+			<property-name>placeBar</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it defaulting to true, 
+                     instead of as disable* defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The text to be displayed in the place bar area of the layout header at the top of the page. The place bar is just above the main content area, where the content changes in every page.</description>
+			<display-name>Place Bar Name</display-name>
+			<property-name>placeBarName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+                <designer-extension>
+                    <tags>
+                        localizable-text
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+        <property>
+            <description>Defines a textual description for the Place Bar to support assistive technologies to provide a recognizable label.</description>
+            <display-name>Place Bar Label</display-name>
+            <property-name>placeBarLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <since>9.0.0.v00_03</since>
+                 <localizable>true</localizable>
+            </property-extension>
+        </property>
+  		<property>
+			<description>Actions in the place bar, displayed as buttons and drop-down buttons at the end of the place bar area.</description>
+			<display-name>Place Bar Actions</display-name>
+			<property-name>placeBarActions</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addPlaceBarAction</property-add-method>
+        	</property-extension>
+		</property>
+  		<property>
+			<!-- # "footerLinks", "OneUI" and "mastFooter" should not be translated -->
+			<description>Indicates if the footer area should be displayed. The footer area is at the bottom of the application layout, before the legal area. This defaults to true, so the footer area will be displayed. Use the "footerLinks" property to add content to the footer area. The footer is part of the OneUI layout; if you need to place footer content outside of the application layout, see the "mastFooter" property.</description>
+			<display-name>Footer Visible</display-name>
+			<property-name>footer</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<!-- Note, there is no "footer" facet. Use 
+				the "MastFooter" facet instead, as explained 
+				by the "mastFooter" property. -->
+                <default-value>true</default-value>
+                <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it defaulting to true, 
+                     instead of as disable* defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Links in the footer area at the bottom of the application layout. Multiple individual links can be added, appearing beside each other, or there can be multiple container groups of links. Links in a container are laid out vertically under each other, with different groups appearing horizontally beside each other.</description>
+			<display-name>Footer Links</display-name>
+			<property-name>footerLinks</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addFooterLink</property-add-method>
+        	</property-extension>
+		</property>
+  		<property>
+  			<!-- # "true", "legalLogo" and "legalText" should not be translated. -->
+			<description>Indicates if the legal bar area should be displayed, defaulting to "true", displayed. The legal bar is at the very bottom of the application layout, below the main content area and the footer links area. The contents of the legal area are provided in the "legalLogo" and the "legalText" properties.</description>
+			<display-name>Legal Bar Visible</display-name>
+			<property-name>legal</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                <default-value>true</default-value>
+                <!-- Note, there is no legal area facet - should maybe consider adding one. -->
+                <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it defaulting to true, 
+                     instead of as disable* defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The path to an image displayed in the legal area at the bottom of the application layout. This might be a logo for the company or organization claiming copyright on the content of the page, or licensing access to the page content.</description>
+			<display-name>Legal Logo Image</display-name>
+			<property-name>legalLogo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <designer-extension>
+                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                     <!-- Note, there is no legal facet - should maybe consider adding one. -->
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- "CSS image sprite" is a technical term and should not be translated. "legalLogo" should not be translated.  -->
+			<description>A CSS class or space-separated classes, used on an element acting as a wrapper around the "legalLogo" image. This would be used when the legal logo is provided using the CSS image sprite technique rather than a direct image reference.</description>
+			<display-name>Legal Logo Class</display-name>
+			<property-name>legalLogoClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+	      		</designer-extension>   
+			</property-extension>
+		</property>
+  		<property>
+			<description>A CSS style or styles, used on an element acting as a wrapper around the "legalLogo" image.</description>
+			<display-name>Legal Logo Style</display-name>
+			<property-name>legalLogoStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                     <!-- the implementation will not use the legalLogoStyle
+                     when the image path is absent, so at present this
+                     cannot use an image specified through CSS.
+                     Actually - it can use that by specifying a blank.gif as the 
+                     image path. -->
+	      		</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "legalLogo" should not be translated -->
+			<description>An alternative descriptive text that will be shown instead of the "legalLogo" if the image cannot be displayed.</description>
+			<display-name>Legal Logo Alternate Text</display-name>
+			<property-name>legalLogoAlt</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "legalLogo", "100px", "100" and "20%" should not be translated -->
+			<description>The width of the image supplied in the "legalLogo" property. When set the browser will determine the page layout slightly faster. This can be set in pixels, like "100px" or "100", or in percentage, like "20%".</description>
+			<display-name>Legal Logo Width</display-name>
+			<property-name>legalLogoWidth</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+					<!-- This is not actually an image path, 
+					it just refers to an image in the description, 
+					so the tag not-image-path 
+					prevents a fail in ImageEditorTest -->
+					<tags>
+						not-image-path
+					</tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "legalLogo", "100px", "100" and "20%" should not be translated -->
+			<description>The height of the image supplied in the "legalLogo" property. When set the browser will determine the page layout slightly faster. This can be set in pixels, like "100px" or "100", or in percentage, like "20%".</description>
+			<display-name>Legal Logo Height</display-name>
+			<property-name>legalLogoHeight</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+                     <!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+                     <!-- TODO ask designer team for a new CSS dimension editor
+                     see http://www.w3schools.com/css/css_dimension.asp
+                     excluding the max- and min- properties -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						30px
+						50%
+						10em
+						auto
+						inherit
+					</editor-parameter>
+                     <!-- This is not actually an image path, 
+                     it just refers to an image in the description, 
+                     so the tag not-image-path 
+                     prevents a fail in ImageEditorTest -->
+                     <tags>
+                         todo
+                         not-image-path
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The legal text displayed in the legal area at the bottom of the application layout. This might explain the copyrights, trademarks and licensing of the page content or of subsections of the page.</description>
+			<display-name>Legal Text</display-name>
+			<property-name>legalText</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+
+        <property>
+            <description>Defines a textual description for the Left Column Facet to support assistive technologies to provide a recognizable label.</description>
+            <display-name>Left Column Label</display-name>
+            <property-name>leftColumnLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.0.v00_03</since>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Defines a textual description for the Right Column Facet to support assistive technologies to provide a recognizable label.</description>
+            <display-name>Right Column Label</display-name>
+            <property-name>rightColumnLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.0.v00_03</since>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+
+    	<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</base-complex-id>
+      		<tag-name>applicationConfiguration</tag-name>
+            <designer-extension>
+                <!-- TODO description needs more detail -->
+                <!-- TODO control class and package should not contain impl:
+                    ..impl.BasicApplicationConfigurationImpl-->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+    	</complex-extension>
+  	</complex-type>
+
+	<complex-type>
+    	<description>Configures the search area, including the search edit box and button, and the optional dropdown list of search options</description>
+    	<display-name>Search Bar Configuration</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-class>
+    	
+  		<property>
+			<description>Name of the page used to open the search results</description>
+			<display-name>Page Name</display-name>
+			<property-name>pageName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			    <required>true</required>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+                    <!-- TODO proposing to make this property required, a breaking change. -->
+                    <!-- TODO the renderer isn't encoding the page name as part of the action URL 
+                    so characters won't be correctly %20 escaped -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  			<!-- # "search" should not be translated -->
+			<description>Name of the parameter carrying the search value in the URL query. Defaults to "search".</description>
+			<display-name>Query Parameter Name</display-name>
+			<property-name>queryParam</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO give suggestions combo editor? -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines the text that will be displayed in the search box when it is not active</description>
+			<display-name>Inactive Text</display-name>
+			<property-name>inactiveText</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+                <designer-extension>
+                     <!-- TODO description grammar check -->
+                     <!-- TODO verify accessibility of inactiveText-->
+                     <!-- TODO verify there is some implicit translated inactive text,
+                     and if not, maybe add a useDefaultInactiveText property?-->
+                     <!-- TODO Proposed Breaking Change - change the behavior when inactiveText is absent
+                     from edit box with no inactive text, to edit box with inactive text "Search..." -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>When these options are provided, a dropdown list with these options will appear beside the search edit box. When the search is submitted, the current selected option will be included in the URL, using the name in the "optionsParam" property.</description>
+			<display-name>Search Combo Box Options</display-name>
+			<property-name>options</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addOption</property-add-method>
+                <designer-extension>
+                     <!-- TODO these are inherently unlocalizable-->
+                     <!-- xe:appSearchBar "options" property, current implementation is unlocalizable,
+                    Not sure yet what I should propose as the fix, think it should be a compile breaking change
+                    because pages using the current mechanism will functionally break when the application
+                    is localized, which would require manual testing to find - better to give a compile error.
+                     -->
+                     <!-- xe:appSearchBar, selected value is not remembered for the duration of the session,
+                     think it probably should be. -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+        	</property-extension>
+		</property>
+  		<property>
+			<description>Name of the parameter carrying the selected search option in the query portion of the URL</description>
+			<display-name>Options Parameter Name</display-name>
+			<property-name>optionsParam</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+                     <!-- TODO description, what's the difference between the optionsParam and the queryParam -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Indicates if the search bar should be rendered. If no value is specified, then it displays only if the current Notes DB is FT indexed.</description>
+			<display-name>Rendered</display-name>
+			<property-name>rendered</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                <designer-extension>
+                     <!-- TODO description to technical - explain in english-->
+                     <!-- TODO display-name should probably be "Visible"-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Accessibility title used for search options</description>
+			<display-name>Accessibility Title for Search Options</display-name>
+			<property-name>scopeTitle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+				<designer-extension>
+					<tags>
+						is-accessibility-title
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Accessibility title used for search input field</description>
+			<display-name>Accessibility Title for Search Input</display-name>
+			<property-name>inputTitle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+				<designer-extension>
+					<tags>
+						is-accessibility-title
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+        <property>
+            <description>Specifies the Fieldset Legend for search options and keyword controls</description>
+            <display-name>Fieldset Legend</display-name>
+            <property-name>legend</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+    	
+    	<complex-extension>
+      		<tag-name>appSearchBar</tag-name>
+            <!-- Note, the package contains .impl. but it cannot be fixed
+            as it would break existing applications. -->
+    	</complex-extension>
+  	</complex-type>
+
+</faces-config>

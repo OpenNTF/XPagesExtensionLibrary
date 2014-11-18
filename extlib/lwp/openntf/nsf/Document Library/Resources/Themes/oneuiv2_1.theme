@@ -1,0 +1,34 @@
+
+<theme extends="oneuiv2.1">
+	<resource>
+		<content-type>text/css</content-type>
+		<href>oneuiv2_1.css</href>
+	</resource>
+	
+	<resources>
+		<bundle src="/strings.properties" var="strings"></bundle>
+		<dojoModule name="extlib.dijit.ExtLib"></dojoModule>
+		<script src="/xpDocLinks.js" clientSide="true"></script>
+	</resources>
+	
+	<control>
+		<name>ViewRoot</name>
+		<property>
+			<name>pageIcon</name>
+			<value>/favicon.ico</value>
+		</property>
+		<property>
+			<name>pageTitle</name>
+			<value>#{javascript:strings.getString("doclib.name")}</value>
+		</property>
+	</control>
+
+	<control>
+		<name>Button.Command</name>
+		<property>
+			<name>styleClass</name>
+			<value>lotusFormButton</value>
+		</property>
+	</control>
+	
+</theme>

@@ -1,0 +1,228 @@
+/****
+ * Global Styles
+ ****/
+.mblView {
+	padding-top: 44px !important;
+}
+.mobile body {
+    color: white;
+    background-color: black;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/****
+ * Accordion
+ ****/
+.mblArrowDown, .mblArrowUp {
+ 	border-color: gray;
+}
+
+/****
+ * Data View
+ ****/
+.mblDataView .mblDataViewCategoryRow {
+	color: #fff;
+	background-color: #000;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9C9E9C), to(#848284));
+	border-top: 1px solid #9C9E9C;
+	border-bottom: 1px solid #2D3642;
+}
+.mblDataView .mblFooterText a{
+	border: 1px solid #ADAAAD;
+}
+.mblDataView .mblRightFooterText a, .mblDataView .mblFooterText a {
+	color: white;
+	text-decoration: none;
+}
+.mblDataView .mblListItemWrapper {
+	border-bottom: 1px solid #ADAAAD;
+}
+
+/****
+ * Forms
+ ****/
+.mobileFormContainer .mobileFormTable {
+	background-color: #000;
+	color: #fff;
+	border: 1px solid gray;
+}
+.mobileFormContainer .mobileFormTable .formRow {
+	border-bottom: 1px solid gray;
+}
+.mobileFormContainer .mobileFormTable .formRow:last-child {
+	border-bottom: none;
+}
+.mobileFormContainer .formBackLink {
+	color: white;
+}
+.mobileFormContainer > .footer button {
+	background-color: #000;
+	color: #fff;
+	border: 1px solid gray;
+	font-weight: bold;
+}
+.mobileFormContainer input[type="text"] {
+	border: none;
+	border-bottom: 1px dashed gray;
+	color: #fff;
+}
+.mobileFormContainer .errorRow {
+	color: #fa0;
+}
+.mobileFormContainer .mobileFormTableErrorDiv {
+	background-color: #9C9E9C;
+	background: -webkit-gradient(linear, left bottom, left top, from(#000), to(#333));
+	border: 2px solid #fff;
+}
+.mobileFormContainer .mobileFormTableErrorDiv input[type="button"] {
+	background: -webkit-gradient(linear, left bottom, left top, from(#848284), to(#9C9E9C));
+	border: 1px solid #333;
+	color: #fff;
+}
+.mobileFormContainer .mobileFormTableErrorDiv input[type="button"]:active {
+	background: -webkit-gradient(linear, left bottom, left top, from(#9C9E9C), to(#848284));
+}
+.mobileFormContainer .mobileFormTableErrorDiv h1 {
+	color: #fff;
+	text-shadow: 0px -1px 3px #000;
+}
+.mobileFormContainer .mobileFormTableErrorDiv h2 {
+	color: #fff;
+	text-shadow: 0px -1px 2px #000;
+}
+.mobileFormContainer .mobileFormTableErrorShade {
+	background-color: #000;
+}
+.mobileFormContainer td.separator {
+	border-bottom: 1px solid gray;
+}
+.buttonLinkContainer .buttonLink {
+	border: 1px solid #ADAAAD;
+	background-color: #000;
+	color: #fff;
+	font-weight: bold;
+}
+
+.mblTabBarButtonIcon[src=""]{
+	display:none;
+}
+.mblTabBarButtonDiv{
+	height: auto;
+}
+
+.mblTabButton .mblTabBarButtonDiv{
+	height: auto;
+}
+
+.mblTabButton{
+	
+	background: -webkit-gradient(linear, left top, left bottom, from(#A59EA5), to(#848284));
+}
+.mblTabButtonSelected.mblTabButton{
+	background: -webkit-gradient(linear, left top, left bottom, from(#181818), to(#100C10), color-stop(0.1, #313031));
+}
+
+.mblArrowButtonBody{
+	-webkit-border-radius: 2px 5px 5px 2px;
+}
+
+.mblArrowButton .mblArrowButtonHead
+{
+	top:13px;
+}
+
+.mblRoundRectList{
+	background: white;
+	color: black;
+}
+
+.mblTabPanelHeader{
+	margin: auto;
+	display: inline-block;
+	width: 100%;
+}
+.mblTabBarButtonAnchor{
+	height: 100%;
+	position: relative;
+	top: 1px;
+}
+
+.mblHeading{
+	height: 42px;
+	line-height: 44px;
+	font-size: 20px;
+	font-color: red;
+}
+
+.mblTabPanelHeader{
+	line-height: 25px;
+}
+
+.mblTabPanelHeader{
+	margin-top: 1px;
+	height: 32px !important;
+	padding: 5px;
+}
+
+.mblTabPanelHeader .mblTabButton{
+	border-width: 1px 1px 1px 1px;
+	border-color: #AAA #666 #444 #aaa;
+	height: 26px;
+	margin: 0;	
+}
+
+.mblTabButton.mblTabButtonSelected{
+	border-color: #444 #666 #999 #666;
+}
+
+.mblTabPanelHeader .mblTabButton:first-child{
+	border-radius: 2px 0 0 2px;
+}
+
+.mblTabPanelHeader .mblTabButton:last-child{
+	border-radius: 0px 2px 2px 0px;
+	border-width: 1px 1px 1px 1px;
+}
+
+.mblArrowButton{
+	background-position: 8px 8px;
+	height: 42px;
+} 
+
+.mblArrowButtonBody, 
+.mblArrowButtonNeck{
+	top: 8px;
+}
+
+.mblHeadingActionFacet{
+	top: 8px;
+}
+
+/* Workaround for when customers upgrade to 9.0 */
+
+.mblHeadingActionFacet button, .mblHeadingActionFacet a, .mblHeading a, .android .mblLoginText a {
+    border: 1px solid #555;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    padding: 0 10px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    color: black;
+    background-color: #C6C6C6;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#DFDFDF), to(#A6A6A6));
+    border-radius: 0;
+    text-shadow: none;
+
+    /*padding: 0 8px;   
+    height: 25px;
+    border-color: #333;
+    background-color: #ADADAD;  
+    background: -webkit-gradient(linear, left top, left bottom, from(#E5E5E5), to(#7F7F7F), color-stop(0.5, #ADADAD), color-stop(0.5, #909090));*/
+}
+
+/*.mblHeadingActionFacet a
+{
+    border-color: #3F3E3E; 
+    background-color: #ADADAD;
+    background: -webkit-gradient(linear, left top, left bottom, from(#E5E5E5), to(#7F7F7F), color-stop(0.5, #ADADAD), color-stop(0.5, #909090));
+}*/

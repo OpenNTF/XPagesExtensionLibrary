@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<style>
+		.xspHtmlTrViewSelected{background-color:#eefee1;}
+		.xspHtmlTrView:hover{background-color:#ffffc8;}
+	</style>
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/DataView">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="This shows the data view component" id="label5"
+			style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel id="panel1">
+			<xp:tabbedPanel id="DetailsOnClient">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="Simple View" id="tabPanel1">
+					<xp:button value="Refresh Page" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xe:pagerSaveState id="pagerSaveState1" for="dataView1"
+						globalRows="true">
+					</xe:pagerSaveState>
+					<xe:dataView id="dataView1" var="viewEntry"
+						collapsibleRows="true" collapsibleDetail="true"
+						pageName="/Domino_ViewStateForm.xsp" columnTitles="true"
+						rowStyleClass="xspHtmlTrView" rows="10">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="1">
+							</xp:dominoView>
+						</xe:this.data>
+						<xe:this.iconColumn>
+							<xe:viewIconColumn>
+								<xe:this.icons>
+									<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+										alt="Already read post">
+									</xe:iconEntry>
+									<xe:iconEntry url="xpPostUnread.gif"
+										selectedValue="unread" alt="Unread post">
+									</xe:iconEntry>
+								</xe:this.icons>
+								<xe:this.value><![CDATA[#{javascript:var read = viewEntry.getRead(session.getEffectiveUserName())
+return read ? "read" : "unread"}]]></xe:this.value>
+							</xe:viewIconColumn>
+						</xe:this.iconColumn>
+						<xe:this.extraColumns>
+							<xe:viewExtraColumn columnName="Date"
+								columnTitle="Date" style="width: 100px">
+							</xe:viewExtraColumn>
+							<xe:viewExtraColumn columnName="Author"
+								columnTitle="Author">
+								<xe:this.href><![CDATA[#{javascript:var href = "/Domino_ViewUserProfile.xsp?name="+viewEntry.getColumnValue('Author')
+return href}]]></xe:this.href>
+							</xe:viewExtraColumn>
+						</xe:this.extraColumns>
+						<xp:this.facets>
+							<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft">
+							</xe:pagerExpand>
+							<xp:pager layout="Previous Group Next" id="pager3"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:link escape="true" text="Add 30 rows" id="link6"
+								xp:key="pagerBottomRight">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script>
+										<xe:addRows rowCount="30" for="dataView1" disableId="link6">
+										</xe:addRows>
+									</xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:panel id="panel2" xp:key="detail">
+								<xp:text escape="true" id="computedField2">
+									<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+								</xp:text>
+								<xp:br></xp:br>
+								<xp:br></xp:br>
+								<xp:link escape="true" text="Reply" id="link3">
+								</xp:link>
+								<xp:label value=" | Tags: " id="label1">
+								</xp:label>
+								<xp:link escape="true" text="See them" id="link4">
+								</xp:link>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel3">
+								<xe:pagerSizes id="pagerSizes1">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Categorized View" id="tabPanel2">
+					<xe:dataView id="dataView2" var="viewEntry"
+						collapsibleCategory="false" pageName="/Domino_ViewStateForm.xsp"
+						collapsibleDetail="true" rowStyleClass="xspHtmlTrView" rows="10">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="title"></xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.categoryColumn>
+							<xe:viewCategoryColumn columnName="Date"></xe:viewCategoryColumn>
+						</xe:this.categoryColumn>
+
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreadsByDate"
+								expandLevel="2">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerExpand id="pagerExpand2" xp:key="pagerTopLeft">
+							</xe:pagerExpand>
+							<xe:pagerAddRows id="pagerAddRows1" rowCount="30"
+								for="dataView2" xp:key="pagerBottomRight"></xe:pagerAddRows>
+							<xp:pager layout="Previous Group Next" id="pager2"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel5" xp:key="detail">
+								<xp:text escape="true" id="computedField1">
+									<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+								</xp:text>
+								<xp:br></xp:br>
+								<xp:br></xp:br>
+								<xp:link escape="true" text="Reply" id="link1">
+								</xp:link>
+								<xp:label value=" | Tags: " id="label2">
+								</xp:label>
+								<xp:link escape="true" text="See them" id="link2">
+								</xp:link>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel9">
+								<xe:pagerSizes id="pagerSizes3">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Categorized View (2)" id="tabPanel5">
+					<xe:dataView id="dataView5" var="viewEntry"
+						collapsibleCategory="true" pageName="/Domino_ViewStateForm.xsp"
+						collapsibleDetail="true" rowStyleClass="xspHtmlTrView"
+						rows="10">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="title"></xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.categoryColumn>
+							<xe:viewCategoryColumn columnName="Date"></xe:viewCategoryColumn>
+							<xe:viewCategoryColumn columnName="Author"></xe:viewCategoryColumn>
+						</xe:this.categoryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1"
+								viewName="AllThreadsByDateByAuthor" expandLevel="4">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xe:pagerExpand id="pagerExpand3"
+								xp:key="pagerTopLeft">
+							</xe:pagerExpand>
+							<xe:pagerAddRows id="pagerAddRows2"
+								rowCount="30" for="dataView2" xp:key="pagerBottomRight">
+							</xe:pagerAddRows>
+							<xp:pager layout="Previous Group Next"
+								id="pager5" xp:key="pagerTopRight" partialRefresh="true"
+								partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel10" xp:key="detail">
+								<xp:text escape="true"
+									id="computedField7">
+									<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+								</xp:text>
+								<xp:br></xp:br>
+								<xp:br></xp:br>
+								<xp:link escape="true" text="Reply"
+									id="link5">
+								</xp:link>
+								<xp:label value=" | Tags: "
+									id="label4">
+								</xp:label>
+								<xp:link escape="true" text="See them"
+									id="link10">
+								</xp:link>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft"
+								id="panel11">
+								<xe:pagerSizes id="pagerSizes4">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Categorized View - 3 columns" id="tabPanel4">
+					<xe:dataView id="dataView4" var="viewEntry"
+						collapsibleCategory="true" pageName="/Domino_ViewStateForm.xsp"
+						rowStyleClass="xspHtmlTrView" multiColumnCount="3" expandedDetail="true"
+						rows="15" showCheckbox="true">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Name"></xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.categoryColumn>
+							<xe:viewCategoryColumn columnName="State"></xe:viewCategoryColumn>
+						</xe:this.categoryColumn>
+
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllContactsByState"
+								expandLevel="2">
+							</xp:dominoView>
+						</xe:this.data>
+						<xp:this.facets>
+							<xp:pager layout="Previous Group Next" id="pager1"
+								xp:key="pagerTopRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:pager layout="Previous Group Next" id="pager4"
+								xp:key="pagerBottomRight" partialRefresh="true" partialExecute="true">
+							</xp:pager>
+							<xp:panel id="panel8" xp:key="detail">
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td>
+											<xp:image url="/NoPhoto.png" id="image2">
+											</xp:image>
+										</xp:td>
+										<xp:td>
+											<xp:text escape="true" id="computedField4" style="font-weight:bold">
+												<xp:this.value><![CDATA[#{viewEntry["Id"]}]]></xp:this.value>
+											</xp:text>
+											<xp:br></xp:br>
+											<xp:text escape="true" id="computedField5">
+												<xp:this.value><![CDATA[#{viewEntry["Name"]}]]></xp:this.value>
+											</xp:text>
+											<xp:br></xp:br>
+											<xp:text escape="true" id="computedField6">
+												<xp:this.value><![CDATA[#{javascript:viewEntry.getColumnValue("City")+", "+viewEntry.getColumnValue("State")}]]></xp:this.value>
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Simple View with more" id="tabPanel3">
+					This is a simple view, without a pager, but a &quot;Add More&quot;
+					link. The detail part is downloaded as part of the page, so a click
+					on the expand icon doesn't trigger a server roundtrip
+					<xp:br></xp:br>A
+					click to the &quot;Add&#160;More&quot;
+					link generates an Ajax
+					request that only gets the extra rows.
+					<xp:br></xp:br>
+					<xe:dataView id="dataView3" var="viewEntry"
+						binding="#{viewStateBean.dataIterator}" collapsibleRows="false"
+						collapsibleDetail="true" pageName="/Domino_ViewStateForm.xsp"
+						columnTitles="true" rowStyleClass="xspHtmlTrView" rows="10"
+						detailsOnClient="true" showCheckbox="true" showHeaderCheckbox="true">
+						<xe:this.summaryColumn>
+							<xe:viewSummaryColumn columnName="Title"
+								columnTitle="Title">
+							</xe:viewSummaryColumn>
+						</xe:this.summaryColumn>
+						<xe:this.data>
+							<xp:dominoView var="view1" viewName="AllThreads"
+								expandLevel="1">
+							</xp:dominoView>
+						</xe:this.data>
+						<xe:this.iconColumn>
+							<xe:viewIconColumn>
+								<xe:this.icons>
+									<xe:iconEntry url="xpPostRead.gif" selectedValue="read"
+										alt="Already read post">
+									</xe:iconEntry>
+									<xe:iconEntry url="xpPostUnread.gif"
+										selectedValue="unread" alt="Unread post">
+									</xe:iconEntry>
+								</xe:this.icons>
+								<xe:this.value><![CDATA[#{javascript:var read = viewEntry.getRead(session.getEffectiveUserName())
+return read ? "read" : "unread"}]]></xe:this.value>
+							</xe:viewIconColumn>
+						</xe:this.iconColumn>
+						<xp:this.facets>
+							<xp:link escape="true" text="Add 30 rows" id="link7"
+								xp:key="pagerBottomRight">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script>
+										<xe:addRows rowCount="30"
+											for="dataView3" disableId="link7">
+										</xe:addRows>
+									</xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:panel id="panel6" xp:key="detail">
+								<xp:text escape="true" id="computedField3">
+									<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+								</xp:text>
+								<xp:br></xp:br>
+								<xp:br></xp:br>
+								<xp:link escape="true" text="Reply" id="link8">
+								</xp:link>
+								<xp:label value=" | Tags: " id="label3">
+								</xp:label>
+								<xp:link escape="true" text="See them" id="link9">
+								</xp:link>
+							</xp:panel>
+							<xp:panel xp:key="pagerBottomLeft" id="panel7">
+								<xe:pagerSizes id="pagerSizes2">
+								</xe:pagerSizes>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:dataView>
+				</xp:tabPanel>
+                <xp:tabPanel label="Sort" id="tabPanel6">
+                    <xp:br></xp:br>
+                    <xe:dataView id="dataView6" columnTitles="true"
+                        rows="10">
+                        <xe:this.data>
+                            <xp:dominoView var="view2"
+                                viewName="AllContacts">
+                            </xp:dominoView>
+                        </xe:this.data>
+                        <xe:this.summaryColumn>
+                            <xe:viewSummaryColumn columnName="Name"
+                                columnTitle="Name">
+                            </xe:viewSummaryColumn>
+                        </xe:this.summaryColumn>
+                        <xe:this.extraColumns>
+                            <xe:viewExtraColumn columnName="City"
+                                columnTitle="City">
+                            </xe:viewExtraColumn>
+                            <xe:viewExtraColumn columnName="EMail"
+                                columnTitle="EMail">
+                            </xe:viewExtraColumn>
+                        </xe:this.extraColumns>
+                        <xp:this.facets>
+                            <xp:pager xp:key="pagerTop"
+                                layout="Previous Group Next" id="pager6" 
+                                styleClass=" ">
+                            </xp:pager>
+                            <xp:panel xp:key="pagerBottom"
+                                id="panel13">
+                                <xe:pagerSizes id="pagerSizes5">
+                                </xe:pagerSizes>
+                            </xp:panel>
+                        </xp:this.facets>
+                    </xe:dataView>
+                    <xp:br></xp:br>
+                    <xp:br></xp:br>
+                </xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

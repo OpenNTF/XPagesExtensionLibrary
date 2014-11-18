@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Extended Components Library for XPages - Mobile device Support
+Bundle-SymbolicName: com.ibm.xsp.extlib.mobile;singleton:=true
+Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Vendor: IBM
+Export-Package: com.ibm.xsp.extlib.actions,
+ com.ibm.xsp.extlib.component.mobile,
+ com.ibm.xsp.extlib.config,
+ com.ibm.xsp.extlib.mobile,
+ com.ibm.xsp.extlib.mobile.themes,
+ com.ibm.xsp.extlib.plugin,
+ com.ibm.xsp.extlib.renderkit.html_extended.mobile,
+ com.ibm.xsp.extlib.request
+Require-Bundle: com.ibm.notes.java.api,
+ org.eclipse.core.runtime,
+ com.ibm.commons,
+ com.ibm.xsp.core,
+ com.ibm.xsp.designer,
+ com.ibm.xsp.extsn,
+ com.ibm.xsp.domino,
+ com.ibm.xsp.extlib.core,
+ com.ibm.xsp.extlib.controls
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: com.ibm.xsp.extlib.plugin.MobilePluginActivator
+Import-Package: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

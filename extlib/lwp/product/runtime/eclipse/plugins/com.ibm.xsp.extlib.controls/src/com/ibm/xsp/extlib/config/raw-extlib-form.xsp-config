@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojoext.form</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+    <!-- Start of Extended Dojo Controls -->
+
+    <component>
+        <description>Abstract Dojo control used to edit a list of values</description>
+        <display-name>Abstract List Text Box</display-name>
+        <component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojoext.form.AbstractDojoExtListTextBox</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>javax.faces.Text</renderer-type>
+            <designer-extension>
+                <!-- TODO Provide styling support with item style and styleClass for individual values -->
+                <!-- TODO See LinkSelect regarding styling -->
+                <!-- TODO Test XPages converters and validators behaviour compliance -->
+                <!-- TODO Test multipleSeparator and multipleTrim behaviour compliance -->
+                <!-- TODO Test modifiedFlag behaviour compliance -->
+                <!-- TODO Verify UIInputEx properties behaviour compliance -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Dojo control used to edit a list of values, for Name values use the Dojo Name List Text Box control. Must be associated with a value picker to allow for value selection.</description>
+        <display-name>List Text Box</display-name>
+        <icon>
+            <small-icon>extlib/designer/icons/DojoExtListTextBox_16.png</small-icon>
+            <large-icon>extlib/designer/icons/DojoExtListTextBox_24.png</large-icon>
+        </icon>
+        <component-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtListTextBox</component-class>
+
+        <property>
+            <description>Indicates if the label should be displayed instead of the value</description>
+            <display-name>Display Label</display-name>
+            <property-name>displayLabel</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Data provider used to provide the list of available options and possibly associated labels. It uses the associated value picker when null.</description>
+            <display-name>Value Labels List</display-name>
+            <property-name>dataProvider</property-name>
+            <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Update description how to associate a value picker as nested children and behvaiour when null -->
+                    <!-- TODO Investigate and describe use case involving my data provider and the same data provider for my picker -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</renderer-type>
+            <tag-name>djextListTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Dojo control used to edit a list of user names</description>
+        <display-name>Name Text Box</display-name>
+        <icon>
+            <small-icon>extlib/designer/icons/DojoExtNameTextBox_16.png</small-icon>
+            <large-icon>extlib/designer/icons/DojoExtNameTextBox_24.png</large-icon>
+        </icon>
+        <component-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtNameTextBox</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</renderer-type>
+            <tag-name>djextNameTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO update describe to include type of name values used Notes CN, include limitations and gotchas -->
+                <!-- TODO describe use case display and remove only at present, to add must include picker -->
+                <!-- TODO Introduce property to specify name extraction behaviour properties, and disabling -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Dojo control used to edit a value using a list of links</description>
+        <display-name>Link Select</display-name>
+        <icon>
+            <small-icon>extlib/designer/icons/DojoExtLinkSelect_16.png</small-icon>
+            <large-icon>extlib/designer/icons/DojoExtLinkSelect_24.png</large-icon>
+        </icon>
+        <component-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtLinkSelect</component-class>
+
+        <group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
+
+        <property>
+            <description>Data provider for the value picker</description>
+            <display-name>Possible Values List</display-name>
+            <property-name>dataProvider</property-name>
+            <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO Provide support for use of both selectitem[s] and dataProvider  -->
+                    <!-- TODO DDE Use of "values pretty panel" to support selectitem and selectitems addition -->
+                    <!-- TODO Update description with use case of selectitem and selectitems children values in absence of a data provider -->
+                    <!-- TODO Server-side validation to prevent submission of illegal values not in list of provided values -->
+                    <!-- TODO Verify converters behaviour applied on each picker data value item -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</renderer-type>
+            <tag-name>djextLinkSelect</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO Introduce styling support for selected and unselected values -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <complex-type>
+        <description>Image used by an Image Select Control</description>
+        <display-name>Select Image</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-class>
+
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+
+        <property>
+            <description>Value that should match the column value to make the icon displayed</description>
+            <display-name>Selected Value</display-name>
+            <property-name>selectedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+        </property>
+
+        <property>
+            <description>Image displayed for the value</description>
+            <display-name>Image</display-name>
+            <property-name>image</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Image displayed for the value when it is selected</description>
+            <display-name>Selected Image</display-name>
+            <property-name>selectedImage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Style for a selected value</description>
+            <display-name>Selected Style</display-name>
+            <property-name>selectedStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Style class for a selected value</description>
+            <display-name>Selected Style Class</display-name>
+            <property-name>selectedStyleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>             
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>   
+            </property-extension>
+        </property>
+
+        <property>
+            <description>An alternative descriptive text that will be shown if the image cannot be displayed.</description>
+            <display-name>Alternate Text</display-name>
+            <property-name>imageAlt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <!-- This is tagged not-image-path because it is an alt text,
+                    not a path to an image resource, so the image JUnit test should not complain. -->
+                    <tags>
+                        not-image-path
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <complex-extension>
+            <tag-name>selectImage</tag-name>
+            <designer-extension>
+                <!-- TODO Introduce text property -->
+                <!-- TODO Investigate image/text selected/unselected styling -->
+                <!-- TODO Investigate selected images conventions? -->
+                <!-- TODO Introduce rendered property -->
+                <!-- TODO Investigate for all UIInputEx properties behaviour -->
+                <!-- TODO Provide selectedImageWidth, selectedImageHeight -->
+                <!-- TODO Provide imageWidth, imageHeight, imageStyleClass -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <component>
+        <description>Dojo control used to edit a value based on an image</description>
+        <display-name>Image Select</display-name>
+        <icon>
+            <small-icon>extlib/designer/icons/DojoExtImageSelect_16.png</small-icon>
+            <large-icon>extlib/designer/icons/DojoExtImageSelect_24.png</large-icon>
+        </icon>
+        <component-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtImageSelect</component-class>
+
+        <property>
+            <description>The list of images objects, each representing a value that can be selected</description>
+            <display-name>Images List</display-name>
+            <property-name>imageValues</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</property-item-class>
+                <property-add-method>addImageValue</property-add-method>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</renderer-type>
+            <tag-name>djextImageSelect</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:image url="/extlib/designer/markup/DojoImageSelect.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+                <!-- TODO Server-side validation to prevent submission of illegal values not in list of provided values -->
+                <!-- TODO Update readonly renderer to display only one image -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <!-- End of Extended Dojo Controls -->
+
+</faces-config>

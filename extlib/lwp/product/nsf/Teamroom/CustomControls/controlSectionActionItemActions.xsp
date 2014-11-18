@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:link escape="true" text="Mark complete (task was completed)"
+		id="linkMarkComplete" role="button" title="mark as complete">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:
+// Do something
+
+}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+
+	<xe:listSeparator id="listSeparator1"></xe:listSeparator>
+	
+	<xp:link escape="true" text="Mark closed (Closing uncompleted task)"
+		id="linkMarkClosed" role="button" title="mark as closed">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:
+		
+// Do something
+
+}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:link>
+</xp:view>

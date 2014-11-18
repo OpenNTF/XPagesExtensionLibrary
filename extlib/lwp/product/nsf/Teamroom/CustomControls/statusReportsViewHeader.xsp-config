@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>statusReportsViewHeader</component-type>
+    <composite-name>statusReportsViewHeader</composite-name>
+    <composite-file>/statusReportsViewHeader.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>isCollapseExpandable</property-name>
+      <property-class>boolean</property-class>
+    </property>
+  </composite-component>
+</faces-config>

@@ -1,0 +1,384 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+%REM ////////////////////////////////////////////////////////////////////////////////////
+
+	Implements exception handling and callstack reporting
+
+	written by:	Thomas Gumz
+
+	Public Class cException
+		Public Sub New
+		Public Sub RaiseError(sModule As String, sClass As String, vOptional As Variant)
+		Public Sub HandleError(sModule As String, sClass As String, vOptional As Variant)
+
+%END REM ////////////////////////////////////////////////////////////////////////////////
+
+Option Declare
+
+Use "lsResources"
+
+%INCLUDE "lserr.lss"
+%INCLUDE "lsconst.lss"
+%INCLUDE "lsxbeerr.lss"
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Public Class cException
+Declare Private Function HasUI As Boolean
+Declare Sub Initialize
+Declare Private Function Sprintf(sFormat As String, sData As String) As String
+Declare Public Function Sprintf1(sFormat As String, sData1 As String) As String
+Declare Public Function Sprintf2(sFormat As String, sData1 As String, sData2 As String) As String
+Declare Public Function Sprintf3(sFormat As String, sData1 As String, sData2 As String, sData3 As String) As String
+Declare Public Function Sprintf4(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String) As String
+Declare Public Function Sprintf5(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String) As String
+Declare Public Function Sprintf6(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String) As String
+Declare Public Function Sprintf7(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String) As String
+Declare Public Function Sprintf8(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String) As String
+Declare Public Function Sprintf9(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String, sData9 As String) As String
+Declare Public Function Sprintf10(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String, sData9 As String, sData10 As String) As String
+
+'++LotusScript Development Environment:2:5:(Declarations):0:10
+Private Const MODULE_NAME	= "lsClassException"
+
+Public Const SPRINTF_SEP		= "|"
+
+Public CR					As String
+Public LF					As String
+Public CRLF				As String
+Public TABCHAR				As String
+
+Public oException			As cException		'globally available object instance
+
+Public Class cException
+	
+	Private m_Session		As NotesSession
+	Private m_lStackFrame	As Long	
+	Private m_aCallStack()	As String
+	Private m_sAdditional	As String
+	Private m_sCaption		As String
+	
+	'-------------
+	Public Sub New
+	'-------------
+		
+		Set m_session	= New NotesSession		
+		m_sCaption	= sprintf1(ERR_CAPTION, m_session.CurrentDatabase.Title)
+		
+	End Sub
+	
+	'--------------------
+	Public Sub RaiseError(sModule As String, sClass As String, vOptional As Variant)
+	'--------------------
+		
+		Call Me.ProcessError(sModule, sClass, Getthreadinfo(LSI_THREAD_CALLPROC), Error, Err, Erl, vOptional)
+		Error Err, Error	're-issue error to bubble it up in the chain...
+		
+	End Sub
+	
+	'---------------------
+	Public Sub HandleError(sModule As String, sClass As String, vOptional As Variant)
+	'---------------------	
+		
+		On Error Goto ERROR_HANDLER
+		
+		Dim sMessage As String
+		
+		Call Me.ProcessError(sModule, sClass, Getthreadinfo(LSI_THREAD_CALLPROC), Error, Err, Erl, vOptional)
+		
+		'now that the error is handled, reset the callstack frame and error code...
+		m_lStackFrame	= 0
+		Err			= 0
+		
+		If HasUI() = True Then
+			
+			sMessage = Join(m_aCallStack, CR)
+			If Len(m_sAdditional) > 0 Then
+				sMessage = sMessage + m_sAdditional
+			End If
+			Msgbox sMessage, MB_OK + MB_ICONSTOP, m_sCaption	
+			
+		Else
+			
+			Forall sStack In m_aCallStack
+				Msgbox sStack
+			End Forall
+			If Len(m_sAdditional) > 0 Then
+				Msgbox m_sAdditional
+			End If
+			
+		End If
+		
+		Exit Sub
+		
+ERROR_HANDLER:
+		
+		Dim sMsg1	As String
+		Dim sMsg2	As String
+		Dim sMsg3	As String
+		
+		sMsg1	= sprintf2(ERR_FORMAT_LOCATION, Error, Cstr(Err)) & CR & CR
+		sMsg2	= sprintf4(ERR_FORMAT_CLASS, MODULE_NAME, Typename(Me), Getthreadinfo(LSI_THREAD_PROC), Cstr(Erl)) & CR & CR
+		sMsg3	= Join(m_aCallStack, CR)
+		sMessage	= sMsg1 + sMsg2 + sMsg3
+		
+		Msgbox sMessage, MB_OK + MB_ICONSTOP, m_sCaption
+		End
+		
+	End Sub
+	
+	'-----------------------
+	Private Sub ProcessError(sModule As String, sClass As String, sFunction As String, sError As String, lErr As Long, lLine As Long, vOptional As Variant)
+	'-----------------------
+		
+		On Error Goto ERROR_HANDLER
+		
+		Dim sStackHeader	As String		
+		Dim sStackFrame	As String
+		
+		If m_lStackFrame = 0 Then
+			
+			sStackHeader = sprintf2(ERR_FORMAT_LOCATION, sError, Cstr(lErr)) & CR
+			
+			Redim Preserve m_aCallStack(m_lStackFrame)
+			m_aCallStack(m_lStackFrame) = sStackHeader
+			m_lStackFrame = m_lStackFrame + 1
+			
+			If Not Isnull(vOptional) Then
+				If Len(Cstr(vOptional)) > 0 Then
+					m_sAdditional = CR + CR + sprintf1(ERR_ADDITIONAL_INFO, CR + Cstr(vOptional))				
+				End If
+			End If
+			
+		End If	
+		
+		If sClass = "" Then
+			sStackFrame = sprintf3(ERR_FORMAT_MODULE, sModule, sFunction, Cstr(lLine))
+		Else
+			sStackFrame = sprintf4(ERR_FORMAT_CLASS, sModule, sClass, sFunction, Cstr(lLine))
+		End If
+		
+		If m_lStackFrame = 1 Then
+			sStackFrame = sStackFrame + "<---[Fault]" 'mark the offending call  
+		End If
+		
+		Redim Preserve m_aCallStack(m_lStackFrame)
+		m_aCallStack(m_lStackFrame) = Lcase$(sStackFrame)
+		m_lStackFrame = m_lStackFrame + 1
+		
+		Exit Sub
+		
+ERROR_HANDLER:
+		
+		Dim sMessage As String
+		Dim sMsg1	As String
+		Dim sMsg2	As String
+		
+		sMsg1	= sprintf2(ERR_FORMAT_LOCATION, Error, Cstr(Err)) & CR
+		sMsg2	= sprintf4(ERR_FORMAT_CLASS, MODULE_NAME, Typename(Me), Getthreadinfo(LSI_THREAD_PROC), Cstr(Erl)) & CR & CR
+		sMessage	= sMsg1 + sMsg2
+		
+		Msgbox sMessage, MB_OK + MB_ICONSTOP, m_sCaption
+		End
+		
+	End Sub
+	
+End Class
+
+'++LotusScript Development Environment:2:1:HasUI:1:8
+Private Function HasUI As Boolean
+	
+	On Error Goto ERROR_HANDLER
+	
+	Dim oUIWorkspace As New NotesUIWorkspace
+	
+	HasUI = True
+	
+	Exit Function
+	
+ERROR_HANDLER:
+	
+	Err = 0
+	Exit Function
+	
+End Function
+'++LotusScript Development Environment:2:2:Initialize:1:10
+Sub Initialize
+	
+	'create a single globally available exception object
+	If oException Is Nothing Then
+		Set oException = New cException
+	End If
+	
+	TABCHAR	= Chr$(9)
+	CR		= Chr$(13)
+	LF		= Chr$(10)
+	CRLF		= CR + LF
+	
+End Sub
+'++LotusScript Development Environment:2:1:Sprintf:1:8
+Private Function Sprintf(sFormat As String, sData As String) As String
+	
+	'C-style sprintf() function for string formatting. Currently only %s is implemented
+	
+	'hsFormat:    the input string, like "In %s2 we trust, but lock your %s1"
+	'hsData:      the keywords separated by '|', like "Car|God"
+	
+	On Error Goto ERROR_HANDLER
+	
+	Dim vData		As Variant
+	Dim iCounter	As Integer
+	
+	Const SPRINTF_SEP = "|"
+	
+	vData	= Split(sData, SPRINTF_SEP, , 5)
+	Sprintf	= Replace(sFormat, "\n", CRLF)
+	
+	For iCounter = 0 To Ubound(vData)
+		Sprintf = Replace(Sprintf, "%s" & iCounter + 1, vData(iCounter), , 1, 5)
+	Next iCounter
+	
+	Exit Function
+	
+ERROR_HANDLER:
+	
+	'can't use the oException object, circular reference
+	Msgbox "ERROR " & Error$ & " in line " & Erl & " in Sprintf(" & sFormat & ", " & sData & ")"
+	Exit Function
+	
+End Function
+
+
+'++LotusScript Development Environment:2:1:Sprintf1:1:8
+Public Function Sprintf1(sFormat As String, sData1 As String) As String
+	
+	'1 argument wrapper for sprintf
+	Sprintf1 = Sprintf( _
+	sFormat, _
+	sData1)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf2:1:8
+Public Function Sprintf2(sFormat As String, sData1 As String, sData2 As String) As String
+	
+	'2 argument wrapper for sprintf
+	Sprintf2 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf3:1:8
+Public Function Sprintf3(sFormat As String, sData1 As String, sData2 As String, sData3 As String) As String
+	
+	'3 argument wrapper for sprintf
+	Sprintf3 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf4:1:8
+Public Function Sprintf4(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String) As String
+	
+	'4 argument wrapper for sprintf
+	Sprintf4 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf5:1:8
+Public Function Sprintf5(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String) As String
+	
+	'5 argument wrapper for sprintf
+	Sprintf5 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf6:1:8
+Public Function Sprintf6(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String) As String
+	
+	'6 argument wrapper for sprintf
+	Sprintf6 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5 + SPRINTF_SEP + _
+	sData6)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf7:1:8
+Public Function Sprintf7(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String) As String
+	
+	'7 argument wrapper for sprintf
+	Sprintf7 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5 + SPRINTF_SEP + _
+	sData6 + SPRINTF_SEP + _
+	sData7)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf8:1:8
+Public Function Sprintf8(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String) As String
+	
+	'8 argument wrapper for sprintf
+	Sprintf8 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5 + SPRINTF_SEP + _
+	sData6 + SPRINTF_SEP + _
+	sData7 + SPRINTF_SEP + _
+	sData8)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf9:1:8
+Public Function Sprintf9(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String, sData9 As String) As String
+	
+	'9 argument wrapper for sprintf
+	Sprintf9 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5 + SPRINTF_SEP + _
+	sData6 + SPRINTF_SEP + _
+	sData7 + SPRINTF_SEP + _
+	sData8 + SPRINTF_SEP + _
+	sData9)
+	
+End Function
+'++LotusScript Development Environment:2:1:Sprintf10:1:8
+Public Function Sprintf10(sFormat As String, sData1 As String, sData2 As String, sData3 As String, sData4 As String, sData5 As String, sData6 As String, sData7 As String, sData8 As String, sData9 As String, sData10 As String) As String
+	
+	'10 argument wrapper for sprintf
+	Sprintf10 = Sprintf( _
+	sFormat, _
+	sData1 + SPRINTF_SEP + _
+	sData2 + SPRINTF_SEP + _
+	sData3 + SPRINTF_SEP + _
+	sData4 + SPRINTF_SEP + _
+	sData5 + SPRINTF_SEP + _
+	sData6 + SPRINTF_SEP + _
+	sData7 + SPRINTF_SEP + _
+	sData8 + SPRINTF_SEP + _
+	sData9 + SPRINTF_SEP + _
+	sData10)
+	
+End Function

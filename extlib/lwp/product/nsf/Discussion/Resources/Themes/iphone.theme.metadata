@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="27a" sequence="22" unid="40B7DC1F56BD069A80257949004B7AC1">
+<created><datetime>20111115T134426,25+00</datetime></created>
+<modified><datetime>20120207T100333,40+00</datetime></modified>
+<revised><datetime>20111122T171048,71+00</datetime></revised>
+<lastaccessed><datetime>20120207T100333,40+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,40+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>iphone.theme</text></item>
+<item name="$Flags"><text>34567Cg~`</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>iphone.theme</text></item></note>

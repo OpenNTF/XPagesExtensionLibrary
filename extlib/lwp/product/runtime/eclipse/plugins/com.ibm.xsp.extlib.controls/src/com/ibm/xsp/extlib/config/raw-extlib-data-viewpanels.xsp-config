@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2013                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>data</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+<!-- move to extlib-data-viewpanels.xsp-config -->
+            
+<!-- extlib repeat control -->
+    <component>
+        <description>An abstract base class for a repeat control containing a data source.</description>
+        <display-name>Repeat Data Source Control</display-name>
+        <component-type>com.ibm.xsp.extlib.data.DataSourceIterator</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIDataSourceIterator</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
+        
+        <!-- Overridden to make the value property *not* required, as the data property can be used instead. -->
+        <property>
+            <!-- Note, using the label reference mechanism, as described here:
+            http://www-10.lotus.com/ldd/ddwiki.nsf/dx/XPages_configuration_file_format#label-reference-mechanism
+            -->
+            <description>%/com.ibm.xsp.UIDataIterator/value/descr%</description>
+            <display-name>%/com.ibm.xsp.UIDataIterator/value/name%</display-name>
+            <property-name>value</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <!-- Overridden to remove the designer default-value -->
+        <property>
+            <description>%/javax.faces.Data/rows/descr%</description>
+            <display-name>%/javax.faces.Data/rows/name%</display-name>
+            <property-name>rows</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Specifies the data source associated with this control. This is usually a data source with multiple items like the Domino View data source.</description>
+            <display-name>Data</display-name>
+            <property-name>data</property-name>
+            <property-class>com.ibm.xsp.model.DataSource</property-class>
+            <property-extension>
+                 <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "disableHideRow" is a property name and should not be translated-->
+            <description>Specifies if the detail section should be expanded by default. Note that this property is not re-evaluated per row. This can be overridden for a row by computing the "disableHideRow" property. It defaults to false, meaning not expanded.</description>
+            <display-name>Expanded Detail</display-name>
+            <property-name>expandedDetail</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO this property is view-specific, so propose moving it down to the 
+                    (abstract) UIDataView subclass 
+                    or maybe not all the code handling the state saving is in the UIDataSourceIterator class -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.UIDataIterator</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <designer-extension>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+<!-- Multiple images component-->
+
+    <component>
+        <description>Multi-image control that selects an icon to display from a list, where the icon displayed depends on the current value of the field to which the control is bound</description>
+        <display-name>Multi-Image Output</display-name>
+        <component-type>com.ibm.xsp.extlib.data.MultiImage</component-type>
+        <component-class>com.ibm.xsp.extlib.component.image.UIMultiGraphic</component-class>
+        
+        <!-- TODO should add a defaultValue property, and override the value property to change the description 
+          as the value for this control is a field in a document, while the superclass value is the URL to an image.
+          -->
+        <!-- TODO this should not inherit from UIGraphic, but from UIOutput,
+        as the value is not a path to an image, but the value of a field in a document,
+        where this control will display a different image depending on the field value. -->
+        <!-- TODO will it be possible to extend this at a later date to provide
+        support for Image Sprites, for performance reasons?
+        If it is not possible, then we should not publish this control,
+        until we have support for sprites and the control can be used 
+        in a performant manner.
+        It might be that you can already use sprites, as the IconEntry does have a style property. -->
+
+        <property>
+            <description>Define the icon based on a value</description>
+            <display-name>Icons</display-name>
+            <property-name>icons</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.image.IconEntry</property-item-class>
+                <property-add-method>addIcon</property-add-method>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.GraphicImage</base-component-type>
+            <component-family>javax.faces.Graphic</component-family>
+            <renderer-type>com.ibm.xsp.ImageEx</renderer-type>
+            <tag-name>multiImage</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- xe:multiImage similarity to xe:djextImageSelect
+                it seems that the multiImage behaves as a read-only image select control,
+                should investigate and possibly delete the xe:multiImage control
+                If we're keeping the Image Select, we should probably rename it. -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+<!-- extlib abstract data view -->
+
+    <component>
+        <description>The base class for some controls that display multiple rows, usually entries from a Domino view. The Data View and Forum View controls have some common behaviors that are shared through this base class.</description>
+        <display-name>Abstract Data View</display-name>
+        <component-type>com.ibm.xsp.extlib.data.AbstractDataView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.AbstractDataView</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+        
+        <property>
+            <description>Display the view items in a flat format, ignoring the response hierarchy, so that responses do not appear indented</description>
+            <display-name>Display Items Flat</display-name>
+            <property-name>showItemsFlat</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Process the expand and collapse actions on the client. The full detail content is sent to the client (usually a web browser), and the expand and collapse actions do not trigger a server round-trip.</description>
+            <display-name>Expand and Collapse Details on Client</display-name>
+            <property-name>detailsOnClient</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the detail is collapsible. This defaults to false, so the detail area is expanded and there is no toggle button in the browser for the user to hide the detail.</description>
+            <display-name>Collapsible Detail</display-name>
+            <property-name>collapsibleDetail</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Disable the button that can show or hide the detail, and show the row detail. This is evaluated once per row, and can make a row detail visible even when "expandedDetail" property is false.</description>
+            <display-name>Disable Hide Row</display-name>
+            <property-name>disableHideRow</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines CSS style(s) used to display the rows</description>
+            <display-name>Row CSS Styles</display-name>
+            <property-name>rowStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines a space-separated list of one or more CSS style classes to be applied to the view rows</description>
+            <display-name>Row CSS Style Classes</display-name>
+            <property-name>rowStyleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+          <!-- # the text >xp:key="summary"< should not be translated. -->
+          <description>Defines the summary column as a column object. Note that the summary column may also be defined in a facet control, using the facet name xp:key="summary".</description>
+          <display-name>Summary Column</display-name>
+          <property-name>summaryColumn</property-name>
+          <property-class>com.ibm.xsp.extlib.component.data.SummaryColumn</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>format</category>
+                <!-- TODO this is using a special SummaryColumn class, why doesn't it just use the superclass ValueColumn? -->
+                    <tags>
+                       todo
+                    </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+            <description>The page used to open the document when the summary link is clicked</description>
+            <display-name>Page Name</display-name>
+            <property-name>pageName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>When the summary link is clicked this flag indicates if the document to be opened should be in read-only mode or editable.</description>
+            <display-name>Open Document as Read-Only</display-name>
+            <property-name>openDocAsReadonly</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.DataSourceIterator</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <designer-extension>
+                <!-- Update the xe:dataView and xe:forumView controls
+                to allow editing of docs, and tracking of which docs are being
+                edited, and creating response docs, without all the 
+                complicated scripting thats currently 
+                in the teamroom (see xpTopicThreadState.jss)
+                Those are a major usability issue, and may require such a complete
+                rewrite as to introduce big instability, so possibly
+                consider holding the dataView out of IFR1 until this work is done. -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+
+<!-- extlib data view -->
+
+    <component>
+        <description>A high level view control</description>
+        <display-name>Data View</display-name>
+        <component-type>com.ibm.xsp.extlib.data.DataView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIDataView</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.aria.role.deprecated</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+        
+        <property>
+            <description>Shows a check box that allows the selection of the row</description>
+            <display-name>Show Check Box</display-name>
+            <property-name>showCheckbox</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension> 
+            </property-extension>
+        </property>
+        <property>
+            <description>Shows a check box in the title area that selects all the rows when checked</description>
+            <display-name>Show Check Box in Header</display-name>
+            <property-name>showHeaderCheckbox</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension> 
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the column titles should be visible. Defaults to false.</description>
+            <display-name>Column Titles</display-name>
+            <property-name>columnTitles</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the category rows are collapsible. This defaults to true.</description>
+            <display-name>Collapsible Category</display-name>
+            <property-name>collapsibleCategory</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <!-- This defaults to true at runtime, so it will only
+                    be possible to set the value in a theme file
+                    in release 8.5.3 or later using the baseValue attribute.
+                    runtime-default-true prevents a fail in BooleanPropertyDefaultTest -->
+                    <tags>
+                      runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies if the rows are collapsible when showing the response documents</description>
+            <display-name>Collapsible Rows</display-name>
+            <property-name>collapsibleRows</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "3" with quotes should not be translated. -->
+            <description>Indicates that multiple documents or repeated entries should be displayed on a single row. So if this is set to "3" then the first 3 documents will be displayed beside each other in a row, the next 3 documents will be displayed on the next row, and so on. When this is absent, one document will be displayed per row.</description>
+            <display-name>Multi Column Count</display-name>
+            <property-name>multiColumnCount</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+          <!-- # the text >xp:key="icon"< should not be translated. -->
+          <description>Defines the icon column as a column object. Note that the icon column may also be defined in a facet control, using the facet name xp:key="icon"</description>
+          <display-name>Icon Column</display-name>
+          <property-name>iconColumn</property-name>
+          <property-class>com.ibm.xsp.extlib.component.data.IconColumn</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>format</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+          <!-- # the values xp:key="categoryRow" and xp:key="categoryRow1" should not be translated. -->
+          <description>Defines one or more category columns as column objects. The category columns are not displayed for every row of data, instead some rows are detected to be category rows, and for those rows the relevant category column is displayed instead of the normal summary and columns. Note that the category columns may also be defined in facet controls, using the facet names xp:key="categoryRow", xp:key="categoryRow1", xp:key="categoryRow2", etc.</description>
+          <display-name>Category Columns</display-name>
+          <property-name>categoryColumn</property-name>
+          <property-class>java.util.List</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <collection-property>true</collection-property>
+            <property-item-class>com.ibm.xsp.extlib.component.data.CategoryColumn</property-item-class>
+            <property-add-method>addCategoryColumn</property-add-method>
+            <designer-extension>
+                <category>format</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+          <!-- # these should not be translated: xp:key="extra0", xp:key="extra1", "extraColumns"  -->
+            <description>Define the extra columns to be rendered, if any. The values in the extra columns may be provided by this property, or as facet controls, using facet names xp:key="extra0", xp:key="extra1", etc. Any facet must have a corresponding column object in this "extraColumns" list, as the column determines the location where the facet will be displayed.</description>
+            <display-name>Extra Columns</display-name>
+            <property-name>extraColumns</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.data.ExtraColumn</property-item-class>
+                <property-add-method>addExtraColumn</property-add-method>
+                <designer-extension>
+                    <category>format</category>
+                    <!-- TODO the description wording needs work -->
+                    <tags>
+                      todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines a textual summary to support assistive technologies to identify the purpose and structure of the data being presented.</description>
+            <display-name>Data Summary</display-name>
+            <property-name>summary</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.0.v00_03</since>
+                <pass-through>true</pass-through>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>accessibility</category>
+                    <editor>com.ibm.std.MultiLine</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Activates the data view to fetch new rows when the bottom of the list is reached (a.k.a. infiniteScroll). Acceptable values are: "enable", "disable" or "auto"; default value is "auto". If set to "auto", the application setting xsp.progressive.enhancement=[enable|disable] will be used.</description>
+            <display-name>Enable Infinite Scroll</display-name>
+            <property-name>infiniteScroll</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.1.v00_02</since>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        enable
+                        disable
+                        auto
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractDataView</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUICustomView</renderer-type>
+            <tag-name>dataView</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+<!-- extlib forum view -->
+<group>
+    <group-type>com.ibm.xsp.extlib.group.linkTitle</group-type>
+    <property>     
+      <description>Provides title information for column text, when displayed as links.</description>
+      <display-name>Link Title</display-name>
+      <property-name>linkTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+       <since>9.0.0.v00_02</since>        
+        <localizable>true</localizable>
+        <designer-extension> 
+         <tags>
+             is-accessibility-title
+         </tags>      
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-complex</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+
+  <group>
+    <group-type>com.ibm.xsp.extlib.group.headerLinkTitle</group-type>
+    <property>
+      <description>Provides title information for column header, when displayed as links.</description>
+      <display-name>Header Link Title</display-name>
+      <property-name>headerLinkTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+       <since>9.0.0.v00_02</since>        
+        <localizable>true</localizable>
+        <designer-extension>
+         <tags>
+             is-accessibility-title
+         </tags>                
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-complex</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  
+
+    <component>
+        <description>A high level control that renders an hierarchical view.</description>
+        <display-name>Forum View</display-name>
+        <component-type>com.ibm.xsp.extlib.data.ForumView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIForumView</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractDataView</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUIForumView</renderer-type>
+            <tag-name>forumView</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <complex-type>
+        <description>Base class for a column holding a value.</description>
+        <display-name>Abstract Column</display-name>
+        
+        <complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.ValueColumn</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.converter</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+
+        <property>
+            <description>Title of the column, displayed at the top of the column</description>
+            <display-name>Column Title</display-name>
+            <property-name>columnTitle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <!-- Note, this is not an accessibility title -->
+                    <tags>
+                       not-accessibility-title
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>The name of the data column to display in the view column.</description>
+            <display-name>Column Name</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <!-- note, this is not localizable, as it is a column name -->
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>For certain columns, the presence of this "href" property will cause the column value to appear as a link which will open the location referenced by this URL</description>
+            <display-name>URL Reference</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies the type of content to expect. HTML and Text are supported. Text is the default.</description>
+            <display-name>Content Type</display-name>
+            <property-name>contentType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        html
+                        text
+                    </editor-parameter>
+                    <!-- TODO this property allows HTML to be output,
+                    so there should be a corresponding htmlFilter property
+                    to specify which type of ACF filter should be used.
+                    Also there should be a JUnit test to verify that for
+                    contentType properties with options html|text,
+                    that there is a htmlFilter property, and that the htmlFilter
+                    is applied correctly. -->
+                    <!-- xe:viewSummaryColumn "contentType" 
+                    functional breaking change. When contentType is "html" need to apply an ACF filter by default,
+                    should also add a property where you can choose which type of ACF filter.
+                    This is a functional breaking change because an app that previously could include
+                    <SCRIPT> in the HTML output will no longer be able to do so, unless they choose a different ACF filter.
+                     -->
+                     <!--  TODO see DataSourceIteratorRenderer.writeColumnValue 
+                     which is currently hardcoded to use the "acf" filter - should be configurable -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>HTML style attributes added the title cell</description>
+            <display-name>Header Style</display-name>
+            <property-name>headerStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>HTML style class attributes added the title cell</description>
+            <display-name>Header Style Class</display-name>
+            <property-name>headerStyleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+          
+       
+
+        <complex-extension>
+            <designer-extension>
+                <!-- TODO should add the table/TD/TH accessibility attributes to this complex-type -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <!-- TODO why all these subclasses for different types of columns? -->
+    <complex-type>
+        <description>Summary column to display in a data view</description>
+        <display-name>Summary Column</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.SummaryColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.SummaryColumn</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.linkTitle</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.headerLinkTitle</group-type-ref>
+
+        <property>
+            <description>For the summary column, the "href" property can be used instead of the Data View "pageName" property, to make the summary text appear as a link to any URL location, instead of linking to a named XPage.</description>
+            <display-name>URL Reference</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            <!-- Overrides the superclass href property to provide a different description -->
+        </property>
+         
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewSummaryColumn</tag-name>
+            <designer-extension>
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Category column to display in a data view</description>
+        <display-name>Category Column</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.CategoryColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.CategoryColumn</complex-class>
+        
+        <property>
+            <description>The name of the data column to display in the view column</description>
+            <display-name>Column Name</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <!-- Unlike the superclass property that this overrides,
+                 the columnName is required for category columns. -->
+                 <required>true</required>
+                 <!-- note, this is not localizable, as it is a column name -->
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewCategoryColumn</tag-name>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Extra column to display in a data view</description>
+        <display-name>Extra Column</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.ExtraColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.ExtraColumn</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.linkTitle</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.headerLinkTitle</group-type-ref>
+       
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewExtraColumn</tag-name>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Icon column to display in a data view</description>
+        <display-name>Icon Column</display-name>
+        
+        <complex-id>com.ibm.xsp.extlib.component.data.IconColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.IconColumn</complex-class>
+        <property>
+            <description>The name of the data column to check in the view column.</description>
+            <display-name>Column Name</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <!-- note, this is not localizable -->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Value that should match the column value to make the icon displayed</description>
+            <display-name>Value</display-name>
+            <property-name>value</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- TODO this description is not clear whether the value is
+                    something like a column value, that is used to choose between
+                    the IconEntry's in the "icons" property,
+                    or whether it is determining whether the overall iconColumn is 
+                    to be rendered. Also, it doesn't mention that when 
+                    the value property is empty, the column value corresponding 
+                    to the columnName value will be used instead. -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Define the list of icons, one of which will be displayed depending on the current value</description>
+            <display-name>Icons</display-name>
+            <property-name>icons</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.image.IconEntry</property-item-class>
+                <property-add-method>addIcon</property-add-method>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>viewIconColumn</tag-name>
+            <designer-extension>
+                <!-- TODO this isn't inheriting from ValueColumn,
+                so it doesn't have the properties for headerStyleClass,
+                columnTitle, etc - I would expect that many of those would be useful,
+                especially the style/styleClass properties. They would work
+                as styles for the TD, where as the xe:iconEntry complex-type
+                would be styles for the IMG tag within the TD. -->
+                <!-- TODO this should have a defaultValue property
+                so it is not necessary to compute the xe:iconEntry selected property -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+    
+    <complex-type>
+        <description>Icon entry defining an icon on a value basis.</description>
+        <display-name>Icon Entry</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.image.IconEntry</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.image.IconEntry</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+        
+        <property>
+            <description>URL of the image</description>
+            <display-name>Image URL</display-name>
+            <property-name>url</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Alternate text for the image</description>
+            <display-name>Alternate Text</display-name>
+            <property-name>alt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <!-- note, this is the accessibility alt text-->
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Value that should match the column value to make the icon display</description>
+            <display-name>Selected Value</display-name>
+            <property-name>selectedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Property that indicates if the image should be selected. This is used when the "selectedValue" property is absent. This is usually a computed value.</description>
+            <display-name>Selected</display-name>
+            <property-name>selected</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <complex-extension>
+            <tag-name>iconEntry</tag-name>
+            <designer-extension>
+                <!--  should have "width" and "height" properties, for HTML rendering speed optimization -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+    
+<!-- /end move to extlib-data-viewpanels.xsp-config -->
+
+<!-- move to extlib-data-viewpanels.xsp-config -->
+    
+<!-- Forum POST  -->    
+    
+    <component>
+        <description>Displaying the content of a post from a user</description>
+        <display-name>Forum Post</display-name>
+        <component-type>com.ibm.xsp.extlib.data.ForumPost</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIForumPost</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.data.ForumPost</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUIForumPost</renderer-type>
+            <tag-name>forumPost</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO this doesn't explain all the facets anywhere -->
+                <!-- TODO authorMeta facet is supposed to be place containing
+                number of posts by this user ever in this database,
+                but don't have a sample of that anywhere - should try proof-of-concept.  -->
+                <tags>
+                  todo
+                </tags>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:table style="background-color:#B4D5FC"&gt;&#xd;
+        &lt;xp:tr&gt;&#xd;
+            &lt;xp:td&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="authorAvatar"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="authorName"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="authorMeta"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+            &lt;/xp:td&gt;&#xd;
+            &lt;xp:td style="width: 100%"&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="postTitle" id="callback3"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="postMeta" id="callback6"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="postDetails" id="callback4"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+                &lt;div&gt;&#xd;
+                    &lt;xp:callback facetName="postActions" id="callback5"&gt;&lt;/xp:callback&gt;&#xd;
+                &lt;/div&gt;&#xd;
+            &lt;/xp:td&gt;&#xd;
+        &lt;/xp:tr&gt;&#xd;
+    &lt;/xp:table&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+<!-- /end move to extlib-data-viewpanels.xsp-config -->
+
+</faces-config>

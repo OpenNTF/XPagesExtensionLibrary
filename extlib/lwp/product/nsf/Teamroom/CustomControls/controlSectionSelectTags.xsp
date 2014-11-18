@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dialog id="dialogSelectTags" title="TeamRoom Message">
+		<xp:label id="label1" value="${compositeData.promptText}"
+			for="listboxTags">
+		</xp:label>
+
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+
+		<xp:listBox id="listboxTags" multiple="true"
+			value="${javascript: '#{'+compositeData.valueEL+'}' }" style="height:200px;width:200px">
+			<xp:selectItems>
+				<xp:this.value><![CDATA[#{javascript:
+				requestScope.possibleOptions;
+				}]]></xp:this.value>
+			</xp:selectItems>
+		</xp:listBox>
+
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+
+		<xp:button id="buttonOkay" value="OK">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="inputSelectMany1">
+				<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialogSelectTags}')]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:button>
+
+		<xp:link escape="true" id="linkCancel" text="Cancel">
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialogSelectTags}')]]></xp:this.script>
+			</xp:eventHandler>
+		</xp:link>
+
+	</xe:dialog>
+
+</xp:view>

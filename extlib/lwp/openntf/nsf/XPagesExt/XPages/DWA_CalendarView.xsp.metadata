@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579240032FA74" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="33e" sequence="23" unid="6EBC76B72417554285257865006609FF">
+<created><datetime dst="true">20110401T143432,31-04</datetime></created>
+<modified><datetime>20111119T181053,07-05</datetime></modified>
+<revised><datetime>20111119T181053,06-05</datetime></revised>
+<lastaccessed><datetime>20111119T181053,07-05</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20111009T103911,64+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=priandvm/O=renovations</name></updatedby>
+<wassignedby><name>CN=priandvm/O=renovations</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE"><text>DWA_CalendarView.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>DWA_CalendarView.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+
+
+
+</note>

@@ -1,0 +1,35 @@
+/*
+ * © Copyright IBM Corp. 2010
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+/* tag cloud */
+.tagCloudOuterPanel {text-align:left; margin-top:15px; padding:5px;}
+.tagCloudSection {font-weight:bold; cursor:pointer;}
+.tagCloudSlider {padding-top:10px; padding-bottom:5px}
+
+.tagCloudInnerPanel {margin-top:5px; width:100%; overflow:hidden;}
+.tagCloudInnerPanel a {text-decoration:none; font-weight:bold;}
+.tagCloudInnerPanel a:hover, .tagCloudInnerPanel a:focus {text-decoration:underline;}
+
+a.tagCloudSize1, a.tagCloudSize1:visited	{font-size:90%;  color:#6c3052; /*#8bbce8;*/}
+a.tagCloudSize2, a.tagCloudSize2:visited	{font-size:93%;  color:#4477bb; /*#649cd8;*/}
+a.tagCloudSize3, a.tagCloudSize3:visited	{font-size:96%;  color:#4477bb;}
+a.tagCloudSize4, a.tagCloudSize4:visited	{font-size:102%; color:#2b588e;}
+a.tagCloudSize5, a.tagCloudSize5:visited	{font-size:107%; color:#1c3052;}
+a.tagCloudSize6, a.tagCloudSize6:visited	{font-size:112%; color:#1c3052;}
+a.tagCloudSize7, a.tagCloudSize7:visited	{font-size:116%; color:#1c3052;}
+a.tagCloudSize8, a.tagCloudSize8:visited	{font-size:122%; color:#1c3052;}
+a.tagCloudSize9, a.tagCloudSize9:visited	{font-size:130%; color:#1c3052;}
+a.tagCloudSize10, a.tagCloudSize10:visited	{font-size:150%; color:#1c3052;}

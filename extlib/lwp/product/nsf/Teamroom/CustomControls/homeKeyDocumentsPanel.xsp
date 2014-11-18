@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:widgetContainer id="widgetContainer12"
+		titleBarText="Key Documents" scrollable="false" type="sidebar">
+		<xp:link id="link1" value="/StatusReports.xsp" text="RTC Experiment">
+		</xp:link>
+		<xp:br />
+		<xp:link id="link2" value="/notYetImplemented.xsp"
+			text="Experiment Wiki">
+		</xp:link>
+	</xe:widgetContainer>
+</xp:view>

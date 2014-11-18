@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:dialog id="dialogMapTags">
+		<xe:this.title><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.title"));}]]></xe:this.title>
+		<xp:panel>
+			<xp:table>
+				<xp:tr>	
+					<xp:td valign="top">
+						<xp:label id="label1" for="listboxObsoleteTags">
+							<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.message1"));}]]></xp:this.value>
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:listBox id="listboxObsoleteTags"
+							multiple="true" style="width:300px;height:110px">
+							<xp:selectItems>
+								<xp:this.value><![CDATA[#{javascript:// Get the current categories
+var currentCat = @DbLookup(@DbName(), "MissionLookup", "Mission", 4, "[FAILSILENT]");
+
+// Get the existing categories
+var oldCat = @DbColumn(@DbName(), "CategoryLookup", 1);
+var trimmedOldCat = @Trim(oldCat);
+
+// Get a list of categories not specified in the Mission statement
+var invalidCat = @Replace(trimmedOldCat, currentCat, "");
+
+// And return
+return @Unique(@Trim(invalidCat));}]]></xp:this.value>
+							</xp:selectItems>
+						</xp:listBox>
+					</xp:td>
+				</xp:tr>
+
+				<xp:tr>
+					<xp:td valign="top">
+						<xp:label id="label2" for="listboxReplacementTags">
+							<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.message2"));}]]></xp:this.value>
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:listBox id="listboxReplacementTags" style="width:300px;height:100px">
+							<xp:selectItems
+								value="#{document1.Categories}">
+							</xp:selectItems>
+						</xp:listBox>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+
+			<xp:br></xp:br>
+
+			<xp:label id="label3">
+				<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.message3"));}]]></xp:this.value>
+			</xp:label>
+
+			<xp:br></xp:br>
+
+			<xp:label id="label4">
+				<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.message4"));}]]></xp:this.value>
+			</xp:label>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xp:button id="buttonMapTags">
+				<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.button1"));}]]></xp:this.value>		
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:
+// Get the old categories and new category					
+var oldCategories:Array = getComponent("listboxObsoleteTags").getValue();
+var newCategory = getComponent("listboxReplacementTags").getValue();
+
+// Get the first document in the ($All) view for document iteration					
+var thisDatabase:NotesDatabase = session.getCurrentDatabase();
+var notesView:NotesView = thisDatabase.getView("($All)");
+var notesDocument:NotesDocument = notesView.getFirstDocument();
+var categories:Array;
+var dirty:Boolean;
+
+// Iterate thru the documents
+while (notesDocument!=null)
+{
+	// Reset the dirty flag
+	dirty = false;
+	
+	// Get the categories
+	categories = notesDocument.getItemValue("Categories");
+	
+	if (categories.length>0)
+	{
+		for (var index=0;index<categories.length;index++)
+		{
+			if (@IsMember(categories[index],oldCategories))
+			{				
+				// Remove the old item and add the new item
+				var removeIndex = categories.indexOf(categories[index]);
+				categories = categories.splice(removeIndex,1,newCategory);
+				
+				// println("Located '" + categories[index] + "' at index " + removeIndex + ".  Replacing with '" + newCategory + "'");
+				
+				// Set the dirty flag
+				dirty = true;	
+			}
+		}
+		
+		// If the categories have been updated, then reset the field and save
+		if (dirty==true)
+		{
+			notesDocument.replaceItemValue("Categories",@Unique(categories));
+			notesDocument.save(true,true);
+		}		
+	}
+
+	// Get the nextdocument
+	notesDocument = notesView.getNextDocument(notesDocument);
+}
+}]]></xp:this.action>
+				</xp:eventHandler></xp:button>
+			
+			<xp:text escape="false" id="spacer">
+				<xp:this.value><![CDATA[#{javascript:return "&nbsp;&nbsp;&nbsp;"}]]></xp:this.value>
+			</xp:text>
+
+			<xp:link escape="true" id="link1">
+				<xp:this.text><![CDATA[#{javascript:return I18n.format(strings.getString("setup.tags.dialog.button2"));}]]></xp:this.text>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialogMapTags}')]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:panel>
+	</xe:dialog>
+</xp:view>

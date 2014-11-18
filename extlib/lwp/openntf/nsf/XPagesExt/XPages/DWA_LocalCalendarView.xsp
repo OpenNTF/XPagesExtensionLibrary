@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/LocalRESTCalendarView">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+
+			<xp:button value="New Calendar Entry" id="button1">
+
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:openPage name="/DWA_LocalCalendarViewEntry.xsp"
+							target="newDocument">
+						</xp:openPage>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Manage Calendar Entries" id="button2">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:openPage name="/DWA_LocalCalendarManager.xsp"></xp:openPage>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+
+			<xe:restService id="restService2" pathInfo="/inoteslegacyjson"
+				preventDojoStore="false">
+				<xe:this.service>
+					<xe:calendarJsonLegacyService
+						viewName="TestCalendar" var="entry" contentType="text/plain"
+						colCalendarDate="$134" colEntryIcon="$149" colStartTime="$144"
+						colEndTime="$146" colSubject="$147" colEntryType="$152" colChair="$153"
+						colConfidential="$154" colStatus="$160" colCustomData="$UserData"
+						colAltSubject="$151">
+
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson2=="true"}]]></xe:this.compact>
+
+					</xe:calendarJsonLegacyService>
+				</xe:this.service>
+			</xe:restService>
+
+			<xp:br></xp:br>
+
+			<xe:calendarView id="calendarView1" jsId="cview1"
+				summarize="false"
+				type="#{javascript: null == viewScope.calendarType? 'M' : viewScope.calendarType }"
+				storeComponentId="restService2">
+			</xe:calendarView>
+
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

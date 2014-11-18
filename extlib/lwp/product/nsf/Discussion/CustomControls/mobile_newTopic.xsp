@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:panel>
+		<xp:this.data>
+			<xp:dominoDocument var="dominoDoc" formName="MainTopic"
+				computeWithForm="onsave" action="newDocument">
+				<xp:this.querySaveDocument>
+					<![CDATA[#{javascript:// store user CGI variables
+						var cgi = new CGIVariables();
+						dominoDoc.replaceItemValue("Remote_User", cgi.get("REMOTE_USER"));
+						dominoDoc.replaceItemValue("Remote_Addr", cgi.get("REMOTE_ADDR"));
+						cgi = null;
+					}]]>
+				</xp:this.querySaveDocument>
+			</xp:dominoDocument>
+		</xp:this.data>
+		
+		<xe:djxmHeading id="djxmHeading3" label="New Topic" back="Cancel" moveTo="home"
+			loaded="${javascript:isMobile()}">
+			<xp:this.facets>
+				<xp:button value="Save" id="button2" xp:key="actionFacet">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xe:moveTo saveDocument="true"
+								targetPage="#{javascript:sessionScope.from}"
+								direction="Left to Right" transitionType="slide"
+								forceFullRefresh="true">
+							</xe:moveTo>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:this.facets>
+		</xe:djxmHeading>
+		
+		<xe:formTable id="formTable2" formTitle=" " xp:key="profile">
+			<xe:formRow id="formRow1" label="Subject">
+				<xp:inputText id="inputText1" required="true"
+					value="#{dominoDoc.Subject}" styleClass="mblFormRowInput">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow2" label="Tags">
+				<xp:inputText id="inputText2"
+					value="#{dominoDoc.WebCategories}" multipleSeparator=","
+					styleClass="mblFormRowInput">
+				</xp:inputText>
+			</xe:formRow>
+			<xe:formRow id="formRow8" labelPosition="left">
+				<xp:inputTextarea id="documentBody"
+					value="#{dominoDoc.Body}"
+					styleClass="mblFormRowTextArea" rows="5" htmlFilterIn="acf"
+					htmlFilter="acf">
+				</xp:inputTextarea>
+			</xe:formRow>
+		</xe:formTable>
+	</xp:panel>
+</xp:view>

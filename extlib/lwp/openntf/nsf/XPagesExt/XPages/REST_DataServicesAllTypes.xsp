@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DataServicesAllTypes">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			Testing the Domino&#160;REST services
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button value="ReadViewEntries as XML" id="button3">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("AllTypes?ReadViewEntries&start=1&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="ReadViewEntries as JSON" id="button4">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("AllTypes?ReadViewEntries&start=1&count=4&outputformat=JSON"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, formatting Standard&#160;JSON:
+			/contactjson
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact JSON" id="ckJson"
+				value="#{sessionScope.CompactJson}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Try Me!" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesAllTypes.xsp/contactsjson?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService4" pathInfo="contactsjson">
+				<xe:this.service>
+					<xe:viewJsonLegacyService viewName="AllTypes"
+						defaultColumns="true" var="entry" contentType="text/plain">
+
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson=="true"}]]></xe:this.compact>
+					</xe:viewJsonLegacyService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, formatting Standard&#160;XML:
+			/contactxml
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact XML View" id="ckXmlView"
+				value="#{sessionScope.CompactXmlView}">
+			</xp:checkBox>
+
+			<xp:checkBox text="As Text" id="ckXmlText"
+				value="#{sessionScope.AsTextXmlView}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Try Me!" id="button2">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesAllTypes.xsp/contactsxml?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService5" pathInfo="contactsxml">
+				<xe:this.service>
+					<xe:viewXmlLegacyService viewName="AllTypes"
+						defaultColumns="true" var="entry">
+
+
+						<xe:this.contentType><![CDATA[#{javascript:sessionScope.AsTextXmlView=="true" ? "text/plain" : "text/xml"
+}]]></xe:this.contentType>
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactXmlView=="true"}]]></xe:this.compact>
+					</xe:viewXmlLegacyService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This is a view Rest service, formatting Basic&#160;JSON:
+			/contactjson2
+			<xp:br></xp:br>
+
+			<xp:checkBox text="Compact JSON" id="checkBox1"
+				value="#{sessionScope.CompactJson2}">
+			</xp:checkBox>
+			<xp:br></xp:br>
+			<xp:button value="Try Me!" id="button5">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action><![CDATA[#{javascript:facesContext.getExternalContext().getResponse().sendRedirect(@FullUrl("REST_DataServicesAllTypes.xsp/contactsjson2?start=0&count=4"))}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:restService id="restService6"
+				pathInfo="contactsjson2">
+				<xe:this.service>
+					<xe:viewItemFileService viewName="AllTypes"
+						defaultColumns="true" var="entry" contentType="text/plain">
+
+						<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson2=="true"}]]></xe:this.compact>
+					</xe:viewItemFileService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:br></xp:br>
+
+
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+
+

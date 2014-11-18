@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:viewColumn columnName="$StatusFor" id="colStatusFor" value="&#173;">
+		<!-- 173 is shy, soft hyphen-->
+		<xp:viewColumnHeader value="For Person/Team" id="viewColumnHeader11"
+			sortable="true" themeId="TeamRoom.Panel.ViewColumnHeader">
+		</xp:viewColumnHeader>
+		<xe:switchFacet id="switchFacet2" selectedFacet="#{rowData['$Form']}">
+			<xe:this.facets>
+				<xp:panel xp:key="Status">
+					<xp:image  id="teamImg"
+						url="/report_group.png" role="image">
+					</xp:image>
+					<xp:label value="Team Status" id="teamLabel">
+					</xp:label>
+				</xp:panel>
+				<xp:panel id="forPanel" xp:key="SubteamStatus" style="width:200px !important; word-wrap:break-word; overflow:hidden;">
+					<xp:image id="subteamImg"
+						url="/report_group.png" role="image">
+					</xp:image>
+					<xp:link id="subteamLink" value="/members.xsp"
+						role="link" title="link to profile document">
+						<xp:this.text><![CDATA[#{javascript://
+							// statusColumn_subteam=Subteam: {0}
+							var msg = strings.status_column_subteam;
+							msg = I18n.format(msg,rowData.getColumnValue("$SingleSubteamName"));
+							return msg;
+						}]]></xp:this.text>
+						<xp:this.parameters>
+							<xp:parameter name="subteam"
+								value="#{javascript:rowData.getColumnValue('$SingleSubteamName')}">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+				</xp:panel>
+				<xp:panel xp:key="IndStat">
+					<xp:image id="memberImg"
+						url="/report_individual.png" role="image">
+					</xp:image>
+					<xp:link id="memberLink" value="/members.xsp"
+						role="link" title="link to profile document">
+						<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(rowData.getColumnValue("$Author")).displayName}]]></xp:this.text>
+						<xp:this.parameters>
+							<xp:parameter name="profile"
+								value="#{javascript:peopleBean.getPerson(rowData.getColumnValue('$Author')).abbreviatedName}">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+				</xp:panel>
+			</xe:this.facets>
+		</xe:switchFacet>
+	</xp:viewColumn>
+</xp:view>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/JDBC/AtFunctions">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel id="main">
+			<xp:panel>
+				<xp:label id="label5" style="font-weight:bold"
+					value="JDBC Specific @function()">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				This page shows some new JDBC @functions() that drastically simplify the use
+				of JDBC. See how @JdbcInsert/Update/Delete use a Javascript object to pass
+				data to the RDBMS.
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:viewPanel rows="10" id="viewPanel1" var="user">
+					<xp:this.facets>
+						<xp:pager partialRefresh="true" layout="Previous Group Next"
+							xp:key="headerPager" id="pager1">
+						</xp:pager>
+					</xp:this.facets>
+					<xp:this.data>
+						<xe:jdbcQuery connectionName="derby1"
+							var="jdbcData1" defaultOrderBy="id" sqlTable="users"
+							clearOnRendering="true" maxBlockCount="1">
+						</xe:jdbcQuery>
+					</xp:this.data>
+					<xp:viewColumn id="viewColumn1" columnName="id">
+						<xp:this.facets>
+							<xp:viewColumnHeader xp:key="header"
+								id="viewColumnHeader1" value="ID" sortable="true">
+							</xp:viewColumnHeader>
+						</xp:this.facets>
+					</xp:viewColumn>
+					<xp:viewColumn id="viewColumn3" columnName="firstName">
+						<xp:this.facets>
+							<xp:viewColumnHeader xp:key="header"
+								id="viewColumnHeader3" value="First Name" sortable="true">
+							</xp:viewColumnHeader>
+						</xp:this.facets>
+					</xp:viewColumn>
+					<xp:viewColumn id="viewColumn2" columnName="lastName">
+						<xp:this.facets>
+							<xp:viewColumnHeader xp:key="header"
+								id="viewColumnHeader2" value="Last Name" sortable="true">
+							</xp:viewColumnHeader>
+						</xp:this.facets>
+					</xp:viewColumn>
+					<xp:viewColumn id="viewColumn4" columnName="city">
+						<xp:this.facets>
+							<xp:viewColumnHeader xp:key="header"
+								id="viewColumnHeader4" value="City" sortable="true">
+							</xp:viewColumnHeader>
+						</xp:this.facets>
+					</xp:viewColumn>
+					<xp:viewColumn id="viewColumn5" columnName="State">
+						<xp:this.facets>
+							<xp:viewColumnHeader xp:key="header"
+								id="viewColumnHeader5" value="State">
+							</xp:viewColumnHeader>
+						</xp:this.facets>
+					</xp:viewColumn>
+				</xp:viewPanel>
+			</xp:panel>
+			<xe:formTable id="formTable1" formTitle="Take an action!"
+				formDescription="Set the record ID and select an action">
+				<xp:this.facets>
+					<xp:panel xp:key="footer" id="panel1">
+						<xp:button value="Insert Record" id="button1">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" immediate="false"
+								refreshId="main">
+								<xp:this.action><![CDATA[#{javascript:try {
+	var id = getComponent("recordId").getValue();
+	if(id) {
+		var v = {
+			id: id,
+			firstName: "Albert",
+			lastName: "Einstein",
+			city: "Boston",
+			state: "MA"
+		}
+		var c = @JdbcInsert("derby1","users",v)
+		@InfoMessage("Record updated: "+c)
+	} else {
+		@ErrorMessage("Please, enter an id");
+	}
+} catch(e) {
+	@ErrorMessage(e);
+}
+}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Update Record, Boston" id="button2">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" immediate="false"
+								refreshId="main">
+								<xp:this.action><![CDATA[#{javascript:try {
+	var id = getComponent("recordId").getValue();
+	if(id) {
+		var v = {
+			city: "Boston",
+			state: "MA"
+		}
+		var c = @JdbcUpdate("derby1","users",v,"id=?",id)
+		@InfoMessage("Record updated: "+c)
+	} else {
+		@ErrorMessage("Please, enter an id");
+	}
+} catch(e) {
+	@ErrorMessage(e);
+}
+
+}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Update Record, Atlanta" id="button4">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" immediate="false"
+								refreshId="main">
+								<xp:this.action><![CDATA[#{javascript:try {
+	var id = getComponent("recordId").getValue();
+	if(id) {
+		var v = {
+			city: "Atlanta",
+			state: "GA"
+		}
+		var c = @JdbcUpdate("derby1","users",v,"id=?",id)
+		@InfoMessage("Record updated: "+c)
+	} else {
+		@ErrorMessage("Please, enter an id");
+	}
+} catch(e) {
+	@ErrorMessage(e);
+}
+
+}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Delete Record" id="button3">
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial" immediate="false"
+								refreshId="main">
+								<xp:this.action><![CDATA[#{javascript:try {
+	var id = getComponent("recordId").getValue();
+	if(id) {
+		var c = @JdbcDelete("derby1","users","id=?",id)
+		@InfoMessage("Record updated: "+c)
+	} else {
+		@ErrorMessage("Please, enter an id");
+	}
+} catch(e) {
+	@ErrorMessage(e);
+}
+}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:panel>
+				</xp:this.facets>
+				<xe:formRow id="formRow1" label="ID:">
+					<xp:inputText id="recordId">
+					</xp:inputText>
+				</xe:formRow>
+			</xe:formTable>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>

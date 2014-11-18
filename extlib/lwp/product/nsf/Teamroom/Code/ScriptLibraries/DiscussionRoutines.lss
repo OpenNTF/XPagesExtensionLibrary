@@ -1,0 +1,50 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Function GetDBPath
+Declare Sub InstantiateObjects
+Declare Function GetURL
+
+'++LotusScript Development Environment:2:5:(Declarations):0:10
+Dim s As NotesSession 
+Dim db As NotesDatabase
+Dim dbpath As String
+Dim note As NotesDocument
+Dim IsWebUser As Integer
+
+'++LotusScript Development Environment:2:1:GetDBPath:1:8
+Function GetDBPath
+'check to see if the database is in a directory and swap the slash directions
+	Dim tmpPath As String     
+	tmpPath = db.filepath
+	Do While Instr(tmpPath,"\") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath,"\")-1) + "/" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath,"\"))
+	Loop
+	
+'check and see if there are any embedded spaces and replace them with +     
+	Do While Instr(tmpPath," ") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath," ")-1) + "%20" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath," "))
+	Loop
+	
+	GetDbPath = tmpPath
+	
+End Function
+
+'++LotusScript Development Environment:2:2:InstantiateObjects:1:8
+Sub InstantiateObjects
+	Set s = New NotesSession
+	Set db = s.CurrentDatabase
+	Set note = s.documentcontext
+End Sub
+'++LotusScript Development Environment:2:1:GetURL:1:8
+Function GetURL
+	Dim s As New notessession
+	
+	Set SetupView = db.getview("MissionLookup")
+	Set setupDoc = SetupView.GetDocumentBYKey("Mission")
+	
+	GetURL = setupdoc.getitemvalue("URLAddress")(0)
+End Function

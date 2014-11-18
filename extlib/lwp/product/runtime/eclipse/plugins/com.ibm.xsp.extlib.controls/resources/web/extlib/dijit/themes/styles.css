@@ -1,0 +1,50 @@
+/*
+ * © Copyright IBM Corp. 2010
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+.dojoxGridRowOver .dojoxGridCell, .dojoxGridRowEditing .dojoxGridCell {
+	background-color: inherit ! important; 
+	color:#000 ! important;
+}
+
+.dojoxGridCell {
+	font-weight: inherit;
+}
+
+.domino-row-unread {
+	font-weight: bold;
+}
+
+.dominoViewSort0, .dominoViewSort1, .dominoViewSort2, .dominoViewSort3, .dominoViewSort4, .dominoViewSort5, .dominoViewSort6 {
+	position: absolute;
+	margin: 0 0.5em;
+	vertical-align: baseline;
+	background-color: transparent;
+	overflow: hidden;
+	background-image: url(../images/arrows.gif);
+	background-repeat: no-repeat;
+	display: inline;
+	height: 10px;
+	width: 7px;
+	cursor: default;
+	border: 0;
+}  
+
+.dominoViewSort0 {background-position:   0px 0px}
+.dominoViewSort1 {background-position:  -7px 0px}
+.dominoViewSort2 {background-position: -14px 0px}
+.dominoViewSort3 {background-position: -21px 0px}
+.dominoViewSort4 {background-position: -28px 0px}
+.dominoViewSort5 {background-position: -35px 0px}
+.dominoViewSort6 {background-position: -42px 0px}

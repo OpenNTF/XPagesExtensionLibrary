@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:ccLayout navigationPath="/JDBC/DynamicViewPanel">
+		<xp:this.facets>
+			<xc:LeftJDBC xp:key="LeftColumn"></xc:LeftJDBC>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold" value="Dynamic View Panel">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This page shows how the DynamicViewPanel can be connected to a relational data source,
+			and how the columns are dynamically created from the JDBC ResultSet meta data.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:jdbcConnectionManager id="jdbcConnectionManager1"
+				connectionName="derby1">
+			</xe:jdbcConnectionManager>
+			Select a Table:
+			<xp:comboBox id="comboBox1" value="#{viewScope.tableName}">
+				<xp:selectItem itemLabel="&lt;Table&gt;" />
+				<xp:selectItems>
+					<xp:this.value><![CDATA[#{javascript:dbUtil.listTables();
+}]]></xp:this.value>
+				</xp:selectItems>
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="dynamicViewPanel1">
+					<xp:this.action><![CDATA[#{javascript:getComponent('dynamicViewPanel1').getData().refresh()}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:comboBox>
+			<br />
+			<xe:dynamicViewPanel rows="10" id="dynamicViewPanel1">
+				<xe:this.facets>
+					<xp:pager partialRefresh="true" layout="Previous Group Next"
+						xp:key="headerPager" id="pager1">
+					</xp:pager>
+				</xe:this.facets>
+				<xe:this.data>
+					<xe:jdbcQuery var="jdbcData1" connectionManager="jdbcConnectionManager1">
+						<xe:this.sqlQuery><![CDATA[#{javascript:var tb = viewScope.tableName
+if(tb && tb!="<Table>") {
+	return "select * from "+tb;
+}
+return null}]]></xe:this.sqlQuery>
+					</xe:jdbcQuery>
+				</xe:this.data>
+			</xe:dynamicViewPanel>
+		</xp:panel>
+	</xc:ccLayout>
+</xp:view>

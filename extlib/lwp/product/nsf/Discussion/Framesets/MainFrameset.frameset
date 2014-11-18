@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='2a6' unid='5A5111854D3EA8C4882569ED000E0612' sequence='21'>
+<created><datetime>20010207T183310,58-08</datetime></created>
+<modified><datetime>20120305T082322,90+00</datetime></modified>
+<revised><datetime>20120305T082322,89+00</datetime></revised>
+<lastaccessed><datetime>20120305T082322,90+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,58+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>MainFrameset|MainFrameset</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$FrameSet' sign='true'>
+<rawitemdata type='1'>
+7/8YAAIACAAAAAAAAAAAAAAAAAAAAAAA8P8+AEQAAAABAAAAAAABAAEAAAAAAAUAAAAAAAUAAAAA
+AAEAAgAAAAAAAQAAAAAAAAADAAEAAQDXAAMAAQDw/0IAAAAAAAEAAAAAAAEAAQAAAAAABQAAAAAA
+BQAAAAAAAwABAAAAAAAFAAAAAAAAAAEANgADAAEAAQARAAMAAQDx/zQAFgAAAABAAQACAAMAAQAA
+AAAAAAAAAAAAAQAAAAAAAAABAP///yABAAAKAQAAAAAg9v8vAAAAAAADAAMADQAAAAAAAAAAAAAA
+AAAAAAAAAAAAAFRlbXBsYXRlIE5hbWU/8f9LABAAAAAAQAEAAgABAAEAAAAAAA4AAAAJAAEAAAAA
+AAAATm90ZXNOYXZpZ2F0b3JOb3Rlc1ZpZXcBAP///yABAAAKAQAAAAAgP/b/LgAAAAAAAwAHAAwA
+AAAAAAAAAAAAAAAAAAAAAAAAAABPdXRsaW5lIFBhZ2Xx/zwAFgAAAABAAQACAAEAAQAAAAAACAAA
+AAAAAQAAAAAAAABTd2l0Y2hlcgEA////IAEAAAoBAAAAACD2/y0AAAAAAAMABwALAAAAAAAAAAAA
+AAAAAAAAAAAAAAAARGIgTG9jYXRpb24/8P8+AAAAAAABAAAAAAABAAEAAAAAAAUAAAAAAAUAAAAA
+AAIAAQAAAAAABQAAAAAAAAADAAEAAgAAAAMAAQDx/zQAAAAAAABAAQADAAEAAQAAAAAAAAAAAAAA
+AQAAAAAAAAABAP///yABAAAKAQAAAAAg9v8sAAAAAAADAAYACgAAAAAAAAAAAAAAAAAAAAAAAAAA
+AFZpZXcgRnJhbWXx/0AAAAAAAABAAQADAAEAAQAAAAAADAAAAAAAAQAAAAAAAABOb3Rlc1ByZXZp
+ZXcBAP///yABAAAKAQAAAAAg
+</rawitemdata></item>
+<item name='$Flags'><text>#4Cw</text></item>
+<item name='$DesignerVersion' sign='true'><text>7</text></item></note>
+

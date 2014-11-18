@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xc:layout navigationPath="/calendar">
+		<xp:text id="titleField" tagName="h1">
+			<xp:this.value><![CDATA[#{javascript:
+				sessionScope.webFrom = "/calendar.xsp";
+				sessionScope.webFromName = strings.getString("calendar.title");
+				return strings.getString("calendar.title");
+			}]]></xp:this.value>
+		</xp:text>
+		<xc:calendarView id="calView"></xc:calendarView>
+	</xc:layout>
+</xp:view>

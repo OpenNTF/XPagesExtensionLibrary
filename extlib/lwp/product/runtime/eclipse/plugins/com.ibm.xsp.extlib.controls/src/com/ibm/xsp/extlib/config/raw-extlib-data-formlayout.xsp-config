@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>data</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+<!-- move to extlib-data-formlayout.xsp-config -->
+    
+<!-- FORM LAYOUT COMPONENTS  -->    
+    <component>
+        <description>Abstract base control for a form layout control, which is an area containing multiple edit boxes or other input controls and a submit button or link used to save the changes.</description>
+        <display-name>Abstract Form Layout</display-name>
+        <component-type>com.ibm.xsp.extlib.data.FormLayout</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.FormLayout</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+        <property>
+            <description>Disable the error summary panel, showing the server side errors</description>
+            <display-name>Disable Error Summary</display-name>
+            <property-name>disableErrorSummary</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Overrides the default text of the error summary</description>
+            <display-name>Error Summary Text</display-name>
+            <property-name>errorSummaryText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines if the validation errors should be displayed per field</description>
+            <display-name>Disable Error Field</display-name>
+            <property-name>disableRowError</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Title of the form, to be displayed at the top of the form area.</description>
+            <display-name>Form Title</display-name>
+            <property-name>formTitle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                    <tags>
+                       not-accessibility-title
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Description of the form to be displayed.</description>
+            <display-name>Form Description</display-name>
+            <property-name>formDescription</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO should probably also support a "description" facet
+                    in case the description should have links or be HTML
+                    with bold, UL tags, etc.-->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines if a help link should be generated per field</description>
+            <display-name>Field Help</display-name>
+            <property-name>fieldHelp</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO this is inherently broken/unimplemented and may have to be removed
+                    and implemented in some different fashion -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+           <!-- TODO the description doesn't mention "none", is it a valid option? -->
+            <!-- # "above", "left" and "none" should not be translated -->
+            <description>Position of the label relative to the input control or main area. Either the label appears above the input ("above") or at the start of the row containing the input ("left"). The default value is "left". Note, this value is the default for this Form Table control, but the option can be overridden in a Form Layout Row control using the "labelPosition" property on that control.</description>
+            <display-name>Label Position</display-name>
+            <property-name>labelPosition</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        above
+                        left
+                        none
+                    </editor-parameter>
+                    <!-- not localizable because it is not translatable text displayed to the end user.-->
+                    <tags>
+                        not-localizable
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Prevents the "*" marks appearing before the required field labels.</description>
+            <display-name>Disable Required Marks</display-name>
+            <property-name>disableRequiredMarks</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies the fieldset legend for nested Form Controls</description>
+            <display-name>Fieldset Legend</display-name>
+            <property-name>legend</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>accessibility</category>
+                    <tags>
+                        localizable-text
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.data.FormLayout</component-family>
+            <designer-extension>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>Displaying a form of input controls with rows containing labels and error fields, an overall title and an area at the bottom for the Save and Cancel actions.</description>
+        <display-name>Form Table</display-name>
+        <component-type>com.ibm.xsp.extlib.data.FormTable</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIFormTable</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+        
+        <property>
+           <!-- TODO these *Width properties are bad practice - should provide a Style property instead. -->
+            <description>Width of the column label, expressed in CSS units (e.g. 15% or 150px...).</description>
+            <display-name>Label Width</display-name>
+            <property-name>labelWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                    <!-- not localizable because it is a CSS width-->
+                    <tags>
+                        not-localizable
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.FormLayout</base-component-type>
+            <component-family>com.ibm.xsp.extlib.data.FormLayout</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUIFormTable</renderer-type>
+            <tag-name>formTable</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO visualization should have the header and footer facets -->
+                <!-- TODO support putting some formTable rows into a custom control, 
+                currently there's a hack, involving nesting an inner formTable 
+                inside the outer formtable, but from a screen-reader point of view, 
+                that won't work, so need some proper mechanism so it works for accessibility -->
+                <tags>
+                  todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Form layout row control.</description>
+        <display-name>Form Layout Row</display-name>
+        <component-type>com.ibm.xsp.extlib.data.FormLayoutRow</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIFormLayoutRow</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+        <property>
+            <description>Label to be displayed for the field.</description>
+            <display-name>Label</display-name>
+            <property-name>label</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Width of the label column, expressed in CSS units (e.g. 15% or 150px...).</description>
+            <display-name>Label Width</display-name>
+            <property-name>labelWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                    <!-- not localizable because it is a CSS width-->
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Holds the ID of the control used to edit the data. That control should be contained within this Form Layout Row control.</description>
+            <display-name>For Identifier</display-name>
+            <property-name>for</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Holds the help ID for the edited field.</description>
+            <display-name>Help ID</display-name>
+            <property-name>helpId</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- TODO the code doesn't seem to be converting this helpId to a clientId-->
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO should this use the id-reference editor? -->
+                    <!-- not sure - is it the id to be assigned to an auto-generated control,
+                    or is it a reference to the id of an existing control?
+                    or even is it a facetName? -->
+                    <!-- Think it was attempting to assume that the help link would be within the formRow,
+                    but it may make more sense for there to be a help facet,
+                    as the help goes into a separate column. -->
+                    <!-- TODO should this be allow-run-time-binding>false< ? -->
+                    <!-- TODO description should explain that there is a help facet too -->
+                    <tags>
+                        todo
+                    </tags>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "above", "left", "none", "inherit" should not be translated -->
+            <description>Position of the label relative to the input control or main area. The label can appear above the input ("above"), or at the start of the row containing the input ("left"), or else the position depends on the Label Position property on the container Form Table control ("inherit"). The default value is "inherit".</description>
+            <display-name>Label Position</display-name>
+            <property-name>labelPosition</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        above
+                        left
+                        none
+                        inherit
+                    </editor-parameter>
+                    <!-- not localizable because it is not translatable text displayed to the end user.-->
+                    <!-- TODO description does not explain the "none" option, is it supported?-->
+                    <tags>
+                        not-localizable
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.FormLayout</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.FormLayoutRow</renderer-type>
+            <tag-name>formRow</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO visualization should have the help and label facets -->
+                <tags>
+                  todo
+                  no-faces-config-renderer
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Form layout column control.</description>
+        <display-name>Form Layout Column</display-name>
+        <component-type>com.ibm.xsp.extlib.data.FormLayoutColumn</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIFormLayoutColumn</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+        
+        <property>
+            <description>This attribute specifies the number of columns spanned by the current cell. The default value of this attribute is one ("1"). The value zero ("0") means that the cell spans all columns from the current column to the last column of the column group (COLGROUP) in which the cell is defined.</description>
+            <display-name>Column Span</display-name>
+            <property-name>colSpan</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO the description says the default value is 1, but getter has the default value of 0-->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.FormLayout</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.FormLayoutColumn</renderer-type>
+            <tag-name>formColumn</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <tags>
+                    no-faces-config-renderer
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+<!-- /end move to extlib-data-formlayout.xsp-config -->
+
+</faces-config>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/RPC">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xe:jsonRpcService id="jsonRpcService1"
+				serviceName="userinfo">
+				<xe:this.methods>
+					<xe:remoteMethod name="getUserName">
+						<xe:this.script><![CDATA[return 
+@UserName()]]></xe:this.script>
+					</xe:remoteMethod>
+					<xe:remoteMethod name="add"
+						script="return arg1 + arg2">
+						<xe:this.arguments>
+							<xe:remoteMethodArg name="arg1"></xe:remoteMethodArg>
+							<xe:remoteMethodArg name="arg2"></xe:remoteMethodArg>
+						</xe:this.arguments>
+					</xe:remoteMethod>
+				</xe:this.methods>
+			</xe:jsonRpcService>
+			<xp:br></xp:br>
+			This button calls back the server to get the current user
+			name
+			<xp:br></xp:br>
+			<xp:button value="Display the user" id="button3">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var deferred = userinfo.getUserName()
+deferred.addCallback(function(result) {
+	alert(result)
+});]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This button calls back the server to execute an addition
+			(3+4), by passing them as arguments
+			<xp:br></xp:br>
+			<xp:button value="Add 2 values" id="button4">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var deferred = userinfo.add(3,4)
+deferred.addCallback(function(result) {
+	alert(result)
+});]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

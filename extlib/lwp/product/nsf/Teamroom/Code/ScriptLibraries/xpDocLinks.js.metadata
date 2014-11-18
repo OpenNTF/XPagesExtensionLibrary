@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3da" sequence="5" unid="1ADEF1F45489C3CF802579060034F581">
+<created><datetime dst="true">20110909T103827,21+01</datetime></created>
+<modified><datetime>20120207T095549,95+00</datetime></modified>
+<revised><datetime dst="true">20111026T122301,96+01</datetime></revised>
+<lastaccessed><datetime>20120207T095549,95+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095549,95+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110909T103829,00+01</datetime><datetime dst="true">20111006T160542,67+01</datetime><datetime dst="true">20111006T162131,93+01</datetime><datetime dst="true">20111014T083957,91+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>xpDocLinks</text></item>
+<item name="$Flags"><text>h534Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

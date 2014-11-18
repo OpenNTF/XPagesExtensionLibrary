@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="786" sequence="16" unid="19A5CB01E5F9F7058025791700505D88">
+<created><datetime dst="true">20110926T153748,24+01</datetime></created>
+<modified><datetime>20120207T095606,24+00</datetime></modified>
+<revised><datetime>20111108T000848,11+00</datetime></revised>
+<lastaccessed><datetime>20120207T095606,24+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095606,24+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T153748,24+01</datetime><datetime dst="true">20110926T153748,26+01</datetime><datetime dst="true">20110926T153748,48+01</datetime><datetime dst="true">20110926T153748,50+01</datetime><datetime dst="true">20111006T144131,08+01</datetime><datetime dst="true">20111006T144131,10+01</datetime><datetime dst="true">20111006T160524,30+01</datetime><datetime dst="true">20111014T083944,03+01</datetime><datetime dst="true">20111026T132552,16+01</datetime><datetime dst="true">20111026T132601,91+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>eventView.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>eventView.xsp</text></item>
+
+</note>

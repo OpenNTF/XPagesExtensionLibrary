@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4a2" sequence="4" unid="568D263267B24254802579060034F57D">
+<created><datetime dst="true">20110909T103827,17+01</datetime></created>
+<modified><datetime>20120207T095552,50+00</datetime></modified>
+<revised><datetime dst="true">20111026T122248,89+01</datetime></revised>
+<lastaccessed><datetime>20120207T095552,50+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095552,50+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110909T103828,64+01</datetime><datetime dst="true">20111006T160525,00+01</datetime><datetime dst="true">20111014T083944,74+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>lsResources</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$POID"><datetime dst="true">20100715T101627,86-04</datetime></item>
+
+</note>

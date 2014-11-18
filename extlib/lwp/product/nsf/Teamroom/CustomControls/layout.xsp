@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+// set the ID to L for layout
+this.setId("L");
+
+if(!applicationScope.containsKey("urlCheckDone")){
+	var missionView:NotesView = database.getView("MissionLookup");
+	if(null != missionView){
+		var missionNote:NotesDocument = missionView.getDocumentByKey("Mission");
+		if(null != missionNote){
+			var urlAddress = missionNote.getItemValueString("URLAddress");
+			if("" == urlAddress){
+				var serverName = facesContext.getExternalContext().getRequest().getServerName();
+				if("127.0.0.1" == serverName){
+					serverName = "localhost";
+				}
+				missionNote.replaceItemValue("URLAddress", serverName);
+				missionNote.save(true);
+			}
+			applicationScope.urlCheckDone = true;
+		}
+	}
+}}]]></xp:this.beforePageLoad>
+	<xp:this.resources>
+		<xp:bundle src="/strings.properties" var="strings"></xp:bundle>
+	</xp:this.resources>
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+	<xe:applicationLayout id="oneUILayout1">
+		<xe:this.configuration>
+			<!-- CHANGE -->
+			<xe:oneuiApplication
+				legalText="&#8206; (c) Copyright IBM Corporation 2011 &#x202C;"
+				navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="/home" footer="false" banner="true"
+				mastHeader="true">
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode label="Teamroom Setup" page="setup">
+						<xe:this.loaded><![CDATA[${javascript:userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR}]]></xe:this.loaded>
+					</xe:pageTreeNode>
+				</xe:this.placeBarActions>
+				<xe:this.searchBar>
+					<xe:appSearchBar pageName="search.xsp"
+						inactiveText="Search..." optionsParam="search" queryParam="search"
+						loaded="${javascript:database.isFTIndexed()}"
+						inputTitle="Enter a search value">
+					</xe:appSearchBar>
+				</xe:this.searchBar>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode>
+						<xe:this.label><![CDATA[#{javascript:I18n.format(strings.getString("welcome.x"), userBean.displayName)}]]></xe:this.label>
+					</xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+				<xe:this.placeBarName><![CDATA[${javascript:var teamname = strings.getString("teamroom.name");
+var vw:NotesView = database.getView("MissionLookup");
+var vc:NotesViewEntryCollection = vw.getAllEntries();
+var ve:NotesViewEntry = vc.getFirstEntry();
+if(null != ve){
+	var v:java.util.Vector = ve.getColumnValues();
+	if(!v.isEmpty()){
+		// get the teamroom name
+		teamname = v.get(1);
+	}
+}
+return teamname;}]]></xe:this.placeBarName>
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+		<xe:this.facets>
+			<xp:div xp:key="LeftColumn">
+				<xe:navigator id="outline" expandable="true">
+					<xe:this.treeNodes>
+						<xe:pageTreeNode page="home" selection="/home"
+							label="Home" role="navigation" />
+						<xe:pageTreeNode page="allDocuments" selection="/allDocuments"
+							label="All Documents" role="navigation" />
+						<xe:pageTreeNode page="announcements" selection="/announcements"
+							label="Announcements" role="navigation" />
+						<xe:pageTreeNode page="events" role="navigation"
+							selection="/events" label="Events" />
+						<xe:pageTreeNode page="statusReports" selection="/statusReports"
+							label="Status Reports" role="navigation" />
+						<xe:pageTreeNode page="calendar" selection="/calendar" 
+							label="Calendar" role="navigation" />
+						<xe:pageTreeNode page="members" selection="/members" 
+							label="Members and Subteams" role="navigation" />
+						<xe:pageTreeNode page="inactiveDocuments" selection="/inactiveDocuments"
+							label="Inactive Documents" role="navigation" />
+					</xe:this.treeNodes>
+				</xe:navigator>
+				<xc:tagCloud id="tagCloud"></xc:tagCloud>
+				<xp:callback id="left" facetName="LeftColumn"></xp:callback>
+			</xp:div>
+			<xp:callback id="right" xp:key="RightColumn"
+				facetName="RightColumn">
+			</xp:callback>
+		</xe:this.facets>
+		<xp:callback id="c" xp:key="MiddleColumn"></xp:callback>
+	</xe:applicationLayout>
+	<xp:div styleClass="ie6Shim">		
+		<!-- Simulate min-height in IE6 -->
+	</xp:div>	
+	<script>
+	//Place shim inside .lotusMain
+	if(dojo.isIE &lt;= 6){
+		dojo.addOnLoad(function(){
+			var shim = dojo.query('.ie6Shim');
+			var main = dojo.query('.lotusMain')[0].appendChild(shim[0]);
+		});
+	}
+	</script>
+</xp:view>

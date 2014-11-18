@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2014                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>picker</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+	<!-- Abstract Picker control -->
+	<component>
+		<description>Base class for all the picker like controls</description>
+		<display-name>Base Picker Control</display-name>
+		<component-type>com.ibm.xsp.extlib.picker.AbstractPicker</component-type>
+		<!-- TODO Propose to change to be com.ibm.xsp.extlib.component.picker.UIPicker-->
+		<component-class>com.ibm.xsp.extlib.component.picker.AbstractPicker</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+
+  		<property>
+			<!-- key: property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker. -->
+  		     <!-- # The "id" should not be translated, it refers to the id Identifier property -->
+			<description>Defines an ID to an input control whose value is set from the picker dialog after pressing ok</description>
+			<display-name>For Control</display-name>
+			<property-name>for</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			    <required>true</required>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                            http://www.ibm.com/xsp/core|inputText
+                            http://www.ibm.com/xsp/core|inputTextarea
+                            http://www.ibm.com/xsp/core|inputHidden
+                            http://www.ibm.com/xsp/coreex|djextListTextBox
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines the title displayed at the top of the picker dialog</description>
+			<display-name>Dialog Title</display-name>
+			<property-name>dialogTitle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <tags>
+                        not-accessibility-title
+                    </tags>
+                </designer-extension>
+                <localizable>true</localizable>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines the icon to display to open the picker</description>
+			<display-name>Picker Icon</display-name>
+			<property-name>pickerIcon</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                    <tags>
+                     todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines the text to display to open the picker</description>
+			<display-name>Picker Text</display-name>
+			<property-name>pickerText</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+                <localizable>true</localizable>
+			</property-extension>
+		</property>
+  		<property>
+  		    <!-- Should we say what the default is here?-->
+			<description>Defines the width of the item list</description>
+			<display-name>List Width</display-name>
+			<property-name>listWidth</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+					<!-- TODO needs better description -->
+                    <tags>
+                     todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+  		    <!-- Should we say what the default is here?-->
+			<description>Defines the height of the item list</description>
+			<display-name>List Height</display-name>
+			<property-name>listHeight</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+					<!-- TODO needs better description -->
+                    <tags>
+                     todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+        
+<!--        <property>
+          <description>Maximum number of entries to return from the data provider. Default is 50</description>
+            <display-name>Max Row Count</display-name>
+            <property-name>maxRowCount</property-name>
+            <property-class>int</property-class>
+             <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+       <property>
+-->       
+		<component-extension>
+		     <designer-extension>
+                  <tags>todo</tags>
+             </designer-extension>
+			<component-family>com.ibm.xsp.extlib.picker.Picker</component-family>
+		</component-extension>
+	</component>
+
+
+<!-- ====================================================================== 
+	Value Picker 
+====================================================================== -->
+
+	<!-- Value Picker control -->
+	<component>
+		<description>This value picker is a dialog that lets a user choose a value or values which are displayed in a list by default</description>
+		<display-name>Value Picker</display-name>
+		<component-type>com.ibm.xsp.extlib.picker.ValuePicker</component-type>
+		<component-class>com.ibm.xsp.extlib.component.picker.UIValuePicker</component-class>
+
+		<property>
+			<description>Defines a picker data provider for the value picker control</description>
+			<display-name>Value Picker Data Provider</display-name>
+			<property-name>dataProvider</property-name>
+			<property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+			<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<category>basics</category>
+					<tags>
+                     todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.picker.AbstractPicker</base-component-type>
+			<component-family>com.ibm.xsp.extlib.picker.Picker</component-family>
+			<renderer-type>com.ibm.xsp.extlib.picker.ValuePicker</renderer-type>
+			<tag-name>valuePicker</tag-name>
+			<designer-extension>
+				<in-palette>true</in-palette>
+				<category>Extension Library</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:image url="/extlib/designer/markup/ValuePicker.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+            <!-- Do we need a new property called type to allow users to more easily change default picker from listbox to checkbox/checkbox search-->
+            <tags>todo</tags>
+			</designer-extension>
+		</component-extension>
+	</component>
+
+<!-- ====================================================================== 
+    Name Picker 
+====================================================================== -->
+
+    <!-- Name Picker control -->
+    <component>
+        <description>This name picker is dialog that allows someone to choose a user or multiple users from a directory, typically a Domino directory.</description>
+        <display-name>Name Picker</display-name>
+        <component-type>com.ibm.xsp.extlib.picker.NamePicker</component-type>
+        <component-class>com.ibm.xsp.extlib.component.picker.UINamePicker</component-class>
+
+        <property>
+            <description>Defines a picker data provider for the name picker control</description>
+            <display-name>Name Picker Data Provider</display-name>
+            <property-name>dataProvider</property-name>
+            <property-class>com.ibm.xsp.extlib.component.picker.data.INamePickerData</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+		<property>
+			<!-- Note, since 9.0.1.v00_08, overriding the parent "for" property to provide
+			an extra xe:djextNameTextBox value in the editor-parameter list -->
+			<!-- key: property.for.component.com.ibm.xsp.extlib.picker.AbstractPicker. -->
+  		     <!-- # The "id" should not be translated, it refers to the id Identifier property -->
+			<description>Defines an ID to an input control whose value is set from the picker dialog after pressing ok</description>
+  		     <!-- # blah -->
+			<display-name>For Control</display-name>
+			<property-name>for</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			    <required>true</required>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <!-- Note, since 9.0.1.v00_08, overriding the parent "for" property to provide
+                         an extra xe:djextNameTextBox value in the editor-parameter list -->
+                    <editor-parameter>
+                            http://www.ibm.com/xsp/core|inputText
+                            http://www.ibm.com/xsp/core|inputTextarea
+                            http://www.ibm.com/xsp/core|inputHidden
+                            http://www.ibm.com/xsp/coreex|djextListTextBox
+                            http://www.ibm.com/xsp/coreex|djextNameTextBox
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+        
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.picker.AbstractPicker</base-component-type>
+            <component-family>com.ibm.xsp.extlib.picker.Picker</component-family>
+            <renderer-type>com.ibm.xsp.extlib.picker.NamePicker</renderer-type>
+            <tag-name>namePicker</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:image url="/extlib/designer/markup/NamePicker.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+<!--  
+	Abstract picker data provider
+-->
+	<complex-type>
+		<description>Abstract data provider for a picker</description>
+		<display-name>Abstract Picker Data</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.IPickerData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.IPickerData</complex-class>
+    </complex-type>
+
+<!--  
+	Value picker data provider
+-->
+	<complex-type>
+		<description>Data being used by a value picker</description>
+		<display-name>Value Picker Data</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</complex-class>
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IPickerData</base-complex-id>
+    	</complex-extension>
+    </complex-type>
+
+<!-- 
+	Simple value picker provider
+-->
+	<complex-type>
+    	<description>Value picker that gets its content from a property, evaluated using a value binding</description>
+    	<display-name>Simple Value Picker Data Provider</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.SimpleValuePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.SimpleValuePickerData</complex-class>
+
+  		<property>
+  		    <!-- # "Array" and "List" are technical terms and should not be translated. "valueListSeparator" should not be translated. -->
+			<description>List of values, which can be provided as an Array, a List or as multiple value text. The text will be split into individual values using the separator in the "valueListSeparator" property.</description>
+			<display-name>Value List</display-name>
+			<property-name>valueList</property-name>
+			<property-class>java.lang.Object</property-class>
+			<property-extension>
+        	<designer-extension>
+          		<editor>com.ibm.std.MultiLine</editor>
+        	</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Separator used between the different entries, if the list is text. Default is the new line character.</description>
+			<display-name>Value List Separator</display-name>
+			<property-name>valueListSeparator</property-name>
+			<property-class>java.lang.String</property-class>
+		</property>
+  		<property>
+  		    <!-- ND has naming convention which is label|value , is there default? comobo editor with suggested seperators deafult | -->
+  		    <!-- # "|" should not be translated -->
+			<description>Separator used between the label and the value of an entry, if the entry is text. It is quite common to use text entries where a "|" character separates a translatable label from a locale-independent value after the separator.</description>
+			<display-name>Label Separator</display-name>
+			<property-name>labelSeparator</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						|
+					</editor-parameter>
+					<!-- The labelSeparator itself is not localizable - the separator
+					is the same in all languages. The not-localizable tag is added
+					to prevent a fail in LabelsLocalizableTest, which assumes that
+					properties with label in the name should be marked as localizable. -->
+					<tags>
+						not-localizable
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Specifies if the key being used should be treated as case insensitive</description>
+			<display-name>Case Insensitive Key</display-name>
+			<property-name>caseInsensitive</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+      		<tag-name>simpleValuePicker</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+<!-- 
+	Bean value picker data provider
+-->
+	<complex-type>
+    	<description>Value picker data provider that delegates its behavior to a managed bean</description>
+    	<display-name>Bean Value Picker Data Provider</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.BeanValuePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.BeanValuePickerData</complex-class>
+
+  		<property>
+			<description>Name of the managed bean, or its class name, used to provide the actual data</description>
+			<display-name>Data Bean</display-name>
+			<property-name>dataBean</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+      		<tag-name>beanValuePicker</tag-name>
+      		<designer-extension>
+            </designer-extension>
+    	</complex-extension>
+  	</complex-type>
+
+<!--  
+	Name picker data provider
+-->
+	<complex-type>
+		<description>Data being used by a name picker</description>
+		<display-name>Name Picker Data</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.INamePickerData</complex-class>
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IPickerData</base-complex-id>
+    	</complex-extension>
+    </complex-type>
+
+<!-- 
+	Bean name picker provider
+-->
+	<complex-type>
+    	<description>Bean name picker data provider that delegates its behavior to a managed bean</description>
+    	<display-name>Bean Name Picker Data Provider</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.BeanNamePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.BeanNamePickerData</complex-class>
+
+  		<property>
+			<description>Name of the managed bean, or its class name, used to provide the actual data</description>
+			<display-name>Data Bean</display-name>
+			<property-name>dataBean</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      		<tag-name>beanNamePicker</tag-name>
+      		<designer-extension>
+            </designer-extension>
+    	</complex-extension>
+  	</complex-type>
+
+<!--  
+	Name picker data provider aggregator
+-->
+	<complex-type>
+		<description>This name picker data provider aggregates the data coming from multiple name picker data providers</description>
+		<display-name>Name Picker Data Aggregator</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.NamePickerAggregatorData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.NamePickerAggregatorData</complex-class>
+
+      	<property>
+        	<description>List of name picker data providers</description>
+        	<display-name>Name Picker Data Providers</display-name>
+        	<property-name>dataProviders</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.component.picker.data.INamePickerData</property-item-class>
+            	<property-add-method>addDataProvider</property-add-method>
+        	</property-extension>
+      	</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      		<tag-name>namePickerAggregator</tag-name>
+    	</complex-extension>
+    </complex-type>
+
+
+<!--  
+	Dedicated validator.
+-->
+  
+  <validator>
+        <!-- so possible enhancement that validator works client side-->
+        <description>Validator for data coming from a picker provider</description>
+        <display-name>Picker Data Validator</display-name>
+        <validator-id>com.ibm.xsp.extlib.validator.PickerValidator</validator-id>
+        <validator-class>com.ibm.xsp.extlib.validator.PickerValidator</validator-class>
+    	<group-type-ref>com.ibm.xsp.validator.group.Validator</group-type-ref>
+		<property>
+		    <!-- # The "for" should not be translated, it refers to the for property of the value picker -->
+			<description>Data provider for validating the values. If empty, it will use the data provider from the "for" control.</description>
+			<display-name>Picker Data Provider</display-name>
+			<property-name>dataProvider</property-name>
+			<property-class>com.ibm.xsp.extlib.component.picker.data.IPickerData</property-class>
+            <property-extension>
+                 <allow-run-time-binding>false</allow-run-time-binding>
+            </property-extension>
+		</property>
+        <property>
+            <!-- # The "id" should not be translated, it refers to the id Identifier property -->
+            <description>Points to the ID of a data picker control (value or name picker)</description>
+            <display-name>Data Picker ID</display-name>
+            <property-name>for</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+            <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                                            http://www.ibm.com/xsp/core|button
+                            http://www.ibm.com/xsp/core|inputText
+                                    </editor-parameter>
+            </designer-extension>
+            </property-extension>
+        </property>
+        <validator-extension>
+            <tag-name>pickerValidator</tag-name>
+        </validator-extension>
+    </validator>
+    
+</faces-config>

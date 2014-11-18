@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Annuler",
+PickerList_OK: "OK",
+PickerList_Cancel: "Annuler",
+PickerListSearch_Search: "Recherche",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "Annuler",
+PickerListSearch_Value: "Valeur",
+PickerListSearch_Values: "Valeurs",
+PickerName_Search: "Recherche",
+PickerName_Add: "Ajouter",
+PickerName_Remove: "Retirer",
+PickerName_RemoveAll: "Tout retirer",
+PickerName_OK: "OK",
+PickerName_Cancel: "Annuler",
+PickerName_SearchIn: "Rechercher dans",
+PickerName_SearchFor: "Rechercher",
+PickerName_unSelectedListLabel: "Liste des valeurs \u00e0 s\u00e9lectionner",
+PickerName_selectedListLabel: "Liste de valeurs s\u00e9lectionn\u00e9es"
+})

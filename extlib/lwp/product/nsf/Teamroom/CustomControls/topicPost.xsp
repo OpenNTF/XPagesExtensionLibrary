@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:panel
+		loaded="${javascript:compositeData.loadedType == 'document'}">
+		<xp:this.data>
+			<xp:dominoDocument
+				var="document1" ignoreRequestParams="true"
+				documentId="#{viewScope.documentId}" action="openDocument"
+				computeWithForm="onsave">
+			</xp:dominoDocument>
+		</xp:this.data>
+		<xp:panel>
+			<xp:this.loaded><![CDATA[${javascript://
+				requestScope.detailLoadType = TopicThreadState.isCurrentHideBody() ? 'abstract' : 'body';
+				
+				var form = document1.getForm();
+				
+				// compute reviewers info
+				viewScope.reviewerCount = 0;
+				if( form == 'MainTopic' ){
+					var reviewerCount = 0;
+					var reviewerList = null;
+					var memberList = document1.getItemValue('PriNameSelection');
+					var subteamList = document1.getItemValue('Subteam1');
+					var hasSubteams = subteamList && !subteamList.isEmpty();
+					if( hasSubteams ){ // expand subteams to their list of members
+						var resolvedSubteamReviewers = @DbLookup(@DbName(), "SubteamLookup", subteamList, 2, "[FAILSILENT]");
+						if( resolvedSubteamReviewers ){
+							if( !memberList || memberList.isEmpty() ){
+								memberList = new java.util.Vector();
+								
+								for(i = 0; i < resolvedSubteamReviewers.length; i++)
+								{
+									memberList.push(resolvedSubteamReviewers[i]);
+								}
+							}else{
+								var expandedMemberList = new java.util.ArrayList();
+								expandedMemberList.addAll(memberList);
+								for( var j = 0; j < resolvedSubteamReviewers.length; j++){
+									var resolvedMember = resolvedSubteamReviewers[j];
+									if ((resolvedMember!=null)&&(expandedMemberList!=null))
+									{
+										if( !expandedMemberList.contains(resolvedMember) ){
+											expandedMemberList.add(resolvedMember);
+										}	
+									}
+								}
+								memberList = expandedMemberList;
+							}
+						}
+					}
+					
+					//print('memberList: ' + memberList);
+					
+					if( !memberList || memberList.isEmpty() ){
+						reviewerCount = 0;
+					}
+					else if(typeof memberList == "string")
+					{
+						reviewerCount = 1;
+					}
+					else{
+						reviewerCount = memberList.size();
+					}
+					viewScope.reviewerCount = reviewerCount;
+					viewScope.reviewerList = memberList;
+				}
+				
+				if( form != 'MainTopic' ){
+					viewScope.docTypeCode = '8response';
+				}else{ // MainTopic
+					viewScope.docTypeCode = '1discussion'; // or '2actionItem', '3meeting', '4reference'
+					// default to showing the discussion fields, for discussion doctype and custom doctypes 
+					var docTypeStr = document1.getItemValueString('DocType');
+					if( strings.defaultdoctype2 == docTypeStr ){ // Action Item
+						viewScope.docTypeCode = '2actionItem';
+					}else if( strings.defaultdoctype3 == docTypeStr ){ // Meeting
+						viewScope.docTypeCode = '3meeting';
+					}else if( strings.defaultdoctype4 == docTypeStr ){ // Reference
+						viewScope.docTypeCode = '4reference';
+					}
+				}
+				
+				true;
+			}]]></xp:this.loaded>
+			
+			<xc:controlForumPost id="postCurrentCC1">
+				<xp:this.facets>
+					<xp:image id="image2" style="height:32px;width:32px;padding-bottom:2px;"
+						xp:key="authorAvatar" alt="" title="">
+						<xp:this.url><![CDATA[${javascript://
+						peopleBean.getPerson(@Name("[ABBREVIATE]", document1.getItemValueString("From"))).thumbnailUrl
+						}]]></xp:this.url>
+					</xp:image>
+					<xp:link styleClass="lotusPerson" id="currentPersonName"
+						text="${javascript:peopleBean.getPerson(document1.getItemValueString('From')).displayName}"
+						xp:key="authorName">
+						<xp:this.value><![CDATA[${javascript://
+							"/members.xsp?profile=" 
+								+ peopleBean.getPerson(@Name("[ABBREVIATE]", document1.getItemValueString("From"))).abbreviatedName
+						}]]></xp:this.value>
+					</xp:link>
+					<xp:text style="font-weight:bold" id="currentTopicSubject"
+						xp:key="postTitle">
+						<xp:this.value><![CDATA[#{javascript://
+							var subject = document1.getItemValueString('Subject');
+							(!subject)? strings.subject_untitled : subject
+						}]]></xp:this.value>
+					</xp:text>
+					<xp:panel xp:key="postMeta"
+						loaded="${javascript: requestScope.detailLoadType == 'body'}">
+						<xp:panel
+							loaded="${javascript: document1.getForm() == 'MainTopic' }">
+							<xe:listInline>
+								<xp:text id="docType1"
+									value="#{document1.DocType}">
+								</xp:text>
+								<xp:panel>
+									<xp:label value="Edited "
+										id="lastModified1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="lastModified1"
+										disableTheme="true"
+										value="#{javascript: @Modified() }">
+										<xp:this.converter>
+											<xp:convertDateTime
+												type="both">
+											</xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</xp:panel>
+								<xc:topicPostTags id="currentMainTags" doc="#{document1}"
+									rendered="#{javascript: !document1.getItemValue('Categories').isEmpty() }" >
+								</xc:topicPostTags>
+								<xp:panel rendered="#{javascript: true &amp;&amp; document1.getItemValueString('Milestones') }">
+									<xp:label value="Event: " id="events1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="event1"
+										disableTheme="true" value="#{document1.Milestones}">
+									</xp:text>
+								</xp:panel>
+								<xp:panel rendered="#{javascript: var teams = document1.getItemValue('SubteamInterest'); return teams &amp;&amp; teams.size() > 0 }">
+									<xp:label value="Subteams: " id="subteamInterest1_label" disableTheme="true">
+									</xp:label>
+									<xp:span
+										id="subteamInterest1">
+										<xp:repeat
+											value="#{javascript: document1.getItemValue('SubteamInterest')}"
+											var="subteamName" indexVar="subteamIndex">
+											<xp:text
+												rendered="#{javascript: 0 != subteamIndex}"
+												disableTheme="true" value=", " />
+											<xp:link
+												text="#{subteamName}" id="subteamsLink"
+												value="/members.xsp">
+												<xp:this.parameters>
+													<xp:parameter
+														name="subteam" value="#{subteamName}">
+													</xp:parameter>
+												</xp:this.parameters>
+											</xp:link>
+										</xp:repeat>
+									</xp:span>
+								</xp:panel>
+							</xe:listInline>
+							<xe:listInline>
+								<xp:panel
+									rendered="#{javascript: '2actionItem' == viewScope.docTypeCode }">
+									<xp:label value="Priority " id="priority1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="priority1"
+										disableTheme="true" value="#{document1.AIPriority}">
+									</xp:text>
+								</xp:panel>
+								<xp:panel>
+									<xp:this.loaded><![CDATA[${javascript://
+										if( '3meeting' == viewScope.docTypeCode || '2actionItem' == viewScope.docTypeCode ){
+											// "Meeting" doesn't have a review status.
+											// "Action Item" uses "Status" below instead of this "Review Status"
+											return false;
+										}
+										// has reviewer members or reviewer subteams
+										return viewScope.reviewerCount > 0;
+									}]]></xp:this.loaded>
+									<xp:label value="Review status: " id="reviewStatus_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="reviewStatus1"
+										disableTheme="true">
+										<xp:this.value><![CDATA[#{javascript://
+											if( document1.isNewNote() ){
+												return strings.topicThread_reviewStatus_open;
+											}
+											// if meeting then blank; if actionItem it depends on the DueDateStatus field; 
+											// all others depend on the ReviewStatus field
+											if(document1.getItemValueString('ReviewStatus') == "1"){
+												return strings.topicThread_reviewStatus_completed;
+											}
+											else{
+												return strings.topicThread_reviewStatus_open;
+											}
+										}]]></xp:this.value>
+									</xp:text>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript: '2actionItem' == viewScope.docTypeCode }">
+									<xp:label value="Status: " id="actionItemStatus_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="actionItemStatus"
+										disableTheme="true">
+										<xp:this.value><![CDATA[#{javascript://
+											if( document1.isNewNote() ){
+												return strings.topicThread_reviewStatus_open;
+											}
+											// if actionItem it depends on the DueDateStatus field;
+											if( document1.getItemValueString('DueDateStatus') == "0" ){
+												return strings.topicThread_reviewStatus_open;
+											}
+											return strings.topicThread_reviewStatus_compClo;
+										}]]></xp:this.value>
+									</xp:text>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript: '3meeting' != viewScope.docTypeCode /*not Meeting*/ &amp;&amp; document1.getItemValueDateTime('DueDate')}">
+									<xp:label value="Due " id="dueDate1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="dueDate1"
+										disableTheme="true" value="#{document1.DueDate}">
+										<xp:this.converter>
+											<xp:convertDateTime
+												type="date">
+											</xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript: '3meeting' == viewScope.docTypeCode }">
+									<xp:label value="Start time: " id="startDateTime1_label" disableTheme="true">
+									</xp:label>
+									<xp:span id="startDateTime1">
+										<xp:text id="startDate1"
+											disableTheme="true" value="#{document1.MtgDate}">
+											<xp:this.converter>
+												<xp:convertDateTime
+													type="date">
+												</xp:convertDateTime>
+											</xp:this.converter>
+										</xp:text>
+										<xp:text disableTheme="true"
+											value=" at " />
+										<xp:text id="startTime1"
+											disableTheme="true" value="#{document1.MtgTime}">
+											<xp:this.converter>
+												<xp:convertDateTime
+													type="time">
+												</xp:convertDateTime>
+											</xp:this.converter>
+										</xp:text>
+										<xp:panel
+											rendered="#{javascript: true &amp;&amp; document1.getItemValueString('StartTImeZone')}">
+											<xp:text disableTheme="true"
+												value=" " />
+											<xp:text disableTheme="true"
+												id="startTimezone1">
+												<xp:this.value><![CDATA[#{javascript://
+													// TODO locale-dependant user understandable TimeZone, like "(GMT-05:00) Indiana (East)"
+													var tzCode = document1.getItemValueString('StartTImeZone');
+													if(!tzCode){
+														return;
+													}
+													var label = com.ibm.xsp.teamroom.timezone.TimeZoneUtil.labelAllowImperfectMatch(
+															tzCode, context.getLocale());
+													if( null != label ){
+														return label;
+													}
+													label = com.ibm.xsp.teamroom.timezone.TimeZoneUtil.labelIgnoreOptional(
+															tzCode, context.getLocale());
+													if( null != label ){
+														// Ignoring the ZN=Eastern part of the code gave a match
+														// This would mean that it might display
+														//  (GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+														// instead of
+														//  (GMT+02:00) Athens, Bucharest, Istanbul
+														// because they are different timezones that have the same
+														// GMT offset and the same daylight savings time schedule.
+														// So append (approx) to indicate that the label displayed
+														// is not for an exact match.
+														return label + strings.mainTopicEdit_TimeZone_approx;
+													}
+													return com.ibm.xsp.teamroom.timezone.TimeZoneUtil.getOffsetOnly(tzCode)
+														+ strings.mainTopicEdit_TimeZone_approx;
+												}]]></xp:this.value>
+											</xp:text>
+										</xp:panel>
+									</xp:span>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript: '3meeting' == viewScope.docTypeCode }">
+									<xp:label value="Duration: " id="duration1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="duration1"
+										disableTheme="true" value="#{document1.Duration}">
+										<xp:this.converter>
+											<xp:convertNumber
+												type="number" integerOnly="true">
+											</xp:convertNumber>
+										</xp:this.converter>
+									</xp:text>
+									<xp:text id="timeUnits"
+										disableTheme="true" value=" minutes">
+									</xp:text>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript: '3meeting' == viewScope.docTypeCode &amp;&amp; document1.getItemValueString('MtgLocation') }">
+									<xp:label value="Location: " id="location1_label" disableTheme="true">
+									</xp:label>
+									<xp:text id="location1"
+										disableTheme="true" value="#{document1.MtgLocation}">
+									</xp:text>
+								</xp:panel>
+							</xe:listInline>
+							<xp:panel readonly="true" rendered="#{javascript: viewScope.reviewerCount > 0 }">
+								<xp:label id="reviewers1_label" disableTheme="true">
+									<xp:this.value><![CDATA[${javascript://
+										// "Reviewers: "
+										if( '2actionItem' == viewScope.docTypeCode ){
+											return strings.topicThread_review_assigneesLabel;
+										}
+										if( '3meeting' == viewScope.docTypeCode ){
+											return strings.topicThread_review_attendeesLabel;
+										}
+										return strings.topicThread_review_reviewersLabel;
+									}]]></xp:this.value>
+								</xp:label>
+								<xp:span id="reviewersList">
+									<xp:repeat 
+										value="#{viewScope.reviewerList}" 
+										rows="#{javascript: viewScope.showAllReviewers? java.lang.Integer.MAX_VALUE : 2}"
+										var="reviewer"
+										indexVar="reviewerIndex">
+										<xp:text rendered="#{javascript: reviewerIndex &gt; 0}" value=", "/>
+											<xp:link id="reviewerMemberLink"
+												value="/members.xsp">
+												<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(reviewer).displayName}]]></xp:this.text>
+												<xp:this.parameters>
+													<xp:parameter
+														name="profile" value="#{javascript:peopleBean.getPerson(reviewer).abbreviatedName}">
+													</xp:parameter>
+												</xp:this.parameters>
+											</xp:link>
+									</xp:repeat>
+									<xp:panel rendered="#{javascript: !viewScope.showAllReviewers &amp;&amp; viewScope.reviewerCount &gt; 2 }">
+										<xp:text
+											id="moreReviewersCount">
+											<xp:this.value><![CDATA[#{javascript://
+												var moreReviewersCount = viewScope.reviewerCount - 2;
+												if( 1 == moreReviewersCount ){
+													return strings.topicThread_review_moreReviewersCount_one;
+												}
+												var countStr = java.lang.Integer.toString(moreReviewersCount);
+												var msg = strings.topicThread_review_moreReviewersCount;
+												return I18n.format(msg, countStr);
+											}]]></xp:this.value>
+										</xp:text>
+										<xp:link id="showReviewersLink">
+											<xp:this.text><![CDATA[${javascript://
+												// "Show all reviewers"
+												if( '2actionItem' == viewScope.docTypeCode ){
+													return strings.topicThread_review_assigneesShowAll;
+												}
+												if( '3meeting' == viewScope.docTypeCode ){
+													return strings.topicThread_review_attendeesShowAll;
+												}
+												return strings.topicThread_review_reviewersShowAll;
+											}]]></xp:this.text>
+											<xp:eventHandler event="onclick"
+												submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.showAllReviewers = true;}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+									</xp:panel>
+									<xp:panel rendered="#{javascript: viewScope.showAllReviewers &amp;&amp; viewScope.reviewerCount &gt; 2 }">
+										<xp:text disableTheme="true"
+											id="reviewersEndAll" value=". ">
+										</xp:text>
+										<xp:link id="hideReviewersLink">
+											<xp:this.text><![CDATA[${javascript://
+												// "Hide reviewers"
+												if( '2actionItem' == viewScope.docTypeCode ){
+													return strings.topicThread_review_assigneesHide;
+												}
+												if( '3meeting' == viewScope.docTypeCode ){
+													return strings.topicThread_review_attendeesHide;
+												}
+												return strings.topicThread_review_reviewersHide;
+											}]]></xp:this.text>
+											<xp:eventHandler event="onclick"
+												submit="true" refreshMode="complete">
+												<xp:this.action><![CDATA[#{javascript:viewScope.showAllReviewers = false;}]]></xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+									</xp:panel>
+								</xp:span><!--  end reviewersList -->
+							</xp:panel>
+						</xp:panel><!-- end mainTopic meta -->
+						<xp:panel loaded="${javascript: document1.getForm() != 'MainTopic' }">
+							<xe:listInline>
+								<xp:panel>
+									<xp:label value="Edited " id="lastModified2_label"
+										disableTheme="true" style="font-weight:normal">
+									</xp:label>
+									<xp:text id="lastModified2" disableTheme="true"
+										value="#{javascript: @Modified() }">
+										<xp:this.converter>
+											<xp:convertDateTime type="both"></xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</xp:panel>
+								<xp:panel>
+									<xp:this.loaded><![CDATA[${javascript://
+										if( document1.getForm() == 'MainTopic' ){
+											return false;
+										} 
+										requestScope.parentUNID = document1.getDocument().getParentDocumentUNID(); 
+										requestScope.parentValid = false;
+										requestScope.parentSubject = null;
+										requestScope.parentAuthor = null;
+											if( requestScope.parentUNID ){
+												var parentDoc = database.getDocumentByUNID(requestScope.parentUNID);
+												if( parentDoc.getItemValueString('Form') != null ){ // if no form, it's probably a deletion stub
+													requestScope.parentValid = true;
+													var parentSubject = parentDoc.getItemValueString('Subject');
+													if( ! parentSubject ){
+														parentSubject = strings.subject_untitled;
+													}
+													requestScope.parentSubject = parentSubject;
+													requestScope.parentAuthor = parentDoc.getItemValueString('From');
+												}
+											}
+										// only load this panel if the area is valid
+										return requestScope.parentValid;
+									}]]></xp:this.loaded>
+									<xp:label value="Response to: "></xp:label>
+										<xp:span id="currentParent">
+										<xp:link id="currentParentLink"
+											text="${requestScope.parentSubject}">
+											<xp:eventHandler event="onclick"
+												submit="true" refreshMode="complete" disableValidators="true">
+												<xp:this.action>
+													<xp:actionGroup>
+														<xp:actionGroup
+															condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+															<xp:confirm
+																message="#{strings.cancel_editing_and_open_other}">
+															</xp:confirm>
+														</xp:actionGroup>
+														<xp:openPage
+															name="/topicThread.xsp" target="openDocument"
+															documentId="${requestScope.parentUNID}">
+														</xp:openPage>
+													</xp:actionGroup>
+												</xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+										<xp:label id="currentParentAuthorLabel" value=" by ">
+										</xp:label>
+										<xp:link styleClass="lotusPerson" id="currentParentAuthor"
+											text="${javascript:peopleBean.getPerson(requestScope.parentAuthor).displayName}">
+											<xp:this.value><![CDATA[${javascript://
+												"/members.xsp?profile=" 
+													+ peopleBean.getPerson(@Name("[ABBREVIATE]",requestScope.parentAuthor)).abbreviatedName
+											}]]></xp:this.value>
+										</xp:link>
+									</xp:span>
+								</xp:panel>
+								<xc:topicPostTags id="currentReplyTags" doc="#{document1}"
+									rendered="#{javascript: !document1.getItemValue('Categories').isEmpty() }" >
+								</xc:topicPostTags>
+							</xe:listInline>
+						</xp:panel><!-- end response meta -->
+					</xp:panel>
+					<xp:panel xp:key="postDetails">
+						<xp:panel
+							loaded="${javascript: requestScope.detailLoadType == 'abstract' }">
+							<xp:text value="#{document1.Abstract}" />
+						</xp:panel>
+						<xp:panel
+							loaded="${javascript: requestScope.detailLoadType == 'body' }">
+							
+							<xp:div styleClass="postDetailArea">
+							<xp:div styleClass="postBodyArea">
+								<xp:inputRichText value="#{document1.Body}"
+									readonly="true">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+								</xp:inputRichText>
+							</xp:div>
+							<xp:div styleClass="postMetaExtraArea">
+								<xp:this.rendered><![CDATA[#{javascript://
+									return this.getChildCount() > 0;
+								}]]></xp:this.rendered>
+								<xp:panel
+									loaded="${javascript: document1.getForm() == 'MainTopic' }"
+									style="width:100%">
+									<xp:span styleClass="xlSpanSpacer"
+										rendered="#{javascript: this.getParent().getParent().getChildCount() == 1 }">
+									</xp:span>
+									<xp:text id="inactiveDateNotice"
+										style="float:right">
+										<xp:this.value><![CDATA[#{javascript://
+											var inactiveDate:com.ibm.xsp.component.xp.XspOutputText = getComponent('outputInactiveDate');
+											if( ! inactiveDate ){
+												return strings.topicThread_inactive_date_never;
+											}
+											var dateStr;
+											dateStr = inactiveDate.getConverter().getAsString(facesContext, inactiveDate,inactiveDate.getValue());
+
+											var msg;
+											var alreadyFiled = document1.getItemValueString('Status') == '0';
+											if( alreadyFiled ){
+												// Document was marked inactive on {0}
+												msg = strings.topicThread_inactive_date_notice_past;
+											}else{
+												// Document will be marked inactive on {0}
+												msg = strings.topicThread_inactive_date_notice_future;
+											}
+											return I18n.format(msg, dateStr);
+										}]]></xp:this.value>
+									</xp:text>
+									<xp:text rendered="false" loaded="${javascript: document1.getItemValueString('NeverFile') != '1'}"
+										id="outputInactiveDate" value="#{document1.FileByDate}">
+										<xp:this.converter>
+											<xp:convertDateTime
+												type="date">
+											</xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</xp:panel>
+								<xp:panel
+									loaded="${javascript:false || document1.getItemValueString('ReviewerLog')}"
+									style="padding-bottom:2px">
+									<xp:section id="reviewerSection"
+										header="Reviewer Log" initClosed="true">
+										<xp:span id="reviewerLogArea">
+											<xp:repeat var="line">
+												<xp:this.value><![CDATA[#{javascript://
+													var log = document1.getItemValueString('ReviewerLog');
+													// output <br/> instead of \n
+													if( !log ) return []; 
+													return log.split('\n');
+												}]]></xp:this.value>
+												<xp:text
+													disableTheme="true" value="#{line}">
+												</xp:text>
+												<xp:br />
+											</xp:repeat>
+										</xp:span>
+									</xp:section>
+								</xp:panel>
+								<xp:panel loaded="${javascript: ! document1.getAttachmentList('Body').isEmpty() }">
+									<xp:fileDownload rows="30"
+										id="fileDownload1" displayLastModified="false"
+										allowDelete="false" hideWhen="true"
+										value="#{document1.Body}">
+									</xp:fileDownload>
+								</xp:panel>
+							</xp:div>
+							</xp:div>
+						</xp:panel>
+					</xp:panel>
+					<xp:panel xp:key="postActions">
+						<xp:panel
+							loaded="${javascript: requestScope.detailLoadType == 'abstract' }">
+							<xe:listInline>
+								<xp:link escape="true" id="currentMoreLink" text="More...">
+									<xp:eventHandler event="onclick" submit="true" refreshMode="partial" disableValidators="true" refreshId="forumCC">
+										<xp:this.action><![CDATA[#{javascript://
+											TopicThreadState.changeCurrentHideBody(false);
+										}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+								<xp:link escape="true" text="Reply" id="link12">
+									<xp:this.loaded><![CDATA[${javascript://
+										(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+									}]]></xp:this.loaded>
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" disableValidators="true" refreshId="forumCC">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:actionGroup
+													condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+													<xp:confirm
+														message="#{strings.cancel_editing_and_create_reply}">
+													</xp:confirm>
+												</xp:actionGroup>
+	
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript://
+														requestScope.currentDocForm = document1.getForm();
+														TopicThreadState.showCurrentNewReply();
+													}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</xe:listInline>
+						</xp:panel>
+						<xp:panel
+							loaded="${javascript: requestScope.detailLoadType == 'body' }">
+							<xe:listInline>
+								<xp:link id="currentHideLink" text="Hide">
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="partial" disableValidators="true" refreshId="forumCC">
+										<xp:this.action><![CDATA[#{javascript://
+											TopicThreadState.changeCurrentHideBody(true);
+										}]]></xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+								<xp:link escape="true" text="Edit" id="currentEditLink">
+									<xp:this.loaded><![CDATA[${javascript://
+										(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+									}]]></xp:this.loaded>
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" id="currentEditLinkEvt" disableValidators="true" refreshId="forumCC">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:actionGroup
+													condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+													<xp:confirm
+														message="#{strings.cancel_editing_and_edit_other}">
+													</xp:confirm>
+												</xp:actionGroup>
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript://
+														requestScope.currentDocForm = document1.getForm();
+														TopicThreadState.showCurrentEdit();
+													}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+								<xp:link escape="true" text="Reply" id="currentBodyReplyLink">
+									<xp:this.loaded><![CDATA[${javascript://
+										(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+									}]]></xp:this.loaded>
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" id="currentBodyReplyLinkEvt" disableValidators="true" refreshId="forumCC">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:actionGroup
+													condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+													<xp:confirm
+														message="#{strings.cancel_editing_and_create_reply}">
+													</xp:confirm>
+												</xp:actionGroup>
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript://
+														requestScope.currentDocForm = document1.getForm();
+														TopicThreadState.showCurrentNewReply();
+													}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+								<xp:link escape="true" text="Delete"
+									id="currentDeleteLink">
+									<xp:this.loaded><![CDATA[${javascript://
+										(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs
+									}]]></xp:this.loaded>
+									<xp:this.rendered><![CDATA[#{javascript://
+										// Note this is computed on render instead of on load
+										// for the case where someone deletes the reply,
+										// causing this current doc delete button to become visible.
+										
+										//TODO should have a disabled delete button 
+										// with a tooltip/popup dialog telling you that
+										// you can only delete docs without replies
+										var responses = document1.getDocument().getResponses();
+										if(!responses || responses.getCount() == 0){
+											return true;
+										}
+										return false;
+									}]]></xp:this.rendered>
+									<xp:eventHandler event="onclick"
+										submit="true" refreshMode="complete">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:executeScript
+													script="#{javascript:viewStateBean.restoreState = true;}">
+												</xp:executeScript>
+												<xp:deleteDocument
+													name="#{javascript:sessionScope.topicThreadPreviousXPage}"
+													message="#{strings.delete_document}">
+												</xp:deleteDocument>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+								</xp:link>
+							</xe:listInline>
+						</xp:panel>
+					</xp:panel><!-- end xp:key="postActions" -->
+				</xp:this.facets>
+			</xc:controlForumPost>
+		</xp:panel>
+	</xp:panel><!-- end document -->
+	<xp:panel
+		loaded="${javascript:compositeData.loadedType == 'rowSummary'}">
+		<xe:listInline>
+			<xp:link id="summaryTopicLink" text="#{item.Topic}" value="/topicThread.xsp">
+				<xp:this.parameters>
+					<xp:parameter name="documentId"
+						value="#{javascript: item.getUniversalID() }">
+					</xp:parameter>
+				</xp:this.parameters>
+			</xp:link>
+			<xp:panel>
+				<xp:label value="Created by: "></xp:label>
+				<xp:link styleClass="lotusPerson" id="summaryAuthorLink"
+					text="#{javascript:peopleBean.getPerson(item.getColumnValue('Author')).displayName}"
+					xp:key="authorName">
+					<xp:this.value><![CDATA[#{javascript://
+						"/members.xsp?profile=" 
+						+ peopleBean.getPerson(item.getColumnValue("Author")).abbreviatedName
+					}]]></xp:this.value>
+				</xp:link>
+			</xp:panel>
+			<xp:panel>
+				<xp:label value="Created: "></xp:label>
+				<xp:text id="summaryCreationDate"
+					value="#{javascript: item.getColumnValue('$121'); // Creation Date }">
+					<xp:this.converter>
+						<xp:convertDateTime type="both" timeStyle="short">
+						</xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+			</xp:panel>
+		</xe:listInline>
+	</xp:panel>
+	<xp:panel
+		loaded="${javascript:compositeData.loadedType == 'rowDetail'}">
+			<xp:this.rendered><![CDATA[#{javascript://
+				requestScope.detailDisplayType = TopicThreadState.isRowShowBody(item.getPosition())? 'body' : 'abstract';
+				true;
+			}]]></xp:this.rendered>
+			<xp:this.data>
+				<xp:dominoDocument var="currentRowDoc"
+					ignoreRequestParams="true"
+					documentId="#{javascript: null == requestScope.item? null : item.getUniversalID()}"
+					computeWithForm="onsave" action="openDocument" formName="response"
+					loaded="${javascript: TopicThreadState.isRowShowBodyAny() }">
+				</xp:dominoDocument>
+			</xp:this.data>
+			
+			<xc:controlForumPost id="postRowCC1">
+				<xp:this.facets>
+					<xp:image id="image1" style="height:32px;width:32px;padding-bottom:2px;"
+						xp:key="authorAvatar">
+						<xp:this.url><![CDATA[#{javascript://
+							peopleBean.getPerson(item.getColumnValue("Author")).thumbnailUrl
+						}]]></xp:this.url>
+					</xp:image>
+					<xp:link styleClass="lotusPerson" id="responsePersonName"
+						text="#{javascript:peopleBean.getPerson(item.getColumnValue('Author')).displayName}"
+						xp:key="authorName">
+						<xp:this.value><![CDATA[#{javascript://
+							"/members.xsp?profile=" 
+							+ peopleBean.getPerson(item.getColumnValue("Author")).abbreviatedName
+						}]]></xp:this.value>
+					</xp:link>
+					<xp:link style="font-weight:bold" id="responseTopicSubject"
+						text="#{item.Topic}" xp:key="postTitle">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="true">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:actionGroup
+										condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+										<xp:confirm
+											message="#{strings.cancel_editing_and_open_other}">
+										</xp:confirm>
+									</xp:actionGroup>
+									<xp:openPage
+										name="/topicThread.xsp"
+										documentId="#{javascript:item.getUniversalID()}"
+										target="openDocument">
+									</xp:openPage>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:panel xp:key="postMeta"
+						rendered="#{javascript: requestScope.detailDisplayType == 'body' }"
+						loaded="${javascript: TopicThreadState.isRowShowBodyAny() }" >
+						<xe:listInline>
+							<xp:panel>
+								<xp:label value="Created " id="label2" disableTheme="true"
+									style="font-weight:normal">
+								</xp:label>
+								<xp:text id="lastModified" disableTheme="true" value="#{item['$121']}">
+									<xp:this.converter>
+										<xp:convertDateTime type="both"></xp:convertDateTime>
+									</xp:this.converter>
+								</xp:text>
+							</xp:panel>
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript://
+									if( currentRowDoc.getItemValueString('Form') == 'Response' ){
+										requestScope.parentUNID = currentRowDoc.getItemValueString('MainID');
+									}else{ // Form 'ResponseToResponse'
+										requestScope.parentUNID = currentRowDoc.getItemValueString('MainIDforRR');
+									}
+									var parentSubject = currentRowDoc.getItemValueString('ImmediateParentSubject');
+									if( ! parentSubject ){
+										parentSubject = strings.subject_untitled;
+									}
+									requestScope.parentSubject = parentSubject;
+									return true;
+								}]]></xp:this.rendered>
+								<xp:label value="Response to: "></xp:label>
+									<xp:span id="replyParent">
+										<xp:link id="replyParentLink"
+											text="#{requestScope.parentSubject}">
+											<xp:eventHandler event="onclick"
+												submit="true" refreshMode="complete" disableValidators="true">
+												<xp:this.action>
+													<xp:actionGroup>
+														<xp:actionGroup
+															condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+															<xp:confirm
+																message="#{strings.cancel_editing_and_open_other}">
+															</xp:confirm>
+														</xp:actionGroup>
+														<xp:openPage
+															name="/topicThread.xsp" target="openDocument"
+															documentId="#{requestScope.parentUNID}">
+														</xp:openPage>
+													</xp:actionGroup>
+												</xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+								</xp:span>
+							</xp:panel>
+							<xc:topicPostTags id="rowTags" doc="#{currentRowDoc}"
+								rendered="#{javascript: !currentRowDoc.getItemValue('Categories').isEmpty() }" >
+							</xc:topicPostTags>
+						</xe:listInline>
+					</xp:panel>
+					<xp:panel xp:key="postDetails">
+						<xp:panel
+							rendered="#{javascript: requestScope.detailDisplayType == 'abstract' }">
+							<xp:text value="#{item.Abstract}" />
+						</xp:panel>
+						<xp:panel
+							rendered="#{javascript: requestScope.detailDisplayType == 'body' }"
+							loaded="${javascript: TopicThreadState.isRowShowBodyAny() }">
+							<xp:div styleClass="postDetailArea">
+								<xp:div styleClass="postBodyArea">
+									<xp:inputRichText value="#{currentRowDoc.Body}"
+										readonly="true">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+									</xp:inputRichText>
+								</xp:div>
+								<xp:div styleClass="postMetaExtraArea"
+									rendered="#{javascript:!currentRowDoc.getAttachmentList('Body').isEmpty()}">
+									<xp:fileDownload rows="30" id="fileDownload2"
+										displayLastModified="false" allowDelete="false"
+										hideWhen="true" value="#{currentRowDoc.Body}">
+									</xp:fileDownload>
+								</xp:div>
+							</xp:div>
+						</xp:panel>
+					</xp:panel>
+					<xp:panel xp:key="postActions">
+						<xe:listInline rendered="#{javascript: requestScope.detailDisplayType == 'abstract' }">
+							<xp:link escape="true" id="responseMoreLink" text="More ...">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" disableValidators="true" refreshId="forumCC">
+									<xp:this.action><![CDATA[#{javascript: //
+										TopicThreadState.changeRowShowBody(true, item.getPosition());
+									}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link text="Reply" id="link13">
+								<xp:this.loaded><![CDATA[${javascript://
+									(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+								}]]></xp:this.loaded>
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" disableValidators="true" refreshId="forumCC">
+										<xp:this.action>
+											<xp:actionGroup>
+												<xp:actionGroup
+													condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+													<xp:confirm
+														message="#{strings.cancel_editing_and_create_reply}">
+													</xp:confirm>
+												</xp:actionGroup>
+												<xp:executeScript>
+													<xp:this.script><![CDATA[#{javascript://
+														TopicThreadState.showRowNewReply(item.getPosition(), true);
+													}]]></xp:this.script>
+												</xp:executeScript>
+											</xp:actionGroup>
+										</xp:this.action>
+									</xp:eventHandler>
+							</xp:link>
+						</xe:listInline>
+						<xe:listInline
+							rendered="#{javascript: requestScope.detailDisplayType == 'body' }"
+							loaded="${javascript: TopicThreadState.isRowShowBodyAny() }">
+							
+							<xp:link escape="true" id="link3" text="Hide">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" disableValidators="true" refreshId="forumCC">
+									<xp:this.action><![CDATA[#{javascript://
+										TopicThreadState.changeRowShowBody(false, item.getPosition());
+									}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link id="link1" text="Edit">
+								<xp:this.loaded><![CDATA[${javascript://
+									(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+								}]]></xp:this.loaded>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" immediate="true" refreshId="forumCC">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:actionGroup
+												condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+												<xp:confirm
+													message="#{strings.cancel_editing_and_edit_other}">
+												</xp:confirm>
+											</xp:actionGroup>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript://
+													TopicThreadState.showRowEdit(item.getPosition())
+												}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link text="Reply" id="link5">
+								<xp:this.loaded><![CDATA[${javascript://
+									(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+								}]]></xp:this.loaded>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" immediate="true" refreshId="forumCC">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:actionGroup
+												condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+												<xp:confirm
+													message="#{strings.cancel_editing_and_create_reply}">
+												</xp:confirm>
+											</xp:actionGroup>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript://
+													TopicThreadState.showRowNewReply(item.getPosition(), false);
+												}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:link escape="true" text="Delete" id="link6">
+								<xp:this.loaded><![CDATA[${javascript://
+									(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs
+								}]]></xp:this.loaded>
+								<xp:this.rendered><![CDATA[#{javascript://
+									// TODO should have a disabled delete button 
+									// with a tooltip/popup dialog telling you that
+									// you can only delete docs without replies
+									if( item.getChildCount() == 0){
+										return true;
+									}
+									return false;
+								}]]></xp:this.rendered>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="forumCC" disableValidators="true">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:deleteDocument var="currentRowDoc"
+												name=""
+												message="#{strings.delete_document}">
+											</xp:deleteDocument>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript: //
+													TopicThreadState.deleteRow(item.getPosition());
+												}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</xe:listInline>
+					</xp:panel><!-- end postActions -->
+				</xp:this.facets>
+			</xc:controlForumPost>
+	</xp:panel><!-- end rowDetail -->
+</xp:view>

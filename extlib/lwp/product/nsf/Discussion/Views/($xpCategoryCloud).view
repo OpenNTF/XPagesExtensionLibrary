@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='2b6' unid='6CA50FF2875AB34E85257458007D7B5D' sequence='23'>
+<created><datetime dst='true'>20080529T185035,81-04</datetime></created>
+<modified><datetime>20120305T082312,87+00</datetime></modified>
+<revised><datetime>20120305T082312,86+00</datetime></revised>
+<lastaccessed><datetime>20120305T082312,87+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,67+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>($xpCategoryCloud)|xpCategoryCloud</text></item>
+<item name='$Index' sign='true'><text>/C</text></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+xgACACAACgBDYXRlZ29yaWVzBQAKAENhdGVnb3JpZXMDAAUAIAAbAAIACgAJAENhdGVnb3JpZXMk
+Q29uZmxpY3QABAAEAAAAWgAFAAQAZm9ybWEBAQAHAHByb2ZpbGUARwIeAQQABQAEAGZvcm1hAQEA
+BwBhcmNoaXZlAEcCHgEEABwCBQAKAENhdGVnb3JpZXNeAQEAAAALAgQAHAIDAAcAJgAgAAlMMVQx
+MFMxM1MxNFJUVDIzUzI2UzI3UlRUMzJTMzNT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FwABAABECGYHAAAKAENhdGVnb3JpZXM=
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQABAHcAi0wAAFZDowQKAAoAIgAAAFAAAQENCQABAAAAAAAAAAICAAAAQ2F0ZWdvcmllc0NhdGVn
+b3JpZXMiAAIAIAAKAENhdGVnb3JpZXMFAAoAQ2F0ZWdvcmllcwMAJgABAAAAAQEACQEACAoBAQQK
+AAA/AK0rBAEBAAEBAAAAAAAAAABXQwIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAA
+AAAAAAAAAAAAQgBQAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAQABAP///wABALTVxQAAAAEA
+gAAAAAEAAAD/AAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>YT</text></item>
+<item name='$WebFlags'><text>S</text></item>
+<item name='$DesignerVersion'><text>8.5</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzVAAAAAQABAAAAwQAAAAAAAAACAAAJCAAFAHn/bAABAIu8nQABAAAAAAABAAAAAAABALrVxQAD
+ACIAAAAAAAAAAAADAAAAAgAACQAAAAAAAAAAE0AFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=
+</rawitemdata></item></note>
+

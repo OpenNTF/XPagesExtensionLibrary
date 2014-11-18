@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.resources>
+		<xp:dojoModule name="dojo.fx"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xe:djxmHeading id="djxmHeading1" label="All Documents" back="Back"
+		moveTo="home" loaded="${javascript:isMobile()}">
+		<xp:this.rendered>
+			<![CDATA[#{javascript:
+				sessionScope.from = "allDocs";
+				return true;
+			}]]>
+		</xp:this.rendered>
+
+		<xp:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:userBean.canCreateDocs}]]>
+				</xp:this.rendered>
+				<xp:button id="button1" styleClass="mblNewButtonDiv">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+							<xe:moveTo direction="Left to Right"
+								forceFullRefresh="true" targetPage="newTopic"
+								transitionType="slide">
+							</xe:moveTo>
+						</xp:this.action>
+					</xp:eventHandler>
+					<div>+</div>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:djxmHeading>
+
+	<xc:mobileSearch dataView="dataView2"
+		loaded="${javascript:isMobile()}">
+		<xp:this.rendered><![CDATA[#{javascript:// only show the search panel if the db is full text indexed
+			return database.isFTIndexed();
+		}]]></xp:this.rendered>
+	</xc:mobileSearch>
+	
+	<xe:dataView id="dataView2" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" columnTitles="true"
+		collapsibleCategory="true" collapsibleRows="true"
+		collapsibleDetail="true" detailsOnClient="true"
+		rowStyleClass="xspHtmlTrView" openDocAsReadonly="true"
+		style="width: 50px !importnat">
+		<xp:this.rows><![CDATA[#{javascript:
+			if(isMobile())
+			{
+				return "10";
+			}
+			else
+			{
+				return "25";
+			}
+		}]]></xp:this.rows>
+		<xp:this.pageName><![CDATA[#{javascript:
+			if(isMobile())
+			{
+				return "document";
+			}
+			else
+			{
+				return "topicThread.xsp";
+			}
+		}]]></xp:this.pageName>
+		<xe:this.data>
+			<xp:dominoView var="dominoView" viewName="xpAllDocuments"
+				dataCache="full">
+				<xp:this.search><![CDATA[#{javascript:
+					if(isMobile())
+					{
+						requestScope.searchQuery;
+					}
+					else
+					{
+						param.searchValue;
+					}
+				}]]></xp:this.search>
+				<xp:this.expandLevel><![CDATA[#{javascript:
+					if(isMobile())
+						{return "2";}
+					else
+						{return "0";}
+				}]]></xp:this.expandLevel>
+			</xp:dominoView>
+		</xe:this.data>
+
+		<xe:this.summaryColumn style="width:50px !important;">
+			<xe:viewSummaryColumn columnName="Topic"
+				columnTitle="Topic">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+
+		<xe:this.iconColumn>
+			<xe:viewIconColumn>
+				<xe:this.icons>
+					<xe:iconEntry>
+						<xp:this.url><![CDATA[#{javascript:
+							var level=viewEntry.getIndentLevel();
+							if (viewEntry.getRead(userBean.canonicalName) && level == 0)
+								{return "xpPostRead.gif";}
+							else if(!viewEntry.getRead(userBean.canonicalName) && level == 0)
+								{return "xpPostUnread.gif";}
+							else if(viewEntry.getRead(userBean.canonicalName) && level > 0)
+								{return "xpResponseRead.gif";}
+							else
+								{return "xpResponseUnread.gif";}
+						}]]></xp:this.url>
+						<xp:this.alt><![CDATA[#{javascript:
+							var level=viewEntry.getIndentLevel();
+							if (viewEntry.getRead(userBean.canonicalName) && level == 0)
+								{return res.getString("images.alt.main.read");}
+							else if(!viewEntry.getRead(userBean.canonicalName) && level == 0)
+								{return res.getString("images.alt.main.unread");}
+							else if(viewEntry.getRead(userBean.canonicalName) && level > 0)
+								{return res.getString("images.alt.repsone.read");}
+							else
+								{return res.getString("images.alt.repsone.unread");}
+						}]]></xp:this.alt>
+					</xe:iconEntry>
+				</xe:this.icons>
+			</xe:viewIconColumn>
+		</xe:this.iconColumn>
+
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn columnName="All Dates"
+				columnTitle="Date" loaded="${javascript:!isMobile()}">
+				<xe:this.converter>
+					<xp:convertDateTime type="both"></xp:convertDateTime>
+				</xe:this.converter>
+			</xe:viewExtraColumn>
+			<xe:viewExtraColumn columnName="From" columnTitle="Author"
+				loaded="${javascript:!isMobile()}">
+				<xe:this.href><![CDATA[#{javascript:
+					var text = "/authorProfile.xsp?lookupName=";
+					text+=viewEntry.getColumnValue("From");
+				}]]></xe:this.href>
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+
+		<xp:this.facets>
+			<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft"
+				loaded="${javascript:!isMobile()}">
+			</xe:pagerExpand>
+			<xp:panel xp:key="pagerTopRight"
+				styleClass="panelPagerTopRight"
+				loaded="${javascript:!isMobile()}">
+				<xp:pager layout="Previous Group Next" for="dataView2"
+					id="pager3" partialRefresh="true" styleClass="pager">
+				</xp:pager>
+			</xp:panel>
+			<xp:panel xp:key="pagerBottomLeft" id="panel3"
+				loaded="${javascript:!isMobile()}">
+				<xe:pagerSizes id="pagerSizes1"
+					sizes="5|10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:panel xp:key="pagerBottomRight"
+				loaded="${javascript:!isMobile()}">
+				<xp:pager layout="Previous Group Next" for="dataView2"
+					id="pager1" partialRefresh="true" styleClass="pager">
+				</xp:pager>
+			</xp:panel>
+
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:text value="No documents found"></xp:text>
+					<xp:br />
+					<xp:text value="for this view"></xp:text>
+				</xp:div>
+			</xp:panel>
+
+			<xp:link escape="true" text="More..." id="link6"
+				xp:key="pagerBottom" loaded="${javascript:isMobile()}">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+						var dv = getComponent("dataView2");
+						if(dv.getRowCount() > 10)
+							return true;
+						else
+							return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView2"
+							disableId="link6">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+
+			<xp:panel id="panel2" xp:key="detail">
+				<xp:text escape="true" id="computedField2"
+					loaded="${javascript:isMobile()}" styleClass="mblThreadDiv">
+					<xp:this.value><![CDATA[#{viewEntry["Abstract"]}]]></xp:this.value>
+				</xp:text>
+				<xp:br loaded="${javascript:isMobile()}"></xp:br>
+				<xp:text escape="true" id="computedField1"
+					loaded="${javascript:isMobile()}">
+					<xp:this.value><![CDATA[#{javascript:
+						var from = viewEntry.getColumnValue("From"); 
+						var dateTime =  viewEntry.getColumnValue("All Dates");
+						return from + " | " + dateTime;
+					}]]></xp:this.value>
+				</xp:text>
+
+				<xp:panel id="previewPanel"
+					loaded="${javascript:!isMobile()}">
+					<xp:text
+						value="#{javascript:viewEntry.getColumnValue('Abstract')}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:link text="Reply " id="linkReply"
+						value="/topicThread.xsp">
+						<xp:this.rendered>
+							<![CDATA[#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]>
+						</xp:this.rendered>
+						<xp:this.parameters>
+							<xp:parameter name="action"
+								value="openDocument">
+							</xp:parameter>
+							<xp:parameter name="documentId"
+								value="#{javascript:viewEntry.getNoteID()}">
+							</xp:parameter>
+							<xp:parameter name="parentNoteID">
+								<xp:this.value><![CDATA[#{javascript:viewEntry.getNoteID() + "#commentForm"}]]></xp:this.value>
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+					<xp:label value=" | "></xp:label>
+					<xp:label value="Tags: "></xp:label>
+					<xp:repeat id="repeatTags" rows="30" var="tagData"
+						first="0" indexVar="tagIndex" repeatControls="false"
+						removeRepeat="true" themeId="Repeat.Tags">
+						<xp:this.value><![CDATA[#{javascript:var obj = viewEntry.getColumnValue("_Categories");
+							var size = 0;
+							var array = null;
+							if(typeof obj == "string"){
+								var str = obj.toString();
+								if(str != null){
+									array = new Array();
+									array[0] = str;
+									size = 1;
+								}
+							}else if(typeof obj == "java.util.Vector"){
+								array = obj.toArray();
+								size = array.length;
+							}
+							return array;}]]></xp:this.value>
+						<xp:link escape="true" id="link2"
+							themeId="Link.person" text="#{javascript:tagData}"
+							value="/byTag.xsp">
+							<xp:this.parameters>
+								<xp:parameter
+									value="#{javascript:tagData;}" name="categoryFilter">
+								</xp:parameter>
+							</xp:this.parameters>
+						</xp:link>
+						<xp:label value="," id="label5"
+							themeId="Text.commaSeparator" for="link2">
+							<xp:this.rendered><![CDATA[#{javascript:size > 1 && tagIndex < size - 1}]]></xp:this.rendered>
+						</xp:label>
+					</xp:repeat>
+				</xp:panel>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='802579670054C522'>
+<noteinfo noteid='11a' unid='BFCC79B29C5155BE802579670054C526' sequence='46'>
+<created><datetime>20111215T152554,94+00</datetime></created>
+<modified><datetime>20120309T140859,95+00</datetime></modified>
+<revised><datetime>20120309T140859,94+00</datetime></revised>
+<lastaccessed><datetime>20120309T140859,95+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152554,97+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></updatedby>
+<wassignedby><name>CN=Artur Lebedevas/OU=Ireland/OU=Contr/O=IBM</name></wassignedby>
+<item name='$DefaultNavigator' sign='true'><text>Main Navigator B1 - All Documents</text></item>
+<item name='$DefaultWebNavigator' sign='true'><text>Main Navigator B1 - All Documents</text></item>
+<item name='$DefaultWebFrameset' sign='true'><text>MainFrameset</text></item>
+<item name='$TemplateServerName' sign='true'><text>CN=Murray Hurvitz/OU=Westford/O=IBM</text></item>
+<item name='$PIRCRefreshModTime' sign='true'><datetime>20110209T082822,87-05</datetime></item>
+<item name='$TemplateModTime' sign='true'><datetime>20110210T133447,73+08</datetime></item>
+<item name='$TemplateFileName' sign='true'><text>C:\Program Files\IBM\Lotus\Notes\Data\doclibxt.ntf</text></item>
+<item name='IconBitmap' summary='true' sign='true'>
+<rawitemdata type='6'>
+AiAgAQAA/+H////AP///gAf//wAAA/4AAAH8AAAA+AAAAPAAAAHgAAABwAAAAYAAAAEAAAABgAAA
+AQAAAAGAAAABAAAAAYAAAAHwAAAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB/AAAAfwAAAH8AAAB
+/AAAAfwAAD/8AAA//AAAP/4AAD8AAAAAAA7u4AAAAAAAAAAAAAAAAADwAO7uAAAAAAAAAAAAAAAP
+H/8ADu7gAAAAAAAAAAAA8f7u//AA7u7u7u4AAAAADx8f/+7v/wAMzMwO4AAAAPHx/u7//u7/8P/8
+Du4AAA8fHxEf7u//7u///A8OAADx8fERERH+7v/+//wPAAAPHx8Rf3ERER/u7/b8DwAA8fHxEREX
+9xEREf7xbA8ADx8fEX9xERF/cR/vFh8PAPHx8RERF/cRERH+8WFvDwAPHxF/cRERf3Ef7xYWHw8A
+8fERERf3ERER/vFhYW8PAA8Rf3EREX9xH+8WFhYfDwDxEREX9xEREf7xYWFhbw8AD/8RERF/cR/v
+FhYWFh8PAAAA//ERERH+8WFhYWFvDwAAAADP/xEf7xYWFhYWHw8AAAAAxv///vFhYWFhYW8PAAAA
+AMb/HG/2FhYWFhYcDwAAAADG/xxv8WFhYWFh/A8AAAAAxv8cb/YWFhYWH/wPAAAAAMb/HG/xYWFh
+Yf/8DwAAAADG/xz2YRERER8fHA8AAAAAxv8czMzMzMzMzMzPAAAAAMb/HA/x8fHx8fHx8QAAAADG
+/x/MzMzMzMzMzMzAAAAAz2bxERER8fHA8AAAAAAAAMzMzMzMzMzMzPAAAAAAAADA/x8fHx8fHx8Q
+AAAAAAAADMzMzMzMzMzMzAAAAA==
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$DefaultClientXPage' sign='true'><text>allDocuments.xsp</text></item>
+<item name='$DBTheme' sign='true'><text>oneuiv2_1.theme</text></item>
+<item name='$CSSExpires' sign='true'><text>365</text></item>
+<item name='$FileExpires' sign='true'><text>365</text></item>
+<item name='$ImageExpires' sign='true'><text>365</text></item>
+<item name='$JSExpires' sign='true'><text>365</text></item>
+<item name='$Daos'><text>0</text></item>
+<item name='$DefaultFrameset'><text>BorderFrame</text></item>
+<item name='$DefaultXPage'><text>main.xsp</text></item>
+<item name='$TITLE'><text>Document Library 8.5.3 - UP2
+Document Library</text></item>
+<item name='$Flags'><text>J7F!</text></item>
+<item name='$FlagsNoRefresh'><text>rv</text></item></note>
+

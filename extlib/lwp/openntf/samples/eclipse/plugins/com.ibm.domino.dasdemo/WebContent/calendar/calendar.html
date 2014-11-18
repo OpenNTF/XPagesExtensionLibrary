@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+         "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Calendar</title>
+<style type="text/css">
+    @import "/xsp/.ibmxspres/dojoroot-1.8.3/dijit/themes/tundra/tundra.css";
+    @import "/xsp/.ibmxspres/dojoroot-1.8.3/dojo/resources/dojo.css";
+    @import "/xsp/.ibmxspres/.dwa/cv/themes/hannover/calendarView.css";
+    @import "calendarApp.css"
+</style>
+<script type="text/javascript">
+        var dojoConfig = {
+            parseOnLoad: true,
+            paths: {"dwa": "/xsp/.ibmxspres/.dwa"} 
+        };
+    </script>
+<script type="text/javascript" src="/xsp/.ibmxspres/dojoroot-1.8.3/dojo/dojo.js" >
+</script>
+<script>
+    dojo.require("dojo.parser");
+    dojo.require("dwa.data.iCalReadStore");
+    dojo.require("dwa.cv.calendarView");
+    dojo.require("dijit.form.Button");
+    dojo.require("dijit.layout.BorderContainer");
+    dojo.require("dijit.layout.ContentPane");
+</script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="calendar.js"></script>
+
+</head>
+<body class="tundra">
+
+<div dojoType="dijit.layout.BorderContainer" class="c-app-container">
+  <div id="header" dojoType="dijit.layout.ContentPane" region="top" class="c-app-header" style="background-color:lightgrey;padding:8px">
+    Header
+  </div>
+  <div dojoType="dijit.layout.ContentPane" region="leading" class="c-app-navigator">
+    <button dojoType="dijit.form.Button" type="button">
+        New Event
+        <script type="dojo/method" event="onClick" args="evt">
+            document.location = "event.html";
+        </script>
+    </button>
+
+	<h3>Views</h3>
+	
+	<div style="padding:10px;line-height:1.5em">
+		<a href="#" onclick="setFormat('D')">One Day</a><br />
+		<a href="#" onclick="setFormat('W')">One Week</a><br />
+		<a href="#" onclick="setFormat('2')">Two Weeks</a><br />
+		<a href="#" onclick="setFormat('M')">One Month</a>
+	</div>
+		
+	<h3>Invitations</h3>
+	
+	<div id="miniView" style="padding:10px;line-height:1.5em">
+		<i>Loading new invitations ...</i>
+	</div>
+  </div>
+  
+  <div dojoType="dijit.layout.ContentPane" region="center">
+    <div id="cv">
+	</div>
+  </div>
+  
+  <div dojoType="dijit.layout.ContentPane" region="bottom" class="c-app-footer" style="background-color:lightgrey;padding:8px">
+    Footer
+  </div>
+</div>
+
+</body>
+</html>

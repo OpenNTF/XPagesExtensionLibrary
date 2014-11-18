@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="document1" action="editDocument" formName="Mission">
+			<xp:this.documentId>
+				<![CDATA[#{javascript:
+						try{
+							var missionView:NotesView = database.getView("MissionLookup");
+							if(null != missionView){
+								missionView.refresh();
+								var missionNote:NotesDocument = missionView.getDocumentByKey("Mission");
+								if(null == missionNote){
+									// Mission does not exist
+									missionNote = database.createDocument();
+									missionNote.appendItemValue("Form","Mission");
+									missionNote.computeWithForm(false, false);
+									missionNote.save(true);
+									missionView.refresh();
+								}
+								return missionNote.getNoteID();
+							}
+						}catch(e){
+							print("documentId exception: " + e);
+							throw e;
+						}
+						return null;
+				}]]>
+			</xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+
+	<xp:label id="labelUpdateFieldsOnSavePrototype" rendered="true">
+		<xp:this.value><![CDATA[#{javascript:
+
+if (!prototype.updateFieldsOnSave)
+{
+	prototype.updateFieldsOnSave = function(source, target, sort, fieldname)
+	{
+		function isArray(obj)
+		{
+		   return obj.constructor == Array;
+		}
+
+		var fieldSource = getComponent(source);
+		var fieldTarget = getComponent(target);
+		
+		if ((fieldSource!=null)&&(fieldTarget!=null))
+		{
+			// Get the items (could be a string or an array)
+			var itemsObject = fieldSource.getValue();
+			var itemsArray;
+		
+			// If it's a string, explode it into an array
+			if (isArray(itemsObject))
+				itemsArray = itemsObject;
+			else
+				itemsArray = @Trim(@Explode(itemsObject,"\n;"));
+		
+			// Sort the array
+			if ((sort==true)&&(isArray(itemsArray)))
+				itemsArray.sort();
+			
+			// Implode the array into a newline sorted string (source)
+			fieldSource.setValue(@Implode(itemsArray,"\n"));
+			// Implode the array into a newline sorted string (target)
+			fieldTarget.setValue(@Implode(itemsArray,","));
+			
+			// Force a save
+			if (sort==false)
+			{
+				document1.getDocument().replaceItemValue(fieldname,@Explode(itemsArray,","));				
+				//document1.getDocument().save(true,false);
+			}			
+		}
+	}	
+}
+
+return "";
+
+		}]]></xp:this.value>
+	</xp:label>
+
+	<xe:applicationLayout id="applicationLayout1">
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				legalText="(c) Copyright IBM Corporation 2011"
+				navigationPath="/setup" defaultNavigationPath="/home" footer="false"
+				mastHeader="true">
+				<xe:this.searchBar>
+					<xe:appSearchBar pageName="search.xsp"
+						inactiveText="Search..." optionsParam="search" queryParam="search"
+						loaded="${javascript:database.isFTIndexed()}"
+						inputTitle="Enter a search value">
+					</xe:appSearchBar>
+				</xe:this.searchBar>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode>
+						<xe:this.label><![CDATA[#{javascript:I18n.format(strings.getString("welcome.x"), userBean.displayName)}]]></xe:this.label>
+					</xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+				<xe:this.placeBarName><![CDATA[#{javascript:var teamname = strings.getString("teamroom.name");
+var vw:NotesView = database.getView("MissionLookup");
+var vc:NotesViewEntryCollection = vw.getAllEntries();
+var ve:NotesViewEntry = vc.getFirstEntry();
+if(null != ve){
+	var v:java.util.Vector = ve.getColumnValues();
+	if(!v.isEmpty()){
+		// get the teamroom name
+		teamname = v.get(1);
+	}
+}
+return teamname;}]]></xe:this.placeBarName>
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+		<xp:text escape="true" id="titleField" tagName="h1"
+			value="#{javascript:strings.getString('teamroom.setup')}">
+		</xp:text>
+		<xp:button value="Save" id="saveCloseButton">
+			<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+			
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+						
+updateFieldsOnSave("fieldDocumentTags", "fieldDocumentTagsHidden", false, "Categories");
+updateFieldsOnSave("fieldDocumentTypes", "fieldDocumentTypesHidden", false, "DocType");
+
+}]]></xp:this.script>
+					</xp:executeScript>
+					<xp:saveDocument></xp:saveDocument><xp:openPage name="/home.xsp"></xp:openPage>
+				</xp:actionGroup>
+			</xp:this.action></xp:eventHandler>
+		</xp:button>
+		
+		<xp:link id="cancelLink" text="Cancel" value="/home.xsp"></xp:link>
+		<xp:br></xp:br>
+		<xp:tabbedPanel id="tabbedPanel1">
+		
+			<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+
+			<xp:tabPanel label="Basics" id="tabPanel1">
+				<xc:setupBasics id="basics"></xc:setupBasics>
+			</xp:tabPanel>
+
+<!--			<xp:tabPanel label="Home Page" id="tabPanel2">-->
+<!--				<xc:setupHomePage></xc:setupHomePage>-->
+<!--			</xp:tabPanel>-->
+
+			<xp:tabPanel label="Tags (Categories)" id="tabPanel3">
+				<xc:setupTags id="tags"></xc:setupTags>
+			</xp:tabPanel>
+
+			<xp:tabPanel label="Document Types" id="tabPanel4">
+				<xc:setupDocumentTypes id="docTypes"></xc:setupDocumentTypes>
+			</xp:tabPanel>
+
+			<xp:tabPanel label="Advanced Options" id="tabPanel5">
+				<xc:setupAdvancedOptions id="advanced"></xc:setupAdvancedOptions>
+			</xp:tabPanel>
+
+		</xp:tabbedPanel>
+	</xe:applicationLayout>
+</xp:view>

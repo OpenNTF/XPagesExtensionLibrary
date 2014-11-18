@@ -1,0 +1,27 @@
+.dj_ie7 .lotusui30 .lotusMenu .lotusMenuHeader .lotusHeading a {margin:0;display:block;padding:3px 10px 5px 5px;}
+.dj_ie .dijitCheckBoxInput{filter: none;}
+.xspInputFieldEditBox{border:1px solid #b3b3b3;line-height:1.5em;margin:0em 0em;overflow:hidden;position:relative;height:19px;}
+.xspInputFieldEditBox > div{position: relative;top: 0;left: 0;bottom: 0;right: 0; background:transparent;}
+.lotusui30 .lotusForm td.lotusFormLabel {vertical-align:top;text-align:left;padding-left:80px;font-weight:bold;padding-top:1px}
+.lotusui30 .lotusBanner ul li a {padding:5px;}
+.lotusui30 .lotusBanner ul.lotusUtility li a {padding:5px;}
+.dijitTextBox .dijitSpinnerButtonContainer {float: right;text-align: center;position: relative;left: inherit;right: 0px;width: 18px;}
+.dijitTextBox .dijitArrowButtonContainer {float: right;text-align: center;position: relative;left: inherit;right: 0px;width: 18px;}
+.dijitValidationTextBox .dijitValidationContainer {float: right;text-align: center;position: relative;left: inherit;right: 0px;width: 18px;}
+.xsp .lotusSection2 .lotusSectionHeader{ display:block; width:100%;}
+.lotusBanner .lotusRightCorner .lotusInner .lotusBannerLogo{float:left;vertical-align:middle;margin-right: 5px;}
+.lotusui30dojo .dijitPopup .dijitMenuItemSelected pre {background-color: #F4F4F4;}
+.xspDataTableRowUnread td:first-child{padding-left:0px !important; background:none !important;}
+.xspColumnUnreadImage{padding-left:5px; margin-right:5px;}
+.xspDataTableRowRead td:first-child{padding-left: 20px !important;}
+.xspInputFieldEditBox > div{width:auto;}
+.xsp .lotusSection2 .lotusSectionHeader .lotusInner h2{width:100%;}
+.lotusui30 .lotusSection2 .lotusSubHeader {padding: 7px 0;overflow: hidden;color: #444;border-bottom: 1px solid #eee;}
+.lotusui30 .lotusSection2 .lotusSubHeader .lotusHeading3{font-size: 1em;font-weight: normal;}
+/* TODO - the below is a hack fix so it gets into extlib. It should be removed for 9.0.2 release
+ * The proper 902 fix is in the core, in:
+ * com.ibm.xsp.theme.oneuiv302\resources\web\oneui\dojoTheme\lotusui30dojo\lotusui30dojo.css
+ * .lotusui30dojo .dijitTabCloseButton{ background: url("layout/images/tabClose.png") no-repeat;width: 16px;height: 1.25em;margin: -2px -3px -3px 1px;opacity: 0.25;filter: alpha(opacity=25);zoom: 1;}
+ */
+.lotusui30dojo .dijitTabCloseButton{ background: url("../../.oneuiv302/oneui/dojoTheme/lotusui30dojo/layout/images/tabClose.png") no-repeat;width: 16px;height: 1.25em;margin: -2px -3px -3px 1px;opacity: 0.25;filter: alpha(opacity=25);zoom: 1;}
+

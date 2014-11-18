@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:formRow label="Report date:">
+		<xp:inputText value="#{document1.ReportDate}" id="reportDateIn"
+			defaultValue="#{javascript:@Today()}" role="button"
+			title="select report date">
+			<!--
+				Note the Report Date is not required in the Notes Client, so not
+				required here
+			-->
+			<xp:this.converter>
+				<xp:convertDateTime type="date"></xp:convertDateTime>
+			</xp:this.converter>
+			<xp:dateTimeHelper dojoType="dijit.form.DateTextBox"></xp:dateTimeHelper>
+		</xp:inputText>
+	</xe:formRow>
+
+	<xe:formRow label="Created:" for="createdPersonLink">
+		<!-- TODO localization of segmented fragments -->
+		<xp:label value="On " id="label3"></xp:label>
+		<xp:text value="#{javascript:@Created()}" id="computedField1"></xp:text>
+		<xp:label value=" by " id="label4"></xp:label>
+		<xp:link styleClass="lotusPerson" id="createdPersonLink"
+			value="/members.xsp" role="button"
+			title="link to person who created">
+			<xp:this.parameters>
+				<xp:parameter name="profile">
+					<xp:this.value><![CDATA[${javascript://
+					var nameStr;
+					if(document1.isNewNote()){ 
+						nameStr = @UserName();
+					}else{
+						nameStr = document1.getItemValueString('From');
+					}
+					return peopleBean.getPerson(nameStr).abbreviatedName;}]]></xp:this.value>
+				</xp:parameter>
+			</xp:this.parameters>
+			<xp:this.text><![CDATA[${javascript://
+					var nameStr;
+					if(document1.isNewNote()){ 
+						nameStr = @UserName();
+					}else{
+						nameStr = document1.getItemValueString('From');
+						if( ! nameStr ){
+							return '';
+						}
+					}
+					return peopleBean.getPerson(nameStr).displayName;
+				}]]></xp:this.text>
+		</xp:link>
+	</xe:formRow>
+
+	<xe:formRow label="Report status:"
+		for="reportStatusIn">
+		<!-- TODO fix layout styling for radio group in a form table -->
+		<style>
+			.lotusForm tr.lotusFormFieldRow .xspRadioButton td{
+				padding-bottom:1px;
+			}
+		</style>
+		<xp:radioGroup id="reportStatusIn"
+			value="#{document1.FileThisStatusDoc}" style="margin:0px;padding:0px"
+			defaultValue="0" legend="Status" role="select"
+			title="select the status of the report">
+			<!-- Note, FileThisStatusDoc are Strings, not integers -->
+			<xp:selectItem itemLabel="Active" itemValue="0" />
+			<xp:selectItem itemLabel="Inactive" itemValue="1" />
+		</xp:radioGroup>
+	</xe:formRow>
+</xp:view>

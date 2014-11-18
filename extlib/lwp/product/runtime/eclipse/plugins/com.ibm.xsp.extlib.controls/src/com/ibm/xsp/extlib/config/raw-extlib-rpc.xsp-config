@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2012                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>rpc</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+	
+<!-- Remote Service -->
+	<component>
+	   <!-- TODO explain pathinfo and find a simpler explanation of remote service -->
+		<description>A control that exposes remote services using the pathinfo information</description>
+		<display-name>Remote Service</display-name>
+		<component-type>com.ibm.xsp.extlib.rpc.JsonRpcService</component-type>
+		<component-class>com.ibm.xsp.extlib.component.rpc.UIJsonRpcService</component-class>
+        <!-- TODO test failure scenario where e.g. rpc call throws exception, timeout, etc is behaviour consistent with partial refresh err handling -->
+        <!-- TODO fix pathinfo : explain as a handler id + it is optional -->
+        <!-- TODO client-side simple action to handle invoking service.method -->
+        <!-- TODO discuss general usability issues with Designer team -->
+        <!--# do not translate "pathInfo" -->
+  		<property>
+			<description>Path info that triggers this service. The "pathInfo" is the part of the URL between ".xsp" and the query (?param=value)</description>
+			<display-name>Path Info</display-name>
+			<property-name>pathInfo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        <!--# do not translate "pathInfo" -->
+  		<property>
+			<description>Name of the generated client-side JavaScript service. Uses the "pathInfo" property if this property is not set.</description>
+			<display-name>Service Name</display-name>
+			<property-name>serviceName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+      	<property>
+        	<description>The list of remote methods provided by the service</description>
+        	<display-name>Methods</display-name>
+        	<property-name>methods</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.component.rpc.RemoteMethod</property-item-class>
+            	<property-add-method>addMethod</property-add-method>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+        	</property-extension>
+      	</property>
+
+        <!-- TODO How to test? Need good use case -->
+        <property>
+            <description>Indicate if the page state, after getting the AJAX request, should be saved on the server</description>
+            <display-name>Save State on Server</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <!-- TODO need to add an action property to point to a method binding - to support inline and saved code -->
+
+        <!-- TODO Is design-time image ok? Has "RPC" tech acronym in it : @Designer is this ok (BiDi, localization etc)??? -->
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.JsonRpcService</component-family>
+			<renderer-type>com.ibm.xsp.extlib.rpc.JsonRpcService</renderer-type>
+			<tag-name>jsonRpcService</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+                <category>Data Access</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:image url="/extlib/designer/markup/RPC.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+    <complex-type>
+        <description>Remote service method definition for use with the Remote Service control</description>
+        <display-name>Method Definition</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rpc.RemoteMethod</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rpc.RemoteMethod</complex-class>
+  		<property>
+  		    <!-- TODO should be a valid JS name (no dashes etc) -->
+			<description>Method name</description>
+			<display-name>Method Name</display-name>
+			<property-name>name</property-name>
+			<property-class>java.lang.String</property-class>
+		</property>
+      	<property>
+        	<description>Optional list of arguments that can be passed to the method</description>
+        	<display-name>Argument List</display-name>
+        	<property-name>arguments</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</property-item-class>
+            	<property-add-method>addArgument</property-add-method>
+        	</property-extension>
+      	</property>
+  		<property>
+  		    <!-- TODO add support for a new property ("action") that can take a method binding -->
+			<description>Inline Server-Side JavaScript implementation of the method</description>
+			<display-name>Script</display-name>
+			<property-name>script</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+              		<editor>com.ibm.std.MultiLine</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+        <complex-extension>
+   			<tag-name>remoteMethod</tag-name>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Remote service method argument definition</description>
+        <display-name>Method Argument Definition</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</complex-class>
+  		<property>
+  		    <!-- TODO must be a valid JS name -->
+			<description>Argument name</description>
+			<display-name>Argument Name</display-name>
+			<property-name>name</property-name>
+			<property-class>java.lang.String</property-class>
+		</property>
+		<!-- TODO why is the list of types so restricted : no Dates, int, Java classes -->
+		<!-- TODO how are mismatches between declared and actual types handled : TBD ... client side err msg dialog ? -->
+		<!-- TODO what about object type support as a catch-all ? -->  
+  		<property>
+			<description>Argument type</description>
+			<display-name>Argument Type</display-name>
+			<property-name>type</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        string
+                        boolean
+                        number
+                        list
+                    </editor-parameter>
+               </designer-extension>
+           </property-extension>
+		</property>
+        <complex-extension>
+   			<tag-name>remoteMethodArg</tag-name>
+        </complex-extension>
+    </complex-type>
+    
+</faces-config>

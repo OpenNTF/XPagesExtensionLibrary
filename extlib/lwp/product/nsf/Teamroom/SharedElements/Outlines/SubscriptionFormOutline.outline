@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='filter' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='21e' unid='D774C5CDF2C83C9E802577C2003DF785' sequence='7'>
+<created><datetime dst='true'>20101020T121650,61+01</datetime></created>
+<modified><datetime>20120207T095545,62+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122251,22+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,62+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,62+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121650,63+01</datetime><datetime
+ dst='true'>20110830T205045,53-04</datetime><datetime dst='true'>20111006T160527,24+01</datetime><datetime
+ dst='true'>20111014T083947,09+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$SiteMapList' sign='true'>
+<rawitemdata type='1a'>
+AQMBAAEAAgBIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAACAEgAbgAAAAAAAQAAAAAAAAAIAAAAXgAAAAAAAAAAAAAAAAAAAAgA
+BQAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRm9ybQDdAQD2/1wAAQAAAAUADgBC
+AAAAAAAAAAAAAAAAAEIAAwAYAAcAJFRhYmxlMQABAAQAZm9ybQMABwAMAAUACTFTM1MAAAASAAIA
+XhsAAAAAAADtAQMABwAKAAMACTBSAAAFRm9ybQDdSABuAAAAAAACAAAAAAAAAAgAAABeAAAAAAAA
+AAAAAAAAAAAACAAFAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVJbmZvAN0BAPb/
+XAABAAAABQAOAEIAAAAAAAAAAAAAAAAAQgADABgABwAkVGFibGUxAAEABABpbmZvAwAHAAwABQAJ
+MVMzUwAAABIAAgBeGwAAAAAAAO0BAwAHAAoAAwAJMFIAAAVJbmZvAN0=
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>SubscriptionFormOutline</text><text>SubscriptionFormOutline</text></textlist></item>
+<item name='$Flags'><text>m34</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

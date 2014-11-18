@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>mobileSearch</component-type>
+    <composite-name>mobileSearch</composite-name>
+    <composite-file>/mobileSearch.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>dataView</property-name>
+      <property-class>string</property-class>
+      <display-name>dataView</display-name>
+      <property-extension>
+        <designer-extension>
+          <default-value>dataView</default-value>
+        </designer-extension>
+      </property-extension>
+      <description>The name of the dataView that will be searched on / refreshed by the search control</description>
+    </property>
+  </composite-component>
+</faces-config>

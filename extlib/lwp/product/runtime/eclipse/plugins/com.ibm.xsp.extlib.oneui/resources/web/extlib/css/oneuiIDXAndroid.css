@@ -1,0 +1,316 @@
+.mblView {
+	padding-top: 44px !important;
+}
+
+.mblHeadingActionFacet {
+	float: right;
+	position: relative;
+	right: 0px;
+	height: 31px;
+}
+
+.mblView .mblHeading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 2;
+	height: 44px;
+	line-height: 44px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	padding: 0px;
+	background-image: -webkit-linear-gradient(bottom, #0075a3, #0075a3 1px, #008abf 1px, #008abf 3px, #1a96c6 3px, #1a96c6 4px, #00090d 4px, #00090d 5px, #131313 5px, #444444 43px, #6b6b6b 43px, #6b6b6b 44px);
+	background-image:	 -moz-linear-gradient(bottom, #0075a3, #0075a3 1px, #008abf 1px, #008abf 3px, #1a96c6 3px, #1a96c6 4px, #00090d 4px, #00090d 5px, #131313 5px, #444444 43px, #6b6b6b 43px, #6b6b6b 44px);
+	background-image:		  linear-gradient(bottom, #0075a3, #0075a3 1px, #008abf 1px, #008abf 3px, #1a96c6 3px, #1a96c6 4px, #00090d 4px, #00090d 5px, #131313 5px, #444444 43px, #6b6b6b 43px, #6b6b6b 44px);
+}
+
+.mblHeading .mblHeadingSpanTitle{
+	float: none;
+}
+
+.mblHeading .mblToolBarButton{
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+	border-color: #191919 #1f1f1f #696969 #1c1c1c;
+	border-width: 1px;
+	border-style: solid;
+	margin: 6px 3px 1px 3px;
+	padding: 0px 10px 0px 10px;
+	background-image: -webkit-linear-gradient(bottom, #121212, #464646);
+	background-image:	 -moz-linear-gradient(bottom, #121212, #464646);
+	background-image:		  linear-gradient(bottom, #121212, #464646);
+}
+
+.mblHeading .mblToolBarButton.mblToolBarButtonHasLeftArrow{
+	z-index: 3;
+	float: left;
+	position: relative;
+	font-size: 12px;
+	height: 26px;
+	line-height: 26px;
+	border-color: #191919 #1f1f1f #696969 #1c1c1c;
+	border-width: 1px;
+	border-style: solid;
+	border-left: none;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	margin: 6px 0 0 15px;
+	padding: 0;
+	background-image: -webkit-linear-gradient(bottom, #121212, #464646);
+	background-image:    -moz-linear-gradient(bottom, #121212, #464646);
+	background-image:         linear-gradient(bottom, #121212, #464646);
+}
+
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonHasRightArrow {
+	border-right: none;
+	padding: 0px;
+	margin-right: 14px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.mblHeading .mblToolBarButton .mblToolBarButtonLeftArrow{
+	background-image: -webkit-linear-gradient(bottom right, #121212, #464646);
+	background-image:	-moz-linear-gradient(bottom right, #121212, #464646);
+	background-image:		 linear-gradient(bottom right, #121212, #464646);
+	-webkit-transform: scale(0.6, 1.00) rotate(45deg);
+	-moz-transform: scale(0.6, 1.00) rotate(45deg);
+	transform:		 scale(0.6, 1.00) rotate(45deg);
+	box-shadow: 0px 1px 0 rgba(255,255,255,0.33);
+	left: -10px;
+	display: block;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid black;
+}
+
+.mblHeading .mblToolBarButtonHasLeftArrow .mblToolBarButtonIcon{
+	z-index: 5;
+	position: relative;
+	width: 3px;
+	height:26px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #696969;
+	background-position: 0px;
+	background-image: -webkit-linear-gradient(bottom, #121212, #464646);
+	background-image:	-moz-linear-gradient(bottom, #121212, #464646);
+	background-image:		 linear-gradient(to top, #121212, #464646);
+}
+
+.mblHeading .mblToolBarButtonSelected.mblToolBarButtonHasLeftArrow .mblToolBarButtonIcon{
+	width: 3px;
+	height: 26px;
+	background-position: 0px;
+	background-image: none;
+	background-color: black;
+}
+
+.mblHeading .mblToolBarButtonHasLeftArrow .mblToolBarButtonLabel{
+	display: block;
+}
+
+.mblHeading .mblToolBarButtonSelected.mblToolBarButtonHasLeftArrow .mblToolBarButtonLabel,
+.mblHeading .mblToolBarButtonSelected.mblToolBarButtonHasRightArrow .mblToolBarButtonLabel,
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonSelected,
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonSelected.mblToolBarButtonHasRightArrow .mblToolBarButtonLabel,
+.mblHeading .mblToolBarButtonSelected.mblToolBarButtonHasRightArrow .mblToolBarButtonIcon,
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonSelected,
+.mblHeading .mblToolBarButton .mblToolBarButtonLeftArrow.mblColorDefaultSel,
+.mblHeading .mblToolBarButton .mblToolBarButtonRightArrow.mblColorDefaultSel{
+	background-color: black;
+	background-image: none;
+}
+
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonRightArrow {
+	background-image: -webkit-linear-gradient(bottom right, #121212, #464646);
+	background-image:	-moz-linear-gradient(bottom right, #121212, #464646);
+	background-image:		 linear-gradient(to top left, #121212, #464646);
+	-webkit-transform: scale(0.6, 1.00) rotate(45deg);
+	-moz-transform: scale(0.6, 1.00) rotate(45deg);
+	transform:		 scale(0.6, 1.00) rotate(45deg);
+	box-shadow: 1px 0px 0 rgba(255,255,255,0.33);
+	display: block;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid black;
+	right: -10px;
+}
+
+.mblHeading .mblHeadingActionFacet .mblToolBarButtonHasRightArrow .mblToolBarButtonLabel {
+	background-image: -webkit-linear-gradient(bottom, #121212, #464646);
+	background-image:	 -moz-linear-gradient(center bottom , #121212, #464646);
+	background-image:		  linear-gradient(to top , #121212, #464646);
+}
+
+.mblHeading .mblHeadingActionFacet .mblToolBarButton.mblToolBarButtonBody {
+	height: 27px;
+	border-color: #191919 #1f1f1f #696969 #1c1c1c;
+	border-width: 1px;
+	border-style: solid;
+	padding-bottom: 0;
+	margin-right: 5px;
+}
+
+.mobileFormContainer .mobileFormTable{
+	color: #000000;
+	background-color: #ffffff
+}
+
+.mobileFormContainer .mobileFormTable .dataCell input[type="text"]{
+	color: #000000;
+}
+
+.mblHeading .mblTabBarSegmentedControl {
+	background-color: transparent;
+	float: right;
+	height: 40px;
+}
+
+.mblTabBarSegmentedControl .mblTabBarButton {
+    background-image:  -webkit-linear-gradient(top, #F4F4F4, #DBDBDB);
+    background-image:     -moz-linear-gradient(to bottom, #F4F4F4, #DBDBDB);
+    background-image:          linear-gradient(to bottom, #F4F4F4, #DBDBDB);
+    background-repeat: repeat-x;
+    background-size: 1px 100%;
+}
+
+.mblTabBarSegmentedControl .mblTabBarButtonSelected {
+    background-image: -webkit-linear-gradient(top, #E2E2E2, #A4A4A4);
+    background-image:    -moz-linear-gradient(to bottom, #E2E2E2, #A4A4A4);
+    background-image:         linear-gradient(to bottom, #E2E2E2, #A4A4A4);
+}
+
+
+.mblHeading .mblTabBarSegmentedControl .mblTabBarButton {
+	height: 27px;
+	line-height: 27px;
+	background-image: -webkit-linear-gradient(top, #3E3E3E, #121213);
+	background-image:    -moz-linear-gradient(to bottom, #3E3E3E, #121213);
+	background-image:         linear-gradient(to bottom, #3E3E3E, #121213);
+	background-repeat: repeat-x;
+	background-size: 1px 100%;
+}
+
+.mblHeading .mblTabBarSegmentedControl .mblTabBarButtonSelected {
+	background-image: -webkit-linear-gradient(top, #666666, #222222);
+	background-image:    -moz-linear-gradient(to bottom, #666666, #222222);
+	background-image:         linear-gradient(to bottom, #666666, #222222);
+}
+
+.mblDataView .mblFooterText > a {
+	color: black;
+	border-radius: 5px;
+	-webkit-box-shadow: 1px 1px 1px #8E8E8E;
+	   -moz-box-shadow: 1px 1px 1px #8E8E8E;
+			box-shadow: 1px 1px 1px #8E8E8E;
+}
+
+.mblDomButtonArrow > div {
+	position: absolute;
+	top: 10px;
+	right: 6px;
+	width: 6px;
+	height: 6px;
+	font-size: 1px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	transform: rotate(45deg);
+	border-width: 2px 2px 0px 0px;
+	border-style: solid;
+	border-color: black;
+}
+
+.mblDataView .mblDomButtonArrow > div {
+	top: -3px;
+	right: 10px;
+}
+
+.mblDataView .mblFooter .mblFooterText .xspPagerContainer .xspPagerNav.xspGroup a,
+.mblDataView .mblFooter .mblFooterText .xspPagerContainer .xspPagerNav.xspNext a,
+.mblDataView .mblFooter .mblFooterText .xspPagerContainer .xspPagerNav.xspPrevious a {
+	margin: 0px;
+	color: #105CB6;
+	text-decoration: none;
+	border: none;
+	display: inline;
+	padding: 0px;
+}
+
+/* BIDI CSS */
+
+html[dir=rtl] .mblHeading .mblHeadingActionFacet {
+	float: left;
+}
+
+html[dir=rtl] .mblHeading .mblToolBarButton{
+	margin: 6px 3px 1px 3px;
+	padding: 0px 10px 0px 10px;
+}
+
+html[dir=rtl] .mblHeading .mblToolBarButton.mblToolBarButtonHasLeftArrow{
+	float: right;
+	border-right: none;
+	border-radius: 3px 0 0 3px;
+	margin: 6px 15px 0 0;
+	border-left: 1px solid #191919;
+	padding: 0;
+}
+
+html[dir=rtl] .mblHeading .mblHeadingActionFacet .mblToolBarButtonHasRightArrow {
+	border-left: none;
+	margin-left: 14px;
+	border-radius: 0 3px 3px 0;
+	border-right: 1px solid #191919;
+	padding: 0 5px 0 0;
+}
+
+html[dir=rtl] .mblHeading .mblToolBarButton .mblToolBarButtonLeftArrow{
+	left: 37px;
+	border-left: none;
+}
+
+html[dir=rtl] .mblHeading .mblHeadingActionFacet .mblToolBarButtonRightArrow {
+	right: 35px;
+	border-right: none;
+}
+
+html[dir=rtl] .mblHeading .mblToolBarButtonText .mblToolBarButtonIcon {
+	padding-left: 5px;
+	padding-right: 0;
+}
+
+html[dir=rtl] .mblHeading .mblHeadingActionFacet .mblToolBarButtonHasRightArrow .mblToolBarButtonLabel {
+	padding-left: 10px;
+	padding-right: 0;
+}
+
+html[dir=rtl] .mblHeading .mblToolBarButtonHasLeftArrow .mblToolBarButtonLabel {
+	padding: 0 0 0 10px;
+}
+
+html[dir=rtl] .mblHeading .mblTabBarSegmentedControl {
+	float: right;
+}
+
+html[dir=rtl] .mblDomButtonArrow > div {
+	top: 10px;
+	right: -6px;
+	-webkit-transform: rotate(225deg);
+	-moz-transform: rotate(225deg);
+	transform: rotate(225deg);
+}
+
+html[dir=rtl] .mblDataView .mblDomButtonArrow > div {
+	top: -3px;
+	right: 6px;
+}
+
+html[dir=rtl] .mblHeading .mblHeadingActionFacet .mblToolBarButton.mblToolBarButtonBody {
+	margin-left: 5px;
+}

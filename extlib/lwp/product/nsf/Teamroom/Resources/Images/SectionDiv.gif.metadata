@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="356" sequence="7" unid="C063465F65969533802577C2003DFA5C">
+<created><datetime dst="true">20101020T121657,88+01</datetime></created>
+<modified><datetime>20120207T095548,67+00</datetime></modified>
+<revised><datetime dst="true">20111026T122250,60+01</datetime></revised>
+<lastaccessed><datetime>20120207T095548,67+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095548,67+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20101020T121657,90+01</datetime><datetime dst="true">20110830T205047,69-04</datetime><datetime dst="true">20111006T160526,62+01</datetime><datetime dst="true">20111014T083946,47+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$TITLE" sign="true"><textlist><text>SectionDiv.gif</text><text>SectionDiv.gif</text></textlist></item>
+<item name="$Comment" sign="true"><text>used in TR setup form</text></item>
+
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime>20001211T100232,00-05</datetime></item>
+<item name="$Flags"><text>34Ci</text></item>
+<item name="$ImageNames" sign="true"><text>TRSectionDiv.gif</text></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item></note>

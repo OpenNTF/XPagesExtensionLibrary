@@ -1,0 +1,1062 @@
+/*
+ * © Copyright IBM Corp. 2014
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+/*** >> XSP BOOTSTRAP MIXIN DECLARATIONS  << ***/
+
+/* dbootstrap font setting occasionally overridden by dojo
+Giving it higher piority here */
+body.xsp {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0;
+}
+
+.xspInputFieldEditBox[role="combobox"]{
+	overflow: hidden;
+	position: relative;
+	height:28px !important;
+	width: 218px;
+}
+select.form-control {
+	outline: 0px none;
+}
+
+/* styling of icons in date/ time pickers */
+
+.xspInputFieldDatePickerIcon,
+.xspInputFieldTimePickerIcon,
+.xspInputFieldDateTimePickerIcon{
+	height: 14px;
+    width: 14px;
+	border: none !important;
+	box-shadow: none !important;
+	padding: 0px !important;
+	cursor: pointer !important;
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 0px;
+	margin-left: -4px;
+}
+
+.xspInputFieldDateTimePickerIcon{
+	background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
+	background-position: -192px -120px;
+	
+}
+.xspInputFieldDatePickerIcon{
+	background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
+	background-position: -192px -120px;
+}
+.xspInputFieldTimePickerIcon{
+	background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
+	background-position: -48px -24px;
+}
+
+/* fix for combo boxes in RT editor in Bootstrap 3 */
+.cke *, .cke_editor * {
+        box-sizing:content-box;
+   -moz-box-sizing:content-box;
+    -ms-box-sizing:content-box;
+-webkit-box-sizing:content-box;
+}
+
+/** Picker dialogs and icons **/
+/* normal font weight for checkboxes in pickers */
+.xspPickerList label.xspPickerSpan {
+	font-weight: normal;
+}
+/* fix alignment for checkboxes in pickers */
+.xspPickerList input[type="checkbox"] {
+	vertical-align: middle;
+}
+/* adjust padding on picker link */
+.xspPickerLink{
+	padding: 6px;
+}
+/* glyphicon adjustments for value/name picker and search boxes*/
+.xspPickerLink.glyphicon-user,
+.xspPickerLink.glyphicon-search,
+.xsp .xspPickerSearchOption .glyphicon-search,
+.xsp .applayout-searchbar .glyphicon-search,
+.xsp .input-group .glyphicon-search{
+	font-size: 14px;
+	top: 2px;
+	margin-right:0px;
+}
+.navbar-search .input-group-btn:last-child > .btn{
+	margin-right: 6px;
+}
+.xspPickerLink.glyphicon-user:focus,.xspPickerLink.glyphicon-user:hover{
+	text-decoration: none;
+}
+.form-inline .control-label{
+	display:inline-block;
+}
+/* extracted css from picker js files */
+.xspPickerBody { margin:0; padding:0; background:#fff;}
+.xspPickerItemSelected {background:#428BCA !important; color: white;}
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none;}
+.xspPickerItem:hover {background:#eeeeee;}
+.xspPickerItemSelected:focus, .xspPickerItem:focus {outline:0px none;}
+.xspPickerBody li {padding:2px 2px 2px 2px;}
+.xspPickerSearchLabel{width: 15%;min-width:70px;}
+.xspmodal .xspPickerSearchOption{width:84%;}
+.xspPickerSearchOption .input-group{width:100%;}
+.xspPickerSearchOption .input-group > input{width:100%;}	
+.xspPickerSearchOption .input-group .input-group-btn{width:1%;}
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+
+/** djListTextBox */
+.xspFilter{background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 15px; display: inline-block; padding: 3px 10px;margin:6px 2px;}
+.xspFilter, .xspClose{
+	color: #428BCA;
+	text-decoration: none;
+}
+.xspClose {
+	margin-left: 8px;
+	font-weight:bold;
+}
+.xspmodal .xspFilter{
+	margin: 0px 2px;
+}
+
+/***********************************************************************	
+	Bootstrap styles used by extlib XPages controls
+***********************************************************************/
+
+/* Application Layout*/
+.applayout-main {	
+}
+.applayout-content {
+	padding: 10px;
+}
+.applayout-column-left {
+	padding: 10px 6px;
+}
+.applayout-column-right {
+	padding: 10px 6px;
+}
+.applayout-footer {
+	display: table; margin-left: auto; margin-right: auto; text-align: center;
+}
+.applayout-legal {
+}
+.applayout-searchbar {	
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.applayout-banner-container .applayout-searchbar {	
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+.applayout-searchbar select {
+	margin-right: 7px;
+}
+.applayout-titlebar {	
+	z-index: 998;
+	margin-bottom: 0;
+}
+.applayout-titlebar-border {
+	border: 1px solid #DDDDDD;
+}
+.applayout-titlebar-tabs {	
+	margin: 4px 0 0 0;
+	padding-top: 3px;
+}
+.applayout-titlebar-name {
+	margin: 0 30px;
+	padding-top: 10px;
+	line-height: 20px;
+	float: left;
+}
+.applayout-titlebar-name.applayout-titlebar-name-padding{
+	line-height: 30px;
+}
+.applayout-titlebar-inner ul:nth-child(2) > li {
+	margin-left: 12px;
+}
+.applayout-titlebar-inner h4:nth-child(2) {
+	margin-left: 12px;
+}
+.applayout-banner {	
+	margin-bottom: 0px;
+  	min-height: 20px;
+  	border-radius: 0px;
+}
+.applayout-placebar {
+	vertical-align: middle;
+	margin-bottom: 0px;
+  	min-height: 20px;
+  	z-index: 999;
+  	border-bottom-width: 1px;
+  	border-color: #DDDDDD;
+ }
+.applayout-placebar-title {
+	float: left;
+	padding: 8px;
+}
+.applayout-placebar-title h3 {
+	margin: 5px 0 0 15px;
+	line-height: 1.1;
+	font-weight: 500;
+}
+.applayout-placebar-actions {
+	margin-bottom: 0px;
+	padding: 8px;
+	min-height: 0px;
+}
+
+.applayout-placebar-actions .btn-default{
+	margin-bottom: 0px;
+}
+
+@media only screen and (max-width : 768px) {
+	.applayout-titlebar-name{
+		float: none;
+	}
+}
+@media only screen and (min-width : 768px) {
+	.applayout-titlebar-tabsarea{
+		float: none;
+	}
+}
+
+.dashlayout-footer {
+	padding: 0px 10px 10px 10px;
+	text-align: center;
+}
+/* table */
+.xsp .table {
+	margin-bottom: 0px;
+}
+
+.nav-search-panel {
+	margin-left: 8px;
+}
+
+/* file upload */
+input[type="file"].form-control {
+	height: auto;
+	width: auto;
+}
+
+/* file download */
+.table.xspDataTableFileDownload img{
+	margin: 0px 4px;
+}
+
+.table.xspDataTableFileDownload > tbody td{
+	padding: 5px !important;
+}
+
+/* Widgets */
+.widget-section-scroll {
+	text-align: center;
+}
+.widget-section-arrow {
+	margin: auto;
+	color: #428BCA;
+}
+.xspWidgetContainer.panel{ 
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	border-width: 0px;
+}
+.xspWidgetContainer .xspWidgetBody{
+	padding: 6px 12px;
+}
+.xspWidgetHeader{
+	border-bottom: 1px solid #DDDDDD;
+	padding-bottom: 6px;
+	margin-bottom: 6px;
+}
+.xspWidgetContainer .panel-heading {
+	background-color: #F5F5F5;
+	border-bottom: 1px solid #DDDDDD;
+}
+.xspWidgetContainer .panel-heading .glyphicon-chevron-down,
+.xspWidgetContainer .panel-heading .glyphicon-chevron-right{
+	padding-right: 6px;
+	padding-top 2px;
+}
+
+/* Form Table - Need to switch to div based form table
+instead of table based. These styles may need to be
+re-worked if/when that switch happens */
+.form-table .form-title h2 {
+	line-height: 30px;
+	margin-bottom: 12px;
+	margin-top:-20px;
+}
+.xspFormTableContainer {
+	padding-top: 0px;
+}
+.xspFormTableContainer .xspFormTableRowData {
+	padding: 6px 12px;
+}
+.xspFormTableContainer .form-table .control-label{
+	padding-left: 25px;
+}
+.xspFormTableContainer .form-table .control-label > label{
+	margin-bottom: 0px;
+}
+.xspFormTableContainer .form-table .form-title .lotusMeta{
+	font-size: 14px;
+}
+.form-table .alert{
+	margin-top: -20px;
+}
+.form-table .alert .text-error {
+	font-weight: bold;
+	margin-left: -10px;
+}
+.has-error .text-error {
+	color: #A94442;
+}
+
+/* Navigator */
+.navigator-twisty {
+	padding: 0;
+	border: 0;
+}
+
+/* Dialog */
+.modal form{
+	margin: 0;
+}
+.xspmodal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  z-index: 1050 !important;
+  width: 560px;
+  margin-left: -280px;
+  overflow: none;
+}
+.dijitDialogUnderlayWrapper {
+	z-index: 1049 !important;
+}
+.form-control:focus {
+	outline: 0px none;
+}
+
+/*disabled navigation links*/
+.navbar-inverse .navbar-nav > .disabled > a,
+.navbar-inverse .navbar-nav > .disabled > a:hover,
+.navbar-inverse .navbar-nav > .disabled > a:focus {
+	color: #666;
+}
+
+/*Bootstrap relies on the href attribute on a's to show the correct cursos: fix for XPage pagination that by default doesn't have that*/
+.nav, .pagination, .carousel a {
+	cursor: pointer;
+}
+
+/* Submenu don't exist any more in BS 3 - adding them here - Also need some custome JS (see xpagesxxx.js*/
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#000000;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+.btn-group.open .dropdown-submenu .dropdown-toggle{box-shadow:none;}
+/*margin between icons and text in buttons*/
+.btn .glyphicon {
+	margin-right: 4px;
+}
+
+/* Removing this style. Containing elements should handle padding/margin */
+/*.btn-default {
+	margin-bottom: 5px;
+}*/
+
+.input-group-btn .btn-default {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+ 
+/*class to use for icon-only buttons*/
+.btn.btn-icon .glyphicon {
+	margin-right: 0;
+}
+
+/*hide the tooltip when not hovered*/
+.tooltip {
+	top: -10000px;
+	width: auto !important;	
+}
+
+.tooltip .tooltip-inner {
+	max-width: none;
+}
+
+/* Display Error Message/Messages */
+/* Remove bullet point icons */
+.alert.alert-warning,
+.alert.alert-warning ul,
+.alert.alert-danger,
+.alert.alert-danger ul{
+	list-style-type: none;
+}
+/* Remove the margin for normal displayError controls
+contained in a span. Leaving it in for other use cases */
+span .alert.alert-warning,
+span .alert.alert-warning ul,
+span .alert.alert-danger,
+span .alert.alert-danger ul{
+	margin-bottom: 0px;
+}
+
+/* Tab Panel */
+.tab-panel{
+	margin: 10px;
+}
+
+/** Navigator **/
+.navigator-twisty.glyphicon-plus-sign,
+.navigator-twisty.glyphicon-minus-sign {
+	font-size: 11pt;
+	margin-right:6px;
+	width:auto;
+	color: #428bca;
+	display: block;
+    float: left;
+    padding: 12px 0;
+    width: auto;
+}
+/* padding for menu items */
+.nav.nav-pills > li > a {
+	padding-left: 22px;
+}
+/* extra padding for items in ContainerNode*/
+.nav.nav-pills li > .nav.nav-pills {
+	padding-left:20px;
+}
+
+/* Accordion */
+.xspAccordion.panel-group .list-group{
+	list-style-type: none;
+}
+
+/* data view control 
+	color: #428BCA;*/
+.xsp *[class*="glyphicon-"] {
+	font-weight: normal;
+}
+.table.dataview .glyphicon-plus-sign,
+.table.dataview .glyphicon-minus-sign{
+	position: relative;
+	top: 2px;
+	font-size: 11pt;
+	color: #428bca;
+}
+.dataview .glyphicon-file{
+	position: relative;
+	left: 8px;
+	font-size: 14px;
+	top: 0px;
+	color: #428bca;
+}
+.table.dataview .xspFirstCell{
+	padding-left: 20px;
+}
+.table.dataview h4{
+	line-height: 1;
+	font-weight: normal
+}
+
+.table.dataview .xspDataViewSummary{
+	padding-top: 2px;
+}
+ 
+div.glyphicon.xspReadIcon{
+	color: #dddddd;
+}
+/* Forum View */
+.forumView .xspForumChildListIcon{
+    border-color: #428BCA;
+    border-style: solid;
+    border-width: 0 0 2px 2px;
+    width: 16px;
+    height: 16px;
+	float: left;
+}
+.forumView ul .media.xspForumChildList{
+	padding-left: 10px;
+	margin-top: 0px;
+}
+.xspForumPost {
+	padding: 7px;
+	border: 1px solid #DDDDDD;
+}
+
+/* Icons */
+.table.dataview [class*="glyphicon-sort"],
+.forumView [class*="glyphicon-sort"]{
+	display: inline;
+	padding: 0px 8px;
+	color: #428bca;
+}
+
+/* tag cloud */
+.xspTagCloud{
+	padding-top: 6px;	
+}
+.xspTagCloudSlider .dijitSliderImageHandle{
+	outline: 0px none;
+}
+.xspTagCloud a.tagCloudSize0, a.tagCloudSize0:visited {
+    color: #5bc0de;
+    font-size: 75%;
+}
+.xspTagCloud a.tagCloudSize1, a.tagCloudSize1:visited {
+    color: #5bc0de;
+    font-size: 85%;
+}
+.xspTagCloud a.tagCloudSize2, a.tagCloudSize2:visited {
+    color: #4477BB;
+    font-size: 90%;
+}
+.xspTagCloud a.tagCloudSize3, a.tagCloudSize3:visited {
+    color: #4477BB;
+    font-size: 95%;
+}
+.xspTagCloud a.tagCloudSize4, a.tagCloudSize4:visited {
+    color: #3399ff;
+    font-size: 100%;
+}
+.xspTagCloud a.tagCloudSize5, a.tagCloudSize5:visited {
+    color: #3399ff;
+    font-size: 110%;
+}
+.xspTagCloud a.tagCloudSize6, a.tagCloudSize6:visited {
+    color: #3399ff;
+    font-size: 120%;
+}
+.xspTagCloud a.tagCloudSize7, a.tagCloudSize7:visited {
+    color: #004C99;
+    font-size: 130%;
+}
+.xspTagCloud a.tagCloudSize8, a.tagCloudSize8:visited {
+    color: #004C99;
+    font-size: 140%;
+}
+.xspTagCloud a.tagCloudSize9, a.tagCloudSize9:visited {
+    color: #004C99;
+    font-size: 150%;
+}
+.xspTagCloud a.tagCloudSize10, a.tagCloudSize10:visited {
+    color: #428bca;
+    font-size: 180%;
+    font-weight: bold;
+}
+/***********************************************************************	
+	OneUI like specific styles used by XPages controls
+	-> Ideally, these classes should be renamed and the rendered adapted
+	   to the new names.
+***********************************************************************/
+
+/* Common utilities coming from OneUI */
+.lotusAltText {
+    display: none;
+}
+.lotusNowrap {
+    white-space: nowrap;
+}
+.lotusMeta {
+	color:#666;
+}
+.lotusTable .lotusMeta {
+    font-size: 0.9em;
+}
+.lotusLeft {
+    float: left;
+    text-align: left;
+}
+.lotusRight {
+    float: right;
+    text-align: right;
+}
+
+/* General table */
+.table h4, .lotusForum h4 {
+    font-size: 1.1em; /* For DataView main topic, ForumView main topic */
+}
+
+
+/*table-based form - use the div one moving forward*/
+.form-table{margin:0;padding:0;zoom:1}
+.form-table .form-title h2{font-size:1.3em;}
+.form-table .form-footer{padding:10px 25px !important;}
+.form-table legend {padding-bottom:5px !important;}
+.form-table .form-footer{padding:10px 25px !important;}
+
+
+/* list of names */
+.lotusFilters {
+    font-size: 0.9em;
+    line-height: 1.8em;
+    margin-top: 5px;
+}
+.lotusFilters a.lotusFilter {
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    padding: 1px 3px;
+    text-decoration: none;
+}
+.lotusFilters a .lotusClose {
+    color: #AAAAAA;
+    padding: 0 4px;
+}
+
+
+/* Links */
+.lotusInlinelist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.lotusInlinelist li {
+    border-left: 1px solid #CCCCCC;
+    display: inline;
+    margin: 0;
+    padding: 0 7px;
+}
+.lotusInlinelist li.lotusFirst, .lotusInlinelist li.lotusLast {
+    border-left-width: 0;
+    padding-left: 0;
+}
+
+.btn + .btn {
+	margin-left: 5px;
+}
+
+/***********************************************************************	
+	Additions to bootstrap
+***********************************************************************/
+
+.container-full {
+	margin: 0 auto;
+	width: 100%;
+}
+
+.container-full > .row {
+	margin-left: 0px;
+    margin-right: 0px;
+}
+
+.xsp .navbar-default, .xsp .navbar-inverse{
+	box-shadow: none;
+}
+.xsp .navbar-brand-img{
+	padding: 6px 12px;
+}
+.xsp .navbar-brand-txt{
+	padding: 13px 12px;
+}
+/*fix for #54: right margin in full width layout*/
+@media (min-width: 768px) {
+  .applayout-banner .navbar-nav.navbar-right:last-child {
+    margin-right: 0 !important;
+  }
+}
+
+/* dashboard layout sidebar */
+
+.sidebar {
+    background-color: #F5F5F5;
+    border-right: 1px solid #EEEEEE;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 15px 6px;
+    z-index: 1000;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    border-bottom: 1px solid #dddddd;
+    top:0;
+  }
+}
+
+.xspDashboardBannerTitle{
+	font-size: 18px;
+	font-weight: bold;
+	padding: 15px 6px;
+	float:left;
+}
+
+.row.xspDashboard {
+	margin: 6px 0px;
+}
+.xspDashboard > h2 {
+	margin: 0px 0px 10px 0px;
+}
+
+.xspDash {
+	text-align: center;
+	align-content: center;
+}
+.xspDash .xspDashTitle{
+	margin-bottom: 0px;
+}
+
+.xspCollapsibleMenu {
+	padding: 8px 6px; 
+	float: left;
+}
+.xspCollapsibleMenu ul.dropdown-menu{
+	padding: 4px; 
+	margin: 0px 4px;
+	min-width: 200px;
+}
+
+.xspNavbar{
+	vertical-align: middle;
+	text-align: center;
+	padding:6px;
+}
+
+.xsp .navbar.navbar-inverse{
+	color: #dddddd;
+}
+.xspNavbar .xspNavbarContent{ 
+	display:inline-block;
+}
+.xspNavbar .xspNavbarElement {
+	height: 100%;
+	padding: 0px 6px;
+}
+
+/***********************************************************************	
+	Dojo 1.9.x fixes for DBootstrap
+***********************************************************************/
+
+/* Spinner button */
+.dijitSpinner .dijitArButtonInner .dijitInputField {
+    margin: 0;
+	padding: 0;
+	border: 0 none;
+	box-shadow: none;	
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	transition: none;
+	-moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: color 0 ease-in;        		
+}
+
+/* text boxes */
+.dbootstrap .form-control.dijitTextBox {
+	line-height: 16px;
+	height:30px;
+}
+
+/* styling of icons in dojo comboboxes */
+.dbootstrap .dijitComboBox input.dijitArrowButtonInner {
+	display: block;
+    margin-left: -5px;
+    text-indent: 0 !important;
+}
+
+/* styling of icons in dojo date/ time pickers */
+.dijitComboBox > div.dijitButtonNode,
+.dijitDateTextBox > div.dijitButtonNode,
+.dijitTimeTextBox > div.dijitButtonNode {
+	margin-top: 0;
+	margin-right: 0;
+	width: 25px;
+	height: 28px;	
+}
+.dbootstrap .dijitComboBox.dijitDateTextBox input.dijitArrowButtonInner,
+.dbootstrap .dijitComboBox.dijitTimeTextBox input.dijitArrowButtonInner {
+    display: block;
+    margin-left: -4px;
+    width: 14px;
+    color: transparent;
+}
+.dbootstrap .dijitComboBox.dijitDateTextBox input.dijitArrowButtonInner {
+    background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
+    background-position: -192px -120px;
+}
+.dbootstrap .dijitComboBox.dijitTimeTextBox input.dijitArrowButtonInner {
+    background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
+    background-position: -49px -24px;
+}
+
+/* Dojo checkbox & radio button */
+.dbootstrap .dijitCheckBox.dijitCheckBoxChecked.dijitChecked {
+	font-size: 9.5px;
+	padding: 0px;
+}
+.dbootstrap div.dijitCheckBox + label,
+.dbootstrap div.dijitRadio + label {
+	font-weight: normal;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif";
+	font-size: 14px;
+	margin: 5px;
+}
+.icon-ok:before, .dbootstrap .dijitRadio.dijitRadioChecked:before {
+	content: "\f111";
+}
+.dbootstrap .dijitRadio.dijitRadioChecked {
+	font-size: 8.5px;
+	padding: 0px;
+}
+
+/** dojoTabContainer **/
+.dbootstrap .dijitTabContainer .dijitContentPane.dijitTabPane {
+	height: 100% !important;
+	width: 100% !important;
+}
+/* Use GlyphIcon for the X on tabs */
+.dbootstrap .dijitTabCloseButton.dijitTabCloseIcon {
+	font-family: Glyphicons Halflings;
+	font-weight: normal;
+	color: #428BCA;
+	font-size: 10pt;
+	opacity: 1;
+}
+/* The glyphicons X icon*/
+.dbootstrap .dijitTabCloseButton.dijitTabCloseIcon:before {
+	content: "\e014";
+}
+/* hide the text of X buttons */
+.dbootstrap .dijitTabCloseButton.dijitTabCloseIcon .dijitTabCloseText {
+	display: none;
+}
+/* add margin around the tab container */
+.dbootstrap .dijitTabContainer {
+	margin: 6px 12px;
+}
+/* fix the border color for unselected tabs*/
+.dbootstrap .dijitTabContainerTop .dijitTab {
+	border-color: #DDDDDD;
+}
+/* overrides the generated width from dojo to fix overbite of tablist */
+.dbootstrap .dijitTabContainer .dijitTabPaneWrapper {
+	width: 100% !important;
+}
+
+/* Use GlyphIcons for the arrow buttons on tablist
+ * We need to stomp over dojo js alterations to these styles
+ * using !important in a few cases
+*/
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton{
+    border: 1px solid #DDDDDD;
+    color: #428BCA;
+    font-family: "Glyphicons Halflings";
+    opacity: 1;
+    font-size: 9pt;
+    padding: 9px 2px;
+    width: 18px;
+    height: 38px !important;
+    position: absolute !important;
+    top: 1px !important;
+}
+/* Glyph Icons */
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton.dijitAlignLeft:before {
+    content: "\e079";
+}
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton.dijitAlignRight.dijitbelow-altArrowButton:before {
+    content: "\e114";
+}
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton.dijitAlignRight:before {
+    content: "\e080";
+}
+/* reverse margins on right side arrows */
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton.dijitAlignRight{
+    margin-right: 0px;
+    margin-left: 2px;
+}
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton.dijitAlignRight.dijitbelow-altArrowButton {
+    padding-top: 10px;
+}
+/* Hide the text icons on arrow buttons*/
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton .dijitTabStripSlideLeftIcon,
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton .dijitTabStripMenuIcon,
+.dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton .dijitTabStripSlideRightIcon {
+	display:none;
+}
+
+.xsp.dbootstrap .dijitUpArrowButton .dijitArrowButtonInner:before {
+	content: " ";
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #000000;
+    border-style: solid;
+    border-width: 5px;
+    content: " ";
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    height: 0;
+    left: 5px;
+    position: relative;
+    width: 0;
+}
+.xsp.dbootstrap .dijitActive .dijitUpArrowButtonActive .dijitArrowButtonInner:before{
+	border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #888888;
+}
+
+.xsp.dbootstrap .dijitActive .dijitDownArrowButtonActive .dijitArrowButtonInner:before {
+	border-color:  #888888 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)
+}
+
+.xsp.dbootstrap .dijitDownArrowButton .dijitArrowButtonInner:before {
+    content: " ";
+    border-color:  #000000 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 5px;
+    content: " ";
+    display: block;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    height: 0;
+    left: 5px;
+    top:3px;
+    position: relative;
+    width: 0;
+}
+
+.xsp.dbootstrap .dijitCheckBox.dijitCheckBoxChecked:before{
+    content: "\e013";
+    font-family: "Glyphicons Halflings";
+    font-size: 9px;
+    left: 1px;
+    position: relative;
+    color: #428bca;
+}
+
+.xsp.dbootstrap .dijitRadio.dijitRadioChecked:before {
+    content: "\2022";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 34px;
+    line-height: 12px;
+    text-align: center;
+}
+
+.xsp.dbootstrap tr.dijitMenuItem td:last-child {
+    padding-right: 10px;
+}
+.xsp.dbootstrap .dijitMenuArrowCell .dijitMenuExpand:before,
+.xsp.dbootstrap .dijitTitlePane .dijitClosed .dijitArrowNode:before {
+    font-family: "Glyphicons Halflings";
+    content: "\e080";
+    font-size: 12px;
+    padding-left: 10px;
+    position: relative;
+    top: -1px;
+    color: #428bca;
+}
+
+.xsp.dbootstrap .dijitInputContainer {
+    padding: 4px;
+}
+
+.xsp .dijitIcon:before, .xsp.dbootstrap .dijitMenuArrowCell .dijitMenuExpand:before, 
+.xsp.dbootstrap .dijitTabStripIcon:before, .xsp.dbootstrap .dijitArrowButtonInner:before, 
+.xsp.dbootstrap .dijitCheckBox:before, .xsp.dbootstrap .dijitRadio:before, 
+.xsp.dbootstrap .dijitCalendarIncrementControl:before, .xsp.dbootstrap .dijitTreeExpando:before, 
+.xsp.dbootstrap .dijitTitlePane .dijitArrowNode:before, .xsp.dbootstrap .dgrid-sort-arrow:before {
+    font-family: "Glyphicons Halflings";
+    color: #428bca;
+}
+.xsp .icon-arrow-left:before, .xsp.dbootstrap .dijitCalendarDecrease:before {
+    content: "\e079";
+    font-family: "Glyphicons Halflings";
+    color: #428bca;
+}
+
+.xsp .icon-arrow-right:before, .xsp.dbootstrap .dijitCalendarIncrease:before {
+    content: "\e080";
+    font-family: "Glyphicons Halflings";
+    color: #428bca;
+}
+
+/* TODO replace cut and paste icons with glyphicons or other font icons when possible */
+.xsp .icon-cut:before, .xsp .dijitIconCut:before, .xsp .dijitEditorIconCut:before {
+    content: "";
+    background-image: url("../../../../.oneuiv302/oneui/dojoTheme/lotusui30dojo/images/editorIcons.png");
+    background-position: -108px center;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.icon-copy:before, .dijitIconCopy:before, .dijitEditorIconCopy:before {
+    content: "\e178";
+    vertical-align: middle;
+    height: 18px;
+    position: relative;
+    top: 3px;
+    width: 18px;
+}
+.icon-paste:before, .dijitIconPaste:before, .dijitEditorIconPaste:before {
+    content: "";
+    background-image: url("../../../../.oneuiv302/oneui/dojoTheme/lotusui30dojo/images/editorIcons.png");
+    background-position: -486px center;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+
+/* menu */
+.dijitMenu.dijitMenuActive .dijitMenuItemFocused{
+	outline: 0px none;
+}
+
+/* dojo dialogs - remove outline */
+.xspmodal.dijitFocused:focus {
+	outline: 0px none;
+}
+.xspmodal .modal-header .close{
+	color: #428BCA;
+	opacity: 1;
+	font-size: 28px;
+}
+
+/* dojo border container/pane - needs more work
+.dijitSplitContainer-child, .dijitBorderContainer-child {
+    border: 1px solid #CCCCCC;
+}
+.dijitSplitContainer-dijitContentPane, .dijitBorderContainer-dijitContentPane {
+    background-color: #FFFFFF;
+    padding: 5px;
+}
+.dijitSplitterH, .dijitGutterH {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 0 none;
+    height: 5px;
+}
+.dijitSplitterV .dijitSplitterThumb {
+    background: none repeat scroll 0 0 #B0B0B0;
+    height: 19px;
+    left: 2px;
+    width: 1px;
+}
+.dijitSplitContainerSizerH .thumb, .dijitSplitterV .dijitSplitterThumb {
+    overflow: hidden;
+    position: absolute;
+    top: 49%;
+}*/
+/*eof*/

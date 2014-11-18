@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:listInline>
+		<xp:panel>
+			<xp:label value="Created "></xp:label>
+			<xp:text id="createdDateOut" value="#{javascript:@Created()}" />
+			<xp:label value=" by "></xp:label>
+			<xp:link styleClass="lotusPerson" id="from"
+				text="#{javascript: peopleBean.getPerson(document1.getItemValueString('From')).displayName }"
+				value="/members.xsp">
+				<xp:this.parameters>
+					<xp:parameter name="profile"
+						value="#{javascript:peopleBean.getPerson(document1.getItemValueString('From')).abbreviatedName}">
+					</xp:parameter>
+				</xp:this.parameters>
+			</xp:link>
+		</xp:panel>
+		<xp:panel>
+			<xp:label value="Report Status: "></xp:label>
+			<xp:span id="reportStatusOut">
+				<!-- Note, FileThisStatusDoc are Strings, not integers -->
+				<xp:label disableTheme="true" value="Active"
+					rendered="#{javascript: document1.getItemValueString('FileThisStatusDoc') == '0'}" ></xp:label>
+				<xp:label disableTheme="true" value="Inactive"
+					rendered="#{javascript: document1.getItemValueString('FileThisStatusDoc') == '1'}" ></xp:label>
+			</xp:span>
+		</xp:panel>
+	</xe:listInline>
+</xp:view>

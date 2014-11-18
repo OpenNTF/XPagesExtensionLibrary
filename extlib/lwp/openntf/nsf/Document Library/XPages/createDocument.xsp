@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.resources>
+		<xp:script src="/xpTopicThreadState.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		TopicThreadState.init();
+		if( !param.documentId && param.parentId ){
+			TopicThreadState.initNewReply();
+		}
+	}]]></xp:this.beforePageLoad>
+	
+	<xc:layout>
+		<xp:this.facets>
+			<xp:panel xp:key="MiddleColumn">
+				<xp:this.data>
+					<xp:dominoDocument action="newDocument"
+						var="document1" computeWithForm="onsave"
+						ignoreRequestParams="true" formName="Document">
+					</xp:dominoDocument>
+				</xp:this.data>
+				
+				<xc:breadcrumb></xc:breadcrumb>
+				
+				<xc:rtaForm formName="Document"></xc:rtaForm>
+				
+<!--				<xe:formTable id="formTable1" formTitle="New Document" labelPosition="left">-->
+<!--					<xe:formRow id="formRow1" label="Subject:">-->
+<!--						<xp:inputText required="true" style="width:100%;"-->
+<!--							value="#{document1.Subject}" />-->
+<!--					</xe:formRow>-->
+<!--					-->
+<!--					<xe:formRow labelPosition="none">-->
+<!--						<xp:inputRichText id="rtBody" value="#{document1.Body}">-->
+<!--						</xp:inputRichText>-->
+<!--					</xe:formRow>-->
+<!--					-->
+<!--					<xe:this.facets>-->
+<!--						<xp:panel xp:key="footer">-->
+<!--							<xp:button value="Save" id="button1">-->
+<!--								<xp:eventHandler event="onclick" submit="true" refreshMode="complete">-->
+<!--									<xp:this.action>-->
+<!--										<xp:actionGroup>-->
+<!--											<xp:saveDocument-->
+<!--												var="document1">-->
+<!--											</xp:saveDocument>-->
+<!--											<xp:openPage-->
+<!--												name="#{javascript:sessionScope.webFrom}">-->
+<!--											</xp:openPage>-->
+<!--										</xp:actionGroup>-->
+<!--									</xp:this.action>-->
+<!--								</xp:eventHandler>-->
+<!--							</xp:button>-->
+<!--						</xp:panel>-->
+<!--					</xe:this.facets>-->
+<!--					-->
+<!--				</xe:formTable>-->
+
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+</xp:view>

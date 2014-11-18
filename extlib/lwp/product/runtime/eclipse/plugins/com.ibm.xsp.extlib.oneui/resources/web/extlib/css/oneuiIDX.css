@@ -1,0 +1,202 @@
+/* Common CSS styles for both Android and IDX */
+
+.mblDataView .mblFooter .mblFooterText .xspPagerContainer .xspPagerNav.xspNext a{
+	margin-right: 10px;
+}
+
+.mblDataView .mblFooter .mblFooterText.mblLeft ,
+.mblDataView .mblFooter .mblFooterText.mblRight,
+.mblDataView .mblFooter .mblFooterText.mblCenter {
+	float:left;
+}
+
+.mblDataView .mblFooter .xspPagerRight,
+.mblDataView .mblFooter .xspPagerLeft,
+.mblDataView .mblFooter .xspPagerNav {
+	float:none;
+}
+
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter .mblFooterText {
+	padding: 4px 0px 4px 0px;
+}
+
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter {
+	padding: 10px;
+}
+
+.mblDataView li.mblListItem.mblVariableHeight.mblFooter .mblFooterText a {
+    margin: 0;
+}
+
+.mblDataView .mblDataRow .mblListItem span.xspTextComputedField,
+.mblDataView .mblDataRow .mblListItem > div{
+	width: 95%
+}
+
+.mblDataView .mblDataRow .mblListItem .mblListItemRightIcon{
+	width: 5%;
+	max-width: 40px;
+}
+
+.mobileFormContainer textarea {
+	width: 98%;
+}
+
+.xspPagerContainer .xspPagerNav.xspGroup a{
+	color: #105CB6;
+}
+
+.mblToolBarButtonBody {
+	text-shadow: none;
+}
+
+.xspDataTableRowUnread td:first-child{padding-left:0px !important; background:none !important;}
+
+.xspColumnUnreadImage{padding-left:5px; margin-right:5px;}
+
+html[dir=rtl] .xspDataTableRowUnread td:first-child{padding-right:0px !important; background:none !important;}
+
+html[dir=rtl] .xspColumnUnreadImage{padding-left:0px; margin-right:0px; padding-right:5px; margin-left:5px;}
+
+.mobile .mblRadioButton{
+	position: relative;
+	background-color: #ffffff;
+	background-image: none;
+	height: auto;
+}
+
+fieldset.mblRadioButton {
+	border-radius: 8px;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 1px;
+	margin: 7px 9px 16px;
+	width: auto;
+	padding: 3px 0px 8px 0px;
+}
+legend.mblRadioButton {
+	border: 0px;
+	top: -5px;
+	position: relative;
+	width: auto;
+	padding: 0px 3px 0px 3px;
+}
+table.mblRadioButton {
+	border: 0px;
+	width: auto;
+}
+label.mblRadioButton {
+	border: 0px;
+	width: auto;
+}
+input[type="radio"] {
+	position:relative;
+	margin:-.3em 5px .2em 8px;
+	padding: 0;
+	width:1.2em;
+	height:1.2em;
+	border-width:1px;
+	border-style:outset;
+	border-style:solid;
+	border-color:#888;
+	border-radius:1em;
+	background-image:-webkit-linear-gradient(top,#d6d6d6 0%,#fbfbfb 100%);
+	font:inherit;
+	cursor:pointer;
+	-webkit-transform:translatey(0.45em);
+	-webkit-appearance:none;
+	-webkit-tap-highlight-color:rgba(255,255,255,0);
+}
+
+input[type="radio"]:checked {
+	border-color:#bbb;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#d4d4d4),to(#fdfdfd));
+}
+
+input[type="radio"]:checked::after {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-.38em;
+	margin-left:-.38em;
+	width:.75em;
+	height:.75em;
+	border-radius:1em;
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#4a4a4a),to(#131313));
+	content:"";
+}
+
+.mobile .mblCheckBox {
+	position: relative;
+	background-color: #ffffff;
+	background-image: none;
+	height: auto;
+}
+
+fieldset.mblCheckBox {
+	border-radius: 8px;
+	border-style: solid;
+	border-color: #CCCCCC;
+	border-width: 1px;
+	margin: 7px 9px 16px;
+	width: auto;
+}
+legend.mblCheckBox {
+	border: 0px;
+	top: -5px;
+	position: relative;
+	width: auto;
+}
+table.mblCheckBox {
+	border: 0px;
+	width: auto;
+}
+input[type="checkbox"]{
+    position: relative;
+    margin: -0.3em 3px .2em 8px !important;
+    width: 1.2em;
+    height: 1.2em !important;
+    border: 1px solid #888;
+    border-width: 1px;
+    border-style: outset;
+    border-radius: 2px;
+    background-color: #fbfbfb;
+    background-image: -webkit-linear-gradient(top,#d6d6d6 0%,#fbfbfb 100%);
+    font: inherit;
+    cursor: pointer;
+    -webkit-transform: translatey(0.45em);
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+
+input[type="checkbox"]:checked {
+    border-color: #bbb;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#d4d4d4),to(#fdfdfd));
+}
+input[type="checkbox"]:checked::after {
+    position: absolute;
+    top: 0;
+    left: .3em;
+    width: .4em;
+    height: .7em;
+    border-width: .15em;
+    border-style: none solid solid none;
+    border-color: #000;
+    content: "";
+    -webkit-transform: rotate(45deg);
+    -webkit-transform-origin: 50% 50%;
+}
+
+.mblColorDefaultSel {
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#222),to(#333));
+}
+
+ul.mblRoundRectList.menuHidden{
+	margin: 0px;
+	border: 0px;
+	height: 0px;
+}
+
+ul.mblRoundRectList.menuShown{
+	height: auto;
+}

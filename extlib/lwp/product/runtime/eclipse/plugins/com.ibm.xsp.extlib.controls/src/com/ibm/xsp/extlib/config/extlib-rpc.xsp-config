@@ -1,0 +1,192 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>rpc</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+	
+
+	<component>
+	   
+		<description>%component.jsonRpcService.descr%</description>
+		<display-name>%component.jsonRpcService.name%</display-name>
+		<component-type>com.ibm.xsp.extlib.rpc.JsonRpcService</component-type>
+		<component-class>com.ibm.xsp.extlib.component.rpc.UIJsonRpcService</component-class>
+        
+        
+        
+        
+        
+  		<property>
+			<description>%property.pathInfo.descr%</description>
+			<display-name>%property.pathInfo.name%</display-name>
+			<property-name>pathInfo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        
+  		<property>
+			<description>%property.serviceName.descr%</description>
+			<display-name>%property.serviceName.name%</display-name>
+			<property-name>serviceName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+      	<property>
+        	<description>%property.methods.descr%</description>
+        	<display-name>%property.methods.name%</display-name>
+        	<property-name>methods</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.component.rpc.RemoteMethod</property-item-class>
+            	<property-add-method>addMethod</property-add-method>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+        	</property-extension>
+      	</property>
+
+        
+        <property>
+            <description>%property.state.descr%</description>
+            <display-name>%property.state.name%</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+
+        
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.JsonRpcService</component-family>
+			<renderer-type>com.ibm.xsp.extlib.rpc.JsonRpcService</renderer-type>
+			<tag-name>jsonRpcService</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+                <category>Data Access</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+	&lt;xp:image url="/extlib/designer/markup/RPC.png" id="image1"&gt;&lt;/xp:image&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+    <complex-type>
+        <description>%complex-type.remoteMethod.descr%</description>
+        <display-name>%complex-type.remoteMethod.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rpc.RemoteMethod</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rpc.RemoteMethod</complex-class>
+  		<property>
+  		    
+			<description>%property.name.complex-type.remoteMethod.descr%</description>
+			<display-name>%property.name.complex-type.remoteMethod.name%</display-name>
+			<property-name>name</property-name>
+			<property-class>java.lang.String</property-class>
+		</property>
+      	<property>
+        	<description>%property.arguments.descr%</description>
+        	<display-name>%property.arguments.name%</display-name>
+        	<property-name>arguments</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</property-item-class>
+            	<property-add-method>addArgument</property-add-method>
+        	</property-extension>
+      	</property>
+  		<property>
+  		    
+			<description>%property.script.descr%</description>
+			<display-name>%property.script.name%</display-name>
+			<property-name>script</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+              		<editor>com.ibm.std.MultiLine</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+        <complex-extension>
+   			<tag-name>remoteMethod</tag-name>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>%complex-type.remoteMethodArg.descr%</description>
+        <display-name>%complex-type.remoteMethodArg.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rpc.RemoteMethodArgument</complex-class>
+  		<property>
+  		    
+			<description>%property.name.complex-type.remoteMethodArg.descr%</description>
+			<display-name>%property.name.complex-type.remoteMethodArg.name%</display-name>
+			<property-name>name</property-name>
+			<property-class>java.lang.String</property-class>
+		</property>
+		
+		
+		  
+  		<property>
+			<description>%property.type.descr%</description>
+			<display-name>%property.type.name%</display-name>
+			<property-name>type</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        string
+                        boolean
+                        number
+                        list
+                    </editor-parameter>
+               </designer-extension>
+           </property-extension>
+		</property>
+        <complex-extension>
+   			<tag-name>remoteMethodArg</tag-name>
+        </complex-extension>
+    </complex-type>
+    
+</faces-config>

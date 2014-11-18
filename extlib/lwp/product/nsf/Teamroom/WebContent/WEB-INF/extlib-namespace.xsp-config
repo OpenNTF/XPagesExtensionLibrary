@@ -1,0 +1,7 @@
+<faces-config>
+  <!-- This file is a workaround from SPR#MKEE89JPHG -->
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+  </faces-config-extension>
+</faces-config>

@@ -1,0 +1,128 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2002, 2013                                       -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="localization">
+	<!-- This tool is used for .java file localization. 
+	a) It runs a pre-processor on .java files, searching for comments like so:
+			return "Select A Name";  // $NLS-NamePickerRenderer.SelectAName-1$
+		(or NLI, NLW, NLE, NLX), and replacing with content like:
+			return ResourceHandler.getString("NamePickerRenderer.SelectAName");
+	b) It takes the english string from the .java file and includes it in a 
+		message_en.properties file, like:
+			NamePickerRenderer.SelectAName=Select A Name
+	c) It does a word-count of all the strings, in .java files and other *_en.properties
+	d) It outputs a log with warnings for duplicate strings, and for untagged strings
+		- strings that are DoNotTranslate should be tagged with: // $NON-NLS-1$ 
+	-->
+
+ <condition property="enable.localize" value="true">
+	    <istrue  value="${enable.localize.global}"/>
+ </condition>
+
+<condition property="dir.buildbase" value="${basedir}/build">
+		<and>
+			<isset property="wp.build.layout"/>
+			<isset property="enable.localize"/>
+		</and>
+	</condition>
+	<condition property ="dir.buildbase" value="${wsbld}/${build.dir.name}">
+		<isset property="enable.localize"/>
+	</condition>
+	<condition property="dir.build" value="${basedir}/build">
+		<and>
+			<isset property="wp.build.layout"/>
+			<isset property="enable.localize"/>
+		</and>
+	</condition>
+	<condition property ="dir.build" value="${dir.buildbase}/${ant.project.name}">
+		<isset property="enable.localize"/>
+	</condition>
+
+
+	<target name="localization" if="enable.localize">
+		<echo message="Starting localization process:: ${dir.newSrc}"/>
+		<taskdef name="localize" classname="com.ibm.xsp.localize.tools.localization.internal.Localize">
+			<classpath>
+				<pathelement location="${env.WPLC_TOOLS}/util/lib/xsp.tools.localize.jar"/>
+<!-- 				<pathelement location="${wsbld}/tools/localization/xsp.tools.localize.jar"/>			 -->
+			</classpath>
+		</taskdef>
+
+		<localize reportDir="${env.LWP_HOME}/logs/ToolReports/localization" PostStringFreezeFlag="false" localizeDir="${dir.newSrc}" SummaryReportDir="${env.LWP_HOME}/logs/ToolReports/localization/Summary"/>
+
+<!-- 		<echo message="basedir:: ${basedir}"/> -->
+<!-- 		<echo message="dir.src.name:: ${dir.src.name}"/> -->
+
+		<!-- copy remaining artifacts to the new dir -->
+		<copy todir="${dir.newSrc}" overwrite="true">
+			<fileset dir="${basedir}/${dir.src.name}" includes="${include.pattern}" excludes="${exclude.pattern},${props.exclude.pattern},${global.exclude.pattern},${lang.props.excludes},${lang.dirs.excludes}"/>
+		</copy>
+
+<!-- Before copying back to the src dir , delete the files first,This is required because the files have been -->
+<!-- added to CC , hence permissions will be readonly. So deleting them first and then copying would help.Discussed with -->
+<!-- Kar regarding this. -->
+		<loadproperties srcFile="${dir.newSrc}/TempCheckFileIdentity.properties"/>
+
+		<echo message=" Property messagePropertyDifferent value is ${messagePropertyDifferent}"/>
+		<echo message=" Property loggingPropertyDifferent value is ${loggingPropertyDifferent}"/>
+
+		<antcall target="deleteAndCopyMessage"/>
+		<antcall target="deleteAndCopyLogging"/>
+		<antcall target="deleteAndCopySpecialAudience" />
+		<delete>
+			<fileset dir="${dir.newSrc}" casesensitive="yes" includes="TempCheckFileIdentity.properties"/>
+		</delete>
+	</target>
+
+	<target name="deleteAndCopyMessage" if="messagePropertyDifferent">
+		<delete>
+			<fileset dir="${basedir}/${dir.src.name}" casesensitive="yes" includes="**/*messages_en.*"/>
+		</delete>
+		<!-- copy the messages.properties back to source , if there are any changes,will be checked in CC back -->
+		<copy todir="${basedir}/${dir.src.name}" overwrite="true">
+			<fileset dir="${dir.src}" includes="**/*messages_en*"/>
+		 </copy>
+	</target>
+
+	<target name="deleteAndCopyLogging" if="loggingPropertyDifferent">
+		<delete>
+			<fileset dir="${basedir}/${dir.src.name}" casesensitive="yes" includes="**/*.properties" excludes="**/*messages_en*,**/*messages*,**/*specialAudience_en.*"/>
+		</delete>
+		<!-- copy the messages.properties back to source , if there are any changes,will be checked in CC back -->
+		<copy todir="${basedir}/${dir.src.name}" overwrite="true">
+			<fileset dir="${dir.src}" includes="**/*.properties" excludes="**/*messages_en*,**/*messages*,**/*specialAudience_en.*,**/*specialAudience.*,TempCheckFileIdentity.properties"/>
+		</copy>
+	</target>
+	
+	<target name="deleteAndCopySpecialAudience">
+		<delete>
+			<fileset dir="${basedir}/${dir.src.name}" casesensitive="yes" includes="**/*specialAudience_en.*"/>
+		</delete>
+		<!-- copy the messages.properties back to source , if there are any changes,will be checked in CC back -->
+		
+		<copy todir="${basedir}/${dir.src.name}" overwrite="true">
+			<fileset dir="${dir.src}" includes="**/*specialAudience_en*"/>
+		 </copy>
+	</target>
+
+	<target name ="ProcessingProperties">
+	</target>
+
+</project>
+
+

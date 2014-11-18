@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="Contact"
+			ignoreRequestParams="true" computeWithForm="onsave" action="newDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+    <xe:appPage resetContent="false" id="form" pageName="form" preload="true">
+
+		<xe:djxmHeading id="mHeader8" label="Add Contact"
+			back="Home" moveTo="home"></xe:djxmHeading>
+
+		<xe:dynamicContent id="dynamicContent" defaultFacet="form">
+			<xp:this.facets>
+				<xe:formTable id="formTable1" xp:key="form"
+					formDescription="Please insert the details of the new contact below.">
+					<xp:this.facets>
+						<xp:panel xp:key="footer" id="panel1">
+							<xp:button value="Save" id="buttonSave">
+								<xp:eventHandler event="onclick" submit="true"
+									id="evtSave" refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:saveDocument></xp:saveDocument>
+											<xe:changeDynamicContentAction
+												for="dynamicContent" facetName="view">
+											</xe:changeDynamicContentAction>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+						</xp:panel>
+					</xp:this.facets>
+					<xe:formRow id="formRow1" label="First Name">
+						<xp:inputText id="FirstName" required="true"
+							value="#{document1.FirstName}">
+						<xp:this.validators>
+							<xp:validateRequired
+								message="First Name is a required field.">
+							</xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow2" label="Last Name">
+						<xp:inputText id="LastName" required="true"
+							disableClientSideValidation="true"
+							value="#{document1.LastName}">
+						<xp:this.validators>
+							<xp:validateRequired
+								message="Last Name is a required field.">
+							</xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow4" label="Email">
+						<xp:inputText id="EMail" required="true"
+							disableClientSideValidation="true" value="#{document1.Email}">
+						<xp:this.validators>
+							<xp:validateRequired
+								message="Email is a required field.">
+							</xp:validateRequired>
+						</xp:this.validators></xp:inputText>
+					</xe:formRow>
+					<xe:formRow id="formRow8" label="City">
+						<xp:comboBox id="City" value="#{document1.City}">
+							<xp:selectItem itemLabel="Dublin"></xp:selectItem>
+							<xp:selectItem itemLabel="London"></xp:selectItem>
+							<xp:selectItem itemLabel="New York"></xp:selectItem>
+							<xp:selectItem itemLabel="Boston"></xp:selectItem>
+						</xp:comboBox>
+					</xe:formRow>
+				</xe:formTable>
+				<xp:div loaded="${javascript:!document1.isNewNote()}" xp:key="view">
+					<!--xe:mBusinessCard id="mBusinessCard1" phoneNumber=" "
+						status="available">
+						<xe:this.name>
+								<![CDATA[#{javascript:var val = document1.getItemValueString("FirstName") + " " + document1.getItemValueString("LastName");
+									if(null != val && "" != val){
+										return val;
+									}
+									return "";}]]>
+						</xe:this.name>
+
+						<xp:this.email>
+								<![CDATA[#{javascript:return document1.getItemValueString("Email");}]]>
+						</xp:this.email>
+						<xp:this.location><![CDATA[#{javascript:var val = document1.getItemValueString("City");
+													if(null != val && "" != val){
+													return val;
+												}
+												return "";}]]>
+						</xp:this.location>
+						<xp:this.picture><![CDATA[#{javascript:var imageName = "NoPhoto.png";
+								return(imageName);}]]>
+						</xp:this.picture>
+
+					</xe:mBusinessCard-->
+					<xp:div styleClass="buttonLinkContainer">
+						<xp:link escape="true" text="Back to Form View" id="link1"
+							styleClass="buttonLink">
+							<xp:eventHandler event="onclick" submit="true"
+								id="eventHandler1" refreshMode="complete">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:executeScript
+											script="#{javascript:document1.getDocument().removeItem('FirstName');document1.getDocument().removeItem('LastName');document1.getDocument().removeItem('Email');document1.getDocument().removeItem('City');}">
+										</xp:executeScript>
+										<xe:changeDynamicContentAction
+											for="dynamicContent" facetName="form">
+										</xe:changeDynamicContentAction>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</xp:div>
+				</xp:div>
+			</xp:this.facets>
+		</xe:dynamicContent>
+	</xe:appPage>
+</xp:view>

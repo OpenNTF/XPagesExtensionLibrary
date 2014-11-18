@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="38e" sequence="10" unid="8DBD9DB7C9A13333802579670054CFD2">
+<created><datetime>20111215T152622,26+00</datetime></created>
+<modified><datetime>20120106T115150,75+00</datetime></modified>
+<revised><datetime>20120106T115150,74+00</datetime></revised>
+<lastaccessed><datetime>20120106T115150,75+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152622,44+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name></updatedby>
+<wassignedby><name>CN=arthur-server/O=dubmob</name></wassignedby>
+<item name="$TITLE" sign="true"><text>xpTopicThreadState</text></item>
+<item name="$Flags"><text>.5834Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+</note>

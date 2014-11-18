@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Calendar Store
+Bundle-SymbolicName: com.ibm.domino.calendar.store;singleton:=true
+Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Vendor: IBM
+Require-Bundle: com.ibm.domino.commons
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.domino.calendar.store
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

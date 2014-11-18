@@ -1,0 +1,56 @@
+<!-- ===================================================================== -->
+<!-- Custom targets called from a project's generated build.xml            -->
+<!-- Set customBuildCallbacks=<path/to/this/file> in your build.properties.-->
+<!-- ===================================================================== -->
+<project name="Build specific targets and properties" default="noDefault">
+	
+	<import file="${wsbld}/tools/copyright-build/srcplugin_brand.xml" />
+	<import file="${wsbld}/tools/copyright-build/srczip_license.xml" />
+
+
+
+	<!-- ===================================================================== -->
+	<!-- Default target                                                        -->
+	<!-- ===================================================================== -->
+	<target name="noDefault">
+		<echo message="This file must be called with explicit targets" />
+	</target>
+	
+	<!-- ===================================================================== -->
+	<!-- Steps to do before the target gather.bin.parts                        -->
+	<!-- Available parameters :                                                -->
+	<!--  destination.temp.folder - the directory plugins will be collected to -->
+	<!--  feature.directory - the directory containing the resulting feature   -->
+	<!-- ===================================================================== -->
+	<target name="pre.gather.bin.parts">
+	</target>
+	
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the target gather.bin.parts                         -->
+	<!-- Available parameters :                                                -->
+	<!--  destination.temp.folder - the directory plugins will be collected to -->
+	<!--  feature.directory - the directory containing the resulting feature   -->
+	<!-- ===================================================================== -->
+	<target name="post.gather.bin.parts">
+		
+		<!-- Regex computes the target path -->
+		<!-- // from org.openntf.extlib.build.source -->
+		<!-- // to org.openntf.extlib.feature -->
+		<propertyregex property="feature.dir.without.build.source" input="${feature.directory}" regexp="build.source" replace="feature" global="true" />
+		<echo message="DEBUG post.gather.bin.parts feature.directory ${feature.directory}" />
+		<echo message="DEBUG post.gather.bin.parts feature.dir.without.build.source ${feature.dir.without.build.source}" />
+
+		<!-- Copy sourceTemplateFeature/feature.xml to /features/org.openntf.extlib.feature.source
+		[Note, normal eclipse builds put the sourceTemplateFeature folder in the plugin feature (org.openntf.extlib.feature),
+		but here we have the sourceTemplateFeature folder in the build-time-only feature, 
+		so have to explicitly copy over its contents to the source feature.]
+		Note, this copy_branding is in: \extlib\lwp\tools\copyright-build\srcplugin_brand.xml 
+		-->
+		<antcall target="copy_branding">
+			<param name="param.feature.dir" value="${feature.dir.without.build.source}" />
+			<param name="brand.plugin.source.dir" value="product/runtime/eclipse/features/org.openntf.extlib.build.source" />
+			<param name="source.or.opensource" value="source" />
+		</antcall>		
+	</target>
+
+</project>

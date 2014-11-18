@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:layout navigationPath="/members">
+		<xc:memberManagement id="memberManagement">
+			<xc:this.loaded><![CDATA[${javascript:param.profile == null && param.subteam == null && param.documentId == null}]]></xc:this.loaded>
+		</xc:memberManagement>
+		<xc:memberProfile id="memberProfile" loaded="${param.profile != null || param.documentId != null}"></xc:memberProfile>
+		<xc:subteamProfile id="subteamProfile">
+			<xc:this.loaded><![CDATA[${javascript:param.profile == null && param.subteam != null}]]></xc:this.loaded>
+		</xc:subteamProfile>
+	</xc:layout>
+</xp:view>

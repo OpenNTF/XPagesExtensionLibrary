@@ -1,0 +1,37 @@
+<div>
+	<style>
+	.xspPickerInputText {font-weight: bold;}
+	.xspPickerHr {margin-top:10px; margin-bottom:10px;}
+	.unselectable {-moz-user-select: none; -webkit-user-select: none;}
+/** Moved all styles below to xsp.mixin.css **/
+/* 	.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none;} */
+/* 	.xspPickerBody {margin:0; padding:0; background:#fff; } */
+/* 	.xspPickerItemSelected {background:#428BCA !important; color: white;} */
+/* 	.xspPickerItemSelected:focus {outline:0px none;} */
+/* 	.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none;} */
+/* 	.xspPickerItem:hover {background:#eeeeee;} */
+/* 	.xspPickerBody li {padding:2px 2px 2px 2px;} */
+	</style>
+	<div style="padding:10px;">
+		<span class="xspPickerInputText" dojoAttachPoint="inputText"></span>
+		<span dojoType="extlib.responsive.dijit.xsp.bootstrap.ListTextBox" dojoAttachPoint="inputList"></span>
+		<hr class="xspPickerHr"></hr>
+		<div class="input-group">
+			<input dojoAttachPoint="edSearch" type="text" class="form-control"></input>
+			<div class="input-group-btn">
+				<button dojoAttachPoint="btSearch" class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</div>
+		</div>
+		<div dojoAttachPoint="bodyWrapper" style="margin-top: 5px; width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper unselectable"
+			 dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress, onfocus:_handleOnFocus"
+			 unselectable="on">
+			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerListSearch_Cancel}</button>
+		<button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerListSearch_OK}</button>
+	</div>
+</div>

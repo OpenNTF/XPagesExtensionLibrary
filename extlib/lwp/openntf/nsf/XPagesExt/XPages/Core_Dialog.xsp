@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/Dialog">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:panel>
+				<xp:label id="label5" style="font-weight:bold"
+					value="This shows Dojo dialogs in action">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:span style="font-weight:bold">&gt;&gt;&gt;
+					Stacked Modal dialogs
+				</xp:span>
+				<xp:br></xp:br>
+				The current time&#160;is displayed here to show how a close button
+				in a dialog can refresh a
+				portion of the page.
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				Current Time:&#160;
+				<xp:text escape="true" id="DateTime" value="#{javascript:@Now()}">
+					<xp:this.converter>
+						<xp:convertDateTime type="both"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:button value="Show Dialog - Client side" id="button1">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog1}");]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Show Dialog - Server side" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="dialog1">
+						<xp:this.action><![CDATA[#{javascript:var d = getComponent('dialog1')
+d.show()}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xe:dialog id="dialog1">
+					<xe:this.title><![CDATA[#{javascript:"This is a modal dialog: "+(new Date()).toGMTString()}]]></xe:this.title>
+					<xe:this.afterContentLoad><![CDATA[#{javascript:print("Dialog: After Content Load")}]]></xe:this.afterContentLoad>
+					<xe:this.beforeContentLoad><![CDATA[#{javascript:print("Dialog: Before Content Load")}]]></xe:this.beforeContentLoad>
+					<xe:dialogContent>
+						<xp:panel>
+							I'm the modal dialog content!
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							The current&#160; time here can be refreshed
+							by another dialog.
+							<xp:br></xp:br>
+							Current Time:&#160;
+							<xp:text escape="true" id="DateTime2" value="#{javascript:@Now()}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+
+							.&#160;
+							<xp:button value="Refresh Dialog" id="button13">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+								</xp:eventHandler>
+							</xp:button>
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							<xp:button value="Close Dialog - Client side - No Refresh"
+								id="button3">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:button value="Close Dialog - Client side - Refresh DateTime"
+								id="button11">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}','#{id:DateTime}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:br></xp:br>
+							<xp:button value="Close Dialog - Server side - No refresh"
+								id="button4">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("dialog1")
+c.hide()}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+
+							<xp:button value="Close Dialog - Server side - Refresh DateTime"
+								id="button5">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("dialog1")
+c.hide("DateTime")}]]></xp:this.action>
+								</xp:eventHandler>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("dialog1")
+c.hide("DateTime")}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							Click on the buttons bellow to display a
+							dialog from the current
+							dialog
+							<xp:br></xp:br>
+						</xp:panel>
+
+						<xp:button value="Show Dialog - Client side" id="button6">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog2}");]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button value="Show Dialog - Server side" id="button7">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="partial" refreshId="dialog2">
+								<xp:this.action><![CDATA[#{javascript:var d = getComponent('dialog2')
+d.show()}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xe:dialogContent>
+					<xe:dialogButtonBar>
+						<xp:button value="Ok" id="button15" styleClass="lotusFormButton">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog1}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:link>
+					</xe:dialogButtonBar>
+					<xe:dialog id="dialog2" title="This is a modal dialog">
+						<xe:dialogContent>
+							Hey, I'm the Dialog within the dialog!
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							Current Time:&#160;
+							<xp:text escape="true" id="computedField1" value="#{javascript:@Now()}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+
+							.&#160;
+							<xp:button value="Refresh Dialog" id="button14">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+								</xp:eventHandler>
+							</xp:button>
+
+							<xp:br></xp:br>
+							<xp:br></xp:br>
+							<xp:button value="Close Dialog - Client side - No Refresh"
+								id="button8">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog2}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:button value="Close Dialog - Client side - Refresh DateTime"
+								id="button12">
+								<xp:eventHandler event="onclick" submit="false">
+									<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog2}','#{id:DateTime2}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:br></xp:br>
+							<xp:button value="Close Dialog - Server side - No refresh"
+								id="button9">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("dialog2")
+c.hide()}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+
+							<xp:button value="Close Dialog - Server side - Refresh DateTime"
+								id="button10">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:var c = getComponent("dialog2")
+c.hide("DateTime2")}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+						</xe:dialogContent>
+					</xe:dialog>
+
+				</xe:dialog>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:span style="font-weight:bold">&gt;&gt;&gt; Dialog that embeds a
+					value picker</xp:span>
+				<xp:br></xp:br>
+				<xp:button value="Show Dialog" id="button22">
+					<xp:eventHandler event="onclick" submit="false">
+						<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog3}");]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+				<xe:dialog id="dialog3" title="This is a modal dialog">
+					<xe:dialogContent id="pnl1">
+						I'm the modal dialog content, ready to display a value picker!
+						<xp:br></xp:br>
+						Single Value:
+						<xe:djextListTextBox id="djextListTextBox3"
+							defaultValue="MA">
+						</xe:djextListTextBox>
+						<xe:valuePicker id="valuePicker5" for="djextListTextBox3"
+							pickerText="Set">
+							<xe:this.dataProvider>
+								<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+								</xe:beanValuePicker>
+							</xe:this.dataProvider>
+						</xe:valuePicker>
+						<xp:br></xp:br>
+					</xe:dialogContent>
+					<xe:dialogButtonBar>
+						<xp:button value="Ok" id="button18" styleClass="lotusFormButton">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialog3}')]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+					</xe:dialogButtonBar>
+				</xe:dialog>
+			</xp:panel>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:span style="font-weight:bold">&gt;&gt;&gt; Dialogs onShow &amp;
+				onHide</xp:span>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Use of an Event Handler:
+			<xp:button value="Display a Dialog with onShow/onHide events"
+				id="button19">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog4}")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Display a TooltipDialog with onShow/onHide events"
+				id="button20">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog1}",'#{id:button20}')]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xe:dialog id="dialog4" title="This is a regular dialog">
+				<xp:panel>Are you seeing the events?</xp:panel>
+				<xp:eventHandler event="onShow" submit="false">
+					<xp:this.script><![CDATA[alert('Dialog: OnShow - EventHandler')]]></xp:this.script>
+				</xp:eventHandler>
+				<xp:eventHandler event="onHide" submit="false">
+					<xp:this.script><![CDATA[alert('Dialog: OnHide - EventHandler')]]></xp:this.script>
+				</xp:eventHandler>
+			</xe:dialog>
+
+			<xe:tooltipDialog id="tooltipDialog1" title="This is a tooltip dialog">
+				<xp:panel>Are you seeing the events?</xp:panel>
+				<xp:eventHandler event="onShow" submit="false">
+					<xp:this.script><![CDATA[alert('TooltipDialog: OnShow - EventHandler')]]></xp:this.script>
+				</xp:eventHandler>
+				<xp:eventHandler event="onHide" submit="false">
+					<xp:this.script><![CDATA[alert('TooltipDialog: OnHide - EventHandler')]]></xp:this.script>
+				</xp:eventHandler>
+			</xe:tooltipDialog>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Use of Dojo Attributes:
+			<xp:button value="Display a Dialog with onShow/onHide events"
+				id="button16">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog("#{id:dialog5}")]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Display a TooltipDialog with onShow/onHide events"
+				id="button21">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openTooltipDialog("#{id:tooltipDialog2}",'#{id:button21}')]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+
+			<xe:dialog id="dialog5" title="This is a regular dialog"
+				onHide="alert('Dialog: OnHide - Dojo Attribute')" onShow="alert('Dialog: OnShow - Dojo Attribute')">
+				<xp:panel>Are you seeing the events?</xp:panel>
+			</xe:dialog>
+
+			<xe:tooltipDialog id="tooltipDialog2" title="This is a tooltip dialog"
+				onHide="alert('TooltipDialog OnHide - Dojo Attribute')" onShow="alert('TooltipDialog OnShow - Dojo Attribute')">
+				<xp:panel>Are you seeing the events?</xp:panel>
+			</xe:tooltipDialog>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

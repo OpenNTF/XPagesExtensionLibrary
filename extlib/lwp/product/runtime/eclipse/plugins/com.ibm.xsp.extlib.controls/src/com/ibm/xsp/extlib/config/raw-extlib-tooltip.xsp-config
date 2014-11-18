@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>tooltip</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+			
+<!-- Tooltip -->
+	<component>
+		<description>Displays a tooltip which gives extra information about a specified target control</description>
+		<display-name>Tooltip</display-name>
+		<component-type>com.ibm.xsp.extlib.tooltip.Tooltip</component-type>
+		<component-class>com.ibm.xsp.extlib.component.tooltip.UITooltip</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+
+  		<property>
+  		    <!-- # The "id" should not be translated, it refers to the id Identifier property -->
+			<description>Defines the "id" of target control which the tooltip is associated with</description>
+			<display-name>Target Control</display-name>
+			<property-name>for</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+  		<property>
+			<description>Defines the text that appears in the tooltip</description>
+			<display-name>Label</display-name>
+			<property-name>label</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+  		<property>
+			<description>Defines the delay, in milliseconds, before the tooltip is made visible. Defaults to 400ms.</description>
+			<display-name>Show Delay (Milliseconds)</display-name>
+			<property-name>showDelay</property-name>
+			<property-class>int</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+  		<property>
+			<description>Defines if the tooltip content should be dynamically generated. Default is false. If true, you can define other controls as children and have them display in the tooltip.</description>
+			<display-name>Dynamic Content</display-name>
+			<property-name>dynamicContent</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+  		<property>
+  		    <!-- # before , after, above, below should not be translated  -->
+			<description>Position of the tooltip in relation to the target control. The options are "before", "after", "above", "below". The "before" option means the tooltip usually appears to the left of the target control (or to the right in languages where the normal text direction is right to left). The "after" option means the tooltip usually appears to the right of the target. The "above" option means to appear above the target control and "below" means to appear below the target control.</description>
+			<display-name>Position</display-name>
+			<property-name>position</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        before
+                        after
+                        above
+                        below
+                    </editor-parameter>
+                    <!-- This is not a control reference.
+                    This tag is needed because the escription contains "the target control"
+                    which is normally only present in control reference properties. -->
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.Tooltip</component-family>
+			<renderer-type>com.ibm.xsp.extlib.tooltip.Tooltip</renderer-type>
+			<tag-name>tooltip</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+</faces-config>

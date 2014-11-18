@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>statusLinkSubteams</component-type>
+    <composite-name>statusLinkSubteams</composite-name>
+    <composite-file>/statusLinkSubteams.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"&gt;&#xd;
+&#xd;
+  &lt;xp:span id="linkSubteams"&gt;&#xd;
+  &lt;xp:repeat var="subteamItem" indexVar="subteamIndex"&#xd;
+        value="#{rowData['$MultipleSubteamNames']}"&gt;&#xd;
+    &lt;xp:text value=", " /&gt;&#xd;
+        &lt;xp:link text="#{subteamItem}" id="subteam"&#xd;
+          value="/subteams.xsp"&gt;&#xd;
+          &lt;xp:this.parameters&gt;&#xd;
+            &lt;xp:parameter name="subteam" value="#{subteamItem}"&gt;&#xd;
+            &lt;/xp:parameter&gt;&#xd;
+          &lt;/xp:this.parameters&gt;&#xd;
+        &lt;/xp:link&gt;&#xd;
+        &lt;xp:text value="[No subteam]" /&gt;&#xd;
+  &lt;/xp:repeat&gt;&#xd;
+  &lt;/xp:span&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>value</property-name>
+      <property-class>object</property-class>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+  </composite-component>
+</faces-config>

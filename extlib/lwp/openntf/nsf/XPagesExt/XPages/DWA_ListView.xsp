@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/ListView">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+			<xp:label value="Domino virtual list displaying the content of a view"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="Fixed columns" id="tabPanel1">
+					<xe:restService id="restService2">
+						<xe:this.service>
+							<xe:viewJsonService defaultColumns="true"
+								viewName="AllContacts">
+							</xe:viewJsonService>
+						</xe:this.service>
+					</xe:restService>
+
+					<xe:listView id="listView2" style="height:250.0px;width:350.0px"
+						storeComponentId="restService2">
+						<xe:listViewColumn id="listViewColumn1" columnName="FirstName"
+							columnTitle="First Name" width="10">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn2" columnName="LastName"
+							columnTitle="Last Name" width="10">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn3" columnName="City"
+							columnTitle="City" width="8">
+						</xe:listViewColumn>
+					</xe:listView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Dynamic Columns" id="tabPanel2">
+				    <xp:label value="Views" for="comboBox1"></xp:label>
+
+				    <xp:comboBox id="comboBox1"
+				    	value="#{viewScope.viewName}">
+				    	<xp:this.defaultValue><![CDATA[#{javascript:if (!viewScope.containsKey("viewName")) {
+	viewScope.viewName = "AllContacts";
+}}]]></xp:this.defaultValue>
+				    	<xp:selectItems>
+				    		<xp:this.value><![CDATA[#{javascript:var v = database.getViews();
+var a = []
+for(var i=0; i<v.size(); i++) {
+	a[i] = v[i].getName()
+}
+return a}]]></xp:this.value>
+				    	</xp:selectItems>
+				    	<xp:eventHandler event="onchange" submit="true"
+				    		refreshMode="partial" refreshId="listPanel1">
+				    	</xp:eventHandler>
+				    </xp:comboBox>
+
+				    <br />
+					<xp:panel id="listPanel1">
+						<xe:restService id="restService1">
+							<xe:this.service>
+								<xe:viewJsonService defaultColumns="true"
+									viewName="#{viewScope.viewName}">
+								</xe:viewJsonService>
+							</xe:this.service>
+						</xe:restService>
+						<xe:listView id="listView1" style="height:250.0px;width:800.0px"
+							storeComponentId="restService1">
+						</xe:listView>
+					</xp:panel>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

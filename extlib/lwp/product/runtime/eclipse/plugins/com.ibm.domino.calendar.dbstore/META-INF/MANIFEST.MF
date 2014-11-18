@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Calendar Database Store
+Bundle-SymbolicName: com.ibm.domino.calendar.dbstore;singleton:=true
+Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Vendor: IBM
+Require-Bundle: com.ibm.notes.java.api,
+ com.ibm.domino.calendar.store,
+ com.ibm.commons,
+ com.ibm.domino.commons
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.domino.calendar.dbstore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

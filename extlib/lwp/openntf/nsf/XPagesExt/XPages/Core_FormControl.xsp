@@ -1,0 +1,2199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/Core/FormControl">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore"></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:tabbedPanel id="DetailsOnClient">
+			<xp:this.selectedTab>
+			    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+			</xp:this.selectedTab>
+			<xp:tabPanel label="List/Name TextBox" id="tabPanel1">
+				<xp:panel>
+					<xp:label value="This shows the new List/Name input text box" id="label5" style="font-weight:bold"></xp:label>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:button value="Refresh Page" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+						</xp:eventHandler>
+					</xp:button>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+                    <xp:label value="Examples of listbox controls:" style="font-weight:bold"></xp:label>
+					<xp:table role="presentation">
+						<xp:tr>
+							<xp:td>
+							</xp:td>
+							<xp:td>Display the value</xp:td>
+							<xp:td>Display the label</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Single Value:"></xp:label></xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox3" defaultValue="MA"
+									value="#{viewScope.user1}" title="Single Value">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker5" for="djextListTextBox3"
+									pickerText="Set">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+								</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox7" defaultValue="MA"
+									value="#{viewScope.user11}" displayLabel="true"
+									title="Single Value with label">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker9" for="djextListTextBox7"
+									pickerText="Set">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label value="Multiple Values:"></xp:label>
+                            </xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox4" multipleSeparator=","
+									multipleTrim="true" defaultValue="CA,FL"
+									value="#{viewScope.user2}" title="Multiple Values">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker1" for="djextListTextBox4"
+									pickerText="Add">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox8" multipleSeparator=","
+									multipleTrim="true" defaultValue="CA,FL"
+									value="#{viewScope.user22}" displayLabel="true"
+									title="Multiple Values with labels">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker8" for="djextListTextBox8"
+									pickerText="Add">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Single Value:"></xp:label></xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox6" defaultValue="AZ"
+									value="#{viewScope.user3}" title="Single Value">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker2" for="djextListTextBox6"
+									pickerText="Set" dojoType="extlib.dijit.PickerCheckbox">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox9" defaultValue="AZ"
+									value="#{viewScope.user33}" displayLabel="true"
+									title="Single Value with label">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker10" for="djextListTextBox9"
+									pickerText="Set" dojoType="extlib.dijit.PickerCheckbox">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Multiple Values:"></xp:label></xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox15" multipleSeparator=","
+									multipleTrim="true" defaultValue="NY,NH,NJ"
+									value="#{viewScope.user4}" title="Multiple Values">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker3" for="djextListTextBox15"
+									pickerText="Add" dojoType="extlib.dijit.PickerCheckbox">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox10" multipleSeparator=","
+									multipleTrim="true" defaultValue="NY,NH,NJ"
+									value="#{viewScope.user44}" displayLabel="true"
+									title="Multiple Values with labels">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker11" for="djextListTextBox10"
+									pickerText="Add" dojoType="extlib.dijit.PickerCheckbox">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Picker List - Single Values:"></xp:label></xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox11" defaultValue="NY"
+									value="#{viewScope.user5}" title="Single Value">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker12" for="djextListTextBox11"
+									pickerText="Set" dojoType="extlib.dijit.PickerListSearch">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox12" defaultValue="NY"
+									value="#{viewScope.user55}" displayLabel="true"
+									title="Single Value with label">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker13" for="djextListTextBox12"
+									pickerText="Set" dojoType="extlib.dijit.PickerListSearch">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Picker List - Multiple Values:"></xp:label></xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox13" multipleSeparator=","
+									multipleTrim="true" defaultValue="NY,NH,NJ"
+									value="#{viewScope.user6}" title="Multiple Values">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker14" for="djextListTextBox13"
+									pickerText="Add" dojoType="extlib.dijit.PickerListSearch">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+							<xp:td>
+								<xe:djextListTextBox
+									id="djextListTextBox14" multipleSeparator=","
+									multipleTrim="true" defaultValue="NY,NH,NJ"
+									value="#{viewScope.user66}" displayLabel="true"
+									title="Multiple Values with labels">
+								</xe:djextListTextBox>
+								<xe:valuePicker id="valuePicker15" for="djextListTextBox14"
+									pickerText="Add" dojoType="extlib.dijit.PickerListSearch">
+									<xe:this.dataProvider>
+										<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+										</xe:beanValuePicker>
+									</xe:this.dataProvider>
+								</xe:valuePicker>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+                    <xp:label value="Control state:" style="font-weight:bold"></xp:label>
+					<xp:br></xp:br>
+					<xp:label value="Disabled control:"></xp:label>
+					<xe:djextListTextBox id="djextListTextBox2"
+						multipleSeparator="," multipleTrim="true" defaultValue="NY,NH,NJ"
+						disabled="true" title="Disabled control state">
+					</xe:djextListTextBox>
+					<xe:valuePicker id="valuePicker7" for="djextListTextBox2"
+						pickerText="Add">
+						<xe:this.dataProvider>
+							<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+							</xe:beanValuePicker>
+						</xe:this.dataProvider>
+					</xe:valuePicker>
+					<xp:br></xp:br>
+					<xp:label value="Readonly control:"></xp:label>
+					<xe:djextListTextBox id="djextListTextBox5"
+						multipleSeparator="," multipleTrim="true" defaultValue="NY,NH,NJ"
+						readOnly="true" title="Readonly control state">
+					</xe:djextListTextBox>
+					<xe:valuePicker id="valuePicker6" for="djextListTextBox5"
+						pickerText="Add">
+						<xe:this.dataProvider>
+							<xe:beanValuePicker dataBean="extlib.pickers.SimplePicker">
+							</xe:beanValuePicker>
+						</xe:this.dataProvider>
+					</xe:valuePicker>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+                    <xp:label value="Test the component events:" style="font-weight:bold"></xp:label>
+                    <xp:br></xp:br>
+                    <xp:table>
+                    	<xp:tr>
+                    		<xp:td style="width:200px">
+                    			<xp:label
+                    				value="Single Value - onClick:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td style="width:400px">
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent1" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onClick"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent1}').innerHTML += " onClick"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker4"
+                    				for="djListboxEvent1" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent1"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseDown:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent2" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onMouseDown"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent2}').innerHTML += " onMouseDown"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker17"
+                    				for="djListboxEvent2" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent2"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseEnter:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent3" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler
+                    					event="onMouseEnter" submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent3}').innerHTML += " onMouseEnter"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker18"
+                    				for="djListboxEvent3" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent3"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onBlur:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent4" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onBlur"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent4}').innerHTML += " onBlur"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker19"
+                    				for="djListboxEvent4" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent4"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onKeyDown:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent5" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onKeyDown"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent5}').innerHTML += " onKeyDown"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker20"
+                    				for="djListboxEvent5" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent5"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onChange:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent6" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onChange"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent6}').innerHTML += " onChange"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker21"
+                    				for="djListboxEvent6" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent6"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseLeave:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent7" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler
+                    					event="onMouseLeave" submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent7}').innerHTML += " onMouseLeave"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker22"
+                    				for="djListboxEvent7" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent7"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseMove:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent8" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onMouseMove"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent8}').innerHTML += " onMouseMove"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker23"
+                    				for="djListboxEvent8" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent8"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseOut:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent9" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onMouseOut"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent9}').innerHTML += " onMouseOut"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker24"
+                    				for="djListboxEvent9" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent9"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseOver:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent10" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onMouseOver"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent10}').innerHTML += " onMouseOver"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker25"
+                    				for="djListboxEvent10" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent10"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onMouseUp:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent11" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onMouseUp"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent11}').innerHTML += " onMouseUp"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker26"
+                    				for="djListboxEvent11" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent11"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onFocus:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent12" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onFocus"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent12}').innerHTML += " onFocus"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker27"
+                    				for="djListboxEvent12" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent12"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onKeyPress:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent13" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onKeyPress"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent13}').innerHTML += " onKeyPress"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker28"
+                    				for="djListboxEvent13" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent13"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    	<xp:tr>
+                    		<xp:td>
+                    			<xp:label
+                    				value="Single Value - onKeyUp:">
+                    			</xp:label>
+                    		</xp:td>
+                    		<xp:td>
+
+                    			<xe:djextListTextBox
+                    				id="djListboxEvent14" defaultValue="AZ"
+                    				value="#{viewScope.user5}"
+                    				title="Single value with events">
+                    				<xp:eventHandler event="onKeyUp"
+                    					submit="false">
+                    					<xp:this.script><![CDATA[dojo.byId('#{id:listboxEvent14}').innerHTML += " onKeyUp"]]></xp:this.script>
+                    				</xp:eventHandler>
+                    			</xe:djextListTextBox>
+                    			<xe:valuePicker id="valuePicker30"
+                    				for="djListboxEvent14" pickerText="Set">
+                    				<xe:this.dataProvider>
+                    					<xe:beanValuePicker
+                    						dataBean="extlib.pickers.SimplePicker">
+                    					</xe:beanValuePicker>
+                    				</xe:this.dataProvider>
+                    			</xe:valuePicker>
+                    			&#160;&#160;&#160;&#160;&#160;
+                    			<xp:label value="Event:"></xp:label>
+                    			<xp:text escape="true" id="listboxEvent14"></xp:text>
+                    		</xp:td>
+                    	</xp:tr>
+                    </xp:table>
+                    <xp:br></xp:br>
+				</xp:panel>
+			</xp:tabPanel>
+			<xp:tabPanel label="Link Select" id="tabPanel2">
+				<xp:panel>
+					<xp:label value="This shows the link based select control"
+						id="label1" style="font-weight:bold">
+					</xp:label>
+					<xp:br></xp:br>
+					<xp:label value="Select a value:"></xp:label>
+					<xe:djextLinkSelect id="djextLinkSelect1"
+						defaultValue="A" value="#{viewScope.link1}"
+						title="Select a value">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onChange" submit="true"
+							refreshMode="partial" refreshId="computedField1">
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="On Change:"></xp:label>
+					<xp:text escape="true" id="computedField1" value="#{viewScope.link1}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:label value="Uses SelectItem children:"></xp:label>
+					<xe:djextLinkSelect id="djextLinkSelect3"
+						defaultValue="A" value="#{viewScope.link2}"
+						title="Uses Select Item children">
+						<xp:selectItem itemLabel="Link A"
+							itemValue="A">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Link B"
+							itemValue="B">
+						</xp:selectItem>
+						<xp:selectItem itemLabel="Link C"
+							itemValue="C">
+						</xp:selectItem>
+						<xp:eventHandler event="onChange" submit="true"
+							refreshMode="partial" refreshId="computedField2">
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="On Change:"></xp:label>
+					<xp:text escape="true" id="computedField2" value="#{viewScope.link2}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:label value="Read only control:"></xp:label>
+					<xe:djextLinkSelect id="djextLinkSelect2"
+						defaultValue="A" value="#{viewScope.link3}" readOnly="true"
+						title="Read only control state">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+					</xe:djextLinkSelect>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+                    <xp:label value="Test the component events:" style="font-weight:bold"></xp:label>
+                    <xp:table border="0">
+						<xp:tr>
+							<xp:td style="width:200px">
+								<xp:label
+									value="Select a value - onClick:" id="label34">
+								</xp:label>
+							</xp:td>
+							<xp:td style="width:400px">
+							
+						<xe:djextLinkSelect id="djextLinkSelect4" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onClick" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent1}').innerHTML += " onClick"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent1"></xp:text>
+					</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onDoubleClick:" id="label35">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect5" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onDblClick" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent2}').innerHTML += " onDoubleClick"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent2"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseDown:" id="label36">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect6" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseDown" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent3}').innerHTML += " onMouseDown"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent3"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseEnter:" id="label37">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect7" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseEnter" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent4}').innerHTML += " onMouseEnter"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent4"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseLeave:" id="label38">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect8" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseLeave"
+							submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent5}').innerHTML += " onMouseLeave"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent5"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td><xp:label value="Select a value - onMouseMove:" id="label48">
+								</xp:label></xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect9" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseMove" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent6}').innerHTML = "onMouseMove"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent6"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseOut:" id="label39">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect10" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseOut" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent7}').innerHTML += " onMouseOut"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent7"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseOver" id="label40">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect11" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseOver" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent8}').innerHTML = " onMouseOver"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent8"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseUp:" id="label41">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect12" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onMouseUp"
+							submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent9}').innerHTML += " onMouseUp"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent9"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onBlur:" id="label42">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect13" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onBlur" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent10}').innerHTML += " onBlur"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent10"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onFocus:" id="label43">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							
+					
+					<xe:djextLinkSelect id="djextLinkSelect14" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onFocus" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent11}').innerHTML += " onFocus"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect><xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent11"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onChange:" id="label44">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect15" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onChange" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent12}').innerHTML += " onChange"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent12"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyDown:" id="label45">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect16" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onKeyDown" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent13}').innerHTML += " onKeyDown"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent13"></xp:text>
+							</xp:td>
+						</xp:tr>
+
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyPress:" id="label46">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect17" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onKeyPress" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent14}').innerHTML += " onKeyPress"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent14"></xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyUp" id="label47">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+							<xe:djextLinkSelect id="djextLinkSelect18" defaultValue="A" value="#{viewScope.link4}" title="Select a value with events">
+						<xe:this.dataProvider>
+							<xe:simpleValuePicker labelSeparator="|">
+								<xe:this.valueList><![CDATA[Link A|A
+Link B|B
+Link C|C]]></xe:this.valueList>
+							</xe:simpleValuePicker>
+						</xe:this.dataProvider>
+						<xp:eventHandler event="onKeyUp" submit="false">
+							<xp:this.script><![CDATA[dojo.byId('#{id:linkEvent15}').innerHTML += " onKeyUp"]]></xp:this.script>
+						</xp:eventHandler>
+					</xe:djextLinkSelect>
+					<xp:label value="Event:"></xp:label>
+					<xp:text escape="true" id="linkEvent15"></xp:text>
+					</xp:td>
+						</xp:tr>
+					</xp:table></xp:panel>
+			</xp:tabPanel>
+			<xp:tabPanel label="Image Select" id="tabPanel3">
+				<xp:panel>
+					<xp:label value="This shows the image select control" id="label2"
+						style="font-weight:bold">
+					</xp:label>
+					<xp:br></xp:br>
+					<xp:label value="Select a value (default: '2days'):"></xp:label>
+					<xe:djextImageSelect id="djextImageSelect1" title="Select a value default is two days"
+						value="#{viewScope.image1}" defaultValue="T">
+						<xe:this.imageValues>
+							<xe:selectImage selectedValue="D"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+								imageAlt="One Day">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="T"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+								imageAlt="Two Days">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="F"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+								imageAlt="One Work Week">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="W"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+								imageAlt="One Week">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="2"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+								imageAlt="Two Weeks">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="M"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+								imageAlt="One Month">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="Y"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+								imageAlt="All Entries">
+							</xe:selectImage>
+						</xe:this.imageValues>
+						<xp:eventHandler event="onClick" submit="true"
+							refreshMode="partial" refreshId="computedField3">
+						</xp:eventHandler>
+					</xe:djextImageSelect>
+					<xp:label value="On Change:"></xp:label>
+					<xp:text escape="true" id="computedField3" value="#{viewScope.image1}">
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:label value="Read only control:"></xp:label>
+					<xe:djextImageSelect id="djextImageSelect2"
+						title="Read only control state default value is two days"
+						value="#{viewScope.image2}" defaultValue="T" readOnly="true">
+						<xe:this.imageValues>
+							<xe:selectImage selectedValue="D"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+								imageAlt="One Day">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="T"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+								imageAlt="Two Days">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="F"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+								imageAlt="One Work Week">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="W"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+								imageAlt="One Week">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="2"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+								imageAlt="Two Weeks">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="M"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+								imageAlt="One Month">
+							</xe:selectImage>
+							<xe:selectImage selectedValue="Y"
+								selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+								image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+								imageAlt="All Entries">
+							</xe:selectImage>
+						</xe:this.imageValues>
+					</xe:djextImageSelect>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					
+					<xp:br></xp:br>
+                    <xp:label value="Test the component events:" style="font-weight:bold"></xp:label>
+                    <xp:table>
+						<xp:tr>
+							<xp:td style="width:200px">
+								<xp:label
+									value="Select a value - onClick:" id="label3">
+								</xp:label>
+
+							</xp:td>
+							<xp:td style="width:400.0px">
+
+								<xe:djextImageSelect
+									id="djextImageSelect3"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onClick"
+										submit="false" id="eventHandler1">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent1}').innerHTML += " onClick"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label19"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent1">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onDoubleClick:" id="label4">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect4"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onDblClick"
+										submit="false" id="eventHandler2">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent2}').innerHTML += " onDoubleClick"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label20"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent2">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseDown:" id="label6">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect5"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onMouseDown"
+										submit="false" id="eventHandler3">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent3}').innerHTML += " onMouseDown"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label21"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent3">
+								</xp:text>
+
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseEnter:" id="label7">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect6"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler
+										event="onMouseEnter" submit="false" id="eventHandler4">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent4}').innerHTML = "onMouseEnter"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label22"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent4">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onBlur:" id="label8">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect7"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onBlur"
+										submit="false" id="eventHandler5">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent5}').innerHTML += " onBlur"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label23"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent5">
+								</xp:text>
+
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyDown:" id="label9">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect8"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onKeyDown"
+										submit="false" id="eventHandler6">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent6}').innerHTML += " onKeyDown"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label24"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent6">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onChange:" id="label10">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+
+								<xe:djextImageSelect
+									id="djextImageSelect9"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onChange"
+										submit="false" id="eventHandler7">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent7}').innerHTML += " onChange"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label25"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent7">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseLeave:" id="label11">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect10"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler
+										event="onMouseLeave" submit="false" id="eventHandler8">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent8}').innerHTML = "onMouseLeave"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label26"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent8">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseMove:" id="label12">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect11"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onMouseMove"
+										submit="false" id="eventHandler9">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent9}').innerHTML = "onMouseMove"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label27"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent9">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseOut:" id="label13">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect12"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onMouseOut"
+										submit="false" id="eventHandler10">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent10}').innerHTML = "onMouseOut"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label28"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent10">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseOver:" id="label14">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect13"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onMouseOver"
+										submit="false" id="eventHandler11">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent11}').innerHTML = "onMouseOver"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label29"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent11">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onMouseUp:" id="label15">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect14"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onMouseUp"
+										submit="false" id="eventHandler12">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent12}').innerHTML += " onMouseUp"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label30"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent12">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onFocus:" id="label16">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect15"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onFocus"
+										submit="false" id="eventHandler13">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent13}').innerHTML += " onFocus"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label31"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent13">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyPress:" id="label17">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect16"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onKeyPress"
+										submit="false" id="eventHandler14">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent14}').innerHTML += " onKeyPress"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label32"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent14">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								<xp:label
+									value="Select a value - onKeyUp:" id="label18">
+								</xp:label>
+							</xp:td>
+							<xp:td>
+								<xe:djextImageSelect
+									id="djextImageSelect17"
+									title="Select a value with events default is two days"
+									value="#{viewScope.image2}" defaultValue="T">
+									<xe:this.imageValues>
+										<xe:selectImage
+											selectedValue="D"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Day_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Day_deselected_24.gif"
+											imageAlt="One Day">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="T"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Days_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Days_deselected_24.gif"
+											imageAlt="Two Days">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="F"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Work_Week_deselected_24.gif"
+											imageAlt="One Work Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="W"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/1_Week_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/1_Week_deselected_24.gif"
+											imageAlt="One Week">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="2"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/2_Weeks_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/2_Weeks_deselected_24.gif"
+											imageAlt="Two Weeks">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="M"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/Month_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/Month_deselected_24.gif"
+											imageAlt="One Month">
+										</xe:selectImage>
+										<xe:selectImage
+											selectedValue="Y"
+											selectedImage="/.ibmxspres/.extlib/icons/calendar/All_Entries_selected_24.gif"
+											image="/.ibmxspres/.extlib/icons/calendar/All_Entries_deselected_24.gif"
+											imageAlt="All Entries">
+										</xe:selectImage>
+									</xe:this.imageValues>
+									<xp:eventHandler event="onKeyUp"
+										submit="false" id="eventHandler15">
+										<xp:this.script><![CDATA[dojo.byId('#{id:imageEvent15}').innerHTML += " onKeyUp"]]></xp:this.script>
+									</xp:eventHandler>
+								</xe:djextImageSelect>
+								<xp:label value="Event:" id="label33"></xp:label>
+								<xp:text escape="true"
+									id="imageEvent15">
+								</xp:text>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+					<xp:br></xp:br>
+				</xp:panel>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xc:OneUILayout>
+</xp:view>

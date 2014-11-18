@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+    xmlns:xc="http://www.ibm.com/xsp/custom">
+    <xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/DynamicSort">
+        <xp:this.facets>
+            <xp:panel xp:key="LeftColumn" id="panel4">
+                <xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+            </xp:panel>
+        </xp:this.facets>
+        <xp:label value="This shows how to dynamically switch between view renderers" id="label5"
+            style="font-weight:bold">
+        </xp:label>
+        <xp:br></xp:br>
+        <xp:panel id="panel1">
+            <xe:sortLinks id="sortLinks1">
+                <xe:this.treeNodes>
+                    <xe:basicLeafNode label="Sort by:"></xe:basicLeafNode>
+                    <xe:basicLeafNode label="By Author" href="#content=byauthor"></xe:basicLeafNode>
+                    <xe:basicLeafNode label="By Date" href="#content=bydate"></xe:basicLeafNode>
+                </xe:this.treeNodes>
+            </xe:sortLinks>
+            <xe:dynamicContent id="dynp" defaultFacet="byauthor"
+                useHash="true">
+                <xp:this.facets>
+                    <xp:panel xp:key="byauthor" id="byauthor">
+                        <xp:viewPanel rows="30" id="viewPanel2">
+                            <xp:this.facets>
+                                <xp:pager partialRefresh="true" layout="Previous Group Next"
+                                    xp:key="headerPager" id="pager4">
+                                </xp:pager>
+                            </xp:this.facets>
+                            <xp:this.data>
+                                <xp:dominoView var="view2" viewName="AllThreadsByAuthor"></xp:dominoView>
+                            </xp:this.data>
+                            <xp:viewColumn columnName="Author" id="viewColumn6">
+                                <xp:viewColumnHeader value="Author"
+                                    id="viewColumnHeader6">
+                                </xp:viewColumnHeader>
+                            </xp:viewColumn>
+                            <xp:viewColumn columnName="Title" id="viewColumn7">
+                                <xp:viewColumnHeader value="Title"
+                                    id="viewColumnHeader7"></xp:viewColumnHeader>
+                            </xp:viewColumn>
+                            <xp:viewColumn columnName="Abstract" id="viewColumn8">
+                                <xp:viewColumnHeader value="Abstract"
+                                    id="viewColumnHeader8">
+                                </xp:viewColumnHeader>
+                            </xp:viewColumn>
+                        </xp:viewPanel>
+                    </xp:panel>
+                    <xp:panel xp:key="bydate" id="bydate">
+                        <xp:viewPanel rows="30" id="viewPanel3">
+                            <xp:this.facets>
+                                <xp:pager partialRefresh="true" layout="Previous Group Next"
+                                    xp:key="headerPager" id="pager5">
+                                </xp:pager>
+                            </xp:this.facets>
+                            <xp:this.data>
+                                <xp:dominoView var="view3" viewName="AllThreadsByDate"></xp:dominoView>
+                            </xp:this.data>
+                            <xp:viewColumn columnName="Date" id="viewColumn4">
+                                <xp:viewColumnHeader value="Date"
+                                    id="viewColumnHeader4"></xp:viewColumnHeader>
+                            </xp:viewColumn>
+                            <xp:viewColumn columnName="Title" id="viewColumn5">
+                                <xp:viewColumnHeader value="Title"
+                                    id="viewColumnHeader5"></xp:viewColumnHeader>
+                            </xp:viewColumn>
+                            <xp:viewColumn columnName="Abstract" id="viewColumn9">
+                                <xp:viewColumnHeader value="Abstract"
+                                    id="viewColumnHeader9">
+                                </xp:viewColumnHeader>
+                            </xp:viewColumn>
+                        </xp:viewPanel>
+                    </xp:panel>
+                </xp:this.facets>
+            </xe:dynamicContent>
+        </xp:panel>
+    </xc:OneUILayout>
+</xp:view>
+

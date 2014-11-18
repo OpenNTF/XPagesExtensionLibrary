@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:djxmHeading id="djxmHeading1" back="Views" moveTo="views" label="Subteams">
+		<xp:this.rendered><![CDATA[#{javascript:
+			sessionScope.from = "subteams";
+			return true;
+		}]]></xp:this.rendered>
+	</xe:djxmHeading>
+	
+	<xc:mobileSearch dataView="dataView1">
+		<xp:this.rendered><![CDATA[#{javascript:// only show the search panel if the db is full text indexed
+			return database.isFTIndexed();
+		}]]></xp:this.rendered>
+	</xc:mobileSearch>
+	
+	<xe:dataView id="dataView1" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" pageName="#subteam" columnTitles="true"
+		rows="10" showCheckbox="false" indexVar="index"
+		collapsibleCategory="true">
+		<xe:this.data>
+			<xp:dominoView var="view1"
+				viewName="xvwTeams" expandLevel="0"
+				search="#{requestScope.searchQuery}">
+			</xp:dominoView>
+		</xe:this.data>
+		
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Team Name">
+				<xe:this.href><![CDATA[#{javascript:var name = viewEntry.getColumnValue("Team Name");
+					if(null != name){
+						var url = "#subteam&subteam=" + name;
+						return url;
+					}
+					return "";
+				}]]></xe:this.href>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+	
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			<xp:link escape="true" text="More..." id="link2"
+				xp:key="pagerBottom" loaded="${javascript:isMobile()}">
+				<xp:this.style>
+					<![CDATA[#{javascript:
+					if(isAndroidCheck())
+					{
+						return "background-color:black; color:white;";
+					}
+				}]]>
+				</xp:this.style>
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+					var dv = getComponent("dataView1");
+					if(dv.getRowCount() > 10)
+						return true;
+					else
+						return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick"
+					submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView1"
+							disableId="link2">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

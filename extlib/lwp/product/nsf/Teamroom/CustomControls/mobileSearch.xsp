@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:div styleClass="mblSearchBar">
+		<xp:inputText value="#{requestScope.searchQuery}" styleClass="mblSearchInput" 
+			autocomplete="off" id="inputText1">
+			<xp:this.attrs>
+				<xp:attr name="placeholder" value="Search...">
+				</xp:attr>
+			</xp:this.attrs>
+		</xp:inputText>
+		<xp:button value="" id="searchButton" icon="iconSearch16.png">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="partial" refreshId="#{compositeData.dataView}">
+				<xp:this.action>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+								var search = getComponent('inputText1').getValue();
+								requestScope.searchQuery = search;
+							}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+	</xp:div>
+</xp:view>

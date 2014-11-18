@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+    xmlns:xe="http://www.ibm.com/xsp/coreex"
+    xmlns:xc="http://www.ibm.com/xsp/custom">
+    <!-- This is a temporary fix for http://www.openntf.org/internal/home.nsf/response.xsp?action=openDocument&documentId=F24B87520580D99786257A120001F9EB -->
+    <xp:scriptBlock id="scriptBlock1">
+        <xp:this.value><![CDATA[XSP.parseDojo = function x_pd(node){
+    if( node && dojo.parser){
+        if(node.getAttribute('dojoType')){
+            dojo.parser.instantiate([node]);
+        } else {
+            dojo.parser.parse(node);
+        }
+    }
+}]]></xp:this.value>
+    </xp:scriptBlock>
+    
+    <xc:OneUILayout id="cc4cconeuilayout"
+        navigationPath="/Core/DynamicTabs">
+        <xp:this.facets>
+            <xp:panel xp:key="LeftColumn" id="panel4">
+                <xc:LeftCore id="cc4ccLeftCore"></xc:LeftCore>
+            </xp:panel>
+        </xp:this.facets>
+        <xp:panel id="mainPanel">
+            <xp:label
+                value="This shows a Dojo tab container with dynamic tabs"
+                id="label5" style="font-weight:bold">
+            </xp:label>
+            <xp:br></xp:br>
+            <xp:panel id='viewRefreshPanel'>
+                <xp:viewPanel id="viewPanel1" rows="7" var="row">
+                    <xp:this.facets>
+                        <xp:pager partialRefresh="true"
+                            layout="Previous Group Next" xp:key="headerPager" id="pager1">
+                        </xp:pager>
+                    </xp:this.facets>
+                    <xp:this.data>
+                        <xp:dominoView var="view1"
+                            viewName="AllContacts">
+                        </xp:dominoView>
+                    </xp:this.data>
+                    <xp:viewColumn columnName="FirstName"
+                        id="viewColumn1" displayAs="link">
+                        <xp:viewColumnHeader value="First Name"
+                            id="viewColumnHeader1">
+                        </xp:viewColumnHeader>
+                        <xp:eventHandler event="onclick" submit="true"
+                            refreshMode="partial" refreshId="tabs">
+                            <xp:this.action><![CDATA[#{javascript:var docId = row.getNoteID()
+getComponent("djTabContainer1").createTab({action: "editDocument", documentId: docId, tabUniqueKey: docId})}]]></xp:this.action>
+                        </xp:eventHandler>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="LastName"
+                        id="viewColumn2" displayAs="link">
+                        <xp:viewColumnHeader value="Last Name"
+                            id="viewColumnHeader2">
+                        </xp:viewColumnHeader>
+                        <xp:eventHandler event="onclick"
+                            submit="false">
+                            <xp:this.script><![CDATA[dijit.byId('#{id:djTabContainer1}').createTab({action:'editDocument',documentId:'#{javascript:row.getNoteID()}',tabUniqueKey:'#{javascript:row.getNoteID()}'})
+]]></xp:this.script>
+                        </xp:eventHandler>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="EMail"
+                        id="viewColumn3">
+                        <xp:viewColumnHeader value="EMail"
+                            id="viewColumnHeader3">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="City" id="viewColumn4">
+                        <xp:viewColumnHeader value="City"
+                            id="viewColumnHeader4">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                </xp:viewPanel>
+            </xp:panel>
+            A&#160;click on the FirstName column&#160;triggers a full
+            server roundtrip with a whole rferesh of the tab
+            <xp:br></xp:br>
+            A click on the LastName&#160;column triggers an Ajax request
+            and only one tab is added and refreshed.
+            <xp:br></xp:br>
+            <xp:br></xp:br>
+            <xp:button value="New Contact - Client Side" id="button4">
+                <xp:eventHandler event="onclick" submit="false">
+                    <xp:this.script><![CDATA[dijit.byId('#{id:djTabContainer1}').createTab()]]></xp:this.script>
+                </xp:eventHandler>
+            </xp:button>
+            <xp:button value="New Contact - Server Side" id="button6">
+                <xp:eventHandler event="onclick" submit="true"
+                    refreshMode="partial" refreshId="tabs">
+                    <xp:this.action><![CDATA[#{javascript:getComponent("djTabContainer1").createTab()}]]></xp:this.action>
+                </xp:eventHandler>
+            </xp:button>
+            <xp:panel id="tabs">
+                <xe:djTabContainer id="djTabContainer1"
+                    tabPosition="top" style="width:500px; height:300px; margin:5px;"
+                    defaultTabContent="doc">
+                    <xp:this.facets>
+                        <xe:djTabPane xp:key="doc" id="djTabPane2"
+                            title="New Document" closable="true"
+                            partialEvents="true">
+                            <xp:panel>
+                                <xp:this.data>
+                                    <xp:dominoDocument var="document1"
+                                        formName="Contact">
+                                        <xp:this.postOpenDocument><![CDATA[#{javascript:var fn = document1.getItemValueString("FirstName")
+var ln = document1.getItemValueString("LastName")
+var title = fn + " " + ln
+var pane = getComponent("djTabPane2")
+pane.setTitle(title)
+pane.setTabUniqueKey(document1.getNoteID())
+}]]></xp:this.postOpenDocument>
+                                    </xp:dominoDocument>
+                                </xp:this.data>
+                                <xp:table role="presentation">
+                                    <xp:tr>
+                                        <xp:td>
+                                            <xp:label
+                                                value="First name:" id="firstName_Label1"
+                                                for="firstName1">
+                                            </xp:label>
+                                        </xp:td>
+                                        <xp:td>
+                                            <xp:inputText
+                                                value="#{document1.FirstName}" id="firstName1"
+                                                required="true">
+                                            </xp:inputText>
+                                        </xp:td>
+                                        <xp:td>
+                                            Required field, client
+                                            side&#160;validation
+                                        </xp:td>
+                                    </xp:tr>
+                                    <xp:tr>
+                                        <xp:td>
+                                            <xp:label value="Last name:"
+                                                id="lastName_Label1" for="lastName1">
+                                            </xp:label>
+                                        </xp:td>
+                                        <xp:td>
+                                            <xp:inputText
+                                                value="#{document1.LastName}" id="lastName1" required="true"
+                                                disableClientSideValidation="true">
+                                            </xp:inputText>
+                                        </xp:td>
+                                        <xp:td>
+                                            Required field, server side
+                                            validation
+                                        </xp:td>
+                                    </xp:tr>
+                                    <xp:tr>
+                                        <xp:td>
+                                            <xp:label value="E mail:"
+                                                id="eMail_Label1" for="eMail1">
+                                            </xp:label>
+                                        </xp:td>
+                                        <xp:td>
+                                            <xp:inputText
+                                                value="#{document1.EMail}" id="eMail1">
+                                            </xp:inputText>
+                                        </xp:td>
+                                        <xp:td></xp:td>
+                                    </xp:tr>
+                                    <xp:tr>
+                                        <xp:td>
+                                            <xp:label value="City:"
+                                                id="city_Label1" for="city1">
+                                            </xp:label>
+                                        </xp:td>
+                                        <xp:td>
+                                            <xp:inputText
+                                                value="#{document1.City}" id="city1">
+                                            </xp:inputText>
+                                        </xp:td>
+                                        <xp:td></xp:td>
+                                    </xp:tr>
+                                </xp:table>
+                                <xp:messages id="messages1"></xp:messages>
+                                <xp:br></xp:br>
+                                <xp:button value="Ok" id="button2">
+                                    <xp:eventHandler event="onclick"
+                                        submit="true">
+                                        <xp:this.action>
+                                            <xp:actionGroup>
+                                                <xp:saveDocument></xp:saveDocument>
+                                                <xp:executeScript>
+                                                    <xp:this.script><![CDATA[#{javascript:var c = getComponent("djTabPane2")
+c.closeTab('viewRefreshPanel')}]]></xp:this.script>
+                                                </xp:executeScript>
+                                            </xp:actionGroup>
+                                        </xp:this.action>
+                                    </xp:eventHandler>
+                                </xp:button>
+                                <xp:button value="Cancel"
+                                    id="button3">
+                                    <xp:eventHandler event="onclick"
+                                        submit="true" immediate="true">
+                                        <xp:this.action>
+                                            <xp:actionGroup>
+                                                <xp:executeScript>
+                                                    <xp:this.script><![CDATA[#{javascript:var c = getComponent("djTabPane2")
+c.closeTab()}]]></xp:this.script>
+                                                </xp:executeScript>
+                                            </xp:actionGroup>
+                                        </xp:this.action>
+                                    </xp:eventHandler>
+                                </xp:button>
+                            </xp:panel>
+                        </xe:djTabPane>
+                    </xp:this.facets>
+                    <xe:djTabPane id="djTabPane1" title="Home Tab">
+                        This is the home tab - it is pre-created and
+                        cannot be closed!
+                    </xe:djTabPane>
+                </xe:djTabContainer>
+            </xp:panel>
+            <xp:panel>
+                Refresh the full page, including the tabs
+                <xp:button value="Refresh Page" id="button1">
+
+                    <xp:eventHandler event="onclick" submit="true"
+                        refreshMode="complete">
+                    </xp:eventHandler>
+                </xp:button>
+            </xp:panel>
+
+            <xp:br></xp:br>
+
+        </xp:panel>
+    </xc:OneUILayout>
+</xp:view>

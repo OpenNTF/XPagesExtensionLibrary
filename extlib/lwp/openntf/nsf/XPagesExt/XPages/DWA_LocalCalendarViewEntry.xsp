@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/CalendarViewREST">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+			<xp:this.data>
+				<xp:dominoDocument computeWithForm="onload"
+					formName="altCalEntry" var="document1" />
+			</xp:this.data>
+			<xp:table role="presentation">
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Meeting Date:" id="label2" for="calendarDateTime1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText id="calendarDateTime1" defaultValue="#{javascript:@Today()}">
+							<xp:this.converter>
+								<xp:convertDateTime type="date" dateStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+							<xp:dateTimeHelper></xp:dateTimeHelper>
+						</xp:inputText>
+						<xp:inputText id="hiddenCalDateTime" value="#{document1.CalendarDateTime}"
+							style="display:none">
+							<xp:this.converter>
+								<xp:convertDateTime type="both" dateStyle="short"
+									timeStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Start date time:" id="startDateTime1_label"
+							for="startDateTime1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText id="startDateTime1"
+							defaultValue="#{javascript:@Time(@Hour(@Now()),0,0);}">
+							<xp:dateTimeHelper id="dateTimeHelper2"></xp:dateTimeHelper>
+							<xp:this.converter>
+								<xp:convertDateTime type="time" timeStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:inputText>
+						<xp:inputText id="hiddenStartTime" value="#{document1.StartDateTIme}"
+							style="display:none">
+							<xp:this.converter>
+								<xp:convertDateTime type="both" timeStyle="short"
+									dateStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="End date time:" id="endDateTIme_Label1"
+							for="endDateTime1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText id="endDateTime1"
+							defaultValue="#{javascript:@Time(@Hour(@Now())+1,0,0);}">
+							<xp:this.converter>
+								<xp:convertDateTime type="time" timeStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+							<xp:dateTimeHelper></xp:dateTimeHelper>
+						</xp:inputText>
+						<xp:inputText id="hiddenEndTime" value="#{document1.EndDateTIme}"
+							style="display:none">
+							<xp:this.converter>
+								<xp:convertDateTime type="both" timeStyle="short"
+									dateStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Subject:" id="subject_Label1" for="subject1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.Subject}" id="subject1"
+							style="width:100.0%">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Alt subject:" id="altSubject_Label1"
+							for="altSubject1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.AltSubject}" id="altSubject1"
+							style="width:100%">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Appointment type:" id="appointmentType_Label1"
+							for="appointmentType1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:comboBox value="#{document1.AppointmentType}" id="appointmentType1"
+							defaultValue="3" style="width:20.0%">
+							<xp:selectItem itemLabel="Meeting" itemValue="3"
+								id="selectItem5">
+							</xp:selectItem>
+							<xp:selectItem itemLabel="Appointment" itemValue="1"
+								id="selectItem6">
+							</xp:selectItem>
+						</xp:comboBox>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Chair:" id="chair_Label1" for="chair1"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.Chair}" id="chair1"
+							style="width:20%"></xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Org confidential:" id="orgConfidential_Label1"
+							for="orgConfidential1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:comboBox value="#{document1.OrgConfidential}" id="orgConfidential1"
+							style="width:20%">
+							<xp:this.converter>
+								<xp:convertNumber></xp:convertNumber>
+							</xp:this.converter>
+							<xp:selectItem itemLabel="False" itemValue=""
+								id="selectItem1">
+							</xp:selectItem>
+							<xp:selectItem itemLabel="True" itemValue="1"
+								id="selectItem2">
+							</xp:selectItem>
+						</xp:comboBox>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Status:" id="status_Label1" for="status1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:comboBox value="#{document1.status}" id="status1"
+							defaultValue="Accepted" style="width:20%">
+							<xp:selectItem itemLabel="Final" itemValue="Accepted"
+								id="selectItem3">
+							</xp:selectItem>
+							<xp:selectItem itemLabel="Draft" itemValue="Draft"
+								id="selectItem4">
+							</xp:selectItem>
+						</xp:comboBox>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Details" id="label1" for="body1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputRichText value="#{document1.Body}" id="body1"></xp:inputRichText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td colspan="2">
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:button value="OK" id="button1">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" immediate="false" save="true" id="eventHandler1">
+								<xp:this.script><![CDATA[// Make sure all the submitted date & time fields are consistent 
+var dateControl = document.getElementById("#{id:calendarDateTime1}");
+var startTimeControl = document.getElementById("#{id:startDateTime1}");
+var endTimeControl = document.getElementById("#{id:endDateTime1}");
+var realDateControl = document.getElementById("#{id:hiddenCalDateTime}");
+var realStartControl = document.getElementById("#{id:hiddenStartTime}");
+var realEndControl = document.getElementById("#{id:hiddenEndTime}");
+var dtString = dateControl.value + " " + startTimeControl.value;
+realDateControl.value=dtString;
+realStartControl.value=dtString;
+dtString = dateControl.value + " " + endTimeControl.value;
+realEndControl.value=dtString;]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:button id="button2" value="Cancel">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" immediate="true" save="false" id="eventHandler2">
+							</xp:eventHandler>
+						</xp:button>
+					</xp:td>
+					<xp:td>
+						<xp:button value="TEST" id="button3" style="display:none">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[// Make sure all the submitted date & time fields are consistent 
+var dateControl = document.getElementById("#{id:calendarDateTime1}");
+var startTimeControl = document.getElementById("#{id:startDateTime1}");
+var endTimeControl = document.getElementById("#{id:endDateTime1}");
+var realDateControl = document.getElementById("#{id:hiddenCalDateTime}");
+var realStartControl = document.getElementById("#{id:hiddenStartTime}");
+var realEndControl = document.getElementById("#{id:hiddenEndTime}");
+var dtString = dateControl.value + " " + startTimeControl.value;
+realDateControl.value=dtString;
+realStartControl.value=dtString;
+dtString = dateControl.value + " " + endTimeControl.value;
+realEndControl.value=dtString;]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:text value="#{document1.From}" id="from1" style="display:none">
+						</xp:text>
+						<xp:text value="#{document1.PostedDate}" id="postedDate1"
+							style="display:none">
+							<xp:this.converter>
+								<xp:convertDateTime type="date" dateStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:text>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="/DWA_LocalCalendarView.xsp"></xp:navigationRule>
+		<xp:navigationRule outcome="xsp-failure"
+			viewId="/DWA_LocalCalendarView.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="REST_Home" label="REST Home"
+				selection="/REST/Home">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="REST_DataService" label="Data Service" 
+				selection="/REST/DataService">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="REST_DataServicesContacts" label="Data Services - Contacts"
+				selection="/REST/DataServicesContacts">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="REST_DataServicesAllTypes" label="Data Services - All Types" 
+				selection="/REST/DataServicesAllTypes">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="REST_DojoGrid" label="Dojo Grid"
+				selection="/REST/DojoGrid">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="REST_DojoGridJsonRest" label="Dojo Grid using JSON Rest"
+				selection="/REST/DojoGridJsonRest">
+			</xe:pageTreeNode>		
+			<xe:pageTreeNode page="REST_DojoNotesPeek" label="Dojo NotesPeek"
+				selection="/REST/DojoNotesPeek">
+			</xe:pageTreeNode>			
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="REST_Custom" label="Script Services"
+				selection="/REST/Custom">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="REST_RPC" label="JSON RPC"
+				selection="/REST/RPC">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

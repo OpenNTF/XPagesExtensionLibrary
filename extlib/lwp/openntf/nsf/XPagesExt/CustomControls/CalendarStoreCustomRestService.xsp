@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:script clientSide="true">
+			<xp:this.contents><![CDATA[
+var path = " ${javascript: // compute the path serverside
+	var value = '/'; // path relative to the application
+	var viewHandler:com.ibm.xsp.application.ViewHandlerEx = facesContext.getApplication().getViewHandler();
+	value = viewHandler.getResourceURL(facesContext,value);
+	value = facesContext.getExternalContext().encodeResourceURL(value);
+	if( value.endsWith('/') ){
+		value = value.substring(0, value.length - 1);
+	}
+	return value;
+} ".trim();
+dojo.registerModulePath('xpagesext', path);
+			]]></xp:this.contents>
+		</xp:script>
+		<!--
+			ensure the dwa module path is registered before attempt to load from
+			xpagesext module path
+		-->
+		<xp:dojoModule name="dwa.cv.calendarView"></xp:dojoModule>
+		<!--
+			Just referencing .js files just for ease of firebug debugging - not
+			needed because the modules auto-include.
+		-->
+		<xp:script clientSide="true"
+			src="/.ibmxspres/.dwa/cv/calendarView.js">
+		</xp:script>
+		<xp:script clientSide="true"
+			src="/.ibmxspres/.dwa/cv/calendarDataStore.js">
+		</xp:script>
+				<xp:script clientSide="true"
+			src="/.ibmxspres/.dwa/date/calendar.js">
+		</xp:script>
+		<xp:script clientSide="true" src="/CalendarStore.js"></xp:script>
+	</xp:this.resources>
+
+
+	<xe:restService id="restService2" pathInfo="inoteslegacyjson">
+		<xe:this.service>
+			<xe:viewJsonLegacyService
+				databaseName="${compositeData.databaseName}" viewName="${compositeData.viewName}"
+				defaultColumns="false" var="entry" contentType="text/plain">
+				<xp:this.columns>
+					<!--  Cal Date -->
+					<xe:restViewColumn name="$134" columnName="$134"></xe:restViewColumn>
+					<!--  Icon -->
+					<xe:restViewColumn name="$149" columnName="$149"></xe:restViewColumn>
+					<!--  Start Date -->
+					<xe:restViewColumn name="$144" columnName="$144"></xe:restViewColumn>
+					<!--  End Date -->
+					<xe:restViewColumn name="$146" columnName="$146"></xe:restViewColumn>
+					<!--  Description -->
+					<xe:restViewColumn name="$147" columnName="$147"></xe:restViewColumn>
+					<!--  Alt Description -->
+					<xe:restViewColumn name="$151"	columnName="$151"></xe:restViewColumn>
+					<!--  Type -->
+					<xe:restViewColumn name="$152" columnName="$152"></xe:restViewColumn>
+					<!--  Chair -->
+					<xe:restViewColumn name="$153" columnName="$153"></xe:restViewColumn>
+					<!--  Confidential -->
+					<xe:restViewColumn name="$154" columnName="$154"></xe:restViewColumn>
+					<!--  Status -->
+					<xe:restViewColumn name="$160" columnName="$160"></xe:restViewColumn>
+					<xe:restViewColumn name="$UserData"	columnName="$UserData">	</xe:restViewColumn>
+				</xp:this.columns>
+				<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson2=="true"}]]></xe:this.compact>
+			</xe:viewJsonLegacyService>
+		</xe:this.service>
+	</xe:restService>
+
+
+	<xe:notesCalendarStore id="${compositeData.storeComponentId}"
+		jsId="nstore1" dojoType="xpagesext.CalendarStore">
+		<xe:this.dojoAttributes>
+			<xp:dojoAttribute name="pathInfo"
+				value="/inoteslegacyjson">
+			</xp:dojoAttribute>
+		</xe:this.dojoAttributes>
+
+	</xe:notesCalendarStore>
+
+</xp:view>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		// The special subteam value "[No subteam]" is handled differently,
+		// as it doesn't correspond to an actual subteam.
+		if( !compositeData.noSubteam ){
+			var msg = strings.status_report_no_subteam;
+			msg = "["+msg+"]";
+			compositeData.noSubteam = msg;
+		}
+	}]]></xp:this.beforePageLoad>
+	
+	<xp:span id="linkSubteams">
+	<xp:repeat var="subteamItem" indexVar="subteamIndex">
+		<xp:this.value><![CDATA[#{javascript://
+			var names = compositeData.value; //rowData.getColumnValue('$MultipleSubteamNames');
+			if( !(names instanceof java.util.Vector) ){
+				var vec = new java.util.Vector();
+				vec.add(names);
+				names = vec;
+			}else if( names.size() > 1 ){
+				// when single subteam named "[No subteam]", display that as text
+				// else when multiple subteams, do not display the
+				// subteam named "[No subteam]"
+				names.remove(compositeData.noSubteam);
+			}
+			return names;
+		}]]></xp:this.value>
+		<xp:text rendered="#{subteamIndex &gt; 0}" value=", " />
+		<xe:switchFacet id="switchFacet3" defaultFacet="link">
+			<xe:this.selectedFacet><![CDATA[#{javascript://
+				// TODO why is subteamItem not available on decode?
+				if( requestScope.subteamItem && compositeData.noSubteam == subteamItem ){
+					return "text";
+				}
+				return null;
+			}]]></xe:this.selectedFacet>
+			<xp:this.facets>
+				<xp:link xp:key="link" text="#{subteamItem}" id="link10"
+					value="/members.xsp">
+					<xp:this.parameters>
+						<xp:parameter name="subteam" value="#{subteamItem}">
+						</xp:parameter>
+					</xp:this.parameters>
+				</xp:link>
+				<xp:text xp:key="text" value="#{subteamItem}" />
+			</xp:this.facets>
+		</xe:switchFacet>
+	</xp:repeat>
+	</xp:span>
+
+</xp:view>

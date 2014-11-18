@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/OneUI/WidgetContainer">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI"></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="Widget Container" id="label5" style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:table role="presentation">
+			<xp:tr valign="top">
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer1" titleBarText="Widget #1">
+						This widget has a title bar
+		</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer2" titleBarText="Widget #2" titleBarHref="/OneUI_Home.xsp">
+						This widget has a
+						clickable
+						title bar
+		</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer10" titleBarText="Widget #3" titleBar="false">
+						This widget has no title
+						bar
+					</xe:widgetContainer>
+				</xp:td>
+			</xp:tr>
+			<xp:tr valign="top">
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer3" titleBarText="Widget #4">
+						This widget has an action menu
+						<xe:this.dropDownNodes>
+							<xe:pageTreeNode page="Core_Home" label="Goto Home"></xe:pageTreeNode>
+							<xe:pageTreeNode page="Domino_Home" label="Goto Domino"></xe:pageTreeNode>
+						</xe:this.dropDownNodes>
+					</xe:widgetContainer>
+					<xe:widgetContainer id="widgetContainer13" titleBarText="Widget #4" dropDownRendered="false">
+						This widget has an action menu that is *not*
+						rendered
+						<xe:this.dropDownNodes>
+							<xe:pageTreeNode page="Core_Home" label="Goto Home">
+							</xe:pageTreeNode>
+							<xe:pageTreeNode page="Domino_Home" label="Goto Domino">
+							</xe:pageTreeNode>
+						</xe:this.dropDownNodes>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer12" titleBarText="Widget #5" scrollable="true">
+						<xe:this.facets>
+							<xp:panel xp:key="header" id="panel6">
+								This widget scrolls using
+								events
+							</xp:panel>
+						</xe:this.facets>
+						<xp:repeat id="repeat2" rows="10" value="#{javascript:return 1000}" indexVar="idx">
+							<xp:text escape="true" id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:"Value #"+idx}]]></xp:this.value>
+							</xp:text>
+							<xp:br></xp:br>
+						</xp:repeat>
+						<xp:eventHandler event="onScrollUp" submit="true" refreshMode="partial" refreshId="repeat2">
+							<xp:this.action><![CDATA[#{javascript:var r = getComponent("repeat2")
+r.setFirst(Math.max(r.getFirst()-10,0))}]]></xp:this.action>
+						</xp:eventHandler>
+						<xp:eventHandler event="onScrollDown" submit="true" refreshMode="partial" refreshId="repeat2">
+							<xp:this.action><![CDATA[#{javascript:var r = getComponent("repeat2")
+r.setFirst(Math.min(r.getFirst()+10,r.getRowCount()))}]]></xp:this.action>
+						</xp:eventHandler>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer11" titleBarText="Widget #6" style="height: 120px">
+						This widget has A fixed height
+					</xe:widgetContainer>
+				</xp:td>
+			</xp:tr>
+			<xp:tr valign="top">
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer4" titleBarText="Widget #7">
+						This widget has a header
+						<xe:this.facets>
+							<xp:panel xp:key="header" id="callback1">
+								I am the header
+			</xp:panel>
+						</xe:this.facets>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer8" titleBarText="Widget #8">
+						This widget has a footer
+						<xe:this.facets>
+							<xp:panel xp:key="footer" id="panel1">
+								I am the footer
+			</xp:panel>
+						</xe:this.facets>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer9" titleBarText="Widget #9">
+						This widget has a fixed height
+						<xe:this.facets>
+							<xp:panel xp:key="header" id="panel3">
+								I am the header
+			</xp:panel>
+							<xp:panel xp:key="footer" id="panel2">
+								I am the footer
+			</xp:panel>
+						</xe:this.facets>
+					</xe:widgetContainer>
+				</xp:td>
+			</xp:tr>
+			<xp:tr valign="top">
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer5" titleBarText="Widget #10" type="standard">
+						This widget is a Standard
+						widget
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer7" titleBarText="Widget #11" type="sidebar">
+						This widget is a SideBar widget
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer6" titleBarText="Widget #12" type="plain">
+						This widget is a Plain widget
+					</xe:widgetContainer>
+				</xp:td>
+			</xp:tr>
+			<xp:tr valign="top">
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer14" titleBarText="Widget #13 - Initially Opened" type="standard" collapsible="true">
+						This widget is collapsible and initially open
+						<xp:br />
+						<xp:br />
+						<xp:button value="Refresh Page" id="button1">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete"></xp:eventHandler>
+						</xp:button>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+					<xe:widgetContainer id="widgetContainer15" titleBarText="Widget #14 - Initially Closed" type="standard" collapsible="true"
+						initClosed="true">
+						This widget is collapsible and initially closed
+						<xp:br />
+						<xp:br />
+						<xp:button value="Refresh Page" id="button2">
+							<xp:eventHandler event="onclick" submit="true" refreshMode="complete"></xp:eventHandler>
+						</xp:button>
+					</xe:widgetContainer>
+				</xp:td>
+				<xp:td>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xc:OneUILayout>
+</xp:view>

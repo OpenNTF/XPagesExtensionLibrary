@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex" xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/DojoEffects">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:button value="Reload" id="button11">
+				
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.action>
+					<xp:openPage name="/Core_DojoEffects.xsp"></xp:openPage>
+				</xp:this.action></xp:eventHandler></xp:button>
+			<xp:br></xp:br>
+			Basic Fading:
+			<xp:button value="Fade Out" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoFadeOut var="myfct" node="effect1"></xe:dojoFadeOut>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Fade In" id="button1">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoFadeIn node="effect1"></xe:dojoFadeIn>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			Extended Fading:
+			<xp:button value="Fade Out - Duration 2s" id="button3">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoFadeOut node="effect1" duration="200"></xe:dojoFadeOut>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Fade Out - Duration 1s - easing"
+				id="button4">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoFadeOut node="effect1" duration="1000"
+							easing="function(x) { return Math.pow(x,10); }">
+						</xe:dojoFadeOut>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			Wiping:
+			<xp:button value="Wipe Out" id="button7">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojofxWipeOut node="effect1"></xe:dojofxWipeOut>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Wipe In" id="button12">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojofxWipeIn node="effect1"></xe:dojofxWipeIn>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Sliding:
+			<xp:button value="Slide to 0" id="button8">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojofxSlideTo node="effect1" left="0">
+							<xp:this.attributes>
+								<xp:parameter name="top"
+									value="dojo.coords(_id).t">
+								</xp:parameter>
+							</xp:this.attributes>
+						</xe:dojofxSlideTo>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Slide to 200" id="button9">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojofxSlideTo node="effect1" left="200">
+							<xp:this.attributes>
+								<xp:parameter name="top"
+									value="dojo.coords(_id).t">
+								</xp:parameter>
+							</xp:this.attributes>
+						</xe:dojofxSlideTo>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Slide to 400" id="button10">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojofxSlideTo node="effect1" left="400">
+							<xp:this.attributes>
+								<xp:parameter name="top"
+									value="dojo.coords(_id).t">
+								</xp:parameter>
+							</xp:this.attributes>
+						</xe:dojofxSlideTo>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:div id="effect1">
+				<xp:span style="font-weight:bold">
+					What is cooler than Domino App Dev?
+				</xp:span>
+				<xp:br></xp:br>
+				<xp:span style="font-weight:bold"></xp:span>
+				<xp:image url="/xpagesui-logo.jpg" id="image1"></xp:image>
+			</xp:div>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			Animate Property:
+			<xp:button value="Grow the box" id="button5">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoAnimateProperty node="bluebox"
+							duration="3000" rate="100">
+							<xp:this.properties>
+								<xe:dojoAnimationProps name="width"
+									start="200" end="400">
+								</xe:dojoAnimationProps>
+								<xe:dojoAnimationProps name="height"
+									start="200" end="400">
+								</xe:dojoAnimationProps>
+							</xp:this.properties>
+						</xe:dojoAnimateProperty>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Shrink it" id="button6">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:dojoAnimateProperty node="bluebox"
+							duration="3000" rate="100">
+							<xp:this.properties>
+								<xe:dojoAnimationProps name="width"
+									start="400" end="200">
+								</xe:dojoAnimationProps>
+								<xe:dojoAnimationProps name="height"
+									start="400" end="200">
+								</xe:dojoAnimationProps>
+							</xp:this.properties>
+						</xe:dojoAnimateProperty>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:div id="bluebox"
+				style="width: 200px; height: 200px; border: 3px solid #000000; margin: 5px; text-align: center; background: blue; float: left;">
+			</xp:div>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+
+

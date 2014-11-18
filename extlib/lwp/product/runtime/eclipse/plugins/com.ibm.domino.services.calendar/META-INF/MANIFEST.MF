@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Calendar Service Plug-in
+Bundle-SymbolicName: com.ibm.domino.services.calendar;singleton:=true
+Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Vendor: IBM
+Require-Bundle: com.ibm.notes.java.api,
+ com.ibm.wink,
+ org.eclipse.equinox.http.registry,
+ org.eclipse.equinox.http.servlet,
+ org.eclipse.core.runtime,
+ com.ibm.domino.osgi.core,
+ com.ibm.commons,
+ net.fortuna.ical4j,
+ com.ibm.domino.calendar.store,
+ com.ibm.domino.calendar.dbstore,
+ com.ibm.domino.das,
+ com.ibm.domino.commons,
+ com.ibm.xsp.core
+Import-Package: javax.servlet;version="2.5.0",
+ javax.servlet.http;version="2.5.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.domino.services.calendar.json,
+ com.ibm.domino.services.calendar.resources,
+ com.ibm.domino.services.calendar.service
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

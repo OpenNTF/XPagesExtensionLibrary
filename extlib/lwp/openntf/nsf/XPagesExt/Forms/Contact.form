@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579240032FA74'>
+<noteinfo noteid='1ca' unid='D010E58DE21278AF852578EA0050645C' sequence='7'>
+<created><datetime dst='true'>20110812T103805,72-04</datetime></created>
+<modified><datetime dst='true'>20111025T214850,05-04</datetime></modified>
+<revised><datetime dst='true'>20111025T214850,04-04</datetime></revised>
+<lastaccessed><datetime dst='true'>20111025T214850,05-04</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20111009T103904,95+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></updatedby>
+<wassignedby><name>CN=Philippe Riand/OU=Westford/O=IBM</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>Contact</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Contact</text></item>
+<item name='FirstName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='LastName' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='EMail' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='City' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='numfield' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><textlist><text>numfield</text><text>City</text><text
+>EMail</text><text>LastName</text><text>FirstName</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8TAAEAAApGaXJzdCBOYW1l
+OgDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/LgCKAAAFADACAAAAAAAAAgEAAAoAAAAA
+AAAAAAkAAAAAAEZpcnN0TmFtZQBiDgEAhAAAAAAAAAAAAN4GAACK/4X/CAABAAAKgQKDBAEAhf8T
+AAEAAApMYXN0IE5hbWU6IADdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/LACKAAAFADAC
+AAAAAAAAAgEAAAoAAAAAAAAAAAgAAAAAAExhc3ROYW1lYg4BAIQAAAAAAAAAAADeBgAAiv+F/wgA
+AQAACoECgwQBAIX/EAABAAAKRS1tYWlsOiDdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAB4AHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/
+KgCKAAAFADACAAAAAAAAAgEAAAoAAAAAAAAAAAUAAAAAAEVNYWlsAGIOAQCEAAAAAAAAAAAA3gYA
+AIr/hf8IAAEAAAqBAoMEAQCF/w4AAQAACkNpdHk6IN0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAiv8oAIoAAAUAMAIAAAAAAAACAQAACgAAAAAAAAAABAAAAAAAQ2l0eWIOAQCEAAAAAAAAAAAA
+3gYAAIr/hf8IAAEAAAqBAoMEAQCF/wgAAQAACt0GAACK//7/VAAAAAEAAAABAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAAAAAHgAeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+LiwkAIr/PACIAQAFADACAAwAAAAAAgEAAAoQAAAAAAAAAAgAAAAAABAAAAAOAAEABAAxLjA1AwBu
+dW1maWVsZGIOAQCEAAAAAAAAAAAA3gYAAIr/hf8IAAEAAAo=
+</rawitemdata></item>
+<item name='$Class'><text>xpFrameWork.ntf</text></item></note>
+

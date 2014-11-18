@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="117e" sequence="1" unid="5851C06AA06918D7802579A7004B3B7C">
+<created><datetime>20120217T134144,28+00</datetime></created>
+<modified><datetime>20120217T134144,40+00</datetime></modified>
+<revised><datetime>20120217T134144,39+00</datetime></revised>
+<lastaccessed><datetime>20120217T134144,40+00</datetime></lastaccessed>
+<addedtofile><datetime>20120217T134144,40+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>collapse.png</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+
+<item name="$FileModDT" sign="true"><datetime>20120217T134054,17+00</datetime></item>
+
+<item name="$FileNames" sign="true"><text>collapse.png</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item></note>

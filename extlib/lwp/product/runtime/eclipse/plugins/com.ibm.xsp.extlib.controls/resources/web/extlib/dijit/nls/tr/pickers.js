@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "Tamam",
+PickerCheckBox_Cancel: "\u0130ptal",
+PickerList_OK: "Tamam",
+PickerList_Cancel: "\u0130ptal",
+PickerListSearch_Search: "Ara",
+PickerListSearch_OK: "Tamam",
+PickerListSearch_Cancel: "\u0130ptal",
+PickerListSearch_Value: "De\u011fer",
+PickerListSearch_Values: "De\u011ferler",
+PickerName_Search: "Ara",
+PickerName_Add: "Ekle",
+PickerName_Remove: "Kald\u0131r",
+PickerName_RemoveAll: "T\u00fcm\u00fcn\u00fc Kald\u0131r",
+PickerName_OK: "Tamam",
+PickerName_Cancel: "\u0130ptal",
+PickerName_SearchIn: "\u015eurada Ara",
+PickerName_SearchFor: "\u015eunu Ara",
+PickerName_unSelectedListLabel: "Se\u00e7ilecek de\u011ferlerin listesi",
+PickerName_selectedListLabel: "Se\u00e7ilen de\u011ferlerin listesi"
+})

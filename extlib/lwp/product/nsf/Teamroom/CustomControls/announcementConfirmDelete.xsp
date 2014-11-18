@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:dialog id="dialogConfirmDelete" title="TeamRoom Message">
+
+		<xp:label id="label1" value="Are you sure you want to delete this announcement?">
+		</xp:label>
+
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+
+		<xp:button id="buttonYes" value="Yes" role="button"
+			title="confirm delete the document">
+			<xp:eventHandler event="onclick" submit="true">
+				<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialogConfirmDelete}')]]></xp:this.script>
+				<xp:this.action>
+					<xp:deleteDocument name="/announcements.xsp"></xp:deleteDocument>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+
+		<xp:link escape="true" text="No" id="linkNo">
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[XSP.closeDialog('#{id:dialogConfirmDelete}')]]></xp:this.script>
+			</xp:eventHandler>		
+		</xp:link>
+
+	</xe:dialog>
+
+</xp:view>

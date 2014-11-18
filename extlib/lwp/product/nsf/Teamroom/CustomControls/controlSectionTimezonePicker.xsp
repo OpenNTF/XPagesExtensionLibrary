@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:script src="/xpTimeZone.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+		
+		viewScope.startDate = getComponent(compositeData.startDateComponentId).getValue();
+		viewScope.startTime = getComponent(compositeData.startTimeComponentId).getValue();
+
+}]]></xp:this.beforePageLoad>
+	
+	<xp:table id="tblTimeZonePicker">
+		<xp:tr>
+			<xp:td style="width:200px;">
+				<xp:comboBox id="cbxTimeZonePicker" style="margin-left:-2px;"
+					value="${javascript:'#{' + compositeData.timezoneFieldELBinding + '}'}"
+					defaultValue="#{javascript:getCurrentTimeZone()}">
+					<xp:selectItem itemValue=""
+						itemLabel="Empty Time Zone">
+					</xp:selectItem>
+					<xp:selectItem itemValue="${javascript:getCurrentTimeZone()}"
+						itemLabel="Local Time Zone">
+					</xp:selectItem>
+					<xp:selectItem id="existingValue">
+						<xp:this.loaded><![CDATA[${javascript://							
+							// note, cannot call getComponent in a loaded computation
+							// so create the binding again.
+							var expr = "#{"+compositeData.timezoneFieldELBinding+"}";
+							var vb = facesContext.getApplication().createValueBinding(expr);
+							var existingCode = vb.getValue(facesContext);
+							if( ! existingCode || com.ibm.xsp.teamroom.timezone.TimeZoneUtil.containsCode(existingCode)
+								|| getCurrentTimeZone() == existingCode ){
+								return false;
+							}
+							// existing code is not an exact match for the list in the combo
+							// so create this xp:selectItem to allow the exising code to 
+							// be preserved while editing the document.
+							requestScope.timezonePickerExistingCode = existingCode;
+							return true;
+						}]]></xp:this.loaded>
+						<xp:this.itemValue><![CDATA[${javascript:// computed at load time
+							return requestScope.timezonePickerExistingCode;
+						}]]></xp:this.itemValue>
+						<xp:this.itemLabel><![CDATA[${javascript:// computed at load time
+							var existingCode = requestScope.timezonePickerExistingCode;
+							// may find a label for a unknown code by ignoring the client-dependant ZX section
+							var label = com.ibm.xsp.teamroom.timezone.TimeZoneUtil.labelAllowImperfectMatch(
+									existingCode, context.getLocale());
+							if( null != label ){
+								return label;
+							}
+							label = com.ibm.xsp.teamroom.timezone.TimeZoneUtil.labelIgnoreOptional(
+									existingCode, context.getLocale());
+							if( null != label ){
+								// Ignoring the ZN=Eastern part of the code gave a match
+								// This would mean that it might display
+								//  (GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
+								// instead of
+								//  (GMT+02:00) Athens, Bucharest, Istanbul
+								// because they are different timezones that have the same
+								// GMT offset and the same daylight savings time schedule.
+								// So append (approx) to indicate that the label displayed
+								// is not for an exact match.
+								return label + strings.mainTopicEdit_TimeZone_approx;
+							}
+							return com.ibm.xsp.teamroom.timezone.TimeZoneUtil.getOffsetOnly(existingCode)
+								+ strings.mainTopicEdit_TimeZone_approx;
+						}]]></xp:this.itemLabel>
+					</xp:selectItem>
+					<xp:selectItems>
+						<xp:this.value><![CDATA[#{javascript://
+							try
+							{
+								com.ibm.xsp.teamroom.timezone.TimeZoneUtil.getComboOptions(context.getLocale());
+							}
+							catch (e)
+							{
+							}
+						}]]></xp:this.value>
+					</xp:selectItems>
+					<xp:eventHandler event="onchange" submit="true"
+						refreshMode="partial"
+						refreshId="#{compositeData.onChangeRefreshId}" immediate="false"
+						execMode="partial" execId="#{compositeData.onChangeRefreshId}">
+					</xp:eventHandler>
+				</xp:comboBox>
+			</xp:td>
+			<xp:td style="vertical-align:middle;">
+				<xp:div id="divLocalTime" style="white-space:nowrap;">
+					<xp:label id="lblLocal" value="Local:"
+						style="padding:0px 5px 0px 5px;">
+					</xp:label>
+					<xp:text id="lblLocalTime">
+						<xp:this.value><![CDATA[#{javascript://
+						
+							try
+							{							
+								var vDate = new java.util.Vector();
+								var vTime = new java.util.Vector();
+								var vZone = new java.util.Vector();
+								
+								vDate.add(0,session.createDateTime(viewScope.startDate));
+								vTime.add(0,session.createDateTime(viewScope.startTime));
+								vZone.add(0,getComponent("cbxTimeZonePicker").getValue());
+														
+								var merged = xpTimeZone_TimeMerge_values(vDate,vTime,vZone);
+								if( merged && merged.size() == 1 )
+								{
+									return merged.get(0).toJavaDate();
+								}
+							}
+							catch (e)
+							{
+								return "An error occurred trying to calculate the local time."; 
+							}
+
+						}]]></xp:this.value>
+						<xp:this.converter>
+							<xp:convertDateTime type="both"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:text>
+				</xp:div>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+</xp:view>

@@ -1,0 +1,20 @@
+<div>
+<style>
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none;}
+.xspPickerList .dijitBorderContainer { width: auto; height: auto;}
+.xspPickerList { height:100%; width:100%; }
+.xspPickerInput .input {margin:3px 3px 3px 3x!important}
+.xspPickerSpan {padding:1px 1px 1px 1px!important}
+.xspPickerListButton{width:70px!important;margin:0 8px 0 5px;}
+</style>
+<div style="padding:10px">
+	<div class="xspPickerList" id="${id}">
+		<div dojoAttachPoint="containerNode" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onclick:_handleClick"></div>
+	</div>
+</div>
+<div class="lotusDialogFooter">
+  <input type="submit" value="${PickerCheckBox_OK}" dojoAttachPoint="pkOk" class="lotusBtn" />
+  <input type="button" value="${PickerCheckBox_Cancel}" dojoAttachPoint="pkCancel" class="lotusBtn" />
+</div>
+
+</div>

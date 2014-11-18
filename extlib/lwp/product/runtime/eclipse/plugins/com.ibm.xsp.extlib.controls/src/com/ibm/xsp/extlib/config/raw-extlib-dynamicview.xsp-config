@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dynamicview</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+		
+	<component>
+		<description>A view panel that dynamically creates its columns based on the view definition</description>
+		<display-name>Dynamic View Panel</display-name>
+		<!-- propose changing to include ext lib -->
+		<component-type>com.ibm.xsp.extlib.dynamicview.DynamicViewPanel</component-type>
+		<component-class>com.ibm.xsp.extlib.component.dynamicview.UIDynamicViewPanel</component-class>
+		
+        <!-- Overridden to remove the designer default-value -->
+        <property>
+            <description>%/javax.faces.Data/rows/descr%</description>
+            <display-name>%/javax.faces.Data/rows/name%</display-name>
+            <property-name>rows</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+  		<property>
+			<description>This property defines the customizer to use, as a managed bean or a class name</description>
+			<display-name>Customizer Bean</display-name>
+			<property-name>customizerBean</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>false</localizable>
+				<designer-extension>
+                    <category>basics</category>
+                    <tags>
+                     todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>This event allows you to receive notifications of mouse click events on a column. Note that this event will be added, and executed, as an onclick event for the column. Thus, it gives access to the current row being clicked.</description>
+			<display-name>On Column Click</display-name>
+			<property-name>onColumnClick</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>mouse-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Shows a check box that allows the selection of the row</description>
+			<display-name>Show Check Box</display-name>
+			<property-name>showCheckbox</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+		            <category>format</category>
+		        </designer-extension> 
+			</property-extension>
+		</property>
+		<property>
+			<description>Shows a check box in the header that selects all the rows</description>
+			<display-name>Show Check Box in Header</display-name>
+			<property-name>showHeaderCheckbox</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+		            <category>format</category>
+		        </designer-extension> 
+			</property-extension>
+		</property>
+		
+		<component-extension>
+      		<base-component-type>com.ibm.xsp.ViewPanel</base-component-type>
+      		<component-family>javax.faces.Data</component-family>
+      		<renderer-type>com.ibm.xsp.ViewPanel</renderer-type>
+			<tag-name>dynamicViewPanel</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+</faces-config>

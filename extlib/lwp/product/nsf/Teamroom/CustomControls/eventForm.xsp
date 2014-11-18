@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument var="event" formName="Event"
+			ignoreRequestParams="false" computeWithForm="onsave">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:link escape="true" id="backLink">
+		<xp:this.value><![CDATA[#{javascript:
+			viewStateBean.restoreState = true;
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				return "/allDocuments.xsp";
+			}
+			else
+			{
+				return sessionScope.webFrom;
+			}
+		}]]></xp:this.value>
+		<xp:this.text><![CDATA[#{javascript:
+			var text;
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				text = "All Documents";
+			}
+			else
+			{
+				text = sessionScope.webFromName;
+			}
+			return I18n.format(strings.getString("back.to"), text);
+		}]]></xp:this.text>
+	</xp:link>
+
+	<xp:br></xp:br>
+
+	<xe:formTable loaded="${javascript:event.isEditable()}"
+		disableRequiredMarks="false" disableErrorSummary="false"
+		labelWidth="100px" legend="New Event Form">
+
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<xp:label loaded="${javascript:param.documentId == null}"
+					disableTheme="true" value="New Event"
+					style="font-size: 1.5em; margin: .75em 0">
+				</xp:label>
+				<xp:text loaded="${javascript:param.documentId != null}"
+					disableTheme="true" value="Event"
+					style="font-size: 1.5em; margin: .75em 0">
+				</xp:text>
+			</xp:panel>
+
+			<xp:panel xp:key="footer">
+				<xp:button value="Save" id="button2">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" id="eventHandler1">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:saveDocument var="event"></xp:saveDocument>
+								<xp:openPage name="/events.xsp"></xp:openPage>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link text="Cancel" id="link2" role="button"
+					title="cancel document">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:actionGroup>
+									<xp:confirm
+										message="Cancel working with this event?">
+									</xp:confirm>
+									<xp:openPage name="/events.xsp"></xp:openPage>
+								</xp:actionGroup>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xe:this.facets>
+
+		<xe:formRow label="Title:" labelPosition="left">
+			<xp:inputText id="fldEventSummary" style="width:100%;"
+				value="#{event.EventSummary}" required="true"
+				disableClientSideValidation="true" autocomplete="off">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Event title is required">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Details:" labelPosition="left">
+			<xp:inputText id="fldEventDetail" style="width:100%;"
+				value="#{event.EventDetail}" required="false"
+				disableClientSideValidation="true" autocomplete="off">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Date:" labelPosition="left">
+			<xp:inputText id="fldEventDate" value="#{event.EventDate}"
+				required="true" disableClientSideValidation="false"
+				autocomplete="off" defaultValue="#{javascript:@Today()}"
+				role="button" title="select date">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Event date is required">
+					</xp:validateRequired>
+				</xp:this.validators>
+				<xp:this.converter>
+					<xp:convertDateTime type="date"></xp:convertDateTime>
+				</xp:this.converter>
+				<xp:dateTimeHelper id="dateTimeDropDown"
+					dojoType="dijit.form.DateTextBox">
+				</xp:dateTimeHelper>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Status:" labelPosition="left">
+			<xp:radioGroup id="rdgStatus"
+				value="#{event.FileThisStatusDoc}" defaultValue="0" legend="Status"
+				title="radio buttons to select event status">
+				<xp:selectItem itemLabel="Active" itemValue="0">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Inactive" itemValue="1">
+				</xp:selectItem>
+			</xp:radioGroup>
+		</xe:formRow>
+	</xe:formTable>
+
+	<!-- read mode begin -->
+
+	<xc:controlReadForm id="readForm" loaded="${javascript:!event.isEditable()}">
+		<xc:this.title>
+			<![CDATA[${javascript: event.getItemValueString("EventSummary")}]]>
+		</xc:this.title>
+		
+		<xp:this.facets>
+			<xp:panel id="pnlSubheading" xp:key="subheading">
+				<xp:text value="" disableTheme="true" />
+				<xp:text id="reportDateOutput" value="#{event.EventDate}"
+					disableTheme="true">
+					<xp:this.converter>
+						<xp:convertDateTime type="date" dateStyle="long">
+						</xp:convertDateTime>
+					</xp:this.converter>
+				</xp:text>
+			</xp:panel>
+
+			<xp:panel id="pnlMeta" xp:key="meta">
+				<xe:listInline>
+					<xp:panel>
+						<xp:label value="Created "></xp:label>
+						<xp:text id="createdDateOut" value="#{javascript:@Created()}"></xp:text>
+						<xp:label value=" by "></xp:label>
+						<xp:link styleClass="lotusPerson" id="from"
+							text="#{javascript:peopleBean.getPerson(event.getItemValueString('From')).displayName}"
+							value="/members.xsp">
+							<xp:this.parameters>
+								<xp:parameter name="profile"
+									value="#{javascript:peopleBean.getPerson(event.getItemValueString('From')).abbreviatedName}">
+								</xp:parameter>
+							</xp:this.parameters>
+						</xp:link>
+					</xp:panel>
+					<xp:panel>
+						<xp:label value="Event status: "></xp:label>
+						<xp:span id="eventStatusOut">
+							<xp:text disableTheme="true" value="Active"
+								rendered="#{javascript:event.getItemValueString('FileThisStatusDoc') == '0'}"></xp:text>
+							<xp:text disableTheme="true" value="Inactive"
+								rendered="#{javascript:event.getItemValueString('FileThisStatusDoc') == '1'}"></xp:text>
+						</xp:span>
+					</xp:panel>
+				</xe:listInline>
+			</xp:panel>
+
+			<xp:panel id="pnlActions" xp:key="actions">
+				<xe:listInline>
+					<xp:link text="Edit" id="link1" value="/events.xsp"
+						role="button" title="edit">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:this.parameters>
+							<xp:parameter name="documentId"
+								value="#{javascript:event.getDocument().getUniversalID()}">
+							</xp:parameter>
+							<xp:parameter name="action"
+								value="editDocument">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+
+					<xp:link text="Mark As Inactive"
+						id="lkMarkAsInactive" role="button" title="mark as inactive">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && event.getItemValueString('FileThisStatusDoc') == '0' }]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:
+	event.replaceItemValue("FileThisStatusDoc","1"); event.save();
+	context.redirectToPage("/events.xsp");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<xp:link text="Mark As Active" id="lkMarkAsActive"
+						role="button" title="mark as active">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && event.getItemValueString('FileThisStatusDoc') == '1' }]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:
+	event.replaceItemValue("FileThisStatusDoc","0"); event.save();
+	context.redirectToPage("/inactiveDocuments.xsp");}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xe:listInline>
+			</xp:panel>
+		</xp:this.facets>
+
+		<xc:controlReadFormRichText
+			inputId="subjectOut" id="subject">
+			<xp:text id="subjectOut" value="#{event.EventDetail}"></xp:text>
+		</xc:controlReadFormRichText>
+	</xc:controlReadForm>
+</xp:view>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="Domino_Home" label="Domino Home"
+				selection="/Domino/Home">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_UserBean" label="User Bean"
+				selection="/Domino/UserBean">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_JavaScript" label="JavaScript Extension"
+				selection="/Domino/JavaScript">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_ViewState" label="View State"
+				selection="/Domino/ViewState">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_DataView" label="Data View"
+				selection="/Domino/DataView">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_ForumView" label="Forum View"
+				selection="/Domino/ForumView">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_DynamicSort" label="Dynamic View Sorting"
+				selection="/Domino/DynamicSort">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_DynamicView" label="Dynamic Views"
+				selection="/Domino/DynamicView">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_TagCloud" label="Tag Cloud"
+				selection="/Domino/TagCloud">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_Pickers" label="Value/Name Pickers"
+				selection="/Domino/Pickers">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Domino_Outline" label="Outline"
+				selection="/Domino/Outline">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="262" sequence="11" unid="A85F22633AFF539D802579670054CE17">
+<created><datetime>20111215T152617,83+00</datetime></created>
+<modified><datetime>20120210T133312,76+00</datetime></modified>
+<revised><datetime>20120210T133312,75+00</datetime></revised>
+<lastaccessed><datetime>20120210T133312,76+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152618,20+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$TITLE" sign="true"><text>xpAttachment.gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080726T235414,17-04</datetime></item>
+<item name="$ImageNames" sign="true"><text>xpAttachment.gif</text></item>
+<item name="$Flags"><text>34CiQ$</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+
+<item name="$EditFilePath"><text>C:\Users\IBM_AD~1\AppData\Local\Temp\notes32C5CD\~xpAttachment.gif</text></item></note>

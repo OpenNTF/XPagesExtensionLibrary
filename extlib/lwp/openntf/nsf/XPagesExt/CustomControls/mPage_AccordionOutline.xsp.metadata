@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579180055A1A0" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1b2" sequence="17" unid="6D5C8F9BA9BA57D7802579180055D0F0">
+<created><datetime dst="true">20110927T163720,48+01</datetime></created>
+<modified><datetime dst="true">20110927T165641,37+01</datetime></modified>
+<revised><datetime dst="true">20110927T165641,36+01</datetime></revised>
+<lastaccessed><datetime dst="true">20110927T165641,37+01</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20110927T163720,50+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE"><text>mPage_AccordionOutline.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>mPage_AccordionOutline.xsp</text></item></note>

@@ -1,0 +1,901 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>data</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+
+            
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.data.DataSourceIterator.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.data.DataSourceIterator.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.DataSourceIterator</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIDataSourceIterator</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
+        
+        
+        <property>
+            
+            <description>%/com.ibm.xsp.UIDataIterator/value/descr%</description>
+            <display-name>%/com.ibm.xsp.UIDataIterator/value/name%</display-name>
+            <property-name>value</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+        <property>
+            <description>%/javax.faces.Data/rows/descr%</description>
+            <display-name>%/javax.faces.Data/rows/name%</display-name>
+            <property-name>rows</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.data.descr%</description>
+            <display-name>%property.data.name%</display-name>
+            <property-name>data</property-name>
+            <property-class>com.ibm.xsp.model.DataSource</property-class>
+            <property-extension>
+                 <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.expandedDetail.descr%</description>
+            <display-name>%property.expandedDetail.name%</display-name>
+            <property-name>expandedDetail</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.UIDataIterator</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <designer-extension>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+
+
+    <component>
+        <description>%component.multiImage.descr%</description>
+        <display-name>%component.multiImage.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.MultiImage</component-type>
+        <component-class>com.ibm.xsp.extlib.component.image.UIMultiGraphic</component-class>
+        
+        
+        
+        
+
+        <property>
+            <description>%property.icons.component.multiImage.descr%</description>
+            <display-name>%property.icons.component.multiImage.name%</display-name>
+            <property-name>icons</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.image.IconEntry</property-item-class>
+                <property-add-method>addIcon</property-add-method>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.GraphicImage</base-component-type>
+            <component-family>javax.faces.Graphic</component-family>
+            <renderer-type>com.ibm.xsp.ImageEx</renderer-type>
+            <tag-name>multiImage</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.data.AbstractDataView.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.data.AbstractDataView.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.AbstractDataView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.AbstractDataView</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+        
+        <property>
+            <description>%property.showItemsFlat.descr%</description>
+            <display-name>%property.showItemsFlat.name%</display-name>
+            <property-name>showItemsFlat</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.detailsOnClient.descr%</description>
+            <display-name>%property.detailsOnClient.name%</display-name>
+            <property-name>detailsOnClient</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.collapsibleDetail.descr%</description>
+            <display-name>%property.collapsibleDetail.name%</display-name>
+            <property-name>collapsibleDetail</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.disableHideRow.descr%</description>
+            <display-name>%property.disableHideRow.name%</display-name>
+            <property-name>disableHideRow</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.rowStyle.descr%</description>
+            <display-name>%property.rowStyle.name%</display-name>
+            <property-name>rowStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.rowStyleClass.descr%</description>
+            <display-name>%property.rowStyleClass.name%</display-name>
+            <property-name>rowStyleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+          
+          <description>%property.summaryColumn.descr%</description>
+          <display-name>%property.summaryColumn.name%</display-name>
+          <property-name>summaryColumn</property-name>
+          <property-class>com.ibm.xsp.extlib.component.data.SummaryColumn</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>format</category>
+                
+                    <tags>
+                       todo
+                    </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+            <description>%property.pageName.descr%</description>
+            <display-name>%property.pageName.name%</display-name>
+            <property-name>pageName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.openDocAsReadonly.descr%</description>
+            <display-name>%property.openDocAsReadonly.name%</display-name>
+            <property-name>openDocAsReadonly</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.DataSourceIterator</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <designer-extension>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+
+
+
+    <component>
+        <description>%component.dataView.descr%</description>
+        <display-name>%component.dataView.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.DataView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIDataView</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.aria.role.deprecated</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+        
+        <property>
+            <description>%property.showCheckbox.descr%</description>
+            <display-name>%property.showCheckbox.name%</display-name>
+            <property-name>showCheckbox</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension> 
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.showHeaderCheckbox.descr%</description>
+            <display-name>%property.showHeaderCheckbox.name%</display-name>
+            <property-name>showHeaderCheckbox</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension> 
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.columnTitles.descr%</description>
+            <display-name>%property.columnTitles.name%</display-name>
+            <property-name>columnTitles</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.collapsibleCategory.descr%</description>
+            <display-name>%property.collapsibleCategory.name%</display-name>
+            <property-name>collapsibleCategory</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    
+                    <tags>
+                      runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.collapsibleRows.descr%</description>
+            <display-name>%property.collapsibleRows.name%</display-name>
+            <property-name>collapsibleRows</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.multiColumnCount.descr%</description>
+            <display-name>%property.multiColumnCount.name%</display-name>
+            <property-name>multiColumnCount</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+          
+          <description>%property.iconColumn.descr%</description>
+          <display-name>%property.iconColumn.name%</display-name>
+          <property-name>iconColumn</property-name>
+          <property-class>com.ibm.xsp.extlib.component.data.IconColumn</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>format</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+          
+          <description>%property.categoryColumn.descr%</description>
+          <display-name>%property.categoryColumn.name%</display-name>
+          <property-name>categoryColumn</property-name>
+          <property-class>java.util.List</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <collection-property>true</collection-property>
+            <property-item-class>com.ibm.xsp.extlib.component.data.CategoryColumn</property-item-class>
+            <property-add-method>addCategoryColumn</property-add-method>
+            <designer-extension>
+                <category>format</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <property>
+          
+            <description>%property.extraColumns.descr%</description>
+            <display-name>%property.extraColumns.name%</display-name>
+            <property-name>extraColumns</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.data.ExtraColumn</property-item-class>
+                <property-add-method>addExtraColumn</property-add-method>
+                <designer-extension>
+                    <category>format</category>
+                    
+                    <tags>
+                      todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.summary.descr%</description>
+            <display-name>%property.summary.name%</display-name>
+            <property-name>summary</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.0.v00_03</since>
+                <pass-through>true</pass-through>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>accessibility</category>
+                    <editor>com.ibm.std.MultiLine</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.infiniteScroll.descr%</description>
+            <display-name>%property.infiniteScroll.name%</display-name>
+            <property-name>infiniteScroll</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.1.v00_02</since>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        enable
+                        disable
+                        auto
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractDataView</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUICustomView</renderer-type>
+            <tag-name>dataView</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+<group>
+    <group-type>com.ibm.xsp.extlib.group.linkTitle</group-type>
+    <property>     
+      <description>%property.linkTitle.descr%</description>
+      <display-name>%property.linkTitle.name%</display-name>
+      <property-name>linkTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+       <since>9.0.0.v00_02</since>        
+        <localizable>true</localizable>
+        <designer-extension> 
+         <tags>
+             is-accessibility-title
+         </tags>      
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-complex</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+
+  <group>
+    <group-type>com.ibm.xsp.extlib.group.headerLinkTitle</group-type>
+    <property>
+      <description>%property.headerLinkTitle.descr%</description>
+      <display-name>%property.headerLinkTitle.name%</display-name>
+      <property-name>headerLinkTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+       <since>9.0.0.v00_02</since>        
+        <localizable>true</localizable>
+        <designer-extension>
+         <tags>
+             is-accessibility-title
+         </tags>                
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-complex</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  
+
+    <component>
+        <description>%component.forumView.descr%</description>
+        <display-name>%component.forumView.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.ForumView</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIForumView</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractDataView</base-component-type>
+            <component-family>com.ibm.xsp.DataIterator</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUIForumView</renderer-type>
+            <tag-name>forumView</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <complex-type>
+        <description>%complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.descr%</description>
+        <display-name>%complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.name%</display-name>
+        
+        <complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.ValueColumn</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.ValueHolder_complex.prop.converter</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+
+        <property>
+            <description>%property.columnTitle.descr%</description>
+            <display-name>%property.columnTitle.name%</display-name>
+            <property-name>columnTitle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    
+                    <tags>
+                       not-accessibility-title
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.columnName.complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.descr%</description>
+            <display-name>%property.columnName.complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.name%</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.href.complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.descr%</description>
+            <display-name>%property.href.complex-type.com.ibm.xsp.extlib.component.data.ValueColumn.name%</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.contentType.descr%</description>
+            <display-name>%property.contentType.name%</display-name>
+            <property-name>contentType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        html
+                        text
+                    </editor-parameter>
+                    
+                    
+                     
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.headerStyle.descr%</description>
+            <display-name>%property.headerStyle.name%</display-name>
+            <property-name>headerStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.headerStyleClass.descr%</description>
+            <display-name>%property.headerStyleClass.name%</display-name>
+            <property-name>headerStyleClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+          
+       
+
+        <complex-extension>
+            <designer-extension>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    
+    <complex-type>
+        <description>%complex-type.viewSummaryColumn.descr%</description>
+        <display-name>%complex-type.viewSummaryColumn.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.SummaryColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.SummaryColumn</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.linkTitle</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.headerLinkTitle</group-type-ref>
+
+        <property>
+            <description>%property.href.complex-type.viewSummaryColumn.descr%</description>
+            <display-name>%property.href.complex-type.viewSummaryColumn.name%</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            
+        </property>
+         
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewSummaryColumn</tag-name>
+            <designer-extension>
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>%complex-type.viewCategoryColumn.descr%</description>
+        <display-name>%complex-type.viewCategoryColumn.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.CategoryColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.CategoryColumn</complex-class>
+        
+        <property>
+            <description>%property.columnName.complex-type.viewCategoryColumn.descr%</description>
+            <display-name>%property.columnName.complex-type.viewCategoryColumn.name%</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 
+                 <required>true</required>
+                 
+                 <designer-extension>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        
+        
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewCategoryColumn</tag-name>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>%complex-type.viewExtraColumn.descr%</description>
+        <display-name>%complex-type.viewExtraColumn.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.data.ExtraColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.ExtraColumn</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.linkTitle</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.headerLinkTitle</group-type-ref>
+       
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.data.ValueColumn</base-complex-id>
+            <tag-name>viewExtraColumn</tag-name>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>%complex-type.viewIconColumn.descr%</description>
+        <display-name>%complex-type.viewIconColumn.name%</display-name>
+        
+        <complex-id>com.ibm.xsp.extlib.component.data.IconColumn</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.data.IconColumn</complex-class>
+        <property>
+            <description>%property.columnName.complex-type.viewIconColumn.descr%</description>
+            <display-name>%property.columnName.complex-type.viewIconColumn.name%</display-name>
+            <property-name>columnName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.value.descr%</description>
+            <display-name>%property.value.name%</display-name>
+            <property-name>value</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.icons.complex-type.viewIconColumn.descr%</description>
+            <display-name>%property.icons.complex-type.viewIconColumn.name%</display-name>
+            <property-name>icons</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.component.image.IconEntry</property-item-class>
+                <property-add-method>addIcon</property-add-method>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>viewIconColumn</tag-name>
+            <designer-extension>
+                
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+    
+    <complex-type>
+        <description>%complex-type.iconEntry.descr%</description>
+        <display-name>%complex-type.iconEntry.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.image.IconEntry</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.image.IconEntry</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+        
+        <property>
+            <description>%property.url.descr%</description>
+            <display-name>%property.url.name%</display-name>
+            <property-name>url</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.alt.descr%</description>
+            <display-name>%property.alt.name%</display-name>
+            <property-name>alt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.selectedValue.descr%</description>
+            <display-name>%property.selectedValue.name%</display-name>
+            <property-name>selectedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.selected.descr%</description>
+            <display-name>%property.selected.name%</display-name>
+            <property-name>selected</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <complex-extension>
+            <tag-name>iconEntry</tag-name>
+            <designer-extension>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+    
+
+
+
+    
+    
+    
+    <component>
+        <description>%component.forumPost.descr%</description>
+        <display-name>%component.forumPost.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.data.ForumPost</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIForumPost</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.data.ForumPost</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.OneUIForumPost</renderer-type>
+            <tag-name>forumPost</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                
+                
+                <tags>
+                  todo
+                </tags>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:table style="background-color:#B4D5FC"&gt;&#13;
+        &lt;xp:tr&gt;&#13;
+            &lt;xp:td&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="authorAvatar"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="authorName"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="authorMeta"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+            &lt;/xp:td&gt;&#13;
+            &lt;xp:td style="width: 100%"&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="postTitle" id="callback3"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="postMeta" id="callback6"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="postDetails" id="callback4"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+                &lt;div&gt;&#13;
+                    &lt;xp:callback facetName="postActions" id="callback5"&gt;&lt;/xp:callback&gt;&#13;
+                &lt;/div&gt;&#13;
+            &lt;/xp:td&gt;&#13;
+        &lt;/xp:tr&gt;&#13;
+    &lt;/xp:table&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+
+
+</faces-config>

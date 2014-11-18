@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DojoGridJsonRest">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold"
+				value="This shows a Dojo grid calling the JSON REST services">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			The data in the grid can be updated and then saved back to
+			the
+			database.
+			<xp:br></xp:br>This
+			page also shows interesting behaviors, like a pure Dojo
+			dialog ('New Item' button) that is only loaded once and that
+			keeps the server side components
+			after it is closed.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService1">
+				<xe:this.service>
+					<xe:viewJsonService viewName="AllContacts"
+						defaultColumns="true" contentType="application/json" var="entry"
+						formName="Contact">
+						<xe:this.columns>
+							<xe:restViewColumn name="ShortName">
+								<xp:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xp:this.value>
+							</xe:restViewColumn>
+						</xe:this.columns>
+						<xe:this.postDeleteDocument><![CDATA[#{javascript:print("postDeleteDocument, id="+id)}]]></xe:this.postDeleteDocument>
+						<xe:this.postNewDocument><![CDATA[#{javascript:print("postNewDocument, doc="+document.getNoteID())}]]></xe:this.postNewDocument>
+						<xe:this.postOpenDocument><![CDATA[#{javascript:print("postOpenDocument, doc="+document.getNoteID())}]]></xe:this.postOpenDocument>
+						<xe:this.postSaveDocument><![CDATA[#{javascript:print("postSaveDocument, doc="+document.getNoteID())}]]></xe:this.postSaveDocument>
+						<xe:this.queryDeleteDocument><![CDATA[#{javascript:print("queryDeleteDocument, id="+id)}]]></xe:this.queryDeleteDocument>
+						<xe:this.queryNewDocument><![CDATA[#{javascript:print("queryNewDocument")}]]></xe:this.queryNewDocument>
+						<xe:this.queryOpenDocument><![CDATA[#{javascript:print("queryOpenDocument, id="+id)}]]></xe:this.queryOpenDocument>
+						<xe:this.querySaveDocument><![CDATA[#{javascript:print("querySaveDocument, doc="+document.getNoteID())}]]></xe:this.querySaveDocument>
+					</xe:viewJsonService>
+				</xe:this.service>
+			</xe:restService>
+			<xp:button value="New Item" id="button3">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[XSP.openDialog('#{id:inPlaceDialog1}')
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Delete Selected Item" id="button4">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var grid = dijit.byId('#{id:djxDataGrid1}');
+var items = grid.selection.getSelected();
+if(items.length) {
+	dojo.forEach(items, function(selectedItem) {
+		if(selectedItem!==null) {
+			grid.store.deleteItem(selectedItem);
+        }
+	});
+	grid.store.save()
+	grid._refresh();	
+}
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Save Changes" id="button5">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var args = {
+	onComplete: function() { /*window.location.reload();*/ },
+	onError: function() { alert('Update error'); }
+}
+restService1.save(args)
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Reload Grid" id="button6">
+
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var grid = dijit.byId('#{id:djxDataGrid1}');
+grid.store.close();
+grid._refresh();	
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br></xp:br>
+			<xe:dialog id="inPlaceDialog1" title="Create New User"
+				keepComponents="true">
+				<xe:djContentPane id="djContentPane1">
+					<xe:dialogContent>
+						<xp:table role="presentation">
+							<xp:tr>
+								<xp:td>
+									<xp:label value="First name:" id="label6" for="dlgFirstName">
+									</xp:label>
+								</xp:td>
+								<xp:td>
+									<xe:djValidationTextBox id="dlgFirstName"
+										required="true">
+									</xe:djValidationTextBox>
+								</xp:td>
+							</xp:tr>
+							<xp:tr>
+								<xp:td>
+									<xp:label value="Last name:" id="label7" for="dlgLastName">
+									</xp:label>
+								</xp:td>
+								<xp:td>
+									<xe:djValidationTextBox id="dlgLastName"
+										required="true">
+									</xe:djValidationTextBox>
+								</xp:td>
+							</xp:tr>
+							<xp:tr>
+								<xp:td>
+									<xp:label value="E mail:" id="label8" for="dlgEMail">
+									</xp:label>
+								</xp:td>
+								<xp:td>
+									<xe:djValidationTextBox id="dlgEMail"
+										required="true">
+									</xe:djValidationTextBox>
+								</xp:td>
+							</xp:tr>
+							<xp:tr>
+								<xp:td>
+									<xp:label value="City:" id="label9" for="dlgCity">
+									</xp:label>
+								</xp:td>
+								<xp:td>
+									<xe:djValidationTextBox id="dlgCity"
+										required="true">
+									</xe:djValidationTextBox>
+								</xp:td>
+							</xp:tr>
+						</xp:table>
+					</xe:dialogContent>
+					<xe:dialogButtonBar>
+						<xp:button id="djButton1" styleClass="lotusFormButton"
+							value="Ok">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[var djForm = dijit.byId(XSP.findForm("#{id:dlgFirstName}").id)
+if(!djForm.validate()) {
+	return;
+}
+
+var firstName = dijit.byId('#{id:dlgFirstName}').getValue();
+var lastName = dijit.byId('#{id:dlgLastName}').getValue();
+var email = dijit.byId('#{id:dlgEMail}').getValue();
+var city = dijit.byId('#{id:dlgCity}').getValue();
+
+var newItem = {
+	"FirstName":firstName,
+    "LastName":lastName,
+    "Email":email,
+    "City":city
+};
+var grid = dijit.byId('#{id:djxDataGrid1}');
+var store = grid.store;
+store.newItem(newItem);
+store.save();
+
+store.close();
+grid._refresh();	
+
+XSP.closeDialog('#{id:inPlaceDialog1}')
+]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:button>
+						<xp:link id="button17" text="Cancel" styleClass="lotusAction">
+							<xp:eventHandler event="onclick" submit="false">
+								<xp:this.script><![CDATA[XSP.closeDialog('#{id:inPlaceDialog1}')
+]]></xp:this.script>
+							</xp:eventHandler>
+						</xp:link>
+					</xe:dialogButtonBar>
+					<xp:eventHandler event="onShow" submit="false">
+					<xp:this.script><![CDATA[dojo.forEach(dijit.byId('#{id:inPlaceDialog1}').getDescendants(), function(widget) {
+     widget.attr('value', null);
+});
+]]></xp:this.script>
+					</xp:eventHandler>
+				</xe:djContentPane>
+				</xe:dialog>
+			<xp:br></xp:br>
+			<xe:djxDataGrid id="djxDataGrid1"
+				style="width: 85em;height: 25em;padding: 1px" storeComponentId="restService1">
+				<!--
+					style="width: 85em;height: 25em;padding: 1px"
+					storeComponentId="restService1"> style="width: 85em;height:
+					25em;padding: 1px" store="restService3">
+				-->
+				<xe:this.dojoAttributes>
+					<xp:dojoAttribute name="updateDelay" value="0"></xp:dojoAttribute>
+				</xe:this.dojoAttributes>
+				<xe:djxDataGridColumn id="djxDataGridColumn6"
+					field="FirstName" width="auto" editable="true">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn7"
+					field="LastName" width="auto" editable="true">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn8"
+					field="City" width="auto">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn9"
+					field="EMail" width="auto">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn10"
+					field="ShortName" width="auto">
+				</xe:djxDataGridColumn>
+			</xe:djxDataGrid>
+			<xp:br></xp:br>
+			<xp:button value="Save Changes" id="button1">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var args = {
+	onComplete: function() { /*window.location.reload();*/ },
+	onError: function() { alert('Update error'); }
+}
+restService1.save(args)
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Revert Changes" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var ds = eval('restService1')
+ds.revert()
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

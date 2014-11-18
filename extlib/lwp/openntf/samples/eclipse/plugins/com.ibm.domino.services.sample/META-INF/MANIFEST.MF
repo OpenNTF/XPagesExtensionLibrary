@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sample REST Service Plug-in
+Bundle-SymbolicName: com.ibm.domino.services.sample;singleton:=true
+Bundle-Version: 9.0.1.v00_09_qualifier
+Bundle-Vendor: IBM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.ibm.wink,
+ com.ibm.domino.osgi.core,
+ com.ibm.commons,
+ com.ibm.notes.java.api,
+ com.ibm.domino.services,
+ com.ibm.xsp.core,
+ com.ibm.domino.das
+Import-Package: javax.servlet;version="2.5.0",
+ javax.servlet.http;version="2.5.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.domino.services.sample.resources,
+ com.ibm.domino.services.sample.service

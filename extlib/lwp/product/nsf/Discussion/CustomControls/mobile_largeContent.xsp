@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:panel>
+		<xp:this.data>
+			<xp:dominoDocument var="dominoDoc" formName="MainTopic"
+				computeWithForm="onsave" action="openDocument">
+				<xp:this.postOpenDocument><![CDATA[#{javascript:// get the main topic details...
+					viewScope.mainUNID = dominoDoc.getItemValueString("mainID");
+					if(null != viewScope.mainUNID){
+						var mainTopic:NotesDocument = null;
+						try{
+							// try to locate parent topic...
+							mainTopic = database.getDocumentByUNID(viewScope.mainUNID);
+							if(null != mainTopic){
+								viewScope.mainID = mainTopic.getNoteID();
+								viewScope.mainSubject = mainTopic.getItemValueString("Subject");
+								viewScope.mainCreated = mainTopic.getCreated().toJavaDate();
+								viewScope.mainFrom = mainTopic.getItemValueString("From");
+								viewScope.mainAbstract = mainTopic.getItemValueString("Abstract");
+							}
+						}catch(e){
+							// if non-existent, then use current document...
+							mainTopic = dominoDoc;
+							if(null != mainTopic){
+								viewScope.mainID = mainTopic.getNoteID();
+								viewScope.mainSubject = mainTopic.getItemValueString("Subject");
+								viewScope.mainCreated = mainTopic.getDocument().getCreated().toJavaDate();
+								viewScope.mainFrom = mainTopic.getItemValueString("From");
+								viewScope.mainAbstract = mainTopic.getItemValueString("Abstract");
+							}
+						}
+					}
+				}]]></xp:this.postOpenDocument>
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xp:div id="divContent">
+			<xp:text id="computedField1" escape="false"
+				rendered="true">
+				<xp:this.value>
+					<![CDATA[#{dominoDoc.body}]]>
+				</xp:this.value>
+			</xp:text>
+		</xp:div>
+
+		<xp:panel id="panel16" styleClass="xlFormFooterContainer">
+			<xp:button value="Back" id="button2" styleClass="xlFormFooterButton">
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+						<xe:moveTo direction="Right to Left"
+						transitionType="slide" forceFullRefresh="true">
+							<xp:this.targetPage>
+								<![CDATA[#{javascript:
+									var url = "document" + sessionScope.backURL;
+									return url;
+								}]]>
+							</xp:this.targetPage>
+						</xe:moveTo>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xp:panel>
+</xp:view>

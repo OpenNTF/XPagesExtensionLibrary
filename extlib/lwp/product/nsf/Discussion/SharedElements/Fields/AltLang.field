@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='1b6' unid='B12C3F2A2DD8366C85256679005C6C41' sequence='14'>
+<created><datetime dst='true'>19980908T124930,25-04</datetime></created>
+<modified><datetime>20120305T082313,87+00</datetime></modified>
+<revised><datetime>20120305T082313,86+00</datetime></revised>
+<lastaccessed><datetime>20120305T082313,87+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100332,46+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE'><text>AltLang</text></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAAAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='AltLang' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>AltLang</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1IAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJQHAAAAAAAAAAAAAAAAgwQBAIX/CAABAAAK3QYAAIr//v9QAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAACK/54AgAAABQAwAgAAAAAAAAIBAAAKcgAAAAAAAAAHAAAAAAByAAoABAABABAA
+AwB2ZXIAvwBYAQMABwAMAAUACTFTMlMAAAA+AAUAAwB2ZXIAAAAAAAAAAIBiQA4CrwAiAAwAAQAA
+AMIBrgAWAAAAAAAAAAAA8D/7AQ0BrgAEALUDAwAHABIADAAJMFIzUzRTNlMxMVNBbHRMYW5nAN4G
+AACK/4X/CAABAAAK
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

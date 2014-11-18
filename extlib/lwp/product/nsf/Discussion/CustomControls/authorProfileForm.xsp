@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	enableModifiedFlag="#{javascript:!isMobile()}">
+	<xp:this.data>
+		<xp:dominoDocument formName="PersonalProfile" var="profileDoc"
+			ignoreRequestParams="true" computeWithForm="onsave">
+			<xp:this.documentId><![CDATA[#{javascript:// obtain the document id for the logged in user if it exists...
+var db:NotesDatabase	= database;
+var vw:NotesView		= db.getView("xpAuthorProfiles");
+var ve:NotesViewEntry	= vw.getEntryByKey(userBean.canonicalName, true);
+var unid				= null;
+
+if (null != ve) {
+	unid = ve.getUniversalID();
+}
+return(unid);}]]></xp:this.documentId>
+			<xp:this.action><![CDATA[#{javascript:// obtain the document id for the logged in user if it exists...
+var db:NotesDatabase	= database;
+var vw:NotesView		= db.getView("xpAuthorProfiles");
+var ve:NotesViewEntry	= vw.getEntryByKey(userBean.canonicalName, true);
+
+if (null != ve) {
+	return("openDocument");
+}
+return("newDocument");}]]></xp:this.action>
+			<xp:this.querySaveDocument><![CDATA[#{javascript:// flush out the old image if updating with a new one...
+if(!profileDoc.isNewNote()){
+	var al:java.util.List = profileDoc.getAttachmentList("attachment");
+	if(!al.isEmpty()){
+		var lastItemIndex = al.size() - 1;
+		if(lastItemIndex > 0){
+			for(var i = lastItemIndex - 1; i >= 0; i--){
+				var eo:NotesEmbeddedObject = al.get(i);
+				profileDoc.removeAttachment("attachment", eo.getName());
+			}
+		}
+	}
+}
+
+// store user CGI variables...
+var cgi = new CGIVariables();
+profileDoc.replaceItemValue("Remote_User", cgi.get("REMOTE_USER"));
+profileDoc.replaceItemValue("Remote_Addr", cgi.get("REMOTE_ADDR"));
+cgi = null;}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:djxmHeading id="djxmHeading3" label="By Author" moveTo="home"
+		loaded="${javascript:isMobile()}">
+		<xp:this.back><![CDATA[#{javascript:
+			if(viewScope.editMode)
+				return "Cancel";
+			return "Back";
+		}]]></xp:this.back>
+		<xp:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xe:dynamicContent id="dynamicContent1">
+					<xp:this.defaultFacet>
+						<![CDATA[#{javascript: 
+							if(profileDoc.getItemValueString("Email") === null || profileDoc.getItemValueString("Email") === "")
+							{return "saveControl";}
+							else
+							{return "editControl";}
+						}]]>
+					</xp:this.defaultFacet>
+					<xp:this.facets>
+						<xp:panel xp:key="saveControl" id="panel2">
+							<xp:button value="Save" id="saveButton">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="complete" save="false">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:saveDocument
+												var="profileDoc">
+											</xp:saveDocument>
+											<xp:changeDocumentMode
+												mode="readOnly" var="profileDoc">
+											</xp:changeDocumentMode>
+											<xe:moveTo
+												direction="Left to Right" transitionType="slide"
+												targetPage="home" forceFullRefresh="true">
+											</xe:moveTo>
+											<xe:changeDynamicContentAction
+												for="dynamicContent1" facetName="editControl">
+											</xe:changeDynamicContentAction>
+											<xp:executeScript
+												script="#{javascript:viewScope.editMode = false;}">
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+						</xp:panel>
+						
+						<xp:panel xp:key="editControl">
+							<xp:button value="Edit" id="editButton">
+								<xp:eventHandler
+									event="onclick" submit="true" refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:changeDocumentMode
+												mode="edit" var="profileDoc">
+											</xp:changeDocumentMode>
+											<xe:changeDynamicContentAction
+												for="dynamicContent1" facetName="saveControl">
+											</xe:changeDynamicContentAction>
+											<xp:executeScript
+												script="#{javascript:viewScope.editMode = true;}">
+											</xp:executeScript>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+						</xp:panel>
+					</xp:this.facets>
+				</xe:dynamicContent>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:djxmHeading>
+	
+	<xe:formTable id="formTable1"
+		xp:key="profile" legend="Author profile form">
+		<xp:this.formTitle>
+			<![CDATA[#{javascript:I18n.format(res.getString("authorProfile.mobile.title"), userBean.commonName)}]]>
+		</xp:this.formTitle>
+		<xe:formRow id="formRow1" labelPosition="none">
+			<xp:image id="photo" height="130px" width="130px"
+				alt="" title="">
+				<xp:this.url><![CDATA[#{javascript:var imageName:String = "xpPhotoPlaceholder.gif";
+				if(!profileDoc.isNewNote())
+				{
+					var al:java.util.List = profileDoc.getAttachmentList("attachment");
+					if(!al.isEmpty())
+					{
+						var eo:NotesEmbeddedObject = al.get(0);
+						imageName = eo.getHref();
+					}
+				}
+				return(imageName);}]]>
+				</xp:this.url>
+			</xp:image>
+			<xp:fileUpload id="profileImage"
+				value="#{profileDoc.attachment}" loaded="${javascript:!isMobile()}"
+				styleClass="webAuthorUpload" role="upload a file with document"
+				title="file upload control">
+			</xp:fileUpload>
+		</xe:formRow>
+		<xe:formRow id="formRow3" label="Email: ">
+			<xp:inputText id="Email" required="true"
+				disableClientSideValidation="#{javascript:!isMobile()}" value="#{profileDoc.Email}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow4" label="Phone: ">
+			<xp:inputText id="Phone" required="false" value="#{profileDoc.Phone}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow5" label="Role: ">
+			<xp:inputText id="Role" required="true"
+				disableClientSideValidation="#{javascript:!isMobile()}" value="#{profileDoc.Role}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow7" label="Goals: ">
+			<xp:inputText id="Goals" required="false" value="#{profileDoc.Goal}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+	</xe:formTable>
+	<xp:panel xp:key="footer" id="panel17" styleClass="webFormFooter">
+		<xe:dynamicContent id="dynamicContent4" loaded="${javascript:!isMobile()}">
+			<xp:this.defaultFacet>
+				<![CDATA[#{javascript: 
+					if(profileDoc.getItemValueString("Email") === null || profileDoc.getItemValueString("Email") === "")
+					{return "saveControl";}
+					else
+					{return "editControl";}
+				}]]>
+			</xp:this.defaultFacet>
+			<xp:this.facets>
+				<xp:panel xp:key="editControl" id="panel1">
+					<xp:button value="Edit" id="button1" styleClass="webFormFooterFacet">
+						<xp:eventHandler
+							event="onclick" submit="true" refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:changeDocumentMode
+											mode="edit" var="profileDoc">
+									</xp:changeDocumentMode>
+									<xe:changeDynamicContentAction
+										facetName="saveControl" for="dynamicContent4">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>					
+				</xp:panel>				
+				<xp:panel xp:key="saveControl" id="panel16" styleClass="webFormFooterFacet">
+					<xp:button value="Save" id="button2" role="submit"
+						title="save button for author form">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" save="false">
+							<xp:this.action>
+								<xp:save name="/authorProfile.xsp">
+								</xp:save>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:link id="linkCancel" text="Cancel"
+						themeId="Link.action" value="/allDocuments.xsp" role="button">
+					</xp:link>	
+					<!-- style="zoom:1"  -->	
+				</xp:panel>
+			</xp:this.facets>
+		</xe:dynamicContent>
+	</xp:panel>
+</xp:view>

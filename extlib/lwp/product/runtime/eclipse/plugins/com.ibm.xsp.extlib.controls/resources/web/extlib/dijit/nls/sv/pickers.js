@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Avbryt",
+PickerList_OK: "OK",
+PickerList_Cancel: "Avbryt",
+PickerListSearch_Search: "S\u00f6k",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "Avbryt",
+PickerListSearch_Value: "V\u00e4rde",
+PickerListSearch_Values: "V\u00e4rden",
+PickerName_Search: "S\u00f6k",
+PickerName_Add: "L\u00e4gg till",
+PickerName_Remove: "Ta bort",
+PickerName_RemoveAll: "Ta bort alla",
+PickerName_OK: "OK",
+PickerName_Cancel: "Avbryt",
+PickerName_SearchIn: "S\u00f6k i",
+PickerName_SearchFor: "S\u00f6k efter",
+PickerName_unSelectedListLabel: "Lista \u00f6ver v\u00e4rden att v\u00e4lja",
+PickerName_selectedListLabel: "Lista \u00f6ver valda v\u00e4rden"
+})

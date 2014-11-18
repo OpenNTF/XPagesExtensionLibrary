@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:dynamicContent id="calendarDynamicContent"
+		defaultFacet="calendarView" useHash="false">
+		<xp:this.facets>
+			<xp:panel id="mainPanel" xp:key="calendarView">
+				<xp:table style="width:100.0%" cellpadding="0" cellspacing="0"
+					border="0">
+					<xp:tr>
+						<xp:td style="width:20%; text-align: left;">
+							<xp:button value="New Meeting" id="btnNewMeeting"
+								themeId="Button.Cancel">
+								<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action><![CDATA[#{javascript:context.redirectToPage("/calendarEntry.xsp?docType=" + strings.defaultdoctype3);}]]></xp:this.action>
+								</xp:eventHandler>	
+							</xp:button>
+							<xp:button value="New Event" id="btnNewEvent" themeId="Button.Cancel">
+								<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="complete">
+									<xp:this.action>
+										<xp:openPage
+											name="/events.xsp" target="newDocument">
+										</xp:openPage>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:button>
+							<xp:text escape="true" id="deleteDoc"
+								style="display:none">
+								<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xp:this.loaded>
+								<xp:this.value><![CDATA[#{javascript:if(null != param && param.unid != null && param.action == "deleteDocument") {
+	var doc = database.getDocumentByUNID(param.unid);
+	if (doc != null) {
+		doc.remove(false);
+	}
+}}]]></xp:this.value>
+							</xp:text>
+						</xp:td>
+						<xp:td style="width:60%; text-align: center;">
+							<xc:actionManager refreshId="mainPanel"
+								actionGroupName="dateRangeActions" padActions="true"
+								defaultSelectedValue="M">
+								<xc:this.actions>
+									<xc:actions deselectedImage="/1_Day_deselected_24.gif"
+										selectedImage="/1_Day_selected_24.gif" 
+										imageAlt="calendar.today"
+										selectedValue="D">
+									</xc:actions>
+									<xc:actions deselectedImage="/2_Days_deselected_24.gif"
+										selectedImage="/2_Days_selected_24.gif" 
+										imageAlt="calendar.today.tomorrow"
+										selectedValue="T">
+									</xc:actions>
+									<xc:actions deselectedImage="/1_Work_Week_deselected_24.gif"
+										selectedImage="/1_Work_Week_selected_24.gif" 
+										imageAlt="calendar.work.week"
+										selectedValue="F">
+									</xc:actions>
+									<xc:actions deselectedImage="/1_Week_deselected_24.gif"
+										selectedImage="/1_Week_selected_24.gif" 
+										imageAlt="calendar.full.week"
+										selectedValue="W">
+									</xc:actions>
+									<xc:actions deselectedImage="/2_Weeks_deselected_24.gif"
+										selectedImage="/2_Weeks_selected_24.gif" 
+										imageAlt="calendar.two.week"
+										selectedValue="2">
+									</xc:actions>
+									<xc:actions deselectedImage="/Month_deselected_24.gif"
+										selectedImage="/Month_selected_24.gif" 
+										imageAlt="calendar.month"
+										selectedValue="M">
+									</xc:actions>
+									<xc:actions deselectedImage="/All_Entries_deselected_24.gif"
+										selectedImage="/All_Entries_selected_24.gif" 
+										imageAlt="calendar.year"
+										selectedValue="Y">
+									</xc:actions>
+								</xc:this.actions>
+							</xc:actionManager>
+						</xp:td>
+						<xp:td style="width:20%; text-align: right;padding-right:5px;">
+							<xp:div style="float: right;">
+							<xp:label id="label1" value="Display:" styleClass="xvwDisplayChoice" style="padding-right:4px;"
+								> <!-- for="mainPanel"> -->
+							</xp:label>
+							<xc:actionManager refreshId="mainPanel"
+								actionGroupName="calendarFormatActions" padActions="false"
+								defaultSelectedValue="false">
+								<xc:this.actions>
+									<xc:actions deselectedImage="/timeblock_deselected_1.gif"
+										selectedImage="/timeblock_selected_1.gif" 
+										imageAlt="calendar.Time"
+										selectedValue="false">
+									</xc:actions>
+									<xc:actions deselectedImage="/list_deselected_1.gif"
+										selectedImage="/list_selected_1.gif" 
+										imageAlt="calendar.List"
+										selectedValue="true">
+									</xc:actions>
+								</xc:this.actions>
+							</xc:actionManager>
+							</xp:div>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+
+				<xe:restService id="restService2" pathInfo="/inoteslegacyjson"
+					preventDojoStore="false">
+					<xe:this.service>
+						<xe:calendarJsonLegacyService
+							viewName="calendarOutline" var="entry" contentType="text/plain"
+							colCalendarDate="CalDateTime" colEntryIcon="Icon"
+							colStartTime="StartDateTime" colEndTime="EndDateTime"
+							colSubject="For" colChair="Chair">
+							<xe:this.compact><![CDATA[#{javascript:sessionScope.CompactJson2=="true"}]]></xe:this.compact>
+						</xe:calendarJsonLegacyService>
+					</xe:this.service>
+				</xe:restService>
+
+				<xp:br></xp:br>
+
+				<xe:calendarView id="calendarView1" jsId="cview1"
+					type="#{javascript:sessionScope.dateRangeActions_selectedValue}"
+					storeComponentId="restService2" style="width:100%">
+
+					<xe:this.summarize>
+						<![CDATA[#{javascript:summarize = sessionScope.calendarFormatActions_selectedValue == "true";}]]>
+					</xe:this.summarize>
+
+					<xe:this.onNewEntry><![CDATA[
+if(#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}){
+	var yyyymmdd = null;
+	var calDate = calendar.getDate();
+	// if we have a calendar date, format it as a yyyymmdd string
+	if (calDate != null) {
+		var yyyy = new String(calDate.getFullYear());
+		var month = calDate.getMonth() + 1;
+		var mm = month < 10 ? new String('0' + month) : month; 
+		var day = calDate.getDate();
+		var dd = day < 10 ? new String('0' + day) : day;
+		yyyymmdd = yyyy + mm + dd;
+	}
+	
+	var path = "";
+	if(dojo.isMozilla || dojo.isWebKit){
+		path = #{javascript:"\"" + @FullUrl('/') + "\""};
+	}
+		
+	// append the XPage to create a calendat entry
+	path += "calendarEntry.xsp";
+	
+	// add a parameter calue for the selected date if available
+	if (yyyymmdd != null) {
+		path += "?date=" + yyyymmdd;
+	}
+	// Add a docType=Meeting paramter so meetings are selected by default;
+	var sDocTypeParam = ("#{javascript:strings.getString('defaultdoctype3')}");
+	path += "&docType=" + sDocTypeParam; 
+	
+	//change the current URL
+	document.location.href = path;
+}]]>
+					</xe:this.onNewEntry>
+
+					<xe:this.onOpenEntry>
+						<![CDATA[var path = "";
+var sUnid = items[0].unid;
+if(dojo.isMozilla || dojo.isWebKit){
+	path = #{javascript:"\"" + @FullUrl('/') + "\""};
+	path = path + "topicThread.xsp?documentId=" + sUnid + "&action=openDocument";
+}else{
+	path = "topicThread.xsp?documentId=" + sUnid + "&action=openDocument";
+}
+document.location.href = path;]]>
+					</xe:this.onOpenEntry>
+
+					<xe:this.onRescheduleEntry>
+						<![CDATA[
+if(#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}){
+	var yyyymmdd = null;
+	var calDate = calendar.getDate();
+	// if we have a calendar date, format it as a yyyymmdd string
+	if (calDate != null) {
+		var yyyy = new String(calDate.getFullYear());
+		var month = calDate.getMonth() + 1;
+		var mm = month < 10 ? new String('0' + month) : month; 
+		var day = calDate.getDate();
+		var dd = day < 10 ? new String('0' + day) : day;
+		yyyymmdd = yyyy + mm + dd;
+	}
+	
+	var path = "";
+	if(dojo.isMozilla || dojo.isWebKit){
+		path = #{javascript:"\"" + @FullUrl('/') + "\""};
+	}
+		
+	// append the XPage to create a calendat entry
+	path += "calendarEntry.xsp";
+	
+	// add a parameter calue for the selected date if available
+	if (item.unid != null && yyyymmdd != null) {
+		path = path + "?documentId=" + item.unid + "&action=openDocument" + "&date=" + yyyymmdd;  
+	}
+	
+	//change the current URL
+	document.location.href=path;
+}]]>
+					</xe:this.onRescheduleEntry>
+					<xe:this.onDeleteEntry><![CDATA[if(#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}){
+	var doIt = XSP.confirm(("#{javascript:strings.getString('delete_calendar_entry')}"));
+	if (doIt) {
+		var sUnid = items[0].unid;
+		var prOptions = {"unid" : sUnid, "action" : "deleteDocument"};
+		XSP.partialRefreshGet("#{id:mainPanel}",
+			{
+				params : prOptions
+			}
+		);
+	}
+}]]></xe:this.onDeleteEntry>
+				</xe:calendarView>
+
+			</xp:panel>
+			
+		</xp:this.facets>
+	</xe:dynamicContent>
+</xp:view>

@@ -1,0 +1,15 @@
+/** Author: Tony McGuckin, IBM **/
+
+a.xspLinkAction:link, a.xspLinkAction:visited{top:-4px;}
+
+.xspPanelContent{display:inline-block;}
+.xspPanelBanner{margin-bottom:20px}
+.xspPanelFrame{width:expression( documentElement.clientWidth < 990 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 990 ? "990px" : "auto") : "990px") : "auto" );}
+
+.xspPanelMain{display:inline-block;overflow:hidden;}
+
+.xspPanelColumnLeft{display:inline-block;}
+
+.xspPanelNavigationMenuTop{display:inline-block;}
+.xspPanelNavigationMenuInner{display:inline-block;}
+.xspPanelNavigationMenuBottom{display:inline-block;}

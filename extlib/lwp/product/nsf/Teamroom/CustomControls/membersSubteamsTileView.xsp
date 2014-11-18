@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:pagerSaveState for="subteamsDataView"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	<xe:dataView id="subteamsDataView" var="viewEntry"
+		collapsibleRows="false" binding="#{viewStateBean.dataIterator}"
+		collapsibleDetail="false" collapsibleCategory="true"
+		rowStyleClass="xspHtmlTrView" openDocAsReadonly="true" rows="25"
+		multiColumnCount="2" expandedDetail="true">
+		<xe:this.data>
+			<xp:dominoView var="viewData" viewName="xvwSubteams"
+				expandLevel="1" dataCache="full">
+			</xp:dominoView>
+		</xe:this.data>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="STMembers">
+				<xe:this.href><![CDATA[#{javascript:
+				var name = viewEntry.getColumnValue("STMembers");
+				if(null != name && typeof name == "java.util.Vector"){
+					if(!name.isEmpty()){
+						return "/members.xsp?profile=" + viewEntry.getColumnValue("STMembers").firstElement();
+					}
+				}
+				else if(null != name && typeof name != "java.util.Vector")
+				{
+					return "/members.xsp?profile=" + name;
+				}
+				return "";}]]></xe:this.href>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.iconColumn>
+			<xe:viewIconColumn>
+				<xe:this.icons>
+					<xe:iconEntry style="height:35px;width:35px" alt="" title="">
+						<xe:this.url><![CDATA[#{javascript:
+							var name = viewEntry.getColumnValue("STMembers");
+							if(null != name && typeof name == "java.util.Vector"){
+								if(!name.isEmpty()){
+									return peopleBean.getPerson(viewEntry.getColumnValue("STMembers").firstElement()).thumbnailUrl;
+								}
+							}
+							else if(null != name && typeof name != "java.util.Vector")
+							{
+								return peopleBean.getPerson(name).thumbnailUrl;
+							}
+							return "";
+						}]]></xe:this.url>
+					</xe:iconEntry>
+				</xe:this.icons>
+			</xe:viewIconColumn>
+		</xe:this.iconColumn>
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			<xp:panel xp:key="categoryRow" id="categoryRow">
+				<xp:checkBox text="" id="cbxRemoveSubteam"
+					checkedValue="true" uncheckedValue="false">
+					<xp:this.loaded>
+						<![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]>
+					</xp:this.loaded>
+					<xp:this.defaultChecked><![CDATA[#{javascript:var stname:string = viewEntry.getColumnValue("STNameNoteID");
+		if(null != stname){
+			stname = stname.split(":");
+			var docId = stname[1];
+			CheckboxBean.isChecked(docId.substring(2));
+		}}]]></xp:this.defaultChecked>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshId="cbxRemoveSubteam" refreshMode="partial"
+						immediate="true" execMode="partial">
+						<xp:this.action><![CDATA[#{javascript:var stname:string = viewEntry.getColumnValue("STNameNoteID");
+		if(null != stname){
+			stname = stname.split(":");
+			var docId = stname[1];
+			CheckboxBean.setChecked(docId.substring(2));
+		}}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:checkBox>
+				<xp:span style="font-weight:bold">
+					<xp:link disableTheme="true" id="categoryField"
+						escape="true">
+						<xp:this.text><![CDATA[#{javascript://
+		var stname:string = viewEntry.getColumnValue("STNameNoteID");
+		if(null != stname){
+			stname = stname.split(":");
+			return stname[0];
+		}else{
+			return "Unspecified";
+		}}]]></xp:this.text>
+						<xp:this.value><![CDATA[#{javascript://
+		var stname:string = viewEntry.getColumnValue("STNameNoteID");
+		if(null != stname){
+			stname = stname.split(":");
+			return "/members.xsp?subteam=" + stname[0];
+		}else{
+			return "#";
+		}}]]></xp:this.value>
+					</xp:link>
+				</xp:span>
+			</xp:panel>
+			<xp:div id="div1" xp:key="detail">
+				<xp:link>
+					<xp:this.rendered>
+						<![CDATA[#{javascript:
+							var name = viewEntry.getColumnValue("STMembers");
+							var email = "";
+							if(null != name && typeof name == "java.util.Vector"){
+								if(name.isEmpty())
+								{
+									return false;
+								}
+							}
+							return true;
+						}]]>
+					</xp:this.rendered>
+					<xp:this.text><![CDATA[#{javascript:
+						var name = viewEntry.getColumnValue("STMembers");
+						if(null != name && typeof name == "java.util.Vector"){
+							if(!name.isEmpty()){
+								return peopleBean.getPerson(viewEntry.getColumnValue("STMembers").firstElement()).internetEmail;
+							}
+						}
+						else if(null != name && typeof name != "java.util.Vector")
+						{
+							return peopleBean.getPerson(name).internetEmail;
+						}
+						return "";
+					}]]></xp:this.text>
+					<xp:this.value><![CDATA[#{javascript:
+						var name = viewEntry.getColumnValue("STMembers");
+						if(null != name && typeof name == "java.util.Vector"){
+							if(!name.isEmpty()){
+								return "mailto:" + peopleBean.getPerson(viewEntry.getColumnValue("STMembers").firstElement()).internetEmail;
+							}
+						}
+						else if(null != name && typeof name != "java.util.Vector")
+						{
+							return peopleBean.getPerson(name).internetEmail;
+						}
+						return "";
+					}]]></xp:this.value>
+				</xp:link>
+			</xp:div>
+			<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft">
+			</xe:pagerExpand>
+			<xp:pager layout="Previous Group Next" id="pager1"
+				xp:key="pagerTopRight" partialRefresh="true"
+				partialExecute="true">
+			</xp:pager>
+			<xp:panel xp:key="pagerBottomLeft" id="panel3">
+				<xe:pagerSizes id="pagerSizes1" sizes="10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next" id="pager2"
+				xp:key="pagerBottomRight" partialRefresh="true"
+				partialExecute="true">
+			</xp:pager>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:label value="For " disableTheme="true"></xp:label>
+	<xp:text id="reportDateOutput" value="#{document1.ReportDate}" disableTheme="true">
+		<xp:this.converter>
+			<xp:convertDateTime type="date" dateStyle="long">
+			</xp:convertDateTime>
+		</xp:this.converter>
+	</xp:text>
+</xp:view>

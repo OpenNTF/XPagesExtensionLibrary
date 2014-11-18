@@ -1,0 +1,13 @@
+config.name=Extlib Projects (OpenNTF Projects - extlibX)
+openntf\runtime\eclipse\plugins\com.ibm.domino.calendar.dbstore
+openntf\runtime\eclipse\plugins\com.ibm.domino.calendar.store
+openntf\runtime\eclipse\plugins\com.ibm.domino.oauth
+openntf\runtime\eclipse\plugins\com.ibm.domino.services.calendar
+openntf\runtime\eclipse\plugins\com.ibm.domino.services.mail
+openntf\runtime\eclipse\plugins\com.ibm.xsp.extlibx
+openntf\runtime\eclipse\plugins\com.ibm.xsp.extlibx.controls
+openntf\runtime\eclipse\plugins\com.ibm.xsp.extlibx.core
+openntf\runtime\eclipse\plugins\com.ibm.xsp.extlibx.oauth
+openntf\runtime\eclipse\plugins\com.ibm.xsp.extlibx.sbt
+openntf\runtime\eclipse\plugins\net.fortuna.ical4j
+openntf\runtime\eclipse\plugins\org.apache.common.dbcp

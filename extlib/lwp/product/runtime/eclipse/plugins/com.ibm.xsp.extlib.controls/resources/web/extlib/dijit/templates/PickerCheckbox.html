@@ -1,0 +1,29 @@
+<div>
+<style>
+.xspPickerList .dijitBorderContainer { width: auto; height: auto;}
+.xspPickerList { height:100%; width:100%; }
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerInput .input {margin:3px 3px 3px 3x!important}
+.xspPickerSpan {padding:1px 1px 1px 1px!important}
+.xspPickerListButton{width:70px!important;margin:0 8px 0 5px;}
+</style>
+<table>
+  <tr>
+    <td>
+	<div class="xspPickerList" id="${id}">
+		<div dojoAttachPoint="containerNode" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onclick:_handleClick"></div>
+	</div>
+	</td>
+    <td valign="top">
+	  <table>
+		<tr>
+		  <td><button dojoAttachPoint="pkOk" class="xspPickerListButton">${PickerCheckBox_OK}</button></td>
+		</tr>
+		<tr>
+		  <td><button dojoAttachPoint="pkCancel" class="xspPickerListButton">${PickerCheckBox_Cancel}</button></td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</div>

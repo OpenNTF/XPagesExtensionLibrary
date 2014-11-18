@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DojoGrid">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label id="label5" style="font-weight:bold"
+				value="This shows a Dojo grid calling the 'ItemFile' REST services for views">
+			</xp:label>
+			<xp:br></xp:br>
+			The data in the grid can be updated and then saved back to the database.<xp:br></xp:br><xp:br></xp:br>Note that this use an implementation of the Dojo File Store,&#160;mostly
+			provided&#160;as an example. It is advised to instead use the JSON REST service as a more robust implementation. <xp:br></xp:br>See
+			&#160;
+			<xp:link escape="true" text="this example" id="link1" value="/REST_DojoGridJsonRest.xsp"></xp:link>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xe:restService id="restService1">
+				<xe:this.service>
+					<xe:viewItemFileService viewName="AllContacts"
+						defaultColumns="true" contentType="application/json" var="entry">
+						<xp:this.columns>
+							<xe:restViewColumn name="ShortName">
+								<xp:this.value><![CDATA[#{javascript:var e = entry.getColumnValue("EMail")
+if(e) {
+	var p = @UpperCase(@Left(e,"@"))
+	return p
+}
+return ""}]]></xp:this.value>
+							</xe:restViewColumn>
+						</xp:this.columns>
+					</xe:viewItemFileService>
+				</xe:this.service>
+			</xe:restService>
+
+
+			<xe:djxDataGrid id="djxDataGrid1"
+				style="width: 85em;height: 25em;padding: 1px" storeComponentId="restService1">
+				<!--
+					style="width: 85em;height: 25em;padding: 1px"
+					storeComponentId="restService1"> style="width: 85em;height:
+					25em;padding: 1px" store="restService3">
+				-->
+				<xe:djxDataGridColumn id="djxDataGridColumn6"
+					field="FirstName" width="auto" editable="true">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn7"
+					field="LastName" width="auto" editable="true">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn8"
+					field="City" width="auto">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn9"
+					field="EMail" width="auto">
+				</xe:djxDataGridColumn>
+				<xe:djxDataGridColumn id="djxDataGridColumn10"
+					field="ShortName" width="auto">
+				</xe:djxDataGridColumn>
+			</xe:djxDataGrid>
+			<xp:br></xp:br>
+			<xp:button value="Save Changes" id="button1">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var args = {
+	onError: function() { alert('Update error'); }
+}
+restService1.save(args)
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Revert Changes" id="button2">
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script><![CDATA[var ds = eval('restService1')
+ds.revert()
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

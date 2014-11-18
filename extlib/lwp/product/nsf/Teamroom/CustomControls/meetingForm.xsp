@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:formTable disableErrorSummary="true">
+		<xe:formRow labelPosition="none">
+		<xp:panel style="display:none">
+			<xp:inputText id="hiddenMtgDate"
+				value="#{document1.MtgDate}" role="button"
+				title="select meeting  time">
+				<xp:this.converter>
+					<xp:convertDateTime type="both" dateStyle="short"
+						timeStyle="short">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:inputText>
+			<xp:message id="message7" for="hiddenMtgDate"
+				showDetail="true" showSummary="true">
+			</xp:message>
+			<xp:inputText id="hiddenMtgTime"
+				value="#{document1.MtgTime}" role="button"
+				title="select meeting time">
+				<xp:this.converter>
+					<xp:convertDateTime type="both" timeStyle="short"
+						dateStyle="short">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:inputText>
+			<xp:message id="message6" for="hiddenMtgTime"
+				showDetail="true" showSummary="true">
+			</xp:message>
+			<xp:inputText id="hiddenStartDateTime"
+				defaultValue="#{javascript:@Time(@Hour(@Now())+1,0,0);}"
+				value="#{document1.StartDateTime}" role="button"
+				title="select start date time">
+				<xp:this.converter>
+					<xp:convertDateTime type="both" dateStyle="short"
+						timeStyle="short">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:inputText>
+			<xp:message id="message5" for="hiddenStartDateTime"></xp:message>
+			<xp:inputText id="hiddenEndDateTime"
+				defaultValue="#{javascript:@Time(@Hour(@Now())+2,0,0);}"
+				value="#{document1.EndDateTime}" role="button"
+				title="select end date time">
+				<xp:this.converter>
+					<xp:convertDateTime type="both" dateStyle="short"
+						timeStyle="short">
+					</xp:convertDateTime>
+				</xp:this.converter>
+			</xp:inputText>
+			<xp:message id="message4" for="hiddenEndDateTime"
+				showDetail="true" showSummary="true">
+			</xp:message>
+			<!--					<xp:text escape="true" id="computedField1">-->
+			<!--						<xp:this.value><![CDATA[#{javascript:var mtgTime2:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime2");-->
+			<!--var mtgTime1:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime1");-->
+			<!--var endTime:java.util.Date = mtgTime2.getValue();-->
+			<!--var startTime:java.util.Date = mtgTime1.getValue();-->
+			<!--//print  ((endTime.getTime() - startTime.getTime()) / 60000)-->
+			<!--return (((endTime.getTime() - startTime.getTime()) / 3600000) * 60)}]]></xp:this.value>-->
+			<!--					</xp:text>-->
+		</xp:panel>
+		</xe:formRow>
+		<xe:formRow label="Meeting Date:" labelWidth="75px">
+					<xp:inputText id="mtgDate1" style="width:160px;"
+						role="button" title="used to select a meeting date">
+						<xp:this.defaultValue><![CDATA[#{javascript://
+var value = getComponent("hiddenMtgDate").getValue();
+if (value == 0 || value == null) {
+	return @Today();
+}
+return value;}]]></xp:this.defaultValue>
+						<xp:dateTimeHelper id="dateTimeHelper1"
+							dojoType="dijit.form.DateTextBox">
+						</xp:dateTimeHelper>
+						<xp:this.converter>
+							<xp:convertDateTime type="date"
+								dateStyle="short">
+							</xp:convertDateTime>
+						</xp:this.converter>
+					</xp:inputText>
+					<!-- xp:image style="padding-left:5px;" url="/.ibmxspres/global/theme/oneuiv2/images/iconDatePicker.gif" id="image1">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[var dateInputText = XSP.getElementById("#{id:mtgDate1}");
+if(null != dateInputText){
+	dateInputText.focus();
+	return false;
+}]]>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:image-->
+		</xe:formRow>
+		<xe:formRow label="Starts:" for="mtgTime1" labelWidth="75px">
+					<xp:inputText id="mtgTime1" style="width:160px;"
+						role="button" title="used to pick a meeting time">
+						<xp:this.defaultValue><![CDATA[#{javascript:getComponent("hiddenStartDateTime").getValue();}]]></xp:this.defaultValue>
+						<xp:dateTimeHelper id="dateTimeHelper2"
+							dojoType="dijit.form.TimeTextBox">
+						</xp:dateTimeHelper>
+						<xp:this.converter>
+							<xp:convertDateTime type="time"
+								timeStyle="short">
+							</xp:convertDateTime>
+						</xp:this.converter>
+						<!--						<xp:eventHandler event="onblur" submit="true"-->
+						<!--							refreshMode="partial" disableValidators="true" refreshId="computedField1">-->
+						<!--						</xp:eventHandler>-->
+					</xp:inputText>
+					<!-- xp:image style="padding-left:5px;" url="/.ibmxspres/global/theme/oneuiv2/images/iconDatePicker.gif" id="image2">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[var dateInputText = XSP.getElementById("#{id:mtgTime1}");
+if(null != dateInputText){
+	dateInputText.focus();
+	return false;
+}]]>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:image-->
+					<xc:controlSectionTimezonePicker id="timezone1"
+						timezoneFieldELBinding="document1.StartTImeZone"
+						startDateComponentId="mtgDate1"
+						startTimeComponentId="mtgTime1"
+						onChangeRefreshId="sectionMeeting">
+					</xc:controlSectionTimezonePicker>
+		</xe:formRow>
+		<xe:formRow label="Ends:" labelWidth="75px">
+					<xp:inputText id="mtgTime2" style="width:160px;"
+						role="button" title="used to select a meeting end time">
+						<xp:this.defaultValue><![CDATA[#{javascript:getComponent("hiddenEndDateTime").getValue();}]]></xp:this.defaultValue>
+						<xp:this.validators>
+							<xp:customValidator>
+								<xp:this.validate><![CDATA[#{javascript:try {
+	//println("validate duration");
+	var mtgTime1:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime1");
+	var mtgTime2:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime2");
+	var endTime:java.util.Date = mtgTime2.getValue();	
+	var startTime:java.util.Date = mtgTime1.getValue();
+	// Teamroom calendar meetings do not span days, do just compare the times
+	if (endTime != null && startTime != null) {
+		var fail = false;
+		var diff = endTime.getHours() - startTime.getHours();
+		if (diff < 0) {
+			fail = true;
+		} else if (diff == 0) {
+			diff = endTime.getMinutes() - startTime.getMinutes();
+			if (diff <= 0) {
+				fail = true;
+			}
+		}
+		if (fail) {
+			//
+			var msg = "Invalid meeting duration"; // need to xlate
+			var msgObj = new javax.faces.application.FacesMessage(
+				javax.faces.application.FacesMessage.SEVERITY_ERROR, msg, msg
+			);
+			facesContext.addMessage(this.getClientId(facesContext), msgObj);
+			this.setValid(false);
+		}
+	}
+} catch (e) {
+	// leave through ... Save will patch up any duration screw-up
+}}]]></xp:this.validate>
+							</xp:customValidator>
+						</xp:this.validators>
+						<xp:dateTimeHelper id="dateTimeHelper3"
+							dojoType="dijit.form.TimeTextBox">
+						</xp:dateTimeHelper>
+						<xp:this.converter>
+							<xp:convertDateTime type="time"
+								timeStyle="short">
+							</xp:convertDateTime>
+						</xp:this.converter>
+					</xp:inputText>
+					<!-- xp:image style="padding-left:5px;" url="/.ibmxspres/global/theme/oneuiv2/images/iconDatePicker.gif" id="image3">
+						<xp:eventHandler event="onclick" submit="false">
+							<xp:this.script><![CDATA[var dateInputText = XSP.getElementById("#{id:mtgTime2}");
+if(null != dateInputText){
+	dateInputText.focus();
+	return false;
+}]]>
+							</xp:this.script>
+						</xp:eventHandler>
+					</xp:image-->
+					<xp:inputText id="mtgDuration"
+					value="#{document1.Duration}" required="true"
+					style="display:none">
+					<xp:this.converter>
+						<xp:convertNumber type="number"
+							integerOnly="true">
+						</xp:convertNumber>
+					</xp:this.converter>
+					<xp:this.defaultValue><![CDATA[#{javascript:var mtgTime2:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime2");
+var mtgTime1:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime1");
+var endTime:java.util.Date = mtgTime2.getValue();
+var startTime:java.util.Date = mtgTime1.getValue();
+return ((endTime.getTime() - startTime.getTime()) / 60000);}]]></xp:this.defaultValue>
+					<xp:this.validators>
+						<xp:validateLongRange minimum="1"
+							message="Invalid meeting duration">
+						</xp:validateLongRange>
+						<xp:validateRequired
+							message="Invalid meeting duration">
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
+				<xp:message id="message8" for="mtgDuration"></xp:message>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

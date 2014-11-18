@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:table
+		style="width:100%; padding: 0px; margin: 0px; border-spacing 0px; font-weight: bold; /*background-color:#F1F3F5; color: #848484*/">
+		<tr>
+			<td width="40%" class="lotusLeft">
+				<xp:callback id="l" facetName="left"></xp:callback>
+			</td>
+			<td width="30%">
+				<xp:callback id="c" facetName="center"></xp:callback>
+			</td>
+			<td width="30%">
+				<xp:callback id="r" facetName="right"></xp:callback>
+			</td>
+		</tr>
+	</xp:table>
+</xp:view>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:label id="label1" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.title"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:table styleClass="xvwBasicSetup" border="0" cellpadding="0" cellspacing="0">
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label2" for="fieldTeamRoomName">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.teamroomname"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="fieldTeamRoomName" size="80"
+					value="#{document1.TeamName}" role="input" title="teamroom name">
+					<xp:this.defaultValue><![CDATA[#{javascript:var thisDatabase:NotesDatabase=session.getCurrentDatabase();
+return thisDatabase.getTitle();
+}]]></xp:this.defaultValue>
+				</xp:inputText>
+			</xp:td>
+		</xp:tr>
+
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label3" for="fieldPurpose">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.purpose"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputTextarea id="fieldPurpose" cols="93" rows="4"
+					value="#{document1.Mission}" role="input"
+					title="teamroom purpose">
+				</xp:inputTextarea>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label4" for="fieldTeamLeader">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.teamleader"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="fieldTeamLeader" size="80"
+					value="#{document1.TeamLeader}"
+					disableClientSideValidation="true" required="true" role="input"
+					title="team leader">
+					<xp:this.validators>
+						<xp:validateRequired>
+							<xp:this.message><![CDATA[#{javascript:return I18n.format(strings.getString("setup.mandatoryfield"));}]]></xp:this.message>
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
+				<xp:message id="fieldTeamLeaderMessage"
+					for="fieldTeamLeader" showDetail="false" showSummary="true">
+				</xp:message>
+			</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label5" for="fieldTeamFacilitator">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.teamfacilitator"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="fieldTeamFacilitator" size="80"
+					value="#{document1.dbFacilitator}"
+					disableClientSideValidation="true" required="true" role="input"
+					title="team failitator">
+					<xp:this.validators>
+						<xp:validateRequired>
+							<xp:this.message><![CDATA[#{javascript:return I18n.format(strings.getString("setup.mandatoryfield"));}]]></xp:this.message>
+						</xp:validateRequired>
+					</xp:this.validators>
+				</xp:inputText>
+				<xp:message id="fieldTeamFacilitatorMessage"
+					for="fieldTeamFacilitator" showDetail="false" showSummary="true">
+				</xp:message>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label6" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.reminders"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label7">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.basics.message"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:button id="sendRemindersNow" themeId="Button.Cancel">
+		<xp:this.value>
+			<![CDATA[#{javascript:strings.getString("setup.basics.sendremindersnow")}]]>
+		</xp:this.value>
+		<xp:eventHandler event="onclick" submit="false">
+			<xp:this.script>
+				<![CDATA[
+					var deferred = reminderService.sendReminders();
+					deferred.addCallback(function(result) {
+						XSP.alert(result)
+					});
+				]]>
+			</xp:this.script>
+		</xp:eventHandler>
+	</xp:button>
+
+	<xe:jsonRpcService id="jsonRpcService1"
+		serviceName="reminderService" state="true">
+		<xe:this.methods>
+			<xe:remoteMethod name="sendReminders">
+				<xe:this.script>
+					<![CDATA[var status = strings.getString("setup.basics.reminders.send.error");
+try{
+	var thisAgent:NotesAgent = database.getAgent("SendReminder");
+	var doc:NotesDocument = database.getProfileDocument("TempVars","");
+	if(null != thisAgent && null != doc){
+		if(!thisAgent.isEnabled()){
+			status = strings.getString("setup.basics.reminders.send.disabled");
+		}else{
+			doc.replaceItemValue('useXPageUrl', 'true');
+			thisAgent.run();
+			//status = doc.getItemValueString('MailSent');
+			status = strings.getString("setup.basics.reminders.sent");
+			doc.removeItem('MailSent');
+			doc.replaceItemValue('useXPageUrl', '');
+		}
+	}
+}catch(e){
+	print(e);
+}finally{
+	return status;
+}]]>
+				</xe:this.script>
+			</xe:remoteMethod>
+		</xe:this.methods>
+	</xe:jsonRpcService>
+</xp:view>

@@ -1,0 +1,33 @@
+<div>
+<style>
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerInputText { font-weight: bold; }
+.xspPickerBody { margin:0; padding:0; background:#fff; }
+.xspPickerItemSelected { background:#b7cdee !important; border: 1px dotted #b7b7b7;}
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none}
+.xspPickerItem:hover { background:#ffffc8 }
+.xspPickerBody li {padding:2px 2px 2px 2px}
+.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
+.xspPickerButton2{width:70px!important;margin:0 8px 0 5px}
+.xspPickerButton3{width:100px!important;margin:0 8px 0 5px}
+.unselectable {-moz-user-select: none; -webkit-user-select: none;}
+</style>
+<div style="padding:10px">
+	<span class="xspPickerInputText" dojoAttachPoint="inputText"></span>
+	<span dojoType="extlib.dijit.ListTextBox" dojoAttachPoint="inputList"></span>
+	<hr/>
+    <div>
+    <input dojoAttachPoint="edSearch" type="text"></input>
+    <button dojoAttachPoint="btSearch" class="xspPickerButton2">${PickerListSearch_Search}</button>
+    </div>
+	<div dojoAttachPoint="bodyWrapper" style="margin-top: 5px; width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper unselectable"
+		 dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress, onfocus:_handleOnFocus"
+		 unselectable="on">
+		<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+	</div>
+</div>
+<div class="lotusDialogFooter">
+  <input type="submit" value="${PickerListSearch_OK}" dojoAttachPoint="pkOk" class="lotusBtn" />
+  <input type="button" value="${PickerListSearch_Cancel}" dojoAttachPoint="pkCancel" class="lotusBtn" />
+</div>
+</div>

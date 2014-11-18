@@ -1,0 +1,10 @@
+#Localization file used by Workplace Designer
+#Tue May 22 09:49:28 BST 2012
+loggingPropertiesFileName=logging.properties
+resourceHandlerPackage=com.ibm.domino.commons.internal
+srcFolderName=com.ibm.domino.commons/src
+propertiesFileName=messages.properties
+resourceHandlerClass=DominoCommonsResourceHandler
+translationLevel=G11N GA UI -- General Audience resources follow
+componentOwner=padraic.edwards@ie.ibm.com
+loggingId=CLFAD

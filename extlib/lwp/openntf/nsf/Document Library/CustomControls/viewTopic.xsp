@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:forumPost id="forumPost2" xp:key="read">
+		<xp:this.facets>
+			<xp:link id="summaryTopicLink" text="#{viewEntry['Title']}"
+				value="/viewDocument.xsp" xp:key="postTitle"
+				styleClass="topicSubject">
+				<xp:this.parameters>
+					<xp:parameter name="documentId"
+						value="#{javascript: viewEntry.getUniversalID() }">
+					</xp:parameter>
+				</xp:this.parameters>
+			</xp:link>
+
+			<xp:panel xp:key="postDetails">
+				<xp:this.data>
+					<xp:dominoDocument var="currentRowDoc"
+						ignoreRequestParams="true"
+						documentId="#{javascript: viewEntry.getUniversalID()}"
+						computeWithForm="onsave" action="openDocument" formName="Document"
+						loaded="${javascript: TopicThreadState.isRowShowBodyAny() }">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xp:text escape="true"
+					rendered="#{javascript: requestScope.detailDisplayType == 'abstract' }">
+					<xp:this.value><![CDATA[#{javascript:viewEntry.getDocument().getItemValueString('Abstract')}]]></xp:this.value>
+				</xp:text>
+				<xp:panel
+					rendered="#{javascript: requestScope.detailDisplayType === 'body'}"
+					styleClass="topicBody">
+					<xp:inputRichText value="#{currentRowDoc.Body}">
+					</xp:inputRichText>
+					<xp:fileDownload rows="30" id="fileDownload23"
+						displayLastModified="false" styleClass="files" allowDelete="false"
+						hideWhen="true" value="#{currentRowDoc.Body}">
+					</xp:fileDownload>
+				</xp:panel>
+			</xp:panel>
+
+			<xp:panel xp:key="postMeta">
+				<xe:listInline>
+					<xp:text xp:key="authorName" escape="true"
+						styleClass="documentAuthor" id="computedField1">
+						<xp:this.value><![CDATA[#{javascript:peopleBean.getPerson(viewEntry.getDocument().getItemValueString('From')).displayName}]]></xp:this.value>
+					</xp:text>
+					<xp:panel
+						rendered="#{javascript: requestScope.detailDisplayType == 'body' }">
+						<xp:text value="Created "></xp:text>
+						<xp:text
+							value="#{javascript: viewEntry.getColumnValue('Date')}">
+							<xp:this.converter>
+								<xp:convertDateTime type="both"
+									timeStyle="short">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:text>
+					</xp:panel>
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript://
+							if (requestScope.detailDisplayType == 'body') {
+								var document:NotesDocument = viewEntry.getDocument(),
+										parentID = document.getParentDocumentUNID(),
+										parentDoc = database.getDocumentByUNID(parentID),
+										parentSubject = parentDoc.getItemValueString('Subject');
+										
+									requestScope.parentID = parentID;
+									requestScope.parentSubject = parentSubject;
+									
+									return true;
+							}
+							return false;
+						}]]></xp:this.rendered>
+						<xp:label value="Response to: "></xp:label>
+						<xp:link value="/viewDocument.xsp">
+							<xp:this.text><![CDATA[#{javascript://
+								return requestScope.parentSubject;
+							}]]></xp:this.text>
+							<xp:this.parameters>
+								<xp:parameter name="documentId">
+									<xp:this.value><![CDATA[#{javascript:
+										return requestScope.parentID;
+									}]]></xp:this.value>
+								</xp:parameter>
+							</xp:this.parameters>
+						</xp:link>
+					</xp:panel>
+
+				</xe:listInline>
+			</xp:panel>
+
+			<xp:div xp:key="postActions">
+				<xe:listInline
+					rendered="#{javascript: requestScope.detailDisplayType == 'abstract' }"
+					firstItemStyleClass="topicActionsFirstItem">
+					<xp:link escape="true" id="currentMoreLink"
+						text="More...">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" disableValidators="true"
+							refreshId="forumCC">
+							<xp:this.action><![CDATA[#{javascript://
+								TopicThreadState.changeRowShowBody(true, viewEntry.getPosition());
+							}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link text="Reply">
+						<xp:this.loaded><![CDATA[${javascript://
+								(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+						}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" disableValidators="true"
+							refreshId="forumCC">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:actionGroup
+										condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+										<xp:confirm
+											message="#{strings.cancel_editing_and_create_reply}">
+										</xp:confirm>
+									</xp:actionGroup>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript://
+											TopicThreadState.showRowNewReply(viewEntry.getPosition(), true);
+										}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xe:listInline>
+
+				<xe:listInline
+					rendered="#{javascript: requestScope.detailDisplayType == 'body' }"
+					loaded="${javascript: TopicThreadState.isRowShowBodyAny() }"
+					firstItemStyleClass="topicActionsFirstItem">
+
+					<xp:link id="currentHideLink" text="Hide">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" disableValidators="true"
+							refreshId="forumCC">
+							<xp:this.action><![CDATA[#{javascript://
+								TopicThreadState.changeRowShowBody(false, viewEntry.getPosition());
+							}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<xp:link escape="true" text="Edit"
+						id="currentEditLink">
+						<xp:this.loaded><![CDATA[${javascript://
+							(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+						}]]></xp:this.loaded>
+						<xp:this.rendered><![CDATA[#{javascript:
+							var document:NotesDocument = viewEntry.getDocument();
+							return document.getItemValueString('SUBMITTED') !== DocLib.Review.Submitted;
+						}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" immediate="true" refreshId="forumCC">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:actionGroup>
+										<xp:actionGroup
+											condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+											<xp:confirm
+												message="#{strings.cancel_editing_and_edit_other}">
+											</xp:confirm>
+										</xp:actionGroup>
+
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript:
+													TopicThreadState.showRowEdit(viewEntry.getPosition())
+												}]]></xp:this.script>
+										</xp:executeScript>
+									</xp:actionGroup>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<xp:link text="Reply">
+						<xp:this.loaded><![CDATA[${javascript://
+								(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs
+						}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" disableValidators="true"
+							refreshId="forumCC">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:actionGroup
+										condition="#{javascript: TopicThreadState.isPromptChangeEditArea() }">
+										<xp:confirm
+											message="#{strings.cancel_editing_and_create_reply}">
+										</xp:confirm>
+									</xp:actionGroup>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript://
+											TopicThreadState.showRowNewReply(viewEntry.getPosition(), true);
+										}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+					<xp:link text="Delete" id="link1">
+						<xp:this.loaded><![CDATA[${javascript://
+								(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs;
+							}]]></xp:this.loaded>
+						<xp:this.rendered><![CDATA[#{javascript://
+								var document:NotesDocument = viewEntry.getDocument(),
+									isSubmitted = document.getItemValueString('SUBMITTED') === DocLib.Review.Submitted,
+									responses = viewEntry.getDocument().getResponses();
+								
+								if(!responses || responses.getCount() == 0){
+									// DISCUSS THIS: Do not allow to delete the original copy
+									// return true && !isSubmitted;
+									return true;
+								}
+								return false;
+							}]]></xp:this.rendered>
+
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:confirm
+										message="#{javascript:strings.delete_document}">
+									</xp:confirm>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:
+											var doc = viewEntry.getDocument();
+											doc.remove(true);}]]>
+										</xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+
+				</xe:listInline>
+
+			</xp:div>
+		</xp:this.facets>
+	</xe:forumPost>
+</xp:view>

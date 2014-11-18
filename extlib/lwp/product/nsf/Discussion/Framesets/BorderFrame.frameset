@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='28a' unid='27C6AD417B0D86E6882569ED000E20F7' sequence='16'>
+<created><datetime>20010207T183419,43-08</datetime></created>
+<modified><datetime>20120305T082322,94+00</datetime></modified>
+<revised><datetime>20120305T082322,93+00</datetime></revised>
+<lastaccessed><datetime>20120305T082322,94+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,48+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>BorderFrame|BorderFrame</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$FrameSet' sign='true'>
+<rawitemdata type='1'>
+7/8YAAIABwAAAAAAAAAAAAAAAAAAAAAA8P9CAAQAAAABAAAAAAAAAAAAAAAAAAUAAAAAAAUAAAAA
+AAEAAwAAAAAABQAAAAAAAAADAAEAAQAMAAIAXgABAAwA8f80ABEAAAAAQAABAgABAAEAAAAAAAAA
+AAAAAAEAAAAAAAAAAQD////EAQAACQEA////xPb/LAAAAAAAAwAHAAoAAAAAAAAAAAAAAAAAAAAA
+AAAAAABXaGl0ZSBQYWdl8P9CAAAAAAABAAAAAAAAAAAAAAAAAAUAAAAAAAUAAAAAAAMAAQAAAAAA
+BQAAAAAAAAABAAwAAwABAAEADAADAAEA8f80ABAAAAAAQAEBAgABAAEAAAAAAAAAAAAAAAEAAAAA
+AAAAAQD////EAQAACQEA////xPb/LAAAAAAAAwAHAAoAAAAAAAAAAAAAAAAAAAAAAAAAAABXaGl0
+ZSBQYWdl8f80AAAAAAAAQAEAAwABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAQD////EAQAACQEA////
+xPb/LgAAAAAAAwAGAAwAAAAAAAAAAAAAAAAAAAAAAAAAAABNYWluRnJhbWVzZXTx/zQAEAAAAABA
+AQECAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAP///8QBAAAJAQD////E9v8sAAAAAAADAAcACgAA
+AAAAAAAAAAAAAAAAAAAAAAAAAFdoaXRlIFBhZ2Xx/zQAEAAAAABAAQECAAEAAQAAAAAAAAAAAAAA
+AQAAAAAAAAABAP///8QBAAAJAQD////E9v8sAAAAAAADAAcACgAAAAAAAAAAAAAAAAAAAAAAAAAA
+AFdoaXRlIFBhZ2U=
+</rawitemdata></item>
+<item name='$Flags'><text>#34CQw</text></item>
+<item name='$DesignerVersion'><text>8.5</text></item></note>
+

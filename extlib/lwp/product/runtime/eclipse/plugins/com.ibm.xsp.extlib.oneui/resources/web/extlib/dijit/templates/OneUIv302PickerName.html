@@ -1,0 +1,54 @@
+
+<table>
+  <tr>
+    <td colspan="3">
+		<table>
+  			<tr dojoAttachPoint="pnSources">
+    			<td dojoAttachPoint="tdSearchIn"></td>
+    			<td>
+    				<select dojoAttachPoint="cbSources" dojoAttachEvent="onchange: _onSrcChange"></select>
+    			</td>
+  			</tr>
+  			<tr>
+    			<td dojoAttachPoint="tdSearchFor"></td>
+    			<td>
+    				<input dojoAttachPoint="edSearch" type="text"></input>
+    				<button dojoAttachPoint="btSearch" class="xspPickerButton2">${PickerName_Search}</button>
+    			</td>
+  			</tr>
+  		</table>
+  	</td>
+  </tr>
+  <tr>
+    <td>
+		<div class="list1">
+			<div dojoAttachPoint="list1Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list1Set, onmouseout: _list1Unset, onclick:_list1Click, ondblclick:_list1DblClick, onkeypress:_list1KeyPress, onscroll:_list1OnScroll, onfocus:_list1OnFocus">
+				<ul dojoAttachPoint="list1Container" class="xspPickerBody" style="width:99%"></ul>
+			</div>
+		</div>
+	</td>
+    <td>
+    	<button dojoAttachPoint="btAdd" class="xspPickerButton2">${PickerName_Add}</button>
+	</td>
+    <td>
+		<div class="list2">
+			<div dojoAttachPoint="list2Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list2Set, onmouseout: _list2Unset, onclick:_list2Click, ondblclick:_list2DblClick, onkeypress:_list2KeyPress, onfocus:_list1OnFocus">
+				<ul dojoAttachPoint="list2Container" class="xspPickerBody" style="width: 100%"></ul>
+			</div>
+		</div>
+	</td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">
+	  <div style="text-align:right">
+        <button dojoAttachPoint="btRemove" class="xspPickerButton3">${PickerName_Remove}</button>
+        <button dojoAttachPoint="btRemoveAll" class="xspPickerButton3">${PickerName_RemoveAll}</button>
+	  </div>
+	</td>
+  </tr>
+</table>
+
+<div class="lotusDialogFooter">
+	<input value="${PickerName_OK}" type="submit" dojoAttachPoint="pkOk" class="lotusBtn"/>
+	<input value="${PickerName_Cancel}" type="button" dojoAttachPoint="pkCancel" class="lotusBtn"/>
+</div>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:label id="labelUpdateReviewerFieldsPrototype" rendered="true">
+		<xp:this.value><![CDATA[#{javascript:
+
+//if (!prototype.updateReviewerFields)
+{
+	prototype.updateReviewerFields = function(sDesc, bIsDiscussion)
+	{		
+		if ((viewScope.get("reviewedByMe")==null)||(viewScope.get("reviewedByMe")==false))
+		{		
+			// Get the time now
+			var dtNow = session.createDateTime("Today");
+			dtNow.setNow();
+					
+			// Construct text to add to the "ReviewerLog" field
+			var sName = "";
+			if (bIsDiscussion)
+				sName = @Name("[Abbreviate]", @UserName());
+			else
+				sName = @Name("[CN]", @UserName());
+			
+			var sNow =  @Text(@Date(@Now()));
+			var sText = sName + " (" + dtNow.getDateOnly() + ")";
+			var sPostedText = document1.getItemValueString("ReviewerLog");
+			var dtNow = session.createDateTime("Today");
+			
+			// Set the time now
+			dtNow.setNow();
+			
+			// Update the backend fields
+			if (bIsDiscussion)
+			{
+				var reviewedBy = document1.getItemValue('ReviewedBy');
+				if(!reviewedBy)
+				{
+					reviewedBy = new java.util.Vector();
+				}
+				
+				// converting to proper case to be consistent with the client
+				// (see the ReviewedBy field in the MainTopic form)
+				reviewedBy.add(@ProperCase(sName));
+				document1.replaceItemValue("ReviewedBy",reviewedBy);
+			}
+			else
+			{
+				document1.replaceItemValue("DueDateStatus","1");
+				document1.replaceItemValue("LastModDate",dtNow);
+				document1.replaceItemValue("CompletedBy",sText);
+			}
+			
+			// Update the backend fields (ReviewerLog)
+			if ((sPostedText!=null)&&(sPostedText!=""))
+				sPostedText = sPostedText + "\n" + sDesc + sText;
+			else
+				sPostedText = sDesc + sText;
+				
+			document1.replaceItemValue("ReviewerLog",sPostedText);
+			
+			// Throw a flag into the viewScope so that a user cannot approve twice
+			viewScope.put("reviewedByMe",true);
+		}
+	}	
+}
+
+return "";
+
+		}]]></xp:this.value>
+	</xp:label>
+
+	<xe:formTable id="dueDateFormTable" disableErrorSummary="true">
+		<xe:formRow id="reviewersRow" label="Due date:"
+			for="fieldDueDate">
+			<xp:inputText id="fieldDueDate" value="#{document1.DueDate}"
+				role="button" title="select a date">
+				<xp:this.converter>
+					<xp:convertDateTime type="date" dateStyle="short"></xp:convertDateTime>
+				</xp:this.converter>
+				<xp:this.validators>
+					<xp:validateExpression
+						message="Since you have specified a Review Date, you must specify at least one reviewer">
+						<xp:this.expression><![CDATA[#{javascript:
+					        if (getComponent("fieldDueDate").getSubmittedValue() != null && 
+					        	(getComponent("fieldReviewers").getSubmittedValue() == "" &&
+					        	getComponent("fieldSubteamReviewers").getSubmittedValue() == "")) 
+					        { 
+					          	return false; 
+					        } 
+					        else 
+					        {
+					          	return true; 
+					        }
+						}]]></xp:this.expression>
+					</xp:validateExpression>
+				</xp:this.validators>
+				<xp:dateTimeHelper id="fieldDueDateHelper"
+					dojoType="dijit.form.DateTextBox">
+				</xp:dateTimeHelper>
+			</xp:inputText>
+			<xc:controlSectionStatus></xc:controlSectionStatus>
+			<xp:panel>
+				<xp:this.rendered><![CDATA[#{javascript:
+					// Do not show this section at all if this is a new doc
+					if (param.documentId==null)
+					{
+						return false;
+					}
+					// Only show for Reference, Action Items and Reference
+					else 
+					{
+						return ((viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype1")))||(viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype2")))||(viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype4"))));
+					}
+				}]]></xp:this.rendered>
+				<xp:panel>
+					<xp:this.rendered><![CDATA[#{javascript:
+				// Only show if this is an action item
+				if (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype2")))
+				{
+					var status = document1.getItemValueString('DueDateStatus')
+					if(status == 0)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}]]></xp:this.rendered>
+
+					<xe:listSeparator id="listSeparator1"></xe:listSeparator>
+
+					<xp:link escape="true"
+						text="Mark complete (task was completed)" id="linkMarkComplete"
+						role="button" title="mark document complete">
+
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" execMode="partial" disableValidators="true"
+							refreshId="panelSectionReviewLog">
+							<xp:this.action><![CDATA[#{javascript:updateReviewerFields("Marked complete by: ", false);}]]></xp:this.action>
+						</xp:eventHandler>
+
+					</xp:link>
+
+					<xe:listSeparator id="actionSeparator"></xe:listSeparator>
+
+					<xp:link escape="true"
+						text="Mark closed (Closing uncompleted task)" id="linkMarkClosed"
+						role="button" title="mark document as closed">
+
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" execMode="partial" disableValidators="true"
+							refreshId="panelSectionReviewLog">
+							<xp:this.action><![CDATA[#{javascript:updateReviewerFields("Marked closed by: ", false);}]]></xp:this.action>
+						</xp:eventHandler>
+
+					</xp:link>
+
+				</xp:panel>
+
+				<xp:panel>
+
+					<xp:this.rendered><![CDATA[#{javascript:
+
+// Only show if this is a discussion or reference document
+if ((viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype1")))||(viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype4"))))
+{
+	// Only show if the current user has not actioned this doucment already
+	var sName = @LowerCase(@Name("[Abbreviate]", @UserName()));
+	var aReviewedByNotDone = @LowerCase(document1.getItemValue("ReviewedByNotDone"));
+	var namesArray = @Explode(aReviewedByNotDone,",");
+	return (@Member(sName,namesArray)>0);
+	
+}}]]></xp:this.rendered>
+
+					<xe:listSeparator id="listSeparator2"></xe:listSeparator>
+
+					<xp:link escape="true" text="Mark reviewed by me"
+						id="linkMarkReviewedByMe" role="button"
+						title="mark as reviewed by me">
+
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" execMode="partial"
+							refreshId="panelSectionReviewLog" immediate="true">
+							<xp:this.action><![CDATA[#{javascript:updateReviewerFields("Reviewed by: ", true);}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xp:panel>
+		</xe:formRow>
+	</xe:formTable>	
+</xp:view>

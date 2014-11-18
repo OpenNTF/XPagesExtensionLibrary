@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.Library" class="com.ibm.xsp.extlib.relational.library.RelationalLibrary" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.controls.DynamicColumnBuilderFactory" class="com.ibm.xsp.extlib.relational.component.dynamicview.JdbcDynamicColumnBuilderFactory" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.designer.runtime.extensions.JavaScriptProvider" class="com.ibm.xsp.extlib.relational.javascript.JdbcJSFunctions" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.runtime.resources" class="com.ibm.xsp.extlib.relational.resources.JdbcDataSourceProvider" />
+   </extension>
+
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.core.events.ApplicationListener" class="com.ibm.xsp.extlib.relational.resources.ApplicationInitializer" />
+   </extension>
+   
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.DumpAccessorFactory" class="com.ibm.xsp.extlib.relational.debug.JdbcDumpFactory" />
+   </extension>
+
+	<extension point="com.ibm.commons.Extension">
+		<service type="com.ibm.xsp.adapter.servletFactory" class="com.ibm.xsp.extlib.relational.jdbc.services.servlet.JdbcServletFactory" />
+	</extension>
+	
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.relational.jdbc.datasource.IFileJdbcPoolProvider" class="com.ibm.xsp.extlib.relational.jdbc.datasource.dbcp.NSFFileJdbcDBCPProvider" />
+   </extension>
+   
+   <extension point="com.ibm.commons.Extension">
+         <service type="com.ibm.xsp.extlib.relational.jdbc.datasource.IFileJdbcPoolProvider" class="com.ibm.xsp.extlib.relational.jdbc.datasource.xpages.NSFFileJdbcXPCPProvider" />
+   </extension>
+</plugin>

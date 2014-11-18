@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/Tooltip">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoView var="view1" viewName="AllContacts"></xp:dominoView>
+				</xp:this.data>
+				<xp:pager layout="Previous Group Next" id="pager1"
+					xp:key="header" for="repeat1" partialRefresh="true">
+				</xp:pager>
+				<xp:label
+					value="This page shows the use ot tooltips. Just mouse over the first and last name columns"
+					id="label1" style="font-weight:bold">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:repeat id="repeat1" rows="15" value="#{view1}"
+					var="row">
+					<xp:div id="rowDataContainer">
+						User: &#160;
+						<xp:text escape="true" id="computedField1"
+							value="#{row.FirstName}">
+						</xp:text>
+						,&#160;
+						<xp:text escape="true" id="computedField2"
+							value="#{row.LastName}">
+						</xp:text>
+						&#160;
+					</xp:div>
+					<xe:tooltip id="tooltip1" for="computedField1"
+						label="#{row.City}">
+					</xe:tooltip>
+					<xe:tooltip id="tooltip2" for="computedField2"
+						dynamicContent="true">
+						<xe:this.afterContentLoad><![CDATA[#{javascript:print("DynamicTooltip: After Content Load")}]]></xe:this.afterContentLoad>
+						<xe:this.beforeContentLoad><![CDATA[#{javascript:print("DynamicTooltip: Before Content Load")}]]></xe:this.beforeContentLoad>
+						<xp:panel>
+							<xp:this.data>
+								<xp:dominoDocument var="document1"
+									formName="Contact" action="editDocument"
+									documentId="#{javascript:row.getNoteID()}"
+									ignoreRequestParams="true">
+								</xp:dominoDocument>
+							</xp:this.data>
+							<xp:span style="font-weight:bold">Business card
+							</xp:span>
+							<xp:table role="presentation">
+								<xp:tr>
+									<xp:td>
+										<xp:label value="First name:"
+											id="firstName_Label1" for="firstName1">
+										</xp:label>
+									</xp:td>
+									<xp:td>
+										<xp:text
+											value="#{document1.FirstName}" id="firstName1">
+										</xp:text>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>
+										<xp:label value="Last name:"
+											id="lastName_Label1" for="lastName1">
+										</xp:label>
+									</xp:td>
+									<xp:td>
+										<xp:text
+											value="#{document1.LastName}" id="lastName1">
+										</xp:text>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>
+										<xp:label value="E mail:"
+											id="eMail_Label1" for="eMail1">
+										</xp:label>
+									</xp:td>
+									<xp:td>
+										<xp:text
+											value="#{document1.EMail}" id="eMail1">
+										</xp:text>
+									</xp:td>
+								</xp:tr>
+								<xp:tr>
+									<xp:td>
+										<xp:label value="City:"
+											id="city_Label1" for="city1">
+										</xp:label>
+									</xp:td>
+									<xp:td>
+										<xp:text
+											value="#{document1.City}" id="city1">
+										</xp:text>
+									</xp:td>
+								</xp:tr>
+							</xp:table>
+						</xp:panel>
+					</xe:tooltip>
+				</xp:repeat>
+			</xp:panel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

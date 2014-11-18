@@ -1,0 +1,748 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojo.layout</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+
+
+    
+    <component>
+        
+        <description>%component.djContentPane.descr%</description>
+        <display-name>%component.djContentPane.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoContentPane</component-class>
+        
+        <property>
+            <description>%property.href.descr%</description>
+            <display-name>%property.href.name%</display-name>
+            <property-name>href</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+                    
+                    
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            
+            <description>%property.extractContent.descr%</description>
+            <display-name>%property.extractContent.name%</display-name>
+            <property-name>extractContent</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.parseOnLoad.descr%</description>
+            <display-name>%property.parseOnLoad.name%</display-name>
+            <property-name>parseOnLoad</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>dojo</category>
+                    
+                    <tags>
+                        runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.preventCache.descr%</description>
+            <display-name>%property.preventCache.name%</display-name>
+            <property-name>preventCache</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.preload.descr%</description>
+            <display-name>%property.preload.name%</display-name>
+            <property-name>preload</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.refreshOnShow.descr%</description>
+            <display-name>%property.refreshOnShow.name%</display-name>
+            <property-name>refreshOnShow</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            
+            <description>%property.loadingMessage.descr%</description>
+            <display-name>%property.loadingMessage.name%</display-name>
+            <property-name>loadingMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.errorMessage.descr%</description>
+            <display-name>%property.errorMessage.name%</display-name>
+            <property-name>errorMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onLoad.descr%</description>
+            <display-name>%property.onLoad.name%</display-name>
+            <property-name>onLoad</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onUnload.descr%</description>
+            <display-name>%property.onUnload.name%</display-name>
+            <property-name>onUnload</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onDownloadStart.descr%</description>
+            <display-name>%property.onDownloadStart.name%</display-name>
+            <property-name>onDownloadStart</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onContentError.descr%</description>
+            <display-name>%property.onContentError.name%</display-name>
+            <property-name>onContentError</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onDownloadError.descr%</description>
+            <display-name>%property.onDownloadError.name%</display-name>
+            <property-name>onDownloadError</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.onDownloadEnd.descr%</description>
+            <display-name>%property.onDownloadEnd.name%</display-name>
+            <property-name>onDownloadEnd</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.partialRefresh.descr%</description>
+            <display-name>%property.partialRefresh.name%</display-name>
+            <property-name>partialRefresh</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</renderer-type>
+            <tag-name>djContentPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djTabContainer.descr%</description>
+        <display-name>%component.djTabContainer.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.TabContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoTabContainer</component-class>
+        
+        <property>
+            <description>%property.tabPosition.descr%</description>
+            <display-name>%property.tabPosition.name%</display-name>
+            <property-name>tabPosition</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        top
+                        bottom
+                        left-h
+                        right-h
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.tabStrip.descr%</description>
+            <display-name>%property.tabStrip.name%</display-name>
+            <property-name>tabStrip</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.useMenu.descr%</description>
+            <display-name>%property.useMenu.name%</display-name>
+            <property-name>useMenu</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.useSlider.descr%</description>
+            <display-name>%property.useSlider.name%</display-name>
+            <property-name>useSlider</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.defaultTabContent.descr%</description>
+            <display-name>%property.defaultTabContent.name%</display-name>
+            <property-name>defaultTabContent</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.TabContainer</renderer-type>
+            <tag-name>djTabContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djTabPane.descr%</description>
+        <display-name>%component.djTabPane.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.TabPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoTabPane</component-class>
+        
+        <property>
+          
+          
+          <description>%/com.ibm.xsp.UITabPanel/label/descr%</description>
+          
+          
+          <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
+          <property-name>title</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+            <localizable>true</localizable>
+            <designer-extension>
+              <category>basics</category>
+              
+              
+              <tags>
+                  todo
+                  not-accessibility-title
+              </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.closable.descr%</description>
+            <display-name>%property.closable.name%</display-name>
+            <property-name>closable</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.tabUniqueKey.descr%</description>
+            <display-name>%property.tabUniqueKey.name%</display-name>
+            <property-name>tabUniqueKey</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.partialEvents.descr%</description>
+            <display-name>%property.partialEvents.name%</display-name>
+            <property-name>partialEvents</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.TabPane</renderer-type>
+            <tag-name>djTabPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djStackContainer.descr%</description>
+        <display-name>%component.djStackContainer.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoStackContainer</component-class>
+
+        <property>
+            <description>%property.selectedTab.component.djStackContainer.descr%</description>
+            <display-name>%property.selectedTab.component.djStackContainer.name%</display-name>
+            <property-name>selectedTab</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|djStackPane
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.persist.component.djStackContainer.descr%</description>
+            <display-name>%property.persist.component.djStackContainer.name%</display-name>
+            <property-name>persist</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.doLayout.descr%</description>
+            <display-name>%property.doLayout.name%</display-name>
+            <property-name>doLayout</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.StackContainer</renderer-type>
+            <tag-name>djStackContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+                    
+                    <tags>
+                       todo
+                    </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djStackPane.descr%</description>
+        <display-name>%component.djStackPane.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.StackPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoStackPane</component-class>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.StackPane</renderer-type>
+            <tag-name>djStackPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djBorderContainer.descr%</description>
+        <display-name>%component.djBorderContainer.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.BorderContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoBorderContainer</component-class>
+
+        <property>
+            
+            <description>%property.design.descr%</description>
+            <display-name>%property.design.name%</display-name>
+            <property-name>design</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        headline
+                        sidebar
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.gutters.descr%</description>
+            <display-name>%property.gutters.name%</display-name>
+            <property-name>gutters</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.liveSplitters.descr%</description>
+            <display-name>%property.liveSplitters.name%</display-name>
+            <property-name>liveSplitters</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.persist.component.djBorderContainer.descr%</description>
+            <display-name>%property.persist.component.djBorderContainer.name%</display-name>
+            <property-name>persist</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.BorderContainer</renderer-type>
+            <tag-name>djBorderContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djBorderPane.descr%</description>
+        <display-name>%component.djBorderPane.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.BorderPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoBorderPane</component-class>
+
+        <property>
+            <description>%property.minSize.descr%</description>
+            <display-name>%property.minSize.name%</display-name>
+            <property-name>minSize</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.maxSize.descr%</description>
+            <display-name>%property.maxSize.name%</display-name>
+            <property-name>maxSize</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <default-value>2147483647</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.splitter.descr%</description>
+            <display-name>%property.splitter.name%</display-name>
+            <property-name>splitter</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.region.descr%</description>
+            <display-name>%property.region.name%</display-name>
+            <property-name>region</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        top
+                        bottom
+                        leading
+                        trailing
+                        left
+                        right
+                        center
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.layoutPriority.descr%</description>
+            <display-name>%property.layoutPriority.name%</display-name>
+            <property-name>layoutPriority</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.BorderPane</renderer-type>
+            <tag-name>djBorderPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <description>%component.djAccordionContainer.descr%</description>
+        <display-name>%component.djAccordionContainer.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.AccordionContainer</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoAccordionContainer</component-class>
+        
+        <property>
+            <description>%property.duration.descr%</description>
+            <display-name>%property.duration.name%</display-name>
+            <property-name>duration</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.selectedTab.component.djAccordionContainer.descr%</description>
+            <display-name>%property.selectedTab.component.djAccordionContainer.name%</display-name>
+            <property-name>selectedTab</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    
+                    
+                    
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.AccordionContainer</renderer-type>
+            <tag-name>djAccordionContainer</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djAccordionPane.descr%</description>
+        <display-name>%component.djAccordionPane.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.layout.AccordionPane</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.layout.UIDojoAccordionPane</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+            <component-family>javax.faces.Panel</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.layout.AccordionPane</renderer-type>
+            <tag-name>djAccordionPane</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Layout</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+
+</faces-config>

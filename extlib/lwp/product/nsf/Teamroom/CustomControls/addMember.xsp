@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument formName="ParticipantProfile"
+			var="newProfile" ignoreRequestParams="true" computeWithForm="onsave">
+			<xp:this.querySaveDocument><![CDATA[#{javascript:// only keep most recent image...
+var al:java.util.List = newProfile.getAttachmentList("thumbnailUrl");
+if(!al.isEmpty()){
+	var lastItemIndex = al.size() - 1;
+	if(lastItemIndex > 0){
+		for(var i = lastItemIndex - 1; i >= 0; i--){
+			var eo:NotesEmbeddedObject = al.get(i);
+			newProfile.removeAttachment("thumbnailUrl", eo.getName());
+		}
+	}
+}}]]></xp:this.querySaveDocument>
+			<xp:this.postSaveDocument><![CDATA[#{javascript:try{
+	var canonicalName = newProfile.getItemValueString("Who");
+	if(null != canonicalName && "" != canonicalName){
+		peopleBean.refreshPerson(@Name("[ABBREVIATE]", canonicalName));
+	}
+}catch(e){
+	print("Error occurred refreshing person details: " + e);
+}}]]></xp:this.postSaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xp:this.beforePageLoad>
+		<![CDATA[#{javascript:
+		viewScope.addressBookSel = null;
+viewScope.addressBookDb = null;
+var vw:NotesView = database.getView("MissionLookup");
+var vc:NotesViewEntryCollection = vw.getAllEntries();
+var ve:NotesViewEntry = vc.getFirstEntry();
+if(null != ve){
+	var missionDoc = ve.getDocument();
+	if(null != missionDoc){
+		nabserver = missionDoc.getItemValueString("NABServer");
+		nabdatabase = missionDoc.getItemValueString("NABDatabase");
+		if("" != nabserver && "" != nabdatabase){
+			viewScope.addressBookDb = nabserver + "!!" + nabdatabase;
+			viewScope.addressBookSel = "db-name";
+		}
+	}
+}}]]></xp:this.beforePageLoad>
+
+	<xp:link escape="true" id="backLink" value="#{javascript:sessionScope.webFrom}">
+		<xp:this.text>
+			<![CDATA[#{javascript:
+				viewStateBean.restoreState = true;
+				return  I18n.format(strings.getString("back.to"), sessionScope.webFromName);
+			}]]>
+		</xp:this.text>
+	</xp:link>
+
+	<xp:panel id="formContainer">
+		<xe:formTable loaded="${javascript:newProfile.isEditable()}"
+			id="containerFormTable" disableErrorSummary="false" disableRowError="true"
+			style="width:100%;min-width:900px;margin-top:8px">
+			<xe:this.facets>
+				<xp:panel xp:key="header">
+					<xp:text escape="true" id="cfTitle" tagName="h2" value="Add Member"></xp:text>
+				</xp:panel>
+				<xp:panel xp:key="footer">
+					<xp:button value="Save" id="btnSave">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument></xp:saveDocument>
+									<xp:openPage name="/members.xsp">
+									</xp:openPage>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:link text="Cancel" id="lnkCancel">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="memberManagementDynamicContent"
+							immediate="true">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:confirm message="Cancel adding a new member?">
+									</xp:confirm>
+									<xe:changeDynamicContentAction
+										for="memberManagementDynamicContent" facetName="membersView">
+									</xe:changeDynamicContentAction>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xe:this.facets>
+			<xe:formRow labelPosition="none" id="containerFormRow">
+
+				<xe:formTable disableRequiredMarks="false"
+					loaded="${javascript:newProfile.isEditable()}" id="memberDetailsFormTable"
+					disableErrorSummary="true" styleClass="xvwMemberDetails"
+					style="float: left; width: 55%;"
+					labelWidth="120px">
+
+					<xe:formRow label="Name:" labelPosition="left">
+						<xp:inputText id="fldWho"
+							value="#{newProfile.Who}" style="width:85%;height:19px;"
+							required="true" disableClientSideValidation="true">
+							<xp:this.validators>
+								<xp:validateRequired
+									message="Please select a member name">
+								</xp:validateRequired>
+								<xp:customValidator>
+									<xp:this.validate><![CDATA[#{javascript:var edtWho = getComponent("fldWho");
+if(null != edtWho){
+	var who = edtWho.getSubmittedValue();
+	var memberName = @DbLookup(@DbName(), "PeopleLookup", who, "$3");
+	if(null != memberName){
+		var msg = I18n.format(strings.getString("x.is.already.a.member"), memberName);
+		var msgObj = new javax.faces.application.FacesMessage(
+			javax.faces.application.FacesMessage.SEVERITY_ERROR, msg, msg
+		);
+		facesContext.addMessage(this.getClientId(facesContext), msgObj);
+		this.setValid(false);
+	}
+}}]]></xp:this.validate>
+								</xp:customValidator>
+							</xp:this.validators>
+							<xp:eventHandler event="onchange"
+								submit="true" refreshMode="partial" refreshId="formContainer"
+								execMode="partial" execId="formContainer">
+								<xp:this.action><![CDATA[#{javascript:var edtWho = getComponent("fldWho");
+if(null != edtWho){
+	var who = edtWho.getValue();
+	var memberName = @DbLookup(@DbName(), "PeopleLookup", who, "$3");
+	if(null != memberName){
+		return;
+	}
+	var nabViewName = "($VIMPeople)";
+	
+	var nabs = null;
+	var nabdb = null;
+	var vw:NotesView = database.getView("MissionLookup");
+	var vc:NotesViewEntryCollection = vw.getAllEntries();
+	var ve:NotesViewEntry = vc.getFirstEntry();
+	if(null != ve){
+		var missionDoc = ve.getDocument();
+		if(null != missionDoc){
+			nabserver = missionDoc.getItemValueString("NABServer");
+			nabdatabase = missionDoc.getItemValueString("NABDatabase");
+			if("" != nabserver && "" != nabdatabase){
+				nabdb = session.getDatabase(nabserver, nabdatabase);
+				nabs = new java.util.Vector();
+				nabs.add(nabdb);
+			}else{
+				nabs = session.getAddressBooks();
+			}
+		}
+	}
+	
+	for(var nab in nabs){
+		var nabFileName = nab.getFileName();
+		var nabServer = nab.getServer();
+		if("" != nabServer){
+			nabFileName = nabServer + "!!" + nabFileName;
+		}
+		if(null != @DbLookup(nabFileName, nabViewName, who, "FullName")){
+			var mailAddress = @DbLookup(nabFileName, nabViewName, who, "MailAddress");
+			var department = @DbLookup(nabFileName, nabViewName, who, "Department");
+			var location = @DbLookup(nabFileName, nabViewName, who, "Location");
+			var officePhoneNumber = @DbLookup(nabFileName, nabViewName, who, "OfficePhoneNumber");
+			var jobTitle = @DbLookup(nabFileName, nabViewName, who, "JobTitle");
+			
+			var fldEmail = getComponent("fldEmail");
+			if(null != fldEmail){
+				var emailName:NotesName = session.createName(mailAddress);
+				if (null != emailName && emailName.isHierarchical()) {
+					mailAddress = emailName.getAbbreviated();
+				}
+				fldEmail.setValue(mailAddress);
+			}
+			var fldDepartment = getComponent("fldDepartment");
+			if(null != fldDepartment){
+				fldDepartment.setValue(department);
+			}
+			var fldLocation = getComponent("fldLocation");
+			if(null != fldLocation){
+				fldLocation.setValue(location);
+			}
+			var fldPhone = getComponent("fldPhone");
+			if(null != fldPhone){
+				fldPhone.setValue(officePhoneNumber);
+			}
+			var fldJobTitle = getComponent("fldJobTitle");
+			if(null != fldJobTitle){
+				fldJobTitle.setValue(jobTitle);
+			}
+			
+			// end for loop as found profile...
+			break;
+		}
+	}
+}}]]>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xp:inputText>
+						<xp:text escape="false" id="separator" disableTheme="true">
+							<xp:this.value><![CDATA[${javascript:"&nbsp;"}]]></xp:this.value>
+						</xp:text>
+						<xe:namePicker id="namePicker" for="fldWho"
+							pickerText="#{javascript: strings.picker_valueEmpty_select }">
+							<xe:this.dataProvider>
+								<xe:dominoNABNamePicker>
+									<xe:this.addressBookSel><![CDATA[#{javascript:viewScope.addressBookSel}]]></xe:this.addressBookSel>
+									<xe:this.addressBookDb><![CDATA[#{javascript:viewScope.addressBookDb}]]></xe:this.addressBookDb>
+								</xe:dominoNABNamePicker>
+							</xe:this.dataProvider>
+						</xe:namePicker>
+					</xe:formRow>
+
+					<xe:formRow label="Email:" labelPosition="left">
+						<xp:inputText value="#{newProfile.Email}" id="fldEmail"
+							style="width:98%;">
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow label="Department:" labelPosition="left">
+						<xp:inputText value="#{newProfile.Department}" id="fldDepartment"
+							style="width:98%;">
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow label="Location:" labelPosition="left">
+						<xp:inputText value="#{newProfile.Location}" id="fldLocation"
+							style="width:98%;">
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow label="Phone:" labelPosition="left">
+						<xp:inputText value="#{newProfile.Phone}" id="fldPhone"
+							style="width:98%;">
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow label="Job title:" labelPosition="left">
+						<xp:inputText value="#{newProfile.JobTitle}" id="fldJobTitle"
+							style="width:98%;">
+						</xp:inputText>
+					</xe:formRow>
+
+					<xe:formRow label="Status:" labelPosition="left">
+						<xp:div styleClass="membersRadioGroup">
+							<xp:radioGroup id="rdgStatus" value="#{newProfile.FileThisStatusDoc}"
+								defaultValue="0" style="height:0px">
+								<xp:selectItem itemLabel="Active" itemValue="0">
+								</xp:selectItem>
+								<xp:selectItem itemLabel="Inactive" itemValue="1">
+								</xp:selectItem>
+							</xp:radioGroup>
+						</xp:div>
+					</xe:formRow>
+				</xe:formTable>
+
+				<xe:formTable disableRequiredMarks="false"
+					loaded="${javascript:newProfile.isEditable()}"
+					id="thumbnailFormTable" disableErrorSummary="true"
+					labelWidth="70px" styleClass="xvwMemberPhoto">
+
+					<xe:formRow labelPosition="left" label="Photo:">
+						<xp:table cellspacing="0" cellpadding="0"
+							border="0">
+							<xp:tr>
+								<xp:td>
+									<xp:image id="thumbnailImage"
+										height="115px" width="115px" alt="" title="">
+										<xp:this.url><![CDATA[#{javascript:var imageName = "thumbNoPhoto.png";
+var al:java.util.List = newProfile.getAttachmentList("thumbnailUrl");
+if(!al.isEmpty()){
+	var lastItemIndex = al.size() - 1;
+	if(lastItemIndex > 0){
+		var eo:NotesEmbeddedObject = al.get(lastItemIndex);
+		imageName = eo.getHref();
+	}else{
+		var eo:NotesEmbeddedObject = al.get(0);
+		imageName = eo.getHref();
+	}
+}
+return(imageName);}]]></xp:this.url>
+									</xp:image>
+								</xp:td>
+								<xp:td style="width:110px">
+									<xp:label
+										value="The photo must be in GIF, JPEG, or PNG format. Maximum size is 130px x 130px."
+										id="label1" for="thumbnailImage">
+									</xp:label>
+								</xp:td>
+							</xp:tr>
+						</xp:table>
+					</xe:formRow>
+
+					<xe:formRow label="File" labelPosition="left"
+						id="thumbnailFormRow">
+						<xp:fileUpload id="fuImage"
+							value="#{newProfile.thumbnailUrl}"
+							accept="image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/x-png">
+							<xp:eventHandler event="onchange"
+								submit="true" refreshMode="complete">
+								<xp:this.action><![CDATA[#{javascript:// cause a roundtrip}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:fileUpload>
+						<xp:link id="lkResetImage" text="Reset">
+							<xp:this.style><![CDATA[#{javascript:// rendered if any images exist...
+var al:java.util.List = newProfile.getAttachmentList("thumbnailUrl");
+if(!al.isEmpty()){
+	return "visibility:visible;";
+}
+return "visibility:hidden;";}]]></xp:this.style>
+							<xp:eventHandler event="onclick"
+								submit="true" refreshMode="partial">
+								<xp:this.action><![CDATA[#{javascript:// remove any thumbnails...
+var al:java.util.List = newProfile.getAttachmentList("thumbnailUrl");
+if(!al.isEmpty()){
+	for(var i = 0; i < al.size(); i++){
+		var eo:NotesEmbeddedObject = al.get(i);
+		newProfile.removeAttachment("thumbnailUrl", eo.getName());
+	}
+}}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:link>
+					</xe:formRow>
+
+				</xe:formTable>
+			</xe:formRow>
+		</xe:formTable>
+	</xp:panel>
+
+</xp:view>

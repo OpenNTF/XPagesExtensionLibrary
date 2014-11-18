@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/ViewState">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="Edit the current thread" id="label5"
+			style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:panel>
+			<xp:this.data>
+				<xp:dominoDocument var="document1"
+					formName="Discussion">
+				</xp:dominoDocument>
+			</xp:this.data>
+			<xp:table role="presentation">
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Title:" id="body_Label1"
+							for="body1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{document1.Title}"
+							id="body1" size="40">
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="Body:" id="label1"
+							for="inputRichText1">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputRichText id="inputRichText1" value="#{document1.Body}"></xp:inputRichText>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+			<xp:button value="Ok" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="false" save="true">
+					<xp:this.action><![CDATA[#{javascript:viewStateBean.restoreState = true
+return context.getHistoryUrl(1)
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:button value="Cancel" id="button2">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete" immediate="true" save="false">
+					<xp:this.action><![CDATA[#{javascript:viewStateBean.restoreState = true
+return context.getHistoryUrl(1)
+}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+		</xp:panel>
+	</xc:OneUILayout>
+	<xp:this.navigationRules>
+		<xp:navigationRule outcome="xsp-success"
+			viewId="/Domino_ViewState.xsp"></xp:navigationRule>
+	</xp:this.navigationRules>
+</xp:view>
+

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='352' unid='6F80F8CE3B07DF9885256E89004DAA4D' sequence='19'>
+<created><datetime dst='true'>20040503T100818,69-04</datetime></created>
+<modified><datetime>20120305T082322,62+00</datetime></modified>
+<revised><datetime>20120305T082322,61+00</datetime></revised>
+<lastaccessed><datetime>20120305T082322,62+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,49+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$Fonts'>
+<rawitemdata type='1'>
+i/8oAAEABSZBcmlhbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$HTMLDocumentStyles' summary='true' sign='true'>
+<rawitemdata type='1'>
+0ggBAAAA/wDSCAEA/wAAANIIAQCAAIAA
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$BackgroundR5' sign='true'>
+<rawitemdata type='1'>
+3QYBAJkAmQAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAH0AHAAAAAEAEwEgAwAAAAAAAAAAAAAA
+AAAAAAD2/zEAAAAAAAMAEwAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAT3V0bGluZVBhZ2UuZ2lmAN4G
+AQCZAA==
+</rawitemdata></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>wOutline Page</text><text>wOutline Page</text></textlist></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAAAAAAQABAP///wAAAAAA
+</rawitemdata></item>
+<item name='$HTMLHeadTag' sign='true'><formula>"&lt;STYLE TYPE=\"text/css\"&gt; 	A:HOVER {BACKGROUND-COLOR: #E3E3E3} 	.TXTOUTLINE {PADDING-TOP: 1em; 		PADDING-BOTTOM: 1em} 	.VTITLE {TEXT-TRANSFORM: UPPERCASE;  		FONT-WEIGHT: bold; 		BACKGROUND-COLOR: #F1F1F1} 	.VRESET {TEXT-TRANSFORM: CAPITALIZE;  		BACKGROUND-COLOR: #F1F1F1} &lt;/STYLE&gt;"</formula></item>
+<item name='$Flags'><text>C34WQ</text></item>
+<item name='$DesignerVersion' sign='true'><text>7</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>wOutline Page</text></item>
+<item name='$BODY' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAzP8IAAAAAACF/x8AAQAACDxT
+VFlMRSBUWVBFPSJ0ZXh0L2NzcyI+AIECgv9aAAIABAAAAAAAAACgBQAAoAUIANACoAVwCEALEA7g
+ELATgBYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACUhKAFCgCgBQoAAABkAAEAAAAEAAAA
+gwQCAIX/EAABAAAIIAlCT0RZIHuBAoMEAgCF/yIAAQAACAkJZm9udC1mYW1pbHk6IHNhbnMtc2Vy
+aWY7gQKDBAIAhf8bAAEAAAgJCWZvbnQtc2l6ZTogIDkgcHQ7AIECgwQCAIX/FQABAAAICSAgICAg
+ICAgICAgfQCBAoMEAgCF/xAAAQAACDwvU1RZTEU+gQKDBAIAhf8eAAEAAAg8RElWIENMQVNTPVRY
+VE9VVExJTkU+zf8IAAAAAACBAoL/WgADAAAAAAAAAAAAOAQAADgEAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAlIQ4BA8AOAQPAAAAAAABAAAABAAAAIMEAwCF
+/wgAAQAACt0GAACt/63/GAAbAAgAAAAMAERpc2NPdXRsaW5lAOr/PgAbAAlEAABkAOAQAQAACQAA
+AAAAAAAAAQAACgEAAAkAAAUAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA7P8iASAOAgAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAEgAIAEAAAsACQABAAAKAQAACgEAAAoBAAAKAQAACgEA
+AAoAAAAAAAAAALABQAIAAAMAAwAFAP///wAFAP///wAFAP///wAFAP///wAFAP///wABALrVxQAF
+AO/v7wAFAP///wABALrVxQAFAP///wABAAAAAAABAAAAAAABAAAAAAAAAAAAAAAAAAAAAAADAAMA
+AAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAP8AAQAA
+AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARGlzY091dGxpbmVOb3Rlc1ZpZXeuAt4GAACuAMz/
+CAAAAAAAhf8IAAEAAAiBAoL/WgAEAAAAAAAAAAAAoAUAAKAFAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAlISgBQ8AoAUPAAAAAAABAAAABAAAAIMEBACF/w4A
+AQAACDwvRElWPs3/CAAAAAAA
+</rawitemdata></item></note>
+

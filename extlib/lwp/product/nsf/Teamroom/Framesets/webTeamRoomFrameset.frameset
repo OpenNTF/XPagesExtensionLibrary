@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='27a' unid='46CED5D0C98689D8802577C2003DFBB7' sequence='7'>
+<created><datetime dst='true'>20101020T121701,35+01</datetime></created>
+<modified><datetime>20120207T095546,10+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122301,88+01</datetime></revised>
+<lastaccessed><datetime>20120207T095546,10+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095546,10+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121701,37+01</datetime><datetime
+ dst='true'>20110830T205048,19-04</datetime><datetime dst='true'>20111006T160542,59+01</datetime><datetime
+ dst='true'>20111014T083957,83+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>webTeamRoomFrameset|webTeamRoomFrameset</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$FrameSet' sign='true'>
+<rawitemdata type='1'>
+7/8YAAIABgAAAAAAAAAAAAAAAAAAAAAA8P8+AEQAAAABAAAAAAABAAEAAAAAAAUAAAAAAAUAAAAA
+AAEAAgAAAAAAAQAAAAAAAAADAAEAAQDcAAMAAQDw/0IAAAAAAAEAAAAAAAEAAQAAAAAABQAAAAAA
+BQAAAAAAAwABAAAAAAAFAAAAAAAAAAEAQQADAAEAAQASAAMAAQDx/zQAFgAAAABAAQECAAMAAQAA
+AAAAAAAAAAAAAQAAAAAAAAABAP///+gBAAAKAQAAAADo9v8yAAAAAAADAAMAEAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAFRlbXBsYXRlIE5hbWVXZWLx/0sAEAAAAABAAQABAAEAAQAAAAAADgAAAAkAAQAA
+AAAAAABOb3Rlc05hdmlnYXRvck5vdGVzVmlldwEA////6AEAAAoBAAAAAOg/9v8yAAAAAAADAAcA
+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAFRlYW1Sb29tIE91dGxpbmXx/zwAFgAAAABAAQACAAEAAQAA
+AAAACAAAAAAAAQAAAAAAAABTd2l0Y2hlcgEA////6AEAAAoBAAAAAOj2/zIAAAAAAAMAAwAQAAAA
+AAAAAAAAAAAAAAAAAAAAAAAARGF0YWJhc2VMb2NhdGlvbvH/PQAAAAAAAEABAAMAAQABAAAAAAAJ
+AAAAAAABAAAAAAAAAE5vdGVzVmlldwEA////6AEAAAoBAAAAAOg/9v8vAAAAAAADAAIADQAAAAAA
+AAAAAAAAAAAAAAAAAAAAAEFubm91bmNlbWVudHM/
+</rawitemdata></item>
+<item name='$Flags'><text>#4C</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item></note>
+

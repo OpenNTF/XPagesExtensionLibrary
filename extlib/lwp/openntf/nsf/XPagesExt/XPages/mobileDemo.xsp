@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	pageTitle="Mobile Application">
+	<xe:singlePageApp id="singlePageApp1" selectedPageName="home">
+		<xe:appPage resetContent="false" id="home" pageName="home">
+			<xe:djxmHeading id="djxmHeading0"
+				label="Mobile Controls Demo">
+			</xe:djxmHeading>
+			<xe:outline>
+				<xe:this.treeNodes>
+					<xe:basicLeafNode href="#form" label="Form"></xe:basicLeafNode>
+					<xe:basicLeafNode href="#transitions"
+						label="Transitions">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#dataView"
+						label="Data View">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#accordionOutline"
+						label="Accordion Outline">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#basicOutline"
+						label="Basic Outline">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#interface" label="Interface Controls">					
+					</xe:basicLeafNode>
+				</xe:this.treeNodes>
+				<xe:this.treeRenderer>
+					<xe:mobileAccordionMenu></xe:mobileAccordionMenu>
+				</xe:this.treeRenderer>
+			</xe:outline>
+		</xe:appPage>
+
+		<xc:mPage_AccordionOutline></xc:mPage_AccordionOutline>
+		<xc:mPage_BasicOutline></xc:mPage_BasicOutline>
+		<xc:mPage_Form></xc:mPage_Form>
+		<xc:mPage_Transitions></xc:mPage_Transitions>
+		<xc:mPage_DataView></xc:mPage_DataView>
+		<xc:mPage_Document></xc:mPage_Document>
+		<xc:mPage_interface></xc:mPage_interface>
+		
+	</xe:singlePageApp>
+</xp:view>

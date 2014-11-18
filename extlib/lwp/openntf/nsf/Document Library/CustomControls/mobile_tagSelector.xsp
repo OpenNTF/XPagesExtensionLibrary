@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+		viewScope[compositeData.variable] = "";
+		var dataString = compositeData.data;
+		var dataArray = "" + compositeData.variable + "dataArray";
+		if(dataString.indexOf('[') == 0)
+		{
+			dataString = dataString.substring(1, dataString.length-1);
+		}
+		
+		if(dataString != "")
+		{
+			var temp = dataString.split(',');
+			viewScope[dataArray] = temp.splice(0,0,"");
+		}
+		else
+		{
+			viewScope[dataArray] = dataString;
+		}
+	}]]></xp:this.beforePageLoad>
+	
+	<xp:panel style="width:100%; min-width:200px; padding-top:5px;">
+		<xp:comboBox id="tagCombo" style="height:25px; width:100%;">
+			<xp:selectItems>
+				<xp:this.value><![CDATA[#{javascript:
+					var dataArray = "" + compositeData.variable + "dataArray";
+					return viewScope[dataArray];
+				}]]></xp:this.value>
+			</xp:selectItems>
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="partial" refreshId="tagList" immediate="false"
+				disableValidators="true">
+				<xp:this.action>
+					<xp:executeScript>
+						<xp:this.script><![CDATA[#{javascript:
+							var tags = [];
+							var tag = getComponent('tagCombo').getValue();
+							var selected = viewScope[compositeData.variable];
+							if(selected != null && selected != "")
+							{
+								tags = selected;
+							}
+							
+							if(!@Contains(tags, tag) && getComponent('tagCombo').getValue())
+							{
+								tags.push(getComponent('tagCombo').getValue());
+								viewScope[compositeData.variable] = tags;
+							}
+						}]]></xp:this.script>
+					</xp:executeScript>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:comboBox>
+		
+		<xe:djxmRoundRectList id="tagList">
+			<xp:this.style><![CDATA[#{javascript:
+				if(viewScope[compositeData.variable] == null || viewScope[compositeData.variable] == "")
+					return "display:none";
+				else
+					return "display:block;";
+			}]]></xp:this.style>
+			<xp:repeat id="repeatList" var="rowData" indexVar="membersIndex" rows="300" first="0">
+				<xp:this.value><![CDATA[#{javascript:
+					if(viewScope[compositeData.variable] != null && viewScope[compositeData.variable] != "")
+					{
+						return viewScope[compositeData.variable];
+					}
+					return null;
+				}]]></xp:this.value>
+				<xe:djxmLineItem id="djxmLineItem1" styleClass="mblTagLabel">
+					<xp:div>
+						<xp:label value="#{javascript:rowData}">
+						</xp:label>
+					</xp:div>
+					<xp:button value="Delete" styleClass="mblTableViewDelete" id="button1">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="repeatList" immediate="false"
+							disableValidators="true">
+							<xp:this.action>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:
+										var selected = viewScope[compositeData.variable];
+										var index = selected.indexOf(rowData);
+										var tags = selected.splice(index, 1);
+										viewScope[compositeData.variable] = tags;
+									}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xe:djxmLineItem>
+			</xp:repeat>
+		</xe:djxmRoundRectList>
+	</xp:panel>
+</xp:view>

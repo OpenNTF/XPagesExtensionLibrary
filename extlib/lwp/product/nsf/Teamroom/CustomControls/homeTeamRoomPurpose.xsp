@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:widgetContainer id="widgetContainer12"
+		titleBarText="TeamRoom Purpose" scrollable="false" type="sidebar">
+		<xp:text escape="true" id="computedField1" style="width:100% !important; word-wrap: break-word;">
+			<xp:this.value><![CDATA[${javascript:var teamname = strings.getString("teamroom.purpose");
+var vw:NotesView = database.getView("MissionLookup");
+var vc:NotesViewEntryCollection = vw.getAllEntries();
+var ve:NotesViewEntry = vc.getFirstEntry();
+if(null != ve){
+	var v:java.util.Vector = ve.getColumnValues();
+	if(!v.isEmpty()){
+		// get the teamroom purpose
+		teamname = v.get(2);
+	}
+}
+return teamname;}]]></xp:this.value>
+		</xp:text>
+	</xe:widgetContainer>
+</xp:view>

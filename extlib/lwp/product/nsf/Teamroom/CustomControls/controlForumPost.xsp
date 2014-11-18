@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<!-- a wrapper around the xe:forumPost control,
+		to work around the design-time visualization limitations
+		in Domino Designer 8.5.3
+	-->
+	<xe:forumPost id="forumPost1">
+		<xe:this.facets>
+			<xp:callback xp:key="authorAvatar" facetName="authorAvatar"
+				id="authorAvatarCB"></xp:callback>
+			<xp:callback xp:key="authorName" facetName="authorName"
+				id="authorNameCB"></xp:callback>
+			<xp:callback xp:key="authorMeta" facetName="authorMeta"
+				id="authorMetaCB"></xp:callback>
+			<xp:callback xp:key="postTitle" facetName="postTitle" id="postTitleCB"></xp:callback>
+			<xp:callback xp:key="postMeta" facetName="postMeta" id="postMetaCB"></xp:callback>
+			<xp:callback xp:key="postDetails" facetName="postDetails"
+				id="postDetailCB"></xp:callback>
+			<xp:callback xp:key="postActions" facetName="postActions"
+				id="postActionsCB"></xp:callback>
+		</xe:this.facets>
+	</xe:forumPost>
+</xp:view>

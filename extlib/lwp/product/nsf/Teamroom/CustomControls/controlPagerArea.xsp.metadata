@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="57e" sequence="12" unid="94CB40030A8B3D4A8025791700505AFE">
+<created><datetime dst="true">20110926T153741,74+01</datetime></created>
+<modified><datetime>20120207T095555,82+00</datetime></modified>
+<revised><datetime>20111201T182700,16+00</datetime></revised>
+<lastaccessed><datetime>20120207T095555,82+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095555,82+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T153746,40+01</datetime><datetime dst="true">20110926T153746,42+01</datetime><datetime dst="true">20110926T153746,45+01</datetime><datetime dst="true">20110926T153746,47+01</datetime><datetime dst="true">20111006T144131,80+01</datetime><datetime dst="true">20111006T144131,82+01</datetime><datetime dst="true">20111006T160523,60+01</datetime><datetime dst="true">20111014T083943,32+01</datetime><datetime dst="true">20111026T120456,06+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>controlPagerArea.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>controlPagerArea.xsp</text></item>
+
+</note>

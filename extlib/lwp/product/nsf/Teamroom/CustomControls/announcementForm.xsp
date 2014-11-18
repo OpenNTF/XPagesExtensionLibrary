@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+    xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:this.data>
+		<xp:dominoDocument var="announcement" formName="announcement"
+			ignoreRequestParams="false" computeWithForm="onsave" documentId="#{param.documentId}">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:link escape="true" id="backLink">
+		<xp:this.value><![CDATA[#{javascript:
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				return "/allDocuments.xsp";
+			}
+			else
+			{
+				return sessionScope.webFrom;
+			}
+		}]]></xp:this.value>
+		<xp:this.text><![CDATA[#{javascript:
+			viewStateBean.restoreState = true;
+			var text;
+			var back = sessionScope.webFrom;
+			if(back === null)
+			{
+				text = "All Documents";
+			}
+			else
+			{
+				text = sessionScope.webFromName;
+			}
+			return I18n.format(strings.getString("back.to"), text);
+		}]]></xp:this.text>
+	</xp:link>
+
+	<xp:br></xp:br>
+
+	<xe:formTable loaded="${javascript:announcement.isEditable()}"
+		disableRequiredMarks="false" disableErrorSummary="false"
+		labelWidth="100px" legend="New Announcement">
+
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<xp:text loaded="${javascript:param.documentId == null}"
+					disableTheme="true" value="New Announcement"
+					style="font-size: 1.5em; margin: .75em 0">
+				</xp:text>
+				<xp:text loaded="${javascript:param.documentId != null}"
+					disableTheme="true" value="Announcement"
+					style="font-size: 1.5em; margin: .75em 0">
+				</xp:text>
+			</xp:panel>
+
+			<xp:panel xp:key="footer">
+
+				<xp:button value="Save" id="button2">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" id="eventHandler1">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:saveDocument var="announcement"></xp:saveDocument>
+								<xp:openPage
+									name="/announcements.xsp">
+								</xp:openPage>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+
+				<xp:link text="Cancel" id="link2" role="button"
+					title="cancel document">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:actionGroup>
+									<xp:confirm
+										message="Cancel working with this announcement?">
+									</xp:confirm>
+									<xp:openPage
+										name="/announcements.xsp">
+									</xp:openPage>
+								</xp:actionGroup>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+
+			</xp:panel>
+		</xe:this.facets>
+
+		<xe:formRow label="Headline:" labelPosition="left">
+			<xp:inputText id="fieldHeadline" style="width:100%;"
+				value="#{announcement.subject}" required="true"
+				disableClientSideValidation="true" autocomplete="off">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Announcement headline is required">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Type:" labelPosition="left">
+			<xp:radioGroup id="rdgType" value="#{announcement.type}"
+				defaultValue="2" legend="Type" role="select"
+				title="choose type of document">
+				<xp:selectItem itemLabel="Must read" itemValue="1">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Informational"
+					itemValue="2">
+				</xp:selectItem>
+			</xp:radioGroup>
+		</xe:formRow>
+
+		<xe:formRow label="Status:" labelPosition="left">
+			<xp:radioGroup id="rdgStatus"
+				value="#{announcement.FileThisStatusDoc}" defaultValue="0"
+				legend="Status" role="select" title="choose status of document">
+				<xp:selectItem itemLabel="Active" itemValue="0">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="Inactive" itemValue="1">
+				</xp:selectItem>
+			</xp:radioGroup>
+		</xe:formRow>
+
+		<xe:formRow labelPosition="left">
+			<xp:inputRichText value="#{announcement.Body}" role="input"
+				title="enter the summary of the document">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+		</xe:formRow>
+
+		<xe:formRow labelPosition="left">
+			<xc:controlAttachArea id="controlAttachArea1"
+				containerStyle="padding:5px;margin-bottom:1em"
+				valueEL="announcement.Body">
+				<xc:this.rendered><![CDATA[#{javascript:return (param.action!="openDocument");}]]></xc:this.rendered>
+			</xc:controlAttachArea>
+		</xe:formRow>
+
+	</xe:formTable>
+
+	<xc:controlReadForm id="readForm" loaded="${javascript:!announcement.isEditable()}">
+
+		<xc:this.title>
+			<![CDATA[${javascript:announcement.getItemValueString("subject")}]]>
+		</xc:this.title>
+
+		<xp:this.facets>
+
+			<xp:panel id="pnlMeta" xp:key="meta">
+				<xe:listInline>
+					<xp:panel>
+						<xp:label value="Created "></xp:label>
+						<xp:text id="createdDateOut" value="#{javascript:@Created()}"></xp:text>
+						<xp:label value=" by "></xp:label>
+						<xp:link styleClass="lotusPerson" id="from"
+							text="#{javascript:peopleBean.getPerson(announcement.getItemValueString('From')).displayName}"
+							value="/members.xsp">
+							<xp:this.parameters>
+								<xp:parameter name="profile"
+									value="#{javascript:peopleBean.getPerson(announcement.getItemValueString('From')).abbreviatedName}">
+								</xp:parameter>
+							</xp:this.parameters>
+						</xp:link>
+					</xp:panel>
+					<xp:panel>
+						<xp:label value="Announcement status: "></xp:label>
+						<xp:span id="announcementStatusOut">
+							<xp:text disableTheme="true" value="Active"
+								rendered="#{javascript:announcement.getItemValueString('FileThisStatusDoc') == '0'}"></xp:text>
+							<xp:text disableTheme="true" value="Inactive"
+								rendered="#{javascript:announcement.getItemValueString('FileThisStatusDoc') == '1'}"></xp:text>
+						</xp:span>
+					</xp:panel>
+					<xp:panel>
+						<xp:label value="Announcement type: "></xp:label>
+						<xp:span id="announcementTypeOut">
+							<xp:text disableTheme="true" value="Must read"
+								rendered="#{javascript:announcement.getItemValueString('type') == '1'}"></xp:text>
+							<xp:text disableTheme="true" value="Informational"
+								rendered="#{javascript:announcement.getItemValueString('type') == '2'}"></xp:text>
+						</xp:span>
+					</xp:panel>
+				</xe:listInline>
+			</xp:panel>
+
+			<xp:panel id="pnlActions" xp:key="actions">
+				<xe:listInline>
+					<xp:link text="Edit" id="link1" value="/announcements.xsp">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:this.parameters>
+							<xp:parameter name="documentId"
+								value="#{javascript:announcement.getDocument().getUniversalID()}">
+							</xp:parameter>
+							<xp:parameter name="action" value="editDocument">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+					<xp:link rendered="#{javascript: return announcement.getItemValue('FileThisStatusDoc')[0] == '0'}" text="Mark as inactive" id="markAsInactiveLink">
+			<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:					
+					announcement.replaceItemValue("DateFiled", new Date());	
+					announcement.replaceItemValue("ViewDateFiled", new Date());
+					announcement.replaceItemValue('FileThisStatusDoc', '1');
+	
+					announcement.replaceItemValue("Status", "0");
+					announcement.replaceItemValue("NeverFile", "0");		
+					
+					announcement.save();
+					context.redirectToPage('/announcements.xsp');}]]></xp:this.action>
+			</xp:eventHandler>		
+		</xp:link>		
+					
+					<xp:link rendered="#{javascript: return announcement.getItemValue('FileThisStatusDoc')[0] == '1' }" text="Mark as active" id="markAsActiveLink">
+			<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+			<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:				
+					announcement.removeItem("FileByDate");	
+					announcement.removeItem("DateFiled");	
+					announcement.removeItem("ViewDateFiled");
+					announcement.replaceItemValue('FileThisStatusDoc', '0');
+	
+					announcement.replaceItemValue("Status", "1")
+					announcement.replaceItemValue("NeverFile", "1")
+	
+					announcement.save();
+					context.redirectToPage('/announcements.xsp');}]]></xp:this.action>
+			</xp:eventHandler>		
+		</xp:link>
+					
+				</xe:listInline>
+			</xp:panel>
+
+		</xp:this.facets>
+		
+		<xp:inputRichText value="#{announcement.Body}"
+			id="inputRichText2" readonly="true" role="input"
+			title="enter the body of the document">
+			<xp:this.dojoAttributes>
+				<xp:dojoAttribute name="toolbar"
+					loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+					<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+				</xp:dojoAttribute>
+			</xp:this.dojoAttributes>
+		</xp:inputRichText>
+
+		<xp:fileDownload rows="30"
+			id="fileDownload1" displayLastModified="false"
+			allowDelete="false" hideWhen="true"
+			value="#{announcement.Body}">
+		</xp:fileDownload>
+
+	</xc:controlReadForm>
+
+</xp:view>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="newResponseDoc" formName="Document"
+			ignoreRequestParams="false" computeWithForm="onsave"
+			action="newDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:djxmHeading id="djxmHeading1" label="New Document" back="Cancel">
+		
+		<xe:this.moveTo><![CDATA[#{javascript://
+			return sessionScope.mobileFrom || "home";
+		}]]></xe:this.moveTo>
+		
+		<xe:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:userBean.canCreateDocs}]]>
+				</xp:this.rendered>
+				
+				<xp:button id="button1" value="Save">	
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xe:moveTo direction="Right to Left"
+									forceFullRefresh="true" saveDocument="true"
+									targetPage="#{javascript:sessionScope.mobileFrom || 'home'}"
+									transitionType="slide">
+								</xe:moveTo>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:djxmHeading>
+
+	<xp:this.resources>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+
+	<xp:this.afterPageLoad><![CDATA[#{javascript://
+		if(param.documentId === null) {
+			getComponent('subjectField').setValue('');
+		}
+	}]]></xp:this.afterPageLoad>
+
+	<xe:formTable id="formTable1">
+		<xe:formRow label="Subject:">
+			<xp:inputText required="true" id="subjectField"
+				value="#{newResponseDoc.Subject}"
+				disableClientSideValidation="true">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow label="Content:">
+			<xp:inputTextarea id="documentBody" required="true"
+				value="#{newResponseDoc.Body}"
+				styleClass="mblReplyBody" rows="8"
+				htmlFilterIn="acf" htmlFilter="acf"
+				disableClientSideValidation="true">
+			</xp:inputTextarea>
+		</xe:formRow>
+	</xe:formTable>
+
+</xp:view>

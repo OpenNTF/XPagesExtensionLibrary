@@ -1,0 +1,7 @@
+Relational JUnit results, running against Notes 9.0.1
+and the Notes JVM
+Test ran 2014-05-30 12:25
+Lines in file: 8
+
+~ RelationalTestSuite
+xsp.extlib.relational.test.RelationalTestSuite

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<!-- 					
+ -->
+	<xe:widgetContainer id="widgetContainer1" titleBarText="Widget #13" type="standard" collapsible="true">
+		This widget is collapsible and initially open
+					</xe:widgetContainer>
+ 	<xe:widgetContainer id="widgetContainer2" titleBarText="Widget #13" type="standard" collapsible="true" initClosed="true">
+		This widget is collapsible and initially closed
+					</xe:widgetContainer>
+	<xp:section id="section1" header="header header">AAA</xp:section>
+ 	
+</xp:view>

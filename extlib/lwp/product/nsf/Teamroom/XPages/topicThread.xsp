@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:redirect>
+	    <xe:this.rules>
+			<xe:redirectRule type="phone"  url="mobile.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectRule>
+			<xe:redirectRule type="tablet"  url="mobile.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectRule>
+		</xe:this.rules>
+	</xe:redirect>
+	
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.DateTextBox"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.TimeTextBox"></xp:dojoModule>
+	</xp:this.resources>
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		// initialize some variables based on the documentId URL parameter
+		requestScope.isDocumentIdGood = false;
+		requestScope.rootAncestorUNID = null;
+		
+		// isDocumentIdGood
+		var doc;
+		if( param.documentId || param.parentId && param.action == 'newDocument'){
+			viewScope.documentId = param.documentId ? param.documentId : param.parentId;
+		}
+		if( viewScope.documentId ){
+			try{
+				doc = database.getDocumentByUNID(viewScope.documentId);
+				var form = doc.getItemValueString('form');
+				if( doc && form ){ // empty form not a good sign
+					// MWD - take this opportunity to find if we have an event 
+					viewScope.isEvent = form == "Event";
+					requestScope.isDocumentIdGood = true;
+				} // else empty document
+			}catch(e){
+				// bad documentId or deleted document
+				// add the error in the next line
+			}
+			if( !requestScope.isDocumentIdGood ){
+				// problem_opening_doc_with_id=Problem accessing the document with ID "{0}"
+				var msgString = strings.problem_opening_doc_with_id;
+				msgString = I18n.format(msgString, viewScope.documentId);
+				var msgObj = new javax.faces.application.FacesMessage(
+					javax.faces.application.FacesMessage.SEVERITY_ERROR, msgString, msgString);
+				facesContext.addMessage(null, msgObj);
+			}
+		}
+		
+		// rootAncestorUNID
+		if( isDocumentIdGood ){
+			var parentUNID = doc.getParentDocumentUNID();
+			if( parentUNID ){
+				var mainUNID;
+				
+				for(var ancestorUNID = parentUNID; ancestorUNID; ){
+					mainUNID = ancestorUNID;
+					try{
+						var ancestorDoc = database.getDocumentByUNID(ancestorUNID);
+						ancestorUNID = ancestorDoc.getParentDocumentUNID()
+					}catch(e){
+						// parent has been deleted or some similar problem
+						{
+							var msgString = strings.problem_finding_main_document;
+							msgString = I18n.format(msgString, ancestorUNID);
+							var msgObj = new javax.faces.application.FacesMessage(
+								javax.faces.application.FacesMessage.SEVERITY_ERROR, msgString, msgString);
+							facesContext.addMessage(null, msgObj);
+						}
+						mainUNID = null;
+						break;
+					}
+				} 
+				requestScope.rootAncestorUNID = mainUNID;
+			}
+		}
+		
+		// previousXPage
+		var historyUrl = context.getHistoryUrl(1);
+		// find the last historyUrl outside of the topicThread page
+		// (probably home or allDocuments, or null if the user bookmarked this page)
+		if( historyUrl && historyUrl.startsWith('/topicThread.xsp') ){
+			var index = 2;
+			while( historyUrl != null && historyUrl.startsWith('/topicThread.xsp') ){ // non-null
+				historyUrl = context.getHistoryUrl(index++);
+			}
+		}
+		if( !historyUrl || !historyUrl.startsWith('/allDocuments.xsp') 
+							&& !historyUrl.startsWith('/home.xsp') 
+							&& !historyUrl.startsWith('/inactiveDocuments.xsp') 
+							&& !historyUrl.startsWith('/search.xsp') 
+							&& !historyUrl.startsWith('/allDocumentsByTag.xsp') ){
+			// must be one of the 4 supported pages
+			if( !historyUrl ){
+				historyUrl = sessionScope.topicThreadPreviousXPage;
+			}else{
+				historyUrl = null;
+			}
+			if( !historyUrl ){
+				historyUrl = "/allDocuments.xsp";
+			}
+		}
+		sessionScope.topicThreadPreviousXPage = historyUrl;
+		
+	}]]></xp:this.beforePageLoad>
+	<xp:this.afterPageLoad><![CDATA[#{javascript:if (viewScope.isEvent) {
+	// an event is being opened (can get here from calendar)
+	// need to redirect to the events page - ref EGLN8BJTM7
+	var redirectURL = "events.xsp" + "?documentId=" + param.documentId + "&action=" + param.action;
+	//print("context.redirectToPage: " +  redirectURL); 
+	context.redirectToPage(redirectURL);
+}
+}]]></xp:this.afterPageLoad>
+	<xc:layout id="L">
+		<xc:this.navigationPath><![CDATA[${javascript://
+			if( sessionScope.topicThreadPreviousXPage.startsWith('/home.xsp') ){
+				return '/home';
+			}
+			if( sessionScope.topicThreadPreviousXPage.startsWith('/inactiveDocuments.xsp') ){
+				return '/inactiveDocuments';
+			}
+			return '/allDocuments';
+		}]]></xc:this.navigationPath>
+		<div><!-- div to help the design-time visualization -->
+			<xp:panel>
+				<xe:listInline>
+					<xp:link escape="true" id="backLink">
+						<xp:this.value><![CDATA[#{javascript:
+							viewStateBean.restoreState = true;
+							if(null != sessionScope.webFrom)
+							{
+								return sessionScope.webFrom;
+							}
+							else
+							{
+								return "/allDocuments.xsp";
+							}
+						}]]></xp:this.value>
+						<xp:this.text><![CDATA[#{javascript:
+							if(null != sessionScope.webFrom)
+							{
+								text = sessionScope.webFromName;
+							}
+							else
+							{
+								text = strings.getString("all.documents");
+							}
+							return I18n.format(strings.getString("back.to"), text);
+						}]]></xp:this.text>
+					</xp:link>
+					<xp:link loaded="${javascript: requestScope.rootAncestorUNID? true : false }" 
+						text="Show Entire Thread" id="link1"
+						value="/topicThread.xsp">
+						<xp:this.parameters>
+							<xp:parameter name="documentId"
+								value="${javascript:requestScope.rootAncestorUNID}">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+				</xe:listInline>
+			</xp:panel>
+			<xp:panel loaded="${javascript: ! requestScope.isDocumentIdGood}">
+						<xp:br />
+						<xp:label id="label1" value="No topic selected to view" />
+						<!-- if viewScope.documentId is invalid, display the error -->
+						<xp:messages id="messages2"></xp:messages>
+			</xp:panel>
+			<xp:panel loaded="${javascript: requestScope.isDocumentIdGood}">
+				<xc:topicThreadForum id="forumCC"></xc:topicThreadForum>
+			</xp:panel>
+		</div>
+	</xc:layout>
+</xp:view>

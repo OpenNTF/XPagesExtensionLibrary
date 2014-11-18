@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.resources>
+		<xp:bundle src="/strings.properties" var="res"></xp:bundle>
+		<xp:script src="/xpDocLinks.js" clientSide="true"></xp:script>
+		<xp:script src="/xpServerSide.jss" clientSide="false"></xp:script>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+		<xp:script src="/xpCGIVariables.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+	
+	<xe:applicationLayout id="oneUILayout1">
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				legalText="(c) Copyright IBM Corporation 2011"
+				navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="/allDocuments.xsp" footer="false"
+				banner="true">
+				<xe:this.searchBar>
+					<xe:appSearchBar pageName="/allDocuments.xsp"
+						inactiveText="Search..." optionsParam="searchValue"
+						queryParam="searchValue"
+						rendered="#{javascript:database.isFTIndexed()}"
+						inputTitle="Enter a search value">
+					</xe:appSearchBar>
+				</xe:this.searchBar>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode>
+						<xe:this.label>
+							<![CDATA[#{javascript:I18n.format(res.getString("welcome.x"), userBean.displayName)}]]>
+						</xe:this.label>
+					</xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+					<xe:pageTreeNode label="My Profile" page="/authorProfile.xsp"></xe:pageTreeNode>
+				</xe:this.bannerUtilityLinks>
+				<xe:this.placeBarName><![CDATA[${javascript:database.getTitle()}]]></xe:this.placeBarName>
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+		<xe:this.facets>
+			<xp:div xp:key="LeftColumn">
+				<xc:viewMenu id="viewMenu"></xc:viewMenu>
+				<xp:panel styleClass="layoutPanel">
+					<xp:section id="tagCloudSection"
+						styleClass="layoutSection" role="filter" header="Tags">
+						<xe:tagCloud alternateText="{0} documents" id="tagCloud"
+							sliderVisible="true"
+							rendererType="com.ibm.xsp.extlib.OneUITagCloud">
+							<xe:this.cloudData>
+								<xe:dominoViewCloudData cacheMode="auto"
+									viewName="xpCategoryCloud" cacheRefreshInterval="120"
+									maxTagLimit="50" linkTargetPage="/byTag.xsp"
+									linkRequestParam="categoryFilter" sortTags="alphabet"
+									tagThreshold="5">
+								</xe:dominoViewCloudData>
+							</xe:this.cloudData>
+						</xe:tagCloud>
+					</xp:section>
+					<xp:br></xp:br>
+					<xp:section id="authorCloudSection"
+						styleClass="layoutSection" role="filter" header="Authors">
+						<xe:tagCloud alternateText="{0} documents" id="authorCloud"
+							sliderVisible="true"
+							rendererType="com.ibm.xsp.extlib.OneUITagCloud">
+							<xe:this.cloudData>
+								<xe:dominoViewCloudData cacheMode="auto"
+									viewName="xpByAuthor" cacheRefreshInterval="120" maxTagLimit="30"
+									linkTargetPage="/authorProfile.xsp"
+									linkRequestParam="lookupName" sortTags="alphabet">
+								</xe:dominoViewCloudData>
+							</xe:this.cloudData>
+						</xe:tagCloud>
+					</xp:section>
+				</xp:panel>
+				<xp:callback id="leftColumnFacetEx" facetName="LeftColumn"></xp:callback>
+			</xp:div>
+			<xp:callback id="rightColumnFacetEx" xp:key="RightColumn"
+				facetName="RightColumn">
+			</xp:callback>
+		</xe:this.facets>
+		<xp:callback id="middleColumnFacetEx" xp:key="MiddleColumn"></xp:callback>
+	</xe:applicationLayout>
+	<xp:div styleClass="ie6Shim">		
+	</xp:div>	
+	<script>
+	//Place shim inside .lotusMain
+	if(dojo.isIE &lt;= 6){
+		dojo.addOnLoad(function(){
+			var shim = dojo.query('.ie6Shim');
+			var main = dojo.query('.lotusMain')[0].appendChild(shim[0]);
+		});
+	}
+	</script>
+</xp:view>

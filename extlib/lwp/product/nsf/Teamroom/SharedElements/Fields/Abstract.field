@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='2be' unid='A29E5981091B9E35802577C2003DF923' sequence='7'>
+<created><datetime dst='true'>20101020T121654,75+01</datetime></created>
+<modified><datetime>20120207T095547,17+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122246,47+01</datetime></revised>
+<lastaccessed><datetime>20120207T095547,17+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095547,17+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121654,77+01</datetime><datetime
+ dst='true'>20110830T205046,31-04</datetime><datetime dst='true'>20111006T160522,60+01</datetime><datetime
+ dst='true'>20111014T083942,32+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+</rawitemdata></item>
+<item name='$TITLE'><text>Abstract</text></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion' sign='true'><text>7</text></item>
+<item name='Abstract' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>Abstract</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAArdBgAAiv/+/1AA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAALD/FAAAAAgAAAAAAAAAAAAAAAAAiv9QAogBAAUAMAIAAAAAAAAC
+AQAACiQCAAAAAAAACAAAAAAAJAIBABoACQBfZWxsaXBzaXMAAQAEACAuLi4DAAcADAAFAAkxVDJT
+AAEAGgAHAF9sZW5ndGgAAAAAAAAAAMByQAMABwAOAAcACTBSMVQyUwABABgABgBfcmFuZ2UAAAAA
+AAAAACRAAwAHAA4ABwAJMFIxVDJTAAEANgAJAF9hYnN0cmFjdAACAEIAAAAAAAAABQAHAF9sZW5n
+dGgAAQAAAAEABABCb2R53gQDAAcAFgAPAAkwUlIxVDJTNlM4UzEwUwAHAEIAPAB0byBtYWtlIHN1
+cmUgd2UgZG9uJ3QgdHJ1bmNhdGUvY2xpcCBpbiB0aGUgbWlkZGxlIG9mIGEgd29yZCwHAAwABgAJ
+MFJSMVMHADwANgBnZXQgdGhlIHRleHQgdXAgdG8gdGhlIGxhc3Qgd29yZCBiZWZvcmUgdGhlIGxh
+c3Qgc3BhY2UHAAwABQAJMFIxUwAHACAAGgBhbmQgYXBwZW5kIGVsbGlwc2lzICcgLi4uJwcADAAF
+AAkwUjFTAAAAdgAFAAkAX2Fic3RyYWN0AKYBBQAHAF9sZW5ndGgABQAGAF9yYW5nZSMCBAANAq8A
+QgAsAAUACQBfYWJzdHJhY3QAAQABACAAoQIFAAkAX2VsbGlwc2lzACICrgAWAAUACQBfYWJzdHJh
+Y3QArgAEALUDAwAHACoAIwAJMFJSMlQ2UzdTOVMxMFMxM1JUMTdTMTlTMjBTMjJSVDIzUgBBYnN0
+cmFjdN4GAACK/4X/CAABAAAK
+</rawitemdata></item></note>
+

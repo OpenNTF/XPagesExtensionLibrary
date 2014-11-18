@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" viewState="nostate"
+	rendered="false">
+	<xp:this.afterPageLoad>
+		<![CDATA[#{javascript:
+			var uAgent = context.getUserAgent().getUserAgent();
+			if((uAgent.match("iPhone") !== null || param.platform=="iphone") ||
+			   (uAgent.match("Android") !== null || param.platform=="android") ||
+			    uAgent.match("iPad") !== null){
+				context.redirectToPage("/mobile.xsp", true);
+			}else{
+				context.redirectToPage("/home.xsp", true);	
+			}
+		}]]>
+	</xp:this.afterPageLoad>
+</xp:view>

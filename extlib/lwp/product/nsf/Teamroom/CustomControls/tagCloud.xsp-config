@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>tagCloud</component-type>
+    <composite-name>tagCloud</composite-name>
+    <composite-file>/tagCloud.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&#xd;
+	xmlns:xe="http://www.ibm.com/xsp/coreex"&gt;&#xd;
+	&lt;xp:section id="tagCloudSection" header="Top 25 categories"&gt;&#xd;
+		tag tag tag tag tag tag&#xd;
+	&lt;/xp:section&gt;&#xd;
+&lt;/xp:view&gt;</render-markup>
+      </designer-extension>
+    </composite-extension>
+  </composite-component>
+</faces-config>

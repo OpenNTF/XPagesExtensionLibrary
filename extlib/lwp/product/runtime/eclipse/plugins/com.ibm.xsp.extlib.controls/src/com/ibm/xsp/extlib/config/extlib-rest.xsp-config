@@ -1,0 +1,405 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  	<faces-config-extension>
+    	<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    	<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>rest</control-subpackage-name>
+        </designer-extension>
+  	</faces-config-extension>
+	
+	
+  
+	<group>
+        
+		<group-type>com.ibm.xsp.extlib.rest.json.options</group-type>
+        <property>
+        
+            <description>%property.compact.group.rest_json.descr%</description>
+            <display-name>%property.compact.group.rest_json.name%</display-name>
+            <property-name>compact</property-name>
+            <property-class>boolean</property-class>
+          	<property-extension>
+            	<designer-extension>
+                	
+            	</designer-extension>
+          	</property-extension>
+        </property>
+    	<property>
+    	     
+      		<description>%property.contentType.group.rest_json.descr%</description>
+      		<display-name>%property.contentType.group.rest_json.name%</display-name>
+      		<property-name>contentType</property-name>
+      		<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                	
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        application/json
+                        text/json
+                        text/plain
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+    	</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+	<group>
+        
+		<group-type>com.ibm.xsp.extlib.rest.xml.options</group-type>
+        <property>
+         
+            <description>%property.compact.group.rest_xml.descr%</description>
+            <display-name>%property.compact.group.rest_xml.name%</display-name>
+            <property-name>compact</property-name>
+            <property-class>boolean</property-class>
+          	<property-extension>
+            	<designer-extension>
+            	</designer-extension>
+          	</property-extension>
+        </property>
+    	<property>
+    	   
+      		<description>%property.contentType.group.rest_json.descr%</description>
+      		<display-name>%property.contentType.group.rest_json.name%</display-name>
+      		<property-name>contentType</property-name>
+      		<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        application/xml
+                        text/xml
+                        text/plain
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+    	</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+	
+	
+  
+	<component>
+	
+		<description>%component.restService.descr%</description>
+		<display-name>%component.restService.name%</display-name>
+		<component-type>com.ibm.xsp.extlib.rest.RestService</component-type>
+		<component-class>com.ibm.xsp.extlib.component.rest.UIRestService</component-class>
+
+  		<property>
+  		    
+  		    
+			<description>%property.pathInfo.descr%</description>
+			<display-name>%property.pathInfo.name%</display-name>
+			<property-name>pathInfo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        <property>
+            
+          <description>%property.service.descr%</description>
+          <display-name>%property.service.name%</display-name>
+          <property-name>service</property-name>
+          <property-class>com.ibm.xsp.extlib.component.rest.IRestService</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+  		<property>
+            
+			<description>%property.jsId.descr%</description>
+			<display-name>%property.jsId.name%</display-name>
+			<property-name>jsId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    
+                    <tags>
+                        not-control-id-reference
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+
+        <property>
+            
+            <description>%property.ignoreRequestParams.descr%</description>
+            <display-name>%property.ignoreRequestParams.name%</display-name>
+            <property-name>ignoreRequestParams</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+             
+            <description>%property.preventDojoStore.descr%</description>
+            <display-name>%property.preventDojoStore.name%</display-name>
+            <property-name>preventDojoStore</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.state.descr%</description>
+            <display-name>%property.state.name%</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+		<component-extension>
+		      
+			<component-family>com.ibm.xsp.extlib.RestService</component-family>
+			<renderer-type>com.ibm.xsp.extlib.rest.RestService</renderer-type>
+			<tag-name>restService</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+                <category>Data Access</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+	&lt;xp:image url="/extlib/designer/markup/RestService.png" id="image1"&gt;&lt;/xp:image&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+  
+    <complex-type>
+        <description>%complex-type.com.ibm.xsp.extlib.component.rest.IRestService.descr%</description>
+        <display-name>%complex-type.com.ibm.xsp.extlib.component.rest.IRestService.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rest.IRestService</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rest.IRestService</complex-class>
+    </complex-type>
+    
+    <group>
+         
+        <group-type>com.ibm.xsp.extlib.group.FacesDojoComponent.complex</group-type>
+        <property>
+            
+            <description>%/com.ibm.xsp.group.FacesDojoComponent/dojoType/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent/dojoType/name%</display-name>
+            <property-name>dojoType</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+        <property>
+            <description>%/com.ibm.xsp.group.FacesDojoComponent/dojoAttributes/descr%</description>
+            <display-name>%/com.ibm.xsp.group.FacesDojoComponent/dojoAttributes/name%</display-name>
+            <property-name>dojoAttributes</property-name>
+            <property-class>java.util.ArrayList</property-class>
+            <property-extension>
+                
+                <collection-property>true</collection-property>
+                
+                <property-item-class>com.ibm.xsp.dojo.DojoAttribute</property-item-class>
+                <property-add-method>addDojoAttribute</property-add-method>
+                
+                <allow-run-time-binding>false</allow-run-time-binding>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+	<complex-type>
+	   
+	   
+    	<description>%complex-type.com.ibm.xsp.extlib.component.rest.AbstractRestService.descr%</description>
+    	<display-name>%complex-type.com.ibm.xsp.extlib.component.rest.AbstractRestService.name%</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.rest.AbstractRestService</complex-class>
+    	<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent.complex</group-type-ref>
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.rest.IRestService</base-complex-id>
+    		            <designer-extension>
+                <tags>todo</tags>
+            </designer-extension>
+    	</complex-extension>
+  	</complex-type>
+
+
+    <complex-type>
+        <description>%complex-type.customRestService.descr%</description>
+        <display-name>%complex-type.customRestService.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.rest.CustomService</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.rest.CustomService</complex-class>
+
+        <property>
+            
+            <description>%property.doGet.descr%</description>
+            
+            <display-name>%property.doGet.name%</display-name>
+            <property-name>doGet</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.doPost.descr%</description>
+            
+            <display-name>%property.doPost.name%</display-name>
+            <property-name>doPost</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.doPut.descr%</description>
+            
+            <display-name>%property.doPut.name%</display-name>
+            <property-name>doPut</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.doDelete.descr%</description>
+            
+            <display-name>%property.doDelete.name%</display-name>
+            <property-name>doDelete</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.serviceBean.descr%</description>
+            <display-name>%property.serviceBean.name%</display-name>
+            <property-name>serviceBean</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+            </property-extension>
+        </property>
+        <property>
+         <description>%property.contentType.complex-type.customRestService.descr%</description>
+         <display-name>%property.contentType.complex-type.customRestService.name%</display-name>
+         <property-name>contentType</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+                 <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                 <editor-parameter>
+                     application/json
+                     application/octet-stream
+                     text/xml
+                     text/plain
+                     image/gif
+                     image/jpeg
+                 </editor-parameter>
+             </designer-extension>
+         </property-extension>
+     </property>
+        <property>
+         <description>%property.contentDisposition.descr%</description>
+         <display-name>%property.contentDisposition.name%</display-name>
+         <property-name>contentDisposition</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+             </designer-extension>
+         </property-extension>
+     </property>
+        <property>
+            
+            <description>%property.requestVar.descr%</description>
+            <display-name>%property.requestVar.name%</display-name>
+            <property-name>requestVar</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+         <description>%property.requestContentType.descr%</description>
+         <display-name>%property.requestContentType.name%</display-name>
+         <property-name>requestContentType</property-name>
+         <property-class>java.lang.String</property-class>
+         <property-extension>
+             <designer-extension>
+                 <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                 <editor-parameter>
+                     application/json
+                     text/xml
+                     text/plain
+                 </editor-parameter>
+             </designer-extension>
+         </property-extension>
+     </property>
+
+        <complex-extension>
+            <tag-name>customRestService</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</base-complex-id>
+            <since>8.5.32001</since>
+        </complex-extension>
+    </complex-type>
+
+</faces-config>

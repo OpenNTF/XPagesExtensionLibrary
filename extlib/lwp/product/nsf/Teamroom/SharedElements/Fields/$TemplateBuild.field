@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='182' unid='B99E3A7741DABFB4802577C2003DF952' sequence='10'>
+<created><datetime dst='true'>20101020T121655,22+01</datetime></created>
+<modified><datetime>20120207T095544,83+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122302,42+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,83+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,83+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20110120T102223,52-05</datetime><datetime dst='true'>20110908T092713,17-04</datetime><datetime
+ dst='true'>20111006T160543,13+01</datetime><datetime dst='true'>20111014T083958,37+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE'><text>$TemplateBuild</text></item>
+<item name='$Fields'><text>$TemplateBuild</text></item>
+<item name='$Flags'><text/></item>
+<item name='$INFO' sign='true'><text>$TemplateBuild</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1IAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAgwQBAIX/CAAAAAAA3QYAAIr/iv8yAIoAAAUAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAJFRlbXBsYXRlQnVpbGTeBgAAiv+F/wgAAAAAAA==
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TemplateBuild' sign='true'><text>R8</text></item>
+<item name='$TemplateBuildName' sign='true'><text>TeamRoom 8.5.2</text></item>
+<item name='$TemplateBuildDate' sign='true'><datetime dst='true'>20110908T092713,00-04</datetime></item>
+<item name='$TemplateBuildTool' sign='true'><text>CICO</text></item></note>
+

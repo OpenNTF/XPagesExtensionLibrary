@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iCal4j library
+Bundle-SymbolicName: net.fortuna.ical4j;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .,
+ lib/ical4j-1.0-beta4.jar
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.apache.commons.codec;bundle-version="1.3.0",
+ org.apache.commons.lang;bundle-version="2.2.0",
+ com.ibm.designer.lib.jsf
+Export-Package: net.fortuna.ical4j.data,
+ net.fortuna.ical4j.filter,
+ net.fortuna.ical4j.model,
+ net.fortuna.ical4j.model.component,
+ net.fortuna.ical4j.model.parameter,
+ net.fortuna.ical4j.model.property,
+ net.fortuna.ical4j.transform,
+ net.fortuna.ical4j.util
+Bundle-Vendor: IBM

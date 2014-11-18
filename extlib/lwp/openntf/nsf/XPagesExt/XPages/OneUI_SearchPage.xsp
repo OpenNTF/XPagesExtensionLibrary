@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/OneUI/SearchPage">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI" ></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This the result of the search page"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="Selected Option:" id="label2"></xp:label>
+			<xp:inputText id="inputText2" value="#{param.option}"></xp:inputText>
+			<xp:br></xp:br>
+			<xp:label value="Search String:" id="label1"></xp:label>
+			<xp:inputText id="inputText1" value="#{param.search}"></xp:inputText>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:link escape="true" text="Mark reviewed by me" id="linkMarkReviewedByMe">
+		<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:
+// Do something
+
+}]]></xp:this.action>
+
+		</xp:eventHandler>
+
+	</xp:link>
+</xp:view>

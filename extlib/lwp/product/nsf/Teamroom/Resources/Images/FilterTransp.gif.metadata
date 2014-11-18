@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2ee" sequence="4" unid="C274EF738CB73EE88025790A002B74D9">
+<created><datetime dst="true">20110913T085439,61+01</datetime></created>
+<modified><datetime>20120207T095547,52+00</datetime></modified>
+<revised><datetime dst="true">20111026T122248,24+01</datetime></revised>
+<lastaccessed><datetime>20120207T095547,52+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095547,52+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110913T085440,84+01</datetime><datetime dst="true">20111006T160524,36+01</datetime><datetime dst="true">20111014T083944,09+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>FilterTransp.gif</text></item>
+<item name="$Flags"><text>34CiQP</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+
+
+<item name="$MimeType" sign="true"><text>image/gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20110912T132321,24+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>FilterTransp.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item></note>

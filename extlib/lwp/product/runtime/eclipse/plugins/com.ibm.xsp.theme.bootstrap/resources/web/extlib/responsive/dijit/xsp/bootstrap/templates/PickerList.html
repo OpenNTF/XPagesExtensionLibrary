@@ -1,0 +1,15 @@
+<div class="pickerlist">
+	<style>
+		.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
+	</style>
+	<div style="padding:10px">
+		<div dojoAttachPoint="bodyWrapper" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" 
+			dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
+			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerList_Cancel}</button>
+		<button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerList_OK}</button>
+	</div>
+</div>

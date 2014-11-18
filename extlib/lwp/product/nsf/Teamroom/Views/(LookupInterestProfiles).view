@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='3b6' unid='A13569D408DCBEC7802577C2003DF6A6' sequence='9'>
+<created><datetime dst='true'>20101020T121648,38+01</datetime></created>
+<modified><datetime>20120207T095549,35+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122302,84+01</datetime></revised>
+<lastaccessed><datetime>20120207T095549,35+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095549,35+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101029T143022,94+01</datetime><datetime
+ dst='true'>20110830T205053,77-04</datetime><datetime dst='true'>20111006T160543,55+01</datetime><datetime
+ dst='true'>20111014T083958,79+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE' sign='true'><text>(LookupInterestProfiles)|LookupInterestProfiles</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
++AEHAGwAZgBGb3Igd2ViIGxvb2t1cHMsIHdlIG11c3QgcmVwbGFjZSB0aGUgZm9yd2FyZCBzbGFz
+aCBpbiBoaWVyYXJjaGljYWwgbmFtZXMgd2l0aCBhIG5vbi1yZXNlcnZlZCBjaGFyYWN0ZXIHAAoA
+AwAJMVMAAQA4ABEAQWJick5hbWUA5XRGAH1mJQBoAgAFAAAAAAAAAAUADgBGdWxsUGVyc29uTmFt
+ZbQCAwAHABAACQAJMFIxUzJTNlMAAQA+ABIAcnBsU0xOYW1lAOZ0RgB9ZiUABQARAEFiYnJuYW1l
+AOV0RgB9ZiUA8QEAAQAvAAEAAgBfX4QDAwAHABIACwAJMFIxUzJTNlM4UwABAD4AEgBycGxzcE5h
+bWUA53RGAH1mJQAFABIAcnBsU0xOYW1lAOZ0RgB9ZiUAAQABACAAAQABAF8AhAMDAAcADgAHAAkw
+UjFTMlMAAgAiAAMAJDQ5AAUAEgBycGxzcE5hbWUA53RGAH1mJQADAAcACgADAAkwUgACABAAAwAk
+MzIAkABWAQMABwAMAAUACTBTMEUABQAeABkAAwADAAMACQAkNDkkMzIkQ29uZmxpY3QABAAEAAAA
+JAAFAAQAZm9ybQEAEABJbnRlcmVzdCBQcm9maWxlCgIDAAcADgAIAAlMMVMyUzNT
+</formula></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+EAABAABEAGYAAAADACQ0OQ==
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQACADIAjggAAFZDAQADAAAAiAEAALAAAQABCQAAAAAAAAAAAAICAAAAVkMAAAMAAAAeAAAA2gAB
+AAEJAAAAAAAAAAAAAgIAAAAkNDmIAQcAbABmAEZvciB3ZWIgbG9va3Vwcywgd2UgbXVzdCByZXBs
+YWNlIHRoZSBmb3J3YXJkIHNsYXNoIGluIGhpZXJhcmNoaWNhbCBuYW1lcyB3aXRoIGEgbm9uLXJl
+c2VydmVkIGNoYXJhY3RlcgcACgADAAkxUwABADgAEQBBYmJyTmFtZQDldEYAfWYlAGgCAAUAAAAA
+AAAABQAOAEZ1bGxQZXJzb25OYW1ltAIDAAcAEAAJAAkwUjFTMlM2UwABAD4AEgBycGxTTE5hbWUA
+5nRGAH1mJQAFABEAQWJicm5hbWUA5XRGAH1mJQDxAQABAC8AAQACAF9fhAMDAAcAEgALAAkwUjFT
+MlM2UzhTAAEAPgASAHJwbHNwTmFtZQDndEYAfWYlAAUAEgBycGxTTE5hbWUA5nRGAH1mJQABAAEA
+IAABAAEAXwCEAwMABwAOAAcACTBSMVMyUwACACIAAwAkNDkABQASAHJwbHNwTmFtZQDndEYAfWYl
+AAMABwAKAAMACTBSACQzMh4AAgAQAAMAJDMyAJAAVgEDAAcADAAFAAkwUzBFACYAAQAAAAEBAAkB
+AAgKAQEECgAAPwCtKwIAAQABAAAAAAAAAAAAV0MBAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+//8AAAAAAAAAAAAAAAAAAFdDAQAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAA
+AAAAAABCAAAAAAABAP///wABAO/v7wABAAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRwPAAAAAQAAAAAAAAAAAAAAAAAAAAAACAAAAHn/bAABAMDAwAABAAAAAAAAAAAAAAABAMDAwAAA
+AB8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAL7/JgAAAAUAAACdAQAACwAAAAAAAABDYXRlZ29yaV96ZW8B
+AE58vv8oAAAABQAAAJ0BAAAOAAAAAAAAAF9FZGl0IERvY3VtZW50AgACCr7/KAAAAAUAAACcAQAA
+DgAAAAAAAABTZW5kIERvY3VfbWVudAMAAwq+/yIAAAAFAAAAnQEAAAgAAAAAAAAAX0ZvcndhcmQE
+AAQKvv9YAAAAAQAAAJ0BAAATAAAAAAAAAEZvcndhcmQgYXMgQm9va21hcmsALgAAACAAAgDoAwAA
+AAAAAKwAAQAIAEJvb2ttYXJr7QMDAAcADAAFAAk0UzZTAF//EAACAAEABwAAAAAAAAC+/ywAAAAF
+AAAAnQEAABIAAAAAAAAAX01vdmUgdG8gRm9sZGVyLi4uBgA9fL7/MAAAAAUAAACdAQAAFgAAAAAA
+AABfUmVtb3ZlIGZyb20gRm9sZGVyLi4uBwA+fA==
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

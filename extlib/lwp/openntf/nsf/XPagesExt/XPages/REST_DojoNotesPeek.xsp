@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/DojoNotesPeek">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			Domino Data Rest Service
+			<xp:br></xp:br>
+			<xp:br></xp:br>Dojo NotesPeek using JSON Rest
+			<xp:br></xp:br><xp:br></xp:br>This sample application is designed to use the 
+			Domino Data Rest Service in a pure Dojo Application that allows the user to 
+			navigate databases, views and documents. The application is contained completely 
+			in one HTML file that can be opened with the button below.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button id="button1" value="Dojo NotesPeek">
+
+			<xp:eventHandler event="onclick" submit="false">
+				<xp:this.script><![CDATA[window.open('#{javascript:@FullUrl("dojoNotesPeek.html")}','_blank')
+]]></xp:this.script>
+			</xp:eventHandler></xp:button>
+			<xp:br></xp:br>
+
+			<xp:br></xp:br></xp:panel>
+	</xc:OneUILayout>
+</xp:view>

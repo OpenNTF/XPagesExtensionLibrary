@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/ListView2">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+			<xp:label value="Domino virtual list displaying the content of a view"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:tabbedPanel id="tabbedPanel1">
+				<xp:this.selectedTab>
+				    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+				</xp:this.selectedTab>
+				<xp:tabPanel label="Narrow View" id="tabPanel3">
+					<xe:restService id="restService3">
+						<xe:this.service>
+							<xe:viewJsonService defaultColumns="true"
+								viewName="AllTypes">
+							</xe:viewJsonService>
+						</xe:this.service>
+					</xe:restService>
+
+					<xe:listView id="listView3"
+						style="height:250.0px;width:600px" storeComponentId="restService3"
+						canBeNarrowMode="true">
+
+						<xe:listViewColumn id="listViewColumn4"
+							columnName="fldIcon" columnTitle="fldIcon" width="10" icon="true"
+							beginWrapUnder="true" narrowDisplay="top" sequenceNumber="1">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn5"
+							columnName="fldText" columnTitle="FldText" width="10"
+							narrowDisplay="top" sequenceNumber="2">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn6"
+							columnName="fldNumber" columnTitle="FldNumber" width="10"
+							narrowDisplay="top" sequenceNumber="3">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn7"
+							columnName="fldDate" columnTitle="FldDate" width="10"
+							narrowDisplay="top" sequenceNumber="4">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn8"
+							columnName="fldTime" columnTitle="FldTime" width="10"
+							narrowDisplay="top" sequenceNumber="5">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn9"
+							columnName="fldDateTime" columnTitle="FldDateTime" width="10"
+							narrowDisplay="top" sequenceNumber="6">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn10"
+							columnName="fldDateTimeRange" columnTitle="FldDateTimeRange" width="10"
+							narrowDisplay="top" sequenceNumber="7">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn11"
+							columnName="fldDialogList" columnTitle="FldDialogList" width="10"
+							narrowDisplay="top" sequenceNumber="8">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn12"
+							columnName="fldText2" columnTitle="FldText2" width="10"
+							narrowDisplay="wrap" sequenceNumber="1">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn13"
+							columnName="fldNumber2" columnTitle="FldNumber2" width="10"
+							narrowDisplay="wrap" sequenceNumber="11">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn14"
+							columnName="fldTime2" columnTitle="FldTime2" width="10"
+							narrowDisplay="wrap" sequenceNumber="12">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn15"
+							columnName="fldDate2" columnTitle="FldDate2" width="10"
+							narrowDisplay="wrap" sequenceNumber="13">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn16"
+							columnName="fldDateTime2" columnTitle="FldDateTime2" width="10"
+							narrowDisplay="wrap" sequenceNumber="14">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn17"
+							columnName="fldDateTimeRange2" columnTitle="FldDateTimeRange2"
+							width="10" narrowDisplay="wrap" sequenceNumber="15">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn18"
+							columnName="fldDialogList2" columnTitle="FldDialogList2" width="10"
+							narrowDisplay="wrap" sequenceNumber="16">
+						</xe:listViewColumn>
+					</xe:listView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Custom Event Handler" id="tabPanel1">
+			<xp:label value="Double-click or right-click cells" id="label2" >
+			</xp:label>
+					<xe:restService id="restService2">
+						<xe:this.service>
+							<xe:viewJsonService defaultColumns="true"
+								viewName="AllContacts">
+							</xe:viewJsonService>
+						</xe:this.service>
+					</xe:restService>
+
+					<xe:listView id="listView2"
+						style="height:250.0px;width:350.0px"
+						storeComponentId="restService2" alternateRows="true">
+						<xe:this.onContextMenu><![CDATA[alert('context menu');
+]]></xe:this.onContextMenu>
+						<xe:this.onCellDblClick><![CDATA[ext && ext.cellValue && alert('cell-dblclick value=' + ext.cellValue);
+]]></xe:this.onCellDblClick>
+						<xe:listViewColumn id="listViewColumn1"
+							columnName="FirstName" columnTitle="First Name" width="10">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn2"
+							columnName="LastName" columnTitle="Last Name" width="10">
+						</xe:listViewColumn>
+						<xe:listViewColumn id="listViewColumn3"
+							columnName="City" columnTitle="City" width="8">
+						</xe:listViewColumn>
+					</xe:listView>
+				</xp:tabPanel>
+				<xp:tabPanel label="Sorting" id="tabPanel2">
+			<xp:label value="Press &quot;First Name&quot;, &quot;Last Name&quot; or &quot;City&quot; column" id="label1" >
+			</xp:label>
+					<xp:panel id="listPanel1">
+						<xe:restService id="restService1">
+							<xe:this.service>
+								<xe:viewJsonService defaultColumns="true"
+									viewName="AllContacts">
+								</xe:viewJsonService>
+							</xe:this.service>
+						</xe:restService>
+						<xe:listView id="listView1" style="height:250.0px;width:800.0px"
+							storeComponentId="restService1">
+						</xe:listView>
+					</xp:panel>
+				</xp:tabPanel>
+			</xp:tabbedPanel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

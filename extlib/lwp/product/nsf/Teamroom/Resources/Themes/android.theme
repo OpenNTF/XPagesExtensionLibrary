@@ -1,0 +1,15 @@
+<theme extends="android" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
+		
+	<resources>
+
+		<bundle var="strings" src="/strings.properties"></bundle>
+		<script src="/mobile-server.jss" clientSide="false"></script>
+		<styleSheet href="/mobile.css"></styleSheet>
+		<script src="/mobileTopicThread.jss" clientSide="false"></script>
+
+		<linkResource rel="apple-touch-icon" href="teamroom_57px.png"></linkResource>
+		
+	</resources>
+	
+</theme>

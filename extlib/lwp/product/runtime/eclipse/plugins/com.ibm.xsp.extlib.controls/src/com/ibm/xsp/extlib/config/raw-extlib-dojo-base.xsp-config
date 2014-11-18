@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojo</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+    <!-- Start of Dojo Controls Properties -->
+    <group>
+        <!-- key-suffix: dojo_widgetBase_tooltip -->
+        <group-type>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip</group-type>
+        <property>
+            <!-- key: property.tooltip. -->
+            <description>When the control "title" property is used for a tab label, accordion pane title, etc. this specifies the tooltip to appear when the mouse is hovered over that text.</description>
+            <display-name>Tooltip</display-name>
+            <property-name>tooltip</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <group>
+        <!-- key-suffix: dojo_widgetBase_tooltip -->
+        <group-type>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip.deprecated</group-type>
+        <!-- Same as above only marked as deprecated. -->
+        <property>
+            <!-- key: property.tooltip. -->
+            <description>When the control "title" property is used for a tab label, accordion pane title, etc. this specifies the tooltip to appear when the mouse is hovered over that text.</description>
+            <display-name>Tooltip</display-name>
+            <property-name>tooltip</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- This property is deprecated in mobile controls since 9.0.0,
+                because the tooltip property doesn't exist on mobile controls,
+                and because you can't hover to see a tooltip on touch-screen
+                devices. -->
+                <is-deprecated>true</is-deprecated>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <!-- key-suffix: dojo_widgetBase -->
+        <group-type>com.ibm.xsp.extlib.group.dojo.widgetBase</group-type>
+        <group-type-ref>com.ibm.xsp.group.core</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.i18n</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip</group-type-ref>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <!-- key-suffix: dojo_widget -->
+        <group-type>com.ibm.xsp.extlib.group.dojo.widget.events.prop.onClick</group-type>
+        
+        <property>
+            <description>JavaScript code executed when a pointer control is clicked over this control</description>
+            <display-name>Click Script</display-name>
+            <property-name>onClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <group>
+        <!-- key-suffix: dojo_widget -->
+        <group-type>com.ibm.xsp.extlib.group.dojo.widget</group-type>
+
+        <!--  Properties -->
+        <property>
+            <description>If true, the control can not be draggable.</description>
+            <display-name>Drag Restriction</display-name>
+            <property-name>dragRestriction</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>WAI ARIA provides a collection of accessibility roles which are used to support assistive technologies. Attaching a role gives assistive technologies information about how to handle each UI element or area. In addition to ARIA roles, a set of navigation roles from the XHTML Role Attribute Module are also supported. An element may have a navigation role in addition to an ARIA role.</description>
+            <display-name>WAI ARIA Role</display-name>
+            <property-name>waiRole</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>WAI ARIA provides a collection of accessibility states and properties which are used to support assistive technologies. The state is specified as a state name and value pair. The state is separated from the value using the hyphen (-) character.</description>
+            <display-name>WAI ARIA State</display-name>
+            <property-name>waiState</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <!-- Start of Dojo Controls Events -->
+        <property>
+            <description>JavaScript code executed when this control loses focus</description>
+            <display-name>Focus Off Script</display-name>
+            <property-name>onBlur</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>focus-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is clicked over this control</description>
+            <display-name>Click Script</display-name>
+            <property-name>onClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed to determine whether this control should be closed if requested.</description>
+            <display-name>Close Script</display-name>
+            <property-name>onClose</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>dojo-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when this control becomes the selected pane in a layout container or to indicate the display of a Dialog, Tooltip Dialog or Title Pane.</description>
+            <display-name>Show Script</display-name>
+            <property-name>onShow</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>dojo-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when another control becomes the selected pane in a layout container or to indicate the hiding of a Dialog, Tooltip Dialog or Title Pane.</description>
+            <display-name>Hide Script</display-name>
+            <property-name>onHide</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>dojo-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is double clicked over this control</description>
+            <display-name>Double Click Script</display-name>
+            <property-name>onDblClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when this control receives focus</description>
+            <display-name>Focus On Script</display-name>
+            <property-name>onFocus</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>focus-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a key is pressed down over this control</description>
+            <display-name>Key Down Script</display-name>
+            <property-name>onKeyDown</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>key-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a key is pressed and released over this control.</description>
+            <display-name>Key Press Script</display-name>
+            <property-name>onKeyPress</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>key-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a key is released over this control</description>
+            <display-name>Key Up Script</display-name>
+            <property-name>onKeyUp</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>key-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is pressed down over this control</description>
+            <display-name>Mouse Down Script</display-name>
+            <property-name>onMouseDown</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control enters this control</description>
+            <display-name>Mouse Enter Script</display-name>
+            <property-name>onMouseEnter</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control leaves from this control</description>
+            <display-name>Mouse Leave Script</display-name>
+            <property-name>onMouseLeave</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is moved within this control</description>
+            <display-name>Mouse Move Script</display-name>
+            <property-name>onMouseMove</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is moved away from this control</description>
+            <display-name>Mouse Out Script</display-name>
+            <property-name>onMouseOut</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is moved onto this control</description>
+            <display-name>Mouse Over Script</display-name>
+            <property-name>onMouseOver</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>JavaScript code executed when a pointer control is released over this control</description>
+            <display-name>Mouse Up Script</display-name>
+            <property-name>onMouseUp</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>mouse-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <!-- End of Dojo Controls Events -->
+
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    todo
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    <!-- End of Dojo Controls Properties -->
+
+
+    <!-- Start of Base Dojo Controls -->
+    <component>
+        <description>The base Dojo widget that all widgets inherit from</description>
+        <display-name>Dojo Widget Base</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.WidgetBase</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+        <!-- Note from 9.0.0, deprecating the tooltip property in UIDojoWidgetBase, 
+            while making it still be non-deprecated in UIDojoWidget. -->
+        <group-type-ref>com.ibm.xsp.group.core</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.i18n</group-type-ref>
+        <!-- <group-type-ref>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip</group-type-ref> -->
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip.deprecated</group-type-ref>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.dojo.WidgetBase</component-family>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Inherits from Dojo Widget Base and adds all the Dojo events. Most widgets will inherit from this, except for some of the controls for mobile devices.</description>
+        <display-name>Dojo Widget</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.Widget</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidget</component-class>
+        <!-- Override the base deprecated tooltip property with a non-deprecated tooltip property -->
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widgetBase.tooltip</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widget</group-type-ref>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.dojo.Widget</component-family>
+            <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+        </component-extension>
+    </component>
+
+</faces-config>

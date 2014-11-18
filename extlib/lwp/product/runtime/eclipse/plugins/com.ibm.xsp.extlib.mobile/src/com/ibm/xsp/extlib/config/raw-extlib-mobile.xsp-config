@@ -1,0 +1,1227 @@
+<?xml version="1.0"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2013                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>mobile</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <group>
+    <!-- key-suffix: mobile_transition -->
+    <group-type>com.ibm.xsp.extlib.mobile.transition</group-type>
+    <property>
+      <!-- # "slide", "fade", "flip", and "none" should not be translated.-->
+      <description>A type of animated transition effect. The options are "slide", where the new page moves in from the side to cover the old page, "fade", where the old page fades out while the new page fades in, "flip", where the old page flips over to display the new page as if the new page was printed on the back of the old page, and "none", where the new page appears immediately without any transistion effect. The default value is "slide".</description>
+      <display-name>Transition</display-name>
+      <property-name>transition</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+                    	slide
+                    	fade
+                    	flip
+                    	none
+                    </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>
+                    group-in-control
+                </tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  <group>
+    <group-type>com.ibm.xsp.extlib.group.touch</group-type>
+    <property>
+      <description>Triggered when a user touches this control</description>
+      <display-name>Touch Start</display-name>
+      <property-name>onTouchStart</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Triggered when a user lifts their finger off this control</description>
+      <display-name>Touch End</display-name>
+      <property-name>onTouchEnd</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Triggered when a user drags their finger over this control</description>
+      <display-name>On Touch Move</display-name>
+      <property-name>onTouchMove</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <category>events</category>
+        <subcategory>container-event</subcategory>
+        <tags>
+            group-in-control
+        </tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  
+    <!-- This WidgetBaseEx is the same as WidgetBase in extlib-dojo-base,
+    except that it doesn't have a tooltip property.
+    The tooltip property has been deprecated in mobile
+    controls in 9.0.0. Any new mobile controls should inherit
+    from this base instead of the original base,
+    so that they do not contain a tooltip property.  -->
+    <component>
+        <description>%/com.ibm.xsp.extlib.dojo.WidgetBase/descr%</description>
+        <display-name>%/com.ibm.xsp.extlib.dojo.WidgetBase/name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.i18n</group-type-ref>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.dojo.WidgetBase</component-family>
+        </component-extension>
+    </component>
+  
+  
+  <component>
+    <description>A control that handles layout and configuration for an application composed of multiple Application Page controls, where only one Application Page control is displayed at any time</description>
+    <display-name>Single Page Application</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.SinglePageApp</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIApplication</component-class>
+    <property>
+      <description>The value of the "pageName" property of the Application Page control that should be displayed on page load.</description>
+      <display-name>Selected Page Name</display-name>
+      <property-name>selectedPageName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <!-- Not an XPage name -->
+          <tags>not-xpage-name</tags>
+          <editor>com.ibm.designer.domino.xsp.attrvalpicker</editor>
+          <editor-parameter>
+            http://www.ibm.com/xsp/coreex,appPage,pageName
+          </editor-parameter>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <!-- # Note to translators: When talking about screen orientation the words portrait and vertical are synonyms and the words landscape and horizontal are synonyms, so both are provided in English. The translators do not need to provide synonyms in their language. -->
+      <description>JavaScript code executed after the device where this browser is running has been rotated from portrait(vertical) to landscape(horizontal) or from landscape to portrait</description>
+      <display-name>Orientation Change Script</display-name>
+      <property-name>onOrientationChange</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>JavaScript code executed when the width or height of the browser has changed</description>
+      <display-name>Resize Script</display-name>
+      <property-name>onResize</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.App</renderer-type>
+      <tag-name>singlePageApp</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>This control should be used as the header in an Application Page control</description>
+    <display-name>Page Heading</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.DojoHeading</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIDMHeading</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.mobile.transition</group-type-ref>
+    <property>
+    <!--key:property.back.  -->
+      <description>A label for the button to return to displaying the previous Application Page control.</description>
+      <display-name>Back Label</display-name>
+      <property-name>back</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+    <!--key:property.href.  -->
+      <description>A URL to open when the back button is pressed</description>
+      <display-name>Navigation URL</display-name>
+      <property-name>href</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The value of the "pageName" property of the Application Page control to transition to when the back button is pressed</description>
+      <display-name>Move To</display-name>
+      <property-name>moveTo</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.attrvalpicker</editor>
+          <editor-parameter>
+            http://www.ibm.com/xsp/coreex,appPage,pageName
+          </editor-parameter>
+          <tags>
+              render-with-prefix-hash
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The text displayed in the heading area, after the back button. Any controls contained in this Application Page Heading control will also appear in the heading area. If both text and controls are present, the text will appear after the controls.</description>
+      <display-name>Label</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.DojoHeading</renderer-type>
+      <tag-name>djxmHeading</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <!-- See the doc at:
+    http://dojotoolkit.org/reference-guide/dojox/mobile/RoundRectList.html -->
+    <description>A container for multiple items displayed in a vertical list. A border with rounded corners surrounds the list items.</description>
+    <display-name>Rounded List</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.RoundRectList</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIDMRoundRectList</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.mobile.transition</group-type-ref>
+    <property>
+      <description>The default icon path for child items. If a child item does not have its own icon parameter specified, this value is used as its icon path. This parameter is especially useful when all or most of the icons are the same, or you use CSS sprite icons, where you specify an aggregated icon image with this parameter and an icon position for each icon.</description>
+      <display-name>Default Icon Base</display-name>
+      <property-name>iconBase</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+    <!--key:property.iconPos.  -->
+      <description>The default icon position for child items. This parameter is especially useful when all or most of the icons are the same. It is the position of an individual icon in an aggregated icon. It is specified as comma separated pixel offset values like top,left,width,height (e.g. "0,0,29,29").</description>
+      <display-name>Default Icon Position</display-name>
+      <property-name>iconPos</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+              0,0,29,29
+              0,29,29,29
+              0,58,29,29
+           </editor-parameter>
+           <!-- This isn't a path to an image, it's a set of coordinates 
+           into an image containing CSS image sprites. -->
+           <tags>
+               not-image-path
+           </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.DojoRoundRectList</renderer-type>
+      <tag-name>djxmRoundRectList</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>A control placed in the Rounded List container control, to act as a single item in the list</description>
+    <display-name>Rounded List Item</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.LineItem</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UILineItem</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.mobile.transition</group-type-ref>
+    <property>
+    <!--key:property.icon.  -->
+      <description>The URL of the icon displayed on the left hand side. If empty no icon is used.</description>
+      <display-name>Icon URL</display-name>
+      <property-name>icon</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The value of the "pageName" property of the Application Page control to open when this line item is selected.</description>
+      <display-name>Target Application Page</display-name>
+      <property-name>moveTo</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <!-- Note this is the "pageName" of a referenced xe:appPage control.-->
+          <tags>
+              not-xpage-name
+              render-with-prefix-hash
+          </tags>
+          <editor>com.ibm.designer.domino.xsp.attrvalpicker</editor>
+          <editor-parameter>
+            http://www.ibm.com/xsp/coreex,appPage,pageName
+          </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The label of this line item. Any controls placed in this line item container will appear before this label text.</description>
+      <display-name>Label</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Text displayed at the right hand side of the list item</description>
+      <display-name>Right Text</display-name>
+      <property-name>rightText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.LineItem</renderer-type>
+      <tag-name>djxmLineItem</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+        <!-- TODO, looking at:
+        http://dojotoolkit.org/reference-guide/dojox/mobile/ListItem.html
+        it seems like some of the properties are missing here. 
+        e.g. 
+        transitionDir="-1" iconPos="0,0,29,29" href="/page2.xsp" hrefTarge="_blank"
+        url="/page1.xsp?section=detail" urlTarget="detail12" callback="function(){ }"
+        sync="false" rightIcon="/ico2.gif" rightIcon2="/ico4.gif" anchorLabel="true"
+        noArrow="true" selected="true" checked="true" arrowClass="mblDomButtonArrow"
+        checkClass="mblDomButtonCheck" variableHeight="true"
+        -->
+        <tags>
+           todo
+        </tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>Web page fragment used in a Single Page Application. Only one of these application Pages is displayed at a time</description>
+    <display-name>Application Page</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.AppPage</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIMobilePage</component-class>
+    
+    <group-type-ref>com.ibm.xsp.extlib.group.FacesAttrsObject.component.since900v_00_03</group-type-ref>
+    
+    <property>
+      <description>If true, the scroll position is kept when transitioning between Application Page controls. The default value is true.</description>
+      <display-name>Keep Scrolling Position</display-name>
+      <property-name>keepScrollPos</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Name of the application page. This can be different to the ID. Used by the Single Page Application control to decide which Application Page to show</description>
+      <display-name>Application Page Name</display-name>
+      <property-name>pageName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <!-- Not a mobile appPage name reference, but a declaration -->
+          <tags>
+            not-mobile-appPage-ref
+            not-xpage-name
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Indicates that the children should be created on the server when the page is created, and not on an as-needed basis</description>
+      <display-name>Dynamic Content</display-name>
+      <property-name>autoCreate</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Indicates that the page children should be recreated each time the page is displayed.</description>
+      <display-name>Reset Content When Displayed</display-name>
+      <property-name>resetContent</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Indicates that the controls within the Application Page control should be loaded in the server-side control tree when the whole XPage is initially loaded. This defaults to "false", so the contents are only loaded when the application switches to displaying this Application Page.</description>
+      <display-name>Preload</display-name>
+      <property-name>preload</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>JavaScript code executed before the transition into this Application Page control, when it is about to become visible</description>
+      <display-name>Before Transition In Script</display-name>
+      <property-name>onBeforeTransitionIn</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.1.v00_00</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>JavaScript code executed after the transition into this Application Page control, when it has just become visible</description>
+      <display-name>After Transition In Script</display-name>
+      <property-name>onAfterTransitionIn</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.1.v00_00</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>JavaScript code executed before the transition out of this Application Page control, when it is about to be no longer visible</description>
+      <display-name>Before Transition Out Script</display-name>
+      <property-name>onBeforeTransitionOut</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.1.v00_00</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>JavaScript code executed after the transition out of this Application Page control, when it is no longer visible</description>
+      <display-name>After Transition Out Script</display-name>
+      <property-name>onAfterTransitionOut</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.1.v00_00</since>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.MobilePage</renderer-type>
+      <tag-name>appPage</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>A Tab Bar control designed for Mobile devices, that can also be used as a segmented button control. The tabs are provided as Tab Bar Button controls.</description>
+    <display-name>Tab Bar</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.TabBar</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UITabBar</component-class>
+    <property>
+      <description>This option only applies when the "barType" property is set to "segmentedControl". This should be set to "true" when the tab bar is placed in an Application Page Heading control. In that case the background area will be provided by the heading control, and the tab bar does not need to provide a background area.</description>
+      <display-name>In Heading</display-name>
+      <property-name>inHeading</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Sets the type of bar to be displayed. The options are "segmentedControl", indicating that the bar should appear as a segmented button with different segments for each tab, or "tabBar", the default, where it appears as a tab bar and the Tab Bar Buttons appear as tabs.</description>
+      <display-name>Bar Type</display-name>
+      <property-name>barType</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+             	tabBar
+             	segmentedControl
+          </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.DojoTabBar</renderer-type>
+      <tag-name>tabBar</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>An individual tab or button in the Tab Bar control</description>
+    <display-name>Tab Bar Button</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.TabBarButton</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UITabBarButton</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.dojo.widget.events.prop.onClick</group-type-ref>
+    <property>
+      <description>The label of the button</description>
+      <display-name>Label</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The icon displayed when this Tab Bar Button is unselected, often a dark gray icon, designed to appear less prominent than the selected icon.</description>
+      <display-name>Unselected Icon</display-name>
+      <property-name>icon1</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The icon displayed when this Tab Bar Button is selected, often a highlighted or brightly colored icon, designed to appear prominent and conspicuous.</description>
+      <display-name>Selected Icon</display-name>
+      <property-name>icon2</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The icon position for the unselected icon. This is the position of an individual icon in an aggregated icon. It is specified as comma separated pixel offset values like top,left,width,height (e.g. "0,0,29,29").</description>
+      <display-name>Unselected Icon Position</display-name>
+      <property-name>iconPos1</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+              0,0,29,29
+              0,29,29,29
+              0,58,29,29
+           </editor-parameter>
+           <!-- This isn't a path to an image, it's a set of coordinates 
+           into an image containing CSS image sprites. -->
+           <tags>
+               not-image-path
+           </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The icon position for the selected icon. This is the position of an individual icon in an aggregated icon. It is specified as comma separated pixel offset values like top,left,width,height (e.g. "0,0,29,29").</description>
+      <display-name>Selected Icon Position</display-name>
+      <property-name>iconPos2</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+              0,0,29,29
+              0,29,29,29
+              0,58,29,29
+           </editor-parameter>
+           <!-- This isn't a path to an image, it's a set of coordinates 
+           into an image containing CSS image sprites. -->
+           <tags>
+               not-image-path
+           </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+    <!--key:property.selected.  -->
+      <description>Indicates whether this button should be initially marked as selected</description>
+      <display-name>Initially Selected</display-name>
+      <property-name>selected</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The type of transition between pages to perform.</description>
+      <display-name>Transition</display-name>
+      <property-name>transition</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <!-- TODO the dojo Tab Bar Button control has a moveTo property and can be used
+          to move to a different view/ApplicationPage, so the transition property 
+          controls the animation effect when transitioning to the moveTo AppPage.
+          But this Tab Bar Button control does not have a moveTo property, 
+          and cannot be used to move to a different AppPage, so the "transition" property 
+          will never be used.
+          The fix should probably be to add a moveTo property. -->
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+	                        slide
+	                        fade
+	                        flip
+	                        none
+	                    </editor-parameter>
+	      <tags>todo</tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <!-- # true and false should not be translated -->
+      <description>Allow select one or more items. Defaults to true, meaning only one item can be selected. Use false to allow more than one item to be selected.</description>
+      <display-name>Select One</display-name>
+      <property-name>selectOne</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <!-- This defaults to true at runtime, so it will only
+          be possible to set the value in a theme file
+          in release 8.5.3 or later using the baseValue attribute.
+          runtime-default-true prevents a fail in BooleanPropertyDefaultTest -->
+          <tags>
+            runtime-default-true
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.DojoTabBarButton</renderer-type>
+      <tag-name>tabBarButton</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  
+  <component>
+    <description>A button that can be placed in the Page Heading control to perform some action or open a different page</description>
+    <display-name>Tool Bar Button</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.ToolBarButton</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIToolBarButton</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.dojo.widget.events.prop.onClick</group-type-ref>
+    <property>
+      <description>The label that appears on the button</description>
+      <display-name>Label</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>The URL of a web page to navigate to when the button is clicked</description>
+      <display-name>URL Reference</display-name>
+      <property-name>href</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+    <!--# "href" is not translated  -->
+      <description>The target that specifies where to open a web page specified by the "href" property</description>
+      <display-name>URL Reference Target Frame</display-name>
+      <property-name>hrefTarget</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+              _blank
+              _self
+              _parent
+              _top
+           </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>An icon to display before the label.</description>
+      <display-name>Icon</display-name>
+      <property-name>icon</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>The position of an aggregated icon. It is a comma separated value like top,left,width,height (e.g. "0,0,29,29").</description>
+      <display-name>Icon Position</display-name>
+      <property-name>iconPos</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+              0,0,29,29
+              0,29,29,29
+              0,58,29,29
+           </editor-parameter>
+           <!-- This isn't a path to an image, it's a set of coordinates 
+           into an image containing CSS image sprites. -->
+           <tags>
+               not-image-path
+           </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+    <!--# "pageName" is not translated  -->
+      <description>The value of the "pageName" property of the Application Page control to transition to when the button is pressed</description>
+      <display-name>Move To</display-name>
+      <property-name>moveTo</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.attrvalpicker</editor>
+          <editor-parameter>
+            http://www.ibm.com/xsp/coreex,appPage,pageName
+          </editor-parameter>
+          <tags>
+              render-with-prefix-hash
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>A URL of an HTML fragment page or JSON data that represents the new content of an Application Page control</description>
+      <display-name>URL</display-name>
+      <property-name>url</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+          <tags>
+              render-with-request-path-prefix
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>The ID of the HTML element where the new Application Page will be created according to the URL parameter</description>
+      <display-name>URL Target</display-name>
+      <property-name>urlTarget</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>A client-side JavaScript function that is called when the transition has finished</description>
+      <display-name>Callback</display-name>
+      <property-name>callback</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.client.script.editor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>An alternative descriptive text that will be shown if the icon image cannot be displayed</description>
+      <display-name>Icon Alternate Text</display-name>
+      <property-name>alt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>accessibility</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>The integer index of the button in the tab ordering for the web page</description>
+      <display-name>Tab Index</display-name>
+      <property-name>tabIndex</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+      <!-- description says it's an integer but the XPages runtime controls use a String for the TabIndex  -->
+        <designer-extension>
+          <category>accessibility</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>The direction of the transition between Application Page controls</description>
+      <display-name>Transition Direction</display-name>
+      <property-name>transitionDir</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <!-- Note, in version 8.5.32005, updated the action to handle "rtl" 
+          as a possible direction, but not including it in the list here,
+          as it will not work on older servers. -->
+          <editor-parameter>
+                            ltr
+                            rtl
+                            -1
+                            1
+                        </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>Navigates to the previous page when the button is clicked</description>
+      <display-name>Back</display-name>
+      <property-name>back</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>Enables the toggle button behavior so that clicking the button toggles it on and off</description>
+      <display-name>Toggle</display-name>
+      <property-name>toggle</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+        <!--# "toggle" should not be translated  -->
+      <description>Used with the "toggle" property to make the toggle button appear initially selected</description>
+      <display-name>Selected</display-name>
+      <property-name>selected</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+        <!--# "label" and "icon" should not be translated  -->
+      <description>When true will produce lightweight HTML output, which will prevent use of both the "label" and "icon" properties</description>
+      <display-name>Lightweight Button</display-name>
+      <property-name>light</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>Makes this button display a previous arrow or a next arrow</description>
+      <display-name>Arrow</display-name>
+      <property-name>arrow</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <!-- 
+          needs to support the "previous" and "next" options.
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+                            left
+                            right
+                        </editor-parameter> -->
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+                            previous
+                            next
+                            left
+                            right
+                        </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <property>
+      <description>A type of animated transition effect</description>
+      <display-name>Transition</display-name>
+      <property-name>transition</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+                            none
+                            slide
+                            fade
+                            flip
+                        </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</base-component-type>
+      <component-family>com.ibm.xsp.extlib.mobile.ToolBarButton</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.ToolBarButton</renderer-type>
+      <tag-name>toolBarButton</tag-name>
+      <since>8.5.32006</since>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  
+  <component>
+    <description>An On and Off switch that allows the user to enable or disable an option</description>
+    <display-name>Toggle Switch</display-name>
+    <component-type>com.ibm.xsp.extlib.mobile.Switch</component-type>
+    <component-class>com.ibm.xsp.extlib.component.mobile.UIDMSwitch</component-class>
+    <!--group-type-ref>com.ibm.xsp.extlib.group.dojo.widget.events.prop.onClick</group-type-ref-->
+    <group-type-ref>com.ibm.xsp.extlib.group.touch</group-type-ref>
+    <property>
+      <description>This event is triggered then the switch changes from On to Off, or Off to On</description>
+      <display-name>State Changed Script</display-name>
+      <property-name>onStateChanged</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The label displayed in the switch control when the switch is in the On state</description>
+      <display-name>On State Label</display-name>
+      <property-name>leftLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The label displayed in the switch control when the switch is in the Off state</description>
+      <display-name>Off State Label</display-name>
+      <property-name>rightLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <!-- # "on" and "off" should not be translated -->
+      <description>The initial state of the switch. Either "on", meaning the switch is initially turned on, or "off", where the switch is initially turned off. The default is "on".</description>
+      <display-name>Initial Value</display-name>
+      <property-name>value</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+                      off
+                      on
+                  </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBase</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Mobile</component-family>
+      <renderer-type>com.ibm.xsp.extlib.mobile.DojoSwitch</renderer-type>
+      <tag-name>djxmSwitch</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Mobile</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>Accordion menu for mobile environments</description>
+    <display-name>Mobile Accordion Menu</display-name>
+    <complex-id>com.ibm.xsp.extlib.renderkit.html_extended.mobile.MobileNavigatorAccordionRenderer</complex-id>
+    <complex-class>com.ibm.xsp.extlib.renderkit.html_extended.mobile.MobileNavigatorAccordionRenderer</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</base-complex-id>
+      <tag-name>mobileAccordionMenu</tag-name>
+      <designer-extension>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>A slick Web 2.0 style movement to another Page in the current Application.</description>
+    <display-name>Move To Application Page</display-name>
+    <complex-id>com.ibm.xsp.extlib.actions.moveTo</complex-id>
+    <complex-class>com.ibm.xsp.extlib.actions.MoveToAction</complex-class>
+    <property>
+      <description>The value of the "pageName" property of the Application Page control to be made visible. This simple action is designed to move between pages of a Single Page Application; use other methods to move to another XSP page.</description>
+      <display-name>Target Application Page Name</display-name>
+      <property-name>targetPage</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>not-xpage-name</tags>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <description>During the page transition, do a full refresh of the browser page, instead of only retrieving the new Application Page segment from the server. This defaults to false.</description>
+      <display-name>Full Refresh</display-name>
+      <property-name>forceFullRefresh</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+	      </property-extension>
+    </property>
+    <property>
+      <description>When set to true, the current document is saved before moving to the target Application Page. This defaults to "false".</description>
+      <display-name>Save Document</display-name>
+      <property-name>saveDocument</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The type of transition between pages to perform.</description>
+      <display-name>Page Transition Type</display-name>
+      <property-name>transitionType</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+	                        slide
+	                        fade
+	                        flip
+	                        none
+	                    </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The direction of the transition between pages.</description>
+      <display-name>Transition Direction</display-name>
+      <property-name>direction</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <!-- Note, in version 8.5.32005, updated the action to handle "rtl" 
+          as a possible direction, but not including it in the list here,
+          as it will not work on older servers. -->
+          <editor-parameter>
+	                        Left to Right
+	                        Right to Left
+	                        1
+	                        -1
+	                    </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>moveTo</tag-name>
+      <base-complex-id>simpleActionInterface</base-complex-id>
+      <designer-extension>
+        <category>%complex-category.mobile%</category>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
+
+
+
+</faces-config>

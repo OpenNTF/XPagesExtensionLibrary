@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Teamroom">
+
+	<xe:singlePageApp id="mApp1" selectedPageName="recent">
+		<xe:appPage resetContent="false" id="views" pageName="views">
+			<xe:djxmHeading id="djxmHeading0"
+				styleClass="mblLoginText">
+				<xp:this.label><![CDATA[#{javascript:
+					var teamname = strings.getString("teamroom.name");
+					var vw:NotesView = database.getView("MissionLookup");
+					var vc:NotesViewEntryCollection = vw.getAllEntries();
+					var ve:NotesViewEntry = vc.getFirstEntry();
+					if(null != ve){
+						var v:java.util.Vector = ve.getColumnValues();
+						if(!v.isEmpty()){
+							// get the teamroom name
+							teamname = v.get(1);
+						}
+					}
+					return teamname;
+					}]]>
+				</xp:this.label>
+				<xp:this.facets>
+					<xp:panel xp:key="actionFacet">
+						<xp:link id="link1">
+							<xp:this.rendered><![CDATA[#{javascript:
+								var _request = facesContext.getExternalContext().getRequest();
+								var _cookies = _request.getHeader("Cookie");
+								var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+								
+								if ((userBean.canonicalName !== "Anonymous") && (isSessionAuth === false)) 
+								{
+									return false;
+								} else {
+									return true;
+								}
+							}]]></xp:this.rendered>
+							<xp:this.text><![CDATA[#{javascript:
+								var _request = facesContext.getExternalContext().getRequest();
+								var _cookies = _request.getHeader("Cookie");
+								var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+							
+								if(userBean.canonicalName === 'Anonymous')
+								{
+									return strings.getString("banner.login");
+								}
+								else if(isSessionAuth === true)
+								{
+									return strings.getString("banner.logout");
+								}
+							}]]></xp:this.text>
+							<xp:this.value>
+								<![CDATA[#{javascript:
+									if(userBean.canonicalName === 'Anonymous')
+									{
+										return facesContext.getExternalContext().getRequestContextPath() + "?opendatabase&login";
+									}
+									else
+									{
+										return facesContext.getExternalContext().getRequestContextPath() + "?logout";
+									}
+								}]]>
+							</xp:this.value>
+						</xp:link>
+					</xp:panel>
+				</xp:this.facets>
+			</xe:djxmHeading>
+
+			<xe:outline>
+				<xe:this.treeNodes>
+					<xe:basicLeafNode href="#recent"
+						label="Recent Activity">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#allDocuments"
+						label="All Documents">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Announcements"
+						href="#announcementsAll">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Events" href="#eventAll">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Status Reports"
+						href="#statusAll">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Members"
+						href="#membersAll">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode href="#subteams"
+						label="Subteams">
+					</xe:basicLeafNode>
+					<xe:basicLeafNode label="Inactive Documents"
+						href="#inactiveDocs">
+					</xe:basicLeafNode>
+				</xe:this.treeNodes>
+			</xe:outline>
+		</xe:appPage>
+
+		<!-- CHANGE -->
+		<xe:appPage resetContent="true" id="recent" pageName="recent">
+			<xc:mobileViewRecent></xc:mobileViewRecent>
+		</xe:appPage>
+
+		<!-- CHANGE -->
+		<xe:appPage resetContent="true" id="subteams"
+			pageName="subteams">
+			<xc:mobileViewSubteams></xc:mobileViewSubteams>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="allDocuments"
+			pageName="allDocuments">
+			<xc:dynamicMobileView></xc:dynamicMobileView>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="inactiveDocs"
+			pageName="inactiveDocs">
+			<xc:mobileViewInactive viewName="xvwInactiveDocuments"
+				titleColumn="subject">
+			</xc:mobileViewInactive>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="statusAll"
+			pageName="statusAll">
+			<xc:mobileViewStatus viewName="xvwStatusAll"
+				titleColumn="Key thought" pageName="#status">
+			</xc:mobileViewStatus>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="eventAll"
+			pageName="eventAll">
+			<xc:mobileViewEvent viewName="Event Lookup"
+				titleColumn="Event Title" pageName="#event">
+			</xc:mobileViewEvent>
+		</xe:appPage>
+
+		<xe:appPage resetContent="false" id="newDiscussion"
+			pageName="newDiscussion">
+			<xc:mobileNewDiscussion></xc:mobileNewDiscussion>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="announcementsAll"
+			pageName="announcementsAll">
+			<xc:mobileViewAnnouncements viewName="Announcements"
+				titleColumn="Subject" pageName="#announcement">
+			</xc:mobileViewAnnouncements>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="membersAll"
+			pageName="membersAll">
+			<xc:mobileViewMembers viewName="xvwMembers"
+				titleColumn="FullName" pageName="#profile">
+			</xc:mobileViewMembers>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="subteam"
+			pageName="subteam">
+			<xc:mobileViewSubteam></xc:mobileViewSubteam>
+		</xe:appPage>
+
+		<xe:appPage id="profile" resetContent="true"
+			pageName="profile">
+			<xe:djxmHeading id="djxmHeading5" label="Profile"
+				back="Back" transition="slide">
+				<xp:this.moveTo><![CDATA[#{javascript:
+					if(null == sessionScope.from)
+						return "allDocuments";
+					else
+						return sessionScope.from;
+				}]]></xp:this.moveTo>
+			</xe:djxmHeading>
+
+			<xc:mobileMemberProfile></xc:mobileMemberProfile>
+		</xe:appPage>
+
+		<xe:appPage id="announcement" resetContent="true"
+			pageName="announcement">
+			<xe:djxmHeading id="djxmHeading4" label="Announcement"
+				back="Back" transition="slide">
+				<xp:this.moveTo><![CDATA[#{javascript:
+					if(null == sessionScope.from)
+						return "allDocuments";
+					else
+						return sessionScope.from;
+				}]]></xp:this.moveTo>
+			</xe:djxmHeading>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="document1"
+						formName="Contact">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xc:mobileThreadAnnouncement id="mobileThreadEvent1"></xc:mobileThreadAnnouncement>
+			</xp:panel>
+		</xe:appPage>
+
+		<xe:appPage id="event" resetContent="true" pageName="event">
+			<xe:djxmHeading id="djxmHeading3" label="Event" back="Back"
+				transition="slide">
+				<xp:this.moveTo><![CDATA[#{javascript:
+					if(null == sessionScope.from)
+						return "allDocuments";
+					else
+						return sessionScope.from;
+				}]]></xp:this.moveTo>
+			</xe:djxmHeading>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="document1"
+						formName="Contact">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xc:mobileThreadEvent id="mobileThreadStatus1"></xc:mobileThreadEvent>
+			</xp:panel>
+		</xe:appPage>
+
+		<xe:appPage id="status" resetContent="true" pageName="status">
+			<xe:djxmHeading id="djxmHeading1" label="Status Report"
+				back="Back" transition="slide">
+				<xp:this.moveTo><![CDATA[#{javascript:
+					if(null == sessionScope.from)
+						return "allDocuments";
+					else
+						return sessionScope.from;
+				}]]></xp:this.moveTo>
+			</xe:djxmHeading>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="document1"
+						formName="Contact">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xc:mobileThreadStatus id="mobileThread1"></xc:mobileThreadStatus>
+			</xp:panel>
+		</xe:appPage>
+
+		<xe:appPage id="document" resetContent="true"
+			pageName="document">
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoDocument var="document1"
+						formName="Response">
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xc:mobileThread id="mobile1"></xc:mobileThread>
+			</xp:panel>
+		</xe:appPage>
+
+		<xe:appPage resetContent="false" id="mobileResponse"
+			pageName="mobileResponse">
+			<xc:mobileTopicThreadNewResponse></xc:mobileTopicThreadNewResponse>
+		</xe:appPage>
+
+		<xe:appPage resetContent="true" id="memberProfile"
+			pageName="memberProfile">
+			<xe:djxmHeading id="djxmHeading8" label="Profile"
+				back="Back" moveTo="#{javascript:sessionScope.backURL}">
+			</xe:djxmHeading>
+			<xc:mobileMemberProfile></xc:mobileMemberProfile>
+		</xe:appPage>
+	</xe:singlePageApp>
+</xp:view>

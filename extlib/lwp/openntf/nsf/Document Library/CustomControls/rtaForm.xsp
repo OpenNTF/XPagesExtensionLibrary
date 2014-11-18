@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.resources>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xc:rtaRemoteService></xc:rtaRemoteService>
+
+	<xp:this.data>
+		<xp:dominoDocument var="newResponseDoc"
+			formName="#{compositeData.formName}" ignoreRequestParams="true"
+			computeWithForm="onsave" documentId="#{compositeData.documentId}"
+			action="#{javascript: (null != compositeData.documentId)? 'editDocument' : 'newDocument'}"
+			parentId="#{compositeData.parentId}">
+
+		<xp:this.postSaveDocument>
+			<xp:actionGroup>
+				<xp:executeScript>
+					<xp:this.script><![CDATA[#{javascript:
+						var agent:NotesAgent = database.getAgent("webSubmitDocument"),
+							document:NotesDocument = newResponseDoc.getDocument(),
+							submitNow = document.getItemValueString('SubmitNow') === DocLib.Review.SubmitNow,
+							isSubmitted = document.getItemValueString("SUBMITTED") === DocLib.Review.Submitted;
+						
+						if (agent !== null && !isSubmitted && submitNow) {
+							try {
+								document.replaceItemValue('CurrentUser', @UserName());
+								agent.runWithDocumentContext(document);
+								document.save();
+							} catch(e) {
+								print("Error: " + e);
+							}
+						}
+				}]]></xp:this.script>
+				</xp:executeScript>
+			</xp:actionGroup>
+		</xp:this.postSaveDocument></xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:this.resources>
+		<xp:script src="/rtaForm.jss"></xp:script>
+		<xp:styleSheet href="/rtaForm.css"></xp:styleSheet>
+	</xp:this.resources>
+
+	<xp:this.afterPageLoad><![CDATA[#{javascript://
+		
+		if(compositeData.documentId === null) {
+			getComponent('subjectField').setValue('');
+		}
+		
+	}]]></xp:this.afterPageLoad>
+	<xp:panel id="rtaFormPanel">
+		<xe:formTable labelPosition="left">
+			<xe:this.formTitle><![CDATA[#{javascript:
+			if(isParentDoc() && compositeData.documentId === null) {
+				return strings.getString("reply");
+			}
+			(param.documentId) ? strings.getString("editDocument") : strings.getString("newDocument");}]]>
+			</xe:this.formTitle>
+
+			<xe:formRow labelPosition="none">
+				<table class="formRowFieldContainer">
+					<tr>
+						<td class="formRowFieldLabel">Subject:</td>
+						<td class="formRowFieldValue">
+							<xp:inputText required="true"
+								id="subjectField" disableClientSideValidation="true"
+								immediate="false">
+								<xp:this.value><![CDATA[#{newResponseDoc.Subject}]]></xp:this.value>
+							</xp:inputText>
+						</td>
+					</tr>
+				</table>
+			</xe:formRow>
+
+			<xe:formRow id="formRow2" labelPosition="none"
+				loaded="${javascript:return !isParentDoc();}">
+				<table class="formRowFieldContainer">
+					<tr>
+						<td class="formRowFieldLabel">Tags:</td>
+						<td class="formRowFieldValue">
+							<xp:inputText id="tagsField"
+								required="false" disableClientSideValidation="true"
+								value="#{newResponseDoc.WebCategories}" multipleSeparator=","
+								size="15">
+							</xp:inputText>
+						</td>
+					</tr>
+				</table>
+			</xe:formRow>
+
+			<xe:formRow labelPosition="none">
+				<xp:section header="Reviewers" id="reviewersID" initClosed="true">
+					<xp:this.loaded><![CDATA[${javascript:
+						return !isParentDoc();
+					}]]></xp:this.loaded>
+
+					<xp:label id="errorMessage"
+						styleClass="error-message" rendered="false">
+					</xp:label>
+					<xe:formTable disableErrorSummary="true" labelPosition="left">
+
+						<xe:formRow label="Originator">
+							<xp:label>
+								<xp:this.value><![CDATA[#{javascript:
+									var currentUser = peopleBean.getPerson(@UserName()).abbreviatedName,
+										from = newResponseDoc.getItemValueString('From');
+										
+									if(from.isEmpty()) {
+										return currentUser;
+									} else {
+										return peopleBean.getPerson(from).abbreviatedName;
+									}
+								}]]></xp:this.value>
+							</xp:label>
+							
+						</xe:formRow>
+						<xe:formRow label="Reviewers:">
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:
+									return !isReviewsReadOnly();
+								}]]></xp:this.rendered>
+								<xe:djextNameTextBox id="reviewers"
+									multipleSeparator="," value="#{newResponseDoc.ReviewerList}"
+									readOnly="#{javascript:isReviewsReadOnly()}">
+								</xe:djextNameTextBox>
+								<xe:namePicker for="reviewers" pickerText="Select">
+									<xe:this.dataProvider>
+										<xe:dominoNABNamePicker></xe:dominoNABNamePicker>
+									</xe:this.dataProvider>
+								</xe:namePicker>
+							</xp:panel>
+
+							<xp:panel>
+								<xp:this.rendered><![CDATA[#{javascript:
+									return isReviewsReadOnly();
+								}]]></xp:this.rendered>
+								<xp:repeat var="reviewerName"
+									indexVar="reviewerIndex"
+									value="#{newResponseDoc.ReviewerList}">
+									<xp:text>
+										<xp:this.value><![CDATA[#{javascript:
+											var length = newResponseDoc.getItemValue('ReviewerList').length - 1;
+											if(reviewerIndex === length) {
+												return reviewerName + '.';
+											} else {
+												return reviewerName + ', ';
+											}
+										}]]></xp:this.value>
+									</xp:text>
+								</xp:repeat>
+							</xp:panel>
+						</xe:formRow>
+
+						<xe:formRow label="Type of review:">
+							<xp:panel>
+								<xp:listBox id="typeOfReviewField"
+									value="#{newResponseDoc.ReviewType}" defaultValue="1" size="1"
+									readonly="#{javascript:isReviewsReadOnly()}">
+	
+									<xp:eventHandler event="onchange"
+										submit="true" refreshMode="partial" refreshId="reviewersID"
+										disableValidators="true" immediate="false">
+										<xp:this.action>
+											<xp:executeScript>
+												<xp:this.script><![CDATA[#{javascript:
+												var value = getComponent('typeOfReviewField').getValue(),
+												showTarget,
+												hideTarget;
+											
+											if(value === '1') {
+												showTarget = 'oneReviewer';
+												hideTarget = 'allReviewers';
+											} else {
+												showTarget = 'allReviewers';
+												hideTarget = 'oneReviewer';
+											}
+											getComponent(showTarget).setRendered(true);
+											getComponent(hideTarget).setRendered(false);
+											}]]></xp:this.script>
+											</xp:executeScript>
+										</xp:this.action>
+									</xp:eventHandler>
+	
+									<xp:selectItem
+										itemLabel="One reviewer at a time" itemValue="1">
+									</xp:selectItem>
+									<xp:selectItem
+										itemLabel="All reviewers simultaneously" itemValue="2">
+									</xp:selectItem>
+								</xp:listBox>
+							</xp:panel>
+						</xe:formRow>
+
+						<xe:formRow label="Time limit options:">
+<!--							 If Type of Review is set to "One reviewer at a time" -->
+							<xp:panel>
+								<xp:listBox defaultValue="0" size="1"
+									rendered="true" id="oneReviewer"
+									readonly="#{javascript:isReviewsReadOnly()}"
+									value="#{newResponseDoc.ReviewWindow}">
+	
+									<xp:eventHandler event="onchange"
+										submit="true" refreshMode="partial" refreshId="reviewersID"
+										immediate="false" disableValidators="true">
+										<xp:this.action>
+											<xp:executeScript
+												script="#{javascript:timeLimit(getComponent('oneReviewer').getValue());}">
+											</xp:executeScript>
+										</xp:this.action>
+									</xp:eventHandler>
+	
+									<xp:selectItem itemValue="0"
+										itemLabel="No time limit for each review">
+									</xp:selectItem>
+									<xp:selectItem itemValue="1"
+										itemLabel="Move to next reviewer after time limit expires">
+									</xp:selectItem>
+									<xp:selectItem itemValue="2"
+										itemLabel="Keep sending reminders after time limit expires">
+									</xp:selectItem>
+								</xp:listBox>
+<!--								 If Type of Review is set to "All reviewers simultaneously" -->
+								<xp:listBox defaultValue="1" size="1"
+									value="#{newResponseDoc.ReviewWindow}" rendered="false"
+									id="allReviewers"
+									readonly="#{javascript:isReviewsReadOnly()}">
+	
+									<xp:eventHandler event="onchange"
+										submit="true" refreshMode="partial" refreshId="reviewersID"
+										disableValidators="true" immediate="false">
+										<xp:this.action>
+											<xp:executeScript
+												script="#{javascript:timeLimit(getComponent('allReviewers').getValue());}">
+											</xp:executeScript>
+										</xp:this.action>
+									</xp:eventHandler>
+	
+									<xp:selectItem itemValue="0"
+										itemLabel="No time limit for each review">
+									</xp:selectItem>
+									<xp:selectItem itemValue="2"
+										itemLabel="Keep sending reminders after time limit expires">
+									</xp:selectItem>
+								</xp:listBox>
+							</xp:panel>
+						</xe:formRow>
+
+						<xe:formRow label="Time limit in days:"
+							id="timeLimitDays">
+							<xe:this.rendered><![CDATA[#{javascript:
+								var target = (getComponent('typeOfReviewField').getValue() === '1') ? getComponent('oneReviewer') : getComponent('allReviewers'),
+									value = target.getValue();
+								
+								if(value === '1' || value === '2') {
+									return true;
+								}
+								return false;
+							}]]></xe:this.rendered>
+							
+							<xp:panel id="panel2">
+								<xp:inputText defaultValue="0"
+									id="timeLimitInDaysField" value="#{newResponseDoc.ReviewTime}"
+									readonly="#{javascript:isReviewsReadOnly()}" size="3"
+									required="false" disableClientSideValidation="true"
+									immediate="false">
+									<xp:this.validators>
+										<xp:validateConstraint
+											message="Time Limit should be a positive number">
+											<xp:this.regex><![CDATA[^[0-9]+$]]></xp:this.regex>
+										</xp:validateConstraint>
+									</xp:this.validators>
+									<xp:this.converter>
+										<xp:convertNumber
+											integerOnly="true">
+										</xp:convertNumber>
+									</xp:this.converter>
+								</xp:inputText>
+								<xp:inputText id="datePicker" rendered="#{javascript: !isReviewsReadOnly();}"
+									styleClass="timeLimitInDaysField">
+									<xp:dateTimeHelper
+										id="dateTimeHelper1">
+									</xp:dateTimeHelper>
+									<xp:this.converter>
+										<xp:convertDateTime timeStyle="full" pattern="yyyy-MM-dd">
+										</xp:convertDateTime>
+									</xp:this.converter>
+									<xp:eventHandler event="onchange" submit="false" refreshMode="complete">
+										<xp:this.script><![CDATA[
+											var dateValue = dojo.attr(dojo.byId('#{id:datePicker}'), 'value');
+											
+											var rpcObject = CalendarService.calculateDays(dateValue);
+											
+											rpcObject.addCallback(function(result) {
+												try {
+													dojo.attr(dojo.byId('#{id:timeLimitInDaysField}'), 'value', result);
+												} catch(e) {
+													console.log("Error " + e);
+												}
+											});
+										]]></xp:this.script>
+									</xp:eventHandler>
+								</xp:inputText>
+							</xp:panel>
+						</xe:formRow>
+
+						<xe:formRow label="Notify originator after:">
+							<xp:panel>
+								<xp:listBox defaultValue="0" size="1"
+									id="notifyAfterField" value="#{newResponseDoc.NotifyAfter}"
+									readonly="#{javascript:isReviewsReadOnly()}">
+									<xp:selectItem
+										itemLabel="Final reviewer" itemValue="0">
+									</xp:selectItem>
+									<xp:selectItem itemLabel="Each reviewer"
+										itemValue="1">
+									</xp:selectItem>
+								</xp:listBox>
+							</xp:panel>
+						</xe:formRow>
+
+						<xe:formRow labelPosition="none">
+							<xp:panel>
+								<xp:checkBox text="Submit for review"
+									id="checkBox1" checkedValue="1" uncheckedValue="0"
+									value="#{newResponseDoc.SubmitNow}"
+									rendered="#{javascript: !isReviewsReadOnly()}">
+								</xp:checkBox>
+							</xp:panel>
+						</xe:formRow>
+
+					</xe:formTable>
+				</xp:section>
+			</xe:formRow>
+
+			<xe:formRow id="formRow3" labelPosition="none">
+				<xp:inputRichText id="rtBody" styleClass="richTextEditor"
+					value="#{newResponseDoc.Body}">
+				</xp:inputRichText>
+				
+			</xe:formRow>
+
+			<xe:formRow labelPosition="none" id="fileArea">
+				<xp:panel id="panel1">
+					<xp:link escape="true" id="link1"
+						text=" Attach File" styleClass="attachLink">
+						<xp:eventHandler event="onclick" submit="false"
+							id="eventHandler4">
+							<xp:this.script><![CDATA[
+						var fileContainer = document.getElementById("#{id:fileContainer}");
+						if(null != fileContainer)
+						{
+							var displayStyle = fileContainer.style.display;
+							if (displayStyle == "inline")
+							{
+								fileContainer.style.display = "none";
+							} 
+							else 
+							{
+								fileContainer.style.display = "inline";
+							}
+						}
+					]]></xp:this.script>
+						</xp:eventHandler>
+						<xp:image id="image2" url="/xpAttachment.gif"
+							alt="Add Attachment">
+						</xp:image>
+					</xp:link>
+					<div class="downloadControl">
+						<xp:fileDownload rows="30" id="fileDownload2" style="float:right;"
+							displayLastModified="false" allowDelete="true"
+							hideWhen="true" value="#{newResponseDoc.Body}">
+						</xp:fileDownload>
+					</div>
+				</xp:panel>
+
+				<xp:panel id="fileContainer" style="display:none;">
+					<xp:br></xp:br>
+					<xp:fileUpload id="fileUpload"
+						value="#{newResponseDoc.Body}">
+						<xp:eventHandler event="onchange" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:// kick off round-trip...}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:fileUpload>
+				</xp:panel>
+			</xe:formRow>
+
+
+			<xe:this.facets>
+				<xp:panel xp:key="footer">
+					<xc:cpSaveDocButton></xc:cpSaveDocButton>
+					<xp:button value="Clear Review Cycle"
+						id="button3">
+						<xp:this.rendered><![CDATA[#{javascript:
+							if (isParentDoc()) {
+								return false;
+							}
+							
+							var document = newResponseDoc.getDocument(),
+								isSubmitted = document.getItemValueString('SUBMITTED') === DocLib.Review.Submitted,
+								originator = document.getItemValueString('From'),
+								isReviewComplete = document.getItemValueInteger('Status') === DocLib.Review.Status.Complete,
+								currentUser = @UserName();
+							
+							if(isSubmitted && currentUser === originator && !isReviewComplete) {
+								return true;
+							} else {
+								return false;
+							}
+						}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:
+								var document:NotesDocument = newResponseDoc.getDocument();
+								document.removeItem('SUBMITTED');
+								getComponent('reviewers').setValue('');
+								viewScope.clearReviewCycle = true;
+							}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+
+					<xp:button value="My Review is Complete"
+						id="button2">
+						<xp:this.loaded><![CDATA[${javascript:
+						if (isParentDoc()) {
+							return false;
+						}
+					
+						var document:NotesDocument = newResponseDoc.getDocument(),
+							isSubmitted = document.getItemValueString('SUBMITTED') === DocLib.Review.Submitted,
+							currentEditor = document.getItemValue('CurrentEditor'),
+							currentUser = peopleBean.getPerson(@UserName()).abbreviatedName,
+							isReviewComplete = document.getItemValueInteger('Status') === DocLib.Review.Status.Complete,
+							isUserEditor = false,
+							i;
+							
+							for(i = 0; i < currentEditor.length; i++) {
+								var editor = peopleBean.getPerson(currentEditor[i]).abbreviatedName;
+								
+								if (editor === currentUser) {
+									isUserEditor = true;
+									break;
+								}
+							}
+						
+						return (isSubmitted && isUserEditor && !isReviewComplete);
+					}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:
+							var agent:NotesAgent = database.getAgent('SubmitDocument'),
+								document:NotesDocument = newResponseDoc.getDocument(),
+								currentEditor = document.getItemValue('CurrentEditor'),
+								currentUser = @UserName();
+							
+							if (agent !== null) {
+								document.replaceItemValue('SubmitNow', DocLib.Review.Resubmit);
+								document.replaceItemValue('CurrentUser', currentUser);
+								try {
+									agent.runWithDocumentContext(document);
+									newResponseDoc.save();
+									context.reloadPage();
+								} catch(e) {
+									print("Error: " + e);
+								}
+
+							}
+						}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+					<span class="markPrivatePublic">
+					<xp:link id="markPrivate" text="Mark Private"
+						themeId="Link.action">
+						<xp:this.rendered><![CDATA[#{javascript://
+							return newResponseDoc.getDocument().getItemValue('readers').length === 0;
+						}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="rtaFormPanel">
+							<xp:this.action><![CDATA[#{javascript://
+								var reviewers = [],
+									isResponse = newResponseDoc.isResponse(),
+									myself = peopleBean.getPerson(@UserName()).abbreviatedName;
+									
+								if (isResponse) {
+									reviewers = [];
+								} else {
+									reviewers = getComponent('reviewers').getValue();
+								}
+								
+								if(typeof(reviewers) === 'string') {
+									if (reviewers.length > 0) {
+										reviewers = [].concat(reviewers);
+									} else {
+										reviewers = [];
+									}
+								}
+								
+								
+								if (!isResponse) {
+									if(!isReviewerOriginator()) {
+										reviewers = reviewers.concat([myself]);
+									}
+								} else {
+									if(reviewers.length === 0) {
+										reviewers = reviewers.concat([myself]);
+									}
+								}
+								newResponseDoc.setValue('readers', reviewers);
+								getComponent('markPrivate').setRendered(false);
+								getComponent('markPublic').setRendered(true);
+							}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					
+					<xp:link id="markPublic" text="Mark Public"
+						themeId="Link.action">
+						<xp:this.rendered><![CDATA[#{javascript://
+							return newResponseDoc.getDocument().getItemValue('readers').length > 0;
+						}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="rtaFormPanel">
+							<xp:this.action><![CDATA[#{javascript://
+								newResponseDoc.setValue('readers', []);
+								getComponent('markPrivate').setRendered(true);
+								getComponent('markPublic').setRendered(false);
+							}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					
+					</span>
+
+					<xp:link id="linkCancel" text="Cancel"
+						themeId="Link.action">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true" execMode="partial"
+							id="editResponseCancelLinkEvt">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:confirm
+										message="#{strings.cancel_editing}">
+									</xp:confirm>
+
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript://
+											TopicThreadState.clearEditArea();
+											if(param.documentId === null) {
+												context.redirectToPage(sessionScope.webFrom);
+											}
+										}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:panel>
+			</xe:this.facets>
+		</xe:formTable>
+	</xp:panel>
+</xp:view>

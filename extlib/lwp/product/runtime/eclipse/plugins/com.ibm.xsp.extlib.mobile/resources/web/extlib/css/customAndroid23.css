@@ -1,0 +1,6 @@
+/* Android 2.3 specific */
+.mblHeading {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="${javascript:@DbTitle()}"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:script src="/xpServerSide.jss" clientSide="false"></xp:script>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+		<xp:bundle var="res" src="/strings.properties"></xp:bundle>
+		<xp:script src="/xpCGIVariables.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init()}]]></xp:this.beforePageLoad>
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:setPageHistory(res.getString("byMostRecent.title"), view.getPageName())}]]></xp:this.beforeRenderResponse>
+	<xp:this.afterPageLoad><![CDATA[#{javascript:setDisplayFormType(null)}]]></xp:this.afterPageLoad>
+	<xc:layout navigationPath="/byMostRecent.xsp">
+		<xc:headerBar id="headerBar" displayType="#{javascript:DISPLAY_BY_MOST_RECENT}"></xc:headerBar>
+		<xc:actionsBar id="actionsBar"></xc:actionsBar>
+		<xp:panel id="refreshRegion">
+			<xc:mainTopic id="mainTopic" gotoPage="/byMostRecent.xsp"
+				loaded="${javascript:getDisplayFormType() == 1}"></xc:mainTopic>
+			<xc:byMostRecentView id="byMostRecentView" loaded="${javascript:getDisplayFormType() == null}"
+				rows="#{javascript:(null == sessionScope.rows) ? DEFAULT_ROW_COUNT : sessionScope.rows}"></xc:byMostRecentView>
+		</xp:panel>
+	</xc:layout>
+</xp:view>

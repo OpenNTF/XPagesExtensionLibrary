@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+<xe:appPage resetContent="false" id="accordionOutline" pageName="accordionOutline" preload="true">
+			<xe:djxmHeading id="mHeader1" title="Accordion Outline"
+				back="Home" moveTo="home">
+			</xe:djxmHeading>
+			<xe:outline>
+				<xe:this.treeNodes>
+					<xe:basicContainerNode label="Links">
+						<xe:this.children>
+							<xe:basicLeafNode label="Form" href="#form"></xe:basicLeafNode>
+							<xe:basicLeafNode label="Business Card"	href="#businessCard"></xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+					<xe:basicContainerNode label="More Links">
+						<xe:this.children>
+							<xe:basicLeafNode label="Transitions" href="#transitions"></xe:basicLeafNode>
+							<xe:basicLeafNode label="Business Card"	href="#businessCard"></xe:basicLeafNode>
+							<xe:basicLeafNode label="Data View" href="#dataView"></xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+					<xe:basicLeafNode label="Regular Item" href="#transitions"></xe:basicLeafNode>
+				</xe:this.treeNodes>
+
+				<xe:this.treeRenderer>
+					<xe:mobileAccordionMenu></xe:mobileAccordionMenu>
+				</xe:this.treeRenderer>
+			</xe:outline>
+		</xe:appPage>
+</xp:view>

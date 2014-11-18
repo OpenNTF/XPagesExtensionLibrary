@@ -1,0 +1,1874 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>dojo.form</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+    
+    <complex-type>
+        <description>%complex-type.djNumberConstraints.descr%</description>
+        <display-name>%complex-type.djNumberConstraints.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.dojo.form.constraints.NumberConstraints</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.dojo.form.constraints.NumberConstraints</complex-class>
+        <property>
+            <description>%property.min.descr%</description>
+            <display-name>%property.min.name%</display-name>
+            <property-name>min</property-name>
+            <property-class>double</property-class>
+            
+        </property>
+
+        <property>
+            <description>%property.max.descr%</description>
+            <display-name>%property.max.name%</display-name>
+            <property-name>max</property-name>
+            <property-class>double</property-class>
+            
+        </property>
+
+        <property>
+            
+            <description>%property.currency.descr%</description>
+            <display-name>%property.currency.name%</display-name>
+            <property-name>currency</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    
+                    <editor-parameter>
+                        USD
+                        EUR
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.fractional.descr%</description>
+            <display-name>%property.fractional.name%</display-name>
+            <property-name>fractional</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        enable
+                        disable
+                        optional
+                        auto
+                        true
+                        false
+                        [true, false]
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.locale.complex-type.djNumberConstraints.descr%</description>
+            <display-name>%property.locale.complex-type.djNumberConstraints.name%</display-name>
+            <property-name>locale</property-name>
+            <property-class>java.util.Locale</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.langPicker</editor>
+                    
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.pattern.descr%</description>
+            <display-name>%property.pattern.name%</display-name>
+            <property-name>pattern</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            <description>%property.places.descr%</description>
+            <display-name>%property.places.name%</display-name>
+            <property-name>places</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <default-value>-1</default-value>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.strict.complex-type.djNumberConstraints.descr%</description>
+            <display-name>%property.strict.complex-type.djNumberConstraints.name%</display-name>
+            <property-name>strict</property-name>
+            <property-class>boolean</property-class>
+        </property>
+
+        <property>
+            <description>%property.symbol.descr%</description>
+            <display-name>%property.symbol.name%</display-name>
+            <property-name>symbol</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            
+            <description>%property.type.complex-type.djNumberConstraints.descr%</description>
+            <display-name>%property.type.complex-type.djNumberConstraints.name%</display-name>
+            <property-name>type</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        decimal
+                        scientific
+                        percent
+                        currency
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <complex-extension>
+            <tag-name>djNumberConstraints</tag-name>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>%complex-type.djDateTimeConstraints.descr%</description>
+        <display-name>%complex-type.djDateTimeConstraints.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.component.dojo.form.constraints.DateTimeConstraints</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.dojo.form.constraints.DateTimeConstraints</complex-class>
+
+        <property>
+            <description>%property.am.descr%</description>
+            <display-name>%property.am.name%</display-name>
+            <property-name>am</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <tags>
+                        localizable-text
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.pm.descr%</description>
+            <display-name>%property.pm.name%</display-name>
+            <property-name>pm</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <tags>
+                        localizable-text
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.clickableIncrement.descr%</description>
+            <display-name>%property.clickableIncrement.name%</display-name>
+            <property-name>clickableIncrement</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            <description>%property.datePattern.descr%</description>
+            <display-name>%property.datePattern.name%</display-name>
+            <property-name>datePattern</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            <description>%property.timePattern.descr%</description>
+            <display-name>%property.timePattern.name%</display-name>
+            <property-name>timePattern</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            
+            <description>%property.formatLength.descr%</description>
+            <display-name>%property.formatLength.name%</display-name>
+            <property-name>formatLength</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						long
+						short
+						medium
+						full
+					</editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.locale.complex-type.djNumberConstraints.descr%</description>
+            <display-name>%property.locale.complex-type.djNumberConstraints.name%</display-name>
+            <property-name>locale</property-name>
+            <property-class>java.util.Locale</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.langPicker</editor>
+                    
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.selector.descr%</description>
+            <display-name>%property.selector.name%</display-name>
+            <property-name>selector</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        time
+                        date
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.strict.complex-type.djDateTimeConstraints.descr%</description>
+            <display-name>%property.strict.complex-type.djDateTimeConstraints.name%</display-name>
+            <property-name>strict</property-name>
+            <property-class>boolean</property-class>
+        </property>
+
+        <property>
+            <description>%property.visibleIncrement.descr%</description>
+            <display-name>%property.visibleIncrement.name%</display-name>
+            <property-name>visibleIncrement</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <property>
+            <description>%property.visibleRange.descr%</description>
+            <display-name>%property.visibleRange.name%</display-name>
+            <property-name>visibleRange</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+
+        <complex-extension>
+            <tag-name>djDateTimeConstraints</tag-name>
+        </complex-extension>
+    </complex-type>
+    
+
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.dojo.form.FormWidgetBase.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.dojo.form.FormWidgetBase.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoFormWidgetBase</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widgetBase</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.dojo.widget</group-type-ref>
+
+        <property>
+           
+            <description>%property.alt.descr%</description>
+            <display-name>%property.alt.name%</display-name>
+            <property-name>alt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            
+            <description>%property.type.component.com.ibm.xsp.extlib.dojo.form.FormWidgetBase.descr%</description>
+            <display-name>%property.type.component.com.ibm.xsp.extlib.dojo.form.FormWidgetBase.name%</display-name>
+            <property-name>type</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                        <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                        <editor-parameter>
+                            text
+                            password
+                            checkbox
+                            radio
+                            submit
+                            reset
+                            file
+                            hidden
+                            image
+                            button
+                        </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.tabIndex.descr%</description>
+            <display-name>%property.tabIndex.name%</display-name>
+            <property-name>tabIndex</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>accessibility</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.disabled.descr%</description>
+            <display-name>%property.disabled.name%</display-name>
+            <property-name>disabled</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.readOnly.descr%</description>
+            <display-name>%property.readOnly.name%</display-name>
+            <property-name>readOnly</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.intermediateChanges.descr%</description>
+            <display-name>%property.intermediateChanges.name%</display-name>
+            <property-name>intermediateChanges</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>dojo</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.onChange.descr%</description>
+            <display-name>%property.onChange.name%</display-name>
+            <property-name>onChange</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>change-event</subcategory>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+          
+          <description>%property.disableClientSideValidation.descr%</description>
+          <display-name>%property.disableClientSideValidation.name%</display-name>
+          <property-name>disableClientSideValidation</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+            
+            <allow-run-time-binding>true</allow-run-time-binding>
+            <designer-extension>
+              
+              <is-deprecated>true</is-deprecated>
+              <category>data</category>
+              
+              <tags>
+                 allow-runtime-binding-but-not-invoke
+              </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+            
+
+        <component-extension>
+            <component-family>javax.faces.Input</component-family>
+            <base-component-type>com.ibm.xsp.UIInputEx</base-component-type>
+            <designer-extension>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    
+    <component>
+        <description>%component.djTextBox.descr%</description>
+        <display-name>%component.djTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.TextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoTextBox</component-class>
+
+        <property>
+            <description>%property.trim.descr%</description>
+            <display-name>%property.trim.name%</display-name>
+            <property-name>trim</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.uppercase.descr%</description>
+            <display-name>%property.uppercase.name%</display-name>
+            <property-name>uppercase</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.lowercase.descr%</description>
+            <display-name>%property.lowercase.name%</display-name>
+            <property-name>lowercase</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.propercase.descr%</description>
+            <display-name>%property.propercase.name%</display-name>
+            <property-name>propercase</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.maxLength.descr%</description>
+            <display-name>%property.maxLength.name%</display-name>
+            <property-name>maxLength</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.TextBox</renderer-type>
+            <tag-name>djTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+                <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djValidationTextBox.descr%</description>
+        <display-name>%component.djValidationTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoValidationTextBox</component-class>
+
+
+  
+        <property>
+            <description>%property.promptMessage.descr%</description>
+            <display-name>%property.promptMessage.name%</display-name>
+            <property-name>promptMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.invalidMessage.descr%</description>
+            <display-name>%property.invalidMessage.name%</display-name>
+            <property-name>invalidMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.regExp.descr%</description>
+            <display-name>%property.regExp.name%</display-name>
+            <property-name>regExp</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.regExpGen.descr%</description>
+            <display-name>%property.regExpGen.name%</display-name>
+            <property-name>regExpGen</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                </designer-extension>   
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.tooltipPosition.descr%</description>
+            <display-name>%property.tooltipPosition.name%</display-name>
+            <property-name>tooltipPosition</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        auto
+                        before
+                        after
+                        above
+                        below
+                        top
+                        bottom
+                    </editor-parameter>
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.validatorExt.descr%</description>
+            <display-name>%property.validatorExt.name%</display-name>
+            <property-name>validatorExt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.displayMessageExt.descr%</description>
+            <display-name>%property.displayMessageExt.name%</display-name>
+            <property-name>displayMessageExt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.TextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</renderer-type>
+            <tag-name>djValidationTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertMask&gt;&lt;/xp:convertMask&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.dojo.form.MappedTextBox.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.dojo.form.MappedTextBox.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.form.MappedTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoMappedTextBox</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</base-component-type>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</renderer-type>
+            <component-family>javax.faces.Input</component-family>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoRangeBoundTextBox</component-class>
+
+        <property>
+            <description>%property.rangeMessage.descr%</description>
+            <display-name>%property.rangeMessage.name%</display-name>
+            <property-name>rangeMessage</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.MappedTextBox</base-component-type>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</renderer-type>
+            <component-family>javax.faces.Input</component-family>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djNumberTextBox.descr%</description>
+        <display-name>%component.djNumberTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.NumberTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoNumberTextBox</component-class>
+
+        <property>
+            
+            <description>%property.javaType.descr%</description>
+            <display-name>%property.javaType.name%</display-name>
+            <property-name>javaType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        byte
+                        short
+                        int
+                        long
+                        float
+                        double
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+          <description>%property.constraints.component.djNumberTextBox.descr%</description>
+          <display-name>%property.constraints.component.djNumberTextBox.name%</display-name>
+          <property-name>constraints</property-name>
+          <property-class>com.ibm.xsp.extlib.component.dojo.form.constraints.NumberConstraints</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                    <category>data</category>
+                    
+                    <tags>
+                        todo
+                    </tags>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.NumberTextBox</renderer-type>
+            <tag-name>djNumberTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertNumber type="number"&gt;&lt;/xp:convertNumber&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djNumberSpinner.descr%</description>
+        <display-name>%component.djNumberSpinner.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.NumberSpinner</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoNumberSpinner</component-class>
+
+        <property>
+          <description>%property.defaultTimeout.descr%</description>
+          <display-name>%property.defaultTimeout.name%</display-name>
+          <property-name>defaultTimeout</property-name>
+          <property-class>int</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          
+          <description>%property.timeoutChangeRate.descr%</description>
+          <display-name>%property.timeoutChangeRate.name%</display-name>
+          <property-name>timeoutChangeRate</property-name>
+          <property-class>double</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.smallDelta.descr%</description>
+          <display-name>%property.smallDelta.name%</display-name>
+          <property-name>smallDelta</property-name>
+          <property-class>double</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.largeDelta.descr%</description>
+          <display-name>%property.largeDelta.name%</display-name>
+          <property-name>largeDelta</property-name>
+          <property-class>double</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.NumberTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.NumberSpinner</renderer-type>
+            <tag-name>djNumberSpinner</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertNumber type="number"&gt;&lt;/xp:convertNumber&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djCurrencyTextBox.descr%</description>
+        <display-name>%component.djCurrencyTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.CurrencyTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoCurrencyTextBox</component-class>
+
+        <property>
+          <description>%property.constraints.component.djCurrencyTextBox.descr%</description>
+          <display-name>%property.constraints.component.djCurrencyTextBox.name%</display-name>
+          <property-name>constraints</property-name>
+          <property-class>com.ibm.xsp.extlib.component.dojo.form.constraints.NumberConstraints</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox</base-component-type>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.CurrencyTextBox</renderer-type>
+            <component-family>javax.faces.Input</component-family>
+            <tag-name>djCurrencyTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertNumber type="number"&gt;&lt;/xp:convertNumber&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djDateTextBox.descr%</description>
+        <display-name>%component.djDateTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.DateTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoDateTextBox</component-class>
+
+        <property>
+          <description>%property.constraints.component.djDateTextBox.descr%</description>
+          <display-name>%property.constraints.component.djDateTextBox.name%</display-name>
+          <property-name>constraints</property-name>
+          <property-class>com.ibm.xsp.extlib.component.dojo.form.constraints.DateTimeConstraints</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.DateTextBox</renderer-type>
+            <tag-name>djDateTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertDateTime type="date"&gt;&lt;/xp:convertDateTime&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djTimeTextBox.descr%</description>
+        <display-name>%component.djTimeTextBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.TimeTextBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoTimeTextBox</component-class>
+
+        <property>
+          <description>%property.constraints.component.djTimeTextBox.descr%</description>
+          <display-name>%property.constraints.component.djTimeTextBox.name%</display-name>
+          <property-name>constraints</property-name>
+          <property-class>com.ibm.xsp.extlib.component.dojo.form.constraints.DateTimeConstraints</property-class>
+          <property-extension>
+            <allow-run-time-binding>false</allow-run-time-binding>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.RangeBoundTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.TimeTextBox</renderer-type>
+            <tag-name>djTimeTextBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputText id="inputText1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&#13;
+        &lt;xp:this.converter&gt;&#13;
+            &lt;xp:convertDateTime type="date"&gt;&lt;/xp:convertDateTime&gt;&#13;
+        &lt;/xp:this.converter&gt;&#13;
+    &lt;/xp:inputText&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djComboBox.descr%</description>
+        <display-name>%component.djComboBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.ComboBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoComboBox</component-class>
+
+        <property>
+          
+          <description>%property.pageSize.descr%</description>
+          <display-name>%property.pageSize.name%</display-name>
+          <property-name>pageSize</property-name>
+          <property-class>int</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.store.descr%</description>
+          <display-name>%property.store.name%</display-name>
+          <property-name>store</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>data</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.autoComplete.descr%</description>
+          <display-name>%property.autoComplete.name%</display-name>
+          <property-name>autoComplete</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.searchDelay.descr%</description>
+          <display-name>%property.searchDelay.name%</display-name>
+          <property-name>searchDelay</property-name>
+          <property-class>int</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.searchAttr.descr%</description>
+          <display-name>%property.searchAttr.name%</display-name>
+          <property-name>searchAttr</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+            <designer-extension>
+                <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.queryExpr.descr%</description>
+          <display-name>%property.queryExpr.name%</display-name>
+          <property-name>queryExpr</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+            <designer-extension>
+                <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.ignoreCase.descr%</description>
+          <display-name>%property.ignoreCase.name%</display-name>
+          <property-name>ignoreCase</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.hasDownArrow.descr%</description>
+          <display-name>%property.hasDownArrow.name%</display-name>
+          <property-name>hasDownArrow</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+            <default-value>true</default-value>
+            <designer-extension>
+                    <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.ValidationTextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.ComboBox</renderer-type>
+            <tag-name>djComboBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:comboBox id="comboBox1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&lt;/xp:comboBox&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>%component.djFilteringSelect.descr%</description>
+        <display-name>%component.djFilteringSelect.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.FilteringSelect</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoFilteringSelect</component-class>
+
+        <property>
+          <description>%property.labelAttr.descr%</description>
+          <display-name>%property.labelAttr.name%</display-name>
+          <property-name>labelAttr</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+              <designer-extension>
+                <category>format</category>
+                <tags>
+                    not-localizable
+                </tags>
+              </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.labelType.descr%</description>
+          <display-name>%property.labelType.name%</display-name>
+          <property-name>labelType</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+              <designer-extension>
+                <category>format</category>
+                <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                <editor-parameter>
+                    text
+                    html
+                </editor-parameter>
+                
+                
+                <tags>
+                    not-localizable
+                    todo
+                </tags>
+              </designer-extension>
+          </property-extension>
+        </property>
+
+        <property>
+          <description>%property.labelFunc.descr%</description>
+          <display-name>%property.labelFunc.name%</display-name>
+          <property-name>labelFunc</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <tags>
+                        not-localizable
+                        todo
+                    </tags>
+                </designer-extension>   
+          </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.ComboBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.FilteringSelect</renderer-type>
+            <tag-name>djFilteringSelect</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:comboBox id="comboBox1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&lt;/xp:comboBox&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>%component.djTextarea.descr%</description>
+        <display-name>%component.djTextarea.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.Textarea</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoTextarea</component-class>
+
+        <property>
+          <description>%property.cols.descr%</description>
+          <display-name>%property.cols.name%</display-name>
+          <property-name>cols</property-name>
+          <property-class>int</property-class>
+          <property-extension>
+              <designer-extension>
+                  <category>format</category>
+              </designer-extension>
+          </property-extension>
+        </property>
+        
+        <property>
+          <description>%property.rows.descr%</description>
+          <display-name>%property.rows.name%</display-name>
+          <property-name>rows</property-name>
+          <property-class>int</property-class>
+          <property-extension>
+              <designer-extension>
+                  <category>format</category>
+              </designer-extension>
+          </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.TextBox</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.Textarea</renderer-type>
+            <tag-name>djTextarea</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputTextarea id="inputTextarea1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&lt;/xp:inputTextarea&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>%component.djSimpleTextarea.descr%</description>
+        <display-name>%component.djSimpleTextarea.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.SimpleTextarea</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoSimpleTextarea</component-class>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.Textarea</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.SimpleTextarea</renderer-type>
+            <tag-name>djSimpleTextarea</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:inputTextarea id="inputTextarea1" value="&lt;%=this.value?this.value:''%&gt;"&gt;&lt;/xp:inputTextarea&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        
+        <description>%component.djButton.descr%</description>
+        <display-name>%component.djButton.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.Button</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoButton</component-class>
+
+        <property>
+            <description>%property.label.component.djButton.descr%</description>
+            <display-name>%property.label.component.djButton.name%</display-name>
+            <property-name>label</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            
+            <description>%property.showLabel.descr%</description>
+            <display-name>%property.showLabel.name%</display-name>
+            <property-name>showLabel</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>%property.iconClass.descr%</description>
+            <display-name>%property.iconClass.name%</display-name>
+            <property-name>iconClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                    
+                    <tags>
+                       not-image-path
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        
+        <property>
+            <description>%property.required.descr%</description>
+            <display-name>%property.required.name%</display-name>
+            <property-name>required</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <is-deprecated>true</is-deprecated>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.Button</renderer-type>
+            <tag-name>djButton</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:button value="&lt;%=this.label?this.label:''%&gt;" id="button1"&gt;&lt;/xp:button&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <group>
+        
+        <group-type>com.ibm.xsp.extlib.group.EditableValueHolder.prop.required</group-type>
+        <property>
+          <description>%/javax.faces.component.group.EditableValueHolder/required/descr%</description>
+          <display-name>%/javax.faces.component.group.EditableValueHolder/required/name%</display-name>
+          <property-name>required</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+            <designer-extension>
+              <category>basics</category>
+            </designer-extension>
+          </property-extension>
+        </property>
+        <group-extension>
+          <designer-extension>
+            <tags>group-in-control</tags>
+          </designer-extension>
+        </group-extension>
+    </group>
+    
+    <component>
+        <description>%component.djToggleButton.descr%</description>
+        <display-name>%component.djToggleButton.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.ToggleButton</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoToggleButton</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.EditableValueHolder.prop.required</group-type-ref>
+        
+        <property>
+            <description>%property.checkedValue.descr%</description>
+            <display-name>%property.checkedValue.name%</display-name>
+            <property-name>checkedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.uncheckedValue.descr%</description>
+            <display-name>%property.uncheckedValue.name%</display-name>
+            <property-name>uncheckedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.Button</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.ToggleButton</renderer-type>
+            <tag-name>djToggleButton</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>%component.djCheckBox.descr%</description>
+        <display-name>%component.djCheckBox.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.CheckBox</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoCheckBox</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.ToggleButton</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.CheckBox</renderer-type>
+            <tag-name>djCheckBox</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:checkBox id="checkBox1" text="&lt;%=this.label?this.label:''%&gt;"&gt;&lt;/xp:checkBox&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+    <component>
+        <description>%component.djRadioButton.descr%</description>
+        <display-name>%component.djRadioButton.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.RadioButton</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoRadioButton</component-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.group.EditableValueHolder.prop.required</group-type-ref>
+
+        <property>
+            <description>%property.selectedValue.descr%</description>
+            <display-name>%property.selectedValue.name%</display-name>
+            <property-name>selectedValue</property-name>
+            <property-class>java.lang.Object</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.groupName.descr%</description>
+            <display-name>%property.groupName.name%</display-name>
+            <property-name>groupName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.skipContainers.descr%</description>
+            <display-name>%property.skipContainers.name%</display-name>
+            <property-name>skipContainers</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.Button</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.RadioButton</renderer-type>
+            <tag-name>djRadioButton</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:radio id="radio1" text="&lt;%=this.label?this.label:''%&gt;"&gt;&lt;/xp:radio&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+                
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.com.ibm.xsp.extlib.dojo.form.SliderBase.descr%</description>
+        <display-name>%component.com.ibm.xsp.extlib.dojo.form.SliderBase.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.dojo.form.SliderBase</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoSliderBase</component-class>
+
+        <property>
+            <description>%property.showButtons.descr%</description>
+            <display-name>%property.showButtons.name%</display-name>
+            <property-name>showButtons</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.minimum.component.com.ibm.xsp.extlib.dojo.form.SliderBase.descr%</description>
+            <display-name>%property.minimum.component.com.ibm.xsp.extlib.dojo.form.SliderBase.name%</display-name>
+            <property-name>minimum</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.maximum.component.com.ibm.xsp.extlib.dojo.form.SliderBase.descr%</description>
+            <display-name>%property.maximum.component.com.ibm.xsp.extlib.dojo.form.SliderBase.name%</display-name>
+            <property-name>maximum</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.discreteValues.descr%</description>
+            <display-name>%property.discreteValues.name%</display-name>
+            <property-name>discreteValues</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.pageIncrement.descr%</description>
+            <display-name>%property.pageIncrement.name%</display-name>
+            <property-name>pageIncrement</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.clickSelect.descr%</description>
+            <display-name>%property.clickSelect.name%</display-name>
+            <property-name>clickSelect</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.slideDuration.descr%</description>
+            <display-name>%property.slideDuration.name%</display-name>
+            <property-name>slideDuration</property-name>
+            <property-class>double</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djHorizontalSlider.descr%</description>
+        <display-name>%component.djHorizontalSlider.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.HorizontalSlider</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoHorizontalSlider</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.SliderBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.HorizontalSlider</renderer-type>
+            <tag-name>djHorizontalSlider</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:image url="extlib/designer/markup/DojoHorizontalSlider.jpg" id="image1"&gt;&lt;/xp:image&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djVerticalSlider.descr%</description>
+        <display-name>%component.djVerticalSlider.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.VerticalSlider</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoVerticalSlider</component-class>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.SliderBase</base-component-type>
+            <component-family>javax.faces.Input</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.VerticalSlider</renderer-type>
+            <tag-name>djVerticalSlider</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+    &lt;xp:image url="/extlib/designer/markup/DojoVerticalSlider.jpg" id="image1"&gt;&lt;/xp:image&gt;&#13;
+&lt;/xp:view&gt;&#13;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>%component.djSliderRule.descr%</description>
+        <display-name>%component.djSliderRule.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.SliderRule</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoSliderRule</component-class>
+
+        <property>
+            <description>%property.ruleStyle.descr%</description>
+            <display-name>%property.ruleStyle.name%</display-name>
+            <property-name>ruleStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.count.descr%</description>
+            <display-name>%property.count.name%</display-name>
+            <property-name>count</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.container.descr%</description>
+            <display-name>%property.container.name%</display-name>
+            <property-name>container</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        topDecoration
+                        bottomDecoration
+                        leftDecoration
+                        rightDecoration
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+            <component-family>com.ibm.xsp.extlib.dojo.form.SliderRule</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.SliderRule</renderer-type>
+            <tag-name>djSliderRule</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <complex-type>
+        <description>%complex-type.djSliderRuleLabel.descr%</description>
+        <display-name>%complex-type.djSliderRuleLabel.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.dojo.form.SliderRuleLabel</complex-id>
+        <complex-class>com.ibm.xsp.extlib.dojo.form.SliderRuleLabel</complex-class>
+
+        <property>
+            <description>%property.label.complex-type.djSliderRuleLabel.descr%</description>
+            <display-name>%property.label.complex-type.djSliderRuleLabel.name%</display-name>
+            <property-name>label</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+
+        <complex-extension>
+            <tag-name>djSliderRuleLabel</tag-name>
+        </complex-extension>
+    </complex-type>
+
+    <component>
+        <description>%component.djSliderRuleLabels.descr%</description>
+        <display-name>%component.djSliderRuleLabels.name%</display-name>
+        
+        <component-type>com.ibm.xsp.extlib.dojo.form.SliderRuleLabels</component-type>
+        <component-class>com.ibm.xsp.extlib.component.dojo.form.UIDojoSliderRuleLabels</component-class>
+
+        <property>
+            <description>%property.labelStyle.descr%</description>
+            <display-name>%property.labelStyle.name%</display-name>
+            <property-name>labelStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>styling</category>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                    
+                    <tags>
+                        todo
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.labels.descr%</description>
+            <display-name>%property.labels.name%</display-name>
+            <property-name>labels</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.client.script.editor</editor>
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.labelsList.descr%</description>
+            <display-name>%property.labelsList.name%</display-name>
+            <property-name>labelsList</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.dojo.form.SliderRuleLabel</property-item-class>
+                <property-add-method>addLabel</property-add-method>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.numericMargin.descr%</description>
+            <display-name>%property.numericMargin.name%</display-name>
+            <property-name>numericMargin</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.minimum.component.djSliderRuleLabels.descr%</description>
+            <display-name>%property.minimum.component.djSliderRuleLabels.name%</display-name>
+            <property-name>minimum</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.maximum.component.djSliderRuleLabels.descr%</description>
+            <display-name>%property.maximum.component.djSliderRuleLabels.name%</display-name>
+            <property-name>maximum</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>%property.constraints.component.djSliderRuleLabels.descr%</description>
+            <display-name>%property.constraints.component.djSliderRuleLabels.name%</display-name>
+            <property-name>constraints</property-name>
+            <property-class>com.ibm.xsp.extlib.component.dojo.form.constraints.NumberConstraints</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.dojo.form.SliderRule</base-component-type>
+            <component-family>com.ibm.xsp.extlib.dojo.form.SliderRuleLabels</component-family>
+            <renderer-type>com.ibm.xsp.extlib.dojo.form.SliderRuleLabels</renderer-type>
+            <tag-name>djSliderRuleLabels</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Dojo Form</category>
+                
+                <tags>
+                   todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+
+</faces-config>

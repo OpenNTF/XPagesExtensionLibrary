@@ -1,0 +1,405 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>jdbc</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+    <group>
+        
+        <group-type>com.ibm.xsp.extlib.relational.group.connection</group-type>
+         <property>
+            <description>%property.connectionName.group.connection.descr%</description>
+            <display-name>%property.connectionName.group.connection.name%</display-name>
+            <property-name>connectionName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        java:comp/env/jdbc/databaseName
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.connectionUrl.group.connection.descr%</description>
+            <display-name>%property.connectionUrl.group.connection.name%</display-name>
+            <property-name>connectionUrl</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        jdbc:db2:databaseName
+                        jdbc:db2//server/database
+                        jdbc:db2//server:port/database
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        
+        <group-type>com.ibm.xsp.extlib.relational.group.connection_control</group-type>
+         <property>
+            <description>%property.connectionName.group.connection.descr%</description>
+            <display-name>%property.connectionName.group.connection.name%</display-name>
+            <property-name>connectionName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        java:comp/env/jdbc/databaseName
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.connectionUrl.group.connection.descr%</description>
+            <display-name>%property.connectionUrl.group.connection.name%</display-name>
+            <property-name>connectionUrl</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        jdbc:db2:databaseName
+                        jdbc:db2//server/database
+                        jdbc:db2//server:port/database
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <group-type>com.ibm.xsp.extlib.relational.group.connectionManager</group-type>
+
+        
+        <property>
+            <description>%property.connectionManager.descr%</description>
+            <display-name>%property.connectionManager.name%</display-name>
+            <property-name>connectionManager</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+                    <editor-parameter>
+                        http://www.ibm.com/xsp/coreex|jdbcConnectionManager
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+    
+    <group>
+        <group-type>com.ibm.xsp.extlib.relational.group.query</group-type>
+        <property>
+            
+            <description>%property.sqlFile.descr%</description>
+            <display-name>%property.sqlFile.name%</display-name>
+            <property-name>sqlFile</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.sqlQuery.descr%</description>
+            <display-name>%property.sqlQuery.name%</display-name>
+            <property-name>sqlQuery</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.std.MultiLine</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.sqlTable.descr%</description>
+            <display-name>%property.sqlTable.name%</display-name>
+            <property-name>sqlTable</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.sqlParameters.descr%</description>
+            <display-name>%property.sqlParameters.name%</display-name>
+            <property-name>sqlParameters</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</property-item-class>
+                <property-add-method>addSqlParameter</property-add-method>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-complex
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+
+    <component>
+        <description>%component.jdbcConnectionManager.descr%</description>
+        <display-name>%component.jdbcConnectionManager.name%</display-name>
+        <component-type>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</component-type>
+        <component-class>com.ibm.xsp.extlib.relational.component.jdbc.UIJdbcConnectionManager</component-class>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection_control</group-type-ref>
+
+        <property>
+            <description>%property.autoCommit.descr%</description>
+            <display-name>%property.autoCommit.name%</display-name>
+            <property-name>autoCommit</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.transactionIsolation.descr%</description>
+            <display-name>%property.transactionIsolation.name%</display-name>
+            <property-name>transactionIsolation</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>data</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        TRANSACTION_NONE
+                        TRANSACTION_READ_COMMITTED
+                        TRANSACTION_READ_UNCOMMITTED
+                        TRANSACTION_REPEATABLE_READ
+                        TRANSACTION_SERIALIZABLE
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            
+            <description>%property.initConnection.descr%</description>
+            <display-name>%property.initConnection.name%</display-name>
+            <property-name>initConnection</property-name>
+            <property-class>javax.faces.el.MethodBinding</property-class>
+            <property-extension>
+                <method-binding-property>true</method-binding-property>
+                <designer-extension>
+                    <category>data</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+           	   
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+            <component-family>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.relational.jdbc.JdbcConnectionManager</renderer-type>
+			<tag-name>jdbcConnectionManager</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Data Access</category>
+                <tags>
+                	no-faces-config-renderer
+                	no-rendered-output
+                </tags>
+      		</designer-extension>
+		</component-extension>        
+    </component>
+
+	<complex-type>
+		<description>%complex-type.jdbcQuery.descr%</description>
+		<display-name>%complex-type.jdbcQuery.name%</display-name>
+		<complex-id>com.ibm.xsp.extlib.relational.jdbc.model.JdbcDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.relational.jdbc.model.JdbcDataSource</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connectionManager</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+		
+        <property>
+            <description>%property.calculateCount.descr%</description>
+            <display-name>%property.calculateCount.name%</display-name>
+            <property-name>calculateCount</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+		<property>
+			<description>%property.sqlCountQuery.descr%</description>
+			<display-name>%property.sqlCountQuery.name%</display-name>
+			<property-name>sqlCountQuery</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <editor>com.ibm.std.MultiLine</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.sqlCountFile.descr%</description>
+			<display-name>%property.sqlCountFile.name%</display-name>
+			<property-name>sqlCountFile</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>%property.defaultOrderBy.descr%</description>
+			<display-name>%property.defaultOrderBy.name%</display-name>
+			<property-name>defaultOrderBy</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<tag-name>jdbcQuery</tag-name>
+			<base-complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</base-complex-id>
+		</complex-extension>
+	</complex-type>
+	
+  	<complex-type>
+    	<description>%complex-type.sqlParameter.descr%</description>
+    	<display-name>%complex-type.sqlParameter.name%</display-name>
+    	<complex-id>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.relational.jdbc.model.SqlParameter</complex-class>
+    	<property>
+      		<description>%property.value.descr%</description>
+      		<display-name>%property.value.name%</display-name>
+      		<property-name>value</property-name>
+      		<property-class>java.lang.Object</property-class>
+      		<property-extension>
+      		</property-extension>
+    	</property>
+    	<complex-extension>
+      		<tag-name>sqlParameter</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+    <complex-type>
+        
+        <description>%complex-type.jdbcRowSet.descr%</description>
+        <display-name>%complex-type.jdbcRowSet.name%</display-name>
+        <complex-id>com.ibm.xsp.extlib.relational.jdbc.model.JdbcRowSetSource</complex-id>
+        <complex-class>com.ibm.xsp.extlib.relational.jdbc.model.JdbcRowSetSource</complex-class>
+        
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.connectionManager</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+
+        <property>
+            <description>%property.rowSetJavaClass.descr%</description>
+            <display-name>%property.rowSetJavaClass.name%</display-name>
+            <property-name>rowSetJavaClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    
+                    <tags>
+                        not-css-class
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+  		<property>
+			<description>%property.maxRows.descr%</description>
+			<display-name>%property.maxRows.name%</display-name>
+			<property-name>maxRows</property-name>
+			<property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>%property.showDeleted.descr%</description>
+            <display-name>%property.showDeleted.name%</display-name>
+            <property-name>showDeleted</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>jdbcRowSet</tag-name>
+            <base-complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</base-complex-id>
+            <designer-extension>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+	
+</faces-config>

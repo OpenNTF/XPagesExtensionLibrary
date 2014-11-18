@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>data</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+<!-- move to extlib-data-pagers.xsp-config -->
+    <group>
+        <!-- key-suffix: partial -->
+        <group-type>com.ibm.xsp.extlib.partial</group-type>
+        <property>
+              <!-- # The "for" should not be translated, it refers to the For Identifier property -->
+            <description>Specifies that the built-in control actions should partial refresh this control, or the control referenced by the "for" property. This defaults to true.</description>
+            <display-name>Partial Refresh</display-name>
+            <property-name>partialRefresh</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- runtime-default-true is a skip for fails in BooleanPropertyDefaultTest,
+                         the true value will cause problems in the theme handling for this property -->
+                    <tags>
+                       runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+              <!-- # The "for" should not be translated, it refers to the For Identifier property -->
+            <description>Defines the ID of the control to refresh when Partial Refresh is enabled. If empty, then the control will refresh itself or the control referenced by the "for" property.</description>
+            <display-name>Partial Refresh ID</display-name>
+            <property-name>refreshId</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Specifies that the built-in control actions should execute only this control and its children, if any. This defaults to true.</description>
+            <display-name>Partial Execute</display-name>
+            <property-name>partialExecute</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- runtime-default-true is a skip for fails in BooleanPropertyDefaultTest,
+                         the true value will cause problems in the theme handling for this property -->
+                    <tags>
+                       runtime-default-true
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+    </group>
+            
+<!-- Pagers -->
+    <component>
+        <description>The base class for the Extension Library controls that allow the browser user to change the configuration of the data iterator controls, for example, providing a link to show more rows in a Data View control</description>
+        <display-name>Abstract Extension Library Pager</display-name>
+        <component-type>com.ibm.xsp.extlib.data.AbstractPager</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.AbstractPager</component-class>
+        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+
+        <property>
+            <description>Holds the ID of the repeating control that this pager is to effect. The For Identifier is not needed when this control placed in a container repeating control.</description>
+            <display-name>For Identifier</display-name>
+            <property-name>for</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <description>Enables the user to select the number of items being displayed in a data iterator</description>
+        <display-name>Pager Sizes</display-name>
+        <component-type>com.ibm.xsp.extlib.data.PagerSizes</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIPagerSizes</component-class>
+
+        <property>
+            <!-- # The {0} will be displayed in the tooltip - this description is not processed to insert a value at those locations. -->
+            <description>Overrides the default text "Show {0} items per page". The value should include a {0} tag at the location where the page size options are to be inserted.</description>
+            <display-name>Text</display-name>
+            <property-name>text</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # The quoted text "all" should not be translated. This is describing a property like sizes="10|25|50|all" -->
+            <description>Defines the page sizes to be displayed in the page size selector. The sizes should be separated using a "|" character. Each size must be a number or the value "all", which means all items and is translated by the control.</description>
+            <display-name>Page Sizes</display-name>
+            <property-name>sizes</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <!-- note, this is not localizable -->
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        10|25|50|all
+                        25|100
+                    </editor-parameter>
+                    <!-- TODO sizes rendered number should use locale-aware converter,
+                    e.g. when using 10|50|1000 as the sizes, then it should be rendered
+                    as 10|50|1,000
+                    -->
+                    <!-- Note that the rendered value does not use the | character
+                    but uses CSS styling to achieve that effect, so there is no
+                    character encoding issue around the | character -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+            <renderer-type>com.ibm.xsp.extlib.data.PagerSizes</renderer-type>
+            <tag-name>pagerSizes</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO the design visualization is non-localizable. -->
+                <tags>
+                  todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <description>A control that allows the user to expand or collapse all the rows in a data iterator control</description>
+        <display-name>Pager Expand/Collapse</display-name>
+        <component-type>com.ibm.xsp.extlib.data.PagerExpand</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIPagerExpand</component-class>
+
+        <property>
+            <description>Overrides the default text for the Expand All link</description>
+            <display-name>Expand Text</display-name>
+            <property-name>expandText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Overrides the default text for the Collapse All link</description>
+            <display-name>Collapse Text</display-name>
+            <property-name>collapseText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.PagerExpand</renderer-type>
+            <tag-name>pagerExpand</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO the design visualization is non-localizable. -->
+                <tags>
+                  todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <description>A control that lets a user show or hide all of the detail areas in a data iterator control.</description>
+        <display-name>Pager Show/Hide Details</display-name>
+        <component-type>com.ibm.xsp.extlib.data.PagerDetail</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIPagerDetail</component-class>
+
+        <property>
+            <description>Overrides the default text for the Show Details link</description>
+            <display-name>Show Details Text</display-name>
+            <property-name>showText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Overrides the default text for the Hide Details link</description>
+            <display-name>Hide Details Text</display-name>
+            <property-name>hideText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.PagerDetail</renderer-type>
+            <tag-name>pagerDetail</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO this attempts to reference a non-existent image - PagerDetail.png does not exist 
+                 and if it is added it will be not-easily localizable -->
+                <tags>
+                  todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+    <component>
+        <description>Enables the user to add rows at the end of the iterator</description>
+        <display-name>Pager Add Rows</display-name>
+        <component-type>com.ibm.xsp.extlib.data.PagerAddRows</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIPagerAddRows</component-class>
+
+        <property>
+            <description>Overrides the default text displayed in a link for adding new rows</description>
+            <display-name>Text</display-name>
+            <property-name>text</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the number of rows to be added to iterator. When this property is absent, the default number of rows are added.</description>
+            <display-name>Number of Rows</display-name>
+            <property-name>rowCount</property-name>
+            <property-class>int</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicate if the updated state, after getting the AJAX request, should be saved on the server. This defaults to false.</description>
+            <display-name>Save State on Server</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # AJAX is a technical acronym (Asynchronous JavaScript And XML) and should not be translated. "partialRefresh" is a property name and should not be translated. -->
+            <description>This forces a page refresh, either a full or partial refresh. By default, the control uses a type of AJAX request that is different to a partial refresh request. When this property is set, the "partialRefresh" property will determine whether the page refresh is a full refresh or a partial refresh.</description>
+            <display-name>Refresh the Page Content</display-name>
+            <property-name>refreshPage</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- xe:pagerAddRows "refreshPage". 
+                    by default instead of doing a partial or full update, 
+                    it does a different kind of ajax request,
+                    I doubt that those requests behave correctly 
+                    when you're editing an inline document within the view,
+                    will the returned page chunk contain the values that 
+                    had been typed in to the browser before doing Show More?
+                    We may need to do a functional breaking change here, 
+                    by making it do a full or partial refresh by default,
+                    and people would only enable the other ajax request 
+                    if they know they're not editing docs in the view.
+                     -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <!-- # "hide", "link", "text" and "auto" in quotes should not be translated. -->
+            <description>How the control should appear when there are no more rows available. The options are "hide", where the control is not shown, "link", where the label continues to be shown as a link but there is no change when the link is clicked, "text", meaning that link label is shown as text rather than a link, and "auto", meaning that the control will choose the format automatically. The default behavior, when the value is absent or set to "auto" is to display the link label as text, same as the "text" option</description>
+            <display-name>Disabled Format</display-name>
+            <property-name>disabledFormat</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        hide
+                        text
+                        link
+                        auto
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.PagerAddRows</renderer-type>
+            <tag-name>pagerAddRows</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library</category>
+                <!-- TODO the design visualization is non-localizable. -->
+                <!-- TODO for accessibility, at present when all rows are shown the link disappears,
+                but it should instead appear disabled - this would be a functional breaking change
+                - the app will still compile, but the behavior will change in a manner that may be considered a break. -->
+                <tags>
+                  todo
+                </tags>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+
+    <component>
+        <!-- Note, this saves more than just the rows count, also saves info of which page you're on, 
+        expanded paths, etc. 
+        -->
+        <description>This control save the state of a data iterator control, so that when you navigate away from the page and back again, the number of rows displayed in the data iterator is the same.</description>
+        <display-name>Pager Save State</display-name>
+        <component-type>com.ibm.xsp.extlib.data.PagerSaveState</component-type>
+        <component-class>com.ibm.xsp.extlib.component.data.UIPagerSaveState</component-class>
+
+        <property>
+            <description>Specifies if the number of rows should be stored globally for all views in this user session or is specific to this view control. This defaults to false, meaning the saved row count state is used for this view only.</description>
+            <display-name>Global Rows</display-name>
+            <property-name>globalRows</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <!-- Note, even though this pagerSaveState control saves
+                multiple kinds of state, this property only effects
+                the saving of the "rows" value - the other state is not saved
+                globally when this option is set, only the rows value is made global. -->
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <component-extension>
+            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+            <renderer-type>com.ibm.xsp.extlib.data.PagerSaveState</renderer-type>
+            <tag-name>pagerSaveState</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <!-- xe:pagerSaveState 
+                may need to change the default behavior there. Currently every
+                view control in the app (on pages that have an xe:pagerSaveState) will
+                show the same number of rows, but think it should default to only applying
+                to this clientId in a page with this name, and if you want it to apply to 
+                more view control instances, then you should specify a groupName property
+                where all views where the pagerSaveState has group "largeWithIcons" will
+                show X number of pages, and views where the pagerSaveState has group
+                "oneLinePerRow" will show Y pages - a larger number. -->
+                <tags>
+                  todo
+                </tags>
+                <category>Extension Library</category>
+                <!-- This does not have a renderer by default because it doesn't
+                render anything to the HTML output, as it is a server-side only
+                control. -->
+                <tags>
+                  no-faces-config-renderer
+                </tags>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:image url="/extlib/designer/markup/PagerSaveState.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+
+<!-- /end move to extlib-data-pagers.xsp-config -->
+<!-- move to extlib-data-pagers.xsp-config -->
+    
+<!-- CLIENT SIDE ACTIONS  -->   
+    <complex-type>
+        <description>Dynamically add rows to a data iterator.</description>
+        <display-name>Add Rows to a Data Iterator</display-name>
+        <complex-id>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-id>
+        <complex-class>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-class>
+        <property>
+            <description>The ID of the repeating control that this action will add rows to. This property is optional when the control containing this simple action is nested in a repeating control, in which case the rows will be added to that repeating control.</description>
+            <display-name>For</display-name>
+            <property-name>for</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>The number of rows to add. When this property is absent, the default number of rows are added.</description>
+            <display-name>Additional Rows Count</display-name>
+            <property-name>rowCount</property-name>
+            <property-class>int</property-class>
+        </property>
+        <property>
+            <description>Defines the ID of the control to hide or disable when no more rows are available. This will usually point to a link control with text like "Show More".</description>
+            <display-name>Disable ID</display-name>
+            <property-name>disableId</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+                    <!-- TODO is this property needed? what happens when it is not present and no more rows are available? --> 
+                    <tags>
+                        todo
+                    </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "hide", "link", "text" and "auto" in quotes should not be translated. -->
+            <description>How the control specified by the Disable ID property should appear when there are no more rows available. The options are "hide", where the control is not shown, "link", where the control continues to be shown as a link but there is no change when the link is clicked, "text", meaning that link label is shown as text rather than a link, and "auto", meaning that the control will choose the format automatically. The default behavior, when the value is absent or set to "auto" is to display the link label as text, same as the "text" option.</description>
+            <display-name>Disabled Format</display-name>
+            <property-name>disabledFormat</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>8.5.32002</since>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        hide
+                        text
+                        link
+                        auto
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>Indicate if the state, after getting the AJAX request, should be saved on the server.</description>
+            <display-name>Save State on Server</display-name>
+            <property-name>state</property-name>
+            <property-class>boolean</property-class>
+        </property>
+        <complex-extension>
+            <base-complex-id>simpleActionInterface</base-complex-id>
+            <tag-name>addRows</tag-name>
+            <designer-extension>
+                <action-type>client</action-type>
+                <category>%complex-category.basic%</category>
+                <!-- xe:addRows simple action, consider deleting, use xe:pagerAddRows control, or SSJS method call instead,
+it was added before the xe:pagerAddRows control, and it's probably easier to add an onClick 
+event to that control than to forever support this simple action.
+                 -->
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+<!-- /end move to extlib-data-pagers.xsp-config -->
+
+</faces-config>

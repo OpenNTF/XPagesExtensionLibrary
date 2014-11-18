@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:pagerSaveState for="allDocumentsDataView"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	<xe:dataView xp:key="tabAll" id="allDocumentsDataView" var="viewEntry"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" columnTitles="true" rowStyleClass="xspHtmlTrView"
+		pageName="/topicThread.xsp" openDocAsReadonly="true" rows="25"
+		value="#{xvwDocsByDate}" detailsOnClient="true">
+		<xp:this.data>
+			<xp:dominoView var="xvwDocsByDate" viewName="xvwDocsByDate" dataCache="full">
+				<xp:this.categoryFilter><![CDATA[#{javascript://}]]>
+				</xp:this.categoryFilter>
+			</xp:dominoView>
+		</xp:this.data>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="$143"
+				columnTitle="Title">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn columnName="$106" columnTitle="Date">
+			</xe:viewExtraColumn>
+			<xe:viewExtraColumn columnName="$146" columnTitle="Author">
+				<xe:this.href><![CDATA[#{javascript:"/members.xsp?profile=" + viewEntry.getColumnValue("$146")}]]></xe:this.href>
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+		<xp:this.facets>
+			<xc:homeDocTypeIcon id="docTypeIcon1" xp:key="icon" />
+			<xp:panel xp:key="summary" id="summaryPanel" style="display:inline-block">
+				<xe:switchFacet id="switchFacet1" defaultFacet="unknown">
+					<xe:this.selectedFacet><![CDATA[#{javascript:
+					
+					try
+					{
+						return ""+viewEntry.getColumnValue("Form")+":"+viewEntry.getColumnValue("DocType");
+					}
+					catch (e)
+					{
+						return "unknown";
+					}
+					
+					}]]></xe:this.selectedFacet>
+					<xp:this.facets>
+						<xp:panel xp:key="noRows">
+							<xp:br />
+							<xp:div styleClass="xlEmptyFacet">
+								<xp:label value="No documents found in this view"></xp:label>
+							</xp:div>
+						</xp:panel>
+						<xp:panel xp:key="MainTopic:Discussion" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="discussionLink">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="MainTopic:Meeting" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link2">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="Status:Status" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link16">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/statusReports.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="Event:Event" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link18">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/events.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="announcement:Announcement" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link20">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/announcements.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="Comment" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link4">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="MainTopic:Reference" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link7">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="MainTopic:Action Item" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link9">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="Chat Entry" style="display:inline-block">
+							<h4 style="margin:0px">
+								<xp:link id="link11">
+									<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+									<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+								</xp:link>
+							</h4>
+						</xp:panel>
+						<xp:panel xp:key="unknown" style="display:inline-block">
+							<xe:switchFacet id="switchFacet2" defaultFacet="other">
+								<xe:this.selectedFacet><![CDATA[#{javascript://
+try{
+	var formName = viewEntry.getDocument().getItemValueString('form');
+	if( 'Response' == formName || formName == 'ResponseToResponse' ){
+		return 'comment';
+	}else{
+		requestScope.formName = viewEntry.getColumnValue("DocType") + ":";
+		return 'other';
+	}
+}
+catch(e){
+	return 'other';
+}}]]></xe:this.selectedFacet>
+								<xp:this.facets>
+									<xp:panel xp:key="comment" style="display:inline-block">
+										<h4 style="margin:0px">
+											<xp:link id="link13">
+												<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+												<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+											</xp:link>
+										</h4>
+									</xp:panel>
+									<xp:panel xp:key="other" style="display:inline-block">
+										<h4 style="margin:0px">
+											<xp:label value="#{javascript:requestScope.formName}"
+												style="padding:0px 4px">
+											</xp:label>
+											<xp:link id="link15">
+												<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("$143")) }]]></xp:this.text>
+												<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+											</xp:link>
+										</h4>
+									</xp:panel>
+								</xp:this.facets>
+							</xe:switchFacet>
+						</xp:panel>
+					</xp:this.facets>
+				</xe:switchFacet>
+			</xp:panel>
+			<xp:panel xp:key="categoryRow">
+				<xp:text value="#{javascript: viewEntry.getColumnValue('$106'); }" />
+			</xp:panel>
+			<xe:pagerExpand id="pagerExpand1" xp:key="pagerTopLeft">
+			</xe:pagerExpand>
+			<xp:pager layout="Previous Group Next" id="pager3" xp:key="pagerTopRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+			<xp:div xp:key="detail" id="dvAbstract1" styleClass="xspDetailPanel">
+				<xp:div id="dvAbstract2" style="padding-bottom:3px;">
+					<xp:text id="cfAbstract" escape="true"
+						value="#{javascript:viewEntry.getColumnValue('Abstract')}">
+					</xp:text>
+				</xp:div>
+				<xp:link id="lkReply" text="Reply">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+					<xp:this.rendered><![CDATA[#{javascript:var docType = viewEntry.getColumnValue("DocType");
+if( docType instanceof java.util.List && ! docType.isEmpty() ){
+	// when multiple doc types, only use the first one.
+	docType = docType.get(0);
+} 
+if("Announcement" != docType && "Event" != docType && "Status" != docType){
+	return true;
+}
+return false;}]]></xp:this.rendered>
+					<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?parentId=" +
+	viewEntry.getUniversalID() +
+		"&action=newDocument"}]]></xp:this.value>
+				</xp:link>
+			</xp:div>
+			<xp:panel xp:key="pagerBottomLeft" id="panel3">
+				<xe:pagerSizes id="pagerSizes1" sizes="10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next" id="pager1" xp:key="pagerBottomRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+		</xp:this.facets>
+	</xe:dataView>
+
+</xp:view>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:pagerSaveState for="membersSubteamsDataView"
+		globalRows="true" id="pagerSaveState1">
+	</xe:pagerSaveState>
+	<xe:dataView xp:key="tileView" id="membersSubteamsDataView" var="viewEntry"
+		collapsibleRows="false" binding="#{viewStateBean.dataIterator}"
+		collapsibleDetail="false" rowStyleClass="xspHtmlTrView"
+		styleClass="xvwMembersListViewTable"
+		openDocAsReadonly="true" rows="25" expandedDetail="true" columnTitles="true">
+		<xe:this.showCheckbox><![CDATA[#{javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xe:this.showCheckbox>
+		<xe:this.data>
+			<xp:dominoView var="viewData" viewName="xvwMembers" dataCache="id">
+			</xp:dominoView>
+		</xe:this.data>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnTitle="Member">
+				<xe:this.value><![CDATA[#{javascript:peopleBean.getPerson(viewEntry.getColumnValue("$3")).displayName}]]></xe:this.value>
+				<xe:this.href><![CDATA[#{javascript:"/members.xsp?profile=" + peopleBean.getPerson(viewEntry.getColumnValue("$3")).abbreviatedName}]]></xe:this.href>
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn style="width: 20em !important;"
+				columnTitle="Email">
+				<!-- xe:this.value><![CDATA[#{javascript:peopleBean.getPerson(viewEntry.getColumnValue("$3")).internetEmail}]]></xe:this.value>
+					<xe:this.href><![CDATA[#{javascript:"mailto:" + peopleBean.getPerson(viewEntry.getColumnValue("$3")).internetEmail}]]></xe:this.href-->
+				<xe:this.value><![CDATA[#{javascript:viewEntry.getColumnValue("Email Address")}]]></xe:this.value>
+				<xe:this.href><![CDATA[#{javascript:
+					var email = viewEntry.getColumnValue("Email Address");
+					if(email == null || email == "")
+					{
+						return null;
+					}
+					else
+					{
+						return "mailto:" + viewEntry.getColumnValue("Email Address");
+					}
+				}]]></xe:this.href>
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next" id="pager1" xp:key="pagerTopRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+			<xp:panel xp:key="pagerBottomLeft" id="panel3">
+				<xe:pagerSizes id="pagerSizes1" sizes="10|25|50|100">
+				</xe:pagerSizes>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next" id="pager2" xp:key="pagerBottomRight"
+				partialRefresh="true" partialExecute="true">
+			</xp:pager>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

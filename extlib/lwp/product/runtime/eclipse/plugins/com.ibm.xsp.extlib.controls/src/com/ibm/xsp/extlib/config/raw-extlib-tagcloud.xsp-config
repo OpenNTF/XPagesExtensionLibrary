@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2013                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>tagcloud</control-subpackage-name>
+        </designer-extension>
+	</faces-config-extension>
+
+	<!-- Tag Cloud control -->
+	<component>
+		<description>Control that displays a tag cloud</description>
+		<!-- TODO what is a tagcloud ... need fuller description -->
+		<display-name>Tag Cloud</display-name>
+		<component-type>com.ibm.xsp.extlib.tagcloud.TagCloud</component-type>
+		<component-class>com.ibm.xsp.extlib.component.tagcloud.UITagCloud</component-class>
+
+		<group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+
+		<property>
+			<description>Indicates if the slider is visible</description>
+			<!-- TODO see if description can be improved ... what slider does and is -->
+			<display-name>Slider Visible</display-name>
+			<property-name>sliderVisible</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+			<!-- TODO defaults to true - should be notes as is not the norm -->
+				<default-value>true</default-value>
+				<tags>todo</tags>
+				<designer-extension>
+					<category>basics</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<!-- TODO apply cloudTitle as control header text (add accessible title later)-->
+        <!-- TODO Where is the "Top X Tags" coming from ??? -->
+        <!--# leave {0} alone - it is intended to be shown in the tootip as is -->
+        <!-- TODO remove default-value, render should return default when cloudTitle is null -->
+<!-- 		
+    	<property>
+       
+      		<description>Text for use in a section  header or label. The placeholder {0} will be substituted with the actual number of tags rendered.</description>
+      		<display-name>Tag Cloud Title</display-name>
+      		<property-name>title</property-name>
+      		<property-class>string</property-class>
+      		<property-extension>
+        		<localizable>true</localizable>
+        		<designer-extension>
+          			<default-value>{0} Tags</default-value>
+          			<editor>com.ibm.std.String</editor>
+          			<category>basics</category>
+        		</designer-extension>
+        		<required>false</required>
+      		</property-extension>
+    	</property>
+-->    	
+    	<property>
+    	    <!--# leave {0} alone - it is intended to be shown in the tootip as is -->
+            <description>Mouse-over pop-up text for individual member tags, i.e. elements of the tag cloud. The placeholder {0} will be substituted with the number of entries for the tag.</description>
+            <display-name>Alternate Text</display-name>
+      		<property-name>alternateText</property-name>
+      		<property-class>string</property-class>
+      		<property-extension>
+        		<localizable>true</localizable>
+        		<designer-extension>
+          			<category>basics</category>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+		<property>
+			<description>Data provider for the tag cloud</description>
+			<display-name>Tag Cloud Data</display-name>
+			<property-name>cloudData</property-name>
+			<property-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</property-class>
+			<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<category>data</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+		<component-extension>
+			<component-family>javax.faces.Panel</component-family>
+			<!-- TODO Teamroom impl overrides this renderer with OneUI custom renderer from ExtLib - why? Does theme not do this?? -->  
+			<renderer-type>com.ibm.xsp.extlib.tagcloud.TagCloud</renderer-type>
+			<tag-name>tagCloud</tag-name>
+			<designer-extension>
+				<in-palette>true</in-palette>
+				<category>Extension Library</category>
+			</designer-extension>
+		</component-extension>
+	</component>
+
+<!--  
+	Tag cloud data
+-->
+	<complex-type>
+		<description>The base class for Tag Cloud data providers</description>
+		<display-name>Abstract Tag Cloud Data Provider</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-class>
+    </complex-type>
+
+</faces-config>

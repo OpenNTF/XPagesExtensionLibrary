@@ -1,0 +1,9 @@
+({
+L_CHARDAY_FRI: "\uae08",
+L_CHARDAY_MON: "\uc6d4",
+L_CHARDAY_SAT: "\ud1a0",
+L_CHARDAY_SUN: "\uc77c",
+L_CHARDAY_THU: "\ubaa9",
+L_CHARDAY_TUE: "\ud654",
+L_CHARDAY_WED: "\uc218"
+})

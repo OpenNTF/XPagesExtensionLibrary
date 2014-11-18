@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.DateTextBox"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.TimeTextBox"></xp:dojoModule>
+	</xp:this.resources>
+	
+	<xc:layout navigationPath="/allDocuments">
+		<xe:dynamicContent id="dynamicContent">
+			<xp:this.facets>
+				<xc:homeMainTopic id="newDocumentContent"
+					xp:key="newDocumentContent">
+				</xc:homeMainTopic>
+			</xp:this.facets>
+			<xp:text escape="true" id="titleField" tagName="h1">
+				<xp:this.value><![CDATA[#{javascript:
+					sessionScope.webFrom = "/allDocuments.xsp";
+					sessionScope.webFromName = strings.getString('all.documents');
+					return strings.getString('all.documents');
+				}]]></xp:this.value>
+			</xp:text>
+			<xc:allDocumentsFilter id="allDocsFilter"></xc:allDocumentsFilter>
+			<xp:br/>
+			<xp:br/>
+			<xp:button value="New Document" id="button1" themeId="Button.Cancel">
+				<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="dynamicContent">
+					<xp:this.action>
+						<xe:changeDynamicContentAction
+							for="dynamicContent" facetName="newDocumentContent">
+						</xe:changeDynamicContentAction>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br/>
+			<xp:br/>
+			<xe:dynamicContent id="dynamicView"
+				defaultFacet="#{javascript: sessionScope.allDocsSelectedTab || 'tabAll';}"
+				useHash="false" partialEvents="true">
+				<xe:this.facets>
+					<xc:allDocsAllTab id="tabAll" xp:key="tabAll" />
+					<xc:allDocsAllByDateTab id="tabByDate"
+						xp:key="tabAllByDate" />
+					<xc:allDocsAllByAuthorTab id="tabByAuthor"
+						xp:key="tabAllByAuthor" />
+					<xc:allDocsAllByTeamTab id="tabByTeam"
+						xp:key="tabAllByTeam" />
+					<xc:allDocsAllByTagTab id="tabByTag"
+						xp:key="tabAllByTag" />
+				</xe:this.facets>
+			</xe:dynamicContent>
+		</xe:dynamicContent>
+	</xc:layout>
+</xp:view>

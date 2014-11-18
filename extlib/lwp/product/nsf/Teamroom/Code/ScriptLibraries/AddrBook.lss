@@ -1,0 +1,31 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Sub FindAddressBook
+
+'++LotusScript Development Environment:2:5:(Declarations):0:2
+
+'++LotusScript Development Environment:2:2:FindAddressBook:1:8
+Sub FindAddressBook
+	Dim s As New notessession
+	Dim books As Variant
+	Set db = s.currentdatabase
+	Set Tprofile = db.getprofiledocument("tempvars")
+	
+	books = s.addressbooks
+	Set book1 = books(0)
+	getFile = book1.filepath
+	
+	Call book1.open(db.server,getfile)
+	
+continue:	
+	If book1.isopen Then
+		Tprofile.addr = getFile
+	Else
+		Tprofile.addr = "nAvail"
+	End If
+	
+	Exit Sub
+	
+End Sub

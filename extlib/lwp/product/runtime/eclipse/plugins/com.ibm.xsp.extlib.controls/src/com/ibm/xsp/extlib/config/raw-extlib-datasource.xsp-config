@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+	<faces-config-extension>
+		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+		<default-prefix>xe</default-prefix>
+	</faces-config-extension>
+
+	<complex-type>
+		<description>Abstract class for data source for lists coming from a data accessor</description>
+		<display-name>Abstract List Data Source Using Accessor</display-name>
+		<complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.model.DataAccessorSource</complex-class>
+		<group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
+		
+		<property>
+			<!-- # "beforeRenderingPhase" should not be translated -->
+			<description>Indicates if the data should be refreshed each time it is rendered. If specified - occurs during "beforeRenderingPhase" notification processing. Default is not to refresh.</description>
+			<display-name>Clear on Rendering</display-name>
+			<property-name>clearOnRendering</property-name>
+			<property-class>boolean</property-class>
+		</property>
+        <property>
+            <!-- # "applicationScope" and "sessionScope" are technical terms and should not be translated. -->
+            <description>Used when the data source is using either the applicationScope or the sessionScope, and thus can be shared by multiple pages. This ID is used to identify the cached data.</description>
+            <display-name>Cache Suffix for Data Storage</display-name>
+            <property-name>cacheSuffix</property-name>
+            <property-class>java.lang.String</property-class>
+        </property>
+		
+		<complex-extension>
+			<base-complex-id>dataInterface</base-complex-id>
+		</complex-extension>
+	</complex-type>
+
+	<complex-type>
+		<description>Abstract class for data source managing blocks of data. Block size is initially set to 20 of data items and will be changed dynamically depending on a count of items requested by some code.</description>
+		<display-name>Abstract List Data Source Using Accessor and Managing Data Blocks</display-name>
+		<complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-class>
+		<property>
+			<description>Used by the data source if it caches blocks of data. Default is 0. Values of 0 and 1 mean that an existing block is discarded when a new block is added.</description>
+			<display-name>Max Block Count</display-name>
+			<property-name>maxBlockCount</property-name>
+			<property-class>int</property-class>
+		</property>
+        <property>
+            <description>Defines the timeout, in seconds, for a block of data. When a block times out, then it is discarded from memory and another data access is performed.</description>
+            <display-name>Block Timeout</display-name>
+            <property-name>timeout</property-name>
+            <property-class>int</property-class>
+        </property>
+		
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</base-complex-id>
+		</complex-extension>
+	</complex-type>
+
+	<complex-type>
+		<description>An object data source creates and manipulate an object (Java or JavaScript). The object must be serializable and owned by the data source (should not be a bean owned by a scope).</description>
+		<display-name>Object Data Source</display-name>
+		<complex-id>com.ibm.xsp.extlib.model.ObjectDataSource</complex-id>
+		<complex-class>com.ibm.xsp.extlib.model.ObjectDataSource</complex-class>
+		<group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
+		
+       	<property>
+       		<!-- # "false" should not be translated -->
+        	<description>Value "true" indicates that this data source is read only. Default is "false".</description>
+         	<display-name>Read Only Flag</display-name>
+         	<property-name>readonly</property-name>
+         	<property-class>boolean</property-class>
+        	<property-extension>
+        	</property-extension>
+       	</property>
+		<property>
+			<description>This script is triggered to create the object handled by the data source.</description>
+			<display-name>Create an Object Script Expression</display-name>
+			<property-name>createObject</property-name>
+			<property-class>javax.faces.el.MethodBinding</property-class>
+			<property-extension>
+				<required>true</required>
+				<method-binding-property>true</method-binding-property>
+			</property-extension>
+		</property>
+		<property>
+			<!-- # "true" should not be translated -->
+			<description>This script is triggered to save the object handled by the data source. It will not be used if the Read Only Flag property is set to "true".</description>
+			<display-name>Save an Object Script Expression</display-name>
+			<property-name>saveObject</property-name>
+			<property-class>javax.faces.el.MethodBinding</property-class>
+			<property-extension>
+				<method-binding-property>true</method-binding-property>
+			</property-extension>
+		</property>
+		
+		<complex-extension>
+			<tag-name>objectData</tag-name>
+			<base-complex-id>dataInterface</base-complex-id>
+			<designer-extension>
+			</designer-extension>
+		</complex-extension>
+	</complex-type>
+
+</faces-config>

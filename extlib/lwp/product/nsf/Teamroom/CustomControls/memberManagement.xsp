@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:dynamicContent id="memberManagementDynamicContent"
+		defaultFacet="membersView" useHash="false">
+		<xe:this.facets>
+			<xc:addMember id="addMember" xp:key="addMember"></xc:addMember>
+			<xc:createSubteam id="createSubteam"
+				xp:key="createSubteam">
+			</xc:createSubteam>
+			<xc:membersView id="membersView" xp:key="membersView"></xc:membersView>
+		</xe:this.facets>
+	</xe:dynamicContent>
+</xp:view>

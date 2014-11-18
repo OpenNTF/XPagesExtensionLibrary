@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579670054C522'>
+<noteinfo noteid='2fa' unid='5CD4D1CE54319B72802579670054CEB3' sequence='10'>
+<created><datetime>20111215T152619,39+00</datetime></created>
+<modified><datetime>20120227T095732,14+00</datetime></modified>
+<revised><datetime>20120227T095732,13+00</datetime></revised>
+<lastaccessed><datetime>20120227T095732,14+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152620,40+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name
+>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name
+>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name='$Fonts'>
+<rawitemdata type='1'>
+i/8oAAEABSZBcmlhbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$HTMLDocumentStyles' summary='true' sign='true'>
+<rawitemdata type='1'>
+0ggBAAAA/wDSCAEA/wAAANIIAQCAAIAA
+</rawitemdata></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$BackgroundR5' sign='true'>
+<rawitemdata type='1'>
+3QYBAJkAmQAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAH0AHAAAAAEAEwEgAwAAAAAAAAAAAAAA
+AAAAAAD2/zEAAAAAAAMAEwAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAT3V0bGluZVBhZ2UuZ2lmAN4G
+AQCZAA==
+</rawitemdata></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>Outline Page</text><text>OutlinePage</text></textlist></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAAAAAAQABAP///wAAAAAA
+</rawitemdata></item>
+<item name='$Flags'><text>C34WQ</text></item>
+<item name='$DesignerVersion' sign='true'><text>6.5</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>OutlinePage</text></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAAqBAoL/WgACAAAA
+AAAAAAAAOAQAADgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA
+AAAAlIQ4BAoAOAQKAAAAAAABAAAABAAAAIMEAgCF/wgAAQAACt0GAACt/63/GgAbAAgAAAAOAERv
+Y0xpYk91dGxpbmUA6v8+ABsACUQAAGQA4BABAAAJAAAAAAAAAAABAAAKAQAACQAABQAAAAAAAQAA
+AAAAAAAAAAAAAAAAAAAAAADs/yQBIA4CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAA
+SAAgAQAADQAJAAEAAAoBAAAKAQAACgEAAAoBAAAKAQAACgAAAAAAAAAAsAFAAgAAAwADAAUA////
+AAUA////AAUA////AAUA////AAUA////AAEA1Mm6AAUA7+/vAAUA////AAEA1Mm6AAUA////AAEA
+AAAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAMAAwAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAB
+AAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAA/wABAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AABEb2NsaWJPdXRsaW5lTm90ZXNWaWV3rgLeBgAArgDdBgAAhf+F/wgAAQAECdIIAQAAAP8A3gYA
+AIX/
+</rawitemdata></item></note>
+

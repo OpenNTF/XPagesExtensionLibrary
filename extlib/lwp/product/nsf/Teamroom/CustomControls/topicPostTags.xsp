@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" style="display:inline">
+	<xp:label value="Tags: "
+		id="tags2_label" disableTheme="true">
+	</xp:label>
+	<xp:span id="tags2">
+		<xp:repeat id="tagsRepeat"
+			value="#{javascript: compositeData.doc.getItemValue('Categories') }" var="tagName"
+			indexVar="tagIndex" style="display:inline">
+			<xp:text
+				rendered="#{javascript: 0 != tagIndex}" disableTheme="true"
+				value=", " />
+			<xp:link id="tagLink"
+				text="#{tagName}" value="/allDocumentsByTag.xsp">
+				<xp:this.parameters>
+					<xp:parameter
+						name="categoryFilter" value="#{tagName}">
+					</xp:parameter>
+				</xp:this.parameters>
+			</xp:link>
+		</xp:repeat>
+	</xp:span>
+</xp:view>

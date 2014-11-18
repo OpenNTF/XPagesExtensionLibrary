@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:panel styleClass="mblThreadPanel">
+		<xp:table styleClass="xlTableWidth">
+			<xp:tr>
+				<xp:td>
+				</xp:td>
+				<xp:td>
+					<xp:div styleClass="mblThreadDiv">
+						
+						<xp:text value="#{currentDocument.Subject}"
+							styleClass="mblThreadDivText">
+						</xp:text>
+						<xp:br></xp:br>
+						
+						<xp:panel>
+							<xp:link styleClass="lotusPerson" id="from"
+								text="#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).displayName}">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xe:moveTo
+												direction="Left to Right" transitionType="slide"
+												targetPage="memberProfile&amp;profile=#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).abbreviatedName}"
+												forceFullRefresh="true">
+											</xe:moveTo>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							&#160;
+							<xp:label value="|"></xp:label>
+							&#160;
+							<xp:text id="createdDateOut" value="Created: #{javascript:@Created()}"></xp:text>
+						</xp:panel>
+						<xp:br></xp:br>	
+						<xp:span id="announcementStatusOut">
+							<xp:text disableTheme="true" value="Active"
+								rendered="#{javascript:currentDocument.getItemValueString('FileThisStatusDoc') == '0'}"></xp:text>
+							<xp:text disableTheme="true" value="Inactive"
+								rendered="#{javascript:currentDocument.getItemValueString('FileThisStatusDoc') == '1'}"></xp:text>
+						</xp:span>
+						&#160;
+						<xp:label value="|"></xp:label>
+						&#160;
+						<xp:span id="announcementTypeOut">
+							<xp:text disableTheme="true" value="Must read"
+								rendered="#{javascript:currentDocument.getItemValueString('type') == '1'}"></xp:text>
+							<xp:text disableTheme="true" value="Informational"
+								rendered="#{javascript:currentDocument.getItemValueString('type') == '2'}"></xp:text>
+						</xp:span>
+						<xp:br></xp:br>				
+						<hr></hr>						
+						
+						<xp:text id="subjectOut" value="#{currentDocument.Abstract}">
+						</xp:text>
+						<xp:br></xp:br>
+					</xp:div>
+					
+					<xp:br></xp:br>
+					
+					<xp:panel>
+						<xc:mobile_fileDownload field="Body"></xc:mobile_fileDownload>
+					</xp:panel>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+</xp:view>

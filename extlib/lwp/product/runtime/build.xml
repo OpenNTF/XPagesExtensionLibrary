@@ -1,0 +1,152 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2008, 2013                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="product/runtime" default="development" basedir=".">
+
+	<import file="${env.WPLC_IMPORT}/pde_build.xml"/>  
+	<import file="${env.WPLC_IMPORT}/pde_prebuild_subant.xml"/>  
+	<import file="${wsbld}/tools/localization/localization.xml" />
+	<import file="${env.WPLC_IMPORT}/nojavadoc.xml"/>
+	<import file="${wsbld}/tools/copyright-build/srczip_license.xml" />
+
+	<import file="${env.WPLC_IMPORT}/pde_build.xml"/>  
+	<import file="${env.WPLC_IMPORT}/pde_prebuild_subant.xml"/>  
+
+	<taskdef name="for" classname="net.sf.antcontrib.logic.ForTask" classpath="${env.WPLC_TOOLS}/mantis/lib/ant-contrib-1.0b3.jar"/>     
+
+	<target name="custom_init" depends="init, subant.init">         
+		<subant target="localize_plugin_and_copyright" genericantfile="${basedir}/build.xml" >
+			<dirset dir="${basedir}" includes="**/plugins/*">
+			 	 <exclude name="**/org.apache.james.mime4j*/**" />
+			 	 <exclude name="**/net.fortuna.ical4j*/**" />
+			</dirset>
+		</subant>
+	</target>
+	
+	<property name="mantis.project.name" value="${ant.project.name}" />
+
+	<target name="localize_plugin_and_copyright" depends="init, subant.init">
+		<property name="dir.newSrc" value="${bundle.build.dir}/src" />
+		
+		<if><available file="${basedir}/.localization"/>
+			<then>
+				<echo message="Calling localization for src ${basedir}"/>
+				
+				<antcall target="localization">
+					<param name="dir.src" value="${dir.newSrc}" />
+					<param name="dir.newSrc" value="${dir.newSrc}" />
+				</antcall> 
+			</then>
+		</if>
+		
+		<echo message="calling change_source_license:: ${basedir} : ${bundle.build.dir}/src" /> 
+		<antcall target="copy_source_to_pde">
+			<param name="src.folder.source" value="${basedir}" />
+			<param name="src.folder.dest" value="${bundle.build.dir}" />
+			<param name="src.folder.name" value="src" />
+		</antcall>
+		
+	</target>
+
+	<property name="dir.prereq.dojo" value="${alt.fe.containers}/dojo-xsp/lwp/build/generateDojoZips/setup"/>
+	<!-- For debug purposes -->
+	<target name="check_dojoroot_dir">
+		<condition property="dojoroot_not_exist">
+			<not>
+			<available file="${dir.build.pde}/dojoroot" type="dir"/>
+			</not>
+		</condition>
+	</target>
+
+	<!-- This to be performed just once for product/runtime area -->
+	<target name="prepare_dojo">
+		<!-- For debug if Unzip could be skipped to speed up build, then use for this target such settings: -->
+		<!-- depends="check_dojoroot_dir" if="dojoroot_not_exist" -->
+		<if><available file="${dir.build.pde}/dojoroot" type="dir" /><then>
+		<echo>Clean up files in [${dir.build.pde}/dojoroot]</echo>
+		<delete>
+			<fileset dir="${dir.build.pde}/dojoroot" includes="**/*"/>
+		</delete>
+		</then></if>
+
+		<echo message="Unzip Dojo sources to: ${dir.build.pde}/dojoroot" /> 
+	        <!-- unzip WDJB stream's produced SRC bld-target.zip into PDE dojoroot directory -->
+        	<unzip src="${dir.prereq.dojo}/bld-target.zip" dest="${dir.build.pde}/dojoroot"/>
+	</target>
+
+	<target name="copy_plugin_res_to_pde">
+		<echo message="subant PDE: ${subant.dir.build.pde}" /> 
+		<if><available file="${basedir}/resources/web" type="dir" />
+			<then>
+				<echo>Processing plugin's resources folder: ${basedir}/resources/web</echo>
+				<copy todir="${subant.dir.build.pde}/dojoroot">
+					<fileset id="res_fileset" dir="${basedir}/resources/web" includes="**/*.js,**/*.css,**/*.htm,**/*.html" excludes="**/.copyarea.db"/>
+				</copy>
+				<path id="basedir.orig">
+					<pathelement location="${basedir}" />
+				</path>
+				<pathconvert property="basedir.unix" refid="basedir.orig">
+					<filtermapper>
+						<replacestring from="\" to="/"/>
+					</filtermapper>					
+				</pathconvert>
+
+				<path id="subant.dir.build.pde.orig">
+					<pathelement location="${subant.dir.build.pde}" />
+				</path>
+				<pathconvert property="subant.dir.build.pde.unix" refid="subant.dir.build.pde.orig">
+					<filtermapper>
+						<replacestring from="\" to="/"/>
+					</filtermapper>					
+				</pathconvert>
+			
+				<propertyregex property="basedir.last.el" input="${basedir.unix}" regexp="([^/]+)$" select="\1" /> 
+				<property name="cr" value="&#xA;" />
+				<pathconvert pathsep="${cr}" property="res" refid="res_fileset">
+					<chainedmapper>
+					<mapper type="regexp" from="(.*)" to="\1,\1" />
+					<filtermapper>
+						<replacestring from="\" to="/"/>
+					</filtermapper>					
+					<filtermapper>
+						<replaceregex pattern="${basedir.unix}/resources/web" replace="${subant.dir.build.pde.unix}/dojoroot/release/dojo" /> 
+					</filtermapper>
+					<filtermapper>
+						<replaceregex pattern="${basedir.unix}/resources/web" 
+						replace="${subant.dir.build.pde.unix}/eclipse/plugins/${basedir.last.el}/resources/web" /> 
+					</filtermapper>
+					</chainedmapper>
+				</pathconvert>
+				<echo file="${subant.dir.build.pde}/dojoroot/minified_resources.txt" append="true">${res}</echo>
+				<echo file="${subant.dir.build.pde}/dojoroot/minified_resources.txt" append="true">${cr}</echo>
+			</then>
+		</if>
+	</target>
+
+	<target name="make_custom_dojo_build">
+		<copy todir="${dir.build.pde}/dojoroot/util/buildscripts/profiles">
+			<fileset dir="${basedir}/../../tools/compact/dojoroot/util-extlib/buildscripts/profiles" includes="extlib.profile.js"/>
+		</copy>
+
+		<exec dir="${dir.build.pde}/dojoroot/util/buildscripts" executable="cmd.exe">
+			<arg value="/c"/>
+			<arg line="build.bat action=release profile=profiles\extlib.profile.js symbol=short optimize=shrinksafe cssOptimize=comments version=1.8.1"/>
+		</exec>
+	</target>
+</project>
+

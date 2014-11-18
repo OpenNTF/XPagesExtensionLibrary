@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xc:layout navigationPath="/setup" navbar="false">
+		<xp:this.facets>
+			<xp:panel xp:key="MiddleColumn">
+				<xp:this.data>
+					<xp:dominoDocument var="document1" action="editDocument" formName="Setup">
+						<xp:this.documentId>
+							<![CDATA[#{javascript:
+									try{
+										var setupView:NotesView = database.getView("SetupLookup");
+										if(null != setupView){
+											setupView.refresh();
+											var setupNote:NotesDocument = setupView.getDocumentByKey("Setup");
+											return setupNote.getNoteID();
+										}
+									}catch(e){
+										print("documentId exception: " + e);
+										throw e;
+									}
+									return null;
+							}]]>
+						</xp:this.documentId>
+					</xp:dominoDocument>
+				</xp:this.data>
+				<xp:text escape="true" id="titleField" tagName="h1"
+					value="Document Library Setup">
+				</xp:text>
+				<xp:button value="Save" id="saveCloseButton">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+					<xp:this.action>
+
+						<xp:actionGroup>
+							<xp:saveDocument var="document1"></xp:saveDocument>
+							<xp:openPage name="/allDocuments.xsp"></xp:openPage>
+						</xp:actionGroup>
+					</xp:this.action></xp:eventHandler></xp:button>
+				
+				<xp:link id="cancelLink" text="Cancel" value="/main.xsp"></xp:link>
+				<hr />
+				<xe:formTable id="formTable2" labelPosition="left" formTitle="Web Information">
+					<xe:formRow id="formRow2"
+						label="Web server address">
+						<xp:text value="http://"></xp:text>
+						<xp:inputText size="60" value="#{document1.URLAddress}"></xp:inputText>
+					</xe:formRow>
+				</xe:formTable>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:layout>
+		
+</xp:view>

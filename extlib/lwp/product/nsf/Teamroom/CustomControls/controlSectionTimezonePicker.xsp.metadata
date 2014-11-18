@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="796" sequence="18" unid="42A92D6E69B000178025791700505CEC">
+<created><datetime dst="true">20110926T153746,68+01</datetime></created>
+<modified><datetime>20120207T095606,83+00</datetime></modified>
+<revised><datetime>20111201T182758,06+00</datetime></revised>
+<lastaccessed><datetime>20120207T095606,83+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095606,83+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>controlSectionTimezonePicker.xsp</text></item>
+<item name="$Flags"><text>gC~4;</text></item>
+
+
+<item name="$DesignerVersion"><text>8.5.1</text></item>
+
+
+
+
+
+
+
+<item name="$FileNames" sign="true"><text>controlSectionTimezonePicker.xsp</text></item></note>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xp:this.resources>
+		<xp:script src="/xpTopicThreadState.jss" clientSide="false"></xp:script>
+		<xp:script src="/constants.jss" clientSide="false"></xp:script>
+		<xp:styleSheet href="/layout.css"></xp:styleSheet>
+		<xp:bundle src="/strings.properties" var="strings"></xp:bundle>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		TopicThreadState.init();
+		if( !param.documentId && param.parentId ){
+			TopicThreadState.initNewReply();
+		}
+		
+		applicationScope.remove('urlCheckDone');
+		if(!applicationScope.containsKey("urlCheckDone")){
+			var setupView:NotesView = database.getView("SetupLookup");
+			if(null != setupView){
+				var setupNote:NotesDocument = setupView.getDocumentByKey("Setup");
+				if(null != setupNote){
+					var urlAddress = setupNote.getItemValueString("URLAddress");
+					if("" == urlAddress){
+						var serverName = facesContext.getExternalContext().getRequest().getServerName();
+						if("127.0.0.1" == serverName){
+							serverName = "localhost";
+						}
+						setupNote.replaceItemValue("URLAddress", serverName);
+						setupNote.save(true);
+					}
+					applicationScope.urlCheckDone = true;
+				} else {
+					setupNote = database.createDocument();
+					setupNote.appendItemValue("Form","Setup");
+					var serverName = facesContext.getExternalContext().getRequest().getServerName();
+					if("127.0.0.1" == serverName){
+						serverName = "localhost";
+					}
+					setupNote.replaceItemValue("URLAddress", serverName);
+					setupNote.save();
+				}
+			}
+		}
+	}]]></xp:this.beforePageLoad>
+
+	<xe:applicationLayout id="applicationLayout1">
+		<xe:this.configuration>
+			<xe:oneuiApplication
+				legalText="(c) Copyright IBM Corporation 2012"
+				navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="/allDocuments" footer="false" banner="true"
+				mastHeader="true" placeBarName="#{javascript: database.getTitle();}"
+				titleBarName="Document Library">
+				<xe:this.searchBar>
+					<xe:appSearchBar pageName="search.xsp"
+						inactiveText="Search..." optionsParam="search" queryParam="search"
+						loaded="${javascript:database.isFTIndexed()}">
+					</xe:appSearchBar>
+				</xe:this.searchBar>
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode label="Setup" page="setup">
+						<xe:this.loaded><![CDATA[${javascript:
+							var urlPath = context.getUrl().getPath();
+							return userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR && !urlPath.endsWith("setup.xsp");
+						}]]></xe:this.loaded>
+					</xe:pageTreeNode>
+				</xe:this.placeBarActions>
+				<xe:this.bannerUtilityLinks>
+					<xe:userTreeNode>
+						<xe:this.label><![CDATA[#{javascript:I18n.format(strings.getString("welcome.x"), userBean.displayName)}]]></xe:this.label>
+					</xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+				</xe:this.bannerUtilityLinks>
+			</xe:oneuiApplication>
+		</xe:this.configuration>
+		<xe:this.facets>
+			<xp:div xp:key="LeftColumn" rendered="#{compositeData.navbar}">
+				<xe:navigator id="outline" expandable="true">
+					<xe:this.treeNodes>
+						<xe:pageTreeNode page="allDocuments"
+							selection="/allDocuments" label="All Documents" />
+						<xe:pageTreeNode page="byAuthor"
+							selection="/byAuthor" label="By Author" />
+						<xe:pageTreeNode page="byTags"
+							selection="/byTags" label="By Tags" />
+						<xe:pageTreeNode page="reviewStatus"
+							selection="/reviewStatus" label="Review Status" />
+					</xe:this.treeNodes>
+				</xe:navigator>
+				
+				<xp:panel styleClass="tagCloud">
+				<xp:section id="section3" header="Tags">
+					<xe:tagCloud
+						rendererType="com.ibm.xsp.extlib.OneUITagCloud"
+						alternateText="{0} Entries" sliderVisible="true"
+						id="CategoryView">
+						<xe:this.cloudData>
+							<xe:dominoViewCloudData cacheMode="auto"
+								cacheRefreshInterval="120" viewName="TagCloud"
+								linkTargetPage="/allDocumentsByTag.xsp" sortTags="alphabet"
+								linkRequestParam="categoryFilter">
+							</xe:dominoViewCloudData>
+						</xe:this.cloudData>
+					</xe:tagCloud>
+				</xp:section>
+				</xp:panel>
+				<xp:callback id="left" facetName="LeftColumn"></xp:callback>
+			</xp:div>
+			<xp:callback id="right" xp:key="RightColumn" facetName="RightColumn"></xp:callback>
+		</xe:this.facets>
+		<xe:dynamicContent id="dynamicContent" defaultFacet="MiddleColumn">
+			<xe:this.facets>
+				<xp:callback id="middle" xp:key="MiddleColumn" facetName="MiddleColumn"></xp:callback>
+				<xp:panel xp:key="newDocView">
+					<xp:this.data>
+						<xp:dominoDocument action="newDocument"
+							var="document1" computeWithForm="onsave"
+							ignoreRequestParams="true" formName="Document">
+						</xp:dominoDocument>
+					</xp:this.data>
+					<xc:breadcrumb></xc:breadcrumb>
+					<xc:rtaForm formName="Document"></xc:rtaForm>
+				</xp:panel>
+			</xe:this.facets>
+		</xe:dynamicContent>
+	</xe:applicationLayout>
+</xp:view>

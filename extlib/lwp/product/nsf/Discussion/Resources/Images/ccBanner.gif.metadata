@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="32a" sequence="9" unid="9BBF24521FBB6720852575C30077E7BA">
+<created><datetime dst="true">20090527T174941,06-04</datetime></created>
+<modified><datetime>20120305T082321,70+00</datetime></modified>
+<revised><datetime>20120305T082321,69+00</datetime></revised>
+<lastaccessed><datetime>20120305T082321,70+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,28+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>ccBanner.gif</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20090527T174155,65-04</datetime></item>
+<item name="$ImageNames" sign="true"><text>ccBanner.gif</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

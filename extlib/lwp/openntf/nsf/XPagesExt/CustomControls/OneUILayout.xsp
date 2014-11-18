@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterPageLoad><![CDATA[#{javascript:if(!view.getPageTitle()) {
+	var t = I18n.format("ExtLib Demo: {0} [{1}]",
+		@RightBack(@Left(context.getUrl(), '.xsp'), '/'),
+		@Name('[CN]', database.getServer())
+	)
+	view.setPageTitle(t)
+}}]]></xp:this.afterPageLoad>
+	<xe:keepSessionAlive id="keepSessionAlive1"></xe:keepSessionAlive>
+	<xe:firebugLite loaded="${javascript:sessionScope.firebug==true}"></xe:firebugLite>
+
+	<xe:applicationLayout id="oneUILayout1">
+		<xe:this.facets>
+			<xp:callback xp:key="LeftColumn" facetName="LeftColumn"
+				id="callback1"></xp:callback>
+			<xp:callback xp:key="RightColumn" facetName="RightColumn"
+				id="callback2"></xp:callback>
+		</xe:this.facets>
+		<xe:this.configuration>
+			<xe:applicationConfiguration
+				placeBarName="XPages Extension Library Demo" legalLogoAlt="IBM Corp"
+				productLogo="XPagesLogo.png" navigationPath="${javascript:compositeData.navigationPath}"
+				defaultNavigationPath="${javascript:compositeData.defaultNavigationPath}"
+				productLogoHeight="20px" productLogoWidth="100px" legalText="(c) 2010-2011 IBM Corp.">
+				<xe:this.bannerApplicationLinks>
+					<xe:basicLeafNode label="Home" selected="true"
+						href="/">
+					</xe:basicLeafNode>
+					<xe:basicContainerNode label="Goto...">
+						<xe:this.children>
+							<xe:basicLeafNode label="Goto Home" submitValue="home">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Goto Domino"
+								submitValue="domino">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+				</xe:this.bannerApplicationLinks>
+				<xe:this.bannerUtilityLinks>
+					<xe:basicContainerNode style="color:rgb(128,128,128)">
+						<xe:this.label><![CDATA[#{javascript:var v = com.ibm.xsp.extlib.util.ExtLibUtil.getExtLibVersion();
+return "XPages ExtLib version: "+v}]]></xe:this.label>
+						<xe:this.children>
+							<xe:basicLeafNode label="Goto Home" submitValue="home">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Goto Domino"
+								submitValue="domino">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+					<xe:userTreeNode></xe:userTreeNode>
+					<xe:loginTreeNode></xe:loginTreeNode>
+					<xe:basicLeafNode submitValue="firebug">
+						<xe:this.label><![CDATA[#{javascript:sessionScope.firebug==true ? "Disable Firebug" : "Enable Firebug"}]]></xe:this.label>
+					</xe:basicLeafNode>
+				</xe:this.bannerUtilityLinks>
+				<!--
+					Way to have Application Name in title bar area
+					<xe:this.titleBarName>Application Name</xe:this.titleBarName>
+				-->
+				<xe:this.titleBarTabs>
+					<xe:pageTreeNode page="Core_Home" selection="/Core/.*"
+						label="Core">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode page="Domino_Home" selection="/Domino/.*"
+						label="Domino">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode page="DWA_Home" selection="/DWA/.*"
+						label="iNotes">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode loaded="false" page="iWidget_Home"
+						selection="/iWidget/.*" label="iWidget">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode page="Mobile_Home" selection="/Mobile/.*"
+						label="Mobile">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode page="OneUI_Home" selection="/OneUI/.*"
+						label="OneUI">
+					</xe:pageTreeNode>
+					<xe:pageTreeNode page="REST_Home" selection="/REST/.*"
+						label="REST">
+					</xe:pageTreeNode>
+				</xe:this.titleBarTabs>
+				<xe:this.placeBarActions>
+					<xe:pageTreeNode page="Admin_Home" label="Administration">
+					</xe:pageTreeNode>
+					<xe:basicContainerNode label="More Actions">
+						<xe:this.children>
+							<xe:pageTreeNode page="Core_Home" label="Goto Home">
+							</xe:pageTreeNode>
+							<xe:pageTreeNode page="Domino_Home" label="Goto Domino">
+							</xe:pageTreeNode>
+							<xe:separatorTreeNode></xe:separatorTreeNode>
+							<xe:basicContainerNode label="Server side redirect">
+								<xe:this.children>
+									<xe:basicLeafNode label="Goto Home"
+										submitValue="home">
+									</xe:basicLeafNode>
+									<xe:basicLeafNode label="Goto Domino"
+										submitValue="domino">
+									</xe:basicLeafNode>
+								</xe:this.children>
+							</xe:basicContainerNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+				</xe:this.placeBarActions>
+				<xe:this.footerLinks>
+					<xe:basicContainerNode label="XPages Extension Library Demo">
+						<xe:this.children>
+							<xe:basicLeafNode onClick=";" label="Home" href="/">
+							</xe:basicLeafNode>
+
+							<xe:basicLeafNode href="/Admin_Home.xsp" label="Database Setup">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+
+					<xe:basicContainerNode label="OpenNTF">
+						<xe:this.children>
+							<xe:basicLeafNode label="Open NTF Project"
+								href="http://extlib.openntf.org/">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Announcement - Blog"
+								href="http://www.openntf.org/blogs/openntf.nsf/d6plinks/NHEF-89BBAD">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode
+								href="http://www.openntf.org/Projects/pmt.nsf/122B29BEE5A3E3A58625779F001DEA75/$file/XPages%20Extension%20Library%20Documentation.pdf"
+								label="Documentation">
+							</xe:basicLeafNode>
+						</xe:this.children>
+					</xe:basicContainerNode>
+					<xe:basicContainerNode label="XPages Resources">
+
+						<xe:this.children>
+							<xe:basicLeafNode label="Domino Application Development Wiki"
+								href="http://www-10.lotus.com/ldd/ddwiki.nsf">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="IBM DeveloperWorks">
+								<xe:this.href><![CDATA[http://www.ibm.com/developerworks/search/searchResults.jsp?searchType=1&searchSite=dW&searchScope=dW&query=xpages&Search=Search]]></xe:this.href>
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="PlanetLotus">
+								<xe:this.href><![CDATA[http://planetlotus.org/search.php?search=xpages&sort=1]]></xe:this.href>
+							</xe:basicLeafNode>
+							<xe:basicLeafNode href="http://xpagesblog.com/"
+								label="XPages Blog">
+							</xe:basicLeafNode>
+
+						</xe:this.children>
+					</xe:basicContainerNode>
+
+				</xe:this.footerLinks>
+				<xe:this.searchBar>
+					<xe:appSearchBar pageName="OneUI_SearchPage"
+						inactiveText="Enter Keywords" loaded="true" inputTitle="Search keywords"
+						scopeTitle="Search options" legend="Search options and keywords">
+						<xe:this.options>
+							<xe:basicLeafNode label="Choice #1" submitValue="c1">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="Choice #2" submitValue="c2">
+							</xe:basicLeafNode>
+							<xe:basicLeafNode label="No Label"></xe:basicLeafNode>
+						</xe:this.options>
+					</xe:appSearchBar>
+				</xe:this.searchBar>
+
+
+			</xe:applicationConfiguration>
+		</xe:this.configuration>
+		<xp:callback id="OneUIMainAreaCallback"></xp:callback>
+		<xp:eventHandler event="onItemClick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:var s = context.getSubmittedValue()
+if(s=="home") {
+	context.redirectToPage("Core_Home")
+} else if(s=="domino") {
+	context.redirectToPage("Domino_Home")
+} else if(s=="firebug") {
+	sessionScope.firebug = !sessionScope.firebug;
+	context.reloadPage();
+}	}]]></xp:this.action>
+		</xp:eventHandler>
+	</xe:applicationLayout>
+</xp:view>

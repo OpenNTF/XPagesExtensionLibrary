@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="282" sequence="17" unid="5FCCEA130FFBA280852574930010ED3C">
+<created><datetime dst="true">20080726T230453,08-04</datetime></created>
+<modified><datetime>20120305T082320,50+00</datetime></modified>
+<revised><datetime>20120305T082320,49+00</datetime></revised>
+<lastaccessed><datetime>20120305T082320,50+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,44+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$TITLE" sign="true"><text>xpAttachment.gif</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080726T235414,17-04</datetime></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$ImageNames" sign="true"><text>xpAttachment.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

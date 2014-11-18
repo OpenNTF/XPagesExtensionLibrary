@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/JavaScript">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+			</xp:panel>
+		</xp:this.facets>
+		<style>
+			.myTable {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+			.myTable td {
+				border: 1px solid black;
+				padding: 5px;
+			}
+		</style>
+		<xp:panel>
+			<xp:label value="This shows some extensions to the Domino @functions"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			The library extends the available @functions with the following one
+			<xp:table styleClass="myTable">
+				<xp:tr>
+				    <th>Domino @Function Extensions</th>
+                    <th>Description</th>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@TopParentID([doc])</xp:td>
+					<xp:td>
+					Returns the Note ID of the top parent in the hierarchy. [doc] is optional and can be a document or
+					the name of of document published by a data source. When empty, it uses the default document.
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@TopParentUNID([doc])</xp:td>
+					<xp:td>
+					Returns the Note universal ID (UNID) of the top parent in the hierarchy. [doc] is optional and can be a document or
+					the name of of document published by a data source. When empty, it uses the default document.
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@FullUrl(url)</xp:td>
+					<xp:td>
+					This method calculates the full URL path, relative to the server.
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@AbsoluteUrl(url)</xp:td>
+					<xp:td>
+					This method makes a URL absolute, by prefix it with the protocol/server name.
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@EncodeUrl(url)</xp:td>
+					<xp:td>
+					This method encodes the URL, by adding the necessary attributes when appropriate (session id...).
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td valign='top'>@ErrorMessage(msg[,component])</xp:td>
+					<xp:td>
+					This method generates an error message that will be displayed by the display error controls. The component
+					is optional, and can be either a component id or an actual component object
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

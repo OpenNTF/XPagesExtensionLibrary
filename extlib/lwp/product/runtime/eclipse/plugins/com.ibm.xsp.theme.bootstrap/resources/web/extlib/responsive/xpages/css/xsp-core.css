@@ -1,0 +1,148 @@
+/*
+ * © Copyright IBM Corp. 2014
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+/*** >> XSP BASE DECLARATIONS  << ***/
+
+/********************************************************************************/
+/*** >> XSP SPECIFIC DECLARATIONS AND EXTENSIONS FOR STYLEKITFAMILYS << ***/
+
+/*** XSP TEXT.<?> ***/
+.xspTextViewTitle{font-weight:bold !important;color:#000000;font-size:1.1em;font-weight:bold}
+.xspTextViewColumn{font-weight:normal;}
+.xspTextViewColumnComputed{font-weight:normal;}
+.xspTextViewColumnHeader{font-weight:normal;}
+
+/*** XSP INPUT.<?>  ***/
+.radio td, .checkbox td {padding-left: 20px}
+.radio label input[type="radio"] {margin-top: 3px;}
+.xspGroupCaption {font-weight:bold;padding-bottom:4px;}
+
+/* Removed hack rules for Dojo compatibility */
+.xspInputFieldRichText{width:100%;background-color:#ffffff;}
+.xspInputFieldRichText ul, .xspInputFieldRichText ol{padding-left: 40px;}
+/* override dojo theme rule for rte container - this provides a border around the rte */
+.RichTextEditable{border-color:#b3b3b3 !important;border-style:solid !important;border-width:1px !important;}
+.xspInputFieldHidden{display:none;}
+
+/*** XSP SECTION.<?>  ***/
+.xspSection{}
+.xspSection-header{cursor:pointer;padding:6px;}
+.xspSection-header-underline{}
+.xspSection-header a{text-decoration:none;color:#000000;font-weight:bold;}
+.xspSection-header a:hover{text-decoration:underline;}
+
+.xspSection .xspSection-header > div > a > span,
+.xspSection .xspSection-wide-header > div > a > span,
+.xspSection .xspSection-box-header > div > a > span,
+.xspSection .xspSection-tab-header > div > a > span {line-height: 25px;}
+
+.xspSection .xspSection-header > div > a:focus,
+.xspSection .xspSection-wide-header > div > a:focus,
+.xspSection .xspSection-box-header > div > a:focus,
+.xspSection .xspSection-tab-header > div > a:focus {outline:0px none;}
+
+.xspSection-wide-header{border-bottom-style:solid;border-width:1px;border-color:#e0e0e0;cursor:pointer;padding:6px;;}
+.xspSection-wide-header a{text-decoration:none;color:#000000;font-weight:bold;display:block;width:100%;}
+
+.xspSection-box-header{border-style:solid;border-width:1px;border-color:#e0e0e0;cursor:pointer;padding:6px;}
+.xspSection-box-header a{text-decoration:none;color:#000000;font-weight:bold;display:block;width:100%;}
+
+.xspSection-tab-header{margin:0px;border-bottom-style:solid;border-width:1px;border-color:#e0e0e0;cursor:pointer;padding:6px;}
+.xspSection-tab-header a{text-decoration:none;color:#000000;font-weight:bold;}
+.xspSection-tab-header-layout{border:1px solid #e0e0e0;padding: 8px 6px 10px 6px;background-color:#f0f0f0;-moz-border-radius:4px 4px 0px 0px;}
+.xspSection-tab-header-layout-underline{font-size:5px;height:0px;background-color:#f0f0f0;}
+
+.xspSection-body{padding-top: 6px;}
+
+/** PAGERS **/
+ul.pagination {
+	font-weight: normal;
+}
+
+/** type="group" **/
+.xspGroup span{margin:0px;padding:0px;}
+.xspGroup span span{color:#848484;display:inline;margin:0px;padding:0px 7px;border-color:#cccccc;}
+.xspGroup span span.xspFirstItem{}
+.xspGroup span span.xspLastItem{}
+.xspGroup span span a, .xspGroup span span a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspGroup span span a:hover, .xspGroup span span a:focus, .xspGroup span span a:active{font-weight:bold !important;text-decoration:underline;}
+.xspGroup span span.xspCurrentItem{color:#848484;}
+
+/** type="first" **/
+.xspFirst a, .xspFirst a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspFirst a:hover, .xspFirst a:focus, .xspFirst a:active{font-weight:bold !important;text-decoration:underline;}
+.xspFirst .xspCurrentItem{color:#848484;}
+
+/** type="previous" **/
+.xspPrevious a, .xspPrevious a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspPrevious a:hover, .xspPrevious a:focus, .xspPrevious a:active{font-weight:bold !important;text-decoration:underline;}
+.xspPrevious .xspCurrentItem{color:#848484;}
+
+/** type="next" **/
+.xspNext a, .xspNext a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspNext a:hover, .xspNext a:focus, .xspNext a:active{font-weight:bold !important;text-decoration:underline;}
+.xspNext .xspCurrentItem{color:#848484;}
+
+/** type="last" **/
+.xspLast a, .xspLast a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspLast a:hover, .xspLast a:focus, .xspLast a:active{font-weight:bold !important;text-decoration:underline;}
+.xspLast .xspCurrentItem{color:#848484;}
+
+/** type="goto" **/
+.xspGoto a, .xspGoto a:visited{color:#105cb6;font-weight:bold !important;text-decoration:none;}
+.xspGoto a:hover, .xspGoto a:focus, .xspGoto a:active{font-weight:bold !important;text-decoration:underline;}
+.xspGoto input{width:20px;text-align:center;color:#848484;}
+.xspGoto .xspCurrentItem{color:#848484;}
+
+/** XSP VIEW PANEL **/
+.xspDataTable tr > td > input.checkbox + a{
+	position: absolute;
+}
+.xspDataTable div.checkbox {
+	padding-left: 20px;
+}
+.xspDataTable .xspColumnUnreadImage {
+	display: none;
+}
+.xspDataTableRowUnread .xspBootstrapRowIcon:before{
+	font-family: 'Glyphicons Halflings';
+	content: '\e022';
+	font-weight: normal;
+	color: #428BCA;
+	padding: 0px 8px;
+	font-size:9pt;
+}
+.xspDataTableRowRead .xspBootstrapRowIcon:before{
+	font-family: 'Glyphicons Halflings';
+	content: '\e022';
+	font-weight: normal;
+	color: #DDDDDD;
+	padding: 0px 8px;
+	font-size:9pt;
+}
+.xspDataTableRowRead > td span,
+.xspDataTableRowRead > td a,
+.xspDataTableRowUnread > td span,
+.xspDataTableRowRead > td a{
+	font: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.xspDataTableRowUnread {
+	font-weight: bold;	
+}
+
+/** Radio Group and Checkbox Group **/
+.xspGroupCaption {
+	font-weight: bold;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:appPage id="appPage1" pageName="interface">
+
+		<xe:djxmHeading id="djxmHeading1" moveTo="home" back="Home"></xe:djxmHeading>
+		<xe:djxmRoundRectList id="djxmRoundRectList1">
+			<p>
+				Segmented Control, in heading
+			</p>
+			<xe:tabBar id="tabBar1" barType="segmentedControl"
+				inHeading="true">
+				<xe:tabBarButton id="tabBarButton1" label="A"
+					selected="true">
+				</xe:tabBarButton>
+				<xe:tabBarButton id="tabBarButton2" label="B"></xe:tabBarButton>
+			</xe:tabBar>
+		</xe:djxmRoundRectList>
+		<xe:djxmRoundRectList id="djxmRoundRectList2">
+			<p>
+				Segmented Control, not in heading
+			</p>
+			<xe:tabBar id="tabBar2" barType="segmentedControl">
+				<xe:tabBarButton id="tabBarButton3" label="A"
+					selected="true">
+				</xe:tabBarButton>
+				<xe:tabBarButton id="tabBarButton4" label="B"></xe:tabBarButton>
+			</xe:tabBar>
+		</xe:djxmRoundRectList>
+		<xe:djxmRoundRectList id="djxmRoundRectList3">
+			<p>
+
+				Tab bar, in heading
+			</p>
+			<xe:tabBar id="tabBar3" inHeading="true">
+				<xe:tabBarButton id="tabBarButton5" label="A"
+					selected="true">
+				</xe:tabBarButton>
+				<xe:tabBarButton id="tabBarButton6" label="B"></xe:tabBarButton>
+			</xe:tabBar>
+		</xe:djxmRoundRectList>
+		<xe:djxmRoundRectList id="djxmRoundRectList4">
+			<p>
+				Tab bar, not in heading
+			</p>
+			<xe:tabBar id="tabBar4">
+				<xe:tabBarButton id="tabBarButton7" label="A"
+					selected="true">
+				</xe:tabBarButton>
+				<xe:tabBarButton id="tabBarButton8" label="B"></xe:tabBarButton>
+			</xe:tabBar>
+		</xe:djxmRoundRectList>
+
+		<xe:djxmRoundRectList id="djxmRoundRectList5">
+			<p>
+				Switch
+			</p>
+
+			<xe:djxmSwitch leftLabel="ON" rightLabel="OFF" id="djxmSwitch1">
+			</xe:djxmSwitch>
+		</xe:djxmRoundRectList>
+	</xe:appPage>
+</xp:view>

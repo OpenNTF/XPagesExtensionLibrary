@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="Core_Home" label="Core Home"
+				selection="/Core/Home">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="Core_Outline" label="Outline &amp; Menu"
+				selection="/Core/Outline">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_InPlaceForm" label="In Context Editing"
+				selection="/Core/InPlaceForm">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_InPlaceDialog" label="In Context Dialogs"
+				selection="/Core/InPlaceDialog">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_DynamicTabs" label="Dynamic Tabs"
+				selection="/Core/DynamicTabs">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_DynamicPage" label="Dynamic Page"
+				selection="/Core/DynamicPage">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_MultiImage" label="Multi Image"
+				selection="/Core/MultiImage">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_Switch" label="Switch Control"
+				selection="/Core/Switch">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_Dialog" label="Dialogs"
+				selection="/Core/Dialog">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_Tooltip" label="Tooltips"
+				selection="/Core/Tooltip">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_ValuePicker" label="Value Pickers"
+				selection="/Core/ValuePicker">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_FormControl" label="Extended Form Controls"
+				selection="/Core/FormControl">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_ScrollingDataSet" label="Scrolling Dataset"
+				selection="/Core/ScrollingDataSet">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="Core_DojoFormControls" label="Dojo Form Controls"
+				selection="/Core/DojoFormControls">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_DojoLayout" label="Dojo Layout"
+				selection="/Core/DojoLayout">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_DojoEffects" label="Dojo Effects"
+				selection="/Core/DojoEffects">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="Core_API_Names" label="API - Names"
+				selection="/Core/APINames">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="Core_Debug" label="Debugging"
+				selection="/Core/Debug">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

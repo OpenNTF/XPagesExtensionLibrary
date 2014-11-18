@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='2e2' unid='EA60B490E651A2288525745A00186715' sequence='29'>
+<created><datetime dst='true'>20080531T002632,53-04</datetime></created>
+<modified><datetime dst='true'>20120501T125732,31+01</datetime></modified>
+<revised><datetime dst='true'>20120501T125732,30+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20120501T125732,31+01</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100333,89+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=dubMob</name></updatedby>
+<wassignedby><name>CN=Simon/O=dubMob</name></wassignedby>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+</rawitemdata></item>
+<item name='$TITLE'><text>Abstract</text></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='Abstract' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>Abstract</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8IAAEAAArdBgAAiv/+/1AA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAALD/FAAAAAgAAAAAAAAAAAAAAAAAiv+6AIgBAAUAMAIAAAAAAAAC
+AQAACo4AAAAAAAAACAAAAAAAjgABABoACQBfZWxsaXBzaXMAAQAEACAuLi4DAAcADAAFAAkxVDJT
+AAEAGgAHAF9sZW5ndGgAAAAAAAAAAMByQAMABwAOAAcACTBSMVQyUwABABgABgBfcmFuZ2UAAAAA
+AAAAACRAAwAHAA4ABwAJMFIxVDJTAAAADgAFAAQAQm9keQMABwAKAAQACTBSUkFic3RyYWN0Yg4B
+AIQAAAAAAAAAAADeBgAAiv+F/wgAAQAACg==
+</rawitemdata></item></note>
+

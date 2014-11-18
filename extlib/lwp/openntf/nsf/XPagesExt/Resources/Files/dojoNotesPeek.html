@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<!--                                                                   
+ ! ***************************************************************** 
+ ! ? Copyright IBM Corp. 2011
+ ! 
+ ! Licensed under the Apache License, Version 2.0 (the "License"); 
+ ! you may not use this file except in compliance with the License. 
+ ! You may obtain a copy of the License at:
+ ! 
+ ! http://www.apache.org/licenses/LICENSE-2.0 
+ ! 
+ ! Unless required by applicable law or agreed to in writing, software 
+ ! distributed under the License is distributed on an "AS IS" BASIS, 
+ ! WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ ! implied. See the License for the specific language governing 
+ ! permissions and limitations under the License.                      
+ ! ***************************************************************** 
+-->
+
+<head>
+
+<title>DOJO Notes Peek</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- <script src="/domjs/dojo-1.5.0/dojo/dojo.js" type="text/javascript" djConfig="parseOnLoad: true"></script> -->
+
+<script src="/xsp/.ibmxspres/dojoroot/dojo/dojo.js" type="text/javascript" djConfig="parseOnLoad: true"></script>
+
+<style type="text/css">
+
+	@import "/xsp/.ibmxspres/dojoroot/dijit/themes/tundra/tundra.css";
+	@import "/xsp/.ibmxspres/dojoroot/dojo/resources/dojo.css";
+	@import "/xsp/.ibmxspres/dojoroot/dojox/grid/resources/tundraGrid.css"; 
+
+	html
+	{
+		height: 100%;
+	}
+
+	body 
+	{
+		height: 90%;
+		margin-left: 0px;
+		margin-top: 0px;
+		margin-right: 0px;
+		margin-bottom: 0px;
+	}
+	
+</style>
+
+		
+<script>
+
+dojo.require("dojo.parser");
+dojo.require("dojo.data.ItemFileReadStore");
+dojo.require("dojox.data.JsonRestStore");
+dojo.require("dijit.Tree");
+dojo.require("dojox.grid.DataGrid");
+dojo.require("dijit.TooltipDialog");
+
+var dbTable;		
+var viewTable;			
+var viewEntiresTable;
+var dbPath;
+var viewName;		
+var viewUnid;
+
+<!-- DB	DATASTORE-->
+var	dbURL = "/api/data"; 
+var	dbStore = new dojox.data.JsonRestStore({
+	target:	dbURL,
+	loadLazyValues:	true,
+	idAttribute:"@filepath"
+});				
+
+<!-- VIEW DATASTORE-->
+var	viewURL;
+var	viewStore;
+
+<!-- VIEW COLLECTION DATASTORE-->
+var	viewCollectionURL;
+var	viewCollectionStore;
+
+function onFetchCompleteViewTable(e) {
+	
+	clearGrid(viewTable);
+	viewTable.selection.setSelected(0, true);
+	onClickViewTable(null);
+}
+
+function onFetchCompleteDBTable(e) {
+
+	dbPath = getDBPath();
+	if (dbPath == "") {
+		dbPath = dbStore.getValue(dbTable.getItem(0), "@filepath");				
+		clearGrid(dbTable);
+		dbTable.selection.setSelected(0, true);
+	}
+	else {
+		//alert(dbTable.rowCount);
+		for (var i = 0; i < dbTable.rowCount; i++) {
+			if (dbPath == dbStore.getValue(dbTable.getItem(i), "@filepath")) {
+				//alert(dbStore.getValue(dbTable.getItem(i), "@title"));
+				dbTable.selection.setSelected(i, true);
+			}
+			else {
+				dbTable.selection.setSelected(i, false);
+			}
+		}
+	}
+	onClickDBTable(null);
+}
+
+function onClickDBTable(e) {
+
+	if (viewEntiresTable != undefined) {
+		viewEntiresTable.setStore(null);
+		viewEntiresTable.setStructure(null); 
+	}
+	
+	if (e != undefined) {
+		dbPath = dbStore.getValue(dbTable.getItem(e.rowIndex), "@filepath");				
+	}
+	else if (dbPath == "") {
+		dbPath = dbStore.getValue(dbTable.getItem(0), "@filepath");				
+	}
+
+	viewURL = "/" + dbPath + "/api/data/collections";
+	dojo.byId("urlResults").innerHTML = "Results for: " + viewURL;
+
+	viewStore = new dojox.data.JsonRestStore({
+		target:	viewURL,	
+		idAttribute:"@unid"
+	});
+
+	if (viewTable != undefined) {
+		viewTable.setStore(viewStore);
+	}
+	else {
+		initViewTable();
+	}
+}
+
+function onClickViewTable(e) {
+	
+	if (e == undefined) {
+		viewUnid = viewTable.store.getValue(viewTable.getItem(0), "@unid");
+		viewName = viewTable.store.getValue(viewTable.getItem(0), "@title");				
+	}
+	else {
+		viewUnid = viewTable.store.getValue(viewTable.getItem(e.rowIndex), "@unid");
+		viewName = viewTable.store.getValue(viewTable.getItem(e.rowIndex), "@title");				
+	}
+	
+	if (viewName == undefined || viewName == "") {
+		viewCollectionURL = "/" + dbPath + "/api/data/collections/unid/" + viewUnid;
+	}
+	else {
+		viewCollectionURL = "/" + dbPath + "/api/data/collections/name/" + viewName;
+	}
+	
+	dojo.byId("urlResults").innerHTML = "Results for view: " + viewCollectionURL;
+
+	viewCollectionStore = new dojox.data.JsonRestStore({
+		target:	viewCollectionURL,	
+		loadLazyValues:	true,
+		//syncMode: true,
+		idAttribute: "@position"
+	});		
+
+	if (viewEntiresTable == undefined) {
+		initViewEntriesTable();
+	}
+	else {
+		viewDesignLayout = createLayout();	
+		viewEntiresTable.setStore(viewCollectionStore);
+		viewEntiresTable.setStructure(viewDesignLayout); 
+	}
+}
+
+function onClickViewEntiresTable(e) {
+
+	docUnid = viewEntiresTable.store.getValue(viewEntiresTable.getItem(e.rowIndex), "@unid");
+	docURL = "/" + dbPath + "/api/data/documents/unid/" + docUnid;
+	dojo.byId("urlResults").innerHTML = "Results for view: " + viewCollectionURL + "<br>Results for document: " + docURL;
+
+	var result = function(url){
+		var json;
+		dojo.xhrGet({
+			url: url,
+			handleAs: "json",
+			load: function(data){
+				json = data;							
+			},
+			sync: true
+		});
+		return json;
+	}
+
+	var docData = result(docURL);
+	var str = "<p><button type=\"button\" onclick=\"self.close()\">Close</button></p>";
+	str += "<table>";
+	for (myKey in docData ) {
+		if (typeof docData[myKey] != 'object' ) {
+			str += "<tr><td><b>" + myKey + "</b></td><td>" + docData[myKey] + "</td></tr>";
+		}
+		else if (docData[myKey].length > 0) {
+			str += "<tr><td><b>" + myKey + "</b></td><td>" + docData[myKey] + "</td></tr>";
+		}
+		else {			
+			str += "<tr><td><b>" + myKey + "</b></td><td>" + docData[myKey]['data'] + "</td></tr>";
+		}
+	}
+	str += "</table>";
+	docWindow=window.open("", "Document" + docUnid, "height=400,width=800,scrollbars=1,resizable=1");
+	docWindow.document.write(str);
+	docWindow.focus();
+	dojo.byId("urlResults").innerHTML = "Results for view: " + viewCollectionURL;
+}		
+
+function showDBToolTip(e) {
+
+	if (e == undefined) {
+		return;
+	}
+
+	var dbTitle = dbStore.getValue(dbTable.getItem(e.rowIndex), "@title");
+	var dbPath = dbStore.getValue(dbTable.getItem(e.rowIndex), "@filepath");
+	var replicaid = dbStore.getValue(dbTable.getItem(e.rowIndex), "@replicaid");
+	closeToolTip();
+	var htmlFragment = "<div style='background:#F0F0F0;'>" + dbTitle + "<br/>" + dbPath + "<br/>" + replicaid + "</div>";
+
+	var dialog = new dijit.TooltipDialog({
+		id: "tooltipDialog",
+		content: htmlFragment,
+		style: "position: absolute; font: normal 4pt Tahoma; z-index:100"
+	});
+	dialog.startup();
+	dojo.style(dialog.domNode, "opacity", 0.85);
+	dijit.placeOnScreen(dialog.domNode, {x: e.pageX, y: e.pageY}, ["TL", "BL"], {x: 10, y: 10});
+}
+
+function showViewToolTip(e) {
+
+	if (e == undefined) {
+		return;
+	}
+
+	var viewName = viewTable.store.getValue(viewTable.getItem(e.rowIndex), "@title");				
+	var viewUnid = viewTable.store.getValue(viewTable.getItem(e.rowIndex), "@unid");
+	closeToolTip();
+	var htmlFragment = "<div style='background:#F0F0F0;'>" + viewName + "<br/>" + viewUnid + "</div>";
+
+	var dialog = new dijit.TooltipDialog({
+		id: "tooltipDialog",
+		content: htmlFragment,
+		style: "position: absolute; font: normal 4pt Tahoma; z-index:100"
+	});
+	dialog.startup();
+	dojo.style(dialog.domNode, "opacity", 0.85);
+	dijit.placeOnScreen(dialog.domNode, {x: e.pageX, y: e.pageY}, ["TL", "BL"], {x: 10, y: 10});
+}
+
+function closeToolTip() {
+	
+	var widget = dijit.byId("tooltipDialog");
+	if (widget) {
+		widget.destroy();
+	}
+}
+
+function clearGrid(grid){
+	
+	if (grid.store != null){
+		var items = grid.selection.getSelected();
+		if (items.length>0) {
+			dojo.forEach(items, function(selectedItem) {
+				grid.selection.setSelected(selectedItem,false);
+			}); 
+		}
+	}else{
+		grid.setStore(null);
+		return;
+	}
+}
+
+function initDBTable () {
+	
+	var	dbLayout = [{
+		field: "@title",
+		name: "Databases",
+		width: "200px"
+	}];
+
+	dbTable = new dojox.grid.DataGrid({
+		id:	"dbTable",					
+		store: dbStore,
+		//clientSort:	true,
+		selectionMode: 'single',
+		autoWidth: true,
+		structure: dbLayout	
+		},
+		document.createElement('div')
+	);
+
+	dojo.byId("idDbTable").appendChild(dbTable .domNode);	
+
+	dbTable .startup();				
+
+	dojo.connect(dbTable, "onRowClick", onClickDBTable);
+	dojo.connect(dbTable, "onMouseOver", showDBToolTip);
+	dojo.connect(dbTable,"onMouseOut", closeToolTip);
+	dojo.connect(dbTable, "_onFetchComplete", onFetchCompleteDBTable);
+}
+
+function initViewTable() {
+
+	var	viewLayout = [{
+		field: "@title",
+		name: "Views",
+		width: "200px"
+	}];
+
+	viewTable = new dojox.grid.DataGrid({
+		id:	"viewTable",					
+		store: viewStore, 
+		//clientSort:	true,
+		//autoHeight:	true,
+		autoWidth: true,
+		singleClickEdit: false,
+		selectionMode: 'single',
+		rowsPerPage: 20,
+		//rowSelector: '20px',
+		structure: viewLayout
+		},
+		document.createElement('div')
+	);				
+
+	dojo.byId("idViewTable").appendChild(viewTable.domNode);	
+
+	viewTable.startup();
+
+	dojo.connect(viewTable, "onRowClick", onClickViewTable);
+	dojo.connect(viewTable, "onMouseOver", showViewToolTip);
+	dojo.connect(viewTable, "onMouseOut", closeToolTip);
+	dojo.connect(viewTable, "_onFetchComplete", onFetchCompleteViewTable);
+}
+
+function initViewEntriesTable() {
+
+	viewDesignLayout = createLayout();	
+
+	viewEntiresTable = new dojox.grid.DataGrid({
+		id:	"viewCollectionTable",					
+		store: viewCollectionStore,
+		//clientSort:	true,
+		//autoHeight:	true,
+		autoWidth: true,
+		rowsPerPage: 20,
+		//rowSelector: '20px',
+		selectionMode: 'single',
+		structure: viewDesignLayout	
+		},
+		document.createElement('div')
+	);
+
+	dojo.byId("idViewEntriesTable").appendChild(viewEntiresTable.domNode);	
+
+	viewEntiresTable.startup();				
+
+	dojo.connect(viewEntiresTable, "onRowDblClick", onClickViewEntiresTable);
+}
+
+dojo.ready(function() {	
+
+	initDBTable();
+});
+
+function getDBPath() {
+
+	var pathname=(location.pathname);
+	var fragment=pathname.split('/dojoNotesPeek.html');
+	var dbName=fragment[0];
+	if (dbName != "") {
+		dbName = dbName.substring(1);
+		return dbName;
+	}
+	return "";
+}
+
+function createLayout(){
+
+	var viewDesignURL = "/" + dbPath + "/api/data/collections/name/" + viewName + "/design";	
+	dojo.byId("urlResults").innerHTML = "Results for view: " + viewCollectionURL;	
+
+	var result = function(url){
+		var json;
+		dojo.xhrGet({
+			url: url,
+			handleAs: "json",
+			load: function(data){
+				json = data;							
+			},
+			sync: true
+		});
+		return json;
+	}
+
+	var viewDesignData = result(viewDesignURL);
+	var viewDesignLayout = new Array();
+	
+	for (var i = 0; viewDesignData != undefined && i < viewDesignData.length; i++) {
+		var layoutObject = new Object();
+		layoutObject.field = viewDesignData[i]['@name'];
+		layoutObject.name = viewDesignData[i]['@title'];
+		layoutObject.width = viewDesignData[i]['@width'];
+		viewDesignLayout.push(layoutObject);
+	}
+
+	return viewDesignLayout;
+}
+
+</script>
+
+</head>
+
+<body>
+
+	<pre><div id="urlResults" height="5%" ></div></pre>
+	<table cellSpacing="5" height="95%" cellPadding="10" border="1">
+		<tbody>
+
+			<tr>
+				<td id="idDbTable" vAlign="top"></td>
+
+				<td id="idViewTable" vAlign="top"></td>
+				<td id="idViewEntriesTable" vAlign="top"></td>
+			</tr>
+		</tbody>
+	</table>	
+
+</body>
+
+</html>
+

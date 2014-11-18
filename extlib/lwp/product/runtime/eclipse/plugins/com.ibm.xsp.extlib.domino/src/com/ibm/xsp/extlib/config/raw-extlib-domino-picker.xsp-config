@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+  </faces-config-extension>
+	
+	<!-- Domino View value picker data provider -->
+	<complex-type>
+    	<description>Value picker data provider that reads the data from a Domino view or folder</description>
+    	<display-name>Value Picker Data Provider for View or Folder</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-class>
+  		<group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
+        
+        <property>
+            <description>Name of the column whose value will be used in the picker as a label</description>
+            <display-name>Label Column Name</display-name>
+            <property-name>labelColumn</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- This is a non-translatable column name, 
+                    not translatable label text. -->
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "match" "ftSearch" and "startFrom" should not be translated -->
+            <description>Define the type of search to be applied. The options are "match", meaning the search value is matched to a key or keys in the view, "ftSearch" meaning the value is found in a full text search of the entry and "startFrom", the default search type, which matches the value as a key and then returns that entry and all subsequent entries.</description>
+            <display-name>Type of Search</display-name>
+            <property-name>searchType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>8.5.32003</since>
+                <designer-extension>
+                    <!-- This is a non-translatable search type, 
+                    not translatable label text. -->
+                    <tags>
+                        not-localizable
+                    </tags>
+          			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          			<editor-parameter>
+						startFrom
+						match
+						ftSearch
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+      		<tag-name>dominoViewValuePicker</tag-name>
+    	</complex-extension>
+  	</complex-type>
+		
+	<!-- Domino Directory name picker -->
+	<complex-type>
+    	<description>Name picker data provider that reads the data from a Domino address book</description>
+    	<display-name>Domino Address Book Name Picker Data Provider</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-class>
+
+  		<property>
+  		    <!-- Give some more detail - look for ref document-->
+			<description>Defines the list of address book databases</description>
+			<display-name>Address Book Selection</display-name>
+			<property-name>addressBookSel</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						all
+						all-public
+						all-private
+						first
+						first-public
+						db-name
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<!-- # The "addressBookSel" should not be translated, it refers to the addressBookSel property -->
+  		<property>
+  		    <!-- reference the property above because these are used together -->
+  		     <!-- # "addressBookSel" "db-name" should not be translated -->
+			<description>Defines the name of the database containing the address book if the selection type for "addressBookSel" property is "db-name"</description>
+			<display-name>Address Book Database Name</display-name>
+			<property-name>addressBookDb</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			</property-extension>
+		</property>
+        <property>
+            <description>This defines the list of names to be displayed, like people or groups. When this property is set, then the people and group boolean properties are ignored.</description>
+            <display-name>Name List Type</display-name>
+            <property-name>nameList</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                        people
+                        peopleByLastName
+                        groups
+                        peopleAndGroups
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
+  		<property>
+			<!-- # "nameList" should not be translated -->
+			<description>Specifies whether or not to include people entries. Default is true. Only used when the "nameList" property is absent.</description>
+			<display-name>Include People</display-name>
+			<property-name>people</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<default-value>true</default-value>
+				<designer-extension>
+					<!-- This defaults to true at runtime, so it will only
+					be possible to set the value in a theme file
+					in release 8.5.3 or later using the baseValue attribute.
+					runtime-default-true prevents a fail in BooleanPropertyDefaultTest -->
+					<tags>
+						runtime-default-true
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<!-- # "nameList" should not be translated -->
+			<description>Specifies whether or not to include group entries. Default is true. Only used when the "nameList" property is absent.</description>
+			<display-name>Include Groups</display-name>
+			<property-name>groups</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<default-value>true</default-value>
+				<designer-extension>
+					<!-- This defaults to true at runtime, so it will only
+					be possible to set the value in a theme file
+					in release 8.5.3 or later using the baseValue attribute.
+					runtime-default-true prevents a fail in BooleanPropertyDefaultTest -->
+					<tags>
+						runtime-default-true
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      		<tag-name>dominoNABNamePicker</tag-name>
+    	</complex-extension>
+  	</complex-type>
+		
+		
+	<!-- Domino Directory name picker -->
+<!-- EXPERIMENTAL - Not yet enabled
+	<complex-type>
+    	<description>Name picker that uses the Domino Directory API to retrive the names</description>
+    	<display-name>Domino Directory Name Picker</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoDirectoryNamePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoDirectoryNamePickerData</complex-class>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      		<tag-name>dominoDirectoryNamePicker</tag-name>
+    	</complex-extension>
+  	</complex-type>
+-->
+
+	<!-- Domino View name picker -->
+	<complex-type>
+    	<description>Name picker data provider that reads its data from a Domino view or folder</description>
+    	<display-name>Name Picker Data Provider for View or Folder</display-name>
+    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-class>
+    	<group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
+        
+        <property>
+            <description>Name of the column in the view whose value will be used in the picker as a label</description>
+            <display-name>Label Column Name</display-name>
+            <property-name>labelColumn</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- This is a non-translatable column name, 
+                    not translatable label text. -->
+                    <tags>
+                        not-localizable
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+  		<property>
+			<description>Label of this name data provider, to uniquely identify it when using multiple data providers. This appears in the picker control dialog in the list where users can choose which directory to search.</description>
+			<display-name>Data Provider Label</display-name>
+			<property-name>label</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+		
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      		<tag-name>dominoViewNamePicker</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+</faces-config>

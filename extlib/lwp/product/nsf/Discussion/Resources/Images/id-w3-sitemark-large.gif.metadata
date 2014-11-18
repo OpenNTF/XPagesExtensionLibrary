@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="42e" sequence="9" unid="DF995C704F0C47C9802578E9003D00EF">
+<created><datetime dst="true">20110811T120619,35+01</datetime></created>
+<modified><datetime>20120305T082321,16+00</datetime></modified>
+<revised><datetime>20120305T082321,15+00</datetime></revised>
+<lastaccessed><datetime>20120305T082321,16+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100337,37+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>id-w3-sitemark-large.gif</text></item>
+<item name="$Flags"><text>34CiQ</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20101004T093608,23-06</datetime></item>
+<item name="$ImageNames" sign="true"><text>id-w3-sitemark-large.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

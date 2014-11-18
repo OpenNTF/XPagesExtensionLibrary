@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:panel>
+	<xp:this.data>
+		<xp:dominoDocument var="newResponseDoc"
+			formName="#{compositeData.formName}" ignoreRequestParams="true"
+			computeWithForm="both" documentId="#{compositeData.documentId}"
+			action="#{javascript: (null != compositeData.documentId)? 'editDocument' : 'newDocument'}"
+			parentId="#{compositeData.parentId}">
+			<xp:this.postNewDocument><![CDATA[#{javascript:/*
+	Due to lack of automatic field inheritance between documents in XPages 8.5.2,
+	we need to do this manually until this is available out of the box.
+*/
+// manually compute and apply the "Compute when composed" fields
+
+// the parent doc, used to copy some fields.
+var parentDoc:NotesDocument = database.getDocumentByUNID(newResponseDoc.getParentId());
+
+if ( newResponseDoc.getItemValueString("Form") == "Response" ) {
+	// -- from Form "Response"
+	var mainID = parentDoc.getItemValueString("MainID");
+	if( ! mainID ){
+		mainID = compositeData.parentId;
+	}
+	newResponseDoc.setValue("MainID", @List(mainID) );
+	// -- end from Form "Response"
+} else {
+	// -- from Form "ResponseToResponse"
+	var MainIDforRR = parentDoc.getItemValueString("MainID");
+	if( !MainIDforRR ){
+		MainIDforRR = parentDoc.getItemValueString("MainIDforRR");
+	}
+	newResponseDoc.setValue("MainIDforRR", @List(MainIDforRR) );
+	// -- end from Form "ResponseToResponse"
+}
+// -- from Subform "Shared Response Header"
+newResponseDoc.setValue("AbbreviateFrom", @Name("[Abbreviate]", newResponseDoc.getItemValue("From")) );
+newResponseDoc.setValue("AltFrom", @UserName(1) );
+//@fn not available: newResponseDoc.setValue("AltLang", @UserNameLanguage(1) );
+var OriginalSubjectStr = parentDoc.getItemValueString("OriginalSubject");
+var OriginalSubject = (OriginalSubjectStr? @List(OriginalSubjectStr) : parentDoc.getItemValue("Subject"));
+newResponseDoc.setValue("OriginalSubject", OriginalSubject );
+newResponseDoc.setValue("ImmediateParentSubject", parentDoc.getItemValue("Subject") );
+newResponseDoc.setValue("ParentForm", parentDoc.getItemValue("Form") );
+// "$$Return" is only needed for the Web Classic, so not using for XPages web.
+newResponseDoc.setValue("ExpireDate", parentDoc.getItemValue("ExpireDate") );
+// "ThreadSort" and "ThreadIndent" seem to be for Web Classic.
+// -- end from Subform "Shared Response Header"
+// -- from Subform "Response Banner"
+newResponseDoc.setValue("ParentSubject", parentDoc.getItemValue("Subject") );
+newResponseDoc.setValue("Categories", parentDoc.getItemValue("Categories") );
+// -- end from Subform "Response Banner"
+}]]></xp:this.postNewDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:formTable id="formTable1" disableRequiredMarks="true"
+		legend="New response form">
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<h2>
+					<xp:text
+						rendered="#{javascript: null == compositeData.documentId}"
+						disableTheme="true" value="New Reply">
+					</xp:text>
+					<xp:text
+						rendered="#{javascript: null != compositeData.documentId}"
+						disableTheme="true" value="Edit Reply">
+					</xp:text>
+				</h2>
+			</xp:panel>
+		</xe:this.facets>
+
+		<xe:formRow label="Subject:">
+			<xp:inputText id="inputText1" style="width:100%"
+				value="#{newResponseDoc.Subject}" required="true"
+				autocomplete="off">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Please provide a subject">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow labelPosition="none">
+			<xp:inputRichText id="body" value="#{newResponseDoc.Body}"
+				role="input"
+				title="used to enter the body of content for the reply">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="alt" value="input text field">
+					</xp:dojoAttribute>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+			<xc:controlAttachArea id="attachResponseBody"
+				valueEL="newResponseDoc.Body">
+			</xc:controlAttachArea>
+		</xe:formRow>
+
+		<xe:this.facets>
+			<xp:panel xp:key="footer">
+				<xp:button value="Save" id="buttonSave">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" id="evtSave">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:saveDocument var="newResponseDoc"></xp:saveDocument>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript://
+										TopicThreadState.clearEditArea();
+									}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:link id="linkCancel" text="Cancel" style="zoom:1"
+					themeId="Link.action">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true" execMode="partial"
+						id="editResponseCancelLinkEvt">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:confirm
+									message="#{strings.cancel_editing}">
+								</xp:confirm>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript://
+									TopicThreadState.clearEditArea();
+								}]]></xp:this.script>
+								</xp:executeScript>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:formTable>
+	</xp:panel>
+</xp:view>

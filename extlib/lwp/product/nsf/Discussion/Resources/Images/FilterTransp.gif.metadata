@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2f6" sequence="6" unid="D647B951E118D80C8025790A002AD9C6">
+<created><datetime dst="true">20110913T084802,62+01</datetime></created>
+<modified><datetime>20120305T082321,94+00</datetime></modified>
+<revised><datetime>20120305T082321,93+00</datetime></revised>
+<lastaccessed><datetime>20120305T082321,94+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,00+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>FilterTransp.gif</text></item>
+<item name="$Flags"><text>34CiQP</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20110912T132321,24+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>FilterTransp.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

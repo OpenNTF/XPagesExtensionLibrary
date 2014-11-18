@@ -1,0 +1,19 @@
+<theme extends="android" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd" >
+
+	<resources>
+	
+		<styleSheet href="/mobile.css"></styleSheet>
+		<script src="/xpServerSide.jss" clientSide="false"></script>
+		<script src="/mobile-server.jss" clientSide="false"></script>
+		<script src="/largeContent.js" clientSide="true"></script>
+		<bundle var="res" src="/strings.properties"></bundle>
+		<script src="/xpCGIVariables.jss" clientSide="false"></script>
+		<dojoModule name="dojo.fx"></dojoModule>
+		<script src="/xpAuthorProfile.jss" clientSide="false"></script>
+	
+		<linkResource rel="apple-touch-icon" href="discussion_57px.png"></linkResource>
+
+	</resources>
+	
+</theme>

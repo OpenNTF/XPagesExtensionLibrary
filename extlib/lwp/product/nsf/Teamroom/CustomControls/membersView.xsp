@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+		if(null == sessionScope.dynamicContentId){
+			sessionScope.dynamicContentId = "membersTileSortingDynamicContent";
+		}
+		if(null == sessionScope.selectedFacetName){
+			sessionScope.selectedFacetName = "members";
+		}
+		if(null == sessionScope.selectedViewFormatFacetName){
+			sessionScope.selectedViewFormatFacetName = "tileView";
+		}
+	}]]></xp:this.beforePageLoad>
+	<xp:text escape="true" id="titleField" tagName="h1">
+		<xp:this.value><![CDATA[#{javascript:
+			sessionScope.webFrom = "/members.xsp";
+			sessionScope.webFromName = strings.getString('members');
+			return strings.getString('members');
+		}]]></xp:this.value>
+	</xp:text>
+	<xp:div id="membersView">
+		<xp:div>
+			<xp:label value="Show:" style="padding-right:4px"></xp:label>
+			<xp:link id="lkShowMembers" text="Members"
+				style="#{javascript:sessionScope.selectedFacetName == 'members' ? 'color:#808080;' : 'color:#105CB6;'}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="membersView">
+					<xp:this.action>
+						<xp:actionGroup>
+							<xp:executeScript>
+								<xp:this.script>
+									<![CDATA[#{javascript:sessionScope.selectedFacetName = "members"}]]>
+								</xp:this.script>
+							</xp:executeScript>
+							<xe:changeDynamicContentAction for="#{sessionScope.dynamicContentId}"
+								facetName="#{sessionScope.selectedFacetName}">
+							</xe:changeDynamicContentAction>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+			<xe:listSeparator></xe:listSeparator>
+			<xp:link id="lkShowSubteams" text="Subteams"
+				style="#{javascript:sessionScope.selectedFacetName == 'subteams' ? 'color:#808080;' : 'color:#105CB6;'}">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="membersView">
+					<xp:this.action>
+						<xp:actionGroup>
+							<xp:executeScript>
+								<xp:this.script>
+									<![CDATA[#{javascript:sessionScope.selectedFacetName = "subteams"}]]>
+								</xp:this.script>
+							</xp:executeScript>
+							<xe:changeDynamicContentAction for="#{sessionScope.dynamicContentId}"
+								facetName="#{sessionScope.selectedFacetName}">
+							</xe:changeDynamicContentAction>
+						</xp:actionGroup>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:div>
+
+		<xp:br></xp:br>
+
+		<xp:div id="actionsAndViewContainer">
+			<xp:div id="actionsContainer">
+				<xp:div style="float:left">
+					<xp:button value="Add Member" id="btnAddMember" themeId="Button.Cancel">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="memberManagementDynamicContent">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("memberManagementDynamicContent")
+c.show("addMember")}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Create Subteam" id="btnCreateSubteam"
+						themeId="Button.Cancel">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="memberManagementDynamicContent">
+							<xp:this.action><![CDATA[#{javascript:var c = getComponent("memberManagementDynamicContent")
+c.show("createSubteam")}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					<xp:button value="Remove" id="btnRemove" themeId="Button.Cancel">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel > lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canDeleteDocs}]]></xp:this.loaded>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" immediate="true" save="false">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:confirm message="Delete selected members/subteams?">
+									</xp:confirm>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:var dv = getComponent("membersSubteamsDataView");
+if(null != dv){
+	var ids = dv.getSelectedIds();
+	if(null != ids && !ids.equals("")){
+		ids = @Explode(ids, ",");
+		try{
+			for(var i = 0; i < ids.length; i++){
+				var forRemoval = database.getDocumentByID(ids[i]);
+				if(null != forRemoval){
+					forRemoval.remove(false);
+				}
+			}
+		}catch(e){
+			print(e.toString());
+		}
+	}
+}
+dv = getComponent("subteamsDataView");
+if(null != dv){
+	var ids = CheckboxBean.getCheckedIds();
+	if(null != ids && !ids.equals("")){
+		ids = @Explode(ids, ",");
+		try{
+			for(var i = 0; i < ids.length; i++){
+				var forRemoval = database.getDocumentByID(ids[i]);
+				if(null != forRemoval){
+					forRemoval.remove(false);
+				}
+			}
+		}catch(e){
+			print(e.toString());
+		}
+	}
+}
+}]]></xp:this.script>
+									</xp:executeScript>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:div>
+				<xp:div style="float:right">
+					<xc:actionManager id="actionManager" refreshId="membersView"
+						displayLabel="true" labelText="Display:"
+						dynamicContentId="membersViewDynamicContent" actionGroupName="membersViewActions"
+						padActions="false" defaultSelectedValue="tileView">
+						<!-- 
+						#{javascript:strings.getString('member.titleview')}
+						#{javascript:strings.getString('member.listview')} 
+						-->
+						<xc:this.actions>
+							<xc:actions deselectedImage="/timeblock_deselected_1.gif"
+								selectedImage="/timeblock_selected_1.gif" imageAlt="member.titleview"
+								selectedValue="tileView">
+								<xc:this.params>
+									<xc:params name="dynamicContentId" value="membersTileSortingDynamicContent"></xc:params>
+									<xc:params name="selectedViewFormatFacetName" value="tileView"></xc:params>
+								</xc:this.params>
+							</xc:actions>
+							<xc:actions deselectedImage="/list_deselected_1.gif"
+								selectedImage="/list_selected_1.gif" imageAlt="member.listview" 
+								selectedValue="listView">
+								<xc:this.params>
+									<xc:params name="dynamicContentId" value="membersListSortingDynamicContent"></xc:params>
+									<xc:params name="selectedViewFormatFacetName" value="listView"></xc:params>
+								</xc:this.params>
+							</xc:actions>
+						</xc:this.actions>
+					</xc:actionManager>
+				</xp:div>
+			</xp:div>
+
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+
+			<xe:dynamicContent defaultFacet="#{sessionScope.selectedViewFormatFacetName}"
+				id="membersViewDynamicContent" useHash="false">
+				<xe:this.facets>
+					<xe:dynamicContent xp:key="tileView"
+						id="membersTileSortingDynamicContent"
+						defaultFacet="#{sessionScope.selectedFacetName}" useHash="false">
+						<xp:this.facets>
+							<xc:membersMembersTileView xp:key="members">
+								<xc:this.id><![CDATA[${javascript:this.setId("membersSubteamsDataViewContainer")}]]></xc:this.id>
+							</xc:membersMembersTileView>
+							<xc:membersSubteamsTileView xp:key="subteams">
+								<xc:this.id><![CDATA[${javascript:this.setId("membersSubteamsDataViewContainer")}]]></xc:this.id>
+							</xc:membersSubteamsTileView>
+						</xp:this.facets>
+					</xe:dynamicContent>
+					<xe:dynamicContent xp:key="listView"
+						id="membersListSortingDynamicContent"
+						defaultFacet="#{sessionScope.selectedFacetName}" useHash="false">
+						<xp:this.facets>
+							<xc:membersMembersListView xp:key="members">
+								<xc:this.id><![CDATA[${javascript:this.setId("membersSubteamsDataViewContainer")}]]></xc:this.id>
+							</xc:membersMembersListView>
+							<xc:membersSubteamsListView xp:key="subteams">
+								<xc:this.id><![CDATA[${javascript:this.setId("membersSubteamsDataViewContainer")}]]></xc:this.id>
+							</xc:membersSubteamsListView>
+						</xp:this.facets>
+					</xe:dynamicContent>
+				</xe:this.facets>
+			</xe:dynamicContent>
+		</xp:div>
+	</xp:div>
+</xp:view>

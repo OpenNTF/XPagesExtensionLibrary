@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	
+	<xp:this.afterPageLoad><![CDATA[#{javascript:
+		var pageTitle = compositeData.pageTitle,
+			pageUrl = compositeData.pageUrl;
+		if (pageTitle) {
+			pageTitle = strings.getString(pageTitle);
+		}
+		if(pageTitle) {
+			sessionScope.webFromName = pageTitle;
+			sessionScope.webFrom = pageUrl;
+		}
+	}]]></xp:this.afterPageLoad>
+
+
+	<xp:link escape="true" value="#{javascript:sessionScope.webFrom || '/allDocuments.xsp'}"
+		rendered="#{javascript:compositeData.pageTitle === null}">
+		<xp:this.text><![CDATA[#{javascript:
+			var text = I18n.format(strings.getString('backTo'), (sessionScope.webFromName || strings.getString('allDocuments')));
+			viewStateBean.restoreState = true; 
+			return text;
+		}]]></xp:this.text>
+	</xp:link>
+</xp:view>

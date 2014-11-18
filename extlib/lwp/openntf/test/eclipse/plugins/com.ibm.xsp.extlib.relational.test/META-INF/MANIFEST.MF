@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Relational Test
+Bundle-SymbolicName: com.ibm.xsp.extlib.relational.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: IBM
+Require-Bundle: org.junit,
+ com.ibm.xsp.extlib.relational,
+ com.ibm.designer.runtime,
+ com.ibm.domino.napi,
+ com.ibm.domino.services,
+ com.ibm.xsp.extsn,
+ com.ibm.xsp.designer,
+ com.ibm.xsp.domino,
+ com.ibm.xsp.rcp,
+ com.ibm.xsp.test.framework,
+ com.ibm.icu,
+ com.ibm.xsp.extlib,
+ com.ibm.xsp.extlib.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.core.runtime,
+ org.osgi.framework

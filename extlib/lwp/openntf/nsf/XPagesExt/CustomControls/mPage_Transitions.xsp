@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:appPage resetContent="false" id="transitions" pageName="transitions"
+		preload="true">
+		<xe:djxmHeading id="mHeader8" label="Transitions 1"
+			back="Home" moveTo="home"></xe:djxmHeading>			
+		<xe:djxmRoundRectList id="djxmRoundRectList1">
+			<xe:djxmLineItem id="mLineItem1" transition="slide"
+				moveTo="page2" label="Slide"></xe:djxmLineItem>
+			<xe:djxmLineItem id="mLineItem2" transition="fade"
+				moveTo="page2" label="Fade"></xe:djxmLineItem>
+			<xe:djxmLineItem id="mLineItem3" transition="flip"
+				moveTo="page2" label="Flip"></xe:djxmLineItem>
+		</xe:djxmRoundRectList>
+	</xe:appPage>
+
+	<xe:appPage resetContent="false" id="page2" pageName="page2"
+		preload="true">
+		<xe:djxmHeading id="mHeader1" label="Transitions 2"
+			back="Home" moveTo="home"></xe:djxmHeading>
+
+		<xe:djxmRoundRectList id="djxmRoundRectList2">
+			<xe:djxmLineItem id="mLineItem4" transition="slide"
+				moveTo="transitions" label="Transition: Slide"></xe:djxmLineItem>
+			<xe:djxmLineItem id="mLineItem5" transition="fade"
+				moveTo="transitions" label="Transition: Fade"></xe:djxmLineItem>
+			<xe:djxmLineItem id="mLineItem6" transition="flip"
+				moveTo="transitions" label="Transition: Flip"></xe:djxmLineItem>
+			<xe:djxmLineItem id="mLineItem7" transition="fade"
+				moveTo="transitions" label="A Fourth (Fade)"></xe:djxmLineItem>
+		</xe:djxmRoundRectList>
+	</xe:appPage>
+
+</xp:view>

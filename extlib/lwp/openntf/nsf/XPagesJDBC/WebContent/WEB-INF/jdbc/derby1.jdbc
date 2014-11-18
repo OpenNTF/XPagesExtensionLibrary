@@ -1,0 +1,6 @@
+<jdbc>
+	<driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+	<url>jdbc:derby:${rcp.data}\derby\XPagesJDBC;create=true</url>
+	<user>phil</user>
+	<password>phil</password>
+</jdbc>

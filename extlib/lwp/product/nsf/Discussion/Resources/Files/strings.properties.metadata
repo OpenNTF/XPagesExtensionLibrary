@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="30e" sequence="20" unid="B20BF385FF882CA780257917004BE93C">
+<created><datetime dst="true">20110926T144909,08+01</datetime></created>
+<modified><datetime dst="true">20120417T150321,35+01</datetime></modified>
+<revised><datetime dst="true">20120417T150321,34+01</datetime></revised>
+<lastaccessed><datetime dst="true">20120417T150321,35+01</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,12+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=dubMob</name></updatedby>
+<wassignedby><name>CN=Simon/O=dubMob</name></wassignedby>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$Comment" sign="true"><text>translatable UI strings</text></item>
+<item name="$TITLE" sign="true"><text>strings.properties</text></item>
+<item name="$$ScriptName" sign="true" summary="false"><text>strings.properties</text></item>
+<item name="$MimeCharSet"><text>ISO-8859-1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>strings.properties</text></item></note>

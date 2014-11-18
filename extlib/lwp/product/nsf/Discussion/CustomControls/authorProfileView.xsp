@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:djxmHeading id="djxmHeading3" label="Author"
+		loaded="${javascript:isMobile()}" back="Back">
+		<xp:this.moveTo>
+			<![CDATA[#{javascript:
+				if(null == sessionScope.from)
+					return "allDocs";
+				else	
+					return sessionScope.from;
+			}]]>
+		</xp:this.moveTo>
+	</xe:djxmHeading>
+	
+	<xp:panel themeId="Panel.header" loaded="${javascript:!isMobile()}">
+		<xp:text escape="true" themeId="ComputedField.header.subtitle" id="cfAuthorProfileTitle">
+			<xp:this.value><![CDATA[#{javascript:var cc		= getComponent("authorViewHeader").getPropertyMap();
+				var name	= cc.getProperty("name");
+				var format	= res.getString("authorprofile.title");
+				
+				if (name == null) {
+					name = cc.getProperty("nameAbbreviated");
+				}
+				
+				I18n.format(format, name);}]]>
+			</xp:this.value>
+		</xp:text>
+	</xp:panel>
+	
+	<xc:authorProfileHeader id="authorViewHeader"></xc:authorProfileHeader>
+	
+	<br />
+	
+	<xe:dataView id="dataView6" var="rows"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" columnTitles="true">
+		<xp:this.rows><![CDATA[#{javascript:
+			if(isMobile())
+			{
+				return "10";
+			}
+			else
+			{
+				return "25";
+			}
+		}]]></xp:this.rows>
+		<xp:this.pageName>
+			<![CDATA[#{javascript:
+				if(isMobile())
+				{
+					return "document";
+				}
+				else
+				{
+					return "topicThread.xsp";
+				}
+			}]]>
+		</xp:this.pageName>
+		<xp:this.facets>
+			<xp:panel xp:key="header" id="panel19">
+				<xp:label id="label24" styleClass="xlAuthorProfileViewHeader" value="Recent topics">
+				</xp:label>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:this.data>
+			<xp:dominoView var="dominoView"
+				viewName="xpAuthorPosts"
+				dataCache="full">
+				<xp:this.categoryFilter><![CDATA[#{javascript:
+					var cc = getComponent("authorViewHeader").getPropertyMap();
+					cc.getProperty("categoryFilterMain");
+				}]]></xp:this.categoryFilter>
+			</xp:dominoView>
+		</xe:this.data>
+		
+		<xe:this.categoryColumn>
+			<xe:viewCategoryColumn columnName=" ">
+			</xe:viewCategoryColumn>
+		</xe:this.categoryColumn>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Topic">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn columnName="Date">
+				<xp:this.styleClass><![CDATA[#{javascript:
+					if(isMobile())
+						return "xlExtraColumn";
+				}]]></xp:this.styleClass>
+				<xp:this.converter>
+					<xp:convertDateTime type="date"></xp:convertDateTime>
+				</xp:this.converter>
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+		
+		<xp:this.facets>
+			<xp:panel xp:key="pagerTopRight" loaded="${javascript:!isMobile()}" 
+				styleClass="panelPagerTopRight">
+				<xp:pager layout="Previous Group Next"
+					for="dataView6" id="pager4" partialRefresh="true" styleClass="pager">
+				</xp:pager>
+			</xp:panel>
+			
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:text value="No documents found" ></xp:text>
+					<xp:br />
+					<xp:text value="for this view" ></xp:text>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:pager layout="Previous Group Next"
+				for="dataView6" id="pager1" partialRefresh="true" 
+				styleClass="pager" xp:key="pagerBottomRight" loaded="${javascript:!isMobile()}">
+			</xp:pager>
+			
+			<xp:link escape="true" text="More..." id="link1"
+				xp:key="pagerBottom" loaded="${javascript:isMobile()}">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+					var dv = getComponent("dataView6");
+					if(dv.getRowCount() > 5)
+						return true;
+					else
+						return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView6" disableId="link1">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+	
+	<br />
+	<br />
+	
+	<xe:dataView id="dataView7" var="rows"
+		binding="#{viewStateBean.dataIterator}" collapsibleRows="true"
+		collapsibleDetail="true" columnTitles="true">
+		<xp:this.rows><![CDATA[#{javascript:
+			if(isMobile())
+			{
+				return "10";
+			}
+			else
+			{
+				return "25";
+			}
+		}]]></xp:this.rows>
+		<xp:this.pageName>
+			<![CDATA[#{javascript:
+				if(isMobile())
+				{
+					return "document";
+				}
+				else
+				{
+					return "topicThread.xsp";
+				}
+			}]]>
+		</xp:this.pageName>
+		<xp:this.facets>
+			<xp:panel xp:key="pagerTopRight" loaded="${javascript:!isMobile()}" 
+				styleClass="panelPagerTopRight">
+				<xp:pager layout="Previous Group Next"
+					for="dataView7" id="pager3" partialRefresh="true" styleClass="pager">
+				</xp:pager>
+			</xp:panel>
+			<xp:pager layout="Previous Group Next"
+				for="dataView7" id="pager2" partialRefresh="true" 
+				styleClass="pager" xp:key="pagerBottomRight" loaded="${javascript:!isMobile()}">
+			</xp:pager>
+			<xp:panel xp:key="header" id="panel18">
+				<xp:label id="label23" styleClass="xlAuthorProfileViewHeader" value="Recent responses">
+				</xp:label>
+			</xp:panel>
+		</xp:this.facets>
+		<xe:this.data>
+			<xp:dominoView var="dominoView2"
+				viewName="xpAuthorPosts"
+				dataCache="full">
+					<xp:this.categoryFilter><![CDATA[#{javascript:
+					var cc = getComponent("authorViewHeader").getPropertyMap();
+					cc.getProperty("categoryFilterResponses");
+				}]]></xp:this.categoryFilter>
+			</xp:dominoView>
+		</xe:this.data>
+		
+		<xe:this.categoryColumn>
+			<xe:viewCategoryColumn columnName=" ">
+			</xe:viewCategoryColumn>
+		</xe:this.categoryColumn>
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Topic">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		
+		<xe:this.extraColumns>
+			<xe:viewExtraColumn columnName="Date">
+				<xp:this.styleClass><![CDATA[#{javascript:
+					if(isMobile())
+						return "xlExtraColumn";
+				}]]></xp:this.styleClass>
+				<xp:this.converter>
+					<xp:convertDateTime type="date"></xp:convertDateTime>
+				</xp:this.converter>
+			</xe:viewExtraColumn>
+		</xe:this.extraColumns>
+		
+		<xp:this.facets>
+			
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:text value="No documents found" ></xp:text>
+					<xp:br />
+					<xp:text value="for this view" ></xp:text>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:link escape="true" text="More..." id="link6"
+				xp:key="pagerBottom" loaded="${javascript:isMobile()}">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+					var dv = getComponent("dataView7");
+					if(dv.getRowCount() > 5)
+						return true;
+					else
+						return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView7" disableId="link6">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

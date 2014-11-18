@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="DWA_Home" label="DWA (iNotes) Home"
+				selection="/DWA/Home">
+			</xe:pageTreeNode>
+			<xe:separatorTreeNode></xe:separatorTreeNode>
+			<xe:pageTreeNode page="DWA_ListView" label="Virtual List"
+				selection="/DWA/ListView">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="DWA_ListView2" label="Virtual List 2"
+				selection="/DWA/ListView2">
+			</xe:pageTreeNode>
+<!--		<xe:pageTreeNode page="DWA_CalendarView"-->
+<!--			label="Calendar View AjaxBlock" selection="/DWA/CalendarView">-->
+<!--		</xe:pageTreeNode>-->
+			<xe:pageTreeNode page="DWA_iNotesRest"
+				label="Calendar View REST Service" selection="/DWA/CalendarViewREST">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="DWA_LocalCalendarView"
+				label="Local Calendar View REST Service" selection="/DWA/LocalRESTCalendarView">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

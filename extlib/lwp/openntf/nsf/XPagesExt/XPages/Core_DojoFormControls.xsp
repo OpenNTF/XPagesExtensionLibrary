@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/Core/DojoFormControls">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore"></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel id="mainPanel">
+			<xp:button value="Toggle Read Only" id="button6">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="mainPanel">
+					<xp:this.action><![CDATA[#{javascript:var mp = getComponent("mainPanel")
+mp.setReadonly(!mp.isReadonly())}]]></xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:text escape="true" id="computedField21">
+				<xp:this.value><![CDATA[#{javascript:var mp = getComponent("mainPanel")
+return mp.isReadonly() ? "Panel is read only" : "Panel is not read only"}]]></xp:this.value>
+			</xp:text>
+			<xp:br></xp:br>
+			<xp:div loaded="true">
+				<xp:button value="Toggle Read Only Renderer" id="button7">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="mainPanel">
+						<xp:this.action><![CDATA[#{javascript:var ro = context.getProperty("xsp.renderer.readonly")!="false"
+context.setSessionProperty("xsp.renderer.readonly",ro?"false":"true")}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:text escape="true" id="computedField22">
+					<xp:this.value><![CDATA[#{javascript:var ro = context.getSessionProperty("xsp.renderer.readonly")!="false"
+return ro ? "Use read only renderer" : "Just make the control read only"}]]></xp:this.value>
+				</xp:text>
+				<xp:br></xp:br>
+			</xp:div>
+			<xp:button value="Validate Form" id="validateButton"
+				loaded="false">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="partial" refreshId="maintable">
+					<xp:this.script><![CDATA[var form = XSP.findForm('#{id:validateButton}')
+var djForm = dijit.byId(form.id)
+var valid = djForm.validate()
+]]></xp:this.script>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:table id='maintable' role="presentation">
+				<xp:tr>
+					<xp:td>
+						<xp:div id="div_fsTextBox">
+							<fieldset id="fsTextBox">
+								<legend>Text Boxes</legend>
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td><xp:label value="Basic TextBox" for="djTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djTextBox id="djTextBox1" value="#{sessionScope.djTextBox1}"
+												lowercase="true">
+											</xe:djTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField1"
+												value="#{sessionScope.djTextBox1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Basic Validation" for="djValidationTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djValidationTextBox id="djValidationTextBox1"
+												value="#{sessionScope.djValidationTextBox1}">
+											</xe:djValidationTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField3"
+												value="#{sessionScope.djValidationTextBox1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Zipcode Validation (\d{5})" for="djValidationTextBox2"></xp:label></xp:td>
+										<xp:td>
+											<xe:djValidationTextBox id="djValidationTextBox2"
+												value="#{sessionScope.djValidationTextBox2}" regExp="\d{5}"
+												defaultValue="01886">
+											</xe:djValidationTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField4"
+												value="#{sessionScope.djValidationTextBox2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Basic Number" for="djNumberTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djNumberTextBox id="djNumberTextBox1"
+												value="#{sessionScope.djNumberTextBox1}" defaultValue="79">
+											</xe:djNumberTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField5"
+												value="#{sessionScope.djNumberTextBox1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="10-50" for="djNumberTextBox2"></xp:label></xp:td>
+										<xp:td>
+											<xe:djNumberTextBox id="djNumberTextBox2"
+												value="#{sessionScope.djNumberTextBox2}" defaultValue="34">
+												<xp:this.constraints>
+													<xe:djNumberConstraints max="50"
+														min="10">
+													</xe:djNumberConstraints>
+												</xp:this.constraints>
+											</xe:djNumberTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField6"
+												value="#{sessionScope.djNumberTextBox2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Spinner" for="djNumberSpinner1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djNumberSpinner id="djNumberSpinner1"
+												value="#{sessionScope.djNumberTextBox3}" defaultValue="64">
+											</xe:djNumberSpinner>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField7"
+												value="#{sessionScope.djNumberTextBox3}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Currency" for="djCurrencyTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djCurrencyTextBox id="djCurrencyTextBox1"
+												value="#{sessionScope.djNumberTextBox4}">
+											</xe:djCurrencyTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField8"
+												value="#{sessionScope.djNumberTextBox4}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Date" for="djDateTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djDateTextBox id="djDateTextBox1"
+												value="#{sessionScope.djDateTextBox1}">
+											</xe:djDateTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField9"
+												value="#{sessionScope.djDateTextBox1}">
+												<xp:this.converter>
+													<xp:convertDateTime type="date">
+													</xp:convertDateTime>
+												</xp:this.converter>
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Time" for="djTimeTextBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djTimeTextBox id="djTimeTextBox1"
+												value="#{sessionScope.djTimeTextBox1}">
+											</xe:djTimeTextBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField10"
+												value="#{sessionScope.djTimeTextBox1}">
+												<xp:this.converter>
+													<xp:convertDateTime type="time">
+													</xp:convertDateTime>
+												</xp:this.converter>
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+								<xp:button value="Submit" id="button1">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="div_fsTextBox">
+									</xp:eventHandler>
+								</xp:button>
+							</fieldset>
+						</xp:div>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:div id='div_fsTextArea'>
+							<fieldset id="fsTextArea">
+								<legend>Text Area</legend>
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td><xp:label value="Text Area" for="djTextarea1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djTextarea id="djTextarea1" value="#{sessionScope.djTextArea1}"
+												rows="6">
+											</xe:djTextarea>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField13"
+												value="#{sessionScope.djTextArea1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Simple Text Area" for="djSimpleTextarea1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djSimpleTextarea id="djSimpleTextarea1"
+												value="#{sessionScope.djTextArea2}" rows="6">
+											</xe:djSimpleTextarea>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField14"
+												value="#{sessionScope.djTextArea2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+								<xp:button value="Submit" id="button2">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="div_fsTextArea">
+									</xp:eventHandler>
+								</xp:button>
+							</fieldset>
+						</xp:div>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:div id='div_fsCombo'>
+							<fieldset id="fsCombo">
+								<legend>Combo Boxes</legend>
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td><xp:label value="Basic combo" for="djComboBox1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djComboBox id="djComboBox1" value="#{sessionScope.djComboBox1}">
+												<xp:selectItem itemLabel="Ford" itemValue="ford">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Toyota" itemValue="toyota">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Renault" itemValue="renault">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Mercedes" itemValue="mercedes">
+												</xp:selectItem>
+											</xe:djComboBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField11"
+												value="#{sessionScope.djComboBox1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Filtering Select" for="djFilteringSelect1"></xp:label></xp:td>
+										<xp:td>
+											<xe:djFilteringSelect id="djFilteringSelect1"
+												value="#{sessionScope.djComboBox2}">
+												<xp:selectItem itemLabel="Ford" itemValue="ford">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Toyota" itemValue="toyota">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Renault" itemValue="renault">
+												</xp:selectItem>
+												<xp:selectItem itemLabel="Mercedes" itemValue="mercedes">
+												</xp:selectItem>
+												<xp:selectItems>
+													<xp:this.value><![CDATA[#{javascript:return ["Peugeot","Nissan","BMW"]}]]></xp:this.value>
+												</xp:selectItems>
+											</xe:djFilteringSelect>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField12"
+												value="#{sessionScope.djComboBox2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+								<xp:button value="Submit" id="button4">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="div_fsCombo">
+									</xp:eventHandler>
+								</xp:button>
+							</fieldset>
+						</xp:div>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:div id='div_fsButtons'>
+							<fieldset id="fsButtons">
+								<legend>
+									Buttons
+								</legend>
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td><xp:label value="CheckBox"></xp:label></xp:td>
+										<xp:td>
+											<xe:djCheckBox id="djCheckBox1" title="True or False"
+											value="#{sessionScope.djCheckBox1}"
+												label="True or False">
+											</xe:djCheckBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField2" value="#{sessionScope.djCheckBox1}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="CheckBox with custom values"></xp:label></xp:td>
+										<xp:td>
+											<xe:djCheckBox id="djCheckBox2" title="Selected or Unselected"
+											value="#{sessionScope.djCheckBox2}"
+												checkedValue="Selected" uncheckedValue="NotSelected"
+												label="Selected or Unselected">
+											</xe:djCheckBox>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField20"
+												value="#{sessionScope.djCheckBox2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Radio Buttons"></xp:label></xp:td>
+										<xp:td>
+											<xe:djRadioButton id="djRadioButton1" title="Value 1"
+												value="#{sessionScope.djButton2}" groupName="val"
+												selectedValue="val1" label="Value #1">
+											</xe:djRadioButton>
+											<xe:djRadioButton id="djRadioButton2" title="Value 2"
+												value="#{sessionScope.djButton2}" groupName="val"
+												selectedValue="val2" label="Value #2">
+											</xe:djRadioButton>
+											<xe:djRadioButton id="djRadioButton3" title="Value 3"
+												value="#{sessionScope.djButton2}" groupName="val"
+												selectedValue="val3" label="Value #3">
+											</xe:djRadioButton>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField17" value="#{sessionScope.djButton2}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Toggle Button"></xp:label></xp:td>
+										<xp:td>
+											<xe:djToggleButton id="djToggleButton1" title="Toggle Button"
+												value="#{sessionScope.djButton3}" label="Toggle Button"
+												checkedValue="Checked..." uncheckedValue="Not Checked...">
+											</xe:djToggleButton>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField18" value="#{sessionScope.djButton3}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Push Buttons"></xp:label></xp:td>
+										<xp:td>
+											<xe:djButton id="djButton1" title="Execute Client Code" label="Execute Client Code">
+												<xp:eventHandler event="onClick" submit="false">
+													<xp:this.script><![CDATA[alert("You clicked me, #{javascript:@UserName()}!")]]></xp:this.script>
+												</xp:eventHandler>
+											</xe:djButton>
+											<xe:djButton id="djButton2" title="Increase Value on Server" label="Increase Value on Server">
+												<xp:eventHandler event="onClick" submit="true"
+													refreshMode="partial" refreshId="computedField19">
+													<xp:this.action><![CDATA[#{javascript:if(sessionScope.djButton4) {
+	sessionScope.djButton4+=1
+} else {
+	sessionScope.djButton4 = 1
+}}]]></xp:this.action>
+												</xp:eventHandler>
+											</xe:djButton>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField19" value="#{sessionScope.djButton4}">
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+								<xp:button value="Submit" id="button5">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="div_fsButtons">
+									</xp:eventHandler>
+								</xp:button>
+							</fieldset>
+						</xp:div>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:div id='div_fsSliders'>
+							<fieldset id="fsSliders">
+								<legend>Sliders</legend>
+								Note: the sliders are using an Integer
+								converter in this example.
+								<xp:table role="presentation">
+									<xp:tr>
+										<xp:td><xp:label value="Horizontal Slider:"></xp:label></xp:td>
+										<xp:td>
+											<xe:djHorizontalSlider id="djHorizontalSlider1"
+												value="#{sessionScope.djSlider1}" maximum="175" minimum="2"
+												style="margin: 5px;width:200px; height: 20px;">
+												<xp:this.converter>
+													<xp:convertNumber integerOnly="true">
+													</xp:convertNumber>
+												</xp:this.converter>
+												<xe:djSliderRuleLabels id="djSliderRuleLabels1"
+													container="topDecoration" style="height:10px;font-size:75%;color:gray;"
+													count="6">
+												</xe:djSliderRuleLabels>
+												<xe:djSliderRule id="djSliderRule1"
+													container="topDecoration" style="height:5px;" count="6">
+												</xe:djSliderRule>
+												<xe:djSliderRule id="djSliderRule2" style="height:5px;"
+													count="5" container="bottomDecoration">
+												</xe:djSliderRule>
+												<xe:djSliderRuleLabels id="djSliderRuleLabels2"
+													container="bottomDecoration" style="height:10px;font-size:75%;color:gray;">
+													<li>green tea</li>
+													<li>coffee</li>
+													<li>red bull</li>
+												</xe:djSliderRuleLabels>
+											</xe:djHorizontalSlider>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField15" value="#{sessionScope.djSlider1}">
+												<xp:this.converter>
+													<xp:convertNumber type="number"
+														integerOnly="true">
+													</xp:convertNumber>
+												</xp:this.converter>
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+									<xp:tr>
+										<xp:td><xp:label value="Vertical Slider:"></xp:label></xp:td>
+										<xp:td>
+											<xe:djVerticalSlider id="djVerticalSlider1"
+												value="#{sessionScope.djSlider2}" maximum="175" minimum="2"
+												style="margin: 5px;width:75px; height: 80px;">
+												<xp:this.converter>
+													<xp:convertNumber integerOnly="true">
+													</xp:convertNumber>
+												</xp:this.converter>
+												<xe:djSliderRuleLabels id="djSliderRuleLabels3"
+													container="leftDecoration"
+													style="height:80px;width:25px;font-size:75%;color:gray;"
+													count="6">
+												</xe:djSliderRuleLabels>
+												<xe:djSliderRule id="djSliderRule3"
+													container="leftDecoration" style="height:80px;width:5px;"
+													count="6">
+												</xe:djSliderRule>
+												<xe:djSliderRule id="djSliderRule4" style="height:80px;width:5px;"
+													count="5" container="rightDecoration">
+												</xe:djSliderRule>
+											</xe:djVerticalSlider>
+										</xp:td>
+										<xp:td>
+											<xp:label value="Value:"></xp:label>
+											<xp:text escape="true" id="computedField16" value="#{sessionScope.djSlider2}">
+												<xp:this.converter>
+													<xp:convertNumber type="number"
+														integerOnly="true">
+													</xp:convertNumber>
+												</xp:this.converter>
+											</xp:text>
+										</xp:td>
+									</xp:tr>
+								</xp:table>
+								<xp:button value="Submit" id="button3">
+									<xp:eventHandler event="onclick" submit="true"
+										refreshMode="partial" refreshId="div_fsSliders">
+									</xp:eventHandler>
+								</xp:button>
+							</fieldset>
+						</xp:div>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

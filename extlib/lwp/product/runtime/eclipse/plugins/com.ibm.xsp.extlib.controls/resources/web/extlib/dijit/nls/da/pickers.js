@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "OK",
+PickerCheckBox_Cancel: "Annull\u00e9r",
+PickerList_OK: "OK",
+PickerList_Cancel: "Annull\u00e9r",
+PickerListSearch_Search: "S\u00f8g",
+PickerListSearch_OK: "OK",
+PickerListSearch_Cancel: "Annull\u00e9r",
+PickerListSearch_Value: "V\u00e6rdi",
+PickerListSearch_Values: "V\u00e6rdier",
+PickerName_Search: "S\u00f8g",
+PickerName_Add: "Tilf\u00f8j",
+PickerName_Remove: "Fjern",
+PickerName_RemoveAll: "Fjern alle",
+PickerName_OK: "OK",
+PickerName_Cancel: "Annull\u00e9r",
+PickerName_SearchIn: "S\u00f8g i",
+PickerName_SearchFor: "S\u00f8g efter",
+PickerName_unSelectedListLabel: "Liste over v\u00e6rdier, der kan v\u00e6lges",
+PickerName_selectedListLabel: "Liste over valgte v\u00e6rdier"
+})

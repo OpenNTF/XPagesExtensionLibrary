@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xe:djxmHeading id="djxmHeading1" label="Home" styleClass="mblLoginText">
+		<xp:link xp:key="actionFacet" id="link1">
+			<xp:this.rendered><![CDATA[#{javascript:
+				var _request = facesContext.getExternalContext().getRequest();
+				var _cookies = _request.getHeader("Cookie");
+				var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+				
+				if ((userBean.canonicalName !== "Anonymous") && (isSessionAuth === false)) 
+				{
+					return false;
+				} else {
+					return true;
+				}
+			}]]></xp:this.rendered>
+			<xp:this.text><![CDATA[#{javascript:
+				var _request = facesContext.getExternalContext().getRequest();
+				var _cookies = _request.getHeader("Cookie");
+				var isSessionAuth = @Contains(_cookies, "DomAuthSessId") === 1 ? true : false;
+			
+				if(userBean.canonicalName === 'Anonymous')
+				{
+					return "Login";
+				}
+				else if(isSessionAuth === true)
+				{
+					return "Logout";
+				}
+			}]]></xp:this.text>
+			<xp:this.value>
+				<![CDATA[#{javascript:
+					if(userBean.canonicalName === 'Anonymous')
+					{
+						return facesContext.getExternalContext().getRequestContextPath() + "?opendatabase&login";
+					}
+					else
+					{
+						return facesContext.getExternalContext().getRequestContextPath() + "?logout";
+					}
+				}]]>
+			</xp:this.value>
+		</xp:link>
+	</xe:djxmHeading>
+
+
+	<xe:outline>
+		<xe:this.treeNodes>
+			<xe:basicLeafNode href="#allDocs"
+				label="All Documents">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode href="#byAuthor"
+				label="By Author">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode href="#byTags"
+				label="By Tags">
+			</xe:basicLeafNode>
+			<xe:basicLeafNode href="#reviewStatus"
+				label="Review Status">
+			</xe:basicLeafNode>
+		</xe:this.treeNodes>
+	</xe:outline>
+	
+	
+</xp:view>

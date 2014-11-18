@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+    xmlns:xe="http://www.ibm.com/xsp/coreex">
+    <xp:label id="label5" style="font-weight:bold" value="Parameterized SQL query">
+    </xp:label>
+    <xp:br></xp:br>
+    <xp:br></xp:br>
+    View panel displaying a parameterized SQL query using standard '?' in the SQL statement. The
+    actual value of the parameters are coming from the 'parameters' property of the data source
+    <xp:br></xp:br>
+    <xp:br></xp:br>
+    Note that the list of entries of the combobox is composed using a new @JdbcDbColumn()
+    function.
+    <xp:br></xp:br>
+    <xp:br></xp:br>
+    <xp:br></xp:br>
+    Select a State:
+    <xp:comboBox id="comboBox1" value="#{viewScope.state}">
+        <xp:selectItem itemLabel="&lt;State&gt;" />
+        <xp:selectItems>
+            <xp:this.value><![CDATA[#{javascript:@JdbcDbColumn("derby1","states","state") }]]></xp:this.value>
+        </xp:selectItems>
+        <xp:eventHandler event="onchange" submit="true"
+            refreshMode="partial" refreshId="viewPanel1">
+            <xp:this.action><![CDATA[#{javascript:getComponent('viewPanel1').getData().refresh()}]]></xp:this.action>
+        </xp:eventHandler>
+    </xp:comboBox>
+    <xp:viewPanel rows="10" id="viewPanel1" var="user">
+        <xp:this.data>
+            <xe:jdbcQuery connectionName="derby1"
+                var="jdbcData1" sqlQuery="select * from users where state=?"
+                defaultOrderBy="id" calculateCount="true">
+                <xe:this.sqlParameters>
+                    <xe:sqlParameter>
+                        <xe:this.value><![CDATA[#{javascript:viewScope.state||""}]]></xe:this.value>
+                    </xe:sqlParameter>
+                    <xe:sqlParameter>
+                        <xe:this.value><![CDATA[#{javascript: null }]]></xe:this.value>
+                    </xe:sqlParameter>
+                    <xe:sqlParameter>
+                        <xe:this.value><![CDATA[${javascript: null }]]></xe:this.value>
+                    </xe:sqlParameter>
+                </xe:this.sqlParameters>
+            </xe:jdbcQuery>
+        </xp:this.data>
+        <xp:viewColumn id="viewColumn1" columnName="id">
+            <xp:this.facets>
+                <xp:viewColumnHeader xp:key="header"
+                    id="viewColumnHeader1" value="ID" sortable="true">
+                </xp:viewColumnHeader>
+            </xp:this.facets>
+        </xp:viewColumn>
+        <xp:viewColumn id="viewColumn3" columnName="firstName">
+            <xp:this.facets>
+                <xp:viewColumnHeader xp:key="header"
+                    id="viewColumnHeader3" value="First Name" sortable="true">
+                </xp:viewColumnHeader>
+            </xp:this.facets>
+        </xp:viewColumn>
+        <xp:viewColumn id="viewColumn2" columnName="lastName">
+            <xp:this.facets>
+                <xp:viewColumnHeader xp:key="header"
+                    id="viewColumnHeader2" value="Last Name" sortable="true">
+                </xp:viewColumnHeader>
+            </xp:this.facets>
+        </xp:viewColumn>
+        <xp:viewColumn id="viewColumn4" columnName="city">
+            <xp:this.facets>
+                <xp:viewColumnHeader xp:key="header"
+                    id="viewColumnHeader4" value="City" sortable="true">
+                </xp:viewColumnHeader>
+            </xp:this.facets>
+        </xp:viewColumn>
+        <xp:viewColumn id="viewColumn5" columnName="State">
+            <xp:this.facets>
+                <xp:viewColumnHeader xp:key="header"
+                    id="viewColumnHeader5" value="State">
+                </xp:viewColumnHeader>
+            </xp:this.facets>
+        </xp:viewColumn>
+    </xp:viewPanel>
+</xp:view>

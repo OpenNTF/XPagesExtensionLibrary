@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579670054C522'>
+<noteinfo noteid='322' unid='E2C307CDBB2F81B1802579670054CEF8' sequence='10'>
+<created><datetime>20111215T152620,08+00</datetime></created>
+<modified><datetime>20120227T095731,52+00</datetime></modified>
+<revised><datetime>20120227T095731,51+00</datetime></revised>
+<lastaccessed><datetime>20120227T095731,52+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152620,80+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name
+>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name
+>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>MainFrameset Notes|MainFrameset</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$FrameSet' sign='true'>
+<rawitemdata type='1'>
+7/8YAAIACAAAAAAAAAAAAAAAAAAAAAAA8P8+AEQAAAABAAAAAAABAAEAAAAAAAUAAAAAAAUAAAAA
+AAEAAgAAAAAAAQAAAAAAAAADAAEAAQC7AAMAAQDw/0IAAAAAAAEAAAAAAAEAAQAAAAAABQAAAAAA
+BQAAAAAAAwABAAAAAAAFAAAAAAAAAAEANgADAAEAAQASAAMAAQDx/zQAFgAAAABAAQECAAMAAQAA
+AAAAAAAAAAAAAQAAAAAAAAABAP///7kBAAAKAQAAAAC59v8vAAAAAAADAAMADQAAAAAAAAAAAAAA
+AAAAAAAAAAAAAFRlbXBsYXRlIE5hbWU/8f9LABAAAAAAQAEAAgABAAEAAAAAAA4AAAAJAAEAAAAA
+AAAATm90ZXNOYXZpZ2F0b3JOb3Rlc1ZpZXcBAP///7kBAAAKAQAAAAC5P/b/LgAAAAAAAwAHAAwA
+AAAAAAAAAAAAAAAAAAAAAAAAAABPdXRsaW5lIFBhZ2Xx/zwAFgAAAABAAQECAAEAAQAAAAAACAAA
+AAAAAQAAAAAAAABTd2l0Y2hlcgEA////uQEAAAoBAAAAALn2/y0AAAAAAAMABwALAAAAAAAAAAAA
+AAAAAAAAAAAAAAAARGIgTG9jYXRpb24/8P8+AAAAAAABAAAAAAABAAEAAAAAAAUAAAAAAAUAAAAA
+AAIAAQAAAAAABQAAAAAAAAADAAEAAgAAAAMAAQDx/zQAAAAAAABAAQADAAEAAQAAAAAAAAAAAAAA
+AQAAAAAAAAABAP///7kBAAAKAQAAAAC59v8sAAAAAAADAAYACgAAAAAAAAAAAAAAAAAAAAAAAAAA
+AFZpZXcgRnJhbWXx/0AAAAAAAABAAQADAAEAAQAAAAAADAAAAAAAAQAAAAAAAABOb3Rlc1ByZXZp
+ZXcBAP///7kBAAAKAQAAAAC5
+</rawitemdata></item>
+<item name='$Flags'><text>#4Cw</text></item>
+<item name='$DesignerVersion' sign='true'><text>6.5</text></item></note>
+

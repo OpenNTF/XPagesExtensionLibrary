@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='32e' unid='0F8F1B33F0EF94D3802577C2003DF6BA' sequence='10'>
+<created><datetime dst='true'>20101020T121648,58+01</datetime></created>
+<modified><datetime>20120207T095548,30+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122302,78+01</datetime></revised>
+<lastaccessed><datetime>20120208T094201,75+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095548,30+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20101118T234513,29+00</datetime><datetime dst='true'>20110830T205053,75-04</datetime><datetime
+ dst='true'>20111006T160543,49+01</datetime><datetime dst='true'>20111014T083958,73+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$CIAOOwner' sign='true'><text>CN=Mike Johnston/O=Jacobson</text></item>
+<item name='$CIAOTime' sign='true'><datetime>19970123T161751,84-05</datetime></item>
+<item name='$HTMLDocumentStyles' summary='true' sign='true'>
+<rawitemdata type='1'>
+0ggBAAAA/wDSCAEA/wAAANIIAQCAAIAA
+</rawitemdata></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$TITLE' sign='true'><text>(Event Lookup)|EventLookup</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+rgACACQADABFdmVudFN1bW1hcnkFAAwARXZlbnRTdW1tYXJ5AwAFAEAAOwAFAAwACQALAAkABABF
+dmVudFN1bW1hcnlFdmVudERhdGVFdmVudERldGFpbCRDb25mbGljdCRSRUYABAAEAAAALgAFAAQA
+Zm9ybQEABQBFdmVudAAKAgUABgBTdGF0dXMBAAEAMQAKAhwCAwAHABYAEAAJTDFTMlMzUzRTNVM2
+UzdT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FgABAABEAGYAAAAJAEV2ZW50RGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation1' summary='true'>
+<rawitemdata type='2'>
+FgABAABEAGYAAAAJAEV2ZW50RGF0ZQ==
+</rawitemdata></item>
+<item name='$Collation2' summary='true'>
+<rawitemdata type='2'>
+FgABAABEAWYAAAAJAEV2ZW50RGF0ZQ==
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQADAAQAiEgAAFZDAAAMAAsAJgAAAKAAAQEACQAAAAAAAAAAAAICAAAAVkMBAwkABAAAAAAASQAB
+AAAJAAAAAAAAAAAAAgIAAABWQwAACwANAAAAAAAeAQEAAAkAAAAAAAAAAAACAgAAAEV2ZW50U3Vt
+bWFyeUV2ZW50IFRpdGxlJgACACQADABFdmVudFN1bW1hcnkFAAwARXZlbnRTdW1tYXJ5AwBFdmVu
+dERhdGVEYXRlRXZlbnREZXRhaWxFdmVudCBTdW1tYXJ5JgABAAAAAQEACQEADQoBAQQKAAA/AK0r
+BAEBAAEAAAAAAAAAAABXQwEAAAkAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAD//wAAAAAAAAAAAAAA
+AAAAV0MBAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAFdDAQAACQAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAABCAAAAAAABAP///wABAO/v7wAB
+AAAAAAAAAAAAAAAAAAEA////AAEA////AAAAAQAAgIAAAQAAAP8AAQAAAAAAAAAIAAAAAAABAA==
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.2</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRwPAAAAAQABAAAAAAAAAAAAAAAAAAAACAAAAHn/bAABAMDAwAABAAAAAAABAAAAAAABAMDAwAAA
+AB8AAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAC+/yYAAAAFAAAAnAEAAAsAAAAAAAAAQ2F0ZWdvcmlfemUA
+AQBOfL7/KAAAAAUAAACdAQAADgAAAAAAAABfRWRpdCBEb2N1bWVudAIAAgq+/ygAAAAFAAAAnQEA
+AA4AAAAAAAAAU2VuZCBEb2N1X21lbnQDAAMKvv8iAAAABQAAAJ0BAAAIAAAAAAAAAF9Gb3J3YXJk
+BAAECr7/LAAAAAUAAACdAQAAEgAAAAAAAABfTW92ZSBUbyBGb2xkZXIuLi4FAD18vv8uAAAABQAA
+AJ0BAAATAAAAAAAAAF9SZW1vdmUgRnJvbSBGb2xkZXIABgA+fL7/QAAAAAEAcACeAQAACQAAAAAA
+AABFeGl0IFZpZXcAIAAAABIAAgD8EQAAAAAAAO0BAwAHAAwABQAJMFMwRQA=
+</rawitemdata></item></note>
+

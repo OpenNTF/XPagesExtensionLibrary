@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='256' unid='0682194A3B801E68802577C2003DF6C5' sequence='8'>
+<created><datetime dst='true'>20101020T121648,69+01</datetime></created>
+<modified><datetime>20120207T095545,92+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122302,72+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,92+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,92+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121648,70+01</datetime><datetime
+ dst='true'>20110830T205053,73-04</datetime><datetime dst='true'>20111006T160543,43+01</datetime><datetime
+ dst='true'>20111014T083958,67+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>(DelEventLookup)|DelEventLookup</text></item>
+<item name='$Index' sign='true'><text/></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+pAACADwAAgAkMAUADABFdmVudFN1bW1hcnkBAAIAICgiAgUACQBFdmVudERhdGUAVgEiAgEAAQAp
+ACICAwAFAB4AGQADAAIACQAEACQwJENvbmZsaWN0JFJFRgAEAAQAAAAuAAUABABmb3JtAQAFAEV2
+ZW50AAoCBQAGAFN0YXR1cwEAAQAxAAoCHAIDAAcAFgAQAAlMMVMyUzNTNFM1UzZTN1M=
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+DwABAABEAGYAAAACACQw
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQABAAEACAAAAFZDAQACAAEAUgAAAI8AAQAACgAAAAAAAAAAAAICAAAAJDAjUgACADwAAgAkMAUA
+DABFdmVudFN1bW1hcnkBAAIAICgiAgUACQBFdmVudERhdGUAVgEiAgEAAQApACICAwAHABQADQAJ
+MVMyUzNTNFM4UzlTACYAAQAAAAEBAAkBAAAKAQEOCgAAAQCtKwEAAQABAAAAAAAAAAAAV0MBAQAJ
+AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA//8AAAAAAAAAAAAAAAAAAEIAAAAAAAEA////AAUA////
+AAEAAAAAAAAAAAAAAAAAAQD///8AAQD///8AAAABAAAAAAABAAAAAAABAAAAAAAAAAgAAAAAAAEA
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>Y</text></item>
+<item name='$DesignerVersion' sign='true'><text>8</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

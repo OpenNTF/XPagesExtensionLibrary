@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xe:djxmHeading id="djxmHeading1" back="Views" moveTo="views" label="All Documents">
+		<xp:this.rendered><![CDATA[#{javascript:
+			sessionScope.from = "allDocuments";
+			return true;
+		}]]></xp:this.rendered>
+		<xp:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:userBean.canCreateDocs}]]>
+				</xp:this.rendered>
+				<xp:button id="button1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xe:moveTo direction="Left to Right"
+								forceFullRefresh="true" targetPage="newDiscussion"
+								transitionType="slide">
+							</xe:moveTo>
+						</xp:this.action>
+					</xp:eventHandler>
+					<div style="position: relative; top: -1px; font-size:22px; line-height:10px;">
+						+
+					</div>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:djxmHeading>
+	
+	<xc:mobileSearch dataView="dataView2">
+		<xp:this.rendered><![CDATA[#{javascript:// only show the search panel if the db is full text indexed
+			return database.isFTIndexed();
+		}]]></xp:this.rendered>
+	</xc:mobileSearch>
+	
+	<xe:dataView id="dataView2" var="viewEntry"
+		collapsibleRows="true" collapsibleDetail="true" columnTitles="true"
+		rows="10" styleClass="xvwDocView">
+		<xp:this.pageName>
+			<![CDATA[#{javascript:
+				var docType=viewEntry.getColumnValue('DocType').toLowerCase();										
+				if( (docType!="announcement") && (docType!="event") && (docType!="status")){
+					return "document";
+				}
+				else{
+					return docType;
+				}
+				}]]>
+		</xp:this.pageName>
+		<xe:this.data>
+			<xp:dominoView var="dominoView2"
+				viewName="xvwDocsByActiveDate" expandLevel="1"
+				search="#{requestScope.searchQuery}"
+				ignoreRequestParams="false">
+			</xp:dominoView>
+		</xe:this.data>
+		
+		<xe:this.summaryColumn>
+			<xe:viewSummaryColumn columnName="Topic"
+				columnTitle="Topic">
+			</xe:viewSummaryColumn>
+		</xe:this.summaryColumn>
+		
+		<xe:this.iconColumn>
+			<xe:viewIconColumn>
+				<xe:this.icons>
+					<xe:iconEntry alt="Discussion" styleClass="mblListItemIcon">
+						<xp:this.url><![CDATA[#{javascript:
+							var formType = viewEntry.getColumnValue("Form");
+							var docType = viewEntry.getColumnValue("DocType");
+							var formName = viewEntry.getDocument().getItemValueString('form');
+							if( docType instanceof java.util.List && ! docType.isEmpty() ){
+								// when multiple doc types, only use the first one.
+								docType = docType.get(0);
+							}
+							
+							if(("MainTopic" == formType) && ("Discussion" == docType || "Event" == docType || "Announcement" == docType || "Status" == docType || "Profile" == docType))
+							{
+								return "discussion_16px_8bit.png";
+							}
+							else if(docType == "Reference")
+							{
+								return "reference_16px_8bit.png";
+							}
+							else if(docType == "Action Item")
+							{
+								return "task_16px_8bit.png";
+							}
+							else if(docType == "Meeting")
+							{
+								return "ftCalendar16.png";
+							}
+							else if(docType == "Chat Entry")
+							{
+								return "ftDefault16.png";
+							}
+							else if(docType == "Announcement")
+							{
+								return "announcement.png";
+							}
+							else if(docType == "Status")
+							{
+								return "statusreport_16px_8bit.png";
+							}
+							else if(docType == "Profile")
+							{
+								return "thumbNoPhoto.png";
+							}
+							else if(docType == "Event")
+							{
+								return "ftEvents16.png";
+							}
+							else if( 'Response' == formName || formName == 'ResponseToResponse')
+							{
+								return "Comment16.png";
+							}
+						}]]></xp:this.url>
+					</xe:iconEntry>
+				</xe:this.icons>
+			</xe:viewIconColumn>
+		</xe:this.iconColumn>
+		
+		<xp:this.facets>
+			<xp:panel xp:key="noRows">
+				<xp:br />
+				<xp:div styleClass="xlEmptyFacet">
+					<xp:label value="No documents found in this view"></xp:label>
+				</xp:div>
+			</xp:panel>
+			
+			<xp:panel id="panel2" xp:key="detail">
+				<xp:text escape="true"
+					style="font-size:12px; font-weight:normal;">
+					<xp:this.value><![CDATA[#{javascript: 
+						var repliesNr=viewEntry.getDescendantCount();
+						var author=viewEntry.getColumnValue('Author');
+						var creationDate=viewEntry.getColumnValue('Date');
+						var str = peopleBean.getPerson(author).displayName +" | " + strings.getString("created") + " " + creationDate;
+						
+						if(repliesNr>0){																													
+							str = peopleBean.getPerson(author).displayName +" | " + strings.getString("created") + " " + creationDate + " | " + repliesNr + " replies";
+						}
+						
+						return str;
+					}]]></xp:this.value>
+				</xp:text>
+			</xp:panel>
+
+			<xp:link escape="true" text="More..." id="link6"
+				xp:key="pagerBottom">
+				<xp:this.rendered>
+					<![CDATA[#{javascript:
+						var dv = getComponent("dataView2");
+						if(dv.getRowCount() > 10)
+							return true;
+						else
+							return false;}]]>
+				</xp:this.rendered>
+				<xp:eventHandler event="onclick" submit="false">
+					<xp:this.script>
+						<xe:addRows rowCount="5" for="dataView2" disableId="link6">
+						</xe:addRows>
+					</xp:this.script>
+				</xp:eventHandler>
+			</xp:link>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

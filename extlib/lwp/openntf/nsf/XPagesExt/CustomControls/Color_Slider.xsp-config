@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+<faces-config-extension>
+<namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+<default-prefix>xc</default-prefix>
+</faces-config-extension>
+<composite-component>
+<component-type>Color_Slider</component-type>
+<composite-name>Color_Slider</composite-name>
+<composite-file>/Color_Slider.xsp</composite-file>
+<composite-extension><designer-extension>
+<in-palette>true</in-palette>
+</designer-extension></composite-extension></composite-component>
+</faces-config>

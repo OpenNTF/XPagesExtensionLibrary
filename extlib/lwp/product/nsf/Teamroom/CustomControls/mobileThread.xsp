@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex" 
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	
+	<xe:djxmHeading id="djxmHeading2"
+		back="Back" transition="slide">
+		<xp:this.moveTo><![CDATA[#{javascript:
+		if(null == sessionScope.from)
+				return "allDocuments";
+			else
+				return sessionScope.from;
+		}]]></xp:this.moveTo>
+		<xp:this.label><![CDATA[#{javascript:
+			sessionScope.backURL = "document\u0026action=openDocument\u0026documentId="+currentDocument.getNoteID();
+			if(currentDocument.getItemValueString("DocType") === "Meeting")
+			{
+				return strings.getString("mobile.thread.heading.meeting");
+			}
+			else if(currentDocument.getItemValueString("DocType") === "Action Item")
+			{
+				return strings.getString("mobile.thread.heading.action");
+			}
+			else
+			{
+				return strings.getString("mobile.thread.heading.doc");
+			}
+		}]]></xp:this.label>
+	</xe:djxmHeading>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:// only allow standalone documents to be deleted
+		var nd:NotesDocument = null;
+		var ndc:NotesDocumentCollection = null;
+		var responseCount = 0;
+		
+		if(null != currentDocument){
+			nd = currentDocument.getDocument();
+			ndc = nd.getResponses();
+			if(null != ndc){
+				responseCount = ndc.getCount();
+			}
+		}
+		
+		viewScope.responseCount = responseCount;
+		
+		topicThreadInit();
+	}]]></xp:this.beforePageLoad>
+	
+	<xp:this.data>
+		<xp:dominoView var="dominoView" viewName="xvwDocsByActiveDate"
+			dataCache="id" expandLevel="0">
+			<xp:this.parentId><![CDATA[#{javascript:
+				return document1.getNoteID();
+			}]]></xp:this.parentId>
+		</xp:dominoView>
+	</xp:this.data>
+	
+	<xp:panel styleClass="mblThreadPanel">
+		<xp:table styleClass="xlThreadTable">
+			<xp:tr styleClass="xlHeadingBackground">
+				<xp:td>
+					<xp:div styleClass="mblThreadDiv">
+						<xp:text value="#{currentDocument.Subject}"
+							styleClass="mblThreadDivText">
+						</xp:text>
+						<xp:br></xp:br>
+						
+						<xp:text value="Tags:&#160;#{currentDocument.Categories}">
+							<xp:this.style><![CDATA[#{javascript:
+								if(currentDocument.getItemValueString('Categories') === null || currentDocument.getItemValueString('Categories') === "")
+								{return "display:none";}
+								else
+								{return "display:inline";}
+							}]]></xp:this.style>
+						</xp:text>
+						<xp:br>
+							<xp:this.style><![CDATA[#{javascript:
+								if(currentDocument.getItemValueString('Categories') === null || currentDocument.getItemValueString('Categories') === "")
+								{return "display:none";}
+								else
+								{return "display:inline";}
+							}]]></xp:this.style>
+						</xp:br>
+						
+						<xp:panel>
+							<xp:link styleClass="lotusPerson" id="from"
+								text="#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).displayName}">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xe:moveTo
+												direction="Left to Right" transitionType="slide"
+												targetPage="memberProfile&amp;profile=#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).abbreviatedName}"
+												forceFullRefresh="true">
+											</xe:moveTo>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							&#160;
+							<xp:label value="|"></xp:label>
+							&#160;
+							<xp:text id="createdDateOut" value="#{javascript:@Created()}">
+							</xp:text>
+						</xp:panel>
+						<xp:br></xp:br>	
+						
+						<xp:panel>
+							<xp:this.loaded><![CDATA[${javascript:
+								if(currentDocument.getItemValueString("DocType") === "Meeting")
+								{return true;}
+								else
+								{return false;}
+							}]]></xp:this.loaded>
+							
+							<xp:text value="Start:&#160;#{currentDocument.StartDateTime}">
+							</xp:text>
+							<xp:br></xp:br>
+							<xp:text value="End:&#160;#{currentDocument.EndDateTime}">
+							</xp:text>
+							<xp:br></xp:br>
+							<xp:label id="lblDuration" value="#{currentDocument.Duration}" rendered="false"></xp:label>
+							<xp:text>
+								<xp:this.value><![CDATA[#{javascript:
+									var text = "Duration: ";
+									var duration = getComponent('lblDuration').getValue();
+									return text += duration + " minutes";
+								}]]></xp:this.value>
+							</xp:text>
+							<xp:br></xp:br>
+							<xp:text value="Attendees:&#160;#{currentDocument.People}">
+								<xp:this.rendered><![CDATA[#{javascript:
+									var people = currentDocument.getItemValueString('People');
+									if(people == null || people == "")
+									{return false;}
+									return true;
+								}]]></xp:this.rendered>
+							</xp:text>
+							
+						</xp:panel>
+						
+						<xp:text value="Review Status:&#160;#{currentDocument.ReviewStatus}">
+							<xp:this.loaded><![CDATA[${javascript:
+								var status = currentDocument.getItemValueString("ReviewStatus");
+								if(null != status && "" != status){
+									return true;
+								}
+								return false;
+							}]]></xp:this.loaded>
+						</xp:text>
+						<xp:br>
+							<xp:this.loaded><![CDATA[${javascript:
+								var status = currentDocument.getItemValueString("ReviewStatus");
+								if(null != status && "" != status){
+									return true;
+								}
+								return false;
+							}]]></xp:this.loaded>
+						</xp:br>
+						<xp:text value="Reviewers:&#160;#{currentDocument.ReviewedBy}">
+							<xp:this.loaded><![CDATA[${javascript:
+								var reviewers = currentDocument.getItemValueString("ReviewedBy");
+								if(null != reviewers && "" != reviewers){
+									return true;
+								}
+								return false;
+							}]]></xp:this.loaded>
+						</xp:text>
+						<xp:br>
+							<xp:this.loaded><![CDATA[${javascript:
+								var reviewers = currentDocument.getItemValueString("ReviewedBy");
+								if(null != reviewers && "" != reviewers){
+									return true;
+								}
+								return false;
+							}]]></xp:this.loaded>
+						</xp:br>
+						
+						<xp:panel>
+							<xp:this.loaded><![CDATA[${javascript:
+								if(currentDocument.getItemValueString("DocType") === "Action Item")
+								{
+									return true;
+								}
+								else
+								{
+									return false;
+								}
+							}]]></xp:this.loaded>
+							<xp:text id="computedField2" value="Priority:&#160;#{currentDocument.dspAIPriority}"></xp:text>
+							&#160;
+							<xp:label value="|"></xp:label>
+							&#160;
+							<xp:text id="computedField1">
+								<xp:this.value><![CDATA[#{javascript:
+									var curStatus = currentDocument.getItemValueString("Current_Status");
+									var text = "Status: ";
+									if(curStatus == 0)
+									{
+										text += "Open";
+									}
+									else
+									{
+										text += "Complete";
+									}
+									return text;
+								}]]></xp:this.value>
+							</xp:text>
+							<xp:br></xp:br>
+							<xp:text value="Due Date:&#160;">
+							</xp:text>
+							<xp:text id="computedField3"
+								value="#{currentDocument.DueDate}">
+								<xp:this.converter>
+									<xp:convertDateTime></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+							<xp:br></xp:br>
+						</xp:panel>
+						
+						<xp:text id="computedField4" value="Assigned to:&#160;#{currentDocument.People}">
+							<xp:this.loaded><![CDATA[${javascript:
+								if(currentDocument.getItemValueString("DocType") === "Action Item")
+								{
+									return true;
+								}
+								else
+								{
+									return false;
+								}
+							}]]></xp:this.loaded>
+						</xp:text>
+					</xp:div>
+				</xp:td>
+			</xp:tr>
+			<xp:tr styleClass="xlThreadBody xlTableRowBackground">
+				<xp:td colspan='2'>
+					<xp:text id="computedField27" value="#{currentDocument.Body}" escape="false">
+					</xp:text>
+					<xp:panel styleClass="mblThreadFileDownload">
+						<xc:mobile_fileDownload field="Body"></xc:mobile_fileDownload>
+					</xp:panel>
+				</xp:td>
+			</xp:tr>
+			<xp:tr styleClass="xlThreadBody">
+				<xp:td colspan="2" styleClass="xlButtonSpacing">
+					<xp:button value="Reply" id="button2" styleClass="mblSmallFormFooterButton">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>					
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+							<xp:this.action>
+								<xe:moveTo direction="Left to Right"
+									transitionType="slide" forceFullRefresh="true"
+									targetPage="mobileResponse&amp;parentId=#{javascript:document1.getNoteID()}">
+								</xe:moveTo>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+					
+					<xp:button value="Delete" id="buttonDelete" 
+						styleClass="mblSmallFormFooterButton mblThreadRightButton">
+						<xp:this.rendered><![CDATA[#{javascript:
+							var nd:NotesDocument = null;
+							var ndc:NotesDocumentCollection = null;
+							var responseCount = 0;
+							
+							if(null != currentDocument){
+								nd = currentDocument.getDocument();
+								ndc = nd.getResponses();
+								if(null != ndc){
+									responseCount = ndc.getCount();
+								}
+							}
+							
+							var editor = userBean.accessLevel >= lotus.domino.ACL.LEVEL_EDITOR;
+							var canDelete = userBean.accessLevel >= lotus.domino.Database.DBACL_DELETE_DOCS;
+							var isUser = currentDocument.getValue("From") === userBean.canonicalName;
+							
+							if((editor || isUser) && canDelete && responseCount == 0)
+							{
+								return true;
+							}
+							else
+							{
+								return false;
+							}
+							}]]>
+						</xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:confirm
+										message="Are you sure you want to delete this topic?">
+									</xp:confirm>
+									<xp:executeScript>
+										<xp:this.script><![CDATA[#{javascript:var doc:NotesDocument=currentDocument.getDocument();doc.remove(true);}]]></xp:this.script>
+									</xp:executeScript>
+									<xe:moveTo direction="Left to Right"
+										transitionType="slide" targetPage="allDocuments"
+										forceFullRefresh="true">
+									</xe:moveTo>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</xp:td>
+			</xp:tr>
+			<xp:tr styleClass="mblCategoryBar">
+				<xp:td colspan="2" styleClass="xlReplyBar">
+					<xp:label>
+						<xp:this.value><![CDATA[#{javascript:
+							var r=getComponent("comments");
+							var num = r.getRowCount().toString();
+							var text = num + " replies";
+							return text;
+						}]]></xp:this.value>
+					</xp:label>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+				</xp:td>
+			</xp:tr>	
+			<xp:tr>
+				<xp:td colspan="2">
+					<xp:repeat id="comments" rows="100" value="#{javascript:dominoView}" var="rowData"
+						indexVar="commentIndex" first="0" rendered="#{javascript:var lastlevel=0;}">
+						<xp:panel>
+							<xp:this.data>
+								<xp:dominoDocument var="document2" formName="Contact"
+									action="openDocument" documentId="#{javascript:rowData.getNoteID()}"
+									ignoreRequestParams="true">
+								</xp:dominoDocument>
+							</xp:this.data>
+							
+							<xp:div styleClass="mblThreadDiv">
+								<xp:text escape="false" id="responseImage">
+									<xp:this.styleClass><![CDATA[#{javascript:
+										if(level < 4)
+											return "xlReplyImage" + level;
+										else
+											return "xlReplyImage4";
+									}]]></xp:this.styleClass>
+									<xp:this.value><![CDATA[#{javascript:
+										return "<img alt=\"\" style=\"\" src=\"/oneuiv2/images/commentIndent.png\""+"/>";
+									}]]></xp:this.value>
+									<xp:this.rendered><![CDATA[#{javascript:
+										var level = rowData.getResponseLevel();
+										if (level>lastlevel){
+											lastlevel=level;return true;
+										}
+										else{
+											lastlevel=level;
+											return false
+										}
+									}]]></xp:this.rendered>
+								</xp:text>
+								
+								<xp:panel>
+									<xp:this.styleClass><![CDATA[#{javascript:
+										if(level < 4)
+											return "xlReplyPadding" + level;
+										else
+											return "xlReplyPadding4";
+									}]]></xp:this.styleClass>
+									<xp:label value="#{javascript:rowData.getColumnValue('Topic')}"
+										styleClass="mblThreadReponseTopic" id="label1"
+										role="button">
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" disableValidators="true" refreshId="comments">
+											<xp:this.action><![CDATA[#{javascript:
+												if(getPosition(rowData.getPosition()) == true)
+												{
+													var row = rowData.getPosition();
+													setPosition(row, false);
+												}
+												else
+												{
+													var row = rowData.getPosition();
+													setPosition(row, true);
+												}
+											}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:label>
+									
+									<xp:image id="expandImage" styleClass="mblThreadImage"
+										url="expand.png" height="16px" width="12px">
+										<xp:this.rendered><![CDATA[#{javascript:
+											if(getPosition(rowData.getPosition()) == true)
+											{return false;}
+											else
+											{return true;}
+										}]]></xp:this.rendered>
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" disableValidators="true" refreshId="comments">
+											<xp:this.action><![CDATA[#{javascript:
+												if(getPosition(rowData.getPosition()) == true)
+												{
+													var row = rowData.getPosition();
+													setPosition(row, false);
+												}
+												else
+												{
+													var row = rowData.getPosition();
+													setPosition(row, true);
+												}
+											}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:image>
+									
+									<xp:image id="collapseImage" styleClass="mblThreadImage"
+										url="collapse.png" height="16px" width="12px">
+										<xp:this.rendered><![CDATA[#{javascript:
+											if(getPosition(rowData.getPosition()) == true)
+											{return true;}
+											else
+											{return false;}
+										}]]></xp:this.rendered>
+										<xp:eventHandler event="onclick" submit="true"
+											refreshMode="partial" disableValidators="true" refreshId="comments">
+											<xp:this.action><![CDATA[#{javascript:
+												if(getPosition(rowData.getPosition()) == true)
+												{
+													var row = rowData.getPosition();
+													setPosition(row, false);
+												}
+												else
+												{
+													var row = rowData.getPosition();
+													setPosition(row, true);
+												}
+											}]]></xp:this.action>
+										</xp:eventHandler>
+									</xp:image>
+									
+									<xp:panel style="display:block">
+										<xp:link styleClass="lotusPerson" id="link1"
+											text="#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).displayName}">
+											<xp:eventHandler event="onclick"
+												submit="true" refreshMode="complete">
+												<xp:this.action>
+													<xp:actionGroup>
+														<xe:moveTo
+															direction="Left to Right" transitionType="slide"
+															targetPage="memberProfile&amp;profile=#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).abbreviatedName}"
+															forceFullRefresh="true">
+														</xe:moveTo>
+													</xp:actionGroup>
+												</xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+										&#160;
+										<xp:label value="|"></xp:label>
+										&#160;
+										<xp:text id="computedField5" value="#{javascript:@Created()}"></xp:text>
+									</xp:panel>
+									<xp:br></xp:br>	
+									
+									<xp:text id="computedField6" styleClass="mblResponseParentSub">
+										<xp:this.rendered><![CDATA[#{javascript:
+											if(getPosition(rowData.getPosition()) == true)
+											{return true;}
+											else
+											{return false;}
+										}]]></xp:this.rendered>
+										<xp:this.value><![CDATA[#{javascript:
+											var text = "In reply to ";
+											//print('Parent Doc: ' + currentDocument.getItemValueString('DocLinkParent'));
+											//text += currentRowDoc.getItemValueString('ImmediateParentSubject');
+											var parentSubject = currentDocument.getItemValueString('ImmediateParentSubject');
+											if( ! parentSubject ){
+												parentSubject = strings.subject_untitled;
+											}
+											else
+											{
+												parentSubject = "In response to: " + parentSubject;
+											}
+											return parentSubject;
+										}]]></xp:this.value>
+									</xp:text>
+									<xp:br></xp:br>
+								</xp:panel>
+							</xp:div>
+							
+							<xp:div id="replyContentDiv">
+								<xp:this.rendered><![CDATA[#{javascript:
+									if(getPosition(rowData.getPosition()) == true)
+									{return true;}
+									else
+									{return false;}
+								}]]></xp:this.rendered>
+								
+								<xp:div>
+									<xp:this.styleClass><![CDATA[#{javascript:
+										if(level < 4)
+											return "xlReplyContentDiv xlReplyMargin" + level;
+										else
+											return "xlReplyContentDiv xlReplyMargin4";
+									}]]></xp:this.styleClass>
+									<xp:text id="replyDetailsText" value="#{currentDocument.Body}" escape="false">
+									</xp:text>
+									<xp:panel styleClass="mblThreadFileDownload">
+										<xc:mobile_fileDownload field="Body"></xc:mobile_fileDownload>
+									</xp:panel>
+									<xp:button value="Reply" id="link3" styleClass="mblSmallFormFooterButton">
+										<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+										<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+											<xp:this.action>
+												<xe:moveTo direction="Left to Right"
+													transitionType="slide" forceFullRefresh="true"
+													targetPage="mobileResponse&amp;parentId=#{javascript:rowData.getNoteID()}">
+												</xe:moveTo>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+									
+									<xp:button value="Delete" id="link2" 
+										styleClass="mblSmallFormFooterButton mblThreadRightButton">
+										<xp:this.rendered><![CDATA[#{javascript:
+											var nd:NotesDocument = null;
+											var ndc:NotesDocumentCollection = null;
+											var responseCount = 0;
+											
+											if(null != currentDocument){
+												nd = currentDocument.getDocument();
+												ndc = nd.getResponses();
+												if(null != ndc){
+													responseCount = ndc.getCount();
+												}
+											}
+											
+											var editor = userBean.accessLevel >= lotus.domino.ACL.LEVEL_EDITOR;
+											var canDelete = userBean.accessLevel >= lotus.domino.Database.DBACL_DELETE_DOCS;
+											var isUser = currentDocument.getValue("From") === userBean.canonicalName;
+											
+											if((editor || isUser) && canDelete && responseCount == 0)
+											{
+												return true;
+											}
+											else
+											{
+												return false;
+											}
+											}]]>
+										</xp:this.rendered>
+										<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+											<xp:this.action>
+												<xp:actionGroup>
+													<xp:confirm
+														message="Are you sure you want to delete this topic?">
+													</xp:confirm>
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:
+														var doc:NotesDocument=currentDocument.getDocument();doc.remove(true);}]]></xp:this.script>
+													</xp:executeScript>
+												</xp:actionGroup>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+								</xp:div>
+							</xp:div>
+							<hr></hr>
+						</xp:panel>
+					</xp:repeat>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+</xp:view>

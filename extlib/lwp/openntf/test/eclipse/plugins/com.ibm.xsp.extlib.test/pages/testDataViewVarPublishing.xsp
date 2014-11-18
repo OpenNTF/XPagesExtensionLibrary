@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.afterRestoreView><![CDATA[#{javascript:print('afterRestoreView')}]]></xp:this.afterRestoreView>
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:print('beforeRestoreResponse');}]]></xp:this.beforeRenderResponse>
+	<xp:this.afterRenderResponse><![CDATA[#{javascript:print('afterRestoreResponse');}]]></xp:this.afterRenderResponse>
+	Use this page in a discussion database containing 1 or more docs.<xp:br></xp:br>
+	To verify this works look at the server console, and click the submit
+	button - verify that view1 always has a value, and is not null.<xp:br></xp:br>
+	Then click the Click button and verify view1 is not null.<xp:br></xp:br>
+	<xp:button value="Submit" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete" immediate="false" save="true">
+		</xp:eventHandler>
+	</xp:button>
+	<xe:dataView rows="30" id="dataView1" expandedDetail="true">
+		<xp:this.data>
+			<xp:dominoView var="view1" viewName="xpAllDocuments"></xp:dominoView>
+		</xp:this.data>
+		<xp:this.facets>
+			<xp:panel xp:key="detail">
+				aaaaaaaaaaa
+				<xp:label rendered="#{javascript: print('computing rendered view1:'+requestScope.view1); true }" value="bbb" id="label1"></xp:label>
+				<xp:button value="Click" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action><![CDATA[#{javascript:
+							print('Clicked. view1'+requestScope.view1);
+						}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:dataView>
+</xp:view>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+		requestScope.tagOptions = @DbColumn(@DbName(), 'MissionLookup', 4);
+	}]]></xp:this.beforePageLoad>
+	
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="MainTopic"
+			ignoreRequestParams="true" computeWithForm="onsave"
+			documentId="#{compositeData.documentId}"
+			action="newDocument">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xe:djxmHeading id="djxmHeading1" moveTo="#{javascript:sessionScope.from}"
+		label="New Document" back="Cancel">
+		<xp:this.facets>
+			<xp:panel xp:key="actionFacet">
+				<xp:button value="Save" id="button1">
+					<xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+						<xp:this.action>
+							<xe:moveTo direction="Left to Right"
+								saveDocument="true" targetPage="allDocuments"
+								transitionType="slide" forceFullRefresh="true">
+							</xe:moveTo>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:panel>
+		</xp:this.facets>
+	</xe:djxmHeading>
+
+	<xp:br></xp:br>
+	<xe:formTable id="discussionForm" disableRowError="false" 
+		loaded="${javascript:document1.isNewNote()}">
+		<xp:this.style><![CDATA[#{javascript:
+			if(isAndroidCheck())
+			{
+				return "background-color:black;";
+			}
+		}]]></xp:this.style>
+		<xe:formRow label="Subject:">
+			<xp:inputText id="subject" styleClass="mblFormRowInput"
+				value="#{document1.Subject}" required="true" autocomplete="off">
+				<xp:this.validators>
+					<xp:validateRequired
+						message="Please provide a subject">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Content:">
+			<xp:inputTextarea id="documentBody" required="true" value="#{document1.Body}"
+				styleClass="mblFormRowTextArea" rows="8"
+				htmlFilterIn="acf" htmlFilter="acf">
+			</xp:inputTextarea>
+		</xe:formRow>
+	</xe:formTable>
+</xp:view>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="206" sequence="8" unid="428B4BF690420EA8802579170050B7C7">
+<created><datetime dst="true">20110926T154139,27+01</datetime></created>
+<modified><datetime>20120207T095545,50+00</datetime></modified>
+<revised><datetime dst="true">20111026T142024,57+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,50+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,50+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon/O=ibm</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110926T154139,36+01</datetime><datetime dst="true">20111006T160525,58+01</datetime><datetime dst="true">20111007T093933,86+01</datetime><datetime dst="true">20111007T093942,27+01</datetime><datetime dst="true">20111014T083945,35+01</datetime><datetime dst="true">20111018T100412,76+01</datetime><datetime dst="true">20111018T100424,80+01</datetime></revisions>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE" sign="true"><text>mobileTopicThread</text></item>
+<item name="$Flags"><text>.5834QP</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

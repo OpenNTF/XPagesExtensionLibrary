@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>CalendarStoreCustom</component-type>
+    <composite-name>CalendarStoreCustom</composite-name>
+    <composite-file>/CalendarStoreCustom.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>storeComponentId</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>chairFieldName</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>dateFieldName</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <property-name>descriptionFieldName</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

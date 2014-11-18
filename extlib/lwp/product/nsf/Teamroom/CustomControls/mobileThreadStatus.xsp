@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:panel styleClass="mblThreadPanel">
+		<xp:table styleClass="xlThreadStatusTable">
+			<xp:tr>
+				<xp:td>
+					<xp:div>
+						<xp:text styleClass="mblThreadDivText">
+							<xp:this.value><![CDATA[#{javascript:
+								var status = document1.getForm();
+								var subject = "";
+								
+								if(status === 'IndStat')
+								{
+									subject = 'Status Report for ' + peopleBean.getPerson(document1.getItemValueString('From')).displayName;
+								}
+								else if(status === 'SubteamStatus')
+								{
+									subject = 'Subteam Status Report';
+								}
+								else
+								{
+									subject = 'Team Status';
+								}
+								return subject;
+							}]]></xp:this.value>
+						</xp:text>
+
+						<xp:inputRichText value="For #{javascript: document1.getItemValueDate('ReportDate').toDateString()}" id="Goals2"
+							readonly="true" styleClass="mblThreadRichText">
+						</xp:inputRichText>
+						
+						<xp:panel styleClass="mblThreadDiv">
+							<xp:label for="from" value=" by "/>
+							<xp:link styleClass="lotusPerson" id="from"
+								text="#{javascript: peopleBean.getPerson(document1.getItemValueString('From')).displayName }">
+								<xp:eventHandler event="onclick"
+									submit="true" refreshMode="complete">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xe:moveTo
+												direction="Left to Right" transitionType="slide"
+												targetPage="memberProfile&amp;profile=#{javascript:peopleBean.getPerson(currentDocument.getItemValueString('From')).abbreviatedName}"
+												forceFullRefresh="true">
+											</xe:moveTo>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							&#160;
+							<xp:label value="|" for="createdDateOut"></xp:label>
+							&#160;
+							<xp:label for="createdDateOut" value="Created " />
+							<xp:text id="createdDateOut" value="#{javascript:@Created()}" />
+							&#160;
+							<xp:label value="|" for="statusField"></xp:label>
+							&#160;
+							<xp:text disableTheme="true" value="Active" id="statusField"
+								rendered="#{javascript: document1.getItemValueString('FileThisStatusDoc') == '0'}" />
+							<xp:text disableTheme="true" value="Inactive"
+								rendered="#{javascript: document1.getItemValueString('FileThisStatusDoc') == '1'}" />
+						</xp:panel>
+						<xp:br></xp:br>
+						
+						<!-- xc:statusCommonSubheading id="subHeadCC" xp:key="subheading"/-->
+						<xp:panel xp:key="meta" styleClass="mblThreadDiv">
+							<xp:this.rendered><![CDATA[#{javascript:
+								var status = document1.getForm();
+								if(status === 'SubteamStatus')
+								{return true;}
+								else
+								{return false;}
+							}]]></xp:this.rendered>
+							<!-- xc:statusCommonMeta id="commonMeta"/-->
+							<xp:label for="linkSubteams" value="Subteams: "/>
+							<xp:label for="linkSubteams" value="#{document1.SubTeamName}"/>
+						</xp:panel>		
+						<hr></hr>
+						
+						
+						<xp:text id="computedField1" value="Key Thought:" styleClass="mblThreadKeyThought">
+						</xp:text><xp:br></xp:br>
+						<xp:text id="subjectOut" value="#{document1.Subject}">
+						</xp:text><xp:br></xp:br><xp:br></xp:br>
+						
+						<xp:text id="computedField2" value="Accomplishments this week:">
+							<xp:this.style><![CDATA[#{javascript:
+								var control = getComponent('inputRichText1').getValue();
+								if(control === null)
+								{
+									getComponent('inputRichText1').setRendered(false);
+									return "display:none";
+								}
+								else
+								{
+									getComponent('inputRichText1').setRendered(true);
+									return "color: black; font-weight:bold;font-size:11pt; line-height:30px;";
+								}
+							}]]></xp:this.style>
+						</xp:text>
+						<xp:inputRichText value="#{document1.ThisWeek}" id="inputRichText1"
+							readonly="true">
+						</xp:inputRichText>
+						<xp:panel styleClass="mblThreadDiv">
+							<xc:mobile_fileDownload field="ThisWeek"></xc:mobile_fileDownload>
+						</xp:panel>
+						
+						<xp:text id="computedField5" value="Summary:">
+							<xp:this.style><![CDATA[#{javascript:
+								var control = getComponent('inputRichText4').getValue();
+								if(control === null)
+								{
+									getComponent('inputRichText4').setRendered(false);
+									return "display:none";
+								}
+								else
+								{
+									getComponent('inputRichText4').setRendered(true);
+									return "color: black; font-weight:bold;font-size:11pt; line-height:30px;";
+								}
+							}]]></xp:this.style>
+						</xp:text>
+						<xp:inputRichText value="#{document1.Summary}" id="inputRichText4"
+							readonly="true">
+						</xp:inputRichText>
+						<xp:panel styleClass="mblThreadDiv">
+							<xc:mobile_fileDownload field="Summary"></xc:mobile_fileDownload>
+						</xp:panel>
+						
+						<xp:text id="computedField3" value="Goal for next week:">
+							<xp:this.style><![CDATA[#{javascript:
+								var control = getComponent('inputRichText2').getValue();
+								if(control === null)
+								{
+									getComponent('inputRichText2').setRendered(false);
+									return "display:none";
+								}
+								else
+								{
+									getComponent('inputRichText2').setRendered(true);
+									return "color: black; font-weight:bold;font-size:11pt; line-height:30px;";
+								}
+							}]]></xp:this.style>
+						</xp:text>
+						<xp:inputRichText value="#{document1.Goals}" id="inputRichText2"
+							readonly="true">
+						</xp:inputRichText>
+						<xp:panel styleClass="mblThreadDiv">
+							<xc:mobile_fileDownload field="Goals"></xc:mobile_fileDownload>
+						</xp:panel>
+						
+						<xp:text id="computedField4" value="Issues:">
+							<xp:this.style><![CDATA[#{javascript:
+								var control = getComponent('inputRichText3').getValue();
+								if(control === null)
+								{
+									getComponent('inputRichText3').setRendered(false);
+									return "display:none";
+								}
+								else
+								{
+									getComponent('inputRichText3').setRendered(true);
+									return "color: black; font-weight:bold;font-size:11pt; line-height:30px;";
+								}
+							}]]></xp:this.style>
+						</xp:text>
+						<xp:inputRichText value="#{document1.Issues}" id="inputRichText3"
+							readonly="true">
+						</xp:inputRichText>								
+						<xp:panel styleClass="mblThreadDiv">
+							<xc:mobile_fileDownload field="Issues"></xc:mobile_fileDownload>
+						</xp:panel>
+					</xp:div>
+				</xp:td>
+			</xp:tr>
+			<xp:tr styleClass="xlThreadStatusDetail">
+				<xp:td colspan='2'>
+					<xp:text id="computedField6" value="Details:">
+						<xp:this.style><![CDATA[#{javascript:
+							var control = getComponent('inputText7').getValue();
+							if(control === null)
+							{
+								getComponent('inputText7').setRendered(false);
+								return "display:none";
+							}
+							else
+							{
+								getComponent('inputText7').setRendered(true);
+								return "color: black; font-weight:bold;font-size:11pt; line-height:30px;";
+							}
+						}]]></xp:this.style>
+					</xp:text>
+					<xp:inputRichText value="#{currentDocument.Body}" id="inputText7" readonly="true">
+					</xp:inputRichText>	
+					<xp:panel styleClass="mblThreadDiv">
+						<xc:mobile_fileDownload field="Body"></xc:mobile_fileDownload>
+					</xp:panel>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+</xp:view>

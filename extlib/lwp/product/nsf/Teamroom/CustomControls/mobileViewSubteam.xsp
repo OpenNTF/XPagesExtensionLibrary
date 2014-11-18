@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:viewScope.subteamName = param.subteam}]]></xp:this.beforePageLoad>
+	
+	<xe:djxmHeading id="djxmHeading1" back="Back" moveTo="subteams" label="Subteam">
+		<xp:this.rendered><![CDATA[#{javascript:
+			sessionScope.from = "subteam\u0026subteam=" + param.subteam;
+			return true;
+		}]]></xp:this.rendered>
+	</xe:djxmHeading>
+	
+	<xp:panel id="readOnlyProfile">
+		<xp:this.data>
+			<xp:dominoDocument formName="Subteam" action="openDocument"
+				var="subteam" ignoreRequestParams="true" computeWithForm="onsave">
+				<xp:this.documentId><![CDATA[#{javascript://
+					var db:NotesDatabase	= database;
+					var vw:NotesView		= db.getView("xwvAllSubteamsLookup");
+					var ve:NotesViewEntry	= vw.getEntryByKey(param.subteam, true);
+					var unid				= null;
+					if (null != ve) {
+						unid = ve.getUniversalID();
+					}
+					return(unid);
+				}]]></xp:this.documentId>
+			</xp:dominoDocument>
+		</xp:this.data>
+		
+		<xe:formTable id="formTable1" formTitle="Subteam Profile for #{javascript:subteam.getItemValueString('STName')}"
+			xp:key="profile">
+			<xe:formRow id="formRow2" label="Created">
+				<xp:text id="createdDateOut" value="#{javascript:@Created()}"></xp:text>
+			</xe:formRow>
+			<xe:formRow id="formRow3" label="Subteam Status: ">
+				<xp:span id="eventStatusOut">
+					<xp:text disableTheme="true" value="Active"
+						rendered="#{javascript:subteam.getItemValueString('FileThisStatusDoc') == '0'}"></xp:text>
+					<xp:text disableTheme="true" value="Inactive"
+						rendered="#{javascript:subteam.getItemValueString('FileThisStatusDoc') == '1'}"></xp:text>
+				</xp:span>
+			</xe:formRow>
+		</xe:formTable>
+		
+		<xe:djxmRoundRectList id="djxmRoundRectList1">
+			<xp:repeat id="repeatList" value="#{subteam.PriNameSelection}"
+				var="rowData" indexVar="membersIndex" rows="300" first="0">
+					<xe:djxmLineItem id="djxmLineItem1" label="#{javascript:rowData}"
+						moveTo="#profile&amp;profile=#{javascript:rowData}">
+					</xe:djxmLineItem>
+			</xp:repeat>
+		</xe:djxmRoundRectList>
+	</xp:panel>
+</xp:view>

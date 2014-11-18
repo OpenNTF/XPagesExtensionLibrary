@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="${javascript:@DbTitle()}"
+	xmlns:xc="http://www.ibm.com/xsp/custom" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xe:redirect>
+		<xe:this.rules>
+			<xe:redirectPhoneRule url="mobile.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectPhoneRule>
+			<xe:redirectTabletRule url="mobile.xsp" urlHash="document" disableRequestParams="false">
+			</xe:redirectTabletRule>
+		</xe:this.rules>
+	</xe:redirect>
+	
+	<xp:this.resources>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+		<xp:script src="/xpServerSide.jss" clientSide="false"></xp:script>
+		<xp:bundle var="res" src="/strings.properties"></xp:bundle>
+		<xp:script src="/xpCGIVariables.jss" clientSide="false"></xp:script>
+		<xp:script src="/largeContent.js" clientSide="true"></xp:script>
+	</xp:this.resources>
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init()}]]></xp:this.beforePageLoad>
+	<xc:layout navigationPath="#{sessionScope.historyPageName}">
+		<xc:viewTopic id="viewTopic"></xc:viewTopic>				
+	</xc:layout>
+</xp:view>

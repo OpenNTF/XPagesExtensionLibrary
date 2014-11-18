@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xc:layout navigationPath="/home">
+		<xp:this.facets>
+			<xp:panel xp:key="RightColumn">
+				<xc:homeTeamRoomPurpose id="wgtTeamRoomPurpose"></xc:homeTeamRoomPurpose>
+				<xc:homeMembersView id="members"></xc:homeMembersView>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:text escape="true" id="titleField" tagName="h1">
+			<xp:this.value><![CDATA[#{javascript:
+				sessionScope.webFrom = "/home.xsp";
+				sessionScope.webFromName = strings.getString('recent.activity');
+				return strings.getString('recent.activity');
+			}]]></xp:this.value>
+		</xp:text>
+		<xe:dataView id="recentActivityDataView" var="viewEntry"
+			binding="#{viewStateBean.dataIterator}" collapsibleRows="false"
+			collapsibleDetail="true" pageName="/topicThread.xsp"
+			columnTitles="false" openDocAsReadonly="true" rows="25"
+			rowStyleClass="xspHtmlTrView" collapsibleCategory="false"
+			detailsOnClient="true">
+			<xe:this.summaryColumn>
+				<xe:viewSummaryColumn columnName="Subject"></xe:viewSummaryColumn>
+			</xe:this.summaryColumn>
+			<xe:this.data>
+				<xp:dominoView var="view1" dataCache="full"
+					viewName="xvwRecentActivity">
+				</xp:dominoView>
+			</xe:this.data>
+			<xe:this.extraColumns>
+				<xe:viewExtraColumn style="text-align:right;"
+					columnName="dateWithTime">
+					<xe:this.converter>
+						<xp:convertDateTime type="time" pattern="h:mm a"
+							dateStyle="short">
+						</xp:convertDateTime>
+					</xe:this.converter>
+				</xe:viewExtraColumn>
+			</xe:this.extraColumns>
+			<xp:this.facets>
+				<xc:homeDocTypeIcon id="docTypeIcon1" xp:key="icon" />
+				<xp:div xp:key="detail" id="dvAbstract1"
+					styleClass="xspDetailPanel">
+					<xp:div id="dvAbstract2"
+						style="padding-bottom:3px;">
+						<xp:text id="cfAbstract" escape="true"
+							value="#{javascript:viewEntry.getColumnValue('Abstract')}">
+						</xp:text>
+					</xp:div>
+					<xp:link id="lkReply" text="Reply">
+						<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+						<xp:this.rendered><![CDATA[#{javascript:var docType = viewEntry.getColumnValue("DocType");
+if( docType instanceof java.util.List && ! docType.isEmpty() ){
+	// when multiple doc types, only use the first one.
+	docType = docType.get(0);
+} 
+if("Announcement" != docType && "Event" != docType && "Status" != docType){
+	return true;
+}
+return false;}]]></xp:this.rendered>
+						<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?parentId=" +
+	viewEntry.getUniversalID() +
+		"&action=newDocument"}]]></xp:this.value>
+					</xp:link>
+				</xp:div>
+				<xp:panel xp:key="summary" id="summaryPanel">
+					<xe:switchFacet id="switchFacet1"
+						defaultFacet="unknown">
+						<xe:this.selectedFacet><![CDATA[#{javascript:""+viewEntry.getColumnValue("DocType")}]]></xe:this.selectedFacet>
+						<xp:this.facets>
+							<xp:panel xp:key="Discussion">
+								<h4 style="margin:0px">
+									<xp:link id="authorLink">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="wrote discussion" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="discussionLink">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Meeting">
+								<h4 style="margin:0px">
+									<xp:link id="link1">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="scheduled meeting" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link2">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Status">
+								<h4 style="margin:0px">
+									<xp:link id="link6">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="reported status" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link16">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/statusReports.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Event">
+								<h4 style="margin:0px">
+									<xp:link id="link17">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="planned event" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link18">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/events.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Announcement">
+								<h4 style="margin:0px">
+									<xp:link id="link19">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="made announcement" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link20">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/announcements.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Comment">
+								<h4 style="margin:0px">
+									<xp:link id="link3">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="added comment" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link4">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Reference">
+								<h4 style="margin:0px">
+									<xp:link id="link5">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="published reference" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link7">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Action Item">
+								<h4 style="margin:0px">
+									<xp:link id="link8">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="assigned action item" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link9">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="Chat Entry">
+								<h4 style="margin:0px">
+									<xp:link id="link10">
+										<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+									</xp:link>
+									<xp:label value="chatted about" style="padding:0px 4px">
+									</xp:label>
+									<xp:link id="link11">
+										<xp:this.text><![CDATA[#{javascript:viewEntry.getColumnValue("Subject") ? viewEntry.getColumnValue("Subject") : strings.getString('home.subject.untitled');}]]></xp:this.text>
+										<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+									</xp:link>
+								</h4>
+							</xp:panel>
+							<xp:panel xp:key="unknown">
+								<xe:switchFacet id="switchFacet2"
+									defaultFacet="other">
+									<xe:this.selectedFacet><![CDATA[#{javascript://
+try{
+	var formName = viewEntry.getDocument().getItemValueString('form');
+	if( 'Response' == formName || formName == 'ResponseToResponse' ){
+		return 'comment';
+	}else{
+		requestScope.formName = viewEntry.getColumnValue("DocType") + ":";
+		return 'other';
+	}
+}
+catch(e){
+	return 'other';
+}}]]></xe:this.selectedFacet>
+									<xp:this.facets>
+										<xp:panel xp:key="comment">
+											<h4 style="margin:0px">
+												<xp:link id="link12">
+													<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+													<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+												</xp:link>
+												<xp:label value="added comment" style="padding:0px 4px">
+												</xp:label>
+												<xp:link id="link13">
+													<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("Subject"))}]]></xp:this.text>
+													<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+												</xp:link>
+											</h4>
+										</xp:panel>
+										<xp:panel xp:key="other">
+											<h4 style="margin:0px">
+												<xp:label value="#{javascript:requestScope.formName}"
+													style="padding:0px 4px">
+												</xp:label>
+												<xp:link id="link14">
+													<xp:this.text><![CDATA[#{javascript:peopleBean.getPerson(@Name("[Abbreviate]", viewEntry.getColumnValue("From"))).displayName}]]></xp:this.text>
+													<xp:this.value><![CDATA[#{javascript:"/members.xsp?profile=" + @Name("[Abbreviate]", viewEntry.getColumnValue("From"))}]]></xp:this.value>
+												</xp:link>
+												<xp:label value="created" style="padding:0px 4px">
+												</xp:label>
+												<xp:link id="link15">
+													<xp:this.text><![CDATA[#{javascript:@NormalizeSubject(viewEntry.getColumnValue("Subject"))}]]></xp:this.text>
+													<xp:this.value><![CDATA[#{javascript:"/topicThread.xsp?action=openDocument&documentId=" + viewEntry.getUniversalID()}]]></xp:this.value>
+												</xp:link>
+											</h4>
+										</xp:panel>
+									</xp:this.facets>
+								</xe:switchFacet>
+							</xp:panel>
+						</xp:this.facets>
+					</xe:switchFacet>
+				</xp:panel>
+				<xp:panel xp:key="categoryRow" id="categoryRow">
+					<xp:span style="font-weight:bold">
+						<xp:text disableTheme="true">
+							<xp:this.value><![CDATA[#{javascript:var date = @Date(viewEntry.getColumnValue("ActivityDate"));
+if(@Today().equals(date)){
+	return strings.getString("today") + "  ";
+}
+if(@Yesterday().equals(date)){
+	return strings.getString("yesterday") + "  ";
+}
+return "";}]]></xp:this.value>
+						</xp:text>
+						<xp:text
+							value="#{javascript:viewEntry.getColumnValue('ActivityDate')}"
+							disableTheme="true" id="dateCategoryField" escape="true">
+							<xp:this.converter>
+								<xp:convertDateTime
+									pattern="MMM d, yyyy" locale="en">
+								</xp:convertDateTime>
+							</xp:this.converter>
+						</xp:text>
+					</xp:span>
+				</xp:panel>
+				<xe:pagerAddRows xp:key="pagerBottomLeft"
+					id="pagerAddRows3" rowCount="10" text="Show more..." state="false"
+					for="recentActivityDataView">
+				</xe:pagerAddRows>
+			</xp:this.facets>
+		</xe:dataView>
+
+	</xc:layout>
+
+</xp:view>

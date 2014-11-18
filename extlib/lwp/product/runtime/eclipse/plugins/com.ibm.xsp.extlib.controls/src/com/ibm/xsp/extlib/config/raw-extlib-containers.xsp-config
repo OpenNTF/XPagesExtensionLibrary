@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010, 2012                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>containers</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+
+	<component>
+		<description>A container that displays a widget (in the larger sense)</description>
+		<display-name>Widget Container</display-name>
+		<component-type>com.ibm.xsp.extlib.containers.WidgetContainer</component-type>
+		<component-class>com.ibm.xsp.extlib.component.containers.UIWidgetContainer</component-class>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+
+        <property>
+            <description>Indicates where this control is located in the tab order of the page. Value must be an integer between 0 and 32,767. If the value is left blank, the tab order will inherit the default order of the browser.</description>
+            <display-name>Tab Index</display-name>
+            <property-name>tabindex</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+              <since>9.0.0.v00_03</since>
+              <!-- Note, even though the control contains support for runtime bindings,
+                don't want to allow them because of the effort of implementing it in swt. -->
+              <allow-run-time-binding>false</allow-run-time-binding>
+              <designer-extension>
+                  <category>accessibility</category>
+                  <editor>com.ibm.std.Integer</editor>
+              </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Transfers focus to the control when pressed</description>
+            <display-name>Access Key</display-name>
+            <property-name>accesskey</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+              <since>9.0.0.v00_03</since>
+              <localizable>true</localizable>
+              <!-- Note, even though the control contains support for runtime bindings,
+                don't want to allow them because of the effort of implementing it in swt. -->
+              <allow-run-time-binding>false</allow-run-time-binding>
+              <designer-extension>
+                  <category>accessibility</category>
+                  <editor>com.ibm.workplace.designer.property.editors.accessKeyValidator</editor>
+              </designer-extension>
+            </property-extension>
+        </property>
+  		<property>
+			<description>Defines the container type as specified by the OneUI specification</description>
+			<display-name>Container Type</display-name>
+			<property-name>type</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+        		<default-value>standard</default-value>
+                <designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+                    	standard
+                    	sidebar
+                    	plain
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Specifies if the title bar should be displayed. Defaults to true, meaning display the title bar.</description>
+			<display-name>Title Bar</display-name>
+			<property-name>titleBar</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+	        	<default-value>true</default-value>
+				<designer-extension>
+                    <category>format</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The text that appears in the title bar at the top of the widget. When absent, no text is displayed there.</description>
+			<display-name>Title Bar Text</display-name>
+			<property-name>titleBarText</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines the title bar href</description>
+			<display-name>Title Bar HREF</display-name>
+			<property-name>titleBarHref</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+                    <!-- Note, this property is not localizable, as it is a HREF,
+                    not translatable text displayed to the end user.-->
+                    <!-- TODO description not useful, and description should mention that titleBarText should
+                    be present when titleBarHref is present, else the link will be zero-width and hard to click. -->
+                    <tags>
+                        not-localizable
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Defines if it can be collapsed and expanded, or whether it is always expanded, with no ability to collapse. The default behavior is always expanded.</description>
+			<display-name>Collapsible</display-name>
+			<property-name>collapsible</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<since>8.5.32003</since>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+        <property>
+            <description>Defines the initial state of the section. This applies when the section is Collapsible, and indicates the initial state before the user toggles the section opened or closed.</description>
+            <display-name>Initially Closed</display-name>
+            <property-name>initClosed</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <since>8.5.32003</since>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+  		<property>
+			<description>Defines if the drop-down menu in the title bar may be displayed. This defaults to true, so the drop-down will be displayed if there are any drop-down nodes present.</description>
+			<display-name>Drop-Down Menu Rendered</display-name>
+			<property-name>dropDownRendered</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+	        	<default-value>true</default-value>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+      	<property>
+        	<description>Actions displayed by a drop-down button in the title bar, which displays a menu containing these actions.</description>
+        	<display-name>Drop-Down Menu Nodes</display-name>
+        	<property-name>dropDownNodes</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addDropDownNode</property-add-method>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- Note this has a list of action nodes, but no event property 
+                     so for people to use the eventHandler to do something when the node is clicked,
+                     they need to set the submitValue property to some unique value, 
+                     and check for that value in the eventHandler onclick by calling 
+                     the SSJS method: context.getSubmittedValue():String -->
+                </designer-extension>
+        	</property-extension>
+      	</property>
+  		<property>
+			<description>Defines if the widget can scroll. Defaults to false.</description>
+			<display-name>Scrollable</display-name>
+			<property-name>scrollable</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- TODO description not useful, is it vertical scroll only or v & horizontal?
+                    and if horizontal is allowed, how come there aren't more scroll events?-->
+                    <!-- TODO should clarify that this does not display a scroll bar,
+                    but 2 up and down arrows at the top and bottom of the content area.
+                    How do those arrows work?-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+        <property>
+            <description>Disable Scroll Up Event. This event is triggered by the arrow located at the top of the widget.</description>
+            <display-name>Disable Scroll Up Event.</display-name>
+            <property-name>disableScrollUp</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <since>8.5.32003</since>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Disable the scroll down event. This event is triggered by the arrow located at the bottom of the widget.</description>
+            <display-name>Disable Scroll Down Event</display-name>
+            <property-name>disableScrollDown</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <since>8.5.32003</since>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+		<property>
+			<description>Event triggered when the user clicks the scrolls upwards</description>
+			<display-name>On Scroll Up</display-name>
+			<property-name>onScrollUp</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+                    <!-- Note, this container-event subcategory is a placeholder
+                    category that will be replaced at runtime with the name of the control.-->
+                    <subcategory>container-event</subcategory>
+                    <!-- TODO should verify these events work when using an eventHandler
+                    or when adding script inline in the All Properties view. -->
+                    <tags>
+                        todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Event triggered when the user scrolls downwards</description>
+			<display-name>On Scroll Down</display-name>
+			<property-name>onScrollDown</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+                    <!-- Note, this container-event subcategory is a placeholder
+                    category that will be replaced at runtime with the name of the control.-->
+                    <subcategory>container-event</subcategory>
+                    <!-- TODO description for these events should mention that there is no
+                    default action for the scroll up and scroll down buttons, so application
+                    designers who are using the scrollable functionality will need
+                    to implement those actions, else the buttons do nothing. -->
+                    <!-- TODO is it possible to build some default actions 
+                    for the scroll up and scroll down buttons? -->
+                    <tags>
+                        todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+		<component-extension>
+			<component-family>javax.faces.Panel</component-family>
+			<renderer-type>com.ibm.xsp.extlib.containers.WidgetContainer</renderer-type>
+			<tag-name>widgetContainer</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+                <!-- TODO control description is not helpful.-->
+                <!-- TODO what's up with the collapsible property, commented out in the xsp-config
+                but present in the control class. -->
+                <!-- TODO why is the design visualization commented out? -->
+                <!-- TODO there's no mention of the header or footer facets,
+                note that the header facet is in common use, as it appears
+                below the title but above the area between the scrollUp and scrollDown buttons  -->
+                <!-- TODO the control doesn't seem to have a default rendering for non-OneUI environments-->
+                <tags>
+                    todo
+                </tags>
+<!--         		
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;table style="border-width: 1"&gt;&#xd;
+		&lt;tr style="background-color: rgb(243, 243, 243);"&gt;&#xd;
+			&lt;td&gt;&#xd;
+				&lt;xp:label value="Widget Title" id="label1"&gt;&lt;/xp:label&gt;&#xd;
+			&lt;/td&gt;&#xd;
+		&lt;/tr&gt;&#xd;
+		&lt;tr&gt;&#xd;
+			&lt;td&gt;&#xd;
+				&lt;xp:callback&gt;&lt;/xp:callback&gt;&#xd;
+			&lt;/td&gt;&#xd;
+		&lt;/tr&gt;&#xd;
+	&lt;/table&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+ -->
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.listStyle</group-type>
+		<property>
+            <!-- key: property.itemStyle.group.listStyle -->
+			<description>HTML style attribute for the list items</description>
+			<display-name>Item Style</display-name>
+			<property-name>itemStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                    <!-- TODO description, does this also apply to the 1st and last items? -->
+                    <!-- TODO use key-prefix for the group, instead of key:s for individual props.-->
+                    <tags>
+                        todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- key: property.itemStyleClass.group.listStyle -->
+			<description>HTML class attribute for the list items</description>
+			<display-name>Item Style Class</display-name>
+			<property-name>itemStyleClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                    <!-- TODO description, does this apply to the 1st and last items? -->
+                    <tags>
+                        todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- key: property.firstItemStyle.group.listStyle -->
+			<description>HTML style attribute added to the first item</description>
+			<display-name>First Item Style</display-name>
+			<property-name>firstItemStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- key: property.firstItemStyleClass.group.listStyle -->
+			<description>HTML class attribute added to the first item</description>
+			<display-name>First Item Style Class</display-name>
+			<property-name>firstItemStyleClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- key: property.lastItemStyle.group.listStyle -->
+			<description>HTML style attribute added to the last item</description>
+			<display-name>Last Item Style</display-name>
+			<property-name>lastItemStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+            <!-- key: property.lastItemStyleClass.group.listStyle -->
+			<description>HTML class attribute added to the last item</description>
+			<display-name>Last Item Style Class</display-name>
+			<property-name>lastItemStyleClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>styling</category>
+					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+        <group-extension>
+            <designer-extension>
+                <tags>
+                    group-in-control
+                </tags>
+            </designer-extension>
+        </group-extension>
+	</group>
+
+	<component>
+		<description>A control that displays its children within a basic HTML list</description>
+		<display-name>List Container</display-name>
+		<component-type>com.ibm.xsp.extlib.containers.List</component-type>
+		<component-class>com.ibm.xsp.extlib.component.containers.UIList</component-class>
+		
+    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    	<group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
+		
+		<component-extension>
+			<component-family>javax.faces.Panel</component-family>
+			<renderer-type>com.ibm.xsp.extlib.containers.List</renderer-type>
+			<tag-name>list</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+                <!-- TODO should there be an option to use OL instead of UL? -->
+                <tags>
+                    todo
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+	<component>
+		<description>A control that displays its children within an inline list. This displays one row with separators between the items.</description>
+		<display-name>Inline List Container</display-name>
+		<component-type>com.ibm.xsp.extlib.containers.ListInline</component-type>
+		<component-class>com.ibm.xsp.extlib.component.containers.UIListInline</component-class>
+
+		<component-extension>
+			<base-component-type>com.ibm.xsp.extlib.containers.List</base-component-type>
+			<renderer-type>com.ibm.xsp.extlib.containers.OneUIInlineList</renderer-type>
+			<tag-name>listInline</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>Extension Library</category>
+                <!-- TODO should there be an option to use OL instead of UL? -->
+                <tags>
+                    todo
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+</faces-config>

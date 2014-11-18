@@ -1,0 +1,128 @@
+/* general styles */
+.s-basicpanel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	x-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.s-stack {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	x-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.s-toppanel {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	overflow: hidden;
+	x-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+
+
+.s-datepick {
+	font-size: medium;
+	line-height: normal;
+}
+.s-datepick td {
+ vertical-align: middle;
+}
+.s-panel-border {
+	border: solid rgb(127,157,185) 1px;
+}
+.s-datepick-cell, td.s-datepick-cell {
+	font-family: lucida grande,helvetica,arial,sans-serif;
+	font-size: 70%;
+	color:black;
+	text-align:right;
+	padding-right:2px;
+	border: 1px solid white;
+}
+.s-datepick-cell-normal, td.s-datepick-cell-normal {
+	Xpadding:1px;
+}
+.s-datepick-cell-select, td.s-datepick-cell-select {
+	border: solid rgb(254,131,50) 1px;
+	background-color: rgb(250,208,106);
+	font-weight: bold;
+	padding:0px;
+}
+.s-datepick-cell-today, td.s-datepick-cell-today {
+	font-weight: bold;
+}
+.s-datepick-cell-focus, td.s-datepick-cell-focus {
+	border: solid rgb(65,160,254) 1px;
+}
+.s-datepick-cell-hover, td.s-datepick-cell-hover {
+	border: solid rgb(65,160,254) 1px;
+}
+.s-cell-center, td.s-cell-center{
+	Xtext-align: center;
+	Xvertical-align: middle;
+}
+.s-label-light {
+	font-family: lucida grande,helvetica,arial,sans-serif;
+	font-size: 70%;
+	font-weight: normal;
+	color: rgb(90,90,115);
+}
+.s-popup {
+	background-color: rgb(228,228,241);
+	border: solid gray 1px;
+	position: absolute;
+	padding: 4px;
+	overflow-x: visible;
+	overflow-y: auto;
+}
+.s-handcursor {
+	cursor: pointer;
+}
+.s-datepick-nav-button, td.s-datepick-nav-button {
+	outline-width:0px;
+	border:solid 1px white;
+	vertical-align: middle;
+}
+.s-datepick-nav-button-hilighted, td.s-datepick-nav-button-hilighted {
+	border:solid 1px black;
+}
+.s-datepick-nav-button-focused, td.s-datepick-nav-button-focused {
+	border:solid 1px black;
+}
+.s-datepick-nav-button-focused:focus {
+	outline-width: 0px;
+}
+
+/* High-Contrast Mode */
+.s-datepick-arrowText{
+	display: none;
+}
+.dijit_a11y .s-datepick-arrowText{
+	display: inline;
+	position:absolute;
+	font-size: 8px;
+}
+.dijit_a11y .s-datepick-nav-button{
+	background-color: #FFFFFF;
+}
+.dijit_a11y .s-label-light{
+	background-color: #FFFFFF;
+}
+.dijit_a11y .s-datepick-cell-focus, .dijit_a11y .s-datepick-cell-hover {
+	font-weight: bold;
+}
+.dijit_a11y .s-datepick-nav-button {
+	border: 0px;
+	margin: 1px;
+}
+.dijit_a11y .s-datepick-nav-button-focused {
+	border: 1px solid;
+	margin: 0px;
+}

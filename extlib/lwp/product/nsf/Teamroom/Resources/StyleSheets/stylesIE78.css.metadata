@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="176" sequence="10" unid="B254E55988F89A938025783F003F5CE1">
+<created><datetime>20110222T113205,45+00</datetime></created>
+<modified><datetime>20120207T095544,77+00</datetime></modified>
+<revised><datetime dst="true">20111026T122251,20+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,77+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,77+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst="true">20110830T205050,83-04</datetime><datetime dst="true">20111006T160527,22+01</datetime><datetime dst="true">20111014T083947,07+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>stylesIE78.css</text></item>
+<item name="$MimeType"><text>text/css</text></item>
+<item name="$Flags"><text>34C=Q</text></item>
+<item name="$MimeCharSet"><text>UTF-8</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+<item name="$FileNames" sign="true"><text>stylesIE78.css</text></item></note>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='sharedfield' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='172' unid='EC29692372A5395205256C70006BBF18' sequence='17'>
+<created><datetime>20021113T143652,72-05</datetime></created>
+<modified><datetime>20120305T082314,08+00</datetime></modified>
+<revised><datetime>20120305T082314,07+00</datetime></revised>
+<lastaccessed><datetime>20120305T082314,08+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100332,12+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE'><text>$TemplateBuild</text></item>
+<item name='$Fields'><text>$TemplateBuild</text></item>
+<item name='$Flags'><text/></item>
+<item name='$INFO' sign='true'><text>$TemplateBuild</text></item>
+<item name='$BODY' summary='true' sign='true'>
+<rawitemdata type='1'>
+gQKC/1IAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAgwQBAIX/CAAAAAAA3QYAAIr/iv8yAIoAAAUAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAJFRlbXBsYXRlQnVpbGTeBgAAiv+F/wgAAAAAAA==
+</rawitemdata></item>
+<item name='$TemplateBuild' sign='true'><text>R8</text></item>
+<item name='$TemplateBuildName' sign='true'><text>Discussion - Notes &amp; Web (8.5.3)</text></item>
+<item name='$TemplateBuildDate' sign='true'><datetime dst='true'>20110830T205918,00-04</datetime></item>
+<item name='$TemplateBuildTool' sign='true'><text>CICO</text></item></note>
+

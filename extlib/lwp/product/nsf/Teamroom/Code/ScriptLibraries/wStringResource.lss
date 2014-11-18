@@ -1,0 +1,149 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Function GetString ( StringType As Integer) As String
+
+'++LotusScript Development Environment:2:5:(Declarations):0:2
+
+'++LotusScript Development Environment:2:1:GetString:1:8
+Function GetString ( StringType As Integer) As String
+     '
+	Select Case StringType
+	Case 1  ' WebAddtopic, WebExpire
+		GetString = "Go Back to Previous Document"
+	Case 2  ' WebAddtopic,  WebExpire, WebRemoveThread
+		GetString = "Return to the TeamRoom"
+	Case 3 'SendReminders
+		getString = "The due date on this item in the TeamRoom has passed.  Since the document is "&_
+		"assigned to you, please follow the doclink below and mark the document Complete as soon as possible"
+	Case 4 'SendReminders
+		getString = "Link to overdue item: "
+	Case 5 'SendReminders
+		getString = "This item in the TeamRoom has been directed to your attention.  Please follow the link and review the document."
+	Case 6  ' WebAddtopic
+		GetString = "The type of document you have selected cannot be added to a newsletter profile."
+	Case 7  ' WebAddtopic
+		GetString = "This topic is already in your Newsletter Profile."
+	Case 8  ' WebAddtopic
+		GetString = "The current topic has been added to your Newsletter Profile. You will be notified by mail when new responses appear in this topic."
+	Case 9  ' WebArchiveSaveSettings
+		GetString = "You have successfully updated the Archive settings for this database. "
+	Case 10 'WebArchiveSaveSettings
+		getString = "Done"	
+		
+	Case 11   'SendNewsletter agent
+		GetString = "Response"
+		
+	Case 12  ' WebExpire
+		GetString = " cannot be marked for expiration."   ' leave the leading space..
+	Case 13  ' WebExpire
+		GetString = "The document's expiration date has been removed." 
+	Case 14  ' WebExpire
+		GetString = "The current document has been marked for expiration."
+	Case 15  ' WebRemoveThread
+		GetString = "Back to Newsletter Profile"
+	Case 16  ' WebRemoveThread
+		GetString = "Profile document could not be found."
+	Case 17  ' WebRemoveThread
+		GetString = "The requested thread(s) have been removed from your Newsletter Profile."   
+	Case 18 'add topic to Newsletter profile
+		getString = "Please choose only one document."
+	Case 19 'add topic to Newsletter profile
+		getString = "Add Topic"
+	Case 20 'add topic to Newsletter profile
+		getString = 	"This action cannot be run on the Newsletter Profile."
+		
+		
+	Case 22   'An error that we are not specifically handling
+		GetString = Err & " - " & Error
+	Case 23 'add topic to Newsletter profile
+		getString = "Alert"
+	Case 24  'Error message in WebRemoveThread agent for empty selection
+		GetString = "No threads were selected to remove from the Newsletter Profile."
+	Case 25 'Used in WebAddTopic agent
+		GetString = "Untitled - "
+	Case 26  'Used in WebAddTopic agent
+		GetString =  "Untitled topic "
+	Case 27  'used in DelDocsViaMission agent
+		GetString = "You are not authorized to delete documents in this database."
+	Case 28   'used for Web navigation
+		GetString =  "By Date"
+	Case 29  'used for Web navigation
+		getString  = "Mission/Team Members"
+	Case 30  'used for Web navigation
+		getString = "Go Back"
+	Case 31  'used in DelDocsViaMission agent
+		getstring = "The selected item(s) have been deleted."
+	Case 32  'used in DelDocsViaMission agent
+		getstring =  "No item(s) were deleted."
+		
+	'used in NotesFixCategories agent
+	Case 33
+		getstring =  "Please choose a category(s) to change"
+	Case 34
+		getstring = "Please choose a replacement category"
+	Case 35
+		getstring ="The category was mapped successfully.  You may select another category to map, or click Done."
+	Case 36
+		getstring = "The categories were mapped successfully.  You may select another category to map, or click Done."		
+	Case 37
+		getstring = "Field requires a value"		
+	Case 38
+		getstring = "Map Categories"
+		
+		
+	'used in WebFixCategories agent
+	Case 40
+		getstring	="Map Another Category"
+	Case 41
+		getstring ="The category was mapped successfully"
+	Case 42
+		getstring = "The categories were mapped successfully"
+		
+	'used in Fix Pasted Documents agent		
+	Case 43
+		getstring = "Number of documents processed: "
+	Case 44
+		getstring =  "Fix pasted documents"
+	Case 45		
+		getstring = "Response to: "
+		
+	Case 46  'used in Send Newsletters agent
+		getstring =  "Documents you requested from the TeamRoom: "
+		
+		
+	Case 48 'sendReminders
+		getString = "Send Reminders"
+		
+	Case 49 'add selected topic to newsletter profile
+		getString = "You must first select a document.  Note:  highlight bar cannot be on a category."
+		
+	Case 50
+		getString = "Index of All Documents"
+	Case 51 
+		getString = "TeamRoom Overview"
+	Case 52
+		getString = "By Date"
+	Case 53 'sendReminders
+		getString = "Done sending reminders."
+	Case 54 'send reminders
+		getString = "TeamRoom name:  "
+		
+	Case 55 'Unfile action; Mark Expired agent
+		getString = "You must first select a document.  Note:  highlight bar cannot be on a category."
+		
+	Case 56 'web unfile action
+		getString= "The document is once again Active."
+		
+	Case 57 'send reminders
+		getstring = "Subject:  "
+		
+	Case 58 'send reminders
+		getString = " [Note:  A URL link to this document was not supplied because the web server address is not specified in TeamRoom setup.]"
+	Case 59 'send newsletter
+		getString = " [Note:  URL links to these documents were not supplied because the web server address is not specified in TeamRoom setup.]"
+	End Select
+	
+End Function

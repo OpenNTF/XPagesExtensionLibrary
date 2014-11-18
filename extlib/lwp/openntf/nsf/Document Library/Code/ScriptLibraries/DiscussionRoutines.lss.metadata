@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="3aa" sequence="14" unid="1E2C26171E8AF3EB802579670054D01F">
+<created><datetime>20111215T152623,03+00</datetime></created>
+<modified><datetime>20120109T151707,61+00</datetime></modified>
+<revised><datetime>20120109T151707,60+00</datetime></revised>
+<lastaccessed><datetime>20120109T151707,61+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152623,04+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name="$TITLE" sign="true"><text>DiscussionRoutines</text></item>
+<item name="$Flags"><text>s34Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item>
+<item name="$POID"><datetime>20110209T084608,86-05</datetime></item>
+
+</note>

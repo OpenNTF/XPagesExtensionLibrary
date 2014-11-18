@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+    xmlns:xc="http://www.ibm.com/xsp/custom"
+    xmlns:xe="http://www.ibm.com/xsp/coreex" dojoParseOnLoad="true">
+    <xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/DWA/CalendarViewREST">
+        <xp:this.facets>
+            <xp:panel xp:key="LeftColumn" id="panel4">
+                <xc:LeftDWA id="cc4ccLeftDWA" ></xc:LeftDWA>
+            </xp:panel>
+        </xp:this.facets>
+        <xp:panel id="mainPanel">
+            Content of the DWA CalendarView
+            <xp:br></xp:br>
+            <xp:br></xp:br>
+            <xp:div id="infoBox">
+                Note, this is nowhere near ready (e.g. displays all user
+                meetings, not just current user)
+                <xp:br></xp:br>
+                Scroll down to the end of the page to create meetings.
+                <xp:br></xp:br>
+            </xp:div>
+            <xp:div id="infoBox1">
+                &#160;&#160;
+            </xp:div>
+            <xp:div id="infoBox2"><xp:div id="infoBox9">
+                    <xp:table role="presentation" border="0">
+                        <xp:tr>
+                            <xp:td>Username  </xp:td>
+                            <xp:td>
+                                <xp:text escape="true"
+                                    id="computedField1"
+                                    value="#{javascript:session.createName(@UserName()).getCommon()}">
+                                </xp:text>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td>
+                                <xp:label value="Mail db to use as calendar source" for="inputText1"></xp:label>
+                            </xp:td>
+                            <xp:td>
+
+                                <xp:inputText id="inputText1"
+                                    style="width:200px">
+                                    <xp:this.defaultValue><![CDATA[#{javascript:sessionScope.server = session.getCurrentDatabase().getServer();
+sessionScope.maildb = "server!![path]/mailfile.nsf"
+if (sessionScope.server != null && sessionScope.server != "") {
+    if (sessionScope.server.startsWith("CN=")) {
+        sessionScope.server = sessionScope.server.substr(3);
+    }
+    var suffix = sessionScope.server.indexOf("/O=");
+    if (suffix != -1) {
+        sessionScope.server = sessionScope.server.substr(0, suffix);
+    }
+    var user = session.createName(@UserName()).getCommon();
+    if (user != null && user != "") {
+        user = user.trim();
+        var gap = user.indexOf(" ");
+        var mailfile = "";
+        if (gap != -1) {
+            var fname = user.substr(0, gap);
+            var lname = user.substr(gap).trim();
+            mailfile = (fname.charAt(0) + lname.substr(0, 7) + ".nsf").toLowerCase(); 
+        }
+        else {
+            mailfile = (user.substr(0,8) + ".nsf").toLowerCase();
+        }
+        sessionScope.mailpath = "mail/" + mailfile;
+        // suggest this name as a guess, otherwise return generic form 
+        sessionScope.maildb = sessionScope.server + "!!" + sessionScope.mailpath;
+    }
+} 
+return sessionScope.maildb;}]]></xp:this.defaultValue>
+                                </xp:inputText>
+                                <xp:button value="GET"
+                                    id="button3">
+                                    <xp:eventHandler event="onclick"
+                                        submit="true" refreshMode="complete" immediate="false"
+                                        save="true" id="eventHandler2">
+                                        <xp:this.action><![CDATA[#{javascript:sessionScope.databaseName = null;
+var maildb = getComponent("inputText1").getValue();
+if (maildb != null) {
+    sessionScope.databaseName  = sessionScope.maildb = maildb;
+    context.reloadPage();
+}}]]></xp:this.action>
+                                    </xp:eventHandler>
+                                </xp:button>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td><xp:label value="Mail db view"></xp:label></xp:td>
+                            <xp:td>
+                                <xp:comboBox id="comboBox1">
+                                    
+                                <xp:this.value><![CDATA[#{javascript:// may be able to get a list of calendar views
+return "($calendar)";}]]></xp:this.value></xp:comboBox>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td>Log into mail db  </xp:td>
+                            <xp:td>
+                                <xp:link escape="true"
+                                    text="External link to iNotes" id="link2">
+
+
+                                    <xp:this.value><![CDATA[#{javascript:if (sessionScope.maildb != null && sessionScope.maildb != "") {
+    var mailURL = sessionScope.maildb.replace("!!", "/");
+    return "http://" + mailURL;
+}
+                    }]]></xp:this.value>
+                                </xp:link>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>
+                </xp:div>
+            </xp:div>
+
+            <xp:br></xp:br>
+
+            <xp:label value="A Radio Button Group to control the layout:"></xp:label>
+            <xp:radioGroup id="radioGroup1"
+                value="#{viewScope.calendarType}" defaultValue="M" legend="Views">
+                <xp:selectItem itemLabel="One Day" itemValue="D"></xp:selectItem>
+                <xp:selectItem itemLabel="Two Days" itemValue="T"></xp:selectItem>
+                <xp:selectItem itemLabel="Five Days" itemValue="F"></xp:selectItem>
+                <xp:selectItem itemLabel="One Week" itemValue="W"></xp:selectItem>
+                <xp:selectItem itemLabel="Two Weeks" itemValue="2"></xp:selectItem>
+                <xp:selectItem itemLabel="Month" itemValue="M"></xp:selectItem>
+                <xp:selectItem itemLabel="Year" itemValue="Y"></xp:selectItem>
+                <xp:eventHandler event="onchange" submit="true"
+                    refreshMode="partial" refreshId="mainPanel">
+                </xp:eventHandler>
+            </xp:radioGroup>
+            <!--            <xp:panel id="viewtypesel">-->
+            <!--                <xp:radio text="One Day" id="radio1" selectedValue="D"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('D', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--                <xp:br></xp:br>-->
+            <!--                <xp:radio text="Two Day" id="radio3" selectedValue="T"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('T', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--                <xp:br></xp:br>-->
+            <!--                <xp:radio text="One Work Week" id="radio2" selectedValue="F"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('F', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--                <xp:br></xp:br>-->
+            <!--                <xp:radio text="One Week" id="radio5" selectedValue="W"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('W', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--                <xp:br></xp:br>-->
+            <!--                <xp:radio text="Two Weeks" id="radio6" selectedValue="2"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('2', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--        -->
+            <!--        -->
+            <!--        <xp:br></xp:br>-->
+            <!---->
+            <!--                <xp:radio text="One Month" id="radio4" selectedValue="M"-->
+            <!--                    groupName="viewtypesel" defaultSelected="true">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('M', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--                <xp:br></xp:br>-->
+            <!--                <xp:radio text="One Year" id="radio7" selectedValue="Y"-->
+            <!--                    groupName="viewtypesel">-->
+            <!--                    <xp:this.onclick><![CDATA[var oWidget = dijit.byId('calendarView1');-->
+            <!--oWidget.drawCalendar('Y', oWidget.summarize);-->
+            <!--oWidget.onActivated();]]></xp:this.onclick>-->
+            <!--                </xp:radio>-->
+            <!--            </xp:panel>-->
+
+            The calendar view control (displaying&#160;
+            <xp:text escape="true" id="computedField2">
+                <xp:this.value><![CDATA[#{javascript:
+var calendarView1 = getComponent("calendarView1");
+if (calendarView1 != null) {
+    return calendarView1.getDate();
+}
+}]]></xp:this.value>
+            </xp:text>
+            ) :
+            <xp:br></xp:br>
+            <xp:panel>
+                <!-- Original Custom calendar Store PoC Using AjaxBlock -->
+                <!--                <xp:this.data>-->
+                <!--                    <xp:dominoView var="meetingsView"-->
+                <!--                        viewName="AllMeetings">-->
+                <!--                    </xp:dominoView>-->
+                <!--                </xp:this.data>-->
+                <!--                <xc:CalendarStoreCustom id="cc4ccCalendarStoreCustom" -->
+                <!--                    storeComponentId="notesCalendarStore1"-->
+                <!--                        dateFieldName="Date" -->
+                <!--                        descriptionFieldName="For"-->
+                <!--                        chairFieldName="Author">-->
+                <!--                </xc:CalendarStoreCustom>-->
+                <!-- Newer custom calendar store using REST service -->
+                <!-- TODO move custom control to proper <xe:> component -->
+                <xc:CalendarStoreCustomRestService id="cc4ccCalendarStoreCustomRestService"
+                    storeComponentId="notesCalendarStore1"
+                    
+                    
+                    databaseName="#{sessionScope.databaseName}"
+                    viewName="($Calendar)">
+                    
+                </xc:CalendarStoreCustomRestService>
+            </xp:panel>
+
+            <xe:calendarView id="calendarView1" jsId="cview1"
+                summarize="false"
+                type="#{javascript: null == viewScope.calendarType? 'M' : viewScope.calendarType }"
+                storeComponentId="notesCalendarStore1">
+                <xe:this.loaded><![CDATA[${javascript:if (sessionScope.databaseName == null) {
+    return false;
+} else {
+    return true;
+}}]]></xe:this.loaded>
+            </xe:calendarView>
+
+
+            <xp:br></xp:br>
+            <xp:panel>
+                <h2>Meeting crud</h2>
+                <xp:panel>
+                    <xp:this.data>
+                        <xp:dominoDocument var="document1"
+                            formName="Meeting">
+                        </xp:dominoDocument>
+                    </xp:this.data>
+                    <xp:table role="presentation">
+                        <xp:tr>
+                            <xp:td>
+                                <xp:label value="Date:" id="date_Label1"
+                                    for="date1">
+                                </xp:label>
+                            </xp:td>
+                            <xp:td>
+                                <xp:inputText value="#{document1.Date}"
+                                    id="date1" title="Date">
+                                    <xp:dateTimeHelper
+                                        id="dateTimeHelper1">
+                                    </xp:dateTimeHelper>
+                                    <xp:this.converter>
+                                        <xp:convertDateTime type="date"
+                                            dateStyle="short">
+                                        </xp:convertDateTime>
+                                    </xp:this.converter>
+                                </xp:inputText>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td>
+                                <xp:label value="Subject:"
+                                    id="subject_Label1" for="subject1">
+                                </xp:label>
+                            </xp:td>
+                            <xp:td>
+                                <xp:inputText
+                                    value="#{document1.Subject}" id="subject1">
+                                </xp:inputText>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td></xp:td>
+                            <xp:td>
+                                <xp:messages layout="table"
+                                    style="color:red" id="messages1">
+                                </xp:messages>
+                            </xp:td>
+                        </xp:tr>
+                        <xp:tr>
+                            <xp:td></xp:td>
+                            <xp:td>
+                                <xp:button value="Submit"
+                                    id="button1">
+                                    <xp:eventHandler event="onclick"
+                                        submit="true" refreshMode="complete" immediate="false"
+                                        save="true" id="eventHandler1">
+                                    </xp:eventHandler>
+                                </xp:button>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>
+                </xp:panel>
+                Existing:
+                <xp:viewPanel rows="30" id="viewPanel1"
+                    pageName="/DWA_CalendarView.xsp">
+                    <xp:this.facets>
+                        <xp:pager partialRefresh="true"
+                            layout="Previous Group Next" xp:key="headerPager" id="pager1">
+                        </xp:pager>
+                    </xp:this.facets>
+                    <xp:this.data>
+                        <xp:dominoView var="view1"
+                            viewName="AllMeetings">
+                        </xp:dominoView>
+                    </xp:this.data>
+                    <xp:viewColumn columnName="Date" id="viewColumn1"
+                        showCheckbox="true">
+                        <xp:viewColumnHeader value="Date"
+                            id="viewColumnHeader1">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="Icon" id="viewColumn2">
+                        <xp:viewColumnHeader value="Icon"
+                            id="viewColumnHeader2">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="SametimeInfo"
+                        id="viewColumn3">
+                        <xp:viewColumnHeader value="SametimeInfo"
+                            id="viewColumnHeader3">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                    <xp:viewColumn columnName="For" id="viewColumn4"
+                        displayAs="link">
+                        <xp:viewColumnHeader value="For"
+                            id="viewColumnHeader4">
+                        </xp:viewColumnHeader>
+                    </xp:viewColumn>
+                </xp:viewPanel>
+                <xp:button value="Delete Selected" id="button2">
+                    <xp:eventHandler event="onclick" submit="true"
+                        refreshMode="complete">
+                        <xp:this.action>
+                            <xp:deleteSelectedDocuments
+                                view="viewPanel1" message="Really?">
+                            </xp:deleteSelectedDocuments>
+                        </xp:this.action>
+                    </xp:eventHandler>
+                </xp:button>
+            </xp:panel>
+        </xp:panel>
+    </xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<theme>
+	<!-- 
+		Use this pattern to include resources (such as style sheets
+		and JavaScript files that are used by this theme.
+	<resource>
+		<content-type>text/css</content-type>
+		<href>mystylesheet.css</href>
+	</resource>
+	
+		Use this pattern to define property name/value pairs for controls
+	<control>
+		<name>[Control Name]</name>
+		<property>
+			<name>[property Name]</name>
+			<value>[property Value]</value>
+		</property>
+	</control>
+	-->
+	
+	<control>
+       <name>ViewRoot</name>
+       <property mode="concat">
+            <name>styleClass</name>
+            <value>blackberry</value>
+        </property>
+    </control>
+	
+	<control>
+		<name>Outline</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.MobileOutlineNavigator</value>
+		</property>
+	</control>
+	<control>
+		<name>FormLayout.FormTable</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.MobileFormTable</value>
+		</property>
+	</control>
+	<control>
+		<name>DataIterator.DataView</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.MobileView</value>
+		</property>
+	</control>
+	<control>
+		<name>InputField.DateTimePicker</name>
+		<property baseValue="com.ibm.xsp.DateTimeHelper">
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.InputDate</value>
+		</property>
+	</control>
+	<control>
+		<name>InputField.EditBox</name>
+		<property baseValue="com.ibm.xsp.TypeAheadInput">
+			<name>rendererType</name>
+			<value>com.ibm.xsp.extlib.mobile.TypeAheadInput</value>
+		</property>
+	</control>
+	
+	<resources> 
+		<metaData> 
+			<name>viewport</name> 
+			<content>width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no</content> 
+		</metaData> 
+		<metaData> 
+			<name>apple-mobile-web-app-capable</name> 
+			<content>yes</content> 
+		</metaData> 
+	</resources> 
+	
+	<!-- View DataTable - SPR#BGLN9F5FX7: Unread marks dont display correctly using default mobile theme -->
+	<control>
+		<name>DataTable.ViewPanel</name>
+		<property>
+			<name>viewStyleClass</name>
+			<value>xspDataTableViewPanel</value>
+		</property>
+		<property>
+			<name>dataTableStyleClass</name>
+			<value>xspDataTable</value>
+		</property>
+		<property>
+			<name>unreadMarksClass</name>
+			<value>xspDataTableRowUnread</value>
+		</property>
+		<property>
+			<name>readMarksClass</name>
+			<value>xspDataTableRowRead</value>
+		</property>
+	</control>
+</theme>

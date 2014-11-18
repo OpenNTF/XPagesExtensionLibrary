@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:text escape="true" id="fieldDueDateStatus"
+		value="#{document1.DueDateStatus}" rendered="false">
+	</xp:text>
+
+	<xp:text escape="true" id="fieldReviewStatus"
+		value="#{document1.ReviewStatus}" rendered="false">
+	</xp:text>
+
+	<xp:label id="labelStatus" value="Status: ">
+	</xp:label>
+
+	<xp:label id="fieldStatus">
+		<xp:this.value><![CDATA[#{javascript:
+		// TODO this is duplicated in topicPost and controlSectionStatus
+// Define the states 
+var szOpenText = strings.getString("doc.status.open");
+var szCompleteText = strings.getString("doc.status.complete");
+var szClosedCompletedText = strings.getString("doc.status.closed");
+
+// Define the output variables
+var szStatus;
+var szRevisionStatus;
+
+// Determine the current document type
+var iDocType = viewScope.get("controlDocType");
+
+// Calculate the current state
+if (getComponent("fieldDueDateStatus").getValue()=="0")
+{
+	szStatus = szOpenText;
+}
+else
+{
+	szStatus = szClosedCompletedText;
+}
+
+// Calculate the current revision state
+if (getComponent("fieldReviewStatus").getValue()=="1")
+{
+	szRevisionStatus = szCompleteText;
+}
+else
+{
+	szRevisionStatus = szOpenText;
+}
+
+// If it's a meeting return nothing
+if (iDocType==strings.defaultdoctype4)
+{
+	return "";
+}
+else
+{
+	// If it's a new document, return "Open"
+	if (@IsNewDoc())
+	{
+		return szOpenText;
+	}
+	else
+	{
+		// Action Item
+		if (iDocType==strings.defaultdoctype2)
+		{
+			return szStatus;
+		}
+		// Discussion and Reference
+		else
+		{
+			return szRevisionStatus;
+		}
+	}
+}
+
+}]]></xp:this.value>
+	</xp:label>
+
+</xp:view>

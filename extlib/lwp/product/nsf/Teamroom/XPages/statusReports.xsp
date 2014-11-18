@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.form.DateTextBox"></xp:dojoModule>
+		<xp:dojoModule name="dijit.form.TimeTextBox"></xp:dojoModule>
+	</xp:this.resources>
+   
+	<xp:eventHandler event="onClientLoad" submit="false">
+		<xp:this.script>
+			<![CDATA[if(!dojo.exists("ibm.xsp.widget.layout.xspClientRCP")){insertLinks();}]]>
+		</xp:this.script>
+	</xp:eventHandler>
+	
+	<xc:layout navigationPath="/statusReports">
+		<xe:dynamicContent id="dc1">
+			<xe:this.defaultFacet><![CDATA[#{javascript://
+				if( param.documentId ){
+					var doc = database.getDocumentByUNID(param.documentId);
+					if( doc ){
+						var formName = doc.getItemValueString('Form');
+						if( 'IndStat' == formName ){
+							return "individualReport";
+						}
+						if( 'Status' == formName || 'SubteamStatus' == formName ){
+							return "teamReport";
+						}
+					}
+				}
+				if( param.action == 'newDocument' ){
+					var formName = param.formName;
+					if( 'IndStat' == formName ){
+						return "individualReport";
+					}
+					if( 'Status' == formName || 'SubteamStatus' == formName ){
+						return "teamReport";
+					}
+				}
+				return null;
+			}]]></xe:this.defaultFacet>
+			<xe:this.facets>
+				<xc:statusIndividualReport id="report1"
+					xp:key="individualReport" />
+				<xc:statusTeamReport id="report2" xp:key="teamReport" />
+			</xe:this.facets>
+			<xp:text escape="true" id="titleField" tagName="h1">
+				<xp:this.value><![CDATA[#{javascript:
+					sessionScope.webFrom = "/statusReports.xsp";
+					sessionScope.webFromName = strings.getString('status.reports');
+					return strings.getString('status.reports');
+				}]]></xp:this.value>
+			</xp:text>
+			<xe:switchFacet defaultFacet="chooseFilterArea"
+				selectedFacet="#{javascript: if( sessionScope.statusReportsFilterEnabled ) 'filteredArea' }">
+				<xe:this.facets>
+					<xp:panel xp:key="chooseFilterArea">
+						<xe:listInline>
+							<xp:panel>
+								<xp:label value="Show: " />
+								<xe:djextLinkSelect
+									id="djextLinkSelect1"
+									value="#{sessionScope.statusReportsSelectedTab}"
+									defaultValue="tabAll" alt="select type of reports to show"
+									title="group of links to filter report types">
+									<xe:this.lastItemStyle><![CDATA[#{javascript://
+										// workaround for issue where there's extra whitespace
+										// at the end of the xe:djextLinkSelect, change the trailing
+										// side of the last item to not have any spacing.
+										var trailingSide = !context.isDirectionRTL()? 'right' : 'left'; 
+										'padding-'+trailingSide+':0'
+									}]]></xe:this.lastItemStyle>
+									<xe:this.dojoAttributes>
+										<xp:dojoAttribute
+											name="enabledLinkClass" value="xvwLinkSelectListItem"
+											loaded="true">
+										</xp:dojoAttribute>
+									</xe:this.dojoAttributes>
+									<xp:eventHandler event="onChange"
+										submit="true" refreshMode="complete">
+										<xp:this.action>
+											<xe:changeDynamicContentAction
+												for="dc2">
+											</xe:changeDynamicContentAction>
+										</xp:this.action>
+									</xp:eventHandler>
+									<xp:selectItem itemLabel="All"
+										itemValue="tabAll">
+									</xp:selectItem>
+									<xp:selectItem
+										itemLabel="All By Team" itemValue="tabAllByTeam">
+									</xp:selectItem>
+									<xp:selectItem
+										itemLabel="Team Reports" itemValue="tabTeamReports">
+									</xp:selectItem>
+									<xp:selectItem
+										itemLabel="Individual Reports"
+										itemValue="tabIndividualReports">
+									</xp:selectItem>
+								</xe:djextLinkSelect>
+							</xp:panel>
+							<xp:panel>
+								<xp:label value="Filter by: " for="comboBox1" />
+								<xp:comboBox id="comboBox1" style="margin-right:5px;"
+									value="#{sessionScope.statusReportsFilterType}">
+									<!-- 1-4 meaning tab1, column 4 (1-indexed) -->
+									<xp:selectItem itemLabel="" />
+									<xp:selectItem itemLabel="Author"
+										itemValue="a" />
+									<xp:selectItem
+										itemLabel="Team (All Reports)" itemValue="t" />
+									<xp:selectItem
+										itemLabel="Team (Team Reports)" itemValue="s" />
+									<xp:eventHandler event="onchange"
+										submit="true" refreshMode="complete" />
+								</xp:comboBox>
+
+								<xp:panel>
+									<xp:this.rendered><![CDATA[#{javascript: true && sessionScope.statusReportsFilterType }]]></xp:this.rendered>
+									<xp:comboBox id="comboBox2" style="margin-right:5px;"
+										value="#{sessionScope.statusReportsFilterColumnValue}">
+										<xp:selectItems>
+											<xp:this.value><![CDATA[#{javascript://
+												var selectedFilter = sessionScope.statusReportsFilterType;
+												if( 'a' == selectedFilter ){
+													var colNum = 1; // Author
+													return @DbColumn(@DbName(), "xvwStatusIndByAuthor", colNum);
+												}
+												else if( 't' == selectedFilter ){
+													var colNum = 1; // Team/Subteam
+													return @DbColumn(@DbName(), "xvwStatusAllByTeam", colNum);
+												}
+												else if( 's' == selectedFilter ){
+													var colNum = 1; // Team/Subteam
+													return @DbColumn(@DbName(), "StatusLookup", colNum);
+												}
+											}]]></xp:this.value>
+										</xp:selectItems>
+									</xp:comboBox>
+									<span class="lotusActions">
+										<xp:link text="Go"
+											id="button1">
+											<xp:eventHandler
+												event="onclick" submit="true" refreshMode="complete">
+												<xp:this.action>
+
+													<xp:actionGroup>
+														<xp:executeScript>
+															<xp:this.script><![CDATA[#{javascript://
+													sessionScope.statusReportsFilterEnabled = true;
+													var filterTab;
+													var selectedFilter = sessionScope.statusReportsFilterType;
+													if( 'a' == selectedFilter ){
+														filterTab = "tabIndividualReports";
+													}else if( 't' == selectedFilter ){
+														filterTab = "tabAllByTeam";
+													}
+													else if( 's' == selectedFilter ){
+														filterTab = "tabTeamReports";
+													}
+													// switch tab
+													sessionScope.statusReportsFilterOldSelectedTab = sessionScope.statusReportsSelectedTab;
+													sessionScope.statusReportsSelectedTab = filterTab;
+												}]]></xp:this.script>
+														</xp:executeScript>
+														<xe:changeDynamicContentAction
+															for="dc2">
+														</xe:changeDynamicContentAction>
+													</xp:actionGroup>
+												</xp:this.action>
+											</xp:eventHandler>
+										</xp:link>
+									</span>
+								</xp:panel>
+							</xp:panel>
+						</xe:listInline>
+					</xp:panel><!-- end chooseFilterArea -->
+					<xp:panel xp:key="filteredArea">
+						<xp:label value="Filtered by: " id="label1">
+						</xp:label>
+						<xe:djextListTextBox id="filteredByValue"
+							value="#{sessionScope.statusReportsFilterColumnValue}">
+							<xp:eventHandler event="onChange"
+								submit="true" refreshMode="complete">
+								<xp:this.action>
+									<xp:actionGroup>
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript://
+														sessionScope.remove('statusReportsFilterEnabled');
+														sessionScope.remove('statusReportsFilterType');
+														sessionScope.remove('statusReportsFilterColumnValue');
+														sessionScope.selectedTab = sessionScope.remove('statusReportsFilterOldSelectedTab');
+													}]]></xp:this.script>
+										</xp:executeScript>
+										<xe:changeDynamicContentAction
+											for="dc2">
+										</xe:changeDynamicContentAction>
+									</xp:actionGroup>
+								</xp:this.action>
+							</xp:eventHandler>
+						</xe:djextListTextBox>
+					</xp:panel><!-- end filteredArea -->
+				</xe:this.facets>
+			</xe:switchFacet>
+
+			<xp:br></xp:br>
+			<xp:button value="New Individual Report" id="button2" themeId="Button.Cancel">
+				<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:openPage name="/statusReports.xsp"
+							target="newDocument">
+							<xp:this.parameters>
+								<xp:parameter name="formName"
+									value="IndStat" />
+							</xp:this.parameters>
+						</xp:openPage>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>			
+			<xp:button value="New Subteam Report" id="button3" themeId="Button.Cancel">
+				<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:openPage name="/statusReports.xsp"
+							target="newDocument">
+							<xp:this.parameters>
+								<xp:parameter name="formName"
+									value="SubteamStatus" />
+							</xp:this.parameters>
+						</xp:openPage>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>			
+			<xp:button value="New Team Report" id="button4" themeId="Button.Cancel">
+				<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+					<xp:this.action>
+						<xp:openPage name="/statusReports.xsp"
+							target="newDocument">
+							<xp:this.parameters>
+								<xp:parameter name="formName"
+									value="Status" />
+							</xp:this.parameters>
+						</xp:openPage>
+					</xp:this.action>
+				</xp:eventHandler>
+			</xp:button>
+			<xp:br />
+			<xp:br />
+			<!--					TODO bind the pager data for all the views to the-->
+			<!--					same values-->
+			<xe:dynamicContent id="dc2">
+				<xe:this.defaultFacet><![CDATA[#{javascript://
+							if( sessionScope.statusReportsSelectedTab != null ){
+								return sessionScope.statusReportsSelectedTab;
+							}
+							return 'tabAll';
+						}]]></xe:this.defaultFacet>
+				<xe:this.facets>
+					<xp:panel xp:key="tabAll">
+						<xp:viewPanel rows="25" id="viewPanel3"
+							var="rowData" binding="#{viewStateBean.dataIterator}"
+							viewStyle="width:100%"
+							summary="A collection of status report documents, displaying all"
+							title="All View">
+							<xp:this.data>
+								<xp:dominoView var="view2"
+									viewName="xvwStatusAll">
+								</xp:dominoView>
+							</xp:this.data>
+							<xp:this.facets>
+								<xc:statusReportsViewHeader id="header1"
+									xp:key="headerPager" isCollapseExpandable="false" />
+								<xc:statusReportsViewFooter
+									xp:key="footerPager" id="footer1" />
+							</xp:this.facets>
+							<!-- note, cannot assign an ID here as it would insert a DIV in a TR -->
+							<xc:statusReportsColumnSubject />
+							<xp:viewColumn columnName="$WeekEnding"
+								id="colReportDate">
+								<xp:viewColumnHeader value="Week ending"
+									id="viewColumnHeader10" sortable="true"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<!-- note, cannot assign an ID here as it would insert a DIV in a TR -->
+							<xc:statusReportsColumnFor />
+						</xp:viewPanel>
+						<xp:br />
+						<xp:br />
+					</xp:panel>
+					<xp:panel xp:key="tabAllByTeam">
+						<!-- Meaning of no subteam? Just this individual, 
+							or whole team? Assuming it means the report is just for this individual.
+						-->
+
+						<xp:viewPanel rows="25" id="viewPanel1"
+							var="rowData" binding="#{viewStateBean.dataIterator}"
+							viewStyle="width:100%"
+							summary="a collection of status report documents, displaying by team"
+							title="By team view">
+							<xp:this.facets>
+								<xc:statusReportsViewHeader
+									xp:key="headerPager" id="header2"
+									isCollapseExpandable="#{javascript: !sessionScope.statusReportsFilterEnabled}" />
+								<xc:statusReportsViewFooter
+									xp:key="footerPager" id="footer2" />
+							</xp:this.facets>
+							<xp:this.data>
+								<xp:dominoView var="view1"
+									viewName="xvwStatusAllByTeam">
+									<xp:this.categoryFilter><![CDATA[#{javascript://
+										if( sessionScope.statusReportsFilterEnabled ){
+											return sessionScope.statusReportsFilterColumnValue;
+										}
+									}]]></xp:this.categoryFilter>
+								</xp:dominoView>
+							</xp:this.data>
+							<xp:viewColumn columnName="$TeamName"
+								id="viewColumn1">
+								<xp:viewColumnHeader value="Team"
+									id="viewColumnHeader1"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<xc:statusReportsColumnFor />
+							<xc:statusReportsColumnSubject />
+							<xp:viewColumn columnName="$WeekEnding"
+								id="viewColumn3">
+								<xp:viewColumnHeader value="Week ending"
+									id="viewColumnHeader3"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+						</xp:viewPanel>
+						<xp:br />
+						<xp:br />
+					</xp:panel>
+
+
+					<xp:panel xp:key="tabTeamReports">
+						<xp:viewPanel rows="25" id="viewPanel4"
+							var="rowData" binding="#{viewStateBean.dataIterator}"
+							viewStyle="width:100%"
+							summary="a collection of status report documents, displaying team reports"
+							title="Team Report View">
+							<xp:this.data>
+								<xp:dominoView var="view4"
+									viewName="StatusLookup">
+									<xp:this.categoryFilter><![CDATA[#{javascript://
+										if( sessionScope.statusReportsFilterEnabled ){
+											return sessionScope.statusReportsFilterColumnValue;
+										}
+									}]]></xp:this.categoryFilter>
+								</xp:dominoView>
+							</xp:this.data>
+							<xp:this.facets>
+								<xc:statusReportsViewHeader
+									xp:key="headerPager"
+									isCollapseExpandable="#{javascript: !sessionScope.statusReportsFilterEnabled}"
+									id="header3" />
+								<xc:statusReportsViewFooter
+									xp:key="footerPager" id="footer3" />
+							</xp:this.facets>
+							<xp:viewColumn columnName="$35"
+								id="viewColumn8">
+								<xp:viewColumnHeader
+									value="Subteam Name" id="viewColumnHeader14"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<xp:viewColumn columnName="ReportDate"
+								id="viewColumn10">
+								<xp:viewColumnHeader value="Report Date"
+									id="viewColumnHeader16"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<xc:statusReportsColumnSubject
+								columnName="$34" />
+						</xp:viewPanel>
+						<xp:br />
+						<xp:br />
+					</xp:panel>
+					<xp:panel xp:key="tabIndividualReports">
+						<xp:viewPanel rows="25" id="viewPanel7"
+							var="rowData" binding="#{viewStateBean.dataIterator}"
+							viewStyle="width:100%"
+							summary="a collection of status report documents, displaying individual reports"
+							title="Individual reports">
+							<xp:this.facets>
+								<xc:statusReportsViewHeader
+									xp:key="headerPager"
+									isCollapseExpandable="#{javascript: !sessionScope.statusReportsFilterEnabled}"
+									id="header4" />
+								<xc:statusReportsViewFooter
+									xp:key="footerPager" id="footer4" />
+							</xp:this.facets>
+							<xp:this.data>
+								<xp:dominoView var="view6"
+									viewName="xvwStatusIndByAuthor">
+									<xp:this.categoryFilter><![CDATA[#{javascript://
+										if( sessionScope.statusReportsFilterEnabled ){
+											return sessionScope.statusReportsFilterColumnValue;
+										}
+									}]]></xp:this.categoryFilter>
+								</xp:dominoView>
+							</xp:this.data>
+							<xp:viewColumn columnName="$Author"
+								id="viewColumn18">
+								<xp:viewColumnHeader value="Author"
+									id="viewColumnHeader24"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<xc:statusReportsColumnSubject />
+							<xp:viewColumn columnName="$ReportDate"
+								id="viewColumn19">
+								<xp:viewColumnHeader value="Week ending"
+									id="viewColumnHeader25"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+							</xp:viewColumn>
+							<xp:viewColumn id="viewColumn2"
+								value="&#173;">
+								<!-- 173 is shy, soft hyphen-->
+								<xp:viewColumnHeader
+									id="viewColumnHeader2" value="Subteams"
+									themeId="TeamRoom.Panel.ViewColumnHeader">
+								</xp:viewColumnHeader>
+								<xc:statusLinkSubteams id="subteams"
+									value="#{rowData['$MultipleSubteamNames']}" />
+							</xp:viewColumn>
+						</xp:viewPanel>
+					</xp:panel>
+				</xe:this.facets>
+			</xe:dynamicContent>
+		</xe:dynamicContent>
+	</xc:layout>
+</xp:view>

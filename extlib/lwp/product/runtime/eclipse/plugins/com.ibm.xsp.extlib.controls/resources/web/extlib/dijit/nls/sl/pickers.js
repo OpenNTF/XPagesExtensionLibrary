@@ -1,0 +1,21 @@
+({
+PickerCheckBox_OK: "V redu",
+PickerCheckBox_Cancel: "Prekli\u010di",
+PickerList_OK: "V redu",
+PickerList_Cancel: "Prekli\u010di",
+PickerListSearch_Search: "Iskanje",
+PickerListSearch_OK: "V redu",
+PickerListSearch_Cancel: "Prekli\u010di",
+PickerListSearch_Value: "Vrednost",
+PickerListSearch_Values: "Vrednosti",
+PickerName_Search: "Iskanje",
+PickerName_Add: "Dodaj",
+PickerName_Remove: "Odstrani",
+PickerName_RemoveAll: "Odstrani vse",
+PickerName_OK: "V redu",
+PickerName_Cancel: "Prekli\u010di",
+PickerName_SearchIn: "I\u0161\u010di v",
+PickerName_SearchFor: "Poi\u0161\u010di",
+PickerName_unSelectedListLabel: "Seznam vrednosti na izbiro",
+PickerName_selectedListLabel: "Seznam izbranih vrednosti"
+})

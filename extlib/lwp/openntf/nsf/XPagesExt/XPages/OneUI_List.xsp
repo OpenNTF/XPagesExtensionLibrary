@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout" navigationPath="/OneUI/List">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI"></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:tabbedPanel id="tabbedPanel1">
+			<xp:this.selectedTab>
+			    <![CDATA[#{javascript:context.getUrlParameter("tab")}]]>
+			</xp:this.selectedTab>
+			<xp:tabPanel label="Lists" id="tabPanel1">
+				<xp:label value="This demos the OneUI lists" id="label5"
+					style="font-weight:bold">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br />
+				Basic list of links
+				<xp:br></xp:br>
+				<xe:linksList id="linksList1">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="Hide" href="#list1"></xe:basicLeafNode>
+						<xe:basicLeafNode label="Reply" href="#list2"></xe:basicLeafNode>
+						<xe:basicLeafNode label="Edit" href="#list3"></xe:basicLeafNode>
+						<xe:basicContainerNode label="Popup">
+							<xe:basicLeafNode label="Option 1" href="#list4"></xe:basicLeafNode>
+							<xe:basicLeafNode label="Option 2" href="#list5"></xe:basicLeafNode>
+							<xe:basicContainerNode label="Oprion 3">
+								<xe:basicLeafNode label="Option 3.1" href="#list6"></xe:basicLeafNode>
+								<xe:basicLeafNode label="Option 3.2" href="#list7"></xe:basicLeafNode>
+							</xe:basicContainerNode>
+						</xe:basicContainerNode>
+					</xe:this.treeNodes>
+				</xe:linksList>
+				<xp:br></xp:br>
+				Sort list
+				<xp:br></xp:br>
+				<xe:sortLinks id="sortLinks2">
+					<xe:this.treeNodes>
+						<xe:basicLeafNode label="Sort by:"></xe:basicLeafNode>
+						<xe:basicLeafNode label="By Author" href="#sort1"></xe:basicLeafNode>
+						<xe:basicLeafNode label="By Date" href="#sort2"></xe:basicLeafNode>
+					</xe:this.treeNodes>
+				</xe:sortLinks>
+				<xp:br></xp:br>
+				Use of a separator control
+				<xp:br></xp:br>
+				Text1
+				<xe:listSeparator id="listSeparator1"></xe:listSeparator>
+				Text2
+				<xe:listSeparator id="listSeparator2"></xe:listSeparator>
+				Text3
+			</xp:tabPanel>
+			<xp:tabPanel label="Lists of Controls" id="tabPanel2">
+				<xp:label value="This demos the OneUI list of controls" id="label1"
+					style="font-weight:bold">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				Basic List (just ul/li tags):
+				<xp:br></xp:br>
+				<xe:list id="list1">
+					<xp:label value="Link A" id="label2" />
+					<xp:label value="Link B" id="label3" />
+					<xp:label value="Link C" id="label4" />
+				</xe:list>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				Inline List (styled ul/li aligning the items on a single row):
+				<xp:br></xp:br>
+				<xe:listInline id="listInline2">
+					<xp:label value="Link A" id="label6" />
+					<xp:label value="Link B" id="label7" />
+					<xp:label value="Link C" id="label8" />
+				</xe:listInline>
+			</xp:tabPanel>
+		</xp:tabbedPanel>
+	</xc:OneUILayout>
+
+</xp:view>
+

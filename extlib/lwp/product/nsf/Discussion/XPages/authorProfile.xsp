@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" pageTitle="${javascript:@DbTitle()}"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:script src="/xpServerSide.jss" clientSide="false"></xp:script>
+		<xp:script src="/mobile-server.jss" clientSide="false"></xp:script>
+		<xp:bundle var="res" src="/strings.properties"></xp:bundle>
+		<xp:script src="/xpCGIVariables.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	<xp:this.beforePageLoad><![CDATA[#{javascript:init()}]]></xp:this.beforePageLoad>
+	<xc:layout navigationPath="#{sessionScope.historyPageName}">
+		<xc:authorProfileForm id="authorProfileForm"
+			userName="#{javascript:userBean.canonicalName;}">
+			<xc:this.rendered><![CDATA[#{javascript:context.getUrlParameter("lookupName") == ""}]]></xc:this.rendered>
+		</xc:authorProfileForm>
+		<xc:authorProfileView id="authorProfileView">
+			<xc:this.rendered><![CDATA[#{javascript:context.getUrlParameter("lookupName") != ""}]]></xc:this.rendered>
+		</xc:authorProfileView>
+	</xc:layout>
+</xp:view>

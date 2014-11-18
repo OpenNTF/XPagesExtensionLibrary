@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='32e' unid='E6A87C6C5DDC335E882569ED000B4ED3' sequence='25'>
+<created><datetime>20010207T180330,75-08</datetime></created>
+<modified><datetime>20120305T082322,98+00</datetime></modified>
+<revised><datetime>20120305T082322,97+00</datetime></revised>
+<lastaccessed><datetime>20120305T082322,98+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,30+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$Fonts'>
+<rawitemdata type='1'>
+i/8oAAEABSZBcmlhbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><textlist><text>Template Name</text><text>Template Name</text></textlist></item>
+<item name='$INFO' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAADwABALrVxQAKAAAA
+</rawitemdata></item>
+<item name='$DesignerVersion' sign='true'><text>7</text></item>
+<item name='SAVEOPTIONS' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='$Fields'><text>SaveOptions</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzVAAAAAQABAAAAQRgAAAAAAAACAQAMCAAFAHn/bAABAIu8nQABAAAAAAAJAAAAAAABAIu8nQAC
+ACYAAAABAAAAAAADAAAAAgAACQAAAAAAAAAAE0AFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAC+/yAAAAABAAAAnkEAAAoAAAAAAAAARGlzY3Vzc2lvbg==
+</rawitemdata></item>
+<item name='$ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzVAAAAAQABAAAAQRgAAAAAAAACAQAMCAAFAL7/IAAAAAEAAACeQQAACgAAAAAAAABEaXNjdXNz
+aW9u
+</rawitemdata></item>
+<item name='$PublicAccess' sign='true'><text>1</text></item>
+<item name='$Flags'><text>CDw</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Template Name</text></item>
+<item name='$BODY' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAACBAAAAAJWHAAAAAAAAAAAAAAAAAQAAAAYAAACDBAEAhf8IAAEAAAmBAoL/WgACAAAA
+AAAAAAAAOAQAADgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA
+AAAAlIQ4BAAAOAQAAAAAAAABAAAABAAAAIMEAgDdBgEA+//7/ywAQQAAAAEBAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAEAAAAAAAAAAAAAAFz/PgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAOAAAAAAAAAAEAAAoAAAAAAQAAAAAA/P86AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUA
+AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAN4GAQD7/6MOOAQoADwAAAAAAAMApBIAAIMEoEGA
+cAAiAAABAQAAgQKC/1oAAwAAAAAAAAAAAIMEoEGDBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAIYBAAAAAKiEkAAAAJAAAAAAAAAAAQAAAAQAAACDBAMAhf8IAAEAAAnd
+BgAArf+p/xYAAQAYAAQACgAKAAAACACcAAMAhf8IAAEAAAmqAt4GAACuAIX/CAABAAAJpQYAAAAA
+gQKDBAEA3QYAAIX/hf8YAAEADgkvLyBTYXZlT3B0aW9uczog0ggBAICAgADeBgAAhf/dBgAAiv/+
+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/PgCIAQAFADACAAgAAAAAAgEAAAkOAAAAAAAAAAsAAAAA
+AA4AAAAMAAEAAQAwAAMAU2F2ZU9wdGlvbnMA3gYAAIr/hf8IAAEAAAmBAoMEAQCF/wgAAQAACQ==
+</rawitemdata></item></note>
+

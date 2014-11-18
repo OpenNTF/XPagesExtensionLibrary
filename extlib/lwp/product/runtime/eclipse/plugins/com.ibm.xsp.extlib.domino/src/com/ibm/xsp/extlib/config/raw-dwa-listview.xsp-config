@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- (c) Copyright IBM Corp. 2010, 2013                                  -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+        <control-subpackage-name>listview</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  
+	<group>
+		<group-type>com.ibm.xsp.extlib.group.listview.jsId</group-type>
+		<property>
+			<!-- reuse the descr/display-name from dwa-calendar -->
+			<description>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/descr%</description>
+			<display-name>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/name%</display-name>
+			<property-name>jsId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- Note, we should probably document for the users: 
+                    the jsId is not clientId namespaced, so if you include 2 calendarStores 
+                    with the same jsId on the same page, it won't work. -->
+                    <!-- This is declaring a jsId (not referencing an existing jsId that's declared elsewhere) -->
+                    <!-- Should maybe have need some kind of editor. Not sure such editors have been provided
+                    by the Designer team - maybe ask them to build editor extensions. -->
+                    <!-- This is not a control reference, it is a declaration of a JavaScript variable -->
+                    <!-- This is not a server requestScope variable name,
+                    it's a client-side browser variable name.-->
+                    <tags>
+                        not-control-id-reference
+                        not-server-variable-name
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<group-extension>
+			<designer-extension>
+				<tags>group-in-control</tags>
+			</designer-extension>
+		</group-extension>
+	</group>
+
+<!-- View Grid -->
+	<component>
+		<description>A control that displays a iNotes list view</description>
+		<display-name>iNotes List View</display-name>
+		<component-type>com.ibm.xsp.extlib.listview.ListView</component-type>
+		<component-class>com.ibm.xsp.extlib.component.listview.UIListView</component-class>
+		<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+		<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+  		<property>
+			<description>A reference to the ID of a data store control, like the Notes List View Store control</description>
+			<display-name>Data Store ID</display-name>
+			<property-name>storeComponentId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+					<editor-parameter>
+						http://www.ibm.com/xsp/coreex|notesListViewStore
+					</editor-parameter>
+					<!-- TODO should this property be marked as required? or is there some control nesting / children
+					arrangement so that the connection is implicit? -->
+					<tags>
+					   todo
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>A reference to the ID of a control that handles the appearance and design of the view, like the Notes List View Design control</description>
+			<display-name>Design Control ID</display-name>
+			<property-name>structureComponentId</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>basics</category>
+                    <!-- TODO should this property be marked as required? or is there some control nesting / children
+                    arrangement so that the connection is implicit? -->
+					<tags>
+					   todo
+					</tags>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+					<editor-parameter>
+						http://www.ibm.com/xsp/coreex|notesListViewDesign
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Allow the view to be shown in narrow screen mode when it detects that the screen is not wide enough to show all the columns</description>
+			<display-name>Allow Narrow Mode</display-name>
+			<property-name>canBeNarrowMode</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+                    <!-- TODO this defaults to true in listView.js, but defaults to false
+                    in UIListView.isCanBeNarrowMode and in the renderer, 
+                    so it is not possible to change this setting. -->
+                    <!-- Update 2012-06-14, see the internal IBM iNotes docs:
+                    https://csnext.ibm.com:8000/jazz/web/projects/iNotes%20Dojo%20Widgets#action=com.ibm.team.scm.browseElement&workspaceItemId=_cLvicCmsEeC7FK4OQ6QADA&componentItemId=_6mQ1wCicEeCnmI4HqB8aSQ&path=%2Fdocs%2Fhomepage%2FlistView%2Fdoc%2FListView.html
+                     -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Whether to hide the column header area, containing the column titles</description>
+			<display-name>Hide Column Headers</display-name>
+			<property-name>hideColumns</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Enable use of two different colors for odd and even rows, which can make wide lists easier to read.</description>
+			<display-name>Color Alternate Rows</display-name>
+			<property-name>alternateRows</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+                    <!-- TODO how do you configure the color for the alternate rows?
+                    there are localization impacts for colors, so generally it can't just be hard-coded
+                    in the control (different countries attach different meaning to different colors).
+                    That said, the OneUI people attempt to assign colors in a manner to not antagonize people
+                    so maybe this iNotes control has been similarly carefully designed?.
+                    Also, where-ever it is assignable, it should be assignable as a syle/styleClass
+                    rather than as a color-only property.  -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Specifies whether to display the column name when the columnTitle property has no value</description>
+			<display-name>Show Column Name When Column Title Is Empty</display-name>
+			<property-name>showColumnNameForEmptyTitle</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>format</category>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be created</description>
+			<display-name>New Entry Action</display-name>
+			<property-name>onNewEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+                    <!-- TODO same points about xe:calendarView events propertys apply to these event properties,
+                    Need to ensure they work with the xp:eventHandler. 
+                    When using All Properties view instead of eventHandler, generated function name should be clientId based, 
+                    to allow for multiple list views on the same page.
+                    Description isn't especially useful. -->
+                    <!-- Q: how is a new entry triggered? A: by double-clicking on an empty timeslot -->
+                    <!-- TODO for this description and the next few, is this event responsible
+                    for creating the entry, or is it just a place to put code before the entry is created.
+                    If it is responsible for creating the enttry, then there should be an 
+                    in-built simple action that can be dropped in here, to create the entry easily
+                    (not sure whether should be a client-side or server-side simple action).
+                    Similar applies for the next few actions - do they need to do the action,
+                    and if so, there should probably be a simple action. -->
+                    <!-- TODO Designer support has issues - xp v xe and eventHandler support -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be opened</description>
+			<display-name>Open Entry Action</display-name>
+			<property-name>onOpenEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is selected</description>
+			<display-name>Select Entry Action</display-name>
+			<property-name>onSelectEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when an entry is going to be deleted</description>
+			<display-name>Delete Entry Action</display-name>
+			<property-name>onDeleteEntry</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<description>Action handler when context menu needs to be launched</description>
+			<display-name>Handle Context Menu</display-name>
+			<property-name>onContextMenu</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+ 		<property>
+			<description>Action handler when the list will be re-sorted, for example, when the user clicks on the column header of a sortable column</description>
+			<display-name>Sort Changed Action</display-name>
+			<property-name>onSortChanged</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+				</designer-extension>
+			</property-extension>
+		</property>
+ 		<property>
+			<description>Action handler when a cell is clicked</description>
+			<display-name>Cell Click Script</display-name>
+			<property-name>onCellClick</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+					<!-- TODO what's the difference between the onCellClick action and the onSelectEntry action in how you trigger them. -->
+					<!-- TODO for accessibility this click action should also be possible to do with a keyboard -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+ 		<property>
+			<description>Action handler when a cell is double-clicked</description>
+			<display-name>Cell Double-Click Script</display-name>
+			<property-name>onCellDblClick</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<category>events</category>
+					<event>true</event>
+					<subcategory>container-event</subcategory>
+					<!-- TODO for accessibility this click action should also be possible to do with a keyboard -->
+                    <!-- TODO what's the difference between the onCellDblClick action and the onOpenEntry action in how you trigger them. -->
+                    <!-- TODO for accessibility this click action should also be possible to do with a keyboard,
+                    and should be different to the keyboard combination for onCellClick. -->
+                    <tags>
+                       todo
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
+			<renderer-type>com.ibm.xsp.extlib.listview.ListView</renderer-type>
+			<tag-name>listView</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		<!-- Note, the component-class, component-family etc include ".dwa.", but that is
+        		the old name for the iNotes product. It would be best of those were renamed,
+        		but they cannot be renamed as that would break applications that were
+        		created using the 8.5.3UpgradePack1 release. -->
+        	    <!-- Note, the description and category mention iNotes, 
+        	    but this control doesn't need iNotes on the server to work. -->
+        	    <!-- Note, the description does not explain what the list view control looks like,
+        	    or what kind of data it displays (lists of multi-column values), and is not helpful. 
+        	    Working on the assumption that people will have to copy from an example 
+        	    to get this to work, as the inter-connection of 3 separate controls is complicated,
+        	    and the explanation of how to connect it to a Notes view is not easy.-->
+        	    <!-- TODO MWD Investigate ListView widget within iNotes itself -->
+        		<tags>
+        		  todo
+        		</tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+<!-- Data Store -->
+	<component>
+		<description>Data store for Notes list view</description>
+		<display-name>Notes List View Store</display-name>
+		<component-type>com.ibm.xsp.extlib.listview.NotesListViewStore</component-type>
+		<component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewStore</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+  		<property>
+			<description>The Domino database containing the Domino view. This value can include the server name or replica ID. If not specified then the current database is assumed.</description>
+			<display-name>Database Name</display-name>
+			<property-name>databaseName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- Not sure if this the same as the xe:dominoView databaseName - allowing server prefixes etc,
+                    could maybe reuse a common property group or description
+                    -->
+               </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The Domino view that will provide content to display in the List View control</description>
+			<display-name>View Name</display-name>
+			<property-name>viewName</property-name>
+			<property-class>java.lang.String</property-class>
+          	<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                    <!-- Note, not sure if this can be a folder name also. -->
+                    <!-- It might be preferable if the description could have an explanation 
+                    of any required column names, etc, but really an entire document 
+                    would be needed describing everything - there's a lot of information,
+                    so not attempting to include it all in the description tooltip.  -->
+                </designer-extension>
+          	</property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.listview.ListViewStore</component-family>
+			<renderer-type>com.ibm.xsp.extlib.listview.NotesListViewStore</renderer-type>
+			<tag-name>notesListViewStore</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+        		<!-- The description is not especially useful, but an entire document 
+        		would be needed to explain this, so not getting into it in the description -->
+      		</designer-extension>
+		</component-extension>
+	</component>
+	<component>
+		<description>Defines the design of columns shown in the list view. The columns shown should be a subset of the data columns retrieved from the server by the data store. The design may also be provided by List View Column controls in the List View control, instead of using this design control.</description>
+		<display-name>Notes List View Design</display-name>
+		<component-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</component-type>
+		<component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewDesign</component-class>
+		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+  		<property>
+			<description>The Domino database containing the Domino view. This value can include the server name or replica ID. If not specified then the current database is assumed.</description>
+			<display-name>Database Name</display-name>
+			<property-name>databaseName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The Domino view that will provide content to display in the List View control</description>
+			<display-name>View Name</display-name>
+			<property-name>viewName</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <!-- Note, not sure if this can be a folder name also. -->
+                    <!-- It might be preferable if the description could have an explanation 
+                    of any required column names, etc, but really an entire document 
+                    would be needed describing everything - there's a lot of information,
+                    so not attempting to include it all in the description tooltip.  -->
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+		</property>
+		<component-extension>
+            <base-component-type>javax.faces.Component</base-component-type>
+			<component-family>com.ibm.xsp.extlib.listview.ListViewDesign</component-family>
+			<renderer-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</renderer-type>
+			<tag-name>notesListViewDesign</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+                <!-- Note, this does not expect list view column children. 
+                They are used within the main xe:listView tag.
+                This control takes the databaseName and viewName, same as the data store -->
+                <!-- TODO the XPagesExt.nsf does not have any examples using xe:notesListViewDesign -->
+                <!-- This internal IBM doc has some info on it:
+                https://csnext.ibm.com:8000/jazz/web/projects/iNotes%20Dojo%20Widgets#action=com.ibm.team.scm.browseElement&workspaceItemId=_cLvicCmsEeC7FK4OQ6QADA&componentItemId=_6mQ1wCicEeCnmI4HqB8aSQ&path=%2Fdocs%2Fhomepage%2FlistView%2Fdoc%2FListViewDataStore.html -->
+                <!-- TODO this is useless,
+                the whole point is that it's meant to allow you to display a subset of the metadata
+                provided by the data store. But both this and the data store only accept
+                databaseName/viewName as configuration - they don't allow custom URLs
+                or inline computed results, so it's not really possible to use a different
+                design from the data store's design. Or at least, the only way to do so 
+                would be to use a different design viewName, but in that case 
+                if you're building a whole view design element, then you might as well 
+                use that view design element for the data store.
+                Really, in practice people will not use this design store,
+                they will instead just use listViewColumn's nested under the listView
+                to define the design. (Instead of reading the design from some URL on the server.)
+                -->
+                <tags>
+                   todo
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+<!-- view column may better be isolated with dojo grid column, if possible -->
+	<component>
+		<description>Defines a column as part of the design and structure of the list view. This will refer to a column in the data source of the list view.</description>
+		<display-name>List View Column</display-name>
+		<component-type>com.ibm.xsp.extlib.listview.ListViewColumn</component-type>
+		<component-class>com.ibm.xsp.extlib.component.listview.UIListViewColumn</component-class>
+
+        <property>
+            <description>The name of the column in the store data. If you set the value of the field to "_item", then your formatter will be called with the entire item from the store - instead of just one field value.</description>
+            <display-name>Column Name</display-name>
+            <property-name>columnName</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+        	<description>The column title displayed for this column. The view column name can be used instead if this property is not specified and the showColumnNameForEmptyTitle property is set to true.</description>
+        	<display-name>Column Title</display-name>
+        	<property-name>columnTitle</property-name>
+        	<property-class>java.lang.String</property-class>
+        	<property-extension>
+				<localizable>true</localizable>
+        		<designer-extension>
+        			<category>basics</category>
+        			<!-- This is a column header label displayed at all times, 
+        			not an accessibility title displayed as a tooltip. -->
+        			<tags>
+        				not-accessibility-title
+        			</tags>
+        		</designer-extension>
+        	</property-extension>
+        </property>
+
+        <property>
+            <description>The width of the column</description>
+            <display-name>Width</display-name>
+            <property-name>width</property-name>
+			<property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>format</category>
+                    <!-- TODO Why is there no style property which could handle the width and other props ??? -->
+                    <!-- TODO description should explain what the value should be - I'd guess like "10px", "20%" etc.
+                    also, there should be an editor with suggestions for what the values should be like.  -->
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <!-- Note, this allows either the string "auto" or an integer value (assumed to be em), 
+                    or a value ending in px.
+                    The value should not contain em or %, as that gives a server-side NumberFormatException -->
+                    <!-- TODO there is an issue in ListViewRenderer,
+                    it is attempting to treat "30" as a chars number,
+                    and "30px" as a pixels number, but the "30px" is treated
+                    as a chars number, because the putBoolean only works if the
+                    boolean argument is true. -->
+                    <editor-parameter>
+						auto
+						10
+						20
+						30
+                    </editor-parameter>
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+        	<description>When the list view is wider than the width of all of the columns combined, by default the last column will be extended in width, so it takes up the remaining space. Set this column as expandable so it will take the extra width.</description>
+        	<display-name>Extendable</display-name>
+        	<property-name>extendable</property-name>
+        	<property-class>boolean</property-class>
+        	<property-extension>
+        		<designer-extension>
+        			<category>format</category>
+        		</designer-extension>
+        	</property-extension>
+        </property>
+        <property>
+        	<description>Indicates whether the column width is fixed, or whether can be resized by the user in the browser</description>
+        	<display-name>Fixed Width</display-name>
+        	<property-name>fixedWidth</property-name>
+        	<property-class>boolean</property-class>
+        	<property-extension>
+        		<designer-extension>
+        			<category>format</category>
+                    <!-- Note, by default column widths are resizable. -->
+        		</designer-extension>
+        	</property-extension>
+        </property>
+
+
+        <property>
+        	<description>Show gradient color on the cell</description>
+        	<display-name>Show Gradient</display-name>
+        	<property-name>showGradient</property-name>
+        	<property-class>boolean</property-class>
+        	<property-extension>
+        		<designer-extension>
+        			<category>format</category>
+                    <!-- TODO gradient would probably be 
+                    fading from one color at the top to another color at the bottom,
+                    where do you specify those 2 colors? -->
+                    <!-- TODO this behavior is broken - maybe the CSS styles aren't in place?
+                    It instead shows a gray background for all cells in the column,
+                    and when you click on a row, the font text turns to white. -->
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+        	</property-extension>
+        </property>
+  		<property>
+			<description>Controls the visibility and formatting of this column when the control displayed in Narrow Display mode.</description>
+			<display-name>Narrow Display</display-name>
+			<property-name>narrowDisplay</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>
+						top
+						wrap
+						hide
+                    </editor-parameter>
+                    <!-- Maybe the description should give the 3 options with a textual explanation of each
+                    and a comment to the translator that the option text values are not translatable. -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The sequence number of this column when the control is in Narrow Display mode</description>
+			<display-name>Narrow Display Sequence Number</display-name>
+			<property-name>sequenceNumber</property-name>
+			<property-class>int</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                    <!-- TODO description should explain how the sequence works. -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Determine if the wrapped column starts directly beneath this column in Narrow Display Mode</description>
+			<display-name>Narrow Display Begin Wrap Under This Column</display-name>
+			<property-name>beginWrapUnder</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Show a twistie for this column when the current row has children, for example, when the row has response documents</description>
+			<display-name>Show Twistie</display-name>
+			<property-name>twistie</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Indicates that this is an empty response column, used to indent the current row because it is a response to a previous row. Default is false.</description>
+			<display-name>Response Indent Column</display-name>
+			<property-name>response</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                </designer-extension>
+                <!-- TODO I haven't managed to get a working example of this
+                description is based on reading the .js files. -->
+                <tags>
+                    todo
+                </tags>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Enables re-sorting the view by clicking the column header</description>
+			<display-name>Sort</display-name>
+			<property-name>sort</property-name>
+			<property-class>int</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.BitwiseFlagsEditor</editor>
+                    <editor-parameter>
+                        0x0001:ascending 
+                        0x0002:descending
+                    </editor-parameter>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Show as icon</description>
+			<display-name>Icon</display-name>
+			<property-name>icon</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+                    <category>format</category>
+                    <!-- when this flag is set, it assumes the content of the column in the row is either
+                    a) a snippet of HTML including an img tag, like: <img src="icon1.gif"/>, or 
+                    b) the name of an image file in the mail nsf, like "sent.gif", 
+                         where it will build up an image tag using ../../ in the URL, 
+                         like: <img src="../../sent.gif"/>
+                    In the case of b), there is no icon alt text, which is bad accessibility.
+                    -->
+                    <!-- TODO this is not very usable - column values would need to be computed to include an <img> tag.--> 
+                    <!-- TODO needs description -->
+                    <!-- 2012-06-27: Leaving the description vague until we have a recommended use pattern.  --> 
+                    <!-- TODO is the icon alt text output correctly - how does it know what the alt text should be? -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+			</property-extension>
+		</property>
+		<component-extension>
+			<component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
+			<renderer-type>com.ibm.xsp.extlib.listview.ListViewColumn</renderer-type>
+			<tag-name>listViewColumn</tag-name>
+      		<designer-extension>
+        		<in-palette>true</in-palette>
+        		<category>iNotes</category>
+                <!-- Note, this control would be nested in the listView control 
+                (used as an alternative to the notesListViewDesign control) -->
+                <!-- TODO 2012-06-27 this control doesn't work in the example in XPagesExt.nsf/DWA_ListView.xsp
+                These controls are not being used to determine how the control should appear,
+                which columns should be shown or how the columns should be configured.
+                It worked in the XPagesExtensionLibrary-853.201109131928NTF release.
+                (Should check with Lisa whether this issue has been logged). -->
+                <tags>
+                   todo
+                   no-faces-config-renderer
+                </tags>
+      		</designer-extension>
+		</component-extension>
+	</component>
+
+</faces-config>

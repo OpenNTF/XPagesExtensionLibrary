@@ -1,0 +1,126 @@
+/*
+
+ATTENTION
+
+This file is just a clone of customIphone.css pulled on 8/23/2011, Blackberry is
+not yet supported by Dojo so we won't yet support it. Once Dojo 1.7 is released
+we can blank this and then start updating this file to add Blackberry support.
+
+*/
+
+
+/****
+ * Global Styles
+ ****/
+.mblView {
+	padding-top: 44px;
+}
+.mblListItem {
+	background-color: white;
+}
+
+/****
+ * Business Card
+ ****/
+.businessCardBox {
+	background: rgb(224,229,236);
+	color: rgb(20,20,20);
+	-webkit-box-shadow: 5px 5px 5px rgb(142,142,142);
+	border: 2px solid rgb(180,193,213);
+}
+
+/****
+ * Accordion
+ ****/
+.mblArrowDown, .mblArrowUp {
+ 	border-color: gray;
+}
+
+/****
+ * Data View
+ ****/
+.mblDataView .mblDataViewCategoryRow {
+	color: #fff;
+	background-color: #889BB3;
+	background: -webkit-gradient(linear, left top, left bottom, from(#B0BCCD), to(#6D84A2), color-stop(0.5, #889BB3), color-stop(0.5, #8195AF));
+	border-top: 1px solid #E5E9EE;
+	border-bottom: 1px solid #2D3642;
+}
+.mblDataView .mblFooter {
+	background-color: #C5CCD3;
+	border-radius: 0px;
+}
+.mblDataView .mblFooterText {
+	border: 1px solid #ADAAAD;
+	background-color: white;
+	-webkit-box-shadow: 1px 1px 1px #8E8E8E;
+}
+.mblDataView .mblRightFooterText a, .mblDataView .mblFooterText a {
+	color: black;
+	text-decoration: none;
+}
+.mblDataView .mblListItemWrapper {
+	border-bottom: 1px solid #ADAAAD;
+}
+
+/**
+ * Forms
+ **/
+.mobileFormContainer .mobileFormTable {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid gray;
+}
+.mobileFormContainer .mobileFormTable .formRow {
+	border-bottom: 1px solid #000;
+}
+.mobileFormContainer .mobileFormTable .formRow:last-child {
+	border: none;
+}
+.mobileFormContainer > .footer button {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid gray;
+	font-weight: bold;
+	-webkit-box-shadow: 1px 1px 1px #8E8E8E;
+}
+.mobileFormContainer input[type="text"] {
+	border: none;
+}
+.mobileFormContainer .errorRow {
+	color: #f00;
+}
+.mobileFormContainer .mobileFormTableErrorDiv {
+	background-color: #363D60;
+	background: -webkit-gradient(radial, center center, 0, center center, 500, from(#363D60), to(gray));
+	border: 2px solid #fff;
+}
+.mobileFormContainer .mobileFormTableErrorDiv input[type="button"] {
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0.1, rgb(55,62,96)), color-stop(0.5, rgb(87,93,122)),color-stop(1, rgb(120,125,148)));
+	border: 1px solid #333;
+	color: #fff;
+}
+.mobileFormContainer .mobileFormTableErrorDiv input[type="button"]:active {
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0.1, rgb(105,119,181)), color-stop(0.5, rgb(131,140,181)),color-stop(1, rgb(148,154,181)));
+}
+.mobileFormContainer .mobileFormTableErrorDiv h1 {
+	color: #fff;
+	text-shadow: 0px -1px 3px #000;
+}
+.mobileFormContainer .mobileFormTableErrorDiv h2 {
+	color: #fff;
+	text-shadow: 0px -1px 2px #000;
+}
+.mobileFormContainer .mobileFormTableErrorShade {
+	background-color: #000;
+}
+.mobileFormContainer td.separator {
+	border-bottom: 1px solid gray;
+}
+.buttonLinkContainer .buttonLink {
+	border: 1px solid #ADAAAD;
+	background-color: #fff;
+	color: #000;
+	font-weight: bold;
+	-webkit-box-shadow: 1px 1px 1px #8E8E8E;
+}

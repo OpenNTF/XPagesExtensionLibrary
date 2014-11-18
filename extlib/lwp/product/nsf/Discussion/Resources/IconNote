@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='8.5'
+ maintenanceversion='3.0' replicaid='CCC578FD00056DEB'>
+<noteinfo noteid='126' unid='85255A0A0010AC8E85254BD4001E8D43' sequence='36'>
+<created><datetime>19800105T003342,43-05</datetime></created>
+<modified><datetime dst='true'>20120521T152832,01+01</datetime></modified>
+<revised><datetime dst='true'>20120521T152832,00+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20120521T152832,01+01</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100329,45+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=dubMob</name><name
+>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Simon/O=dubMob</name><name
+>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TemplateModTime'><datetime dst='true'>19980909T102333,41-04</datetime></item>
+<item name='$TemplateServerName'><text>CN=Debbie Branco/O=Iris</text></item>
+<item name='$TemplateFileName'><text>d:\data\discsw50.ntf</text></item>
+<item name='$DefaultWebNavigator'><text>All Documents</text></item>
+<item name='$LaunchWebViewName'><text>($All)</text></item>
+<item name='IconBitmap' summary='true'>
+<rawitemdata type='6'>
+AiAgAgUA//+f////H////h////Af///AH///AA///gAH//wAA//8AAP/+AAB/4AAAf8AAAHPAAAB
+jwAAAw8AAAAPAAAADwAAAAcAAAADAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAD
+AAAABwAAwA8AAfAfAAP//wAH//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAA
+AAAAbwAAAAAAAAAAAAAAAAAAD28AAAAAAAAAAAAAAAAA/2FvAAAAAAAAAAAAAAAA/xYWH8AAAAAA
+AAAAAAAM/2Fpn2b/AAAAAAAAAAAAzxYWyZkWFvAAAAAAAAAAAMFhYWzPYWHwAAAAAAAAAAz2FhYW
+9hYWHwAAAAAADu7sYWFhaZ9hYW8AAAAAAPAADGEWFsmZFhYfAAAAAADxERxhYWHJmfFhbwAA8AAA
+8REfxhYWyZn2FhAABvAAAPERccYRYcmZ8WHwAPbwAADxER/8YRYczxYfAPYW8AAA8RERH8YRERER
+8PFhYfwAAPERcXF8xmZmbwYWiPZv8ADxER8fEfzMzMxhYoiBYW8A8REREREREREPFhYi9hYfAPER
+cXFxcXERD2Fhb2FhYfDxER8fHx8REQ8WFoj2Fhbw8REREREREREPYWKIgWFh8PERcXFxcXERDxYS
+iI8WFvDxER8fHx8REQ9hYoiPYWEA8REREREREREPFhKIjxYfAPERcXFxcR//DxFhIvFh8ADxER8f
+HxHu7gzxERERHwAA8RERERER//4AzGZmZvAAAPEREREREf/gAADMzMzAAADxERERERH+AAAAAAAA
+AAAA////////8AAAAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$DefaultWebFrameset'><text>MainFrameset</text></item>
+<item name='$LANGUAGE'><text>en</text></item>
+<item name='$CSSExpires'><text>365</text></item>
+<item name='$ImageExpires'><text>365</text></item>
+<item name='$JSExpires'><text>365</text></item>
+<item name='$FileExpires'><text>365</text></item>
+<item name='$DefaultClientXPage'><text>main.xsp</text></item>
+<item name='$DefaultWebPage'><text>Color Page</text></item>
+<item name='$DBTheme'><text>oneuiv2_1_blue.theme</text></item>
+<item name='$Daos'><text>0</text></item>
+<item name='$DefaultFrameset'><text>MainFrameset</text></item>
+<item name='$DefaultXPage'><text>main.xsp</text></item>
+<item name='$TITLE'><text>Discussion 8.5.3 - UP1
+Discussion</text></item>
+<item name='$Flags'><text>fJ7ZF!QU</text></item>
+<item name='$FlagsNoRefresh'><text>rQU</text></item></note>
+

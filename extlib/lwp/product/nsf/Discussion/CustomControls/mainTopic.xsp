@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	enableModifiedFlag="#{javascript:!isMobile()}">
+	<xp:this.data>
+		<xp:dominoDocument var="dominoDoc" formName="MainTopic"
+			computeWithForm="onsave" action="newDocument">
+			<xp:this.querySaveDocument><![CDATA[#{javascript:// store user CGI variables
+var cgi = new CGIVariables();
+dominoDoc.replaceItemValue("Remote_User", cgi.get("REMOTE_USER"));
+dominoDoc.replaceItemValue("Remote_Addr", cgi.get("REMOTE_ADDR"));
+cgi = null;}]]></xp:this.querySaveDocument>
+		</xp:dominoDocument>
+	</xp:this.data>
+	
+	<xe:djxmHeading id="djxmHeading1" label="All Documents"
+		loaded="${javascript:isMobile()}" back="Back">
+		<xp:this.moveTo>
+			<![CDATA[#{javascript:
+				if(null == sessionScope.from)
+					return "allDocs";
+				else	
+					return sessionScope.from;
+			}]]>
+		</xp:this.moveTo>
+	</xe:djxmHeading>
+	
+	<xe:formTable id="formTable2" formTitle="New Topic" xp:key="profile">
+		<xe:formRow id="formRow1" label="Subject:" labelPosition="left">
+			<xp:inputText id="inputText1" required="true"
+				disableClientSideValidation="true" value="#{dominoDoc.Subject}"
+				styleClass="mblFormRowInput">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Tags:" labelPosition="left">
+			<xp:inputText id="inputText2"
+				value="#{dominoDoc.WebCategories}" multipleSeparator=","
+				styleClass="mblFormRowInput">
+				<xp:typeAhead mode="partial" ignoreCase="true"
+					minChars="1" id="typeAhead1" valueListSeparator="," tokens=",">
+					<xp:this.valueList><![CDATA[#{javascript:@DbColumn(@DbName(), "xpCategoryCloud", 1)}]]></xp:this.valueList>
+				</xp:typeAhead>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow3" labelPosition="none">
+			<xp:inputRichText id="rtBody" value="#{dominoDoc.Body}" styleClass="mblThreadRichText">
+			</xp:inputRichText>
+		</xe:formRow>
+	</xe:formTable>
+	
+	<xp:panel id="panel1" styleClass="attachFilePanel" loaded="${javascript:!isMobile()}">
+		<xp:link escape="true" id="link1" text=" Attach File"
+			styleClass="attachFileLink" role="button"
+			title="expand area to attach a file to document">
+			<xp:eventHandler event="onclick" submit="false"
+				id="eventHandler4">
+				<xp:this.script><![CDATA[
+					var fileContainer = document.getElementById("#{id:fileContainer}");
+					var upload = document.getElementById("#{id:fileUpload}");
+					if(null != fileContainer)
+					{
+						var displayStyle = fileContainer.style.height;
+						if (displayStyle == "0px")
+						{
+							fileContainer.style.height = '50px';
+							fileContainer.style.width = '250px';
+							upload.style.height = '25px';
+							upload.style.width = '200px';
+						} 
+						else 
+						{
+							fileContainer.style.height = '0px';
+							fileContainer.style.width = '0px';
+							upload.style.height = '0px';
+							upload.style.width = '0px';
+						}
+					}
+				]]></xp:this.script>
+			</xp:eventHandler>
+			<xp:image id="image2" url="/xpAttachment.gif"
+				alt="Add Attachment">
+			</xp:image>
+		</xp:link>
+		<xp:div dir="ltr">
+			<xp:fileDownload rows="30" id="fileDownload1"
+				displayLastModified="false" styleClass="mainTopicDownload" allowDelete="true"
+				hideWhen="true" value="#{dominoDoc.Body}">
+			</xp:fileDownload>
+		</xp:div>
+	</xp:panel>
+	
+	<xp:panel id="fileContainer" style="height:0px; width:0px;" loaded="${javascript:!isMobile()}">
+		<xp:br></xp:br>
+		<xp:fileUpload id="fileUpload" value="#{dominoDoc.Body}"
+			style="margin-top:5px; height:0px; width:0px;" role="upload">
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:// kick off round-trip...}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:fileUpload>
+	</xp:panel>
+	
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	
+	<xp:panel id="panel16" styleClass="xlFormFooterContainer">
+		<xp:button value="Save" id="button2"
+			styleClass="lotusFormButton" role="submit"
+			title="save button for new document form">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" id="eventHandler2" execMode="partial"
+				execId="mainTopic">
+				<xp:this.action>
+					<xp:actionGroup>
+						<xp:save
+							name="#{javascript:compositeData.gotoPage}">
+						</xp:save>
+					</xp:actionGroup>
+				</xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:link id="linkCancel" text="Cancel"
+			themeId="Link.action" value="#{javascript:compositeData.gotoPage}"
+			role="button">
+			<!-- style="zoom:1" -->
+		</xp:link>
+	</xp:panel>
+</xp:view>

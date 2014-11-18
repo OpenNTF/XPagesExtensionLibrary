@@ -1,0 +1,897 @@
+'++LotusScript Development Environment:2:5:(Options):0:74
+Option Public
+Option Explicit
+Option Compare Nocase
+
+
+
+
+
+'++LotusScript Development Environment:2:5:(Forward):0:1
+Declare Sub ParSendMail
+Declare Function ListIncludesOriginator
+Declare Function SendToNext
+Declare Function GetString(StringType)
+Declare Function GetDBPath
+Declare Function OriginatorNotSubmitting
+Declare Function SendToAll 
+Declare Sub SerSendMail
+
+'++LotusScript Development Environment:2:5:(Declarations):0:10
+Dim session As NotesSession
+Dim db As NotesDatabase
+Dim note As NotesDocument
+Dim mailnote As NotesDocument
+Dim savenote As NotesDocument
+Dim rtitem As Variant
+Dim item As NotesItem
+Dim dbug As NotesLog
+Dim username As NotesName
+Dim fromname As NotesName
+Dim sendtoName As NotesName
+Dim reviewername As NotesName
+Dim dt As NotesDateTime
+Dim InReview As String
+Dim SerSendError As Variant     
+Dim ParSendError As Variant     
+Dim ParName As notesname
+
+Dim ReviewerNumber, TotalReviewers, Position, SubmitNow, NSubmitNow, IsCurrentReviewer As Integer
+Dim ReviewerList, ReviewTime As Variant
+Dim NextReviewer, DbName, ViewList, NotificationType, ClientType, FieldName, ErrorText As String
+
+
+'++LotusScript Development Environment:2:2:ParSendMail:1:8
+Sub ParSendMail
+	
+	mailnote.Form = "Memo"
+	Set rtitem = New NotesRichTextItem(mailnote, "Body")
+	
+	If note.NotifyAfter(0) <> "1" Then
+		'to eliminate double text and doclink in mailnote
+		Call rtitem.Remove
+		Set rtitem = New NotesRichTextItem(mailnote, "Body")
+		rtitem.AppendText(GetString(10))
+		Call rtitem.AppendDocLink(note, GetString(11))
+		' ---- Link Attachment 
+		Dim s As New NotesSession
+		Dim SetupView As NotesView
+		Dim setupDoc
+		Dim url
+		
+		Set SetupView = db.getview("SetupLookup")
+		Set setupDoc = SetupView.GetDocumentBYKey("Setup")
+		url = ""
+		If Not setupDoc Is Nothing Then
+			url = setupdoc.getitemvalue("URLAddress")(0)
+		End If
+		
+		If url = "" Then
+			url = db.Server
+			If url <> "" Then
+				Dim newName As NotesName
+				Set newName = session.Createname(url)
+				url = newName.Common	
+			End If
+		End If
+		url = url + "/"
+
+		rtitem.Addnewline(1)
+		rtitem.AppendText(" http://" + url + GetDBPath() + "/viewDocument.xsp?action=openDocument&documentId="+note.universalid)
+	End If 
+	
+	On Error Goto ParMailError
+	
+	'doc was just submitted; notify all reviewers
+	If ClientType = "Notes" And note.NSubmitNow(0) = "1" Then
+		mailnote.subject = GetString(3)
+		
+		Forall a  In ReviewerList
+			Set ParName = New NotesName(a)
+			ParSendError = ""
+			Call mailnote.send(False, ParName.abbreviated) 
+			If ParSendError= "1" Then
+				Messagebox(GetString(45))
+'                    note.submitnow = "0"
+			Else
+				Messagebox(GetString(42))
+ '                   note.submitnow = "0"          
+			End If               
+		End Forall
+		
+	Elseif ClientType <> "Notes" And note.submitnow(0) = "1" Then
+		mailnote.subject = GetString(3)
+		Call mailnote.send(False, note.ReviewerList)
+		
+		If ParSendError = "1" Then
+			Print  "<h3>" & GetString(44) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(43) & "</h3>"               
+		End If
+		
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+		
+	End If     
+	
+	
+'doc is completed by one or more (but not all) of the reviewers; don't notify author after each reviewer   
+	If ClientType = "Notes" And InReview = "1" And  note.NotifyAfter(0) <> "1" And username.common <> fromname.common Then
+		mailnote.subject = GetString(8)
+		Call mailnote.send(False, note.From)
+		If ParSendError= "1" Then
+			Messagebox(GetString(46))
+		Else
+			Messagebox(GetString(48))
+		End If
+		
+	Elseif ClientType <> "Notes" And InReview = "1" And note.NotifyAfter(0) <> "1" And username.common <> fromname.common Then
+		mailnote.subject = GetString(8)
+		Call mailnote.send(False, note.From)
+		
+		If ParSendError = "1" Then
+			Print  "<h3>" & GetString(46) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(48) & "</h3>"               
+		End If
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+		
+	End If
+	
+	
+	
+'doc is complete; notify author after each reviewer   
+	If ClientType = "Notes" And InReview = "1" And  note.NotifyAfter(0) = "1" And username.common <> fromname.common Then
+		mailnote.subject = GetString(8)
+		Call mailnote.send(False, note.From)
+		If ParSendError= "1" Then
+			Messagebox(GetString(46))
+		Else
+			Messagebox(GetString(47))
+		End If
+		
+	Elseif ClientType <> "Notes" And InReview = "1" And note.NotifyAfter(0) = "1" And username.common <> fromname.common Then
+		mailnote.subject = GetString(8)
+		Call mailnote.send(False, note.From)
+		
+		If ParSendError = "1" Then
+			Print  "<h3>" & GetString(46) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(47) & "</h3>"               
+		End If
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+		
+	End If
+	
+'if I'm the final reviewer, notify the originator that my review is complete
+	If ClientType = "Notes" And note.complete(0) = "1" And note.status(0) = 3 Then
+		Set sendtoname = fromname
+		Call mailnote.send(True, note.from)
+		If ParSendError= "1" Then
+			Messagebox(GetString(46))
+		Else
+			Messagebox(GetString(4))
+		End If
+	Elseif ClientType <> "Notes" And note.complete(0) = "1" And note.status(0) = 3  Then
+		Set sendtoname = fromname
+		Call mailnote.send(False, note.From)
+		
+		If ParSendError = "1" Then
+			Print  "<h3>" & GetString(46) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(4) & "</h3>"               
+		End If
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+		
+	End If     
+	
+	Exit Sub
+	
+ParMailError:
+	ParSendError = "1"
+	Msgbox (GetString(12))
+	Resume Next
+	
+End Sub
+
+'++LotusScript Development Environment:2:1:ListIncludesOriginator:1:8
+Function ListIncludesOriginator
+	
+'the reviewer list cannot include the originator.  The assumption is that since you wrote it you don't need to review it.
+	
+	ListIncludesOriginator = False
+	Dim comparename As NotesName
+	Dim SameName As Integer
+	
+	ReviewerList = note.ReviewerList
+	Set fromname = New NotesName(note.From(0))
+	Forall r In ReviewerList
+		Set comparename = New NotesName(r)
+		If comparename.IsHierarchical And fromname.IsHierarchical And comparename.Abbreviated = fromname.Abbreviated Then
+			ListIncludesOriginator = True
+			FieldName = "Reviewer List"
+			Exit Function
+		Elseif comparename.Common = fromname.Common Then
+			ListIncludesOriginator = True
+			FieldName = "Reviewer List"
+			Exit Function
+		End If
+	End Forall
+	
+	Set comparename = New NotesName(note.NewReviewer(0))
+	If comparename.IsHierarchical And fromname.IsHierarchical And comparename.Abbreviated = fromname.Abbreviated Then
+		ListIncludesOriginator = True
+		FieldName = "Reviewer"
+	Elseif comparename.Common = fromname.Common Then
+		ListIncludesOriginator = True
+		FieldName = "Reviewer"
+	End If
+	
+End Function
+
+'++LotusScript Development Environment:2:1:SendToNext:1:8
+Function SendToNext
+	
+	Dim RevCompleteMailError As String   'new 462
+	
+	
+	If Not(dbug Is Nothing) Then dbug.LogAction("SendToNext")
+	
+	SendToNext = True
+	
+     'On Error Goto StandardError
+	
+	Set mailnote = New NotesDocument(db)
+	
+	ReviewerList = note.ReviewerList
+	TotalReviewers = Ubound(ReviewerList)
+	RevCompleteMailError = "0"    'new 462
+	
+	Set username = New NotesName(note.CurrentUser(0))
+	Set reviewername = New NotesName(note.CurrentEditor(0))
+	Set fromname = New NotesName(note.From(0))
+	
+	If Lcase(username.Common) = Lcase(reviewername.Common) Then IsCurrentReviewer = True
+	
+'Statuses:  1=New, 2=In Review, 3=Review Complete     
+	If note.Status(0) = 1 Then
+		note.reviewernumber = 0
+		ReviewerNumber = note.ReviewerNumber(0) 
+'savenote is a copy of the original which we save as a response to the copy that will be reviewed          
+		If Not(note.HasItem("OriginalSaved")) Then
+			note.save True, True, True
+			Set savenote = New NotesDocument(db)
+			Call note.CopyAllItems(savenote, False)
+'from the Notes client, the body field is not available to note until a ui save
+			If note.HasItem("Body") Then
+				Set rtitem = note.GetFirstItem("Body")
+				savenote.RemoveItem("Body")
+				Call rtitem.CopyItemToDocument(savenote, "Body")
+			Else
+				note.CopyBody = True
+			End If
+			Call savenote.MakeResponse(note)
+			savenote.~$RefOptions = "1"
+			savenote.Subject = GetString(1)
+			savenote.save True, True, True
+			note.OriginalSaved = savenote.UniversalId
+		End If
+	Else
+		ReviewerNumber = note.ReviewerNumber(0) + 1
+	End If
+	
+	
+	
+'Mail Section
+	If ReviewerNumber > TotalReviewers Then                   'last person on the review list; notify author
+		mailnote.SendTo = note.From
+		Set sendtoName = New NotesName(mailnote.SendTo(0))
+		mailnote.Subject = GetString(2)
+		NotificationType = "complete"
+		Call SerSendMail
+		note.Status = 3
+		note.RemoveItem("DocAuthors")
+	Else
+		NotificationType = "review"                                    
+		mailnote.SendTo = ReviewerList(ReviewerNumber)
+		Set sendtoName = New NotesName(mailnote.SendTo(0))
+		mailnote.Subject = GetString(3)
+		Call SerSendMail                                              'notify reviewer
+		If note.NotifyAfter(0) = "1" And ReviewerNumber > 0 And fromname.Common <> username.Common Then
+			NotificationType = "originator"
+			mailnote.SendTo = note.From
+			Set sendtoName = New NotesName(mailnote.SendTo(0))
+			mailnote.Subject = GetString(8)
+			Call SerSendMail                                           'notify after each                       
+'these two things need to be reset               
+			NotificationType = "review"
+			mailnote.SendTo = ReviewerList(ReviewerNumber)
+		End If
+'if the send was successful, reset the NexReviewer variable
+		NextReviewer = mailnote.SendTo(0)
+		Position = Instr(NextReviewer, "@")
+		If Position > 0 Then NextReviewer = Left(NextReviewer, Position)
+	End If
+	
+'We make sure that the mailsend is successful before we alter any field values on the current document     
+	
+'put the next reviewer in the author name field so they can edit the doc, but strip off the @ if there is one     
+	If note.Status(0) = 1 Then
+		note.Status = 2
+		Set item = note.getfirstitem("ReviewerLog")
+		item.AppendToTextList(GetString(6))
+	Else
+		Set item = note.GetFirstItem("ReviewerLog")
+'First, note that the review is complete if appropriate
+		If (SubmitNow Or NSubmitNow Or (note.Resubmit(0) <> "0" )) And IsCurrentReviewer Then
+			item.AppendToTextList(GetString(8))
+		End If
+	End If
+	
+	NextReviewer = mailnote.SendTo(0)
+	Position = Instr(NextReviewer, "@")
+	If Position > 0 Then NextReviewer = Left(NextReviewer, Position)
+	note.CurrentEditor = NextReviewer
+	note.NewReviewer = NextReviewer
+'ReviewerNumber is 0 based here but 1 based on the document because it is used by Notes formulas
+	note.ReviewerNumber = ReviewerNumber
+	
+	If ClientType<> "Notes" Then
+		note.RemoveItem("SubmitNow")
+	Else
+		note.RemoveItem("NSubmitNow")
+	End If
+	note.RemoveItem("Resubmit")
+	
+	note.RemoveItem("CurrentUser")
+	
+	
+	
+End Function
+
+
+'++LotusScript Development Environment:2:1:GetString:1:8
+Function GetString(StringType)
+	
+	Select Case StringType
+	Case 1     'Subject of the original copy of the document
+		GetString = "Original Copy: " & note.Subject(0)
+	Case 2     'Subject of the final reviewer email stating that all reviewers have completed their review
+		GetString = "Review is complete for the document entitled:  " & note.Subject(0)
+	Case 3     'Subject of email informing a reviewer that they need to review this doc
+		GetString = fromname.Common & " would like you to review the document entitled: " & note.Subject(0)
+	Case 4     'First line of acknowledgement page, informing user that email was successfully sent to originator
+		GetString = sendtoname.Common & " has been notified that review of this document is complete."
+	Case 5     'First line of acknowledgement page, informing user that email was successfully sent to next reviewer
+		GetString = sendtoname.Common & " has been notified that this document requires review."
+	Case 6     'Line in Reviewer Log stating when the doc was submitted for review by the originator
+		GetString = "Submitted for review on " & Today
+	Case 7     'Line in Reviewer Log stating that a particular reviewer has been skipped
+          'GetString = ReviewerList(ReviewerNumber - 1) & " was skipped over by " & username.Common & " on " & Today
+		GetString = reviewername.Common & " was skipped over by " & username.Common & " on " & Today
+	Case 8     'Line in Reviewer Log stating when a particular reviewer completed their review
+		GetString = "Review completed by " & username.Common & " on " & Today
+	Case 9     'User submitted form but did not indicate that they needed to send anything
+		GetString = "Document has been saved"
+	Case 10   'Text for the Body field of the notification email
+		GetString = "Click on this link to access the document.  "
+	Case 11   'Text associated with the AppendDocLink method
+		GetString = db.Title & ", " & note.Subject(0)
+	Case 12   'An error that we are not specifically handling
+		GetString = Err & " - " & Error
+	Case 13   'First line on the acknowledgment page when there was an error sending the document
+		GetString = "Error sending review notification to " & sendtoName.Common
+	Case 14   '1st string in the second line on the acknowledgement page when there was an error sending the document
+          '(the string says "Return to Document, fix the whatever, and resubmit" and Return to Document is a link back to the doc"
+		GetString = "Please click here to return to the document"
+	Case 15   '2nd string in the second line on the acknowledgement page when there was a validation or send error
+		GetString = ", fix the " & FieldName & ", and resubmit."
+	Case 16   '1st line of Error if user entered a ReviewWindow but no ReviewTime
+		GetString = "You indicated what should happen when the time limit expires but you did not indicate a valid Time Limit (a whole number greater than 0).  "
+	Case 17   '1st line of Error if originator included themself in the reviewer list
+		GetString = "The document's originator cannot be included in the reviewer list.  "
+	Case 18   'messagebox text for validation errors
+		GetString = "Please enter a valid " & FieldName & "."
+	Case 19   'User indicated submit for review but didn't enter any reviewers
+		GetString = "You did not indicate who should review this document."
+	Case 30   '30-33 are the names of views you can go to from the submitted page     
+		GetString = "All Documents"
+	Case 31   '30-33 are the names of views you can go to from the submitted page     
+		GetString = "By Author"
+	Case 32   '30-33 are the names of views you can go to from the submitted page     
+		GetString = "Review Status"
+	Case 33   '30-33 are the names of views you can go to from the submitted page     
+		GetString = "By Category"
+	Case 40   'Title bar for messageboxes (Notes client only)
+		GetString = "Document Library"
+	Case 41   'Title bar for error messageboxes (Notes client only)
+		GetString = "Document Library - Error"
+	Case 42   'Confirmation of mail send to all reviewers (parallel review)
+		GetString = Parname.abbreviated & " has been notified that this document requires review." 
+	Case 43   'Confirmation of mail send to all reviewers (parallel review) WEB ONLY
+		GetString = "Notification has been sent to all reviewers." 
+	Case 44 'Error sending mail to parallel reviewers WEB ONLY
+		GetString = "Error sending review notification to one or more reviewers."
+	Case 45 'Error sending mail to parallel reviewers
+		getstring =      "Error sending review notification to " &  ParName.abbreviated + "."
+	Case 46 'author could not be notified
+		getstring =  fromname.Common & " could not be notified that your review is complete."
+	Case 47 'author has been notified
+		getstring = fromname.Common & " has been notified that your review is complete."
+	Case 48 'Parallel review, not all reviewers have completed review and author is not notified after final
+		getstring = "Your review is complete.  The Author will be notified after all reviewers have completed their review."
+	Case 49 'If you're tyring to submit a document for review and you're not the document's author
+		getstring = "You cannot submit the document for review because you are not the document's original author."
+	Case 50 'Don't allow Move to Next Reviewer if it's a parallel review
+		getstring = "Move to Next Reviewer is not a valid option when you have chosen 'All reviewers simultaneously' as the type of review."
+	Case 51
+		getstring = "by Alternate Name"
+	Case 52
+		getstring="This document is original copy and cannot be edited. "
+	End Select
+	
+End Function
+
+'++LotusScript Development Environment:2:1:GetDBPath:1:8
+Function GetDBPath
+'check to see if the database is in a directory and swap the slash directions
+	Dim tmpPath As String     
+	tmpPath = db.filepath
+	Do While Instr(tmpPath,"\") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath,"\")-1) + "/" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath,"\"))
+	Loop
+	
+'check and see if there are any embedded spaces and replace them with +     
+	Do While Instr(tmpPath," ") > 0
+		tmpPath = Left$(tmpPath, Instr(tmpPath," ")-1) + "+" + Right$(tmpPath,Len(tmpPath)-Instr(tmpPath," "))
+	Loop
+	
+	GetDbPath = tmpPath
+	
+End Function
+
+
+'++LotusScript Development Environment:2:1:OriginatorNotSubmitting:1:8
+Function OriginatorNotSubmitting
+	OriginatorNotSubmitting = False
+	Dim username As notesname
+	
+	Set fromname = New NotesName(note.From(0))
+	Set username = New NotesName(note.CurrentUser(0))
+	
+	If fromname.common <> username.common Then
+		OriginatorNotSubmitting = True
+	End If
+	
+End Function
+
+'++LotusScript Development Environment:2:1:SendToAll:1:8
+Function SendToAll 
+	
+	sendtoall = True
+	Dim ParallelEditors As Variant
+	Dim CurrentEditor As Variant
+	Dim i As Integer
+	Dim item As notesitem
+	Dim uboundrev As Variant
+	Dim prevrev As Variant
+	
+	If note.hasitem("PrevRev") Then
+		prevrev = note.prevrev
+	Else
+		UboundRev  = Ubound(ReviewerList)
+		Redim prevrev(UboundRev) As Variant                              
+	End If
+	
+	InReview = "0"
+	i = 0
+	
+	
+	Set mailnote = New NotesDocument(db)
+	Set username = New NotesName(note.CurrentUser(0))
+	Set fromname = New NotesName(note.From(0))
+	CurrentEditor = note.CurrentEditor
+	
+'savenote is a copy of the original which we save as a response to the copy that will be reviewed          
+	If Not(note.HasItem("OriginalSaved")) Then
+		note.save True, True, True
+		Set savenote = New NotesDocument(db)
+		Call note.CopyAllItems(savenote, False)
+'from the Notes client, the body field is not available to note until a ui save
+		If note.HasItem("Body") Then
+			Set rtitem = note.GetFirstItem("Body")
+			savenote.RemoveItem("Body")
+			Call rtitem.CopyItemToDocument(savenote, "Body")
+		Else
+			note.CopyBody = True
+		End If
+		Call savenote.MakeResponse(note)
+		savenote.~$RefOptions = "1"
+		savenote.Subject = GetString(1)
+		savenote.save True, True, True
+		note.OriginalSaved = savenote.UniversalId
+	End If
+	
+	Set item = note.getfirstitem("ReviewerLog")
+	
+	If note.Complete(0) = "1" Then
+' determine which item in the CurrentEditor array is the current reviewer          
+'since their review is compete, remove them from the CurrentEditor field
+		Forall a In note.CurrentEditor
+			'Print username.Common & " === " & a
+			Print LCase(username.Abbreviated) & " == " & LCase(a)
+			Print LCase(username.Abbreviated) = LCase(a)
+			If  Not username.ishierarchical And Lcase(username.common) = Lcase(a) And _   'if not hier. user and not hier. reviewer name
+			Lcase(note.CurrentEditor(i)) = Lcase(a) Then
+				CurrentEditor(i) = ""
+				PrevRev(i) = username.common
+				note.prevrev = PrevRev
+				note.CurrentEditor = CurrentEditor
+				note.Locked = ""
+				note.reviewernumber = note.reviewernumber(0) + 1
+				item.appendtotextlist(GetString(8)) 
+			ElseIf username.Ishierarchical And LCase(username.Abbreviated) = LCase(a) And _
+			LCase(note.CurrentEditor(i)) = LCase(a) Then
+				CurrentEditor(i) = ""
+				PrevRev(i) = username.abbreviated
+				note.prevrev = PrevRev
+				note.CurrentEditor = CurrentEditor
+				note.Locked = ""
+				note.reviewernumber = note.reviewernumber(0) + 1
+				item.appendtotextlist(GetString(8))
+			Elseif username.ishierarchical And Lcase(username.Canonical) = Lcase(a) And _   'if hier. user and hier. reviewer name
+			Lcase(note.CurrentEditor(i)) = Lcase(a) Then
+				CurrentEditor(i) = ""
+				PrevRev(i) = username.abbreviated
+				note.prevrev = PrevRev
+				note.CurrentEditor = CurrentEditor
+				note.Locked = ""
+				note.reviewernumber = note.reviewernumber(0) + 1
+				item.appendtotextlist(GetString(8))
+				Elseif  username.ishierarchical And Lcase(username.Common) = Lcase(a) And _  'if hier. user and not hier. reviewer name
+			Lcase(note.CurrentEditor(i)) = Lcase(a) Then
+				CurrentEditor(i) = ""
+				PrevRev(i) = username.abbreviated
+				note.prevrev = PrevRev
+				note.CurrentEditor = CurrentEditor
+				note.Locked = ""
+				note.reviewernumber = note.reviewernumber(0) + 1
+				item.appendtotextlist(GetString(8))                    
+			End If
+			i = i+1
+		End Forall
+	End If
+	
+	If (ClientType = "Notes" And note.NSubmitNow(0) = "1") Or (ClientType <> "Notes" And note.SubmitNow(0) = "1") Then   'doc. was just submitted for review
+		note.CurrentEditor = note.ReviewerList
+		note.reviewernumber = 0
+		item.appendtotextlist(GetString(6))
+	End If
+	
+	ReviewerList = note.ReviewerList
+	ParallelEditors=note.CurrentEditor
+	
+	
+'determine if doc. is still in review (ParallelEditors array will have at least 1 value)
+'change status to 2 (in review) if it was a new document     
+	i=0
+	Forall b In ParallelEditors
+		If Not ParallelEditors(i) = "" Then
+			InReview = "1"
+			Gosub Continue
+		End If
+		
+		i=i+1
+	End Forall
+	
+Continue:
+'fix status     
+	If inreview = "1" And note.status(0) = 1 Then
+		note.status = 2
+	End If
+	
+	If inreview = "0" Then
+		note.status = 3
+	End If     
+	
+	
+	
+	
+'set the due date          
+	If note.ReviewWindow(0) <> "0" Then
+		Set dt = New NotesDateTime("")
+		dt.SetNow
+		ReviewTime = note.ReviewTime(0)
+		If Isnumeric(ReviewTime) Then
+			dt.AdjustDay(ReviewTime)
+			Set note.DueDateTime = dt
+		End If
+	End If
+	
+	
+	
+	
+	
+	
+MailSection:
+'mail sent to all reviewers
+	If (ClientType = "Notes" And note.NSubmitNow(0) = "1") Or (ClientType <> "Notes" And note.SubmitNow(0) = "1") Then   
+		i=0
+		Forall c In ReviewerList
+			If Not ParallelEditors(i) = ReviewerList(i) Then
+				Exit Function
+			End If
+			i=i+1
+		End Forall
+		
+		'create rtitem only if NotifyAfter set to "after each reviewer"
+		If note.NotifyAfter(0)="1" Then
+			Set rtitem = New NotesRichTextItem(mailnote, "Body")
+			rtitem.AppendText(GetString(10))
+			Call rtitem.AppendDocLink(note, GetString(11))
+			' ---- Link Attachment 
+			Dim s As New NotesSession
+			Dim SetupView As NotesView
+			Dim setupDoc
+			Dim url
+			
+			Set SetupView = db.getview("SetupLookup")
+			Set setupDoc = SetupView.GetDocumentBYKey("Setup")
+			url = ""
+			If Not setupDoc Is Nothing Then
+				url = setupdoc.getitemvalue("URLAddress")(0)
+			End If
+			
+			If url = "" Then
+				url = db.Server
+				If url <> "" Then
+					Dim newName As NotesName
+					Set newName = session.Createname(url)
+					url = newName.Common	
+				End If
+			End If
+			url = url + "/"
+
+			rtitem.Addnewline(1)
+			rtitem.AppendText(" http://" + url + GetDBPath() + "/viewDocument.xsp?action=openDocument&documentId="+note.universalid)
+		End If
+		Call ParSendMail
+		
+		If ClientType<> "Notes" Then
+			note.RemoveItem("SubmitNow")
+		Else
+			note.RemoveItem("NSubmitNow")
+		End If
+		
+		note.RemoveItem("Resubmit")
+		
+		Exit Function
+	End If     
+	
+	
+'determine if author should be notified after each review
+	If note.hasitem("Reviewers")  And note.status(0) = 2 And note.NotifyAfter(0) = "1" _
+	And Not username.ishierarchical And Not fromname.ishierarchical And Not username.common = fromname.common Then
+		mailnote.Form = "Memo"
+		Set rtitem = New NotesRichTextItem(mailnote, "Body")
+		rtitem.AppendText(GetString(10))
+		Call rtitem.AppendDocLink(note, GetString(11))
+		mailnote.SendTo = note.From
+		mailnote.Subject = GetString(8)
+		NotificationType = "complete"
+'          Call mailnote.send(True, note.From)
+		
+		Call ParSendMail
+		
+		Exit Function
+		
+		Elseif note.status(0) = 2 And note.NotifyAfter(0) = "1" _
+	And username.ishierarchical And fromname.ishierarchical  And Not username.Abbreviated = fromname.abbreviated Then
+		mailnote.Form = "Memo"
+		Set rtitem = New NotesRichTextItem(mailnote, "Body")
+		rtitem.AppendText(GetString(10))
+		Call rtitem.AppendDocLink(note, GetString(11))
+		mailnote.SendTo = note.From
+		mailnote.Subject = GetString(8)
+		NotificationType = "complete"
+'          Call mailnote.send(True, note.From)
+		Call ParSendMail
+		
+		Exit Function          
+	End If
+	
+'doc is completed by one or more (but not all) of the reviewers; don't notify author after each reviewer   
+	If note.hasitem("Reviewers")  And note.status(0) = 2 And note.NotifyAfter(0) <> "1"And  username.common <> fromname.common Then
+'          NotificationType = "complete"
+		Call ParSendMail
+		
+		Exit Function
+		
+	End If
+	
+	
+'determine if review is complete and author should be notified
+	If InReview = "0" Then 
+		mailnote.SendTo = note.From
+		
+		Set rtitem = New NotesRichTextItem(mailnote, "Body")
+		rtitem.AppendText(GetString(10))
+		Call rtitem.AppendDocLink(note, GetString(11))
+		
+		mailnote.Subject = GetString(2)
+		NotificationType = "complete"
+		Call ParSendMail
+		note.RemoveItem("DocAuthors")
+		
+	End If
+	
+	
+'if I'm not the final reviewer and mail gets sent to originator after each review is complete
+	If clienttype = "Notes" And note.complete(0) = "1" And InReview = "1" And note.NotifyAfter(0) = "1" Then
+'          Call mailnote.send(True, note.from)
+		Messagebox(GetString(8))     
+		Call ParSendMail
+		
+	End If
+	
+	
+	
+End Function
+
+'++LotusScript Development Environment:2:2:SerSendMail:1:8
+Sub SerSendMail
+	
+	'reset SerSendError flag each time before running sub
+	SerSendError = ""	
+	
+'set the due date          
+	If note.ReviewWindow(0) <> "0" Then
+		Set dt = New NotesDateTime("")
+		dt.SetNow
+		ReviewTime = note.ReviewTime(0)
+		If Isnumeric(ReviewTime) Then
+			dt.AdjustDay(ReviewTime)
+			Set note.DueDateTime = dt
+		End If
+	End If
+	
+	On Error Goto SerMailError
+	
+	mailnote.Form = "Memo"
+	Set rtitem = New NotesRichTextItem(mailnote, "Body")
+	rtitem.AppendText(GetString(10))
+	Call rtitem.AppendDocLink(note, GetString(11))
+	' ---- Link Attachment 
+	Dim s As New NotesSession
+	Dim SetupView As NotesView
+	Dim setupDoc
+	Dim url
+	
+	Set SetupView = db.getview("SetupLookup")
+	Set setupDoc = SetupView.GetDocumentBYKey("Setup")
+	url = ""
+	If Not setupDoc Is Nothing Then
+		url = setupdoc.getitemvalue("URLAddress")(0)
+	End If
+	
+	If url = "" Then
+		url = db.Server
+		If url <> "" Then
+			Dim newName As NotesName
+			Set newName = session.Createname(url)
+			url = newName.Common	
+		End If
+	End If
+	url = url + "/"
+
+	rtitem.Addnewline(1)
+	rtitem.AppendText(" http://" + url + GetDBPath() + "/viewDocument.xsp?action=openDocument&documentId="+note.universalid)
+	
+'Send to reviewer (or next reviewer, if doc is in review
+	If  ClientType = "Notes" And NotificationType = "review" Then
+		mailnote.Send(False)
+		If SerSendError= "1" Then     
+			Messagebox (GetString(13))     'error sending notification
+		Else
+			Messagebox (GetString(5))     'xxx has been notified that review is needed
+		End If
+	Elseif ClientType <> "Notes" And NotificationType = "review" Then
+		Call mailnote.send(False)
+		If SerSendError = "1" Then
+			Print  "<h3>" & GetString(13) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(5) & "</h3>"               
+		End If
+		
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+	End If     
+	
+	
+	
+'Send mail to author after each review
+	If  ClientType = "Notes" And NotificationType = "originator" Then 
+		mailnote.Send(False)     
+		If SerSendError= "1" Then
+			Messagebox (GetString(46))       'the doc author could not be notified
+		Else
+			Messagebox (GetString(47))        'the doc author was notified
+		End If
+	Elseif ClientType <> "Notes" And NotificationType = "originator" Then 
+		Call mailnote.send(False)
+		If SerSendError = "1" Then
+			Print  "<h3>" & GetString(46) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(47) & "</h3>"               
+		End If
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+	End If     
+	
+	
+'If I am the last person on the review list
+	If ClientType = "Notes" And ReviewerNumber > TotalReviewers Then 
+		mailnote.Send(False)
+		If SerSendError= "1" Then
+			Messagebox (GetString(46))       'the doc author could not be notified
+		Else
+			Messagebox (GetString(4))        'the doc author was notified
+		End If
+	Elseif ClientType <> "Notes" And ReviewerNumber > TotalReviewers Then 
+		Call mailnote.send(False)
+		If SerSendError = "1" Then
+			Print  "<h3>" & GetString(46) & "</h3>"
+		Else
+			Print  "<h3>" & GetString(4) & "</h3>"               
+		End If
+		Print "<hr><center>" & _
+		"<b><a href=/" + DbName + "/($All)?OpenView>" & GetString(30) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ByCategory?OpenView>" & GetString(33) & "</a></b> | " & _     
+		"<b><a href=/" + DbName + "/ByAuthor?OpenView>" & GetString(31) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/By+Alternate+Name?OpenView>" & GetString(51) & "</a></b> | " & _
+		"<b><a href=/" + DbName + "/ReviewStatus?OpenView>" & GetString(32) & "</a></b>" & _
+		"</center><hr>"
+	End If     
+	
+	Exit Sub
+	
+	
+SerMailError:
+	SerSendError = "1"
+	Msgbox (GetString(12))
+	Resume Next
+	
+End Sub

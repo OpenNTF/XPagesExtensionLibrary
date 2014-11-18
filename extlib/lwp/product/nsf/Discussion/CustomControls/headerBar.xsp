@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:panel themeId="Panel.header" id="panelHeader">
+		<xp:label id="labelAllDocs" themeId="ComputedField.header.subtitle">
+			<xp:this.loaded><![CDATA[${javascript:DISPLAY_ALL_DOCUMENTS == compositeData.displayType}]]></xp:this.loaded>
+			<xp:this.value><![CDATA[#{javascript:var translatedTitle = "";
+var searchValue = context.getUrlParameter("searchValue");
+if("" != searchValue){
+	translatedTitle = I18n.format(res.getString("searchresults.title"), searchValue);
+}else{
+	translatedTitle = res.getString("alldocuments.title");
+}
+return(translatedTitle);}]]></xp:this.value>
+		</xp:label>
+		<xp:label value="Most Recent Documents" id="labelMostRecentDocs" themeId="ComputedField.header.subtitle">
+			<xp:this.loaded><![CDATA[${javascript:DISPLAY_BY_MOST_RECENT == compositeData.displayType}]]></xp:this.loaded>
+		</xp:label>
+		<xp:label value="All Documents by Author" id="labelAllDocsByAuthor" themeId="ComputedField.header.subtitle">
+			<xp:this.loaded><![CDATA[${javascript:DISPLAY_BY_AUTHOR == compositeData.displayType}]]></xp:this.loaded>
+		</xp:label>
+		<xp:label id="labelAllDocsByTag" themeId="ComputedField.header.subtitle">
+			<xp:this.loaded><![CDATA[${javascript:DISPLAY_BY_TAG == compositeData.displayType}]]></xp:this.loaded>
+			<xp:this.value><![CDATA[#{javascript:var translatedTitle = "";
+var searchValue = context.getUrlParameter("categoryFilter");
+if("" != searchValue){
+	translatedTitle = I18n.format(res.getString("bytag.filtered.title"), searchValue);
+}else{
+	translatedTitle = res.getString("bytag.unfiltered.title");
+}
+return(translatedTitle);}]]></xp:this.value>
+		</xp:label>
+		<xp:label value="My Documents" id="labelMyDocs" themeId="ComputedField.header.subtitle">
+			<xp:this.loaded><![CDATA[${javascript:DISPLAY_MY_DOCUMENTS == compositeData.displayType}]]></xp:this.loaded>
+		</xp:label>
+	</xp:panel>
+</xp:view>

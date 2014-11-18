@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="4b2" sequence="10" unid="A9ADF5A9D2BB3D2485257487002348DA">
+<created><datetime dst="true">20080715T022524,10-04</datetime></created>
+<modified><datetime>20120207T100338,79+00</datetime></modified>
+<revised><datetime>20111117T233018,15+00</datetime></revised>
+<lastaccessed><datetime>20120207T100338,79+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100338,79+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>xpSidebar.gif</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$ImagesWide" sign="true"><number>1</number></item>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20080626T010346,00+01</datetime></item>
+<item name="$ImageNames" sign="true"><text>xpSidebar.gif</text></item>
+<item name="$EditFilePath"><text>C:\Users\IBM_AD~1\AppData\Local\Temp\notes97E53A\~xpSidebar.gif</text></item>
+<item name="$Flags"><text>34CiQ$</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+</note>

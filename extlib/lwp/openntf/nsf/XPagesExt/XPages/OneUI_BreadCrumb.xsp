@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/OneUI/BreadCrumb">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI" ></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:label value="Bread Crumbs Control" id="label5" style="font-weight:bold">
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xe:breadCrumbs id="outline" label="You are in: ">
+			<xe:this.treeNodes>
+				<xe:pageTreeNode page="Core_Home" label="Home">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="OneUI_Home"
+					label="OneUI">
+				</xe:pageTreeNode>
+				<xe:pageTreeNode page="OneUI_BreadCrumbs"
+					label="Bread Crumbs">
+				</xe:pageTreeNode>
+			</xe:this.treeNodes>
+		</xe:breadCrumbs>
+	</xc:OneUILayout>
+</xp:view>
+

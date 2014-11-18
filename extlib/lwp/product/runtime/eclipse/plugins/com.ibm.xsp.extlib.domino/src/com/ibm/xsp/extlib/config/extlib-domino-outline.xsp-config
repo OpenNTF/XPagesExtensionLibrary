@@ -1,0 +1,178 @@
+<faces-config>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+  </faces-config-extension>
+	
+	
+	<complex-type>
+    	<description>%complex-type.loginTreeNode.descr%</description>
+    	<display-name>%complex-type.loginTreeNode.name%</display-name>
+    	<complex-id>com.ibm.xsp.extlib.tree.complex.LoginTreeNode</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.tree.complex.LoginTreeNode</complex-class>
+    	
+  		<property>
+			<description>%property.rendered.descr%</description>
+			<display-name>%property.rendered.name%</display-name>
+			<property-name>rendered</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				
+				
+				<designer-extension>
+				
+					<tags>
+						runtime-default-false
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
+      		<tag-name>loginTreeNode</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+	
+	<complex-type>
+    	<description>%complex-type.dominoViewListTreeNode.descr%</description>
+    	<display-name>%complex-type.dominoViewListTreeNode.name%</display-name>
+    	<complex-id>com.ibm.xsp.extlib.tree.complex.ViewListTreeNode</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.tree.complex.ViewListTreeNode</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+
+  		<property>
+			<description>%property.filter.descr%</description>
+			<display-name>%property.filter.name%</display-name>
+			<property-name>filter</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+    	<property>
+    		
+      		<description>%property.var.complex-type.dominoViewListTreeNode.descr%</description>
+      		<display-name>%property.var.complex-type.dominoViewListTreeNode.name%</display-name>
+      		<property-name>var</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+	    		<allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+				</designer-extension>
+      		</property-extension>
+    	</property>
+  		<property>
+			<description>%property.views.descr%</description>
+			<display-name>%property.views.name%</display-name>
+			<property-name>views</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					
+					<tags>
+						runtime-default-true
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>%property.folders.descr%</description>
+			<display-name>%property.folders.name%</display-name>
+			<property-name>folders</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+				<designer-extension>
+					
+					<tags>
+						runtime-default-true
+					</tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</base-complex-id>
+      		<tag-name>dominoViewListTreeNode</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+	
+	<complex-type>
+    	<description>%complex-type.dominoViewEntriesTreeNode.descr%</description>
+    	<display-name>%complex-type.dominoViewEntriesTreeNode.name%</display-name>
+    	<complex-id>com.ibm.xsp.extlib.tree.complex.ViewEntryTreeNode</complex-id>
+    	<complex-class>com.ibm.xsp.extlib.tree.complex.ViewEntryTreeNode</complex-class>
+        <group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+        <group-type-ref>com.ibm.xsp.extlib.group.viewNameProp</group-type-ref>
+
+    	<property>
+      		<description>%property.var.complex-type.dominoViewEntriesTreeNode.descr%</description>
+      		<display-name>%property.var.complex-type.dominoViewEntriesTreeNode.name%</display-name>
+      		<property-name>var</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+	    		<allow-run-time-binding>false</allow-run-time-binding>
+				<designer-extension>
+					<editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+				</designer-extension>
+      		</property-extension>
+    	</property>
+  		<property>
+			<description>%property.labelColumn.descr%</description>
+			<display-name>%property.labelColumn.name%</display-name>
+			<property-name>labelColumn</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+                    
+                    <tags>
+                        not-localizable
+                    </tags>
+				</designer-extension>
+			</property-extension>
+		</property>
+    	<property>
+    	    
+      		<description>%property.keys.descr%</description>
+      		<display-name>%property.keys.name%</display-name>
+      		<property-name>keys</property-name>
+      		<property-class>java.lang.Object</property-class>
+    	</property>
+    	<property>
+      		<description>%property.keysExactMatch.descr%</description>
+      		<display-name>%property.keysExactMatch.name%</display-name>
+      		<property-name>keysExactMatch</property-name>
+      		<property-class>boolean</property-class>
+    	</property>
+
+    	<complex-extension>
+    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</base-complex-id>
+      		<tag-name>dominoViewEntriesTreeNode</tag-name>
+    	</complex-extension>
+  	</complex-type>
+
+</faces-config>

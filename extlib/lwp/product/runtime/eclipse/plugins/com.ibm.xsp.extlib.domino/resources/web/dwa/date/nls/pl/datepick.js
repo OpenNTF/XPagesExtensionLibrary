@@ -1,0 +1,9 @@
+({
+L_CHARDAY_FRI: "p",
+L_CHARDAY_MON: "p",
+L_CHARDAY_SAT: "s",
+L_CHARDAY_SUN: "n",
+L_CHARDAY_THU: "c",
+L_CHARDAY_TUE: "w",
+L_CHARDAY_WED: "\u015b"
+})

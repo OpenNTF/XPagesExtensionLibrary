@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:singlePageApp id="singlePageApp1" selectedPageName="appPage1">
+		<xe:appPage id="appPage1" pageName="appPage1">
+			<xe:djxmHeading id="djxmHeading1" label="App Page 1"></xe:djxmHeading>
+			<xp:panel>
+				content of appPage1
+			</xp:panel>
+		</xe:appPage>
+	</xe:singlePageApp>
+</xp:view>

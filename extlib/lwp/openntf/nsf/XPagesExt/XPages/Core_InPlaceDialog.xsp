@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/InPlaceDialog">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:panel>
+				<xp:this.data>
+					<xp:dominoView var="view1" viewName="AllContacts"></xp:dominoView>
+				</xp:this.data>
+				<xp:label value="This shows both modal and tooltip dialogs"
+					id="label5" style="font-weight:bold">
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:br></xp:br>
+				<xp:pager layout="Previous Group Next" id="pager1" xp:key="header"
+					for="repeat1" partialRefresh="true">
+				</xp:pager>
+				<xp:repeat id="repeat1" rows="15" value="#{view1}" var="row">
+					<xp:div id="rowDataContainer">
+						User: &#160;
+						<xp:text escape="true" id="computedField1"
+							value="#{row.FirstName}">
+						</xp:text>
+						,&#160;
+						<xp:text escape="true" id="computedField2"
+							value="#{row.LastName}">
+						</xp:text>
+						&#160;
+						<xp:span id="inform">
+							<xp:link escape="true" id="link1"
+								text="Edit - Modal">
+								<xp:eventHandler event="onclick"
+									submit="false">
+									<xp:this.script><![CDATA[XSP.openDialog('#{id:inPlaceDialog1}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							&#160; -- &#160;
+							<xp:link escape="true" id="link2"
+								text="Edit - Tooltip">
+								<xp:eventHandler event="onclick"
+									submit="false">
+									<xp:this.script><![CDATA[XSP.openTooltipDialog('#{id:tooltipDialog1}','#{id:computedField1}')]]></xp:this.script>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:br></xp:br>
+							<xe:dialog id="inPlaceDialog1"
+								title="Edit User">
+								<xp:panel>
+									<xp:this.data>
+										<xp:dominoDocument
+											var="document1" formName="Contact" action="editDocument"
+											documentId="#{javascript:row.getNoteID()}"
+											ignoreRequestParams="true">
+										</xp:dominoDocument>
+									</xp:this.data>
+								<xe:dialogContent>
+									<xp:table role="presentation">
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="First name:" id="label6"
+													for="inputText5">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.FirstName}" id="inputText5"
+													required="true">
+												</xp:inputText>
+											</xp:td>
+											<xp:td>Required field, client side&#160;validation</xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="Last name:" id="label7" for="inputText6">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.LastName}" id="inputText6"
+													required="true" disableClientSideValidation="true">
+												</xp:inputText>
+											</xp:td>
+											<xp:td>Required field, server side validation</xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="E mail:" id="label8" for="inputText7">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.EMail}" id="inputText7">
+												</xp:inputText>
+											</xp:td>
+											<xp:td></xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label value="City:"
+													id="label9" for="inputText8">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.City}" id="inputText8">
+												</xp:inputText>
+											</xp:td>
+											<xp:td></xp:td>
+										</xp:tr>
+									</xp:table>
+									<xp:messages id="messages2"></xp:messages>
+								</xe:dialogContent>
+								<xe:dialogButtonBar>
+									<xp:button value="Ok" id="button15"
+										styleClass="lotusFormButton">
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="complete">
+											<xp:this.action>
+												<xp:actionGroup>
+													<xp:saveDocument></xp:saveDocument>
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:var c = getComponent("inPlaceDialog1")
+c.hide("repeat1")}]]></xp:this.script>
+													</xp:executeScript>
+												</xp:actionGroup>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+									<xp:link id="button17" text="Cancel"
+										styleClass="lotusAction">
+										<xp:eventHandler event="onclick"
+											submit="true" immediate="true">
+											<xp:this.action>
+												<xp:actionGroup>
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:var c = getComponent("inPlaceDialog1")
+c.hide()}]]></xp:this.script>
+													</xp:executeScript>
+												</xp:actionGroup>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:link>
+								</xe:dialogButtonBar>
+								</xp:panel>
+							</xe:dialog>
+							<xe:tooltipDialog id="tooltipDialog1"
+								title="Edit User">
+								<xp:panel>
+									<xp:this.data>
+										<xp:dominoDocument
+											var="document1" formName="Contact" action="editDocument"
+											documentId="#{javascript:row.getNoteID()}"
+											ignoreRequestParams="true">
+										</xp:dominoDocument>
+									</xp:this.data>
+
+									<xp:table role="presentation">
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="First name:" id="label1"
+													for="inputText1">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.FirstName}" id="inputText1"
+													required="true">
+												</xp:inputText>
+											</xp:td>
+											<xp:td>Required field, client side&#160;validation</xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="Last name:" id="label2" for="inputText2">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.LastName}" id="inputText2"
+													required="true" disableClientSideValidation="true">
+												</xp:inputText>
+											</xp:td>
+											<xp:td>Required field, server side validation</xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label
+													value="E mail:" id="label3" for="inputText3">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.EMail}" id="inputText3">
+												</xp:inputText>
+											</xp:td>
+											<xp:td></xp:td>
+										</xp:tr>
+										<xp:tr>
+											<xp:td>
+												<xp:label value="City:"
+													id="label4" for="inputText4">
+												</xp:label>
+											</xp:td>
+											<xp:td>
+												<xp:inputText
+													value="#{document1.City}" id="inputText4">
+												</xp:inputText>
+											</xp:td>
+											<xp:td></xp:td>
+										</xp:tr>
+									</xp:table>
+									<xp:messages id="messages1"></xp:messages>
+									<xp:br></xp:br>
+									<xp:button value="Ok"
+										id="button3">
+										<xp:eventHandler event="onclick"
+											submit="true" refreshMode="complete">
+											<xp:this.action>
+												<xp:actionGroup>
+													<xp:saveDocument></xp:saveDocument>
+
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:var c = getComponent("tooltipDialog1")
+c.hide("repeat1")}]]></xp:this.script>
+													</xp:executeScript>
+												</xp:actionGroup>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+									<xp:button value="Cancel"
+										id="button4">
+										<xp:eventHandler event="onclick"
+											submit="true" immediate="true">
+											<xp:this.action>
+												<xp:actionGroup>
+
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:var c = getComponent("tooltipDialog1")
+c.hide()}]]></xp:this.script>
+													</xp:executeScript>
+												</xp:actionGroup>
+											</xp:this.action>
+										</xp:eventHandler>
+									</xp:button>
+								</xp:panel>
+							</xe:tooltipDialog>
+						</xp:span>
+					</xp:div>
+				</xp:repeat>
+			</xp:panel>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC579050049E718" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1da" sequence="6" unid="4D86419F59EDE5CC802577E0004D0603">
+<created><datetime>20101119T140118,11+00</datetime></created>
+<modified><datetime>20120207T095545,28+00</datetime></modified>
+<revised><datetime dst="true">20111026T122251,80+01</datetime></revised>
+<lastaccessed><datetime>20120207T095545,28+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095545,28+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime>20101119T140118,15+00</datetime><datetime dst="true">20110830T205049,45-04</datetime><datetime dst="true">20111006T160527,82+01</datetime><datetime dst="true">20111014T083947,67+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$TITLE"><text>timeblock_deselected_1.png</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt"><text>D</text></item>
+
+<item name="$FileModDT" sign="true"><datetime>20100126T212846,00+00</datetime></item>
+
+<item name="$FileNames" sign="true"><text>timeblock_deselected_1.png</text></item>
+<item name="$DesignerVersion"><text>8.5.2</text></item></note>

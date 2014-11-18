@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:button value="Save" id="button1">
+		<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action>
+				<xp:actionGroup>
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:
+						if(newResponseDoc.getDocument().getItemValueString('SUBMITTED') === DocLib.Review.Submitted) {
+							return false;
+						}
+						if(isParentDoc()) {
+							return false;
+						}
+						var reviewers = getComponent('reviewers').getValue(),
+							checkBoxValue = getComponent('checkBox1').getValue(),
+							timeLimit = getComponent('timeLimitInDaysField').getValue(),
+							reviewTime = parseInt(newResponseDoc.getItemValueString('ReviewWindow'));
+						return (isReviewerOriginator() || (checkBoxValue === '1' && reviewers.length === 0) || (checkBoxValue === '1' && reviewTime >= 1 && timeLimit < 1));
+					}]]></xp:this.condition>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
+							var reviewers = getComponent('reviewers').getValue(),
+								errorTarget = getComponent('errorMessage');
+							if(reviewers.length === 0) {
+								errorTarget.setValue(strings.getString('error.reviewers.requiered'));
+							} else if(isReviewerOriginator()) {
+								errorTarget.setValue(strings.getString('error.reviewers.origintator'));
+							}
+							errorTarget.setRendered(true);
+						}]]></xp:this.script>
+						</xp:executeScript>
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
+								var timeLimit = getComponent('timeLimitInDaysField').getValue(),
+									errorTarget = getComponent('errorMessage'),
+									reviewWindow = newResponseDoc.getItemValueString('ReviewWindow');
+								if(timeLimit < 1 && (reviewWindow === '1' || reviewWindow === '2')) {
+									errorTarget.setValue(strings.getString('error.reviewers.timelimit'));
+									errorTarget.setRendered(true);
+								}
+							}]]></xp:this.script>
+						</xp:executeScript>
+					</xp:actionGroup>
+					<xp:actionGroup>
+						<xp:this.condition><![CDATA[#{javascript:
+					if(newResponseDoc.getDocument().getItemValueString('SUBMITTED') === DocLib.Review.Submitted) {
+						return true;
+					}
+					
+					if(isParentDoc()) {
+						return true;
+					}
+					
+					var value = getComponent('checkBox1').getValue(),
+						reviewers = getComponent('reviewers').getValue(),
+						timeLimit = getComponent('timeLimitInDaysField').getValue(),
+						checkBoxValue = getComponent('checkBox1').getValue(),
+						reviewTime = parseInt(newResponseDoc.getItemValueString('ReviewWindow'));
+					if(value === '1') {
+						if(reviewers.length === 0 || isReviewerOriginator() || (checkBoxValue === '1' && reviewTime >= 1 && timeLimit < 1)) {
+							return false;
+						}
+					}
+					return true;
+					
+				}]]></xp:this.condition>
+
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
+							var document:NotesDocument = newResponseDoc.getDocument();
+							if(viewScope.clearReviewCycle === true) {
+								var reviewerLog = document.getItemValueString('ReviewerLog'),
+									dateString = @Text(@Date(@Now())),
+									msg = "\nReview cycle was cleared on: " + dateString.replace(/.{8}$/, (new Date()).getFullYear());
+									
+									viewScope.clearReviewCycle = false;
+	
+									document.replaceItemValue('Status', 1);
+									document.replaceItemValue('CurrentEditor', []);
+									document.replaceItemValue('ReviewerList', []);
+									document.removeItem('SUBMITTED');
+									document.replaceItemValue('ReviewerLog', reviewerLog + msg);
+							}
+							
+							if(!newResponseDoc.isResponse()) {
+								var tagsField = getComponent('tagsField').getValue();
+								document.replaceItemValue('Categories', tagsField);
+							}
+							}]]></xp:this.script>
+						</xp:executeScript>
+						<xp:saveDocument var="newResponseDoc">
+						</xp:saveDocument>
+
+
+
+						<xp:executeScript>
+							<xp:this.script><![CDATA[#{javascript:
+							if(!isMobile()) {
+								if(param.documentId !== null) {
+								 	context.reloadPage();
+								 } else {
+								 	context.redirectToPage(sessionScope.webFrom);
+								 }
+							 }
+						 
+							}]]></xp:this.script>
+						</xp:executeScript>
+					</xp:actionGroup>
+
+				</xp:actionGroup>
+			</xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+</xp:view>

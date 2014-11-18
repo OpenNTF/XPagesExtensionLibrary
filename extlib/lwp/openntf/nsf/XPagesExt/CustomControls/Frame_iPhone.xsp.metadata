@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579240032FA74" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="17e" sequence="28" unid="19E4D124B92DCE168025792000452268">
+<created><datetime dst="true">20111005T133507,92+01</datetime></created>
+<modified><datetime>20111119T181051,93-05</datetime></modified>
+<revised><datetime>20111119T181051,92-05</datetime></revised>
+<lastaccessed><datetime>20111119T181051,93-05</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20111009T103903,08+01</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=priandvm/O=renovations</name></updatedby>
+<wassignedby><name>CN=priandvm/O=renovations</name></wassignedby>
+<item name="$Flags"><text>gC~4;</text></item>
+<item name="$TITLE" sign="true"><text>Frame_iPhone.xsp</text></item>
+
+
+<item name="$FileNames" sign="true"><text>Frame_iPhone.xsp</text></item>
+
+
+
+<item name="$DesignerVersion"><text>8.5.2</text></item>
+
+
+
+</note>

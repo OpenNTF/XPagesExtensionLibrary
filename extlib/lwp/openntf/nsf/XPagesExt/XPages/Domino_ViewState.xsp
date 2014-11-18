@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+    xmlns:xc="http://www.ibm.com/xsp/custom">
+
+    <xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Domino/ViewState">
+        <xp:this.facets>
+            <xp:panel xp:key="LeftColumn" id="panel4">
+                <xc:LeftDomino id="cc4ccLeftDomino" ></xc:LeftDomino>
+            </xp:panel>
+        </xp:this.facets>
+        <xp:label
+            value="This shows the how the Domino view state can be kept when editing a document"
+            id="label5" style="font-weight:bold">
+        </xp:label>
+        <xp:br></xp:br>
+        <xp:br></xp:br>
+        <xp:panel id="panel1">
+            <xe:pagerSaveState id="pagerSaveState1" for="viewPanel1"
+                globalRows="true">
+            </xe:pagerSaveState>
+            <xp:viewPanel rows="10" id="viewPanel1"
+                pageName="/Domino_ViewStateForm.xsp">
+                <xp:this.facets>
+                    <xp:panel xp:key="headerPager" id="panel2">
+                        <xe:pagerExpand id="pagerExpand1"
+                            for="viewPanel1">
+                        </xe:pagerExpand>
+                            <xp:pager partialRefresh="true"
+                                layout="Previous Group Next" id="pager1">
+                            </xp:pager>
+                    </xp:panel>
+                    <xp:panel xp:key="footerPager" id="panel3">
+                        <xe:pagerSizes id="pagerSizes1" for="viewPanel1">
+                        </xe:pagerSizes>
+                    </xp:panel>
+                </xp:this.facets>
+                <xp:this.data>
+                    <xp:dominoView var="view1" viewName="AllThreads"
+                        expandLevel="1">
+                    </xp:dominoView>
+                </xp:this.data>
+                <xp:viewColumn columnName="Title" id="viewColumn1"
+                    displayAs="link" indentResponses="true">
+                    <xp:viewColumnHeader value="Title"
+                        id="viewColumnHeader1">
+                    </xp:viewColumnHeader>
+                </xp:viewColumn>
+                <xp:viewColumn id="viewColumn2" columnName="date">
+                    <xp:this.facets>
+                        <xp:viewColumnHeader xp:key="header"
+                            id="viewColumnHeader2" value="Date" sortable="true">
+                        </xp:viewColumnHeader>
+                    </xp:this.facets>
+                </xp:viewColumn>
+                <xp:viewColumn id="viewColumn3" columnName="Author">
+                    <xp:this.facets>
+                        <xp:viewColumnHeader xp:key="header"
+                            id="viewColumnHeader3" value="Author" sortable="true">
+                        </xp:viewColumnHeader>
+                    </xp:this.facets>
+                </xp:viewColumn></xp:viewPanel>
+        </xp:panel>
+    </xc:OneUILayout>
+</xp:view>
+

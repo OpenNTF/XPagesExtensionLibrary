@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xe:navigator id="outline">
+		<xe:this.treeNodes>
+			<xe:pageTreeNode page="/allDocuments.xsp"
+				label="All Documents" selection="/allDocuments.xsp"
+				role="navigation">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="/byMostRecent.xsp" label="By Most Recent" selection="/byMostRecent.xsp"
+				role="navigation">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="/byAuthor.xsp" label="By Author" selection="/byAuthor.xsp"
+				role="navigation">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="/byTag.xsp" label="By Tag" selection="/byTag.xsp"
+				role="navigation">
+			</xe:pageTreeNode>
+			<xe:pageTreeNode page="/myDocuments.xsp" label="My Documents" selection="/myDocuments.xsp"
+				role="navigation">
+			</xe:pageTreeNode>
+		</xe:this.treeNodes>
+	</xe:navigator>
+</xp:view>

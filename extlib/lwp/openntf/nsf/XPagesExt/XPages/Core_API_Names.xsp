@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.resources>
+		<xp:dojoModule name="extlib.dijit.ExtLib"></xp:dojoModule>
+	</xp:this.resources>
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/APINames">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This shows the some client side functions for manipulating names - Common Name extraction"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:table role="presentation">
+				<xp:tr>
+					<xp:td>
+						<xp:label id="label1">
+							<xp:this.value><![CDATA["john doe"<jd@acme.com>=]]></xp:this.value>
+						</xp:label>
+						<xp:scriptBlock>
+							<xp:this.value><![CDATA[document.write(XSP.extractCN('\"john doe\"&lt;jd@acme.com&gt;'))]]></xp:this.value>
+						</xp:scriptBlock>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label id="label2">
+							<xp:this.value><![CDATA[jd@acme.com=]]></xp:this.value>
+						</xp:label>
+						<xp:scriptBlock value="document.write(XSP.extractCN('jd@acme.com'))">
+						</xp:scriptBlock>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label id="label3" value="Frank Adams=">
+						</xp:label>
+						<xp:scriptBlock value="document.write(XSP.extractCN('Frank Adams'))">
+						</xp:scriptBlock>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label id="label4" value="CN=Frank Adams/O=renovations=">
+						</xp:label>
+						<xp:scriptBlock
+							value="document.write(XSP.extractCN('CN=Frank Adams/O=renovations'))">
+						</xp:scriptBlock>
+					</xp:td>
+				</xp:tr>
+				<xp:tr>
+					<xp:td>
+						<xp:label id="label6" value="Frank Adams/renovations=">
+						</xp:label>
+						<xp:scriptBlock
+							value="document.write(XSP.extractCN('Frank Adams/renovations'))">
+						</xp:scriptBlock>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

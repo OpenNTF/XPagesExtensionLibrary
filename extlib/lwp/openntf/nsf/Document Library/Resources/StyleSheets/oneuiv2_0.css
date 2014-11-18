@@ -1,0 +1,82 @@
+
+.xspInputFieldRichText td{border:1px solid #c0c0c0;}
+
+.xspDetailPanel{/*background-color:#b4d5fc;*/padding-top:5px;}
+
+.xspPagerRight{font-size:inherit;padding:0px 4px 0px 4px;}
+.xspHtmlTrViewSelected{background-color:#eefee1;}
+.xspHtmlTrView:hover{background-color:#ffffc8;}
+
+.xspPaddingLR5{padding:0px 5px 0px 5px;}
+
+/* todo: hide the branding logo */
+.lotusui .lotusLogo, .lotusLoginLogo {background-image:url("blank.gif");background-repeat:no-repeat;height:18px;width:126px;}
+
+.lotusForum .lotusPostContent .postDetailArea{border-top:thin solid #CCCCCC; border-bottom:thin solid #CCCCCC; padding-top:2px; padding-bottom: 2px; margin-top: 2px; margin-bottom: 2px;}
+.lotusForum .lotusPostContent .postMetaExtraArea{
+	color:#666666; 
+	font-size:0.9em; 
+	/*border-top:thin dashed #CCCCCC;*/ 
+	padding-top:2px; padding-bottom: 2px; 
+	margin-top: 2px; margin-bottom: 2px;
+}
+.lotusForum .lotusPostContent .postMetaExtraArea .xspSection-header a .xspSection-header-underline {
+	font-weight: normal;
+	color:#666666;
+}
+.lotusForum .lotusPostContent .postMetaExtraArea .xspSection-header a:hover .xspSection-header-underline {
+	color: #05386B; /*hover link blue*/
+}
+
+/* dojo slider */
+.dijitSlider{padding:3px 0px 3px 0px;}
+.dijitSliderBar{border-style:none !important;}
+.dijitSliderBumperH{width:2px !important;}
+.dijitSlider .dijitButtonNode{display:none !important;}
+
+.dijitSliderImageHandle{border:0px !important;background-position:left bottom !important;background-repeat:no-repeat !important;width:10px !important;height:11px !important;}
+.dijitSliderImageHandleH{top:-3px !important;background:transparent url(xpTagSliderHandle.gif) no-repeat scroll center top !important;}
+
+.dijitSliderProgressBar{background-color:#a5c0ec !important;}
+.dijitSliderRemainingBar{background-color:#e3e3e3 !important;}
+.dijitSliderBottomBumper, .dijitSliderLeftBumper{background-color:#a5c0ec !important;}
+
+.inactiveView .xspDataTable tbody tr:hover
+{
+	background: #ffffc8;
+}
+.inactiveView .xspDataTableViewPanel,
+.inactiveView .xspDataTable
+{
+	width: 100%;
+	/*table-layout: fixed;*/
+}
+.inactiveView .xspDataTable thead th {
+	font-weight: bold;
+}
+.inactiveView .xspDataTable thead th:first-child
+{
+	width: 20px;
+}
+
+.lotusForm td label
+{
+	font-weight: normal;
+}
+
+.lotusForm td.lotusFormLabel{
+	text-align: left;
+	padding: 0 0 0 25px;
+}
+
+.xvwFilterList
+{
+	line-height: 1.8em;
+}
+input.lotusBtn, button.lotusBtn{
+	margin-right: 5px;
+}
+.xspDataTable th,
+.xspDataTable th .xspPanelViewColumnHeader{
+	font-weight: normal;
+}

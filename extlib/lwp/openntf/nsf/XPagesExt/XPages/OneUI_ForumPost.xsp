@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/OneUI/ForumPost">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftOneUI id="cc4ccLeftOneUI" ></xc:LeftOneUI>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label value="This demos the OneUI Formu Post capability"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			To render properly, the forumPost object have to be in a "lotusContent lotusForum" div when using OneUIv2<xp:br></xp:br>
+			<xp:div styleClass="lotusForum">
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			This represents a selected entry
+				<xe:forumPost id="forumPost1">
+					<xp:this.facets>
+						<xp:image xp:key="authorAvatar" url="/NoPhoto.png" id="image1" height="45" width="45"></xp:image>
+						<xp:text xp:key="authorName" escape="true" id="computedField12"
+							value='Frank Adams'>
+						</xp:text>
+						<xp:text xp:key="authorMeta" escape="true" id="computedField13"
+							value='16 posts'>
+						</xp:text>
+						<xp:text escape="true" xp:key="postTitle" style="margin:0"
+							id="computedField8" tagName="h4" value="What's up today?">
+						</xp:text>
+						<xp:text xp:key="postDetails" escape="true" id="computedField7"
+							value="We all ready to celebrate the XPages Extension Library!">
+						</xp:text>
+						<xp:text xp:key="postMeta" escape="true" id="computedField11"
+							value="November, 23rd 2010">
+						</xp:text>
+						<xp:div xp:key="postActions">
+							<xp:link escape="true" text="Reply" id="link11">
+							</xp:link>
+							<xp:label value=" | Tags: " id="label4">
+							</xp:label>
+							<xp:link escape="true" text="See them" id="link12">
+							</xp:link>
+						</xp:div>
+					</xp:this.facets>
+				</xe:forumPost>
+				<xp:br></xp:br>
+			<xp:br></xp:br>
+			This represents a comment entry, that is within a list (ul/li) with specific styles for OneUIv2
+				<ul class="lotusCommentList">
+					<li class="lotusCommentItem">
+						<xe:forumPost id="forumPost2">
+							<xp:this.facets>
+								<xp:image xp:key="authorAvatar" url="/NoPhoto.png" id="image2" height="45" width="45"></xp:image>
+								<xp:text xp:key="authorName" escape="true" id="computedField1"
+									value='Frank Adams'>
+								</xp:text>
+								<xp:text xp:key="authorMeta" escape="true" id="computedField2"
+									value='16 posts'>
+								</xp:text>
+								<xp:text escape="true" xp:key="postTitle" style="margin:0"
+									id="computedField3" tagName="h4" value="What's up today?">
+								</xp:text>
+								<xp:text xp:key="postDetails" escape="true" id="computedField4"
+									value="We all ready to celebrate the XPages Extension Library!">
+								</xp:text>
+								<xp:text xp:key="postMeta" escape="true" id="computedField5"
+									value="November, 23rd 2010">
+								</xp:text>
+								<xp:div xp:key="postActions">
+									<xp:link escape="true" text="Reply" id="link1">
+									</xp:link>
+									<xp:label value=" | Tags: " id="label1">
+									</xp:label>
+									<xp:link escape="true" text="See them" id="link2">
+									</xp:link>
+								</xp:div>
+							</xp:this.facets>
+						</xe:forumPost>
+					</li>
+				</ul>
+			</xp:div>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

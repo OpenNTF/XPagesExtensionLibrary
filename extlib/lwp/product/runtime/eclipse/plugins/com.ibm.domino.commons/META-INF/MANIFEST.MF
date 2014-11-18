@@ -1,0 +1,19 @@
+Bundle-Name: Domino common utilities
+Bundle-SymbolicName: com.ibm.domino.commons;singleton:=true
+Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Vendor: IBM
+Bundle-ClassPath: .
+Eclipse-ExtensibleAPI: true
+Require-Bundle: com.ibm.notes.java.api,
+ com.ibm.commons,
+ org.apache.james.mime4j,
+ net.fortuna.ical4j;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.domino.commons,
+ com.ibm.domino.commons.internal,
+ com.ibm.domino.commons.json,
+ com.ibm.domino.commons.mime,
+ com.ibm.domino.commons.model,
+ com.ibm.domino.commons.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ManifestVersion: 2

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="CCC578FD00056DEB" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="382" sequence="16" unid="EA8EE887940F8C7E882569ED006DDE50">
+<created><datetime>20010208T120003,36-08</datetime></created>
+<modified><datetime>20120305T082322,24+00</datetime></modified>
+<revised><datetime>20120305T082322,23+00</datetime></revised>
+<lastaccessed><datetime>20120305T082322,24+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T100334,85+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></updatedby>
+<wassignedby><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name></wassignedby>
+<item name="$ImagesHigh" sign="true"><number>1</number></item>
+<item name="$ImagesColorize" sign="true"><number>0</number></item>
+<item name="$FileModDT" sign="true"><datetime>20010208T091958,00-08</datetime></item>
+<item name="$ImageNames" sign="true"><text>discActionButton.gif</text></item>
+<item name="$WebBrowserCompatible" sign="true"><number>1</number></item>
+<item name="$Flags"><text>34CiQv</text></item>
+<item name="$ImagesWide" sign="true"><number>2</number></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item>
+<item name="$TITLE" sign="true"><text>ActionButton.gif</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+</note>

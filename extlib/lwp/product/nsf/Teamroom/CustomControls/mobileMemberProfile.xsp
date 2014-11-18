@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		if(null != param.profile)
+		{
+			viewScope.personName = param.profile;
+		}else{
+			if(null != param.documentId)
+			{
+				var profile:NotesDocument = database.getDocumentByUNID(param.documentId);
+				if(null != profile)
+				{
+					var who = profile.getItemValueString("Who");
+					if(null != who)
+					{
+						viewScope.personName = @Name("[ABBREVIATE]", who);
+					}
+				}
+			}else{
+				viewScope.personName = "Anonymous";
+			}
+		}
+	}]]></xp:this.beforePageLoad>
+
+	<xp:panel id="readOnlyProfile" xp:key="readOnlyProfile">
+		<xp:this.data>
+			<xp:dominoDocument formName="ParticipantProfile"
+				action="openDocument" var="profileDoc" ignoreRequestParams="true">
+				<xp:this.documentId><![CDATA[#{javascript://
+					var viewName = "xvwMembers";
+					if(null != param.status && param.status == "0"){
+						viewName = "xvwInactiveMembers";
+					}
+					var db:NotesDatabase	= database;
+					var vw:NotesView		= db.getView(viewName);
+					var ve:NotesViewEntry	= vw.getEntryByKey(viewScope.personName, true);
+					var unid				= null;
+					if (null != ve) {
+						unid = ve.getUniversalID();
+					}
+					return(unid);}]]>
+				</xp:this.documentId>
+			</xp:dominoDocument>
+		</xp:this.data>
+	
+	<xe:formTable id="formTable1" formTitle="#{profileDoc.enterWho}"
+		xp:key="profile">
+		<xe:formRow id="formRow1" labelPosition="none">
+			<xp:image id="photo" alt="#{profileDoc.enterWho}"
+				height="130px" width="130px">
+				<xp:this.url><![CDATA[#{javascript:var imageName = "profileNoPhoto-118px.png";
+					var al:java.util.List = profileDoc.getAttachmentList("thumbnailUrl");
+					if(!al.isEmpty()){
+						var lastItemIndex = al.size() - 1;
+						if(lastItemIndex > 0){
+							var eo:NotesEmbeddedObject = al.get(lastItemIndex);
+							imageName = eo.getHref();
+						}else{
+							var eo:NotesEmbeddedObject = al.get(0);
+							imageName = eo.getHref();
+						}
+					}
+					return(imageName);}]]>
+				</xp:this.url>
+			</xp:image>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xe:formRow>
+		
+		<xe:formRow id="formRow3" label="Email: ">
+			<xp:link text="#{profileDoc.Email}">
+				<xp:this.loaded><![CDATA[${javascript:
+					var email = profileDoc.getItemValueString('Email');
+					if(null == email || email == "")
+					{
+						return false;
+					}
+					return true;
+				}]]></xp:this.loaded>
+				<xp:this.value><![CDATA[#{javascript:"mailto:" + profileDoc.getItemValueString('Email')}]]></xp:this.value>
+			</xp:link>
+			<xp:inputText id="inputText2" required="false"
+				value="Not specified" size="15" readonly="true">
+				<xp:this.loaded><![CDATA[${javascript:
+					var email = profileDoc.getItemValueString('Email');
+					if(null == email || email == "")
+					{
+						return true;
+					}
+					return false;
+				}]]></xp:this.loaded>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow7" label="Phone: ">
+			<xp:link text="#{profileDoc.Phone}">
+				<xp:this.loaded><![CDATA[${javascript:
+					var phone = profileDoc.getItemValueString('Phone');
+					if(null == phone || phone == "")
+					{
+						return false;
+					}
+					return true;
+				}]]></xp:this.loaded>
+				<xp:this.value><![CDATA[#{javascript:
+				 var phoneNum = "tel:";
+				 phoneNum += profileDoc.getItemValueString('Phone');
+				}]]></xp:this.value>
+			</xp:link>
+			<xp:inputText id="inputText3" required="false" value="Not specified"
+				size="15" readonly="true">
+				<xp:this.loaded><![CDATA[${javascript:
+					var phone = profileDoc.getItemValueString('Phone');
+					if(null == phone || phone == "")
+					{
+						return true;
+					}
+					return false;
+				}]]></xp:this.loaded>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow4" label="Department: ">
+			<xp:inputText id="Phone" required="false" size="15">
+				<xp:this.value><![CDATA[#{javascript:
+					var dept = profileDoc.getItemValueString('Department');
+					if(null == dept || dept == "")
+					{
+						return "Not specified";
+					}
+					return dept;
+				}]]></xp:this.value>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow5" label="Location: ">
+			<xp:inputText id="Role" required="true" size="15">
+				<xp:this.value><![CDATA[#{javascript:
+					var loc = profileDoc.getItemValueString('Location');
+					if(null == loc || loc == "")
+					{
+						return "Not specified";
+					}
+					return loc;
+				}]]></xp:this.value>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Job Title: ">
+			<xp:inputText id="inputText1" required="false" size="15">
+				<xp:this.value><![CDATA[#{javascript:
+					var job = profileDoc.getItemValueString('JobTitle');
+					if(null == job || job == "")
+					{
+						return "Not specified";
+					}
+					return job;
+				}]]></xp:this.value>
+			</xp:inputText>
+		</xe:formRow>
+	</xe:formTable>
+	</xp:panel>
+</xp:view>

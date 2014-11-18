@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom"
+	enableModifiedFlag="true">
+	
+	<xe:formTable id="formTable1" formTitle="#{compositeData.Name}"
+		xp:key="profile">
+		<xe:formRow id="formRow1" label="Picture:">
+			<xp:image id="photo" alt="#{compositeData.Name}" url="#{javascript:compositeData.URL}">
+			</xp:image>
+			<br />
+			<br />
+		</xe:formRow>
+		<xe:formRow id="formRow8" label="Name: ">
+			<xp:inputText id="inputText1" required="true"
+				disableClientSideValidation="true" value="#{javascript:compositeData.Name}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow9" label="Department: ">
+			<xp:inputText id="inputText2" required="true"
+				disableClientSideValidation="true" value="#{javascript:compositeData.Department}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow10" label="Job Title: ">
+			<xp:inputText id="inputText3" required="true"
+				disableClientSideValidation="true" value="#{javascript:compositeData.JobTitle}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow11" label="Status: ">
+			<xp:inputText id="inputText4" required="true"
+				disableClientSideValidation="true" size="15">
+				<xp:this.value>
+					<![CDATA[#{javascript:if(compositeData.Status == "1"){
+					return "Inactive";
+					}
+					return "Active";}]]>
+				</xp:this.value>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow3" label="Email: ">
+			<xp:inputText id="Email" required="true"
+				disableClientSideValidation="true" value="#{javascript:compositeData.Email}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow4" label="Phone: ">
+			<xp:inputText id="Phone" required="false"
+				disableClientSideValidation="true" value="#{javascript:compositeData.Phone}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow6" label="Location: &#160;">
+			<xp:inputText id="Location" required="true"
+				disableClientSideValidation="true" value="#{javascript:compositeData.Location}"
+				size="15">
+			</xp:inputText>
+		</xe:formRow>	
+	</xe:formTable>
+</xp:view>

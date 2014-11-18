@@ -1,0 +1,51 @@
+<div>
+<style>
+.xspPicker { height:100%; width:100%; }
+.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+.xspPickerBody { margin:0; padding:0; background:#fff; }
+.xspPickerItemSelected { background:#b7cdee !important; border: 1px dotted #b7b7b7;}
+.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none}
+.xspPickerItem:hover { background:#ffffc8; border:1px dotted #b7b7b7 }
+
+.xspHtmlTrViewSelected{background-color:#eefee1;}
+.xspHtmlTrView:hover{background-color:#ffffc8;}
+
+.xspPickerBody li {padding:2px 2px 2px 2px}
+.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
+.xspPickerButton2{width:70px!important;margin:0 8px 0 5px}
+.xspPickerButton3{width:100px!important;margin:0 8px 0 5px}
+</style>
+<table width="100%">
+  <tr>
+    <td colspan="2">
+		<span class="xspPickerInputText" dojoAttachPoint="inputText"></span>
+		<div dojoType="extlib.dijit.ListTextBox" dojoAttachPoint="inputList"></div>
+		<hr/>
+    	<div>
+    		<input dojoAttachPoint="edSearch" type="text"></input>
+    		<button dojoAttachPoint="btSearch" class="xspPickerButton2">${PickerListSearch_Search}</button>
+    	</div>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	<div class="xspPicker">
+	<div dojoAttachPoint="bodyWrapper" style="margin-top: 5px; width:100%;height:${listHeight}" class="xspPickerBodyWrapper"
+		 dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress, onfocus:_handleOnFocus">
+		<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+	</div>
+	</div>
+	</td>
+    <td valign="top">
+	  <table>
+		<tr>
+		  <td><button dojoAttachPoint="pkOk" class="xspPickerButton">${PickerListSearch_OK}</button></td>
+		</tr>
+		<tr>
+		  <td><button dojoAttachPoint="pkCancel" class="xspPickerButton">${PickerListSearch_Cancel}</button></td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</div>

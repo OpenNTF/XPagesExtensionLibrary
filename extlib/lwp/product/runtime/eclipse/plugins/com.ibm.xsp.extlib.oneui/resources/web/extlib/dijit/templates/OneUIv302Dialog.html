@@ -1,0 +1,16 @@
+<div class="lotusDialogWrapper" tabindex="-1" role="dialog" aria-labelledby="${id}_title">
+	<div class="lotusDialogBorder">
+		<div class='lotusDialog'>
+			<div dojoAttachPoint="titleBar" class="lotusDialogHeader">
+				<h1 id="dialogHeader" style="margin:0;" class="lotusHeading">
+					<span dojoAttachPoint="titleNode" id="${id}_title"></span>
+					
+				</h1>
+				<a dojoAttachPoint="closeButtonNode" title="${buttonCancel}" class="lotusDialogClose" href="javascript:;" dojoAttachEvent="onclick: onCancel">
+					<img aria-label="close button" alt="" src="/xsp/.ibmxspres/.oneuiv302/oneui/css/images/blank.gif"><span class="lotusAltText">X</span></img>
+				</a>
+			</div>
+			<div dojoAttachPoint="containerNode"></div>
+		</div>
+	</div>
+</div>

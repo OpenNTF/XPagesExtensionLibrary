@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/REST/Home">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftREST id="cc4ccLeftREST" ></xc:LeftREST>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			Extension Library Demo - REST -&#160;Domino Access Services (DAS)
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			The extension library includes three types of REST services:
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<ul>
+			<li>The Domino Data Service is a built-in service that represents Domino data in JSON format. Once you install the extension library, you can begin using the data service without creating an XPage or adding any Java code to the Domino server.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			</li>
+			<li>The REST services control is a component you add to an XPage. Often you add other controls to the page that directly reference the REST Services control. For example, a Dojo Data Grid can reference a REST Services control on the same page.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			</li>
+			<li>A Custom Database Servlet is a Java class you add to a database design. The servlet handles incoming HTTP requests usually by delegating to one of the REST service classes in the extension library. This type of REST service requires detailed knowledge of the Java programming language.
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			</li>
+			</ul>
+			For more information see <q>Extension Library REST Services</q>. This document is included with the extension library.  The other pages on the REST tab include examples of the REST services control and a custom database servlet.<xp:br></xp:br>
+			<xp:br></xp:br>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>

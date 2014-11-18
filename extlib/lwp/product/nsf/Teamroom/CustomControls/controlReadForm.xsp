@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:br/>
+	<xp:div
+		style="border-color:#E5E5E5;border-style:solid;border-width:thin;padding:0px 3px ">
+		<h1 id="title" tagName="h1" style="margin:0.3em 0">
+			<xp:text disableTheme="true"
+				value="#{javascript:compositeData.title}" />
+		</h1>
+		
+		<xp:div style="font-size: 1.5em; margin: .75em 0">
+			<xp:callback facetName="subheading" id="cb1"></xp:callback>
+		</xp:div>
+
+		<xp:div styleClass="lotusMeta">
+			<xp:callback facetName="meta" id="meta"></xp:callback>
+		</xp:div>
+		<xp:div
+			style="border-top-color:#E5E5E5;border-top-style:solid;border-top-width:thin;padding:6px 0px; margin:6px 0px">
+			<xp:callback id="c"></xp:callback>
+		</xp:div>
+		<xp:div styleClass="lotusActions"
+			style="border-top-color:#E5E5E5;border-top-style:solid;border-top-width:thin;padding:5px 3px 5px 3px">
+			<xp:callback id="cb3" facetName="actions"></xp:callback>
+		</xp:div>
+	</xp:div>
+</xp:view>

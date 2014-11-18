@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>controlForumPost</component-type>
+    <composite-name>controlForumPost</composite-name>
+    <composite-file>/controlForumPost.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+	&lt;xp:table style="background-color:#B4D5FC"&gt;&#xd;
+		&lt;xp:tr&gt;&#xd;
+			&lt;xp:td&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="authorAvatar"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="authorName"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="authorMeta"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+			&lt;/xp:td&gt;&#xd;
+			&lt;xp:td style="width: 100%"&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="postTitle" id="callback3"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="postMeta" id="callback6"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="postDetails" id="callback4"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+				&lt;div&gt;&#xd;
+					&lt;xp:callback facetName="postActions" id="callback5"&gt;&lt;/xp:callback&gt;&#xd;
+				&lt;/div&gt;&#xd;
+			&lt;/xp:td&gt;&#xd;
+		&lt;/xp:tr&gt;&#xd;
+	&lt;/xp:table&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+      </designer-extension>
+    </composite-extension>
+  </composite-component>
+</faces-config>

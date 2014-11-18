@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.beforePageLoad>
+		<![CDATA[#{javascript:
+			document1.overrideServerNameForXPageUrl = false;
+			document1.overrideNABServer = false;
+			document1.overrideNABDatabase = false;
+		}]]>
+	</xp:this.beforePageLoad>
+	
+	<xp:label id="label1" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.agents"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:label id="label2">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.message1"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<hr></hr>
+
+	<xp:label id="label3" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.markingdocumentsinactive"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:table border="0" cellpadding="0" cellspacing="0">
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label4">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.status"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="false" id="computedField3">
+					<xp:this.value><![CDATA[#{javascript:return "&nbsp;";}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:image id="image1">
+					<xp:this.url><![CDATA[#{javascript:
+
+var thisDatabase:NotesDatabase = session.getCurrentDatabase();
+var profileDocument:NotesDocument = thisDatabase.getProfileDocument("TempVars","");
+if (profileDocument!=null)
+{
+	if (profileDocument.getItemValueString("FilingEnabled")=="0")
+		return "/agentDisabled.gif";
+	else
+		return "/agentEnabled.gif";
+}
+else
+{
+	println("Could not locate TempVars profile document");
+}
+
+}]]></xp:this.url>
+				</xp:image>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="false" id="computedField4">
+					<xp:this.value><![CDATA[#{javascript:return "&nbsp;";}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:label id="label5">
+					<xp:this.value><![CDATA[#{javascript:
+
+var thisDatabase:NotesDatabase = session.getCurrentDatabase();
+var profileDocument:NotesDocument = thisDatabase.getProfileDocument("TempVars","");
+if (profileDocument!=null)
+{
+	if (profileDocument.getItemValueString("FilingEnabled")=="0")
+		return I18n.format(strings.getString("setup.advanced.disabled"));
+	else
+		return I18n.format(strings.getString("setup.advanced.enabled"));
+}
+else
+{
+	println("Could not locate TempVars profile document");
+}
+}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xp:br></xp:br>
+
+	<xp:label id="label6">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.defaultinterval"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:text escape="false" id="computedField1">
+		<xp:this.value><![CDATA[#{javascript:return "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";}]]></xp:this.value>
+	</xp:text>
+
+	<xp:comboBox id="intervalComboBox"
+		value="#{document1.DefaultFilingInterval}" role="drop down"
+		title="choose interval for marking documents inactive" defaultValue="5">
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval1')}" 
+			itemValue="#{javascript:'Never'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval2')}" 
+			itemValue="#{javascript:'1 week'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval3')}" 
+			itemValue="#{javascript:'2 weeks'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval4')}" 
+			itemValue="#{javascript:'3 weeks'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval5')}" 
+			itemValue="#{javascript:'1 month'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval6')}" 
+			itemValue="#{javascript:'2 months'}">
+		</xp:selectItem>
+		<xp:selectItem itemLabel="#{javascript:strings.getString('setup.advanced.interval7')}" 
+			itemValue="#{javascript:'3 months'}">
+		</xp:selectItem>
+	</xp:comboBox>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:checkBox id="checkBox1" value="#{document1.FileOpenDocs}">
+		<xp:this.text><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.allowdocuments"));}]]></xp:this.text>
+		<xp:this.uncheckedValue><![CDATA[#{javascript:return "";}]]></xp:this.uncheckedValue>
+		<xp:this.checkedValue><![CDATA[#{javascript:return "1";}]]></xp:this.checkedValue>
+	</xp:checkBox>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<hr></hr>
+
+	<xp:label id="label10" style="font-weight:bold">
+		<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.reminders"));}]]></xp:this.value>
+	</xp:label>
+
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+
+	<xp:table border="0" cellpadding="0" cellspacing="0">
+		<xp:tr>
+			<xp:td>
+				<xp:label id="label11">
+					<xp:this.value><![CDATA[#{javascript:return I18n.format(strings.getString("setup.advanced.status"));}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="false" id="computedField5">
+					<xp:this.value><![CDATA[#{javascript:return "&nbsp;";}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:image id="image3">
+					<xp:this.url><![CDATA[#{javascript:
+
+var thisDatabase:NotesDatabase = session.getCurrentDatabase();
+var profileDocument:NotesDocument = thisDatabase.getProfileDocument("TempVars","");
+if (profileDocument!=null)
+{
+	if (profileDocument.getItemValueString("ReminderEnabled")=="0")
+		return "/agentDisabled.gif";
+	else
+		return "/agentEnabled.gif";
+}
+else
+{
+	println("Could not locate TempVars profile document");
+}
+
+}]]></xp:this.url>
+				</xp:image>
+			</xp:td>
+			<xp:td>
+				<xp:text escape="false" id="computedField6">
+					<xp:this.value><![CDATA[#{javascript:return "&nbsp;";}]]></xp:this.value>
+				</xp:text>
+			</xp:td>
+			<xp:td>
+				<xp:label id="label12">
+					<xp:this.value><![CDATA[#{javascript:
+
+var thisDatabase:NotesDatabase = session.getCurrentDatabase();
+var profileDocument:NotesDocument = thisDatabase.getProfileDocument("TempVars","");
+if (profileDocument!=null)
+{
+	if (profileDocument.getItemValueString("ReminderEnabled")=="0")
+		return I18n.format(strings.getString("setup.advanced.disabled"));
+	else
+		return I18n.format(strings.getString("setup.advanced.enabled"));
+}
+else
+{
+	println("Could not locate TempVars profile document");
+}
+}]]></xp:this.value>
+				</xp:label>
+			</xp:td>
+		</xp:tr>
+	</xp:table>
+
+	<xp:div>
+		<xp:br></xp:br>
+		<hr></hr>
+		<xp:label id="label13" style="font-weight:bold">
+			<xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.webinformation")}]]></xp:this.value>
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:label id="label14">
+			<xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.webserver")}]]></xp:this.value>
+		</xp:label>
+		<xp:text escape="false" id="computedField2">
+			<xp:this.value><![CDATA[#{javascript:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}]]></xp:this.value>
+		</xp:text>
+		<xp:label id="label7" for="URLAddress" value="#{javascript:'http://'}">
+			<!-- xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.http")}]]></xp:this.value-->
+		</xp:label>
+		<xp:inputText id="URLAddress" size="60"
+			value="#{document1.URLAddress}"
+			disabled="#{javascript:document1.getItemValueString('overrideServerNameForXPageUrl') == 'true' ? false : true}"
+			required="true">
+			<xp:this.validators>
+				<xp:validateRequired
+					message="Please provide a web server name or address">
+				</xp:validateRequired>
+			</xp:this.validators>
+			<xp:this.defaultValue><![CDATA[#{javascript:
+var serverName = document1.getItemValueString("URLAddress");
+if("" == serverName){
+	serverName = facesContext.getExternalContext().getRequest().getServerName();
+	if("127.0.0.1" == serverName){
+		serverName = "localhost";
+	}
+}
+return serverName;}]]></xp:this.defaultValue>
+		</xp:inputText>
+		<xp:checkBox id="overrideServerNameForXPageUrl"
+			value="#{document1.overrideServerNameForXPageUrl}"
+			text="Override">
+			<xp:this.rendered>
+				<![CDATA[#{javascript:userBean.accessLevel >= lotus.domino.ACL.LEVEL_EDITOR && userBean.canCreateDocs}]]>
+			</xp:this.rendered>
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="partial" refreshId="URLAddress" disableValidators="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("URLAddress").setDisabled(!java.lang.Boolean.valueOf(this.getParent().getValue()))}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+		<xp:br></xp:br>
+		<xp:br></xp:br>
+		<xp:label id="label8" style="font-weight:bold">
+			<xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.nabinformation")}]]></xp:this.value>
+		</xp:label>
+		<xp:br></xp:br>
+		<xp:label id="label9" for="NABServer" style="width:200px">
+			<xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.nabserver")}]]></xp:this.value>
+		</xp:label>
+		<xp:text escape="false" id="computedField7">
+			<xp:this.value><![CDATA[#{javascript:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}]]></xp:this.value>
+		</xp:text>
+		<xp:inputText id="NABServer" size="60" style="position:relative;left:3px"
+			value="#{document1.NABServer}"
+			disabled="#{javascript:document1.getItemValueString('overrideNABServer') == 'true' ? false : true}"
+			required="false">
+		</xp:inputText>
+		<xp:checkBox id="overrideNABServer"
+			value="#{document1.overrideNABServer}"
+			text="Override">
+			<xp:this.rendered>
+				<![CDATA[#{javascript:userBean.accessLevel >= lotus.domino.ACL.LEVEL_EDITOR && userBean.canCreateDocs}]]>
+			</xp:this.rendered>
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="partial" refreshId="NABServer" disableValidators="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("NABServer").setDisabled(!java.lang.Boolean.valueOf(this.getParent().getValue()))}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+		<xp:br></xp:br>
+		<xp:label id="label16">
+			<xp:this.value><![CDATA[#{javascript:strings.getString("setup.advanced.nabdatabase")}]]></xp:this.value>
+		</xp:label>
+		<xp:text escape="false" id="computedField8">
+			<xp:this.value><![CDATA[#{javascript:"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"}]]></xp:this.value>
+		</xp:text>
+		<xp:inputText id="NABDatabase" size="60"
+			style="position:relative;left:2px" value="#{document1.NABDatabase}"
+			disabled="#{javascript:document1.getItemValueString('overrideNABDatabase') == 'true' ? false : true}"
+			required="false">
+		</xp:inputText>
+		<xp:checkBox id="overrideNABDatabase"
+			value="#{document1.overrideNABDatabase}"
+			text="Override">
+			<xp:this.rendered>
+				<![CDATA[#{javascript:userBean.accessLevel >= lotus.domino.ACL.LEVEL_EDITOR && userBean.canCreateDocs}]]>
+			</xp:this.rendered>
+			<xp:eventHandler event="onchange" submit="true"
+				refreshMode="partial" refreshId="NABDatabase" disableValidators="true">
+				<xp:this.action><![CDATA[#{javascript:getComponent("NABDatabase").setDisabled(!java.lang.Boolean.valueOf(this.getParent().getValue()))}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:checkBox>
+	</xp:div>
+</xp:view>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='view' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='802579670054C522'>
+<noteinfo noteid='1b2' unid='E1DB29FF6DFA7DEC802579670054CD27' sequence='10'>
+<created><datetime>20111215T152615,43+00</datetime></created>
+<modified><datetime>20120227T095733,98+00</datetime></modified>
+<revised><datetime>20120227T095733,97+00</datetime></revised>
+<lastaccessed><datetime>20120227T095733,98+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152615,55+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name
+>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name
+>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name></updatedby>
+<wassignedby><name>CN=admin/O=dubmob</name></wassignedby>
+<item name='$LANGUAGE' sign='true'><text>en</text></item>
+<item name='$FormulaClass' sign='true'><text>1</text></item>
+<item name='$TITLE' sign='true'><text>($xpCategoryCloud)|xpCategoryCloud</text></item>
+<item name='$Index' sign='true'><text>/C</text></item>
+<item name='$Formula' summary='true' sign='true'><formula compiled='true'>
+xgACACAACgBDYXRlZ29yaWVzBQAKAENhdGVnb3JpZXMDAAUAIAAbAAIACgAJAENhdGVnb3JpZXMk
+Q29uZmxpY3QABAAEAAAAWgAFAAQAZm9ybWEBAQAHAHByb2ZpbGUARwIeAQQABQAEAGZvcm1hAQEA
+BwBhcmNoaXZlAEcCHgEEABwCBQAKAENhdGVnb3JpZXNeAQEAAAALAgQAHAIDAAcAJgAgAAlMMVQx
+MFMxM1MxNFJUVDIzUzI2UzI3UlRUMzJTMzNT
+</formula></item>
+<item name='$Collation' summary='true'>
+<rawitemdata type='2'>
+FwABAABECGYHAAAKAENhdGVnb3JpZXM=
+</rawitemdata></item>
+<item name='$VIEWFORMAT' summary='true' sign='true'>
+<rawitemdata type='5'>
+AQABAHcAi0wAAFZDowQKAAoAIgAAAFAAAQENCQABAAAAAAAAAAICAAAAQ2F0ZWdvcmllc0NhdGVn
+b3JpZXMiAAIAIAAKAENhdGVnb3JpZXMFAAoAQ2F0ZWdvcmllcwMAJgABAAAAAQEACQEACAoBAQQK
+AAA/AK0rBAEBAAEBAAAAAAAAAABXQwIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAA
+AAAAAAAAAAAAQgBQAAAAAQD///8AAQDv7+8AAQAAAAAAAAAAAAAAAQABAP///wABALTVxQAAAAEA
+gAAAAAEAAAD/AAEAAAAAAAAACAAAAAAAAQA=
+</rawitemdata></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$Flags'><text>YT</text></item>
+<item name='$WebFlags' sign='true'><text>S</text></item>
+<item name='$DesignerVersion' sign='true'><text>8.5</text></item>
+<item name='$V5ACTIONS' sign='true'>
+<rawitemdata type='1'>
+vRzVAAAAAQABAAAAwQAAAAAAAAACAAAJCAAFAHn/bAABAIu8nQABAAAAAAABAAAAAAABALrVxQAD
+ACIAAAAAAAAAAAADAAAAAgAACQAAAAAAAAAAE0AFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAPz/OgAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=
+</rawitemdata></item></note>
+

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xp:dominoDocument formName="Subteam" var="subteam"
+			ignoreRequestParams="true" computeWithForm="onsave">
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:link escape="true" id="backLink" value="#{javascript:sessionScope.webFrom}">
+		<xp:this.text><![CDATA[#{javascript:
+			viewStateBean.restoreState = true;
+			return I18n.format(strings.getString("back.to"), sessionScope.webFromName);
+		}]]></xp:this.text>
+	</xp:link>
+
+	<xp:br></xp:br>
+
+	<xe:formTable disableRequiredMarks="false"
+		loaded="${javascript:subteam.isEditable()}" id="subteamFormTable"
+		disableErrorSummary="false" style="width:100%;" labelWidth="120px"
+		labelPosition="left">
+
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<h2 id="h2">
+					Create Subteam
+				</h2>
+			</xp:panel>
+			<xp:panel xp:key="footer">
+				<xp:button value="Save" id="btnSave">
+					<xp:this.loaded><![CDATA[${javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs}]]></xp:this.loaded>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:saveDocument></xp:saveDocument>
+								<xp:openPage name="/members.xsp">
+								</xp:openPage>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:link text="Cancel" id="lnkCancel" role="button"
+					title="cancel">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="memberManagementDynamicContent"
+						immediate="true">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:confirm
+									message="Cancel creating a new subteam?">
+								</xp:confirm>
+								<xe:changeDynamicContentAction
+									for="memberManagementDynamicContent" facetName="membersView">
+								</xe:changeDynamicContentAction>
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xe:this.facets>
+
+		<xe:formRow label="Name:" labelPosition="left">
+			<xp:inputText value="#{subteam.STName}" id="fldSTName"
+				style="width:98%;" required="true">
+				<xp:this.validators>
+					<xp:validateRequired message="Please specify a subteam name">
+					</xp:validateRequired>
+				</xp:this.validators>
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Purpose" labelPosition="left">
+			<xp:inputText value="#{subteam.Position}" id="fldPurpose"
+				style="width:98%;">
+			</xp:inputText>
+		</xe:formRow>
+
+		<xe:formRow label="Members:" labelPosition="top">
+			<xe:djextNameTextBox id="fldMembers" multipleSeparator=","
+				value="#{subteam.PriNameSelection}" waiRole="button"
+				title="select members">
+				<xe:this.validators>
+					<xp:validateRequired
+						message="Please select subteam members">
+					</xp:validateRequired>
+				</xe:this.validators>
+			</xe:djextNameTextBox>
+			<xe:valuePicker id="vpSubteamMembers" for="fldMembers"
+				dialogTitle="Select subteam members..." dojoType="extlib.dijit.PickerCheckbox"
+				pickerText="#{javascript: strings.picker_valueEmpty_select }">
+				<xe:this.dataProvider>
+					<xe:dominoViewValuePicker viewName="PeopleLookup"
+						labelColumn="$3">
+					</xe:dominoViewValuePicker>
+				</xe:this.dataProvider>
+			</xe:valuePicker>
+		</xe:formRow>
+
+		<xe:formRow label="Status:" labelPosition="left">
+			<xp:div styleClass="subteamRadioGroup">
+				<xp:radioGroup id="rdgStatus" value="#{subteam.FileThisStatusDoc}"
+					defaultValue="0" style="height:0px">
+					<xp:selectItem itemLabel="Active" itemValue="0">
+					</xp:selectItem>
+					<xp:selectItem itemLabel="Inactive" itemValue="1">
+					</xp:selectItem>
+				</xp:radioGroup>
+			</xp:div>
+		</xe:formRow>
+	</xe:formTable>
+
+</xp:view>

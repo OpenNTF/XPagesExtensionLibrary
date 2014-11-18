@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+
+	<xp:panel id="panelSectionReviewLog">
+		<xe:formTable style="font-size:8pt" disableErrorSummary="true">
+			<xe:formRow labelPosition="none">
+				<xp:label id="labelActionResponseTitle"
+					style="text-decoration:underline" value="Reviewer Log">
+					<xp:this.rendered><![CDATA[#{javascript:var log = document1.getItemValueString('ReviewerLog');
+return (log!=null)&&(log!="");}]]></xp:this.rendered>
+				</xp:label>
+				<xp:br></xp:br>
+				<xp:span id="labelActionResponseArea">
+					<xp:repeat var="line">
+						<xp:this.value><![CDATA[#{javascript://
+									var log = document1.getItemValueString('ReviewerLog');
+									// output <br/> instead of \n
+									if( !log ) return []; 
+									return log.split('\n');
+								}]]></xp:this.value>
+						<xp:text disableTheme="true" value="#{line}">
+						</xp:text>
+						<xp:br />
+					</xp:repeat>
+				</xp:span>
+			</xe:formRow>
+		</xe:formTable>				
+	</xp:panel>
+</xp:view>

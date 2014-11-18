@@ -1,0 +1,89 @@
+.s-basicpanel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.s-stack {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.s-label-light {
+    font-family: lucida grande,helvetica,arial,sans-serif;
+	font-size: 70%;
+	font-weight: normal;
+	color: rgb(90,90,115);
+}
+
+.s-sidecalendar-entry-highlighted {
+	background-color: rgb(98,149,215) !important;
+	color: white !important;
+}
+
+.s-sidecalendar-dateindicator, .s-sidecalendar-dateindicator-highlighted {
+	font-family: lucida grande,helvetica,arial,sans-serif;
+	font-size: 70%;
+	font-weight: bold;
+	color: rgb(90,90,115);
+ 	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 1px 4px;
+	border: none;
+	cursor: pointer;
+}
+
+.s-sidecalendar-dateindicator-highlighted{
+	color: black;
+	padding: 0px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white rgb(176, 112, 48) rgb(176, 112, 48) white;
+	background-color: rgb(248, 184, 80);
+}
+
+.s-toppanel {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	overflow: hidden;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.s-bottompanel {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	overflow: hidden;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.s-nodisplay {
+	display: none;
+}
+
+.xs-handcursor {
+	cursor: D_HANDCURSOR_NQ;
+}
+
+.s-sidecalendar-entry {
+	border-style: solid;
+	border-color: #b5c3d6;
+	border-width: 0px 0px 1px;
+	padding: 1px 2px;
+}
+
+.s-panel-border {
+	border: solid #d8e9fc 1px;
+}

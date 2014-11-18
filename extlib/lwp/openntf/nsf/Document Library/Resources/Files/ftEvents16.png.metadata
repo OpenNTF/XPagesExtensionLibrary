@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579670054C522" version="8.5" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="2d6" sequence="10" unid="AF33E2EC162B6CF3802579670054CE84">
+<created><datetime>20111215T152618,92+00</datetime></created>
+<modified><datetime>20120106T115151,25+00</datetime></modified>
+<revised><datetime>20120106T115151,24+00</datetime></revised>
+<lastaccessed><datetime>20120106T115151,25+00</datetime></lastaccessed>
+<addedtofile><datetime>20111215T152619,88+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name><name>CN=admin/O=dubmob</name><name>CN=arthur-server/O=dubmob</name></updatedby>
+<wassignedby><name>CN=arthur-server/O=dubmob</name></wassignedby>
+<item name="$TITLE"><text>ftEvents16.png</text></item>
+<item name="$Flags"><text>345CgQ</text></item>
+<item name="$FlagsExt" sign="true"><text>D</text></item>
+<item name="$FileModDT" sign="true"><datetime dst="true">20100909T193832,10+01</datetime></item>
+<item name="$LANGUAGE" sign="true"><text>en</text></item>
+<item name="$DesignerVersion" sign="true"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>ftEvents16.png</text></item></note>

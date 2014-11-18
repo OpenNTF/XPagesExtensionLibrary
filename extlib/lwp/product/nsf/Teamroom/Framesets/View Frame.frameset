@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='CCC579050049E718'>
+<noteinfo noteid='196' unid='A69A4EA70C8EFEAC802577C2003DFBC3' sequence='7'>
+<created><datetime dst='true'>20101020T121701,47+01</datetime></created>
+<modified><datetime>20120207T095544,94+00</datetime></modified>
+<revised><datetime dst='true'>20111026T122252,06+01</datetime></revised>
+<lastaccessed><datetime>20120207T095544,94+00</datetime></lastaccessed>
+<addedtofile><datetime>20120207T095544,94+00</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=system/O=renovations</name><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name><name
+>CN=Dave Cohen/OU=Westford/O=IBM</name><name>CN=Simon McLoughlin/OU=Ireland/O=IBM</name><name
+>CN=Tony McGuckin/OU=Ireland/O=IBM</name></updatedby>
+<revisions><datetime dst='true'>20101020T121701,49+01</datetime><datetime
+ dst='true'>20110830T205048,21-04</datetime><datetime dst='true'>20111006T160528,08+01</datetime><datetime
+ dst='true'>20111014T083947,93+01</datetime></revisions>
+<wassignedby><name>CN=Tony McGuckin/OU=Ireland/O=IBM</name></wassignedby>
+<item name='$TITLE' sign='true'><text>View Frame|View Frame</text></item>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$FrameSet' sign='true'>
+<rawitemdata type='1'>
+7/8YAAIAAwAAAAAAAAAAAAAAAAAAAAAA8P8+AEUAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAUAAAAA
+AAIAAQAAAAAAAQB4tLwAAAACAGEAAQAAAAMAAQDx/0kAAQAAAABAAAADAAEAAQAAAAAACQAAAAwA
+AQB4tLwAAABOb3Rlc1ZpZXdOb3Rlc1ByZXZpZXcBAP///wABAAAKAQAAAAAAP/b/LwAAAAAAAwAC
+AA0AAAAAAAAAAAAAAAAAAAAAAAAAAABBbm5vdW5jZW1lbnRzP/H/XADhAAAAAGAAAAMAAQABAAAA
+AAAMAAAAAAABAHi0vAAAAE5vdGVzUHJldmlldxQAFAAAABIAAQAHAFByZXZpZXcAAwAAAAIAKAAB
+AHi0vAABAAAKAQAAAAAA
+</rawitemdata></item>
+<item name='$Flags'><text>#34CQ</text></item>
+<item name='$DesignerVersion' sign='true'><text>6</text></item>
+<item name='$LANGUAGE' sign='true'><text>en</text></item></note>
+

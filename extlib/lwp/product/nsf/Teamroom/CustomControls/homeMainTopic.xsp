@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" 
+	xmlns:xc="http://www.ibm.com/xsp/custom" 
+	xmlns:xe="http://www.ibm.com/xsp/coreex">
+	
+	<xp:this.data>
+		<xp:dominoDocument var="document1" formName="MainTopic"
+			ignoreRequestParams="true" computeWithForm="onsave"
+			documentId="#{compositeData.documentId}"
+			action="#{javascript:(null != compositeData.documentId)? 'editDocument' : 'newDocument'}">
+		</xp:dominoDocument>
+	</xp:this.data>
+	<xp:this.beforePageLoad><![CDATA[#{javascript://
+		// Initialize viewScope.controlDocType
+		// (note, for custom docTypes the value is "Discussion" instead
+		//  of the custom docType string.)
+		
+		var docType = null;
+		
+		// read existing docType from the document
+		var docTypeVector = document1.getItemValue('DocType');
+		if( docTypeVector && !docTypeVector.isEmpty() ){
+			docType = docTypeVector.get(0);
+		}
+		
+		// handle new doc being specified as a meeting in advance 
+		if (! docType && param.docType==strings.defaultdoctype3) {
+			docType = param.docType;
+		}
+		
+		if( ! docType ){ 
+			// Get the default document
+			var docType = @DbColumn(@DbName(), "MissionLookup", 5);
+			if(!docType){
+				// Default to the "Discussion" document type
+				docType = strings.defaultdoctype1;
+			}
+			else{
+				// Use the first document type
+				docType = docType[0];
+			}
+		}
+		// convert any non-default doctype to "Discussion", because the discussion
+		// fields are used for custom doctypes
+		if ( docType!=strings.defaultdoctype1 
+				&& docType!=strings.defaultdoctype2
+				&& docType!=strings.defaultdoctype3
+				&& docType!= strings.defaultdoctype4 ){
+			docType = strings.defaultdoctype1;
+		}
+		
+		// Put the newly selected value into the view scope
+		viewScope.controlDocType = docType;
+		//print("viewScope.controlDocType=" + viewScope.controlDocType);}]]></xp:this.beforePageLoad>
+
+	<xp:this.afterPageLoad><![CDATA[#{javascript:if (param.date != null) {	
+	// user creating a meeting entry that is not for today
+	var mtgDate;
+	var sDate = param.date;
+	try {
+		var sdf:java.text.SimpleDateFormat = new java.text.SimpleDateFormat("yyyyMMdd");
+		var mtgDate = sdf.parse(sDate);
+		document1.setValue("MtgDate",mtgDate);
+		} catch (e) { 
+			// let the default value | bindings handle it
+		}
+	if (param.documentId != null) {
+		// rescheduling an existing entry - need to update default date/times
+		try {
+		var startDate = document1.getItemValue("StartDateTime");
+		if (startDate instanceof java.util.Vector) {
+			if (startDate.size() > 0) {
+				var datetime = startDate.get(0);
+				if (datetime != null) {
+					var javadatetime = datetime.toJavaDate();
+					var yyyy = sDate.substring(0,4);
+					var mm = sDate.substring(4,6);
+					var dd = sDate.substring(6,8);
+					var hours = javadatetime.getHours();
+					var mins = javadatetime.getMinutes();
+					//print("SDT=" + yyyy + mm + dd + hours + mins);
+					document1.setValue("StartDateTime",@Time(yyyy, mm, dd, hours, mins,0));
+					document1.setValue("MtgTime",@Time(yyyy, mm, dd, hours, mins,0));
+					startDate = document1.getItemValue("EndDateTime");
+					if (startDate instanceof java.util.Vector) {
+						if (startDate.size() > 0) {
+							datetime = startDate.get(0);
+							if (datetime != null) {
+								javadatetime = datetime.toJavaDate();
+								hours = javadatetime.getHours();
+								mins = javadatetime.getMinutes();
+								//print("EDT=" + yyyy + mm + dd + hours + mins);
+								document1.setValue("EndDateTime",@Time(yyyy, mm, dd, hours,mins,0));
+							}
+						}
+					}
+				}
+			}
+		}
+		} catch (e) {}
+	}	
+}}]]></xp:this.afterPageLoad>
+
+	<xp:label id="labelIndexOfPrototype" rendered="true">
+		<xp:this.value><![CDATA[#{javascript:// Prototype the indexOf function for JavaScript arrays
+if (!Array.prototype.indexOf)
+{
+  Array.prototype.indexOf = function(elt /*, from*/)
+  {
+    var len = this.length;
+
+    var from = Number(arguments[1]) || 0;
+    from = (from < 0)
+         ? Math.ceil(from)
+         : Math.floor(from);
+    if (from < 0)
+      from += len;
+
+    for (; from < len; from++)
+    {
+      if (from in this &&
+          this[from] === elt)
+        return from;
+    }
+    return -1;
+  };
+}
+
+return "";}]]></xp:this.value>
+	</xp:label>
+	
+		<div class="xvwForm">
+	<xe:formTable id="newForm" disableRequiredMarks="true"
+		legend="new document form">
+		<xe:this.facets>
+			<xp:panel xp:key="header">
+				<xp:text
+					rendered="#{javascript: null == compositeData.documentId}"
+					tagName="h2" id="titleNew" value="New Main Document">
+				</xp:text>
+				<xp:text
+					rendered="#{javascript: null != compositeData.documentId}"
+					tagName="h2" id="titleEdit" value="Edit Document">
+				</xp:text>
+			</xp:panel>
+		</xe:this.facets>
+		<xe:formRow labelPosition="none">
+			<xp:table style="width:99%" border="0" cellpadding="0"
+				cellspacing="0">
+				<xp:tr>
+					<xp:td style="width:10%;min-width:10%;">
+						<xp:label id="lblDocumentType"
+							value="Document type:" for="fieldDocType"
+							style="white-space:nowrap;">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:comboBox id="fieldDocType"
+							value="#{document1.DocType}" style="width:100%;"
+							defaultValue="#{javascript:viewScope.controlDocType;}">
+							<xp:selectItems id="selectItems1">
+								<xp:this.value><![CDATA[#{javascript://
+									// Get the default document
+                                    var docType = @DbColumn(@DbName(), "MissionLookup", 5);
+                                   
+                                    if(docType=="")
+                                    {
+                                        docType = I18n.format(strings.getString("defaultdoctype1"));
+                                    }
+                                    return docType;
+								}]]></xp:this.value>
+							</xp:selectItems>
+							<xp:eventHandler event="onchange"
+								submit="true" refreshMode="partial"
+								refreshId="divDocTypeRefresh" execMode="partial"
+								disableValidators="true">
+								<xp:this.action><![CDATA[#{javascript://
+									// Get the combo box control
+									var controlDocType = getComponent("fieldDocType");
+									// Get the newly selected value
+									var docType = controlDocType.getSubmittedValue();
+									if( null == docType ){
+										docType = controlDocType.getValue();
+									}
+									// convert any non-default doctype to "Discussion", because the discussion
+									// fields are used for custom doctypes
+									if ( docType!=strings.defaultdoctype1 
+											&& docType!=strings.defaultdoctype2
+											&& docType!=strings.defaultdoctype3
+											&& docType!= strings.defaultdoctype4 ){
+										docType = strings.defaultdoctype1;
+									}
+									// Put the newly selected value into the view scope
+									viewScope.controlDocType=docType;
+								}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:comboBox>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xe:formRow>
+		<xe:formRow labelPosition="none">
+			<xp:table style="width:99%" border="0" cellpadding="0"
+				cellspacing="0">
+				<xp:tr>
+					<xp:td style="width:10%;min-width:10%;">
+						<xp:label id="lblSubject" value="Subject:"
+							for="subjectField2">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText id="subjectField2"
+							style="width:100%;" value="#{document1.Subject}" required="true"
+							disableClientSideValidation="false" autocomplete="off">
+							<xp:this.validators>
+								<xp:validateRequired
+									message="Please provide a subject">
+								</xp:validateRequired>
+							</xp:this.validators>
+						</xp:inputText>
+					</xp:td>
+				</xp:tr>
+			</xp:table>
+		</xe:formRow>
+
+		<xe:formRow labelPosition="none">
+			<xp:span style="vertical-align:baseline;">
+				<xp:this.rendered><![CDATA[#{javascript://
+					viewScope.tagOptions = @DbColumn(@DbName(), 'MissionLookup', 4);
+					true;}]]>
+				</xp:this.rendered>
+
+				<xp:table style="width:99%" border="0" cellpadding="0"
+					cellspacing="0">
+					<xp:tr>
+						<xp:td style="width:10%;min-width:10%;">
+							<xp:label id="lblTags" value="Tags:">
+							</xp:label>
+						</xp:td>
+						<xp:td>
+							<xe:djextNameTextBox id="tagsField"
+								styleClass="tagsField" multipleSeparator=","
+								value="#{document1.Categories}" waiRole="button"
+								title="control to select tags">
+							</xe:djextNameTextBox>
+							<xe:valuePicker id="tagsPicker"
+								pickerText="Select" for="tagsField" listWidth="300">
+								<xe:this.dataProvider>
+									<xe:simpleValuePicker
+										caseInsensitive="true" labelSeparator=","
+										valueListSeparator=","
+										valueList="#{javascript:viewScope.tagOptions }">
+									</xe:simpleValuePicker>
+								</xe:this.dataProvider>
+							</xe:valuePicker>
+						</xp:td>
+					</xp:tr>
+				</xp:table>
+			</xp:span>
+		</xe:formRow>
+
+		<xe:formRow labelPosition="none">
+			<!-- The divDocTypeRefresh div gets refreshed on the fieldDocType combobox change event-->
+			<xp:div id="divDocTypeRefresh">
+				<xp:section id="sectionReviewers" disableTheme="true"
+					headerStyle="color:rgb(0,0,0);text-decoration:none" role="presentation">
+
+					<!-- CMC 23/11/10 -->
+					<!-- The "Due Date" section  -->
+					<xp:this.header><![CDATA[#{javascript://
+						var docType = viewScope.controlDocType;
+						if (docType==strings.defaultdoctype1)
+						{
+							return strings.sectionheader1;
+						}
+						else if (docType == strings.defaultdoctype2)
+						{
+							return strings.sectionheader2;
+						}
+						else if (docType==strings.defaultdoctype3)
+						{
+							return strings.sectionheader3;
+						}
+						else if (docType==strings.defaultdoctype4)
+						{
+							return strings.sectionheader4;
+						}
+						else
+						{
+							return strings.sectionheader1;
+						}
+						
+					}]]></xp:this.header>
+					<xp:this.initClosed><![CDATA[#{javascript:// open or close depending on docType selected
+var docType = viewScope.controlDocType;
+if (docType==strings.defaultdoctype1)
+{
+	return true;
+}
+else if (docType == strings.defaultdoctype2)
+{
+	return false;
+}
+else if (docType==strings.defaultdoctype3)
+{
+	return false;
+}
+else if (docType==strings.defaultdoctype4)
+{
+	return true;
+}
+else
+{
+	return true;
+}	}]]></xp:this.initClosed>
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" refreshId="divDocTypeRefresh"
+						disableValidators="true">
+					</xp:eventHandler>
+				</xp:section>
+				<xp:div id="reviewersDiv"
+					style="#{javascript: getComponent('sectionReviewers').isClosed()? 'display:none;padding:10px' : 'padding:10px' }">
+					<!--  TODO the xe:formTable control is not honoring the rendered property
+						on xe:formRow controls, nor on panels containing xe:formRow controls,
+						- need to fix that before can convert these reviewers areas to Form Tables -->
+
+					<!-- CMC 23/11/10 -->
+					<!-- The sectionDueDate displays when something other than "Meeting" is selected in the fieldDocType combobox -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:return (viewScope.controlDocType!=I18n.format(strings.getString("defaultdoctype3")));}]]></xp:this.rendered>
+						<xc:controlSectionDueDate id="sectionDueDate"></xc:controlSectionDueDate>
+					</xp:panel>
+
+					<!-- CMC 11/10/10 -->
+					<!-- The sectionActionItem displays when "Action Item" is selected in the fieldDocType combobox -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:return (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype2")));}]]></xp:this.rendered>
+						<xc:controlSectionActionItem
+							id="sectionActionItem">
+						</xc:controlSectionActionItem>
+					</xp:panel>
+
+					<!-- CMC 11/10/10 -->
+					<!-- The sectionMeeting displays when "Meeting" is selected in the fieldDocType combobox -->
+					<xp:panel>
+						<xp:this.rendered><![CDATA[#{javascript:return (viewScope.controlDocType==I18n.format(strings.getString("defaultdoctype3")));}]]></xp:this.rendered>
+						<xc:controlSectionMeeting id="sectionMeeting"></xc:controlSectionMeeting>
+					</xp:panel>
+
+					<!-- CMC 23/11/10 -->
+					<!-- The "Reviewers" section  -->
+					<xc:controlSectionCombinedNames
+						id="sectionCombinedNames">
+					</xc:controlSectionCombinedNames>
+
+					<!-- CMC 23/11/10 -->
+					<!-- The review log -->
+					<xc:controlSectionReviewLog id="sectionReviewLog"></xc:controlSectionReviewLog>
+				</xp:div>
+			</xp:div>
+		</xe:formRow>
+		<xe:formRow labelPosition="none">
+			<xc:controlSectionShared id="sectionShared"></xc:controlSectionShared>
+		</xe:formRow>
+
+		<xe:formRow labelPosition="none">
+			<xp:inputRichText value="#{document1.Body}"
+				style="width:99%;" role="input"
+				title="text field for main content">
+				<xp:this.dojoAttributes>
+					<xp:dojoAttribute name="toolbar"
+						loaded="${javascript:com.ibm.xsp.extlib.util.ExtLibUtil.isXPages852()}">
+						<xp:this.value><![CDATA[#{javascript:var customToolbar = "[['Font','FontSize'], \n" +
+	"['Bold','Italic','Underline','Strike'], \n" +
+	"['TextColor', 'BGColor'], \n" +
+	"['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', '-', 'NumberedList','BulletedList'], \n" +
+	"['Outdent','Indent'], \n" +
+	"['MenuPaste'], \n" +
+	"['Find'], \n" +
+	"['Image', 'Table', 'MenuLink', '-', 'Smiley']]";
+return customToolbar;}]]></xp:this.value>
+					</xp:dojoAttribute>
+				</xp:this.dojoAttributes>
+			</xp:inputRichText>
+			<xc:controlAttachArea id="attachArea"
+				containerStyle="padding:5px;margin-bottom:1em"
+				valueEL="document1.Body">
+			</xc:controlAttachArea>
+		</xe:formRow>
+
+		<xe:this.facets>
+			<xp:panel xp:key="footer">
+				<xp:button value="Save" id="buttonSave">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" id="evtSave">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:
+									// Presave calendar-only code to make sure duration data is calculated
+if (view.getPageName().startsWith('/calendarEntry.xsp')) {
+	// Compute the duration of the meeting from the start and end times
+	try {
+		var mtgTime1:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime1");
+		var mtgTime2:com.ibm.xsp.component.xp.XspInputText = getComponent("mtgTime2");
+		
+		var endTime:java.util.Date = mtgTime2.getValue();	
+		var startTime:java.util.Date = mtgTime1.getValue();
+		//print("++ " + endTime.getTime());
+		//print("-- " + startTime.getTime());
+		if (endTime != null && startTime != null) {
+			var duration = ((endTime.getTime() - startTime.getTime()) / 60000);
+			//println("duration = " + duration);
+			// Should not happen as custom control has validator on EndDateTime field
+			if (duration < 0) {
+				duration = 60; // do not allow meetings with negative time
+				// auto-fix to the meeting to be (a default) 1 hour from start time 
+				var newEndTime:java.util.Date = new java.util.Date(startTime.getTime() + 3600000);
+				document1.setValue("EndDateTime", newEndTime);
+			}
+			document1.setValue("Duration", duration);
+		}
+	} catch (e) {}
+}}]]></xp:this.script>
+								</xp:executeScript>
+								<xp:saveDocument></xp:saveDocument>
+
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:if (view.getPageName().startsWith('/calendarEntry.xsp')) {
+	context.redirectToPage("calendar.xsp");
+}}]]></xp:this.script>
+								</xp:executeScript>
+								<xp:actionGroup>
+									<xp:this.condition><![CDATA[#{javascript:
+									var msgs = facesContext.getMessages(); 
+									if( msgs && msgs.hasNext()) {
+										// note, the save action can add errors, 
+										// in which case the page should be redisplayed
+										return false; 
+									}
+									// action to do next will depend on where this custom control is being used
+									requestScope.isInTopicThread = view.getPageName().startsWith('/topicThread.xsp');
+									return true;
+								}]]></xp:this.condition>
+									<xp:actionGroup
+										condition="#{javascript: !requestScope.isInTopicThread}">
+										<!-- New Main Topic docs are created inline in the XPage, 
+											not in the topicThread page, so do not move page when save/cancel a new doc 
+										-->
+										<xp:executeScript
+											script="#{javascript: context.reloadPage() }">
+										</xp:executeScript>
+									</xp:actionGroup>
+									<xp:actionGroup
+										condition="#{javascript: requestScope.isInTopicThread}">
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript://
+											TopicThreadState.clearEditArea();
+										}]]></xp:this.script>
+										</xp:executeScript>
+									</xp:actionGroup>
+								</xp:actionGroup>
+
+
+							</xp:actionGroup>
+						</xp:this.action>
+						<xp:this.script><![CDATA[var meetingSection = document.getElementById("#{id:sectionMeeting}");
+if(null != meetingSection){
+	// get the values from the UI fields
+	var dateControl = document.getElementById("#{id:mtgDate1}");
+	var startTimeControl = document.getElementById("#{id:mtgTime1}");
+	var endTimeControl = document.getElementById("#{id:mtgTime2}");
+
+	// get the the hidden data-bound fields 
+	var realMtgDateControl = document.getElementById("#{id:hiddenMtgDate}");
+	var realMtgTimeControl = document.getElementById("#{id:hiddenMtgTime}");
+	var realStartControl = document.getElementById("#{id:hiddenStartDateTime}");
+	var realEndControl = document.getElementById("#{id:hiddenEndDateTime}");
+
+	// calc a Date/Time value from the UI fields for the Domino items
+	var dtString = dateControl.value + " " + startTimeControl.value;
+
+	// set the data values for the bound fields
+	realMtgDateControl.value = dtString;
+	realMtgTimeControl.value = dtString;
+	realStartControl.value = dtString;
+	// calc the Date/Time value from the UI field for the Domino item
+	dtString = dateControl.value + " " + endTimeControl.value;
+	realEndControl.value=dtString;
+}]]></xp:this.script>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:span id="linkMarkPrivatePublicContainer"
+					style="padding-right:5px;">
+					<xp:link id="linkMarkPrivate" text="Mark Private"
+						style="zoom:1" role="button" title="mark document as private">
+						<xp:this.rendered><![CDATA[#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && document1.getItemValueString("readers") == ""}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="linkMarkPrivatePublicContainer"
+							execId="linkMarkPrivatePublicContainer" execMode="partial"
+							disableValidators="true">
+							<xp:this.action>
+								<![CDATA[#{javascript:document1.replaceItemValue("readers", [userBean.canonicalName, "LocalDomainServers"])}]]>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+					<xp:link id="linkMarkPublic" text="Mark Public"
+						style="zoom:1" role="button" title="mark document as public">
+						<xp:this.rendered><![CDATA[#{javascript:(userBean.accessLevel >= lotus.domino.ACL.LEVEL_AUTHOR) && userBean.canCreateDocs && document1.getItemValueString("readers") != ""}]]></xp:this.rendered>
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="partial" refreshId="linkMarkPrivatePublicContainer"
+							execId="linkMarkPrivatePublicContainer" execMode="partial"
+							disableValidators="true">
+							<xp:this.action>
+								<![CDATA[#{javascript:document1.replaceItemValue("readers", "")}]]>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:link>
+				</xp:span>
+				<xp:link id="linkCancel" text="Cancel" style="zoom:1"
+					themeId="Link.action" role="button"
+					title="cancel creating document">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="complete" immediate="true" execMode="partial">
+						<xp:this.action>
+							<xp:actionGroup>
+								<xp:confirm
+									message="#{strings.cancel_editing}">
+								</xp:confirm>
+								<xp:executeScript>
+									<xp:this.script><![CDATA[#{javascript:if (view.getPageName().startsWith('/calendarEntry.xsp')) {
+	context.redirectToPage("calendar.xsp");
+}}]]></xp:this.script>
+								</xp:executeScript>
+								<xp:actionGroup>
+									<xp:this.condition><![CDATA[#{javascript:
+									// action to do next will depend on where this custom control is being used
+									requestScope.isInTopicThread = view.getPageName().startsWith('/topicThread.xsp');
+									return true;
+								}]]></xp:this.condition>
+									<xp:actionGroup
+										condition="#{javascript: !requestScope.isInTopicThread}">
+										<!-- New Main Topic docs are created inline in the XPage, 
+											not in the topicThread page, so do not move page when save/cancel a new doc 
+										-->
+										<xp:executeScript
+											script="#{javascript: context.reloadPage() }">
+										</xp:executeScript>
+									</xp:actionGroup>
+									<xp:actionGroup
+										condition="#{javascript: requestScope.isInTopicThread}">
+										<xp:executeScript>
+											<xp:this.script><![CDATA[#{javascript://
+										TopicThreadState.clearEditArea();
+									}]]></xp:this.script>
+										</xp:executeScript>
+									</xp:actionGroup>
+								</xp:actionGroup>
+
+							</xp:actionGroup>
+						</xp:this.action>
+					</xp:eventHandler>
+				</xp:link>
+			</xp:panel>
+		</xe:this.facets>
+	</xe:formTable>
+		</div>
+		<xp:eventHandler event="onClientLoad" submit="false">
+			<xp:this.script><![CDATA[try{
+	var x = document.getElementById("#{id:sectionReviewers}" + "_lk_close");
+	if(null != x){
+		x.setAttribute("role", "link");
+		x.setAttribute("wairole", "link");
+	}
+	var y = document.getElementById("#{id:sectionReviewers}" + "_lk_open");
+	if(null != y){
+		y.setAttribute("role", "link");
+		y.setAttribute("wairole", "link");
+	}
+	var xx = document.getElementById("#{id:sectionMoreOptions}" + "_lk_close");
+	if(null != xx){
+		xx.setAttribute("role", "link");
+		xx.setAttribute("wairole", "link");
+	}
+	var yy = document.getElementById("#{id:sectionMoreOptions}" + "_lk_open");
+	if(null != yy){
+		yy.setAttribute("role", "link");
+		yy.setAttribute("wairole", "link");
+	}
+}catch(e){
+	//console.log("e: " + e);
+}]]></xp:this.script>
+		</xp:eventHandler></xp:view>

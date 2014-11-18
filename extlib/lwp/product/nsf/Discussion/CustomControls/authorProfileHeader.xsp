@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core"
+	xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.beforePageLoad>
+		<![CDATA[#{javascript:// setup properties for the custom control
+			initAuthorProfile()
+		}]]>
+	</xp:this.beforePageLoad>
+	
+	<xp:this.resources>
+		<xp:script src="/xpAuthorProfile.jss" clientSide="false"></xp:script>
+	</xp:this.resources>
+	
+	<xe:formTable id="formTable4" xp:key="profile"
+		legend="Author profile display">
+		<xp:this.loaded><![CDATA[${javascript:compositeData.profileFound ? true : false}]]></xp:this.loaded>
+		<xe:formRow id="formRow1" labelPosition="none">
+			<xp:image url="#{javascript:compositeData.photoURL}"
+				id="photo" alt="" title=""
+				styleClass="xlImage formRowImage" height="130px" width="130px">
+			</xp:image>
+		</xe:formRow>
+		<xe:formRow id="formRow12" label="Email">
+			<xp:inputText id="inputText7"
+				disabled="true"
+				value="#{javascript:compositeData.email}">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow13" label="Phone">
+			<xp:inputText id="inputText8"
+				disabled="true"
+				value="#{javascript:compositeData.phone}">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow14" label="Role">
+			<xp:inputText id="inputText9" 
+				disabled="true"
+				value="#{javascript:compositeData.role}">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow16" label="Goals">
+			<xp:inputText id="inputText11"
+				disabled="true"
+				value="#{javascript:compositeData.goal}">
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow2" label="Mains">
+			<xp:inputText id="inputText1"
+				disabled="true"
+				value="#{javascript:compositeData.postsMain}">
+				<xp:this.converter>
+					<xp:convertNumber integerOnly="true"></xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+		</xe:formRow>
+		<xe:formRow id="formRow3" label="Responses">
+			<xp:inputText id="inputText2"
+				disabled="true"
+				value="#{javascript:compositeData.postsResponses}">
+				<xp:this.converter>
+					<xp:convertNumber integerOnly="true"></xp:convertNumber>
+				</xp:this.converter>
+			</xp:inputText>
+		</xe:formRow>
+	</xe:formTable>
+
+	<xp:label value="User has no details">
+		<xp:this.loaded><![CDATA[${javascript:compositeData.profileFound ? false : true}]]></xp:this.loaded>
+	</xp:label>
+</xp:view>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom">
+
+	<xc:OneUILayout id="cc4cconeuilayout"  navigationPath="/Core/Switch">
+		<xp:this.facets>
+			<xp:panel xp:key="LeftColumn" id="panel4">
+				<xc:LeftCore id="cc4ccLeftCore" ></xc:LeftCore>
+			</xp:panel>
+		</xp:this.facets>
+		<xp:panel>
+			<xp:label
+				value="This shows a control that can dynamically switch its display between a set of facets"
+				id="label5" style="font-weight:bold">
+			</xp:label>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:label value="What do you want to buy?" for="comboBox1"></xp:label>
+			<xp:comboBox id="comboBox1">
+				<xp:selectItem itemLabel="Select an item..."
+					itemValue=""></xp:selectItem>
+				<xp:selectItem itemLabel="A Car" itemValue="car"></xp:selectItem>
+				<xp:selectItem itemLabel="A Motorbike" itemValue="moto">
+				</xp:selectItem>
+				<xp:selectItem itemLabel="A Moped" itemValue="moped"></xp:selectItem>
+				<xp:selectItem itemLabel="I don't know!" itemValue="dunno"></xp:selectItem>
+				<xp:eventHandler event="onchange" submit="true"
+					refreshMode="partial" refreshId="panel1">
+				</xp:eventHandler>
+			</xp:comboBox>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:panel id="panel1">
+				<xe:switchFacet id="switchFacet1" defaultFacet="else">
+					<xe:this.selectedFacet><![CDATA[#{javascript:var cb = getComponent("comboBox1")
+return cb.getValue()}]]></xe:this.selectedFacet>
+					<xp:this.facets>
+						<xp:panel xp:key="car">
+							What about a Ford?
+							<xp:br></xp:br>
+							<xp:text escape="true" id="computedField2" value="#{javascript:@Now()}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+							<xp:link escape="true" text=" Refresh" id="link1">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="computedField2">
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+						<xp:panel xp:key="moto">
+							Hum, a nice Harley or a Japanese sports
+							one?
+							<xp:br></xp:br>
+							<xp:text escape="true" id="computedField3" value="#{javascript:@Now()}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+							<xp:link escape="true" text=" Refresh" id="link2">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="computedField3">
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+						<xp:panel xp:key="moped">
+							Do you prefer Peugeot or Piaggio?
+							<xp:br></xp:br>
+							<xp:text escape="true" id="computedField4" value="#{javascript:@Now()}">
+								<xp:this.converter>
+									<xp:convertDateTime type="both"></xp:convertDateTime>
+								</xp:this.converter>
+							</xp:text>
+							<xp:link escape="true" text=" Refresh" id="link3">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="computedField4">
+								</xp:eventHandler>
+							</xp:link>
+						</xp:panel>
+						<xp:panel xp:key="else">
+							<xp:label id="label1">
+								<xp:this.value><![CDATA[#{javascript:var v = getComponent("comboBox1").getValue()
+if(v) {
+	return "We don't know about your selection. Please select another option"
+} else {
+	return ""
+}
+}]]></xp:this.value>
+							</xp:label>
+
+						</xp:panel>
+					</xp:this.facets>
+				</xe:switchFacet>
+			</xp:panel>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:br></xp:br>
+			<xp:button value="Refresh the page" id="button1">
+				<xp:eventHandler event="onclick" submit="true"
+					refreshMode="complete">
+				</xp:eventHandler>
+			</xp:button>
+			<xp:text escape="true" id="computedField1" value="#{javascript:@Now()}">
+				<xp:this.converter>
+					<xp:convertDateTime type="both"></xp:convertDateTime>
+				</xp:this.converter>
+			</xp:text>
+		</xp:panel>
+	</xc:OneUILayout>
+</xp:view>
