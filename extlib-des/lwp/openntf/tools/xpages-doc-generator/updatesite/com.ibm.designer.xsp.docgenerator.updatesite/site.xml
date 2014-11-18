@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.ibm.designer.xsp.docgenerator.feature_1.0.0.201311041432.jar" id="com.ibm.designer.xsp.docgenerator.feature" version="1.0.0.201311041432"/>
+</site>

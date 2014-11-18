@@ -1,0 +1,49 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2008, 2011                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<project name="openntf/design" default="development" basedir=".">
+
+	<import file="${env.WPLC_IMPORT}/pde_build.xml"/>  
+	<import file="${env.WPLC_IMPORT}/pde_prebuild_subant.xml"/>  
+	<import file="${wsbld}/tools/build/localization.xml" />
+    <import file="${env.WPLC_IMPORT}/nojavadoc.xml"/>
+
+	<target name="custom_init">         
+		<subant target="localize_plugin" genericantfile="${basedir}/build.xml" >
+			<dirset dir="${basedir}" includes="**/plugins/*" />
+		</subant>   
+	</target>
+	
+	<property name="mantis.project.name" value="${ant.project.name}" />
+
+	<target name="localize_plugin" depends="init, subant.init">
+		<property name="dir.newSrc" value="${bundle.build.dir}/src" />
+		
+		<if><available file="${basedir}/.localization"/>
+			<then>
+				<echo message="Calling localization for src ${basedir}"/>
+				
+				<antcall target="localization">
+					<param name="dir.src" value="${dir.newSrc}" />
+					<param name="dir.newSrc" value="${dir.newSrc}" />
+				</antcall> 
+			</then>
+		</if>
+	</target>
+</project>
+

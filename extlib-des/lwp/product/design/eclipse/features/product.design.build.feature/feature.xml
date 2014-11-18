@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="product.design.build.feature"
+      label="Extlib Product Designer Tooling Build Feature"
+      version="1.0.0">
+
+   <description>
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright>
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license>
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.openntf.extlib.designer.tooling.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.openntf.extlib.designer.build.source.feature"
+         version="0.0.0"/>
+
+</feature>

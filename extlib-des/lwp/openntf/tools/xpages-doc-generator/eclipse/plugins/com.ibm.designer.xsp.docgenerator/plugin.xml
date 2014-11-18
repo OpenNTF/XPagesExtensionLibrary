@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2010                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<plugin>
+	<extension point="org.eclipse.ui.popupMenus"> 
+		<objectContribution id="org.eclipse.ui.articles.action.contribution.popup.object"
+			objectClass="org.eclipse.core.resources.IProject">
+			<action id="com.ibm.designer.domino.run.generator" 
+            	label="Generate XPages Registry Documentation" 
+            	icon="icons/designer16.gif" 
+            	class="com.ibm.xsp.eclipse.tools.ui.RunGeneratorAction"
+            	menubarPath="additions"> 
+         	</action> 
+   		</objectContribution> 
+	</extension>
+   
+</plugin>

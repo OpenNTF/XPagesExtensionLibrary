@@ -1,0 +1,160 @@
+/*
+ * © Copyright IBM Corp. 2010
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+
+.MainTitle {
+  border-style: none;
+  background: #8EBDF8;
+  padding: 10px;
+}
+
+.MainTitleText {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+h1 {
+  border-style: none;
+  font-size: 19px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  padding: 5px;
+}
+
+h2 {
+  border-style: none;
+  font-size: 15px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+h3 {
+  border-style: none;
+  font-size: 13px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+.Inherited {
+  font-size: 11px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  font-style: italic;
+}
+
+.Type {
+  font-size: 11px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+.DefinitionTitle {
+  font-size: 18px;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+.DefinitionTitle-1 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Verdana,Arial,Helv,Helvetica;
+}
+
+.TableHeader {
+  border-style: Solid;
+  border-width: 1pt;
+  border-color: #000000;
+}
+
+.TableCellHeader {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 1pt;
+  background: #CCCCFF;
+  color: #000000;
+  font-style: normal;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  font-weight: bold;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+.TableCategoryCell {
+  border-style: none;
+  color: #000000;
+  font-style: normal;
+  font-weight: bold;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  font-size: 11px;
+  vertical-align: top;
+}
+
+.TableCell {
+  border-style: none;
+  color: #000000;
+  font-style: normal;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  font-size: 11px;
+  vertical-align: top;
+}
+
+.TableProp {
+  border-style: none;
+  border-width: 1pt;
+  border-color: #000000;
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+.TablePropCell {
+  border-bottom: dotted;
+  border-left: solid;
+  border-width: 1pt;
+  border-color: #000000;
+  border-collapse: collapse;
+  color: #000000;
+  font-style: normal;
+  font-family: Verdana,Arial,Helv,Helvetica;
+  font-size: 11px;
+  vertical-align: top;
+}
+
+.Prop-Tag {
+  font-size: 9px;
+  font-family: Courier, Courier new;
+  font-weight: bold;
+}
+
+.Prop-Category {
+  font-size: 9px;
+  font-family: Courier, Courier new;
+  font-weight: bold;
+}
+
+.Prop-Attribute {
+  font-size: 9px;
+  font-family: Courier, Courier new;
+}
+
+.ListAttributeClass {
+  list-style-type: none;
+  margin-left: 0px;
+  margin-top: 0;
+}
+.ListAttributeCategory {
+  list-style-type: none;
+  margin-left: 20px;
+  margin-top: 0;
+}
+.ListAttribute {
+  list-style-type: none;
+  margin-left: 40px;
+  margin-top: 0;
+}

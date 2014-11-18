@@ -1,0 +1,9 @@
+#Localization file used by Workplace Designer
+#Fri Jun 16 14:55:56 EDT 2006
+specialAudienceProperties=specialAudience.properties
+loggingPropertiesFileName=xspeditor.properties
+resourceHandlerPackage=com.ibm.xsp.extlib.designer.xspprops
+srcFolderName=com.ibm.xsp.extlib.designer.xspprops/src
+propertiesFileName=messages.properties
+resourceHandlerClass=ResourceHandler
+loggingId=CLFAD

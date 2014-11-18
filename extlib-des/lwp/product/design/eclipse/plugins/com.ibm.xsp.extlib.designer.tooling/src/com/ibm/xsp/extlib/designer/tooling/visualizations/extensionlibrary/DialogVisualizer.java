@@ -1,0 +1,128 @@
+/*
+ * © Copyright IBM Corp. 2011
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+package com.ibm.xsp.extlib.designer.tooling.visualizations.extensionlibrary;
+
+import org.w3c.dom.Node;
+
+import com.ibm.designer.domino.constants.XSPAttributeNames;
+import com.ibm.designer.domino.constants.XSPTagNames;
+import com.ibm.xsp.extlib.designer.tooling.visualizations.AbstractCommonControlVisualizer;
+import com.ibm.xsp.registry.FacesRegistry;
+
+/**
+ * This class generates the following source
+ * 
+ *  <?xml version="1.0" encoding="UTF-8"?>
+ *  <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+ * 
+ *  <%
+ *  var titleVar=this.title;
+ *  if(null==titleVar || titleVar==""){
+ *      titleVar="Title";
+ *  }
+ *  %>
+ * 
+ *  <xp:table style="background-color:rgb(240,240,240);border-color:rgb(170,170,170);border-style:solid;border-width:thin;width:98%">
+ *      
+ *      <xp:tr>
+ *          <xp:td style="border-color:rgb(240,240,240);border-style:solid;border-width:thin">
+ *              <xp:label>
+ *              	<xp:this.value><%=titleVar%></xp:this.value>
+ *              </xp:label>
+ *          </xp:td>
+ *          <xp:td style="width:5%;border-style:solid;border-width:thin;border-color:rgb(240,240,240)">
+ *              <xp:image url="/extlib/designer/markup/extensionlibrary/DialogXButton.png"></xp:image>
+ *          </xp:td>
+ *      </xp:tr>
+ *      
+ *      <xp:tr style="background-color:rgb(255,255,255)">
+ *          <xp:td colspan="2" style="border-color:rgb(255,255,255);border-style:solid;border-width:medium">
+ *              <xp:callback></xp:callback>
+ *          </xp:td> 
+ *      </xp:tr>
+ * 
+ *  </xp:table>
+ *  
+ * 
+ *  </xp:view>
+ *
+ */
+public class DialogVisualizer extends AbstractCommonControlVisualizer{
+
+    private static final String DEFAULT_DIALOG_TITLE = "Title"; // $NLX-DialogVisualizer.Title-1$
+    private static final String DIALOG_X_IMAGE="DialogXButton.png"; // $NON-NLS-1$
+    
+    /*
+     * (non-Javadoc)
+     * @see com.ibm.designer.domino.xsp.api.visual.AbstractVisualizationFactory#getXSPMarkupForControl(org.w3c.dom.Node, com.ibm.designer.domino.xsp.api.visual.AbstractVisualizationFactory.IVisualizationCallback, com.ibm.xsp.registry.FacesRegistry)
+     */
+    @Override
+    public String getXSPMarkupForControl(Node nodeToVisualize,  IVisualizationCallback callback, FacesRegistry registry) {
+
+        StringBuilder strBuilder = new StringBuilder();
+        
+        String titleVarName = "titleVar"; // $NON-NLS-1$
+        strBuilder.append(generateFunctionToGetAttributeValue(XLIB_ATTR_TITLE, DEFAULT_DIALOG_TITLE, titleVarName));
+        strBuilder.append(LINE_DELIMITER);
+        
+        Tag table = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE);
+        table.addAttribute(XSPAttributeNames.XSP_ATTR_STYLE, "background-color:rgb(240,240,240);border-color:rgb(170,170,170);border-style:solid;border-width:thin;width:98%"); // $NON-NLS-1$
+        
+        Tag firstRow = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE_ROW);
+        table.addChildTag(firstRow);
+        
+        Tag firstRowCell1 = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE_CELL);
+        firstRowCell1.addAttribute(XSPAttributeNames.XSP_ATTR_STYLE, "border-color:rgb(240,240,240);border-style:solid;border-width:thin"); // $NON-NLS-1$
+        firstRow.addChildTag(firstRowCell1);
+        
+        Tag titleLabel = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_LABEL);
+        titleLabel.addJSVarAttributeBinding(XSPAttributeNames.XSP_ATTR_VALUE, titleVarName);
+        firstRowCell1.addChildTag(titleLabel);
+        
+        Tag firstRowCell2 = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE_CELL);
+        firstRowCell2.addAttribute(XSPAttributeNames.XSP_ATTR_STYLE, "width:5%;border-style:solid;border-width:thin;border-color:rgb(240,240,240)"); // $NON-NLS-1$
+        firstRow.addChildTag(firstRowCell2);
+        
+        Tag dialgoXButtonImage = createImageTagObj(DIALOG_X_IMAGE, EXTENSION_LIBRARY_IMAGES_LOCATION);
+        firstRowCell2.addChildTag(dialgoXButtonImage);
+        
+        Tag secondRow = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE_ROW);
+        secondRow.addAttribute(XSPAttributeNames.XSP_ATTR_STYLE, "background-color:rgb(255,255,255)"); // $NON-NLS-1$
+        table.addChildTag(secondRow);
+        
+        Tag secondRowCell = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_TABLE_CELL);
+        secondRowCell.addAttribute(XSPAttributeNames.XSP_ATTR_STYLE, "border-color:rgb(255,255,255);border-style:solid;border-width:medium"); // $NON-NLS-1$
+        secondRowCell.addAttribute(XSPAttributeNames.XSP_ATTR_COLSPAN,"2");
+        secondRow.addChildTag(secondRowCell);
+        
+        Tag callbackTag = new Tag(XP_PREFIX, XSPTagNames.XSP_TAG_CALLBACK);
+        secondRowCell.addChildTag(callbackTag);
+        
+        strBuilder.append(table.toString());
+        strBuilder.append(LINE_DELIMITER);
+        
+        return strBuilder.toString();   
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.ibm.xsp.extlib.designer.tooling.visualizations.AbstractCommonControlVisualizer#isStaticMarkup()
+     */
+    @Override
+    public boolean isStaticMarkup(){
+		return false;
+	}
+}

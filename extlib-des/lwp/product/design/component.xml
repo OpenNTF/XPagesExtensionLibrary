@@ -1,0 +1,66 @@
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2008, 2012                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+
+<component name="product/design" project-type="eclipse-pde" disabled="false">
+
+	<!-- dependency name="prereqs.extlib-des/dtp_1.8.2" type="dir" / -->
+	<dependency name="prereq.des.infra/xve" type="dir" /> 
+	<dependency name="prereq.des.infra/swtbot" type="dir" /> 
+	<dependency name="product/runtime" type="dir" /> 
+
+
+
+	<!--An output group is needed to get it into the fe.zip -->
+	<output-group name="default">
+		<output type="dir" 
+			visibility="public"
+			platform="all"
+			location="${env.LWP_COMP_BUILD}/eclipse"
+			preferredInstallLocation="."/>
+	</output-group>
+
+	<!-- This is required until all FEs are using PDE builder.  -->
+	<output-group name="temp.PDE_Builder">
+ 		<output type="dir"
+ 			visibility="public"
+ 			platform="all"
+ 			location="**/component.xml"
+ 			preferredInstallLocation="."/>
+		<output type="dir"
+			visibility="public"
+			platform="all"
+			location="**/plugin.xml"
+			preferredInstallLocation="."/>
+		<output type="dir"
+			visibility="public"
+			platform="all"
+			location="**/fragment.xml"
+			preferredInstallLocation="."/>
+		<output type="dir"
+			visibility="public"
+			platform="all"
+			location="**/feature.xml"
+			preferredInstallLocation="."/>
+		<output type="dir"
+			visibility="public"
+			platform="all"
+			location="**/META-INF"
+			preferredInstallLocation="."/>
+	</output-group>
+</component>
+

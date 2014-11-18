@@ -1,0 +1,67 @@
+<!-- ===================================================================== -->
+<!-- Custom targets called from a project's generated build.xml            -->
+<!-- Set customBuildCallbacks=<path/to/this/file> in your build.properties.-->
+<!-- ===================================================================== -->
+<project name="Build specific targets and properties" default="noDefault">
+	
+	<import file="${wsbld}/tools/copyright-build/srcplugin_brand.xml" />
+	<import file="${wsbld}/tools/copyright-build/srczip_license.xml" />
+
+
+	<!-- ===================================================================== -->
+	<!-- Default target                                                        -->
+	<!-- ===================================================================== -->
+	<target name="noDefault">
+		<echo message="This file must be called with explicit targets" />
+	</target>
+	
+	<!-- ===================================================================== -->
+	<!-- Steps to do before the target gather.bin.parts                        -->
+	<!-- Available parameters :                                                -->
+	<!--  destination.temp.folder - the directory plugins will be collected to -->
+	<!--  feature.directory - the directory containing the resulting feature   -->
+	<!-- ===================================================================== -->
+	<target name="pre.gather.bin.parts">
+	</target>
+	
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the target gather.bin.parts                         -->
+	<!-- Available parameters :                                                -->
+	<!--  destination.temp.folder - the directory plugins will be collected to -->
+	<!--  feature.directory - the directory containing the resulting feature   -->
+	<!-- ===================================================================== -->
+	<target name="post.gather.bin.parts">
+		
+		<echo message="TEST RTC build properties env.ENABLE_IBM_COPYRIGHT = ${env.ENABLE_IBM_COPYRIGHT}" /> 
+
+		<propertyregex property="feature.dir.without.build.source" input="${feature.directory}" regexp="build.source." replace="tooling." global="true" />
+			<echo message="DEBUG post.gather.bin.parts feature.directory ${feature.directory}" />
+			<echo message="DEBUG post.gather.bin.parts feature.dir.without.build.source ${feature.dir.without.build.source}" />
+
+		<antcall target="copy_branding">
+			<param name="param.feature.dir" value="${feature.dir.without.build.source}" />
+			<param name="brand.plugin.source.dir" value="product/design/eclipse/features/org.openntf.extlib.designer.build.source.feature" />
+			<param name="source.or.opensource" value="source" />
+		</antcall>
+
+		<!-- antcall target="copy_branding">
+			<param name="param.feature.dir" value="${feature.dir.without.build.source}" />
+			<param name="brand.plugin.source.dir" value="product/design/eclipse/features/com.ibm.xsp.extlib.designer.build.source.feature/opensource" />
+			<param name="source.or.opensource" value="opensource" />
+		</antcall -->
+
+		<!-- echo message="process copyrights in src.zips: ${destination.temp.folder}" />
+
+		<antcall target="change_source_copyright_srczips">
+			<param name="src.zip.dir" value="${destination.temp.folder}" />
+		</antcall>
+
+		
+		<echo message="scan source headers in ${feature.directory}" />
+		<antcall target="replace_license">
+			<param name="srczip.unzipped.folder" value="${feature.directory}" />
+		</antcall -->
+
+	</target>
+
+</project>

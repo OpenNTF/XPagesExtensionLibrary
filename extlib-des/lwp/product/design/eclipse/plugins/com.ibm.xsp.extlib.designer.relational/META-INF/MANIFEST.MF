@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domino Designer Relational Tools Plug-in
+Bundle-SymbolicName: com.ibm.xsp.extlib.designer.relational;singleton:=true
+Bundle-Version: 9.0.1.v00_10_qualifier
+Bundle-Activator: com.ibm.xsp.extlib.designer.relational.Activator
+Bundle-Vendor: IBM
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ com.ibm.xsp.extlib.designer.tooling,
+ com.ibm.commons,
+ com.ibm.designer.domino.navigator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.xsp.extlib.designer.relational.jdbc.plugin.wizard
+Bundle-Localization: plugin

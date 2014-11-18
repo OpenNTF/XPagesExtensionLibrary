@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+    <xe:applicationLayout id="applicationLayout1">
+        <xe:this.configuration>
+            <xe:oneuiApplication>
+                <xe:this.bannerApplicationLinks>
+                    <xe:loginTreeNode label="Login 1"></xe:loginTreeNode>
+                    <xe:basicLeafNode label="Basic 1"></xe:basicLeafNode>
+                    <xe:dominoViewListTreeNode label="View 1"></xe:dominoViewListTreeNode>
+                    <xe:dominoViewEntriesTreeNode label="View 2"
+                        viewName="someview">
+                    </xe:dominoViewEntriesTreeNode>
+                    <xe:basicContainerNode label="Container 1">
+                        <xe:this.children>
+                            <xe:basicLeafNode label="Basic 2"></xe:basicLeafNode>
+                            <xe:pageTreeNode label="Page 2">
+                                <xe:this.children>
+                                    <xe:userTreeNode label="User 2"></xe:userTreeNode>
+                                </xe:this.children></xe:pageTreeNode>
+                        </xe:this.children>
+                    </xe:basicContainerNode>
+                    <xe:pageTreeNode label="Page 1"></xe:pageTreeNode>
+                    <xe:separatorTreeNode></xe:separatorTreeNode>
+                    <xe:userTreeNode label="User 1"></xe:userTreeNode>
+                    <xe:repeatTreeNode></xe:repeatTreeNode>
+                    <xe:beanTreeNode></xe:beanTreeNode>
+                </xe:this.bannerApplicationLinks>
+            </xe:oneuiApplication>
+        </xe:this.configuration>
+    </xe:applicationLayout></xp:view>

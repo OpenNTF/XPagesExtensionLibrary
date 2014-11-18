@@ -1,0 +1,8 @@
+*.copyarea.db
+feFeatureBuildCallbacks.xml
+felement.xml
+fePluginBuildCallbacks.xml
+plugin_directory.xml
+/build/
+/logs/
+build.log

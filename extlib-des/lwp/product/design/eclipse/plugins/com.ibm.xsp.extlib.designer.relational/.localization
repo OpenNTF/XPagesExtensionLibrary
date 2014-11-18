@@ -1,0 +1,12 @@
+#Localization file used by Workplace ...
+#Fri Jun 13 13:42:35 BST 2014
+resourceHandlerClass=ResourceHandler
+propertiesFileName=messages.properties
+resourceHandlerPackage=com.ibm.xsp.extlib.designer.relational
+loggingId=CLFAD
+buildErrorLevel=1
+loggingPropertiesFileName=logging.properties
+componentOwner=DesignerDev@notesdev.ibm.com
+specialAudienceProperties=specialAudience.properties
+translationLevel=G11N SA UI -- Special IT Audience resources follow
+srcFolderName=com.ibm.xsp.extlib.designer.relational/src

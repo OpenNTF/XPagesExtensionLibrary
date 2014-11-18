@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view style="border:none" xmlns:xp="http://www.ibm.com/xsp/core">
+    <xp:div style="background-color:#F9F7F7; padding:2px; border:1px solid #C0C7CD">
+        
+        <xp:table style="width:98%">
+            <xp:tr>
+                <xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid;padding:3px" colspan="3">
+                    <xp:callback id="callback2" facetName="MastHeader" />
+                </xp:td>
+            </xp:tr>
+        </xp:table>                                     
+        <xp:table style="width: 98%">
+            <xp:tr>
+                <xp:td
+                    style="border-width:1px;border-color:rgb(192,192,192);border-style:solid"
+                    colspan="3">
+                    <xp:table width="100%">
+                        <xp:tr>
+                            <xp:td style="border:none">
+                                <xp:table style="border:none">
+                                    <xp:tr>
+                                        <xp:td style="border:none">
+                                            <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">
+                                                [logo] &#160;
+                                                [bannerApplicationLinks]
+                                            </xp:span>
+                                        </xp:td>
+                                    </xp:tr>
+                                </xp:table>
+                            </xp:td>
+                            <xp:td style="border:none">
+                                <xp:div style="float:right; border:none">
+                                    <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">[bannerUtilityLinks]</xp:span>
+                                </xp:div>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>
+                </xp:td>
+            </xp:tr>
+            <xp:tr>
+                <xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid" colspan="3">
+                    <xp:table width="100%">
+                        <xp:tr>
+                            <xp:td style="border:none">
+                                <xp:table style="border:none">
+                                    <xp:tr>
+                                        <xp:td style="border:none">
+                                            <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">[titleBarTabs]</xp:span>
+                                        </xp:td>
+                                    </xp:tr>
+                                </xp:table>
+                            </xp:td>
+                            <xp:td style="border:none">
+                                <xp:div style="float:right; border:none">
+                                    <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12px">
+                                    <xp:callback id="SearchBar" facetName="SearchBar" /><xp:span
+                                        style="padding-left:3.0px;font-family:Arial;font-size:12pt">
+                                        [searchBar]
+                                        </xp:span>
+                                    </xp:span>
+                                </xp:div>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>
+                </xp:td>
+            </xp:tr>
+            <xp:tr>
+                <xp:td colspan="3" style="border-color:rgb(192,192,192);border-style:solid;border-width:1px">
+                    <xp:table width="100%">
+                        <xp:tr>
+                            <xp:td style="border:none">
+                                <xp:table style="border:none">
+                                    <xp:tr>
+                                        <xp:td style="border:none">
+                                            <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">
+                                            [placeBarName]
+                                            </xp:span>
+                                        </xp:td>
+                                    </xp:tr>
+                                </xp:table>        
+                            </xp:td>
+                            <xp:td style="border:none">
+                                <xp:div style="float:right;border:none">
+                                <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">
+                                [placeBarActions]
+                                </xp:span>
+
+                                </xp:div>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>
+                </xp:td>
+            </xp:tr>
+            <xp:tr>
+                <xp:td
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;width:123px;padding-bottom:65px;background-color:rgb(255,255,255)"
+                    valign="top">
+                    <xp:callback id="LeftColumn" facetName="LeftColumn" />
+                </xp:td>
+                <xp:td valign="top"
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;background-color:rgb(255,255,255)">
+                    <xp:callback id="callback1" />
+                </xp:td>
+                <xp:td
+                    style="border-color:rgb(192,192,192);border-style:solid;border-width:1px;width:123px;background-color:rgb(255,255,255)"
+                    valign="top">
+                    <xp:callback id="RightColumn"
+                        facetName="RightColumn">
+                    </xp:callback>
+                </xp:td>
+            </xp:tr>
+        </xp:table>
+        <xp:table width="98%">
+            <xp:tr>
+                <xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid">
+                    <xp:table>
+                        <xp:tr>
+                            <xp:td style="border:none">
+                                <xp:table style="border:none">
+                                    <xp:tr>
+                                        <xp:td style="border:none">
+                                            <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">[footerLinks]</xp:span>
+                                        </xp:td>
+                                    </xp:tr>
+                                </xp:table>
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>                     
+                </xp:td>
+            </xp:tr>
+        </xp:table>
+        <xp:table width="98%">
+            <xp:tr>
+                <xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid">
+                    <xp:table width="100%">
+                        <xp:tr>
+                            <xp:td style="border:none">
+                                <xp:table style="border:none">
+                                    <xp:tr>
+                                        <xp:td style="border:none">
+                                            <xp:span style="color:#797979;font-weight:bold;font-family:Arial;font-size:12pt">[legalText]</xp:span>
+                                        </xp:td>
+                                    </xp:tr>
+                                </xp:table>         
+                            </xp:td>
+                        </xp:tr>
+                    </xp:table>         
+                </xp:td>
+            </xp:tr>
+        </xp:table>
+        <xp:table style="width:98%">
+            <xp:tr>
+                <xp:td style="border-width:1px;border-color:rgb(192,192,192);border-style:solid;padding:3px" colspan="3">
+                  <xp:callback id="callback3" facetName="MastFooter" />
+                </xp:td>
+            </xp:tr>
+        </xp:table>    
+    </xp:div>
+    
+</xp:view>

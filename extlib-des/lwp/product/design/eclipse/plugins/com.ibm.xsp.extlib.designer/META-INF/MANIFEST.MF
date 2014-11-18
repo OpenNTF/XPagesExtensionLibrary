@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Domino Designer Extensions Framework Common Plug-in
+Bundle-SymbolicName: com.ibm.xsp.extlib.designer;singleton:=true
+Bundle-Version: 9.0.1.v00_10_qualifier
+Bundle-Activator: com.ibm.xsp.extlib.designer.DesignerExtensionActivator
+Bundle-Vendor: IBM
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.4.2",
+ org.eclipse.swt;bundle-version="3.6.2",
+ com.ibm.commons;bundle-version="8.5.3",
+ com.ibm.commons.swt;bundle-version="8.5.3",
+ com.ibm.commons.iloader;bundle-version="8.5.3",
+ com.ibm.designer.domino.ide.resources;bundle-version="8.5.3",
+ com.ibm.xsp.core;bundle-version="9.0.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ibm.xsp.extlib.designer.common.properties

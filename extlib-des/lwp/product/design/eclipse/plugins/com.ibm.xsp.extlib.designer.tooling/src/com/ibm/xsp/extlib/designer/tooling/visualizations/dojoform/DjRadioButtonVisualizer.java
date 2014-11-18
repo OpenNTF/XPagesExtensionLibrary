@@ -1,0 +1,77 @@
+/*
+ * © Copyright IBM Corp. 2011
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at:
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+ * implied. See the License for the specific language governing 
+ * permissions and limitations under the License.
+ */
+package com.ibm.xsp.extlib.designer.tooling.visualizations.dojoform;
+
+import org.w3c.dom.Node;
+
+import com.ibm.designer.domino.constants.XSPAttributeNames;
+import com.ibm.designer.domino.constants.XSPTagNames;
+import com.ibm.xsp.extlib.designer.tooling.visualizations.AbstractCommonControlVisualizer;
+import com.ibm.xsp.registry.FacesRegistry;
+
+/**
+ * This class generates the following source
+ * 
+ *  <?xml version="1.0" encoding="UTF-8"?>
+ *  <xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+ * 
+ *  <%
+ *  var labelValue=this.label;
+ *  if(null==labelValue || labelValue==""){
+ *      labelValue="";
+ *  }
+ *  %>
+ *
+ *  <xp:radio id="radio1">
+ *  	<xp:this.text="<%=labelValue%>"></xp:this.text>
+ *  </xp:radio>
+ * 
+ *  </xp:view>
+ *
+ */
+public class DjRadioButtonVisualizer extends AbstractCommonControlVisualizer{
+
+    /*
+     * (non-Javadoc)
+     * @see com.ibm.designer.domino.xsp.api.visual.AbstractVisualizationFactory#getXSPMarkupForControl(org.w3c.dom.Node, com.ibm.designer.domino.xsp.api.visual.AbstractVisualizationFactory.IVisualizationCallback, com.ibm.xsp.registry.FacesRegistry)
+     */
+    @Override
+    public String getXSPMarkupForControl(Node nodeToVisualize,  IVisualizationCallback callback, FacesRegistry registry) {
+
+        StringBuilder strBuilder = new StringBuilder();
+        
+        String labelAttributeJSVar = "labelValue"; // $NON-NLS-1$
+        strBuilder.append(generateFunctionToGetAttributeValue(XSPAttributeNames.XSP_ATTR_LABEL, "", labelAttributeJSVar));
+        strBuilder.append(LINE_DELIMITER);
+        
+        Tag radioTag = createTag(XP_PREFIX, XSPTagNames.XSP_TAG_RADIO);
+        radioTag.addJSVarAttributeBinding(XSPAttributeNames.XSP_ATTR_TEXT, labelAttributeJSVar);
+        radioTag.addAttribute(XSPAttributeNames.XSP_ATTR_ID, "radio1"); // $NON-NLS-1$
+        strBuilder.append(radioTag.toString());
+        
+        return strBuilder.toString();
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.ibm.xsp.extlib.designer.tooling.visualizations.AbstractCommonControlVisualizer#isStaticMarkup()
+     */
+    @Override
+    public boolean isStaticMarkup(){
+		return false;
+	}
+
+}

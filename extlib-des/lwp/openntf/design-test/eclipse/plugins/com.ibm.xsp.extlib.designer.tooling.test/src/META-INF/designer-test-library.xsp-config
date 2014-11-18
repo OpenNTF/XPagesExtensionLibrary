@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Â© Copyright IBM Corp. 2010, 2011                                    -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<faces-config>
+
+    <faces-config-extension>
+        <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+        <default-prefix>xe</default-prefix>
+        <designer-extension>
+            <control-subpackage-name>layout</control-subpackage-name>
+        </designer-extension>
+    </faces-config-extension>
+    
+    
+        <component>
+        <description>A app layout component (copy and pasted) for JUnit designer testing</description>
+        <display-name>TEST Application Layout</display-name>
+        <component-type>com.ibm.xsp.extlib.layout.UIApplicationLayout</component-type>
+        <component-class>com.ibm.xsp.extlib.component.layout.UIApplicationLayout</component-class>
+
+        <property>
+            <description>Application Configuration</description>
+            <display-name>Application Configuration</display-name>
+            <property-name>configuration</property-name>
+            <property-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- TODO description-->
+                    <!-- TODO make the applicationConfiguration property required,
+                    technically a breaking functionality change. -->
+                    <!-- TODO make the applicationConfiguration property
+                    do <allow-run-time-binding>false</allow-run-time-binding>,
+                    which is technically a breaking change. -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <property>
+            <description>Event triggered after a click on some node in the Application Configuration</description>
+            <display-name>On Item Click</display-name>
+            <property-name>onItemClick</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <category>events</category>
+                    <event>true</event>
+                    <subcategory>container-event</subcategory>
+                    <!-- TODO description is wrong as it is not related to the outline, and need to 
+                    explain the mechanism for figuring out which outline entry was clicked -->
+                    <!-- TODO what does the eventHandler for this listen to? 
+                    when any link node is clicked? what if it's a URL link node?
+                    is it when any node with a submittedValue is clicked? -->
+                    <tags>
+                       todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <component-extension>
+            <component-family>com.ibm.xsp.extlib.layout.ApplicationLayout</component-family>
+            <renderer-type>com.ibm.xsp.extlib.OneUIApplicationLayout</renderer-type>
+            <tag-name>TESTapplicationLayout</tag-name>
+            <designer-extension>
+                <in-palette>true</in-palette>
+                <category>Extension Library TEST</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;&#xd;
+&lt;/xp:view&gt;&#xd;
+</render-markup>
+            </designer-extension>
+        </component-extension>
+    </component>
+    
+
+
+    <complex-type>
+        <description>Base definition for the application layout configuration objects implementing this interface</description>
+        <display-name>Base Application Configuration</display-name>
+        <complex-id>com.ibm.xsp.extlib.designer.component.layout.ApplicationConfiguration</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-class>
+    </complex-type>
+    
+    
+    <complex-type>
+        <description>FOR UNIT TEST ONLY</description>
+        <display-name>Unit Test 1</display-name>
+        <complex-id>test.unittest1</complex-id>
+        <complex-class>xsp.extlib.designer.junit.util.Dummy</complex-class>
+        
+        <property>
+            <description>Test Property 1</description>
+            <display-name>property1</display-name>
+            <property-name>property1</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <default-value>test default</default-value>
+                 <designer-extension>
+                    <exclude-types>test.etype, test/etype, test etype</exclude-types>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        
+        <property>
+            <description>default-value test 1</description>
+            <display-name>property2</display-name>
+            <property-name>property2</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>false</default-value>
+            </property-extension>
+        </property>
+        <property>
+            <description>default-value test 2</description>
+            <display-name>property3</display-name>
+            <property-name>property3</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>true</default-value>
+            </property-extension>
+        </property>
+        <property>
+            <description>default-value test 3</description>
+            <display-name>property4</display-name>
+            <property-name>property4</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <!-- default-value>commented out</default-value -->
+            </property-extension>
+        </property>
+    </complex-type>
+    
+    
+    <complex-type>
+        <description>Basic application configuration abstract class.</description>
+        <display-name>Basic Application Configuration</display-name>
+        <complex-id>com.ibm.xsp.extlib.designer.component.layout.impl.BasicApplicationConfigurationImpl</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-class>
+
+        <property>
+            <description>Default navigation path</description>
+            <display-name>Default Navigation Path</display-name>
+            <property-name>defaultNavigationPath</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                     <!-- TODO needs description, explain how navigation paths work-->
+                     <!-- TODO add an editor with suggestions, or request Designer make one -->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Navigation path</description>
+            <display-name>Navigation path</display-name>
+            <property-name>navigationPath</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                     <!-- TODO needs description, explain how navigation paths work-->
+                     <!-- TODO add an editor with suggestions, or request Designer make one -->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the banner should be displayed</description>
+            <display-name>Banner</display-name>
+            <property-name>TESTbanner</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- TODO needs description, note defaults to true -->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the mast header should be displayed</description>
+            <display-name>Mast Header</display-name>
+            <property-name>mastHeader</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- TODO needs description, note defaults to true-->
+                     <!-- TODO maybe delete this property, and always display the facet-->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the mast footer should be displayed</description>
+            <display-name>Mast Footer</display-name>
+            <property-name>mastFooter</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- TODO needs description, note defaults to true-->
+                     <!-- TODO maybe delete this property, and always display the facet-->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo</description>
+            <display-name>Product Logo</display-name>
+            <property-name>productLogo</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo Style Class</description>
+            <display-name>Product Logo Class</display-name>
+            <property-name>productLogoClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo Style</description>
+            <display-name>Product Logo Style</display-name>
+            <property-name>productLogoStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo Alternate Text</description>
+            <display-name>Product Logo Alt</display-name>
+            <property-name>productLogoAlt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo Width, as generated in the img tag</description>
+            <display-name>Product Logo Width</display-name>
+            <property-name>productLogoWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- TODO needs description, and editor with suggestions-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Product Logo Height, as generated in the img tag</description>
+            <display-name>Product Logo Height</display-name>
+            <property-name>productLogoHeight</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- TODO needs description, and editor with suggestions-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Application links in the banner</description>
+            <display-name>Application links</display-name>
+            <property-name>testbannerApplicationLinks</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addBannerApplicationLink</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <exclude-types>test1,test2,test3</exclude-types>
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Utility links in the banner</description>
+            <display-name>Utility links</display-name>
+            <property-name>bannerUtilityLinks</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addBannerUtilityLink</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the title bar should be displayed, defaults to true</description>
+            <display-name>Title Bar</display-name>
+            <property-name>titleBar</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                 <default-value>true</default-value>
+            </property-extension>
+        </property>
+        <property>
+            <description>Tabs in the title bar</description>
+            <display-name>Title bar tabs</display-name>
+            <property-name>titleBarTabs</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addTitleBarTab</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Search bar</description>
+            <display-name>Search Bar</display-name>
+            <property-name>searchBar</property-name>
+            <property-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</property-class>
+            <property-extension>
+                <designer-extension>
+                    <!-- TODO needs description and to explain search bar facet-->
+                    <!-- TODO SearchBar complex-type has impl in the package name-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the place bar should be displayed, defaults to true</description>
+            <display-name>Place Bar</display-name>
+            <property-name>placeBar</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Place bar name</description>
+            <display-name>Place bar name</display-name>
+            <property-name>placeBarName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Actions in the place bar, displayed as buttons and drop-down buttons.</description>
+            <display-name>Place bar actions</display-name>
+            <property-name>placeBarActions</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addPlaceBarAction</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the footer should be displayed</description>
+            <display-name>Footer</display-name>
+            <property-name>footer</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <!-- TODO needs description, and explain the related facets -->
+                    <!-- TODO proposed functional breaking change.
+                    At present the footer appears by default, but is empty, 
+                    with no contents, so its useless and really shouldn't be present.
+                    I'd propose that the footer is only shown when the footerLinks property 
+                    is set to some value. -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Links in the footer</description>
+            <display-name>Footer links</display-name>
+            <property-name>footerLinks</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addFooterLink</property-add-method>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <!-- TODO explain how to get the different footer links into different columns in the footer area -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the legal bar should be displayed</description>
+            <display-name>Legal Bar</display-name>
+            <property-name>legal</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <!-- TODO needs description-->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo</description>
+            <display-name>Legal Logo</display-name>
+            <property-name>legalLogo</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                 <designer-extension>
+                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                     <!-- TODO needs description-->
+                     <!-- TODO why is there a legal logo?-->
+                     <tags>
+                         todo
+                     </tags>
+                 </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo Style Class</description>
+            <display-name>Legal Logo Class</display-name>
+            <property-name>legalLogoClass</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>             
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>   
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo Style</description>
+            <display-name>Legal Logo Style</display-name>
+            <property-name>legalLogoStyle</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>             
+                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>   
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo Alternate Text</description>
+            <display-name>Legal Logo Alt</display-name>
+            <property-name>legalLogoAlt</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo Width, as generated in the IMG HTML tag</description>
+            <display-name>Legal Logo Width</display-name>
+            <property-name>legalLogoWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO needs description-->
+                     <!-- TODO needs editor-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Logo Height, as generated in the IMG HTML tag</description>
+            <display-name>Legal Logo Height</display-name>
+            <property-name>legalLogoHeight</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO needs description-->
+                     <!-- TODO needs editor-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Legal Text</description>
+            <display-name>Legal Text</display-name>
+            <property-name>legalText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                     <!-- TODO needs description-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+
+        <complex-extension>
+            <base-complex-id>com.ibm.xsp.extlib.designer.component.layout.ApplicationConfiguration</base-complex-id>
+            <tag-name>TESTapplicationConfiguration</tag-name>
+            <designer-extension>
+                <tags>
+                    todo
+                </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+    <complex-type>
+        <description>Search bar configuration</description>
+        <display-name>Search Bar Configuration</display-name>
+        <complex-id>com.ibm.xsp.extlib.designer.component.layout.impl.SearchBar</complex-id>
+        <complex-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-class>
+        
+        <property>
+            <description>Name of the page used to open the search results</description>
+            <display-name>Page Name</display-name>
+            <property-name>pageName</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+                    <!-- TODO proposing to make this property required, a breaking change. -->
+                    <!-- TODO the renderer isn't encoding the page name as part of the action URL 
+                    so characters won't be correctly %20 escaped -->
+                    <tags>
+                        todo
+                    </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <!-- # "search" should not be translated -->
+            <description>Name of the parameter carrying the search value in the URL query. Defaults to "search"</description>
+            <display-name>Query Parameter Name</display-name>
+            <property-name>queryParam</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO give suggestions combo editor? -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Defines the string that will be displayed in the search box in not active</description>
+            <display-name>Inactive Text</display-name>
+            <property-name>inactiveText</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+                <designer-extension>
+                     <!-- TODO description grammar check -->
+                     <!-- TODO verify accessibility of inactiveText-->
+                     <!-- TODO verify there is some implicit translated inactive text,
+                     and if not, maybe add a useDefaultInactiveText property?-->
+                     <!-- TODO Proposed Breaking Change - change the behavior when inactiveText is absent
+                     from edit box with no inactive text, to edit box with inactive text "Search..." -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Search options tree</description>
+            <display-name>Search Combo Box Options</display-name>
+            <property-name>options</property-name>
+            <property-class>java.util.List</property-class>
+            <property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+                <collection-property>true</collection-property>
+                <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+                <property-add-method>addOption</property-add-method>
+                <designer-extension>
+                     <!-- TODO needs description-->
+                     <!-- TODO what are these intended to be?-->
+                     <!-- TODO these are inherently unlocalizable-->
+                     <!-- xe:appSearchBar "options" property, current implementation is unlocalizable,
+                    Not sure yet what I should propose as the fix, think it should be a compile breaking change
+                    because pages using the current mechanism will functionally break when the application
+                    is localized, which would require manual testing to find - better to give a compile error.
+                     -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Name of the parameter carrying the selected search option in the query portion of the URL</description>
+            <display-name>Options Parameter Name</display-name>
+            <property-name>optionsParam</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO description, what's the difference between the optionsParam and the queryParam -->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        <property>
+            <description>Indicates if the search bar should be rendered. If no value is specified, then it displays only if the current Notes DB is FT indexed.</description>
+            <display-name>Rendered</display-name>
+            <property-name>rendered</property-name>
+            <property-class>boolean</property-class>
+            <property-extension>
+                <designer-extension>
+                     <!-- TODO description to technical - explain in english-->
+                     <!-- TODO display-name should probably be "Visible"-->
+                     <tags>
+                         todo
+                     </tags>
+                </designer-extension>
+            </property-extension>
+        </property>
+        
+        <complex-extension>
+            <tag-name>TESTappSearchBar</tag-name>
+            <designer-extension>
+                 <!-- TODO needs description-->
+                 <!-- TODO package contains .impl. -->
+                 <tags>
+                     todo
+                 </tags>
+            </designer-extension>
+        </complex-extension>
+    </complex-type>
+
+</faces-config>

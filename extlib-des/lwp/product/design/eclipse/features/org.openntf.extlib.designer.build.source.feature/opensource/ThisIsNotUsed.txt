@@ -1,0 +1,8 @@
+
+Maire Kehoe 2012-12-17 15:43
+The content of this folder are not used.
+The plugin & feature names are always
+com.ibm.xsp.extlib.designer.tooling.feature.source
+never
+com.ibm.xsp.extlib.designer.tooling.feature.opensource
+even when publishing on OpenNTF.

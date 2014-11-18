@@ -1,0 +1,11 @@
+#Localization file used by Workplace Designer
+#Fri Jun 21 16:31:52 BST 2013
+resourceHandlerClass=DesignerResourceHandler
+propertiesFileName=messages.properties
+resourceHandlerPackage=com.ibm.xsp.extlib.designer
+loggingId=CLFAD
+loggingPropertiesFileName=logging.properties
+specialAudienceProperties=specialAudience.properties
+componentOwner=padraic.edwards@ie.ibm.com
+translationLevel=G11N DNT -- Do Not Translate resources follow
+srcFolderName=com.ibm.xsp.extlib.designer/src

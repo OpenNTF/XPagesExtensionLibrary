@@ -1,0 +1,4 @@
+config.name=Extlib Projects (Designer Projects)
+product\design\eclipse\plugins\com.ibm.xsp.extlib.designer
+product\design\eclipse\plugins\com.ibm.xsp.extlib.designer.tooling
+product\design\eclipse\plugins\com.ibm.xsp.extlib.designer.xspprops
