@@ -42,11 +42,12 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import com.ibm.commons.xml.DOMUtil;
 import com.ibm.commons.xml.XMLException;
 
 /**
@@ -57,6 +58,7 @@ import com.ibm.commons.xml.XMLException;
  * Unit: ToolsUtil.java
  */
 public class ToolsUtil {
+    private static String NEWLINE = System.getProperty("line.separator"); //$NON-NLS-1$
 
     public static void writeOut(File file, String str) {
         try {
@@ -86,14 +88,25 @@ public class ToolsUtil {
         StringWriter sw = new StringWriter();
         try {
           Transformer t = TransformerFactory.newInstance().newTransformer();
-          t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
           t.setOutputProperty(OutputKeys.INDENT, "yes");
+          t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
           t.transform(new DOMSource(node), new StreamResult(sw));
         } catch (TransformerException te) {
         	throw new RuntimeException(te);
         }
-        return sw.toString();
-      }
+        String asStr = sw.toString();
+        String xmlDecl = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        String badStart = xmlDecl+"<";
+        if( asStr.startsWith(badStart) ){ // missing newline after xmlDecl
+        	asStr = xmlDecl+NEWLINE+asStr.substring(xmlDecl.length());
+        }
+        // convert the newline character in render-markup elements from
+        // &#13; to &#xd; (hex encoding of same character), to be consistent
+        // with the previous XML serializer.
+        asStr = asStr.replace("&#13;", "&#xd;");
+        return asStr+NEWLINE;
+    }
+    @SuppressWarnings("deprecation")
     public static Document readInFile(File file) throws Exception {
     
             String inUrl = file.toURL().toString();
@@ -134,7 +147,29 @@ public class ToolsUtil {
                 allMsgs = allMsgs.substring(0,  allMsgs.length()-2);
                 throw new RuntimeException("Problem(s) parsing XML: "+allMsgs);
             }
+            removeWhitespaceNodes(document.getDocumentElement());
             return document;
+        }
+    private static void removeWhitespaceNodes(Node e) {
+        // called after have read-in the nodes. 
+        // Later the nodeToString method will be used to 
+        // convert the node to string, while attempting to format with 2-space indent.
+        // But if the tree already contains whitespace characters then it won't do the indent formatting,
+        // and you end up with a mix of tabs, 2-space and 4-space indenting.
+        // So removing the source-file indentation whitespace here, so can do consistent 2-space indent.
+        NodeList kids = e.getChildNodes();
+        int i = 0;
+        while( i < kids.getLength() ){
+            Node kid = kids.item(i);
+            if( kid.getNodeType() == Node.TEXT_NODE && ((Text) kid).getTextContent().trim().isEmpty() ){
+                e.removeChild(kid);
+            }else{
+                if( kid.getNodeType() == Node.ELEMENT_NODE ){
+                    removeWhitespaceNodes(kid);
+                }
+                i++;
+            }
+        }
         }
 
     public static Map<String, String> processArgs(String[] args){

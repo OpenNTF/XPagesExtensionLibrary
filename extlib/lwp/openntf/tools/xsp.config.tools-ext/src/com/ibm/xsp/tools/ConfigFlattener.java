@@ -160,12 +160,15 @@ public class ConfigFlattener {
      * @param str
      */
     private String changeNewlines(String str) {
-        if( "\n".equals(NEWLINE) ){
-            // the serializer uses \n as the newline character
-            return str;
-        }
-        // replace "\n" with "\r\n"
-        return str.replace("\n", NEWLINE);
+        // Since the 9.0.1_N / 2014-11-09 change to the xml serializer
+        // the xml will be using the OS newline, but this ConfigFlattener
+        // and related classes may be using \n, and the copyright text files
+        // may have any possible newline.
+        // Convert from random newlines to the operating system newline
+        String modOne = str.replace("\r\n", "\n");
+        String modTwo = modOne.replace("\r","\n");
+        String modThree = modTwo.replace("\n",NEWLINE);
+        return modThree;
     }
     /**
      * @param document
@@ -308,8 +311,8 @@ public class ConfigFlattener {
      * @return
      */
     private File getExtraPropsFile(String configFileName, String extraPropsFolder) {
-        if(configFileName.startsWith("dtd-")) {
-            configFileName = configFileName.replaceFirst("dtd-", "");
+        if(configFileName.startsWith("raw-")) {
+            configFileName = configFileName.replaceFirst("raw-", "");
         }
         
         String nameLessExtsn = configFileName.substring(0, configFileName.lastIndexOf('.'));
@@ -379,9 +382,9 @@ public class ConfigFlattener {
     private String insertLine(String str, String copyright) {
         // the first line contains the 
         // <?xml version="1.0" encoding="UTF-8"?>
-        int firstNewline = str.indexOf('\n');
-        String firstLine = str.substring(0, firstNewline+1);
-        str = str.substring(firstNewline+1);
+        int firstNewline = str.indexOf(NEWLINE);
+        String firstLine = str.substring(0, firstNewline+NEWLINE.length());
+        str = str.substring(firstNewline+NEWLINE.length());
         return firstLine + copyright + str;
     }
     /**
