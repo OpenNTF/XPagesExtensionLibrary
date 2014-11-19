@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,80 +17,70 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
   </faces-config-extension>
-	
-	
-	<complex-type>
-    	<description>%complex-type.dominoViewValuePicker.descr%</description>
-    	<display-name>%complex-type.dominoViewValuePicker.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-class>
-  		<group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
-        
-        <property>
-            <description>%property.labelColumn.complex-type.dominoViewValuePicker.descr%</description>
-            <display-name>%property.labelColumn.complex-type.dominoViewValuePicker.name%</display-name>
-            <property-name>labelColumn</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    
-                    <tags>
+  <complex-type>
+    <description>%complex-type.dominoViewValuePicker.descr%</description>
+    <display-name>%complex-type.dominoViewValuePicker.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewValuePickerData</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
+    <property>
+      <description>%property.labelColumn.complex-type.dominoViewValuePicker.descr%</description>
+      <display-name>%property.labelColumn.complex-type.dominoViewValuePicker.name%</display-name>
+      <property-name>labelColumn</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                         not-localizable
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            
-            <description>%property.searchType.descr%</description>
-            <display-name>%property.searchType.name%</display-name>
-            <property-name>searchType</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <since>8.5.32003</since>
-                <designer-extension>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.searchType.descr%</description>
+      <display-name>%property.searchType.name%</display-name>
+      <property-name>searchType</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <tags>
                         not-localizable
                     </tags>
-          			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-          			<editor-parameter>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						startFrom
 						match
 						ftSearch
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
-      		<tag-name>dominoViewValuePicker</tag-name>
-    	</complex-extension>
-  	</complex-type>
-		
-	
-	<complex-type>
-    	<description>%complex-type.dominoNABNamePicker.descr%</description>
-    	<display-name>%complex-type.dominoNABNamePicker.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-class>
-
-  		<property>
-  		    
-			<description>%property.addressBookSel.descr%</description>
-			<display-name>%property.addressBookSel.name%</display-name>
-			<property-name>addressBookSel</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+      <tag-name>dominoViewValuePicker</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.dominoNABNamePicker.descr%</description>
+    <display-name>%complex-type.dominoNABNamePicker.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.picker.data.DominoNABNamePickerData</complex-class>
+    <property>
+      <description>%property.addressBookSel.descr%</description>
+      <display-name>%property.addressBookSel.name%</display-name>
+      <property-name>addressBookSel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						all
 						all-public
 						all-private
@@ -98,118 +88,98 @@
 						first-public
 						db-name
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-  		<property>
-  		    
-  		     
-			<description>%property.addressBookDb.descr%</description>
-			<display-name>%property.addressBookDb.name%</display-name>
-			<property-name>addressBookDb</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.nameList.descr%</description>
-            <display-name>%property.nameList.name%</display-name>
-            <property-name>nameList</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.addressBookDb.descr%</description>
+      <display-name>%property.addressBookDb.name%</display-name>
+      <property-name>addressBookDb</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.nameList.descr%</description>
+      <display-name>%property.nameList.name%</display-name>
+      <property-name>nameList</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         people
                         peopleByLastName
                         groups
                         peopleAndGroups
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-  		<property>
-			
-			<description>%property.people.descr%</description>
-			<display-name>%property.people.name%</display-name>
-			<property-name>people</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<default-value>true</default-value>
-				<designer-extension>
-					
-					<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.people.descr%</description>
+      <display-name>%property.people.name%</display-name>
+      <property-name>people</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
 						runtime-default-true
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			
-			<description>%property.groups.descr%</description>
-			<display-name>%property.groups.name%</display-name>
-			<property-name>groups</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<default-value>true</default-value>
-				<designer-extension>
-					
-					<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.groups.descr%</description>
+      <display-name>%property.groups.name%</display-name>
+      <property-name>groups</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
 						runtime-default-true
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
-      		<tag-name>dominoNABNamePicker</tag-name>
-    	</complex-extension>
-  	</complex-type>
-		
-		
-	
-
-
-	
-	<complex-type>
-    	<description>%complex-type.dominoViewNamePicker.descr%</description>
-    	<display-name>%complex-type.dominoViewNamePicker.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-class>
-    	<group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
-        
-        <property>
-            <description>%property.labelColumn.complex-type.dominoViewNamePicker.descr%</description>
-            <display-name>%property.labelColumn.complex-type.dominoViewNamePicker.name%</display-name>
-            <property-name>labelColumn</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      <tag-name>dominoNABNamePicker</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.dominoViewNamePicker.descr%</description>
+    <display-name>%complex-type.dominoViewNamePicker.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.databaseNameProp</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.viewFolderNameProp</group-type-ref>
+    <property>
+      <description>%property.labelColumn.complex-type.dominoViewNamePicker.descr%</description>
+      <display-name>%property.labelColumn.complex-type.dominoViewNamePicker.name%</display-name>
+      <property-name>labelColumn</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                         not-localizable
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-  		<property>
-			<description>%property.label.descr%</description>
-			<display-name>%property.label.name%</display-name>
-			<property-name>label</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-		
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
-      		<tag-name>dominoViewNamePicker</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.label.descr%</description>
+      <display-name>%property.label.name%</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
+      <tag-name>dominoViewNamePicker</tag-name>
+    </complex-extension>
+  </complex-type>
 </faces-config>

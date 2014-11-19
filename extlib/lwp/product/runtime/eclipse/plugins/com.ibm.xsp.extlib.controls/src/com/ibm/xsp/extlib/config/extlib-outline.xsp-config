@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,437 +17,371 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>outline</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <component>
+    <description>%component.com.ibm.xsp.extlib.outline.AbstractOutline.descr%</description>
+    <display-name>%component.com.ibm.xsp.extlib.outline.AbstractOutline.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.AbstractOutline</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.AbstractOutline</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <property>
+      <description>%property.treeNodes.descr%</description>
+      <display-name>%property.treeNodes.name%</display-name>
+      <property-name>treeNodes</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addNode</property-add-method>
         <designer-extension>
-            <control-subpackage-name>outline</control-subpackage-name>
+          <category>basics</category>
         </designer-extension>
-	</faces-config-extension>
-	
-	
-
-
-	<component>
-		<description>%component.com.ibm.xsp.extlib.outline.AbstractOutline.descr%</description>
-		<display-name>%component.com.ibm.xsp.extlib.outline.AbstractOutline.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.AbstractOutline</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.AbstractOutline</component-class>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-
-      	<property>
-        	<description>%property.treeNodes.descr%</description>
-        	<display-name>%property.treeNodes.name%</display-name>
-        	<property-name>treeNodes</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addNode</property-add-method>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-        	</property-extension>
-      	</property>
-
-		<property>
-			<description>%property.onItemClick.descr%</description>
-			<display-name>%property.onItemClick.name%</display-name>
-			<property-name>onItemClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>outline</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineList</renderer-type>
-      		<designer-extension>
-				<in-palette>true</in-palette>
-				<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-
-	<component>
-		<description>%component.navigator.descr%</description>
-		<display-name>%component.navigator.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineNavigator</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineNavigator</component-class>
-
-        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
-		
-  		<property>
-  			
-			<description>%property.expandable.descr%</description>
-			<display-name>%property.expandable.name%</display-name>
-			<property-name>expandable</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				
-				<designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onItemClick.descr%</description>
+      <display-name>%property.onItemClick.name%</display-name>
+      <property-name>onItemClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>outline</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineList</renderer-type>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.navigator.descr%</description>
+    <display-name>%component.navigator.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineNavigator</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineNavigator</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+    <property>
+      <description>%property.expandable.descr%</description>
+      <display-name>%property.expandable.name%</display-name>
+      <property-name>expandable</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  		    
-			<description>%property.expandEffect.descr%</description>
-			<display-name>%property.expandEffect.name%</display-name>
-			<property-name>expandEffect</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-        	        <category>basics</category>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.expandEffect.descr%</description>
+      <display-name>%property.expandEffect.name%</display-name>
+      <property-name>expandEffect</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						wipe
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.expandLevel.descr%</description>
-			<display-name>%property.expandLevel.name%</display-name>
-			<property-name>expandLevel</property-name>
-      		<property-class>int</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-		
-		<property>
-			<description>%property.keepState.descr%</description>
-			<display-name>%property.keepState.name%</display-name>
-			<property-name>keepState</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-	        	<default-value>false</default-value>
-				
-				<since>8.5.32001</since>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineMenu</renderer-type>
-			<tag-name>navigator</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		<description>%component.breadCrumbs.descr%</description>
-		<display-name>%component.breadCrumbs.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineBreadCrumbs</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineBreadCrumbs</component-class>
-
-        <property>
-       		
-            <description>%property.label.component.breadCrumbs.descr%</description>
-            <display-name>%property.label.component.breadCrumbs.name%</display-name>
-            <property-name>label</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.BreadCrumbs</renderer-type>
-			<tag-name>breadCrumbs</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		
-		<description>%component.sortLinks.descr%</description>
-		<display-name>%component.sortLinks.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineSortLinks</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineSortLinks</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.SortLinks</renderer-type>
-			<tag-name>sortLinks</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		<description>%component.linksList.descr%</description>
-		<display-name>%component.linksList.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineLinksList</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineLinksList</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.LinksList</renderer-type>
-			<tag-name>linksList</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		<description>%component.accordion.descr%</description>
-		<display-name>%component.accordion.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineAccordion</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineAccordion</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineAccordion</renderer-type>
-			<tag-name>accordion</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		<description>%component.toolbar.descr%</description>
-		<display-name>%component.toolbar.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineToolbar</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineToolbar</component-class>
-		
-  		<property>
-			<description>%property.showButtonLabels.descr%</description>
-			<display-name>%property.showButtonLabels.name%</display-name>
-			<property-name>showButtonLabels</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-	        	<default-value>true</default-value>
-				<designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.expandLevel.descr%</description>
+      <display-name>%property.expandLevel.name%</display-name>
+      <property-name>expandLevel</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.keepState.descr%</description>
+      <display-name>%property.keepState.name%</display-name>
+      <property-name>keepState</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>false</default-value>
+        <since>8.5.32001</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineMenu</renderer-type>
+      <tag-name>navigator</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.breadCrumbs.descr%</description>
+    <display-name>%component.breadCrumbs.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineBreadCrumbs</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineBreadCrumbs</component-class>
+    <property>
+      <description>%property.label.component.breadCrumbs.descr%</description>
+      <display-name>%property.label.component.breadCrumbs.name%</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.BreadCrumbs</renderer-type>
+      <tag-name>breadCrumbs</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.sortLinks.descr%</description>
+    <display-name>%component.sortLinks.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineSortLinks</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineSortLinks</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.SortLinks</renderer-type>
+      <tag-name>sortLinks</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.linksList.descr%</description>
+    <display-name>%component.linksList.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineLinksList</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineLinksList</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.LinksList</renderer-type>
+      <tag-name>linksList</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.accordion.descr%</description>
+    <display-name>%component.accordion.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineAccordion</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineAccordion</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineAccordion</renderer-type>
+      <tag-name>accordion</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.toolbar.descr%</description>
+    <display-name>%component.toolbar.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineToolbar</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineToolbar</component-class>
+    <property>
+      <description>%property.showButtonLabels.descr%</description>
+      <display-name>%property.showButtonLabels.name%</display-name>
+      <property-name>showButtonLabels</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                       runtime-default-true
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineToolbar</renderer-type>
-			<tag-name>toolbar</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		
-		
-		<description>%component.popupMenu.descr%</description>
-		<display-name>%component.popupMenu.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlinePopupMenu</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlinePopupMenu</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlinePopupMenu</renderer-type>
-			<tag-name>popupMenu</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		
-		<description>%component.outline.descr%</description>
-		<display-name>%component.outline.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineGeneric</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineGeneric</component-class>
-
-  		<property>
-			<description>%property.treeRenderer.descr%</description>
-			<display-name>%property.treeRenderer.name%</display-name>
-			<property-name>treeRenderer</property-name>
-			<property-class>com.ibm.xsp.extlib.tree.ITreeRenderer</property-class>
-			<property-extension>
-                 <allow-run-time-binding>false</allow-run-time-binding>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineList</renderer-type>
-			<tag-name>outline</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		
-		<description>%component.dropDownButton.descr%</description>
-		<display-name>%component.dropDownButton.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.OutlineDropDownButton</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UIOutlineDropDownButton</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.outline.OutlineDropDownButton</renderer-type>
-			<tag-name>dropDownButton</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-		<description>%component.listSeparator.descr%</description>
-		<display-name>%component.listSeparator.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.outline.Separator</component-type>
-		<component-class>com.ibm.xsp.extlib.component.outline.UISeparator</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Outline</component-family>
-			<renderer-type>com.ibm.xsp.extlib.outline.Separator</renderer-type>
-			<tag-name>listSeparator</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-        		
-				<render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
-					&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineToolbar</renderer-type>
+      <tag-name>toolbar</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.popupMenu.descr%</description>
+    <display-name>%component.popupMenu.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlinePopupMenu</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlinePopupMenu</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlinePopupMenu</renderer-type>
+      <tag-name>popupMenu</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.outline.descr%</description>
+    <display-name>%component.outline.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineGeneric</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineGeneric</component-class>
+    <property>
+      <description>%property.treeRenderer.descr%</description>
+      <display-name>%property.treeRenderer.name%</display-name>
+      <property-name>treeRenderer</property-name>
+      <property-class>com.ibm.xsp.extlib.tree.ITreeRenderer</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineList</renderer-type>
+      <tag-name>outline</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.dropDownButton.descr%</description>
+    <display-name>%component.dropDownButton.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.OutlineDropDownButton</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UIOutlineDropDownButton</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <base-component-type>com.ibm.xsp.extlib.outline.AbstractOutline</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.outline.OutlineDropDownButton</renderer-type>
+      <tag-name>dropDownButton</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.listSeparator.descr%</description>
+    <display-name>%component.listSeparator.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.outline.Separator</component-type>
+    <component-class>com.ibm.xsp.extlib.component.outline.UISeparator</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Outline</component-family>
+      <renderer-type>com.ibm.xsp.extlib.outline.Separator</renderer-type>
+      <tag-name>listSeparator</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+					&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
 				    |
-					&lt;/xp:view&gt;&#13;
+					&lt;/xp:view&gt;&#xd;
 				</render-markup>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-
-    <complex-type>
-        <description>%complex-type.com.ibm.xsp.extlib.tree.ITreeNode.descr%</description>
-        <display-name>%complex-type.com.ibm.xsp.extlib.tree.ITreeNode.name%</display-name>
-        <complex-id>com.ibm.xsp.extlib.tree.ITreeNode</complex-id>
-        <complex-class>com.ibm.xsp.extlib.tree.ITreeNode</complex-class>
-    </complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
-    	<display-name>%complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</complex-class>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
-
-  		<property>
-			<description>%property.label.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
-			<display-name>%property.label.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
-			<property-name>label</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.image.descr%</description>
-			<display-name>%property.image.name%</display-name>
-			<property-name>image</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.imageAlt.descr%</description>
-			<display-name>%property.imageAlt.name%</display-name>
-			<property-name>imageAlt</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-				<designer-extension>
-					<tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.tree.ITreeNode.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.tree.ITreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.ITreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.ITreeNode</complex-class>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+    <property>
+      <description>%property.label.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
+      <display-name>%property.label.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.image.descr%</description>
+      <display-name>%property.image.name%</display-name>
+      <property-name>image</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.imageAlt.descr%</description>
+      <display-name>%property.imageAlt.name%</display-name>
+      <property-name>imageAlt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
 						not-image-path
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.imageHeight.descr%</description>
-			<display-name>%property.imageHeight.name%</display-name>
-			<property-name>imageHeight</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.imageHeight.descr%</description>
+      <display-name>%property.imageHeight.name%</display-name>
+      <property-name>imageHeight</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -455,24 +389,21 @@
 						auto
 						inherit
 					</editor-parameter>
-					
-					<tags>
+          <tags>
 						not-image-path
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.imageWidth.descr%</description>
-			<display-name>%property.imageWidth.name%</display-name>
-			<property-name>imageWidth</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.imageWidth.descr%</description>
+      <display-name>%property.imageWidth.name%</display-name>
+      <property-name>imageWidth</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -480,475 +411,413 @@
 						auto
 						inherit
 					</editor-parameter>
-					
-					<tags>
+          <tags>
 						not-image-path
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-        
-            <description>%/com.ibm.xsp.group.aria.role/role/descr%</description>
-            <display-name>%/com.ibm.xsp.group.aria.role/role/name%</display-name>
-			<property-name>role</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%/com.ibm.xsp.group.core.prop.title/title/descr%</description>
-            <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
-            <property-name>title</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                
-                <since>8.5.32002</since>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <tags>is-accessibility-title</tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-  		<property>
-			<description>%property.rendered.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
-			<display-name>%property.rendered.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
-			<property-name>rendered</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.enabled.descr%</description>
-			<display-name>%property.enabled.name%</display-name>
-			<property-name>enabled</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.selected.descr%</description>
-			<display-name>%property.selected.name%</display-name>
-			<property-name>selected</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.basicLeafNode.descr%</description>
-    	<display-name>%complex-type.basicLeafNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</complex-class>
-
-  		<property>
-			<description>%property.href.descr%</description>
-			<display-name>%property.href.name%</display-name>
-			<property-name>href</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-  		<property>
-  		    
-			<description>%property.onClick.descr%</description>
-			<display-name>%property.onClick.name%</display-name>
-			<property-name>onClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.designer.domino.client.script.editor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.submitValue.descr%</description>
-			<display-name>%property.submitValue.name%</display-name>
-			<property-name>submitValue</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
-			<tag-name>basicLeafNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.basicContainerNode.descr%</description>
-    	<display-name>%complex-type.basicContainerNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.ComplexContainerTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.ComplexContainerTreeNode</complex-class>
-
-  		<property>
-			<description>%property.transparent.descr%</description>
-			<display-name>%property.transparent.name%</display-name>
-			<property-name>transparent</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.expanded.descr%</description>
-            <display-name>%property.expanded.name%</display-name>
-            <property-name>expanded</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <default-value>true</default-value>
-                <since>8.5.32005</since>
-            </property-extension>
-        </property>
-      	<property>
-        	<description>%property.children.complex-type.basicContainerNode.descr%</description>
-        	<display-name>%property.children.complex-type.basicContainerNode.name%</display-name>
-        	<property-name>children</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addChild</property-add-method>
-        	</property-extension>
-      	</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</base-complex-id>
-            <default-property>children</default-property>
-      		<tag-name>basicContainerNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-
-	
-	<complex-type>
-    	<description>%complex-type.pageTreeNode.descr%</description>
-    	<display-name>%complex-type.pageTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.PageTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.PageTreeNode</complex-class>
-
-  		<property>
-			<description>%property.page.descr%</description>
-			<display-name>%property.page.name%</display-name>
-			<property-name>page</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.queryString.descr%</description>
-			<display-name>%property.queryString.name%</display-name>
-			<property-name>queryString</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.selection.descr%</description>
-			<display-name>%property.selection.name%</display-name>
-			<property-name>selection</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-      	<property>
-        	<description>%property.children.complex-type.pageTreeNode.descr%</description>
-        	<display-name>%property.children.complex-type.pageTreeNode.name%</display-name>
-        	<property-name>children</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addChild</property-add-method>
-        	</property-extension>
-      	</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
-      		<tag-name>pageTreeNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-	   
-    	<description>%complex-type.separatorTreeNode.descr%</description>
-    	<display-name>%complex-type.separatorTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.SeparatorTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.SeparatorTreeNode</complex-class>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
-
-  		<property>
-			<description>%property.rendered.complex-type.separatorTreeNode.descr%</description>
-			<display-name>%property.rendered.complex-type.separatorTreeNode.name%</display-name>
-			<property-name>rendered</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
-      		<tag-name>separatorTreeNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.userTreeNode.descr%</description>
-    	<display-name>%complex-type.userTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.UserTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.UserTreeNode</complex-class>
-
-  		<property>
-  			
-			<description>%property.userField.descr%</description>
-			<display-name>%property.userField.name%</display-name>
-			<property-name>userField</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
-      		<tag-name>userTreeNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.repeatTreeNode.descr%</description>
-    	<display-name>%complex-type.repeatTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.RepeatTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.RepeatTreeNode</complex-class>
-		<property>
-			<description>%property.value.descr%</description>
-			<display-name>%property.value.name%</display-name>
-			<property-name>value</property-name>
-      		<property-class>java.lang.Object</property-class>
-      		<property-extension>
-        		<designer-extension>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-    	<property>
-      		<description>%property.var.descr%</description>
-      		<display-name>%property.var.name%</display-name>
-      		<property-name>var</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-	    		<allow-run-time-binding>false</allow-run-time-binding>
-				<designer-extension>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
-				</designer-extension>
-      		</property-extension>
-    	</property>
-    	<property>
-      		<description>%property.indexVar.descr%</description>
-      		<display-name>%property.indexVar.name%</display-name>
-      		<property-name>indexVar</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-	    		<allow-run-time-binding>false</allow-run-time-binding>
-				<designer-extension>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
-				</designer-extension>
-      		</property-extension>
-    	</property>
-      	<property>
-        	<description>%property.children.complex-type.repeatTreeNode.descr%</description>
-        	<display-name>%property.children.complex-type.repeatTreeNode.name%</display-name>
-        	<property-name>children</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addChild</property-add-method>
-        	</property-extension>
-      	</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
-      		<tag-name>repeatTreeNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-    	<description>%complex-type.beanTreeNode.descr%</description>
-    	<display-name>%complex-type.beanTreeNode.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.tree.complex.BeanTreeNode</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.tree.complex.BeanTreeNode</complex-class>
-
-  		<property>
-			<description>%property.nodeBean.descr%</description>
-			<display-name>%property.nodeBean.name%</display-name>
-			<property-name>nodeBean</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
-      		<tag-name>beanTreeNode</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-
-
-    <complex-type>
-        <description>%complex-type.com.ibm.xsp.extlib.tree.ITreeRenderer.descr%</description>
-        <display-name>%complex-type.com.ibm.xsp.extlib.tree.ITreeRenderer.name%</display-name>
-        <complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</complex-id>
-        <complex-class>com.ibm.xsp.extlib.tree.ITreeRenderer</complex-class>
-        <complex-extension>
-        </complex-extension>
-    </complex-type>
-    
-	
-	<complex-type>
-    	<description>%complex-type.com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer.descr%</description>
-    	<display-name>%complex-type.com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</complex-class>
-  		<property>
-			<description>%property.containerStyle.descr%</description>
-			<display-name>%property.containerStyle.name%</display-name>
-			<property-name>containerStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.containerStyleClass.descr%</description>
-			<display-name>%property.containerStyleClass.name%</display-name>
-			<property-name>containerStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>          	 
-	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-	      		</designer-extension>   
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.itemStyle.descr%</description>
-			<display-name>%property.itemStyle.name%</display-name>
-			<property-name>itemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.itemStyleClass.descr%</description>
-			<display-name>%property.itemStyleClass.name%</display-name>
-			<property-name>itemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>          	 
-	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-	      		</designer-extension>   
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.selectedItemStyle.descr%</description>
-			<display-name>%property.selectedItemStyle.name%</display-name>
-			<property-name>selectedItemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.selectedItemStyleClass.descr%</description>
-			<display-name>%property.selectedItemStyleClass.name%</display-name>
-			<property-name>selectedItemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>          	 
-	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-	      		</designer-extension>   
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.disabledItemStyle.descr%</description>
-			<display-name>%property.disabledItemStyle.name%</display-name>
-			<property-name>disabledItemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.disabledItemStyleClass.descr%</description>
-			<display-name>%property.disabledItemStyleClass.name%</display-name>
-			<property-name>disabledItemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>          	 
-	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-	      		</designer-extension>   
-			</property-extension>
-		</property>
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</base-complex-id>
-    	</complex-extension>
-  	</complex-type>
-    
-	
-	<complex-type>
-		
-    	<description>%complex-type.htmlListRenderer.descr%</description>
-    	<display-name>%complex-type.htmlListRenderer.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer</complex-class>
-    	<complex-extension>
-			
-    		<base-complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</base-complex-id>
-      		<tag-name>htmlListRenderer</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
-	
-	<complex-type>
-		
-    	<description>%complex-type.htmlDivSpanRenderer.descr%</description>
-    	<display-name>%complex-type.htmlDivSpanRenderer.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlDivSpanRenderer</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlDivSpanRenderer</complex-class>
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</base-complex-id>
-      		<tag-name>htmlDivSpanRenderer</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%/com.ibm.xsp.group.aria.role/role/descr%</description>
+      <display-name>%/com.ibm.xsp.group.aria.role/role/name%</display-name>
+      <property-name>role</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%/com.ibm.xsp.group.core.prop.title/title/descr%</description>
+      <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
+      <property-name>title</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>8.5.32002</since>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>is-accessibility-title</tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rendered.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.descr%</description>
+      <display-name>%property.rendered.complex-type.com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode.name%</display-name>
+      <property-name>rendered</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.enabled.descr%</description>
+      <display-name>%property.enabled.name%</display-name>
+      <property-name>enabled</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.selected.descr%</description>
+      <display-name>%property.selected.name%</display-name>
+      <property-name>selected</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.basicLeafNode.descr%</description>
+    <display-name>%complex-type.basicLeafNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</complex-class>
+    <property>
+      <description>%property.href.descr%</description>
+      <display-name>%property.href.name%</display-name>
+      <property-name>href</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.onClick.descr%</description>
+      <display-name>%property.onClick.name%</display-name>
+      <property-name>onClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.designer.domino.client.script.editor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.submitValue.descr%</description>
+      <display-name>%property.submitValue.name%</display-name>
+      <property-name>submitValue</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
+      <tag-name>basicLeafNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.basicContainerNode.descr%</description>
+    <display-name>%complex-type.basicContainerNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.ComplexContainerTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.ComplexContainerTreeNode</complex-class>
+    <property>
+      <description>%property.transparent.descr%</description>
+      <display-name>%property.transparent.name%</display-name>
+      <property-name>transparent</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.expanded.descr%</description>
+      <display-name>%property.expanded.name%</display-name>
+      <property-name>expanded</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <since>8.5.32005</since>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.children.complex-type.basicContainerNode.descr%</description>
+      <display-name>%property.children.complex-type.basicContainerNode.name%</display-name>
+      <property-name>children</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addChild</property-add-method>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.complex.ComplexLeafTreeNode</base-complex-id>
+      <default-property>children</default-property>
+      <tag-name>basicContainerNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.pageTreeNode.descr%</description>
+    <display-name>%complex-type.pageTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.PageTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.PageTreeNode</complex-class>
+    <property>
+      <description>%property.page.descr%</description>
+      <display-name>%property.page.name%</display-name>
+      <property-name>page</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.queryString.descr%</description>
+      <display-name>%property.queryString.name%</display-name>
+      <property-name>queryString</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.selection.descr%</description>
+      <display-name>%property.selection.name%</display-name>
+      <property-name>selection</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.children.complex-type.pageTreeNode.descr%</description>
+      <display-name>%property.children.complex-type.pageTreeNode.name%</display-name>
+      <property-name>children</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addChild</property-add-method>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
+      <tag-name>pageTreeNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.separatorTreeNode.descr%</description>
+    <display-name>%complex-type.separatorTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.SeparatorTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.SeparatorTreeNode</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+    <property>
+      <description>%property.rendered.complex-type.separatorTreeNode.descr%</description>
+      <display-name>%property.rendered.complex-type.separatorTreeNode.name%</display-name>
+      <property-name>rendered</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
+      <tag-name>separatorTreeNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.userTreeNode.descr%</description>
+    <display-name>%complex-type.userTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.UserTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.UserTreeNode</complex-class>
+    <property>
+      <description>%property.userField.descr%</description>
+      <display-name>%property.userField.name%</display-name>
+      <property-name>userField</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode</base-complex-id>
+      <tag-name>userTreeNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.repeatTreeNode.descr%</description>
+    <display-name>%complex-type.repeatTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.RepeatTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.RepeatTreeNode</complex-class>
+    <property>
+      <description>%property.value.descr%</description>
+      <display-name>%property.value.name%</display-name>
+      <property-name>value</property-name>
+      <property-class>java.lang.Object</property-class>
+      <property-extension>
+        <designer-extension/>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.var.descr%</description>
+      <display-name>%property.var.name%</display-name>
+      <property-name>var</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.indexVar.descr%</description>
+      <display-name>%property.indexVar.name%</display-name>
+      <property-name>indexVar</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.VarNameEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.children.complex-type.repeatTreeNode.descr%</description>
+      <display-name>%property.children.complex-type.repeatTreeNode.name%</display-name>
+      <property-name>children</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addChild</property-add-method>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
+      <tag-name>repeatTreeNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.beanTreeNode.descr%</description>
+    <display-name>%complex-type.beanTreeNode.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.complex.BeanTreeNode</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.complex.BeanTreeNode</complex-class>
+    <property>
+      <description>%property.nodeBean.descr%</description>
+      <display-name>%property.nodeBean.name%</display-name>
+      <property-name>nodeBean</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension/>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
+      <tag-name>beanTreeNode</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.tree.ITreeRenderer.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.tree.ITreeRenderer.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</complex-id>
+    <complex-class>com.ibm.xsp.extlib.tree.ITreeRenderer</complex-class>
+    <complex-extension/>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</complex-id>
+    <complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</complex-class>
+    <property>
+      <description>%property.containerStyle.descr%</description>
+      <display-name>%property.containerStyle.name%</display-name>
+      <property-name>containerStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.containerStyleClass.descr%</description>
+      <display-name>%property.containerStyleClass.name%</display-name>
+      <property-name>containerStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.itemStyle.descr%</description>
+      <display-name>%property.itemStyle.name%</display-name>
+      <property-name>itemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.itemStyleClass.descr%</description>
+      <display-name>%property.itemStyleClass.name%</display-name>
+      <property-name>itemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectedItemStyle.descr%</description>
+      <display-name>%property.selectedItemStyle.name%</display-name>
+      <property-name>selectedItemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectedItemStyleClass.descr%</description>
+      <display-name>%property.selectedItemStyleClass.name%</display-name>
+      <property-name>selectedItemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disabledItemStyle.descr%</description>
+      <display-name>%property.disabledItemStyle.name%</display-name>
+      <property-name>disabledItemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disabledItemStyleClass.descr%</description>
+      <display-name>%property.disabledItemStyleClass.name%</display-name>
+      <property-name>disabledItemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</base-complex-id>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.htmlListRenderer.descr%</description>
+    <display-name>%complex-type.htmlListRenderer.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer</complex-id>
+    <complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlListRenderer</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</base-complex-id>
+      <tag-name>htmlListRenderer</tag-name>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.htmlDivSpanRenderer.descr%</description>
+    <display-name>%complex-type.htmlDivSpanRenderer.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlDivSpanRenderer</complex-id>
+    <complex-class>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlDivSpanRenderer</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.HtmlTagsRenderer</base-complex-id>
+      <tag-name>htmlDivSpanRenderer</tag-name>
+    </complex-extension>
+  </complex-type>
 </faces-config>

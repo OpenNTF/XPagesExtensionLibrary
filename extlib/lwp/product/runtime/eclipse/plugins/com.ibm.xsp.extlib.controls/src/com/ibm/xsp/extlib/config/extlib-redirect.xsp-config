@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,220 +17,192 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>misc</control-subpackage-name>
+      <control-subpackage-name>misc</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-			
-	
-
-	<component>
-		<description>%component.redirect.descr%</description>
-		<display-name>%component.redirect.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.misc.Redirect</component-type>
-		<component-class>com.ibm.xsp.extlib.component.misc.UIRedirect</component-class>
-		<property>
-			<description>%property.rules.descr%</description>
-			<display-name>%property.rules.name%</display-name>
-			<property-name>rules</property-name>
-			<property-class>java.util.List</property-class>
-			<property-extension>
-				<allow-run-time-binding>false</allow-run-time-binding>
-				<collection-property>true</collection-property>
-				<property-item-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</property-item-class>
-				<property-add-method>addRule</property-add-method>
-				<designer-extension>
-					<category>basics</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<component-extension>
-			<base-component-type>javax.faces.Component</base-component-type>
-			<component-family>com.ibm.xsp.extlib.misc.Redirect</component-family>
-			<renderer-type>com.ibm.xsp.extlib.misc.Redirect</renderer-type>
-			<tag-name>redirect</tag-name>
-			<since>8.5.32003</since>
-			<designer-extension>
-				<in-palette>true</in-palette>
-				<category>Extension Library</category>
-				<tags>
+  <component>
+    <description>%component.redirect.descr%</description>
+    <display-name>%component.redirect.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.misc.Redirect</component-type>
+    <component-class>com.ibm.xsp.extlib.component.misc.UIRedirect</component-class>
+    <property>
+      <description>%property.rules.descr%</description>
+      <display-name>%property.rules.name%</display-name>
+      <property-name>rules</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</property-item-class>
+        <property-add-method>addRule</property-add-method>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.misc.Redirect</component-family>
+      <renderer-type>com.ibm.xsp.extlib.misc.Redirect</renderer-type>
+      <tag-name>redirect</tag-name>
+      <since>8.5.32003</since>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
 					no-faces-config-renderer
 					no-rendered-output
 				</tags>
-			</designer-extension>
-		</component-extension>
-	</component>
-	
-	<complex-type>
-		<description>%complex-type.com.ibm.xsp.extlib.component.misc.AbstractRedirectRule.descr%</description>
-		<display-name/>
-		<complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-class>
-		
-		<complex-extension>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>
-	
-	<complex-type>
-		<description>%complex-type.com.ibm.xsp.extlib.component.misc.RedirectRuleBase.descr%</description>
-		<display-name/>
-		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-class>
-		
-		<property>
-			
-			<description>%property.url.descr%</description>
-			<display-name>%property.url.name%</display-name>
-			<property-name>url</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<required>true</required>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			
-			<description>%property.urlHash.descr%</description>
-			<display-name>%property.urlHash.name%</display-name>
-			<property-name>urlHash</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					
-					<tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.component.misc.AbstractRedirectRule.descr%</description>
+    <display-name/>
+    <complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</complex-class>
+    <complex-extension>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.component.misc.RedirectRuleBase.descr%</description>
+    <display-name/>
+    <complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</complex-class>
+    <property>
+      <description>%property.url.descr%</description>
+      <display-name>%property.url.name%</display-name>
+      <property-name>url</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <required>true</required>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.urlHash.descr%</description>
+      <display-name>%property.urlHash.name%</display-name>
+      <property-name>urlHash</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
 						not-xpage-name
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.disableRequestParams.descr%</description>
-			<display-name>%property.disableRequestParams.name%</display-name>
-			<property-name>disableRequestParams</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.extraParams.descr%</description>
-			<display-name>%property.extraParams.name%</display-name>
-			<property-name>extraParams</property-name>
-			<property-class>java.util.List</property-class>
-			<property-extension>
-				<allow-run-time-binding>false</allow-run-time-binding>
-				<collection-property>true</collection-property>
-				<property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
-				<property-add-method>addExtraParam</property-add-method>
-			</property-extension>
-		</property>
-		
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</base-complex-id>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>
-	
-	
-	
-	<complex-type>
-		<description>%complex-type.redirectPhoneRule.descr%</description>
-		<display-name>%complex-type.redirectPhoneRule.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-class>
-
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
-			<tag-name>redirectPhoneRule</tag-name>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>	
-	
-	
-	<complex-type>
-		<description>%complex-type.redirectTabletRule.descr%</description>
-		<display-name>%complex-type.redirectTabletRule.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-class>
-
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
-			<tag-name>redirectTabletRule</tag-name>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>	
-	
-	
-	<complex-type>
-		<description>%complex-type.redirectHeaderRule.descr%</description>
-		<display-name>%complex-type.redirectHeaderRule.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-class>
-		<property>
-			
-			<description>%property.header.descr%</description>
-			<display-name>%property.header.name%</display-name>
-			<property-name>header</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disableRequestParams.descr%</description>
+      <display-name>%property.disableRequestParams.name%</display-name>
+      <property-name>disableRequestParams</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension/>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.extraParams.descr%</description>
+      <display-name>%property.extraParams.name%</display-name>
+      <property-name>extraParams</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
+        <property-add-method>addExtraParam</property-add-method>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.misc.AbstractRedirectRule</base-complex-id>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.redirectPhoneRule.descr%</description>
+    <display-name>%complex-type.redirectPhoneRule.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.RedirectPhoneRule</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+      <tag-name>redirectPhoneRule</tag-name>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.redirectTabletRule.descr%</description>
+    <display-name>%complex-type.redirectTabletRule.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.RedirectTabletRule</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+      <tag-name>redirectTabletRule</tag-name>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.redirectHeaderRule.descr%</description>
+    <display-name>%complex-type.redirectHeaderRule.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.RedirectHeaderRule</complex-class>
+    <property>
+      <description>%property.header.descr%</description>
+      <display-name>%property.header.name%</display-name>
+      <property-name>header</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						User-Agent
 						Accept
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.headerPattern.descr%</description>
-			<display-name>%property.headerPattern.name%</display-name>
-			<property-name>headerPattern</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
-			<tag-name>redirectHeaderRule</tag-name>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>
-	
-	
-	<complex-type>
-		<description>%complex-type.redirectCustomRule.descr%</description>
-		<display-name>%complex-type.redirectCustomRule.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-class>
-		
-		<property>
-			<description>%property.redirect.descr%</description>
-			<display-name>%property.redirect.name%</display-name>
-			<property-name>redirect</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
-			<tag-name>redirectCustomRule</tag-name>
-			<since>8.5.32003</since>
-		</complex-extension>
-	</complex-type>	
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.headerPattern.descr%</description>
+      <display-name>%property.headerPattern.name%</display-name>
+      <property-name>headerPattern</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.RegularExpressionEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+      <tag-name>redirectHeaderRule</tag-name>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.redirectCustomRule.descr%</description>
+    <display-name>%complex-type.redirectCustomRule.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.misc.RedirectCustomRule</complex-class>
+    <property>
+      <description>%property.redirect.descr%</description>
+      <display-name>%property.redirect.name%</display-name>
+      <property-name>redirect</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension/>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.misc.RedirectRuleBase</base-complex-id>
+      <tag-name>redirectCustomRule</tag-name>
+      <since>8.5.32003</since>
+    </complex-extension>
+  </complex-type>
 </faces-config>

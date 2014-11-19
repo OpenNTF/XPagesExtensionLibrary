@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,107 +17,95 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>dialog</control-subpackage-name>
+      <control-subpackage-name>dialog</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-	<component>
-		<description>%component.dialog.descr%</description>
-		<display-name>%component.dialog.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dialog.Dialog</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialog</component-class>
-        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
-
-  		<property>
-			<description>%property.keepComponents.descr%</description>
-			<display-name>%property.keepComponents.name%</display-name>
-			<property-name>keepComponents</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-	        	<default-value>true</default-value>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-		
-		<component-extension>
-			<base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
-			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dialog.Dialog</renderer-type>
-			<tag-name>dialog</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	
-	<component>
-	    
-		<description>%component.tooltipDialog.descr%</description>
-		<display-name>%component.tooltipDialog.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dialog.TooltipDialog</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dialog.UITooltipDialog</component-class>
-
-		<component-extension>
-			<base-component-type>com.ibm.xsp.extlib.dialog.Dialog</base-component-type>
-			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dialog.TooltipDialog</renderer-type>
-			<tag-name>tooltipDialog</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-        		<tags>todo</tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	<component>
-		<description>%component.dialogButtonBar.descr%</description>
-		<display-name>%component.dialogButtonBar.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialogButtonBar</component-class>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</renderer-type>
-			<tag-name>dialogButtonBar</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-        		<tags>todo</tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	<component>
-		<description>%component.dialogContent.descr%</description>
-		<display-name>%component.dialogContent.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dialog.DialogContent</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dialog.UIDialogContent</component-class>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Dialog</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dialog.DialogContent</renderer-type>
-			<tag-name>dialogContent</tag-name>
-			<since>8.5.32001</since>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-        		<tags>todo</tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
+  <component>
+    <description>%component.dialog.descr%</description>
+    <display-name>%component.dialog.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dialog.Dialog</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dialog.UIDialog</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+    <property>
+      <description>%property.keepComponents.descr%</description>
+      <display-name>%property.keepComponents.name%</display-name>
+      <property-name>keepComponents</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.layout.ContentPane</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Dialog</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dialog.Dialog</renderer-type>
+      <tag-name>dialog</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.tooltipDialog.descr%</description>
+    <display-name>%component.tooltipDialog.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dialog.TooltipDialog</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dialog.UITooltipDialog</component-class>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dialog.Dialog</base-component-type>
+      <component-family>com.ibm.xsp.extlib.Dialog</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dialog.TooltipDialog</renderer-type>
+      <tag-name>tooltipDialog</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>todo</tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.dialogButtonBar.descr%</description>
+    <display-name>%component.dialogButtonBar.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dialog.UIDialogButtonBar</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Dialog</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dialog.DialogButtonBar</renderer-type>
+      <tag-name>dialogButtonBar</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>todo</tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.dialogContent.descr%</description>
+    <display-name>%component.dialogContent.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dialog.DialogContent</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dialog.UIDialogContent</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Dialog</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dialog.DialogContent</renderer-type>
+      <tag-name>dialogContent</tag-name>
+      <since>8.5.32001</since>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>todo</tags>
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

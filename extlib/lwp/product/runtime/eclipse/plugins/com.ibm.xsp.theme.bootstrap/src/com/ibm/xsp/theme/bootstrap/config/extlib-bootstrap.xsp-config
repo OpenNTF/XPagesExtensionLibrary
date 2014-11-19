@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,106 +17,93 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
-	</faces-config-extension>
-    
-	
-	<complex-type>
-	    
-    	<description>%complex-type.bootstrapResponsiveConfiguration.descr%</description>
-    	<display-name>%complex-type.bootstrapResponsiveConfiguration.name%</display-name>
-    	<complex-id>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-id>
-    	<complex-class>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-class>
-		
-  		<property>
-	   		
-			<description>%property.invertedNavbar.descr%</description>
-			<display-name>%property.invertedNavbar.name%</display-name>
-			<property-name>invertedNavbar</property-name>
-			<property-class>boolean</property-class>
-		</property>
-		
-		<property>
-	   		
-			<description>%property.fixedNavbar.descr%</description>
-			<display-name>%property.fixedNavbar.name%</display-name>
-			<property-name>fixedNavbar</property-name>
-			<property-class>string</property-class>
-			<property-extension>
-				<localizable>false</localizable>
-		        <designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>fixed-top
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+  </faces-config-extension>
+  <complex-type>
+    <description>%complex-type.bootstrapResponsiveConfiguration.descr%</description>
+    <display-name>%complex-type.bootstrapResponsiveConfiguration.name%</display-name>
+    <complex-id>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-id>
+    <complex-class>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-class>
+    <property>
+      <description>%property.invertedNavbar.descr%</description>
+      <display-name>%property.invertedNavbar.name%</display-name>
+      <property-name>invertedNavbar</property-name>
+      <property-class>boolean</property-class>
+    </property>
+    <property>
+      <description>%property.fixedNavbar.descr%</description>
+      <display-name>%property.fixedNavbar.name%</display-name>
+      <property-name>fixedNavbar</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>fixed-top
 						fixed-bottom
 						unfixed-top
 					</editor-parameter>
-		        </designer-extension>
-			</property-extension>
-		</property>
-		
-		<property>
-			<description>%property.collapseLeftColumn.descr%</description>
-			<display-name>%property.collapseLeftColumn.name%</display-name>
-			<property-name>collapseLeftColumn</property-name>
-			<property-class>boolean</property-class>
-		</property>
-		
-		<property>
-	   		
-			<description>%property.collapseLeftTarget.descr%</description>
-			<display-name>%property.collapseLeftTarget.name%</display-name>
-			<property-name>collapseLeftTarget</property-name>
-			<property-class>string</property-class>
-			<property-extension>
-				<localizable>false</localizable>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>.applayout-column-left
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.collapseLeftColumn.descr%</description>
+      <display-name>%property.collapseLeftColumn.name%</display-name>
+      <property-name>collapseLeftColumn</property-name>
+      <property-class>boolean</property-class>
+    </property>
+    <property>
+      <description>%property.collapseLeftTarget.descr%</description>
+      <display-name>%property.collapseLeftTarget.name%</display-name>
+      <property-name>collapseLeftTarget</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>.applayout-column-left
 						.navbar-brand
 						.applayout-footer .applayout-titlebar-inner
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		<property>
-			<description>%property.collapseLeftMenuLabel.descr%</description>
-			<display-name>%property.collapseLeftMenuLabel.name%</display-name>
-			<property-name>collapseLeftMenuLabel</property-name>
-			<property-class>string</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-		
-		<property>
-			
-			<description>%property.pageWidth.descr%</description>
-			<display-name>%property.pageWidth.name%</display-name>
-			<property-name>pageWidth</property-name>
-			<property-class>string</property-class>
-			<property-extension>
-				<localizable>false</localizable>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>full
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.collapseLeftMenuLabel.descr%</description>
+      <display-name>%property.collapseLeftMenuLabel.name%</display-name>
+      <property-name>collapseLeftMenuLabel</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.pageWidth.descr%</description>
+      <display-name>%property.pageWidth.name%</display-name>
+      <property-name>pageWidth</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>full
 						fluid
 						fixed
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-    	<complex-extension>
-    		<layout-extension>
-                <responsive>true</responsive>
-                <layout-image>extlib/designer/markup/layout/bootstrapLayout.jpg</layout-image>
-            </layout-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
-      		<tag-name>bootstrapResponsiveConfiguration</tag-name>
-			<since>9.0.1.v00_10</since>
-    	</complex-extension>
-  	</complex-type>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <layout-extension>
+        <responsive>true</responsive>
+        <layout-image>extlib/designer/markup/layout/bootstrapLayout.jpg</layout-image>
+      </layout-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
+      <tag-name>bootstrapResponsiveConfiguration</tag-name>
+      <since>9.0.1.v00_10</since>
+    </complex-extension>
+  </complex-type>
 </faces-config>

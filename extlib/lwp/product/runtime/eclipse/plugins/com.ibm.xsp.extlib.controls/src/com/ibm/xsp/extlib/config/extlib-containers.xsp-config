@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,407 +17,367 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>containers</control-subpackage-name>
+      <control-subpackage-name>containers</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-	<component>
-		<description>%component.widgetContainer.descr%</description>
-		<display-name>%component.widgetContainer.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.containers.WidgetContainer</component-type>
-		<component-class>com.ibm.xsp.extlib.component.containers.UIWidgetContainer</component-class>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-
-        <property>
-            <description>%property.tabindex.descr%</description>
-            <display-name>%property.tabindex.name%</display-name>
-            <property-name>tabindex</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-              <since>9.0.0.v00_03</since>
-              
-              <allow-run-time-binding>false</allow-run-time-binding>
-              <designer-extension>
-                  <category>accessibility</category>
-                  <editor>com.ibm.std.Integer</editor>
-              </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.accesskey.descr%</description>
-            <display-name>%property.accesskey.name%</display-name>
-            <property-name>accesskey</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-              <since>9.0.0.v00_03</since>
-              <localizable>true</localizable>
-              
-              <allow-run-time-binding>false</allow-run-time-binding>
-              <designer-extension>
-                  <category>accessibility</category>
-                  <editor>com.ibm.workplace.designer.property.editors.accessKeyValidator</editor>
-              </designer-extension>
-            </property-extension>
-        </property>
-  		<property>
-			<description>%property.type.descr%</description>
-			<display-name>%property.type.name%</display-name>
-			<property-name>type</property-name>
-			<property-class>java.lang.String</property-class>
-            <property-extension>
-        		<default-value>standard</default-value>
-                <designer-extension>
-                    <category>format</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+  <component>
+    <description>%component.widgetContainer.descr%</description>
+    <display-name>%component.widgetContainer.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.containers.WidgetContainer</component-type>
+    <component-class>com.ibm.xsp.extlib.component.containers.UIWidgetContainer</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <property>
+      <description>%property.tabindex.descr%</description>
+      <display-name>%property.tabindex.name%</display-name>
+      <property-name>tabindex</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>accessibility</category>
+          <editor>com.ibm.std.Integer</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.accesskey.descr%</description>
+      <display-name>%property.accesskey.name%</display-name>
+      <property-name>accesskey</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <localizable>true</localizable>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>accessibility</category>
+          <editor>com.ibm.workplace.designer.property.editors.accessKeyValidator</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.type.descr%</description>
+      <display-name>%property.type.name%</display-name>
+      <property-name>type</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <default-value>standard</default-value>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                     	standard
                     	sidebar
                     	plain
                     </editor-parameter>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.titleBar.descr%</description>
-			<display-name>%property.titleBar.name%</display-name>
-			<property-name>titleBar</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-	        	<default-value>true</default-value>
-				<designer-extension>
-                    <category>format</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.titleBarText.descr%</description>
-			<display-name>%property.titleBarText.name%</display-name>
-			<property-name>titleBarText</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.titleBarHref.descr%</description>
-			<display-name>%property.titleBarHref.name%</display-name>
-			<property-name>titleBarHref</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBar.descr%</description>
+      <display-name>%property.titleBar.name%</display-name>
+      <property-name>titleBar</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBarText.descr%</description>
+      <display-name>%property.titleBarText.name%</display-name>
+      <property-name>titleBarText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBarHref.descr%</description>
+      <display-name>%property.titleBarHref.name%</display-name>
+      <property-name>titleBarHref</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+          <tags>
                         not-localizable
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.collapsible.descr%</description>
-			<display-name>%property.collapsible.name%</display-name>
-			<property-name>collapsible</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<since>8.5.32003</since>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.initClosed.descr%</description>
-            <display-name>%property.initClosed.name%</display-name>
-            <property-name>initClosed</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <since>8.5.32003</since>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-  		<property>
-			<description>%property.dropDownRendered.descr%</description>
-			<display-name>%property.dropDownRendered.name%</display-name>
-			<property-name>dropDownRendered</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-	        	<default-value>true</default-value>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-      	<property>
-        	<description>%property.dropDownNodes.descr%</description>
-        	<display-name>%property.dropDownNodes.name%</display-name>
-        	<property-name>dropDownNodes</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addDropDownNode</property-add-method>
-				<designer-extension>
-                    <category>basics</category>
-                    
-                </designer-extension>
-        	</property-extension>
-      	</property>
-  		<property>
-			<description>%property.scrollable.descr%</description>
-			<display-name>%property.scrollable.name%</display-name>
-			<property-name>scrollable</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.collapsible.descr%</description>
+      <display-name>%property.collapsible.name%</display-name>
+      <property-name>collapsible</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.initClosed.descr%</description>
+      <display-name>%property.initClosed.name%</display-name>
+      <property-name>initClosed</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.dropDownRendered.descr%</description>
+      <display-name>%property.dropDownRendered.name%</display-name>
+      <property-name>dropDownRendered</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.dropDownNodes.descr%</description>
+      <display-name>%property.dropDownNodes.name%</display-name>
+      <property-name>dropDownNodes</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addDropDownNode</property-add-method>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.scrollable.descr%</description>
+      <display-name>%property.scrollable.name%</display-name>
+      <property-name>scrollable</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.disableScrollUp.descr%</description>
-            <display-name>%property.disableScrollUp.name%</display-name>
-            <property-name>disableScrollUp</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <since>8.5.32003</since>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.disableScrollDown.descr%</description>
-            <display-name>%property.disableScrollDown.name%</display-name>
-            <property-name>disableScrollDown</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <since>8.5.32003</since>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-		<property>
-			<description>%property.onScrollUp.descr%</description>
-			<display-name>%property.onScrollUp.name%</display-name>
-			<property-name>onScrollUp</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-                    
-                    <subcategory>container-event</subcategory>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disableScrollUp.descr%</description>
+      <display-name>%property.disableScrollUp.name%</display-name>
+      <property-name>disableScrollUp</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disableScrollDown.descr%</description>
+      <display-name>%property.disableScrollDown.name%</display-name>
+      <property-name>disableScrollDown</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onScrollUp.descr%</description>
+      <display-name>%property.onScrollUp.name%</display-name>
+      <property-name>onScrollUp</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                         todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onScrollDown.descr%</description>
-			<display-name>%property.onScrollDown.name%</display-name>
-			<property-name>onScrollDown</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-                    
-                    <subcategory>container-event</subcategory>
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onScrollDown.descr%</description>
+      <display-name>%property.onScrollDown.name%</display-name>
+      <property-name>onScrollDown</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                         todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		<component-extension>
-			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.ibm.xsp.extlib.containers.WidgetContainer</renderer-type>
-			<tag-name>widgetContainer</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-                
-                
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.extlib.containers.WidgetContainer</renderer-type>
+      <tag-name>widgetContainer</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-	<group>
-		<group-type>com.ibm.xsp.extlib.group.listStyle</group-type>
-		<property>
-            
-			<description>%property.itemStyle.group.listStyledescr%</description>
-			<display-name>%property.itemStyle.group.listStylename%</display-name>
-			<property-name>itemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <group>
+    <group-type>com.ibm.xsp.extlib.group.listStyle</group-type>
+    <property>
+      <description>%property.itemStyle.group.listStyledescr%</description>
+      <display-name>%property.itemStyle.group.listStylename%</display-name>
+      <property-name>itemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
                         todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-            
-			<description>%property.itemStyleClass.group.listStyledescr%</description>
-			<display-name>%property.itemStyleClass.group.listStylename%</display-name>
-			<property-name>itemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.itemStyleClass.group.listStyledescr%</description>
+      <display-name>%property.itemStyleClass.group.listStylename%</display-name>
+      <property-name>itemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
                         todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-            
-			<description>%property.firstItemStyle.group.listStyledescr%</description>
-			<display-name>%property.firstItemStyle.group.listStylename%</display-name>
-			<property-name>firstItemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-            
-			<description>%property.firstItemStyleClass.group.listStyledescr%</description>
-			<display-name>%property.firstItemStyleClass.group.listStylename%</display-name>
-			<property-name>firstItemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-            
-			<description>%property.lastItemStyle.group.listStyledescr%</description>
-			<display-name>%property.lastItemStyle.group.listStylename%</display-name>
-			<property-name>lastItemStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-            
-			<description>%property.lastItemStyleClass.group.listStyledescr%</description>
-			<display-name>%property.lastItemStyleClass.group.listStylename%</display-name>
-			<property-name>lastItemStyleClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>styling</category>
-					<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-				</designer-extension>
-			</property-extension>
-		</property>
-        <group-extension>
-            <designer-extension>
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.firstItemStyle.group.listStyledescr%</description>
+      <display-name>%property.firstItemStyle.group.listStylename%</display-name>
+      <property-name>firstItemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.firstItemStyleClass.group.listStyledescr%</description>
+      <display-name>%property.firstItemStyleClass.group.listStylename%</display-name>
+      <property-name>firstItemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.lastItemStyle.group.listStyledescr%</description>
+      <display-name>%property.lastItemStyle.group.listStylename%</display-name>
+      <property-name>lastItemStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.lastItemStyleClass.group.listStyledescr%</description>
+      <display-name>%property.lastItemStyleClass.group.listStylename%</display-name>
+      <property-name>lastItemStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>
                     group-in-control
                 </tags>
-            </designer-extension>
-        </group-extension>
-	</group>
-
-	<component>
-		<description>%component.list.descr%</description>
-		<display-name>%component.list.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.containers.List</component-type>
-		<component-class>com.ibm.xsp.extlib.component.containers.UIList</component-class>
-		
-    	<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-    	<group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
-		
-		<component-extension>
-			<component-family>javax.faces.Panel</component-family>
-			<renderer-type>com.ibm.xsp.extlib.containers.List</renderer-type>
-			<tag-name>list</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-                <tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  <component>
+    <description>%component.list.descr%</description>
+    <display-name>%component.list.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.containers.List</component-type>
+    <component-class>com.ibm.xsp.extlib.component.containers.UIList</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
+    <component-extension>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.extlib.containers.List</renderer-type>
+      <tag-name>list</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-	<component>
-		<description>%component.listInline.descr%</description>
-		<display-name>%component.listInline.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.containers.ListInline</component-type>
-		<component-class>com.ibm.xsp.extlib.component.containers.UIListInline</component-class>
-
-		<component-extension>
-			<base-component-type>com.ibm.xsp.extlib.containers.List</base-component-type>
-			<renderer-type>com.ibm.xsp.extlib.containers.OneUIInlineList</renderer-type>
-			<tag-name>listInline</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.listInline.descr%</description>
+    <display-name>%component.listInline.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.containers.ListInline</component-type>
+    <component-class>com.ibm.xsp.extlib.component.containers.UIListInline</component-class>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.containers.List</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.containers.OneUIInlineList</renderer-type>
+      <tag-name>listInline</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

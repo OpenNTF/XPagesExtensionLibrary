@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,39 +17,34 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
-        <designer-extension>
-            <control-subpackage-name>jdbc</control-subpackage-name>
-        </designer-extension>
-	</faces-config-extension>
-
-	<complex-type>
-	     
-    	<description>%complex-type.com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService.descr%</description>
-    	<display-name>%complex-type.com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-class>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</base-complex-id>
-    	</complex-extension>
-  	</complex-type>
-  	
-  	<complex-type>
-    	<description>%complex-type.jdbcQueryJsonService.descr%</description>
-    	<display-name>%complex-type.jdbcQueryJsonService.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-class>
-    	<group-type-ref>com.ibm.xsp.extlib.rest.json.options</group-type-ref>
-		<group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
-		<group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
-    	<complex-extension>
-      		<tag-name>jdbcQueryJsonService</tag-name>
-    		<base-complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</base-complex-id>
-    	</complex-extension>
-  	</complex-type>
-	
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>jdbc</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-id>
+    <complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.rest.AbstractRestService</base-complex-id>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.jdbcQueryJsonService.descr%</description>
+    <display-name>%complex-type.jdbcQueryJsonService.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-id>
+    <complex-class>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcQueryJsonService</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.rest.json.options</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.relational.group.connection</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.relational.group.query</group-type-ref>
+    <complex-extension>
+      <tag-name>jdbcQueryJsonService</tag-name>
+      <base-complex-id>com.ibm.xsp.extlib.relational.component.jdbc.rest.JdbcService</base-complex-id>
+    </complex-extension>
+  </complex-type>
 </faces-config>

@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,96 +17,89 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>dynamicview</control-subpackage-name>
+      <control-subpackage-name>dynamicview</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-		
-	<component>
-		<description>%component.dynamicViewPanel.descr%</description>
-		<display-name>%component.dynamicViewPanel.name%</display-name>
-		
-		<component-type>com.ibm.xsp.extlib.dynamicview.DynamicViewPanel</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dynamicview.UIDynamicViewPanel</component-class>
-		
-        
-        <property>
-            <description>%/javax.faces.Data/rows/descr%</description>
-            <display-name>%/javax.faces.Data/rows/name%</display-name>
-            <property-name>rows</property-name>
-            <property-class>int</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-  		<property>
-			<description>%property.customizerBean.descr%</description>
-			<display-name>%property.customizerBean.name%</display-name>
-			<property-name>customizerBean</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>false</localizable>
-				<designer-extension>
-                    <category>basics</category>
-                    <tags>
+  <component>
+    <description>%component.dynamicViewPanel.descr%</description>
+    <display-name>%component.dynamicViewPanel.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dynamicview.DynamicViewPanel</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dynamicview.UIDynamicViewPanel</component-class>
+    <property>
+      <description>%/javax.faces.Data/rows/descr%</description>
+      <display-name>%/javax.faces.Data/rows/name%</display-name>
+      <property-name>rows</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.customizerBean.descr%</description>
+      <display-name>%property.customizerBean.name%</display-name>
+      <property-name>customizerBean</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                      todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onColumnClick.descr%</description>
-			<display-name>%property.onColumnClick.name%</display-name>
-			<property-name>onColumnClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>mouse-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.showCheckbox.descr%</description>
-			<display-name>%property.showCheckbox.name%</display-name>
-			<property-name>showCheckbox</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-		            <category>format</category>
-		        </designer-extension> 
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.showHeaderCheckbox.descr%</description>
-			<display-name>%property.showHeaderCheckbox.name%</display-name>
-			<property-name>showHeaderCheckbox</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-		            <category>format</category>
-		        </designer-extension> 
-			</property-extension>
-		</property>
-		
-		<component-extension>
-      		<base-component-type>com.ibm.xsp.ViewPanel</base-component-type>
-      		<component-family>javax.faces.Data</component-family>
-      		<renderer-type>com.ibm.xsp.ViewPanel</renderer-type>
-			<tag-name>dynamicViewPanel</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onColumnClick.descr%</description>
+      <display-name>%property.onColumnClick.name%</display-name>
+      <property-name>onColumnClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>mouse-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.showCheckbox.descr%</description>
+      <display-name>%property.showCheckbox.name%</display-name>
+      <property-name>showCheckbox</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.showHeaderCheckbox.descr%</description>
+      <display-name>%property.showHeaderCheckbox.name%</display-name>
+      <property-name>showHeaderCheckbox</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.ViewPanel</base-component-type>
+      <component-family>javax.faces.Data</component-family>
+      <renderer-type>com.ibm.xsp.ViewPanel</renderer-type>
+      <tag-name>dynamicViewPanel</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

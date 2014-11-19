@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,480 +17,420 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>data</control-subpackage-name>
+      <control-subpackage-name>data</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-
-    <group>
-        
-        <group-type>com.ibm.xsp.extlib.partial</group-type>
-        <property>
-              
-            <description>%property.partialRefresh.descr%</description>
-            <display-name>%property.partialRefresh.name%</display-name>
-            <property-name>partialRefresh</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <default-value>true</default-value>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+  <group>
+    <group-type>com.ibm.xsp.extlib.partial</group-type>
+    <property>
+      <description>%property.partialRefresh.descr%</description>
+      <display-name>%property.partialRefresh.name%</display-name>
+      <property-name>partialRefresh</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                        runtime-default-true
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-              
-            <description>%property.refreshId.descr%</description>
-            <display-name>%property.refreshId.name%</display-name>
-            <property-name>refreshId</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.partialExecute.descr%</description>
-            <display-name>%property.partialExecute.name%</display-name>
-            <property-name>partialExecute</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <default-value>true</default-value>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.refreshId.descr%</description>
+      <display-name>%property.refreshId.name%</display-name>
+      <property-name>refreshId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.partialExecute.descr%</description>
+      <display-name>%property.partialExecute.name%</display-name>
+      <property-name>partialExecute</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                        runtime-default-true
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <group-extension>
-            <designer-extension>
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>
                     group-in-control
                 </tags>
-            </designer-extension>
-        </group-extension>
-    </group>
-            
-
-    <component>
-        <description>%component.com.ibm.xsp.extlib.data.AbstractPager.descr%</description>
-        <display-name>%component.com.ibm.xsp.extlib.data.AbstractPager.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.AbstractPager</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.AbstractPager</component-class>
-        <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-        <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
-
-        <property>
-            <description>%property.for.component.com.ibm.xsp.extlib.data.AbstractPager.descr%</description>
-            <display-name>%property.for.component.com.ibm.xsp.extlib.data.AbstractPager.name%</display-name>
-            <property-name>for</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-        </component-extension>
-    </component>
-
-
-    <component>
-        <description>%component.pagerSizes.descr%</description>
-        <display-name>%component.pagerSizes.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.PagerSizes</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.UIPagerSizes</component-class>
-
-        <property>
-            
-            <description>%property.text.component.pagerSizes.descr%</description>
-            <display-name>%property.text.component.pagerSizes.name%</display-name>
-            <property-name>text</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                 <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            
-            <description>%property.sizes.descr%</description>
-            <display-name>%property.sizes.name%</display-name>
-            <property-name>sizes</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                
-                <designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+      </designer-extension>
+    </group-extension>
+  </group>
+  <component>
+    <description>%component.com.ibm.xsp.extlib.data.AbstractPager.descr%</description>
+    <display-name>%component.com.ibm.xsp.extlib.data.AbstractPager.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.AbstractPager</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.AbstractPager</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+    <property>
+      <description>%property.for.component.com.ibm.xsp.extlib.data.AbstractPager.descr%</description>
+      <display-name>%property.for.component.com.ibm.xsp.extlib.data.AbstractPager.name%</display-name>
+      <property-name>for</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.pagerSizes.descr%</description>
+    <display-name>%component.pagerSizes.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.PagerSizes</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.UIPagerSizes</component-class>
+    <property>
+      <description>%property.text.component.pagerSizes.descr%</description>
+      <display-name>%property.text.component.pagerSizes.name%</display-name>
+      <property-name>text</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.sizes.descr%</description>
+      <display-name>%property.sizes.name%</display-name>
+      <property-name>sizes</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         10|25|50|all
                         25|100
                     </editor-parameter>
-                    
-                    
-                    <tags>
+          <tags>
                        todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
-            <renderer-type>com.ibm.xsp.extlib.data.PagerSizes</renderer-type>
-            <tag-name>pagerSizes</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+      <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+      <renderer-type>com.ibm.xsp.extlib.data.PagerSizes</renderer-type>
+      <tag-name>pagerSizes</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                   todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-
-    <component>
-        <description>%component.pagerExpand.descr%</description>
-        <display-name>%component.pagerExpand.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.PagerExpand</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.UIPagerExpand</component-class>
-
-        <property>
-            <description>%property.expandText.descr%</description>
-            <display-name>%property.expandText.name%</display-name>
-            <property-name>expandText</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.collapseText.descr%</description>
-            <display-name>%property.collapseText.name%</display-name>
-            <property-name>collapseText</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-            <renderer-type>com.ibm.xsp.extlib.data.PagerExpand</renderer-type>
-            <tag-name>pagerExpand</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.pagerExpand.descr%</description>
+    <display-name>%component.pagerExpand.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.PagerExpand</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.UIPagerExpand</component-class>
+    <property>
+      <description>%property.expandText.descr%</description>
+      <display-name>%property.expandText.name%</display-name>
+      <property-name>expandText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.collapseText.descr%</description>
+      <display-name>%property.collapseText.name%</display-name>
+      <property-name>collapseText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+      <renderer-type>com.ibm.xsp.extlib.data.PagerExpand</renderer-type>
+      <tag-name>pagerExpand</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                   todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-
-    <component>
-        <description>%component.pagerDetail.descr%</description>
-        <display-name>%component.pagerDetail.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.PagerDetail</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.UIPagerDetail</component-class>
-
-        <property>
-            <description>%property.showText.descr%</description>
-            <display-name>%property.showText.name%</display-name>
-            <property-name>showText</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.hideText.descr%</description>
-            <display-name>%property.hideText.name%</display-name>
-            <property-name>hideText</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-            <renderer-type>com.ibm.xsp.extlib.data.PagerDetail</renderer-type>
-            <tag-name>pagerDetail</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.pagerDetail.descr%</description>
+    <display-name>%component.pagerDetail.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.PagerDetail</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.UIPagerDetail</component-class>
+    <property>
+      <description>%property.showText.descr%</description>
+      <display-name>%property.showText.name%</display-name>
+      <property-name>showText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.hideText.descr%</description>
+      <display-name>%property.hideText.name%</display-name>
+      <property-name>hideText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+      <renderer-type>com.ibm.xsp.extlib.data.PagerDetail</renderer-type>
+      <tag-name>pagerDetail</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                   todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.pagerAddRows.descr%</description>
-        <display-name>%component.pagerAddRows.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.PagerAddRows</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.UIPagerAddRows</component-class>
-
-        <property>
-            <description>%property.text.component.pagerAddRows.descr%</description>
-            <display-name>%property.text.component.pagerAddRows.name%</display-name>
-            <property-name>text</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.rowCount.component.pagerAddRows.descr%</description>
-            <display-name>%property.rowCount.component.pagerAddRows.name%</display-name>
-            <property-name>rowCount</property-name>
-            <property-class>int</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.state.component.pagerAddRows.descr%</description>
-            <display-name>%property.state.component.pagerAddRows.name%</display-name>
-            <property-name>state</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            
-            <description>%property.refreshPage.descr%</description>
-            <display-name>%property.refreshPage.name%</display-name>
-            <property-name>refreshPage</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.pagerAddRows.descr%</description>
+    <display-name>%component.pagerAddRows.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.PagerAddRows</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.UIPagerAddRows</component-class>
+    <property>
+      <description>%property.text.component.pagerAddRows.descr%</description>
+      <display-name>%property.text.component.pagerAddRows.name%</display-name>
+      <property-name>text</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rowCount.component.pagerAddRows.descr%</description>
+      <display-name>%property.rowCount.component.pagerAddRows.name%</display-name>
+      <property-name>rowCount</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.state.component.pagerAddRows.descr%</description>
+      <display-name>%property.state.component.pagerAddRows.name%</display-name>
+      <property-name>state</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.refreshPage.descr%</description>
+      <display-name>%property.refreshPage.name%</display-name>
+      <property-name>refreshPage</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            
-            <description>%property.disabledFormat.component.pagerAddRows.descr%</description>
-            <display-name>%property.disabledFormat.component.pagerAddRows.name%</display-name>
-            <property-name>disabledFormat</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>format</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disabledFormat.component.pagerAddRows.descr%</description>
+      <display-name>%property.disabledFormat.component.pagerAddRows.name%</display-name>
+      <property-name>disabledFormat</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         hide
                         text
                         link
                         auto
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-            <renderer-type>com.ibm.xsp.extlib.data.PagerAddRows</renderer-type>
-            <tag-name>pagerAddRows</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+      <renderer-type>com.ibm.xsp.extlib.data.PagerAddRows</renderer-type>
+      <tag-name>pagerAddRows</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                   todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-
-    <component>
-        
-        <description>%component.pagerSaveState.descr%</description>
-        <display-name>%component.pagerSaveState.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.data.PagerSaveState</component-type>
-        <component-class>com.ibm.xsp.extlib.component.data.UIPagerSaveState</component-class>
-
-        <property>
-            <description>%property.globalRows.descr%</description>
-            <display-name>%property.globalRows.name%</display-name>
-            <property-name>globalRows</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
-            <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
-            <renderer-type>com.ibm.xsp.extlib.data.PagerSaveState</renderer-type>
-            <tag-name>pagerSaveState</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.pagerSaveState.descr%</description>
+    <display-name>%component.pagerSaveState.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.data.PagerSaveState</component-type>
+    <component-class>com.ibm.xsp.extlib.component.data.UIPagerSaveState</component-class>
+    <property>
+      <description>%property.globalRows.descr%</description>
+      <display-name>%property.globalRows.name%</display-name>
+      <property-name>globalRows</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.data.AbstractPager</base-component-type>
+      <component-family>com.ibm.xsp.extlib.data.Pager</component-family>
+      <renderer-type>com.ibm.xsp.extlib.data.PagerSaveState</renderer-type>
+      <tag-name>pagerSaveState</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <tags>
                   todo
                 </tags>
-                <category>Extension Library</category>
-                
-                <tags>
+        <category>Extension Library</category>
+        <tags>
                   no-faces-config-renderer
                 </tags>
-        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
-&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
-    &lt;xp:image url="/extlib/designer/markup/PagerSaveState.png" id="image1"&gt;&lt;/xp:image&gt;&#13;
-&lt;/xp:view&gt;&#13;
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:image url="/extlib/designer/markup/PagerSaveState.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
 </render-markup>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-
-
-    
-   
-    <complex-type>
-        <description>%complex-type.addRows.descr%</description>
-        <display-name>%complex-type.addRows.name%</display-name>
-        <complex-id>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-id>
-        <complex-class>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-class>
-        <property>
-            <description>%property.for.complex-type.addRows.descr%</description>
-            <display-name>%property.for.complex-type.addRows.name%</display-name>
-            <property-name>for</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                 <designer-extension>
-                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
-                 </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            <description>%property.rowCount.complex-type.addRows.descr%</description>
-            <display-name>%property.rowCount.complex-type.addRows.name%</display-name>
-            <property-name>rowCount</property-name>
-            <property-class>int</property-class>
-        </property>
-        <property>
-            <description>%property.disableId.descr%</description>
-            <display-name>%property.disableId.name%</display-name>
-            <property-name>disableId</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                 <designer-extension>
-                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
-                     
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.addRows.descr%</description>
+    <display-name>%complex-type.addRows.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-id>
+    <complex-class>com.ibm.xsp.extlib.actions.client.data.DataIteratorAddRows</complex-class>
+    <property>
+      <description>%property.for.complex-type.addRows.descr%</description>
+      <display-name>%property.for.complex-type.addRows.name%</display-name>
+      <property-name>for</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rowCount.complex-type.addRows.descr%</description>
+      <display-name>%property.rowCount.complex-type.addRows.name%</display-name>
+      <property-name>rowCount</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.disableId.descr%</description>
+      <display-name>%property.disableId.name%</display-name>
+      <property-name>disableId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+          <tags>
                         todo
                     </tags>
-                 </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            
-            <description>%property.disabledFormat.complex-type.addRows.descr%</description>
-            <display-name>%property.disabledFormat.complex-type.addRows.name%</display-name>
-            <property-name>disabledFormat</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <since>8.5.32002</since>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.disabledFormat.complex-type.addRows.descr%</description>
+      <display-name>%property.disabledFormat.complex-type.addRows.name%</display-name>
+      <property-name>disabledFormat</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>8.5.32002</since>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         hide
                         text
                         link
                         auto
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.state.complex-type.addRows.descr%</description>
-            <display-name>%property.state.complex-type.addRows.name%</display-name>
-            <property-name>state</property-name>
-            <property-class>boolean</property-class>
-        </property>
-        <complex-extension>
-            <base-complex-id>simpleActionInterface</base-complex-id>
-            <tag-name>addRows</tag-name>
-            <designer-extension>
-                <action-type>client</action-type>
-                <category>%complex-category.basic%</category>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.state.complex-type.addRows.descr%</description>
+      <display-name>%property.state.complex-type.addRows.name%</display-name>
+      <property-name>state</property-name>
+      <property-class>boolean</property-class>
+    </property>
+    <complex-extension>
+      <base-complex-id>simpleActionInterface</base-complex-id>
+      <tag-name>addRows</tag-name>
+      <designer-extension>
+        <action-type>client</action-type>
+        <category>%complex-category.basic%</category>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </complex-extension>
-    </complex-type>
-
-
-
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
 </faces-config>

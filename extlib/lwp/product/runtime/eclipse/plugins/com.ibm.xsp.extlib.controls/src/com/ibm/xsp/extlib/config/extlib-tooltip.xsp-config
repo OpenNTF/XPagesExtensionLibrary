@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,108 +17,96 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>tooltip</control-subpackage-name>
+      <control-subpackage-name>tooltip</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-			
-
-	<component>
-		<description>%component.tooltip.descr%</description>
-		<display-name>%component.tooltip.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.tooltip.Tooltip</component-type>
-		<component-class>com.ibm.xsp.extlib.component.tooltip.UITooltip</component-class>
-		<group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
-
-  		<property>
-  		    
-			<description>%property.for.descr%</description>
-			<display-name>%property.for.name%</display-name>
-			<property-name>for</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.designer.domino.xsp.idpicker</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-  		<property>
-			<description>%property.label.descr%</description>
-			<display-name>%property.label.name%</display-name>
-			<property-name>label</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-  		<property>
-			<description>%property.showDelay.descr%</description>
-			<display-name>%property.showDelay.name%</display-name>
-			<property-name>showDelay</property-name>
-			<property-class>int</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-  		<property>
-			<description>%property.dynamicContent.descr%</description>
-			<display-name>%property.dynamicContent.name%</display-name>
-			<property-name>dynamicContent</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-
-  		<property>
-  		    
-			<description>%property.position.descr%</description>
-			<display-name>%property.position.name%</display-name>
-			<property-name>position</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+  <component>
+    <description>%component.tooltip.descr%</description>
+    <display-name>%component.tooltip.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.tooltip.Tooltip</component-type>
+    <component-class>com.ibm.xsp.extlib.component.tooltip.UITooltip</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+    <property>
+      <description>%property.for.descr%</description>
+      <display-name>%property.for.name%</display-name>
+      <property-name>for</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.designer.domino.xsp.idpicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.label.descr%</description>
+      <display-name>%property.label.name%</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.showDelay.descr%</description>
+      <display-name>%property.showDelay.name%</display-name>
+      <property-name>showDelay</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.dynamicContent.descr%</description>
+      <display-name>%property.dynamicContent.name%</display-name>
+      <property-name>dynamicContent</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.position.descr%</description>
+      <display-name>%property.position.name%</display-name>
+      <property-name>position</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         before
                         after
                         above
                         below
                     </editor-parameter>
-                    
-                    <tags>
+          <tags>
                         not-control-id-reference
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-		
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Tooltip</component-family>
-			<renderer-type>com.ibm.xsp.extlib.tooltip.Tooltip</renderer-type>
-			<tag-name>tooltip</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Tooltip</component-family>
+      <renderer-type>com.ibm.xsp.extlib.tooltip.Tooltip</renderer-type>
+      <tag-name>tooltip</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,6 +17,7 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
@@ -25,10 +26,8 @@
     </designer-extension>
   </faces-config-extension>
   <group>
-    
     <group-type>com.ibm.xsp.extlib.mobile.transition</group-type>
     <property>
-      
       <description>%property.transition.group.mobile_transition.descr%</description>
       <display-name>%property.transition.group.mobile_transition.name%</display-name>
       <property-name>transition</property-name>
@@ -105,24 +104,18 @@
       </designer-extension>
     </group-extension>
   </group>
-  
-    
-    <component>
-        <description>%/com.ibm.xsp.extlib.dojo.WidgetBase/descr%</description>
-        <display-name>%/com.ibm.xsp.extlib.dojo.WidgetBase/name%</display-name>
-        <component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
-        
-        <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
-        <group-type-ref>com.ibm.xsp.group.core</group-type-ref>
-        <group-type-ref>com.ibm.xsp.group.i18n</group-type-ref>
-
-        <component-extension>
-            <component-family>com.ibm.xsp.extlib.dojo.WidgetBase</component-family>
-        </component-extension>
-    </component>
-  
-  
+  <component>
+    <description>%/com.ibm.xsp.extlib.dojo.WidgetBase/descr%</description>
+    <display-name>%/com.ibm.xsp.extlib.dojo.WidgetBase/name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.i18n</group-type-ref>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.dojo.WidgetBase</component-family>
+    </component-extension>
+  </component>
   <component>
     <description>%component.singlePageApp.descr%</description>
     <display-name>%component.singlePageApp.name%</display-name>
@@ -136,7 +129,6 @@
       <property-extension>
         <designer-extension>
           <category>basics</category>
-          
           <tags>not-xpage-name</tags>
           <editor>com.ibm.designer.domino.xsp.attrvalpicker</editor>
           <editor-parameter>
@@ -147,7 +139,6 @@
       </property-extension>
     </property>
     <property>
-      
       <description>%property.onOrientationChange.descr%</description>
       <display-name>%property.onOrientationChange.name%</display-name>
       <property-name>onOrientationChange</property-name>
@@ -193,7 +184,6 @@
     <component-class>com.ibm.xsp.extlib.component.mobile.UIDMHeading</component-class>
     <group-type-ref>com.ibm.xsp.extlib.mobile.transition</group-type-ref>
     <property>
-    
       <description>%property.back.descr%</description>
       <display-name>%property.back.name%</display-name>
       <property-name>back</property-name>
@@ -206,7 +196,6 @@
       </property-extension>
     </property>
     <property>
-    
       <description>%property.href.descr%</description>
       <display-name>%property.href.name%</display-name>
       <property-name>href</property-name>
@@ -260,7 +249,6 @@
     </component-extension>
   </component>
   <component>
-    
     <description>%component.djxmRoundRectList.descr%</description>
     <display-name>%component.djxmRoundRectList.name%</display-name>
     <component-type>com.ibm.xsp.extlib.mobile.RoundRectList</component-type>
@@ -279,7 +267,6 @@
       </property-extension>
     </property>
     <property>
-    
       <description>%property.iconPos.descr%</description>
       <display-name>%property.iconPos.name%</display-name>
       <property-name>iconPos</property-name>
@@ -293,8 +280,7 @@
               0,29,29,29
               0,58,29,29
            </editor-parameter>
-           
-           <tags>
+          <tags>
                not-image-path
            </tags>
         </designer-extension>
@@ -318,7 +304,6 @@
     <component-class>com.ibm.xsp.extlib.component.mobile.UILineItem</component-class>
     <group-type-ref>com.ibm.xsp.extlib.mobile.transition</group-type-ref>
     <property>
-    
       <description>%property.icon.descr%</description>
       <display-name>%property.icon.name%</display-name>
       <property-name>icon</property-name>
@@ -341,7 +326,6 @@
       <property-extension>
         <designer-extension>
           <category>basics</category>
-          
           <tags>
               not-xpage-name
               render-with-prefix-hash
@@ -385,7 +369,6 @@
       <designer-extension>
         <in-palette>true</in-palette>
         <category>Mobile</category>
-        
         <tags>
            todo
         </tags>
@@ -397,9 +380,7 @@
     <display-name>%component.appPage.name%</display-name>
     <component-type>com.ibm.xsp.extlib.mobile.AppPage</component-type>
     <component-class>com.ibm.xsp.extlib.component.mobile.UIMobilePage</component-class>
-    
     <group-type-ref>com.ibm.xsp.extlib.group.FacesAttrsObject.component.since900v_00_03</group-type-ref>
-    
     <property>
       <description>%property.keepScrollPos.descr%</description>
       <display-name>%property.keepScrollPos.name%</display-name>
@@ -419,7 +400,6 @@
       <property-extension>
         <designer-extension>
           <category>basics</category>
-          
           <tags>
             not-mobile-appPage-ref
             not-xpage-name
@@ -632,8 +612,7 @@
               0,29,29,29
               0,58,29,29
            </editor-parameter>
-           
-           <tags>
+          <tags>
                not-image-path
            </tags>
         </designer-extension>
@@ -653,15 +632,13 @@
               0,29,29,29
               0,58,29,29
            </editor-parameter>
-           
-           <tags>
+          <tags>
                not-image-path
            </tags>
         </designer-extension>
       </property-extension>
     </property>
     <property>
-    
       <description>%property.selected.descr%</description>
       <display-name>%property.selected.name%</display-name>
       <property-name>selected</property-name>
@@ -679,7 +656,6 @@
       <property-class>java.lang.String</property-class>
       <property-extension>
         <designer-extension>
-          
           <category>basics</category>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
@@ -688,12 +664,11 @@
 	                        flip
 	                        none
 	                    </editor-parameter>
-	      <tags>todo</tags>
+          <tags>todo</tags>
         </designer-extension>
       </property-extension>
     </property>
     <property>
-      
       <description>%property.selectOne.descr%</description>
       <display-name>%property.selectOne.name%</display-name>
       <property-name>selectOne</property-name>
@@ -701,7 +676,6 @@
       <property-extension>
         <designer-extension>
           <category>basics</category>
-          
           <tags>
             runtime-default-true
           </tags>
@@ -719,7 +693,6 @@
       </designer-extension>
     </component-extension>
   </component>
-  
   <component>
     <description>%component.toolBarButton.descr%</description>
     <display-name>%component.toolBarButton.name%</display-name>
@@ -738,7 +711,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.href.component.toolBarButton.descr%</description>
       <display-name>%property.href.component.toolBarButton.name%</display-name>
@@ -754,9 +726,7 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
-    
       <description>%property.hrefTarget.descr%</description>
       <display-name>%property.hrefTarget.name%</display-name>
       <property-name>hrefTarget</property-name>
@@ -774,7 +744,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.icon.component.toolBarButton.descr%</description>
       <display-name>%property.icon.component.toolBarButton.name%</display-name>
@@ -790,7 +759,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.iconPos.component.toolBarButton.descr%</description>
       <display-name>%property.iconPos.component.toolBarButton.name%</display-name>
@@ -805,16 +773,13 @@
               0,29,29,29
               0,58,29,29
            </editor-parameter>
-           
-           <tags>
+          <tags>
                not-image-path
            </tags>
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
-    
       <description>%property.moveTo.component.toolBarButton.descr%</description>
       <display-name>%property.moveTo.component.toolBarButton.name%</display-name>
       <property-name>moveTo</property-name>
@@ -832,7 +797,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.url.descr%</description>
       <display-name>%property.url.name%</display-name>
@@ -848,7 +812,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.urlTarget.descr%</description>
       <display-name>%property.urlTarget.name%</display-name>
@@ -861,7 +824,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.callback.descr%</description>
       <display-name>%property.callback.name%</display-name>
@@ -874,7 +836,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.alt.descr%</description>
       <display-name>%property.alt.name%</display-name>
@@ -887,20 +848,17 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.tabIndex.descr%</description>
       <display-name>%property.tabIndex.name%</display-name>
       <property-name>tabIndex</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
-      
         <designer-extension>
           <category>accessibility</category>
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.transitionDir.descr%</description>
       <display-name>%property.transitionDir.name%</display-name>
@@ -910,7 +868,6 @@
         <designer-extension>
           <category>basics</category>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-          
           <editor-parameter>
                             ltr
                             rtl
@@ -920,7 +877,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.back.component.toolBarButton.descr%</description>
       <display-name>%property.back.component.toolBarButton.name%</display-name>
@@ -932,7 +888,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.toggle.descr%</description>
       <display-name>%property.toggle.name%</display-name>
@@ -944,9 +899,7 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
-        
       <description>%property.selected.component.toolBarButton.descr%</description>
       <display-name>%property.selected.component.toolBarButton.name%</display-name>
       <property-name>selected</property-name>
@@ -957,9 +910,7 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
-        
       <description>%property.light.descr%</description>
       <display-name>%property.light.name%</display-name>
       <property-name>light</property-name>
@@ -970,7 +921,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.arrow.descr%</description>
       <display-name>%property.arrow.name%</display-name>
@@ -979,7 +929,6 @@
       <property-extension>
         <designer-extension>
           <category>format</category>
-          
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
                             previous
@@ -990,7 +939,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <property>
       <description>%property.transition.component.toolBarButton.descr%</description>
       <display-name>%property.transition.component.toolBarButton.name%</display-name>
@@ -1009,7 +957,6 @@
         </designer-extension>
       </property-extension>
     </property>
-    
     <component-extension>
       <base-component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</base-component-type>
       <component-family>com.ibm.xsp.extlib.mobile.ToolBarButton</component-family>
@@ -1022,13 +969,11 @@
       </designer-extension>
     </component-extension>
   </component>
-  
   <component>
     <description>%component.djxmSwitch.descr%</description>
     <display-name>%component.djxmSwitch.name%</display-name>
     <component-type>com.ibm.xsp.extlib.mobile.Switch</component-type>
     <component-class>com.ibm.xsp.extlib.component.mobile.UIDMSwitch</component-class>
-    
     <group-type-ref>com.ibm.xsp.extlib.group.touch</group-type-ref>
     <property>
       <description>%property.onStateChanged.descr%</description>
@@ -1068,7 +1013,6 @@
       </property-extension>
     </property>
     <property>
-      
       <description>%property.value.descr%</description>
       <display-name>%property.value.name%</display-name>
       <property-name>value</property-name>
@@ -1103,8 +1047,7 @@
     <complex-extension>
       <base-complex-id>com.ibm.xsp.extlib.tree.ITreeRenderer</base-complex-id>
       <tag-name>mobileAccordionMenu</tag-name>
-      <designer-extension>
-      </designer-extension>
+      <designer-extension/>
     </complex-extension>
   </complex-type>
   <complex-type>
@@ -1129,16 +1072,14 @@
       <display-name>%property.forceFullRefresh.name%</display-name>
       <property-name>forceFullRefresh</property-name>
       <property-class>boolean</property-class>
-      <property-extension>
-	      </property-extension>
+      <property-extension/>
     </property>
     <property>
       <description>%property.saveDocument.descr%</description>
       <display-name>%property.saveDocument.name%</display-name>
       <property-name>saveDocument</property-name>
       <property-class>boolean</property-class>
-      <property-extension>
-      </property-extension>
+      <property-extension/>
     </property>
     <property>
       <description>%property.transitionType.descr%</description>
@@ -1165,7 +1106,6 @@
       <property-extension>
         <designer-extension>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-          
           <editor-parameter>
 	                        Left to Right
 	                        Right to Left
@@ -1183,7 +1123,4 @@
       </designer-extension>
     </complex-extension>
   </complex-type>
-
-
-
 </faces-config>
