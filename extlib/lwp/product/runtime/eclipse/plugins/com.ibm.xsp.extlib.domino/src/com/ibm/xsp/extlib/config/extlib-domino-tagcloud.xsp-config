@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,142 +17,125 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>tagcloud</control-subpackage-name>
+      <control-subpackage-name>tagcloud</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-	
-	
-	<complex-type>
-    	<description>%complex-type.dominoViewCloudData.descr%</description>
-    	<display-name>%complex-type.dominoViewCloudData.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-class>
-
-         
-		<property>
-            <description>%property.viewName.descr%</description>
-            <display-name>%property.viewName.name%</display-name>
-			<property-name>viewName</property-name>
-			<property-class>string</property-class>
-			<property-extension>
-			    <designer-extension>
-                   <editor>com.ibm.xsp.extlib.designer.tooling.editor.ViewNameEditor</editor>
-                </designer-extension>
-        		<required>true</required>
-      		</property-extension>
-    	</property>
-    	<property>
-    	    
-            <description>%property.categoryColumn.descr%</description>
-            <display-name>%property.categoryColumn.name%</display-name>
-      		<property-name>categoryColumn</property-name>
-      		<property-class>int</property-class>
-    	</property>
-    	<property>
-    	    
-            <description>%property.sortTags.descr%</description>
-            <display-name>%property.sortTags.name%</display-name>
-      		<property-name>sortTags</property-name>
-      		<property-class>string</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-          			<editor-parameter>
+  <complex-type>
+    <description>%complex-type.dominoViewCloudData.descr%</description>
+    <display-name>%complex-type.dominoViewCloudData.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.tagcloud.ViewTagCloudData</complex-class>
+    <property>
+      <description>%property.viewName.descr%</description>
+      <display-name>%property.viewName.name%</display-name>
+      <property-name>viewName</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.ViewNameEditor</editor>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.categoryColumn.descr%</description>
+      <display-name>%property.categoryColumn.name%</display-name>
+      <property-name>categoryColumn</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.sortTags.descr%</description>
+      <display-name>%property.sortTags.name%</display-name>
+      <property-name>sortTags</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
           			   alphabet
           			   weight
 					</editor-parameter>
-        		</designer-extension>
-        		<required>false</required>
-      		</property-extension>
-    	</property>
-    	<property>
-            <description>%property.maxTagLimit.descr%</description>
-            <display-name>%property.maxTagLimit.name%</display-name>
-      		<property-name>maxTagLimit</property-name>
-      		<property-class>int</property-class>
-    	</property>
-    	<property>
-    	    
-            <description>%property.tagThreshold.descr%</description>
-            <display-name>%property.tagThreshold.name%</display-name>
-      		<property-name>tagThreshold</property-name>
-      		<property-class>int</property-class>
-    	</property>
-    	<property>
-            <description>%property.minEntryCount.descr%</description>
-            <display-name>%property.minEntryCount.name%</display-name>
-      		<property-name>minEntryCount</property-name>
-      		<property-class>int</property-class>
-    	</property>
-    	
-      	<property>
-      	     
-            <description>%property.cacheMode.descr%</description>
-            <display-name>%property.cacheMode.name%</display-name>
-        	<property-name>cacheMode</property-name>
-        	<property-class>string</property-class>
-        	<property-extension>
-          		<designer-extension>
-            		<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-            		<editor-parameter>
+        </designer-extension>
+        <required>false</required>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.maxTagLimit.descr%</description>
+      <display-name>%property.maxTagLimit.name%</display-name>
+      <property-name>maxTagLimit</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.tagThreshold.descr%</description>
+      <display-name>%property.tagThreshold.name%</display-name>
+      <property-name>tagThreshold</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.minEntryCount.descr%</description>
+      <display-name>%property.minEntryCount.name%</display-name>
+      <property-name>minEntryCount</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.cacheMode.descr%</description>
+      <display-name>%property.cacheMode.name%</display-name>
+      <property-name>cacheMode</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                           off
                           auto
                           manual
                     </editor-parameter>
-          		</designer-extension>
-        	</property-extension>
-      	</property>
-      	<property>
-      	     
-            <description>%property.cacheRefreshInterval.descr%</description>
-            <display-name>%property.cacheRefreshInterval.name%</display-name>
-        	<property-name>cacheRefreshInterval</property-name>
-        	<property-class>int</property-class>
-      	</property>
-      	        
-      	<property>
-            <description>%property.linkTargetPage.descr%</description>
-            <display-name>%property.linkTargetPage.name%</display-name>
-        	<property-name>linkTargetPage</property-name>
-        	<property-class>string</property-class>
-        	<property-extension>
-          		<designer-extension>
-            		<editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
-          		</designer-extension>
-          		<required>false</required>
-        	</property-extension>
-      	</property>
-      	
-      	<property>
-      	     
-            <description>%property.linkRequestParam.descr%</description>
-            <display-name>%property.linkRequestParam.name%</display-name>
-        	<property-name>linkRequestParam</property-name>
-        	<property-class>string</property-class>
-      	</property>
-      	
-      	<property>
-      	     
-            <description>%property.linkMetaSeparator.descr%</description>
-            <display-name>%property.linkMetaSeparator.name%</display-name>
-        	<property-name>linkMetaSeparator</property-name>
-        	<property-class>string</property-class>
-        	<property-extension>
-                <designer-extension>
-                    <tags>todo</tags>
-                 </designer-extension>
-            </property-extension>
-      	</property>
-
-    	<complex-extension>
-    		<base-complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</base-complex-id>
-      		<tag-name>dominoViewCloudData</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.cacheRefreshInterval.descr%</description>
+      <display-name>%property.cacheRefreshInterval.name%</display-name>
+      <property-name>cacheRefreshInterval</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.linkTargetPage.descr%</description>
+      <display-name>%property.linkTargetPage.name%</display-name>
+      <property-name>linkTargetPage</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+        </designer-extension>
+        <required>false</required>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.linkRequestParam.descr%</description>
+      <display-name>%property.linkRequestParam.name%</display-name>
+      <property-name>linkRequestParam</property-name>
+      <property-class>string</property-class>
+    </property>
+    <property>
+      <description>%property.linkMetaSeparator.descr%</description>
+      <display-name>%property.linkMetaSeparator.name%</display-name>
+      <property-name>linkMetaSeparator</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>todo</tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</base-complex-id>
+      <tag-name>dominoViewCloudData</tag-name>
+    </complex-extension>
+  </complex-type>
 </faces-config>

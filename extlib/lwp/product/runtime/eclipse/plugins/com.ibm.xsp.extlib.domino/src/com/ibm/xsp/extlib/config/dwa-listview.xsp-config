@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,604 +17,539 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>listview</control-subpackage-name>
+      <control-subpackage-name>listview</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-  
-	<group>
-		<group-type>com.ibm.xsp.extlib.group.listview.jsId</group-type>
-		<property>
-			
-			<description>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/descr%</description>
-			<display-name>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/name%</display-name>
-			<property-name>jsId</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    
-                    
-                    
-                    
-                    
-                    <tags>
+  <group>
+    <group-type>com.ibm.xsp.extlib.group.listview.jsId</group-type>
+    <property>
+      <description>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/descr%</description>
+      <display-name>%/com.ibm.xsp.extlib.group.calendar.jsId/jsId/name%</display-name>
+      <property-name>jsId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         not-control-id-reference
                         not-server-variable-name
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-		<group-extension>
-			<designer-extension>
-				<tags>group-in-control</tags>
-			</designer-extension>
-		</group-extension>
-	</group>
-
-
-	<component>
-		<description>%component.listView.descr%</description>
-		<display-name>%component.listView.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.listview.ListView</component-type>
-		<component-class>com.ibm.xsp.extlib.component.listview.UIListView</component-class>
-		<group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
-		<group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
-		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
-  		<property>
-			<description>%property.storeComponentId.descr%</description>
-			<display-name>%property.storeComponentId.name%</display-name>
-			<property-name>storeComponentId</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>basics</category>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>group-in-control</tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  <component>
+    <description>%component.listView.descr%</description>
+    <display-name>%component.listView.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.listview.ListView</component-type>
+    <component-class>com.ibm.xsp.extlib.component.listview.UIListView</component-class>
+    <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+    <property>
+      <description>%property.storeComponentId.descr%</description>
+      <display-name>%property.storeComponentId.name%</display-name>
+      <property-name>storeComponentId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+          <editor-parameter>
 						http://www.ibm.com/xsp/coreex|notesListViewStore
 					</editor-parameter>
-					
-					<tags>
+          <tags>
 					   todo
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.structureComponentId.descr%</description>
-			<display-name>%property.structureComponentId.name%</display-name>
-			<property-name>structureComponentId</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>basics</category>
-                    
-					<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.structureComponentId.descr%</description>
+      <display-name>%property.structureComponentId.name%</display-name>
+      <property-name>structureComponentId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
 					   todo
 					</tags>
-					<editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
-					<editor-parameter>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+          <editor-parameter>
 						http://www.ibm.com/xsp/coreex|notesListViewDesign
 					</editor-parameter>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.canBeNarrowMode.descr%</description>
-			<display-name>%property.canBeNarrowMode.name%</display-name>
-			<property-name>canBeNarrowMode</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>format</category>
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.canBeNarrowMode.descr%</description>
+      <display-name>%property.canBeNarrowMode.name%</display-name>
+      <property-name>canBeNarrowMode</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.hideColumns.descr%</description>
-			<display-name>%property.hideColumns.name%</display-name>
-			<property-name>hideColumns</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>format</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.alternateRows.descr%</description>
-			<display-name>%property.alternateRows.name%</display-name>
-			<property-name>alternateRows</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>format</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.hideColumns.descr%</description>
+      <display-name>%property.hideColumns.name%</display-name>
+      <property-name>hideColumns</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.alternateRows.descr%</description>
+      <display-name>%property.alternateRows.name%</display-name>
+      <property-name>alternateRows</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.showColumnNameForEmptyTitle.descr%</description>
-			<display-name>%property.showColumnNameForEmptyTitle.name%</display-name>
-			<property-name>showColumnNameForEmptyTitle</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>format</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onNewEntry.descr%</description>
-			<display-name>%property.onNewEntry.name%</display-name>
-			<property-name>onNewEntry</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-                    
-                    
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.showColumnNameForEmptyTitle.descr%</description>
+      <display-name>%property.showColumnNameForEmptyTitle.name%</display-name>
+      <property-name>showColumnNameForEmptyTitle</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onNewEntry.descr%</description>
+      <display-name>%property.onNewEntry.name%</display-name>
+      <property-name>onNewEntry</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onOpenEntry.descr%</description>
-			<display-name>%property.onOpenEntry.name%</display-name>
-			<property-name>onOpenEntry</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onSelectEntry.descr%</description>
-			<display-name>%property.onSelectEntry.name%</display-name>
-			<property-name>onSelectEntry</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onDeleteEntry.descr%</description>
-			<display-name>%property.onDeleteEntry.name%</display-name>
-			<property-name>onDeleteEntry</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			<description>%property.onContextMenu.descr%</description>
-			<display-name>%property.onContextMenu.name%</display-name>
-			<property-name>onContextMenu</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
- 		<property>
-			<description>%property.onSortChanged.descr%</description>
-			<display-name>%property.onSortChanged.name%</display-name>
-			<property-name>onSortChanged</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-				</designer-extension>
-			</property-extension>
-		</property>
- 		<property>
-			<description>%property.onCellClick.descr%</description>
-			<display-name>%property.onCellClick.name%</display-name>
-			<property-name>onCellClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-					
-					
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onOpenEntry.descr%</description>
+      <display-name>%property.onOpenEntry.name%</display-name>
+      <property-name>onOpenEntry</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onSelectEntry.descr%</description>
+      <display-name>%property.onSelectEntry.name%</display-name>
+      <property-name>onSelectEntry</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onDeleteEntry.descr%</description>
+      <display-name>%property.onDeleteEntry.name%</display-name>
+      <property-name>onDeleteEntry</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onContextMenu.descr%</description>
+      <display-name>%property.onContextMenu.name%</display-name>
+      <property-name>onContextMenu</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onSortChanged.descr%</description>
+      <display-name>%property.onSortChanged.name%</display-name>
+      <property-name>onSortChanged</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onCellClick.descr%</description>
+      <display-name>%property.onCellClick.name%</display-name>
+      <property-name>onCellClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
- 		<property>
-			<description>%property.onCellDblClick.descr%</description>
-			<display-name>%property.onCellDblClick.name%</display-name>
-			<property-name>onCellDblClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-					
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onCellDblClick.descr%</description>
+      <display-name>%property.onCellDblClick.name%</display-name>
+      <property-name>onCellDblClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-
-		<component-extension>
-            <base-component-type>javax.faces.Component</base-component-type>
-			<component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
-			<renderer-type>com.ibm.xsp.extlib.listview.ListView</renderer-type>
-			<tag-name>listView</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>iNotes</category>
-        		
-        	    
-        	    
-        	    
-        		<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
+      <renderer-type>com.ibm.xsp.extlib.listview.ListView</renderer-type>
+      <tag-name>listView</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>iNotes</category>
+        <tags>
         		  todo
         		</tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-
-	<component>
-		<description>%component.notesListViewStore.descr%</description>
-		<display-name>%component.notesListViewStore.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.listview.NotesListViewStore</component-type>
-		<component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewStore</component-class>
-		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
-  		<property>
-			<description>%property.databaseName.component.notesListViewStore.descr%</description>
-			<display-name>%property.databaseName.component.notesListViewStore.name%</display-name>
-			<property-name>databaseName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    
-               </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.viewName.component.notesListViewStore.descr%</description>
-			<display-name>%property.viewName.component.notesListViewStore.name%</display-name>
-			<property-name>viewName</property-name>
-			<property-class>java.lang.String</property-class>
-          	<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                    
-                    
-                </designer-extension>
-          	</property-extension>
-		</property>
-		<component-extension>
-            <base-component-type>javax.faces.Component</base-component-type>
-			<component-family>com.ibm.xsp.extlib.listview.ListViewStore</component-family>
-			<renderer-type>com.ibm.xsp.extlib.listview.NotesListViewStore</renderer-type>
-			<tag-name>notesListViewStore</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>iNotes</category>
-        		
-      		</designer-extension>
-		</component-extension>
-	</component>
-	<component>
-		<description>%component.notesListViewDesign.descr%</description>
-		<display-name>%component.notesListViewDesign.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</component-type>
-		<component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewDesign</component-class>
-		<group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
-  		<property>
-			<description>%property.databaseName.component.notesListViewStore.descr%</description>
-			<display-name>%property.databaseName.component.notesListViewStore.name%</display-name>
-			<property-name>databaseName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.viewName.component.notesListViewStore.descr%</description>
-			<display-name>%property.viewName.component.notesListViewStore.name%</display-name>
-			<property-name>viewName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    
-                    
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-		</property>
-		<component-extension>
-            <base-component-type>javax.faces.Component</base-component-type>
-			<component-family>com.ibm.xsp.extlib.listview.ListViewDesign</component-family>
-			<renderer-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</renderer-type>
-			<tag-name>notesListViewDesign</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>iNotes</category>
-                
-                
-                
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.notesListViewStore.descr%</description>
+    <display-name>%component.notesListViewStore.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.listview.NotesListViewStore</component-type>
+    <component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewStore</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+    <property>
+      <description>%property.databaseName.component.notesListViewStore.descr%</description>
+      <display-name>%property.databaseName.component.notesListViewStore.name%</display-name>
+      <property-name>databaseName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.viewName.component.notesListViewStore.descr%</description>
+      <display-name>%property.viewName.component.notesListViewStore.name%</display-name>
+      <property-name>viewName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.listview.ListViewStore</component-family>
+      <renderer-type>com.ibm.xsp.extlib.listview.NotesListViewStore</renderer-type>
+      <tag-name>notesListViewStore</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>iNotes</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.notesListViewDesign.descr%</description>
+    <display-name>%component.notesListViewDesign.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</component-type>
+    <component-class>com.ibm.xsp.extlib.component.listview.UINotesListViewDesign</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.listview.jsId</group-type-ref>
+    <property>
+      <description>%property.databaseName.component.notesListViewStore.descr%</description>
+      <display-name>%property.databaseName.component.notesListViewStore.name%</display-name>
+      <property-name>databaseName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.viewName.component.notesListViewStore.descr%</description>
+      <display-name>%property.viewName.component.notesListViewStore.name%</display-name>
+      <property-name>viewName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>javax.faces.Component</base-component-type>
+      <component-family>com.ibm.xsp.extlib.listview.ListViewDesign</component-family>
+      <renderer-type>com.ibm.xsp.extlib.listview.NotesListViewDesign</renderer-type>
+      <tag-name>notesListViewDesign</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>iNotes</category>
+        <tags>
                    todo
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-
-	<component>
-		<description>%component.listViewColumn.descr%</description>
-		<display-name>%component.listViewColumn.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.listview.ListViewColumn</component-type>
-		<component-class>com.ibm.xsp.extlib.component.listview.UIListViewColumn</component-class>
-
-        <property>
-            <description>%property.columnName.descr%</description>
-            <display-name>%property.columnName.name%</display-name>
-            <property-name>columnName</property-name>
-			<property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-        	<description>%property.columnTitle.descr%</description>
-        	<display-name>%property.columnTitle.name%</display-name>
-        	<property-name>columnTitle</property-name>
-        	<property-class>java.lang.String</property-class>
-        	<property-extension>
-				<localizable>true</localizable>
-        		<designer-extension>
-        			<category>basics</category>
-        			
-        			<tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.listViewColumn.descr%</description>
+    <display-name>%component.listViewColumn.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.listview.ListViewColumn</component-type>
+    <component-class>com.ibm.xsp.extlib.component.listview.UIListViewColumn</component-class>
+    <property>
+      <description>%property.columnName.descr%</description>
+      <display-name>%property.columnName.name%</display-name>
+      <property-name>columnName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.columnTitle.descr%</description>
+      <display-name>%property.columnTitle.name%</display-name>
+      <property-name>columnTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
         				not-accessibility-title
         			</tags>
-        		</designer-extension>
-        	</property-extension>
-        </property>
-
-        <property>
-            <description>%property.width.descr%</description>
-            <display-name>%property.width.name%</display-name>
-            <property-name>width</property-name>
-			<property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>format</category>
-                    
-                    
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    
-                    
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.width.descr%</description>
+      <display-name>%property.width.name%</display-name>
+      <property-name>width</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						auto
 						10
 						20
 						30
                     </editor-parameter>
-                    <tags>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-        	<description>%property.extendable.descr%</description>
-        	<display-name>%property.extendable.name%</display-name>
-        	<property-name>extendable</property-name>
-        	<property-class>boolean</property-class>
-        	<property-extension>
-        		<designer-extension>
-        			<category>format</category>
-        		</designer-extension>
-        	</property-extension>
-        </property>
-        <property>
-        	<description>%property.fixedWidth.descr%</description>
-        	<display-name>%property.fixedWidth.name%</display-name>
-        	<property-name>fixedWidth</property-name>
-        	<property-class>boolean</property-class>
-        	<property-extension>
-        		<designer-extension>
-        			<category>format</category>
-                    
-        		</designer-extension>
-        	</property-extension>
-        </property>
-
-
-        <property>
-        	<description>%property.showGradient.descr%</description>
-        	<display-name>%property.showGradient.name%</display-name>
-        	<property-name>showGradient</property-name>
-        	<property-class>boolean</property-class>
-        	<property-extension>
-        		<designer-extension>
-        			<category>format</category>
-                    
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.extendable.descr%</description>
+      <display-name>%property.extendable.name%</display-name>
+      <property-name>extendable</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.fixedWidth.descr%</description>
+      <display-name>%property.fixedWidth.name%</display-name>
+      <property-name>fixedWidth</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.showGradient.descr%</description>
+      <display-name>%property.showGradient.name%</display-name>
+      <property-name>showGradient</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <tags>
                         todo
                     </tags>
-        		</designer-extension>
-        	</property-extension>
-        </property>
-  		<property>
-			<description>%property.narrowDisplay.descr%</description>
-			<display-name>%property.narrowDisplay.name%</display-name>
-			<property-name>narrowDisplay</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.narrowDisplay.descr%</description>
+      <display-name>%property.narrowDisplay.name%</display-name>
+      <property-name>narrowDisplay</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						top
 						wrap
 						hide
                     </editor-parameter>
-                    
-                    <tags>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.sequenceNumber.descr%</description>
-			<display-name>%property.sequenceNumber.name%</display-name>
-			<property-name>sequenceNumber</property-name>
-			<property-class>int</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.sequenceNumber.descr%</description>
+      <display-name>%property.sequenceNumber.name%</display-name>
+      <property-name>sequenceNumber</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.beginWrapUnder.descr%</description>
-			<display-name>%property.beginWrapUnder.name%</display-name>
-			<property-name>beginWrapUnder</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.twistie.descr%</description>
-			<display-name>%property.twistie.name%</display-name>
-			<property-name>twistie</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.response.descr%</description>
-			<display-name>%property.response.name%</display-name>
-			<property-name>response</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                </designer-extension>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.beginWrapUnder.descr%</description>
+      <display-name>%property.beginWrapUnder.name%</display-name>
+      <property-name>beginWrapUnder</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.twistie.descr%</description>
+      <display-name>%property.twistie.name%</display-name>
+      <property-name>twistie</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.response.descr%</description>
+      <display-name>%property.response.name%</display-name>
+      <property-name>response</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+        <tags>
                     todo
                 </tags>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.sort.descr%</description>
-			<display-name>%property.sort.name%</display-name>
-			<property-name>sort</property-name>
-			<property-class>int</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.BitwiseFlagsEditor</editor>
-                    <editor-parameter>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.sort.descr%</description>
+      <display-name>%property.sort.name%</display-name>
+      <property-name>sort</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.BitwiseFlagsEditor</editor>
+          <editor-parameter>
                         0x0001:ascending 
                         0x0002:descending
                     </editor-parameter>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.icon.descr%</description>
-			<display-name>%property.icon.name%</display-name>
-			<property-name>icon</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>format</category>
-                    
-                     
-                    
-                     
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.icon.descr%</description>
+      <display-name>%property.icon.name%</display-name>
+      <property-name>icon</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
-			<renderer-type>com.ibm.xsp.extlib.listview.ListViewColumn</renderer-type>
-			<tag-name>listViewColumn</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>iNotes</category>
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.listview.ListView</component-family>
+      <renderer-type>com.ibm.xsp.extlib.listview.ListViewColumn</renderer-type>
+      <tag-name>listViewColumn</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>iNotes</category>
+        <tags>
                    todo
                    no-faces-config-renderer
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

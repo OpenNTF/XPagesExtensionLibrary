@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,90 +17,71 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>tagcloud</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <component>
+    <description>%component.tagCloud.descr%</description>
+    <display-name>%component.tagCloud.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.tagcloud.TagCloud</component-type>
+    <component-class>com.ibm.xsp.extlib.component.tagcloud.UITagCloud</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
+    <property>
+      <description>%property.sliderVisible.descr%</description>
+      <display-name>%property.sliderVisible.name%</display-name>
+      <property-name>sliderVisible</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <tags>todo</tags>
         <designer-extension>
-            <control-subpackage-name>tagcloud</control-subpackage-name>
+          <category>basics</category>
         </designer-extension>
-	</faces-config-extension>
-
-	
-	<component>
-		<description>%component.tagCloud.descr%</description>
-		
-		<display-name>%component.tagCloud.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.tagcloud.TagCloud</component-type>
-		<component-class>com.ibm.xsp.extlib.component.tagcloud.UITagCloud</component-class>
-
-		<group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
-
-		<property>
-			<description>%property.sliderVisible.descr%</description>
-			
-			<display-name>%property.sliderVisible.name%</display-name>
-			<property-name>sliderVisible</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-			
-				<default-value>true</default-value>
-				<tags>todo</tags>
-				<designer-extension>
-					<category>basics</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-		
-		
-        
-        
-        
-    	
-    	<property>
-    	    
-            <description>%property.alternateText.descr%</description>
-            <display-name>%property.alternateText.name%</display-name>
-      		<property-name>alternateText</property-name>
-      		<property-class>string</property-class>
-      		<property-extension>
-        		<localizable>true</localizable>
-        		<designer-extension>
-          			<category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-		<property>
-			<description>%property.cloudData.descr%</description>
-			<display-name>%property.cloudData.name%</display-name>
-			<property-name>cloudData</property-name>
-			<property-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</property-class>
-			<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-				<designer-extension>
-					<category>data</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>javax.faces.Panel</component-family>
-			  
-			<renderer-type>com.ibm.xsp.extlib.tagcloud.TagCloud</renderer-type>
-			<tag-name>tagCloud</tag-name>
-			<designer-extension>
-				<in-palette>true</in-palette>
-				<category>Extension Library</category>
-			</designer-extension>
-		</component-extension>
-	</component>
-
-
-	<complex-type>
-		<description>%complex-type.com.ibm.xsp.extlib.component.tagcloud.ITagCloudData.descr%</description>
-		<display-name>%complex-type.com.ibm.xsp.extlib.component.tagcloud.ITagCloudData.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-id>
-		<complex-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-class>
-    </complex-type>
-
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.alternateText.descr%</description>
+      <display-name>%property.alternateText.name%</display-name>
+      <property-name>alternateText</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.cloudData.descr%</description>
+      <display-name>%property.cloudData.name%</display-name>
+      <property-name>cloudData</property-name>
+      <property-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>data</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.extlib.tagcloud.TagCloud</renderer-type>
+      <tag-name>tagCloud</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.component.tagcloud.ITagCloudData.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.component.tagcloud.ITagCloudData.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.tagcloud.ITagCloudData</complex-class>
+  </complex-type>
 </faces-config>

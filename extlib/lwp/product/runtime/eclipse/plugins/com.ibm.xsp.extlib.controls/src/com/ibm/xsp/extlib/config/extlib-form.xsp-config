@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,304 +17,244 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>dojoext.form</control-subpackage-name>
+      <control-subpackage-name>dojoext.form</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-    
-
-    <component>
-        <description>%component.com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox.descr%</description>
-        <display-name>%component.com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojoext.form.AbstractDojoExtListTextBox</component-class>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
-            <component-family>javax.faces.Input</component-family>
-            <renderer-type>javax.faces.Text</renderer-type>
-            <designer-extension>
-                
-                
-                
-                
-                
-                
-                <tags>
+  <component>
+    <description>%component.com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox.descr%</description>
+    <display-name>%component.com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojoext.form.AbstractDojoExtListTextBox</component-class>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>javax.faces.Text</renderer-type>
+      <designer-extension>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.djextListTextBox.descr%</description>
-        <display-name>%component.djextListTextBox.name%</display-name>
-        
-        <component-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtListTextBox</component-class>
-
-        <property>
-            <description>%property.displayLabel.descr%</description>
-            <display-name>%property.displayLabel.name%</display-name>
-            <property-name>displayLabel</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.dataProvider.component.djextListTextBox.descr%</description>
-            <display-name>%property.dataProvider.component.djextListTextBox.name%</display-name>
-            <property-name>dataProvider</property-name>
-            <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
-            <property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.djextListTextBox.descr%</description>
+    <display-name>%component.djextListTextBox.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtListTextBox</component-class>
+    <property>
+      <description>%property.displayLabel.descr%</description>
+      <display-name>%property.displayLabel.name%</display-name>
+      <property-name>displayLabel</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.dataProvider.component.djextListTextBox.descr%</description>
+      <display-name>%property.dataProvider.component.djextListTextBox.name%</display-name>
+      <property-name>dataProvider</property-name>
+      <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
-            <component-family>javax.faces.Input</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</renderer-type>
-            <tag-name>djextListTextBox</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.djextNameTextBox.descr%</description>
-        <display-name>%component.djextNameTextBox.name%</display-name>
-        
-        <component-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtNameTextBox</component-class>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
-            <component-family>javax.faces.Input</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</renderer-type>
-            <tag-name>djextNameTextBox</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojoext.form.ListTextBox</renderer-type>
+      <tag-name>djextListTextBox</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.djextNameTextBox.descr%</description>
+    <display-name>%component.djextNameTextBox.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtNameTextBox</component-class>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojoext.form.AbstractListTextBox</base-component-type>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojoext.form.NameTextBox</renderer-type>
+      <tag-name>djextNameTextBox</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.djextLinkSelect.descr%</description>
-        <display-name>%component.djextLinkSelect.name%</display-name>
-        
-        <component-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtLinkSelect</component-class>
-
-        <group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
-
-        <property>
-            <description>%property.dataProvider.component.djextLinkSelect.descr%</description>
-            <display-name>%property.dataProvider.component.djextLinkSelect.name%</display-name>
-            <property-name>dataProvider</property-name>
-            <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
-            <property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    
-                    
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.djextLinkSelect.descr%</description>
+    <display-name>%component.djextLinkSelect.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtLinkSelect</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.listStyle</group-type-ref>
+    <property>
+      <description>%property.dataProvider.component.djextLinkSelect.descr%</description>
+      <display-name>%property.dataProvider.component.djextLinkSelect.name%</display-name>
+      <property-name>dataProvider</property-name>
+      <property-class>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
-            <component-family>javax.faces.Input</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</renderer-type>
-            <tag-name>djextLinkSelect</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojoext.form.LinkSelect</renderer-type>
+      <tag-name>djextLinkSelect</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <complex-type>
-        <description>%complex-type.selectImage.descr%</description>
-        <display-name>%complex-type.selectImage.name%</display-name>
-        <complex-id>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-id>
-        <complex-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-class>
-
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
-        <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
-
-        <property>
-            <description>%property.selectedValue.descr%</description>
-            <display-name>%property.selectedValue.name%</display-name>
-            <property-name>selectedValue</property-name>
-            <property-class>java.lang.Object</property-class>
-        </property>
-
-        <property>
-            <description>%property.image.descr%</description>
-            <display-name>%property.image.name%</display-name>
-            <property-name>image</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.selectedImage.descr%</description>
-            <display-name>%property.selectedImage.name%</display-name>
-            <property-name>selectedImage</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.selectedStyle.descr%</description>
-            <display-name>%property.selectedStyle.name%</display-name>
-            <property-name>selectedStyle</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.selectedStyleClass.descr%</description>
-            <display-name>%property.selectedStyleClass.name%</display-name>
-            <property-name>selectedStyleClass</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>             
-                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-                </designer-extension>   
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.imageAlt.descr%</description>
-            <display-name>%property.imageAlt.name%</display-name>
-            <property-name>imageAlt</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.selectImage.descr%</description>
+    <display-name>%complex-type.selectImage.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</complex-class>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+    <property>
+      <description>%property.selectedValue.descr%</description>
+      <display-name>%property.selectedValue.name%</display-name>
+      <property-name>selectedValue</property-name>
+      <property-class>java.lang.Object</property-class>
+    </property>
+    <property>
+      <description>%property.image.descr%</description>
+      <display-name>%property.image.name%</display-name>
+      <property-name>image</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectedImage.descr%</description>
+      <display-name>%property.selectedImage.name%</display-name>
+      <property-name>selectedImage</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectedStyle.descr%</description>
+      <display-name>%property.selectedStyle.name%</display-name>
+      <property-name>selectedStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectedStyleClass.descr%</description>
+      <display-name>%property.selectedStyleClass.name%</display-name>
+      <property-name>selectedStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.imageAlt.descr%</description>
+      <display-name>%property.imageAlt.name%</display-name>
+      <property-name>imageAlt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
                         not-image-path
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <complex-extension>
-            <tag-name>selectImage</tag-name>
-            <designer-extension>
-                
-                
-                
-                
-                
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>selectImage</tag-name>
+      <designer-extension>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </complex-extension>
-    </complex-type>
-
-    <component>
-        <description>%component.djextImageSelect.descr%</description>
-        <display-name>%component.djextImageSelect.name%</display-name>
-        
-        <component-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtImageSelect</component-class>
-
-        <property>
-            <description>%property.imageValues.descr%</description>
-            <display-name>%property.imageValues.name%</display-name>
-            <property-name>imageValues</property-name>
-            <property-class>java.util.List</property-class>
-            <property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-                <collection-property>true</collection-property>
-                <property-item-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</property-item-class>
-                <property-add-method>addImageValue</property-add-method>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
-            <component-family>javax.faces.Input</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</renderer-type>
-            <tag-name>djextImageSelect</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Extension Library</category>
-        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
-&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;
-    &lt;xp:image url="/extlib/designer/markup/DojoImageSelect.png" id="image1"&gt;&lt;/xp:image&gt;&#13;
-&lt;/xp:view&gt;&#13;
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
+  <component>
+    <description>%component.djextImageSelect.descr%</description>
+    <display-name>%component.djextImageSelect.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtImageSelect</component-class>
+    <property>
+      <description>%property.imageValues.descr%</description>
+      <display-name>%property.imageValues.name%</display-name>
+      <property-name>imageValues</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.component.dojoext.form.SelectImage</property-item-class>
+        <property-add-method>addImageValue</property-add-method>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.form.FormWidgetBase</base-component-type>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojoext.form.ImageSelect</renderer-type>
+      <tag-name>djextImageSelect</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;
+    &lt;xp:image url="/extlib/designer/markup/DojoImageSelect.png" id="image1"&gt;&lt;/xp:image&gt;&#xd;
+&lt;/xp:view&gt;&#xd;
 </render-markup>
-                
-                
-                <tags>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    
-
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,35 +17,32 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
   </faces-config-extension>
-	
-	
-    <complex-type>
-        <description>%complex-type.alertAction.descr%</description>
-        <display-name>%complex-type.alertAction.name%</display-name>
-        <complex-id>com.ibm.xsp.extlib.actions.client.AlertClientAction</complex-id>
-        <complex-class>com.ibm.xsp.extlib.actions.client.AlertClientAction</complex-class>
-		<property>
-			<description>%property.text.descr%</description>
-			<display-name>%property.text.name%</display-name>
-			<property-name>text</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-        <complex-extension>
-      		<base-complex-id>simpleActionInterface</base-complex-id>
-			<tag-name>alertAction</tag-name>
-            <designer-extension>
-                <action-type>client</action-type>
-                <category>%complex-category.basic%</category>
-            </designer-extension>
-        </complex-extension>
-    </complex-type>
-
+  <complex-type>
+    <description>%complex-type.alertAction.descr%</description>
+    <display-name>%complex-type.alertAction.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.actions.client.AlertClientAction</complex-id>
+    <complex-class>com.ibm.xsp.extlib.actions.client.AlertClientAction</complex-class>
+    <property>
+      <description>%property.text.descr%</description>
+      <display-name>%property.text.name%</display-name>
+      <property-name>text</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>simpleActionInterface</base-complex-id>
+      <tag-name>alertAction</tag-name>
+      <designer-extension>
+        <action-type>client</action-type>
+        <category>%complex-category.basic%</category>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
 </faces-config>

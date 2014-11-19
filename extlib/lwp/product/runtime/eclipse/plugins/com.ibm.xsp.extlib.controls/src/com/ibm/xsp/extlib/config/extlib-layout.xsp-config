@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,290 +17,262 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>layout</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <component>
+    <description>%component.applicationLayout.descr%</description>
+    <display-name>%component.applicationLayout.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.layout.ApplicationLayout</component-type>
+    <component-class>com.ibm.xsp.extlib.component.layout.UIApplicationLayout</component-class>
+    <property>
+      <description>%property.configuration.descr%</description>
+      <display-name>%property.configuration.name%</display-name>
+      <property-name>configuration</property-name>
+      <property-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</property-class>
+      <property-extension>
+        <required>true</required>
+        <allow-run-time-binding>false</allow-run-time-binding>
         <designer-extension>
-            <control-subpackage-name>layout</control-subpackage-name>
+          <category>basics</category>
         </designer-extension>
-	</faces-config-extension>
-
-	<component>
-		<description>%component.applicationLayout.descr%</description>
-		<display-name>%component.applicationLayout.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.layout.ApplicationLayout</component-type>
-		<component-class>com.ibm.xsp.extlib.component.layout.UIApplicationLayout</component-class>
-
-		<property>
-			
-			<description>%property.configuration.descr%</description>
-			<display-name>%property.configuration.name%</display-name>
-			<property-name>configuration</property-name>
-			<property-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</property-class>
-			<property-extension>
-				<required>true</required>
-				<allow-run-time-binding>false</allow-run-time-binding>
-				<designer-extension>
-					<category>basics</category>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-		<property>
-			<description>%property.onItemClick.descr%</description>
-			<display-name>%property.onItemClick.name%</display-name>
-			<property-name>onItemClick</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<category>events</category>
-					<event>true</event>
-					<subcategory>container-event</subcategory>
-                    
-                    
-                    <tags>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onItemClick.descr%</description>
+      <display-name>%property.onItemClick.name%</display-name>
+      <property-name>onItemClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                        todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.layout.ApplicationLayout</component-family>
-			<renderer-type>com.ibm.xsp.extlib.layout.OneUIApplicationLayout</renderer-type>
-			<tag-name>applicationLayout</tag-name>
-			<designer-extension>
-				<in-palette>true</in-palette>
-				<category>Extension Library</category>
-                
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.layout.ApplicationLayout</component-family>
+      <renderer-type>com.ibm.xsp.extlib.layout.OneUIApplicationLayout</renderer-type>
+      <tag-name>applicationLayout</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                    todo
                 </tags>
-        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
-&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#13;&#13;
-&lt;xp:callback id="MastHeader" facetName="MastHeader"/&gt;&#13;&#13;
-&lt;xp:div style="background-color:#CEE1FC; padding:5px"&gt;&#13;
-&lt;table width="98%"&gt;&lt;tr&gt;&lt;td&gt;&#13;
-  {logo} &amp;#160; {bannerApplicationLinks}&#13;
-&lt;/td&gt;&lt;td align="right"&gt;{bannerUtilityLinks}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#13;
-  &lt;xp:table style="width: 98%; background-color:#FFFFFF"&gt;&#13;
-    &lt;xp:tr&gt;&#13;
-      &lt;xp:td colspan="3" style="background-color:#4586D3"&gt;&#13;
-        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&#13;
-          &lt;table&gt;&lt;tr&gt;&#13;
-            &lt;td style="background-color:#4372A9;color:#FFFFFF"&gt;&#13;
-              {titleBarTabs}&lt;/td&gt;&#13;
-            &lt;td style="background-color:#E4E8EF"&gt;&#13;
-              selected&lt;/td&gt;&#13;
-          &lt;/tr&gt;&lt;/table&gt;&#13;
-        &lt;/td&gt;&lt;td&gt;&#13;
-          &lt;div style="float:right;background:#FFFFFF"&gt;&#13;
-        &lt;xp:callback id="SearchBar" facetName="SearchBar"/&gt;&#13;&#13;
-                {searchBar}&lt;/div&gt;&#13;
-        &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#13;
-      &lt;/xp:td&gt;&#13;
-    &lt;/xp:tr&gt;&#13;
-    &lt;xp:tr&gt;&#13;
-      &lt;xp:td colspan="3" style="background-color:#E4E8EF"&gt;&#13;
-        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&lt;h2&gt;{placeBarName}&lt;/h2&gt;&lt;/td&gt;&#13;
-          &lt;td&gt; &#13;
-              &lt;div style="float:right;border:thin solid #C0C7CD"&gt;&#13;
-                {placeBarActions}&lt;/div&gt;&lt;/td&gt;&#13;
-        &lt;/tr&gt;&lt;/table&gt;&#13;
-      &lt;/xp:td&gt;&#13;
-    &lt;/xp:tr&gt;&#13;
-    &lt;xp:tr&gt;&#13;
-      &lt;xp:td style="width:123px" valign="top"&gt;&#13;
-        &lt;xp:callback id="LeftColumn" facetName="LeftColumn"/&gt;&#13;
-      &lt;/xp:td&gt;&#13;
-      &lt;xp:td valign="top"&gt;&#13;
-        &lt;xp:callback id="callback1"/&gt;&#13;
-&lt;xp:br/&gt;&lt;xp:br/&gt;&lt;xp:br/&gt;&#13;
-      &lt;/xp:td&gt;&#13;
-      &lt;xp:td style="width:123px" valign="top"&gt;&#13;
-        &lt;xp:callback id="RightColumn" facetName="RightColumn" /&gt;&#13;
-      &lt;/xp:td&gt;&#13;
-    &lt;/xp:tr&gt;&#13;
-  &lt;/xp:table&gt;&#13;
-  &lt;xp:table style="width: 98%; background-color:#FFFFFF; margin-top:5px"&gt;&#13;
-  &lt;xp:tr&gt;&lt;xp:td&gt; {footerLinks}&lt;/xp:td&gt;&lt;/xp:tr&gt;&#13;
-  &lt;/xp:table&gt;&#13;
-  {legalText}&#13;
-  &lt;/xp:div&gt;&#13;&#13;
-&lt;xp:callback id="MastFooter" facetName="MastFooter"/&gt;&#13;&#13;
-&lt;/xp:view&gt;&#13;
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#xd;
+&lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;&#xd;&#xd;
+&lt;xp:callback id="MastHeader" facetName="MastHeader"/&gt;&#xd;&#xd;
+&lt;xp:div style="background-color:#CEE1FC; padding:5px"&gt;&#xd;
+&lt;table width="98%"&gt;&lt;tr&gt;&lt;td&gt;&#xd;
+  {logo} &amp;#160; {bannerApplicationLinks}&#xd;
+&lt;/td&gt;&lt;td align="right"&gt;{bannerUtilityLinks}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xd;
+  &lt;xp:table style="width: 98%; background-color:#FFFFFF"&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td colspan="3" style="background-color:#4586D3"&gt;&#xd;
+        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&#xd;
+          &lt;table&gt;&lt;tr&gt;&#xd;
+            &lt;td style="background-color:#4372A9;color:#FFFFFF"&gt;&#xd;
+              {titleBarTabs}&lt;/td&gt;&#xd;
+            &lt;td style="background-color:#E4E8EF"&gt;&#xd;
+              selected&lt;/td&gt;&#xd;
+          &lt;/tr&gt;&lt;/table&gt;&#xd;
+        &lt;/td&gt;&lt;td&gt;&#xd;
+          &lt;div style="float:right;background:#FFFFFF"&gt;&#xd;
+        &lt;xp:callback id="SearchBar" facetName="SearchBar"/&gt;&#xd;&#xd;
+                {searchBar}&lt;/div&gt;&#xd;
+        &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td colspan="3" style="background-color:#E4E8EF"&gt;&#xd;
+        &lt;table width="100%"&gt;&lt;tr&gt;&lt;td&gt;&lt;h2&gt;{placeBarName}&lt;/h2&gt;&lt;/td&gt;&#xd;
+          &lt;td&gt; &#xd;
+              &lt;div style="float:right;border:thin solid #C0C7CD"&gt;&#xd;
+                {placeBarActions}&lt;/div&gt;&lt;/td&gt;&#xd;
+        &lt;/tr&gt;&lt;/table&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+    &lt;xp:tr&gt;&#xd;
+      &lt;xp:td style="width:123px" valign="top"&gt;&#xd;
+        &lt;xp:callback id="LeftColumn" facetName="LeftColumn"/&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+      &lt;xp:td valign="top"&gt;&#xd;
+        &lt;xp:callback id="callback1"/&gt;&#xd;
+&lt;xp:br/&gt;&lt;xp:br/&gt;&lt;xp:br/&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+      &lt;xp:td style="width:123px" valign="top"&gt;&#xd;
+        &lt;xp:callback id="RightColumn" facetName="RightColumn" /&gt;&#xd;
+      &lt;/xp:td&gt;&#xd;
+    &lt;/xp:tr&gt;&#xd;
+  &lt;/xp:table&gt;&#xd;
+  &lt;xp:table style="width: 98%; background-color:#FFFFFF; margin-top:5px"&gt;&#xd;
+  &lt;xp:tr&gt;&lt;xp:td&gt; {footerLinks}&lt;/xp:td&gt;&lt;/xp:tr&gt;&#xd;
+  &lt;/xp:table&gt;&#xd;
+  {legalText}&#xd;
+  &lt;/xp:div&gt;&#xd;&#xd;
+&lt;xp:callback id="MastFooter" facetName="MastFooter"/&gt;&#xd;&#xd;
+&lt;/xp:view&gt;&#xd;
 </render-markup>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-	<complex-type>
-    	<description>%complex-type.com.ibm.xsp.extlib.component.layout.ApplicationConfiguration.descr%</description>
-    	<display-name>%complex-type.com.ibm.xsp.extlib.component.layout.ApplicationConfiguration.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-class>
-  	</complex-type>
-
-	<complex-type>
-    	<description>%complex-type.applicationConfiguration.descr%</description>
-    	<display-name>%complex-type.applicationConfiguration.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-class>
-
-  		<property>
-			<description>%property.defaultNavigationPath.descr%</description>
-			<display-name>%property.defaultNavigationPath.name%</display-name>
-			<property-name>defaultNavigationPath</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			     <designer-extension>
-			         
-			         <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.component.layout.ApplicationConfiguration.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.component.layout.ApplicationConfiguration.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</complex-class>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.applicationConfiguration.descr%</description>
+    <display-name>%complex-type.applicationConfiguration.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</complex-class>
+    <property>
+      <description>%property.defaultNavigationPath.descr%</description>
+      <display-name>%property.defaultNavigationPath.name%</display-name>
+      <property-name>defaultNavigationPath</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
 			             todo
 			         </tags>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						/tab1/link1
 						/tab1/link2
 						/tab2/link1
 						/tab2/link2
 					</editor-parameter>
-			     </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			
-			<description>%property.navigationPath.descr%</description>
-			<display-name>%property.navigationPath.name%</display-name>
-			<property-name>navigationPath</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                 <designer-extension>
-                     
-                     
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.navigationPath.descr%</description>
+      <display-name>%property.navigationPath.name%</display-name>
+      <property-name>navigationPath</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						/tab1/link1
 						/tab1/link2
 						/tab2/link1
 						/tab2/link2
 					</editor-parameter>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.banner.descr%</description>
-			<display-name>%property.banner.name%</display-name>
-			<property-name>banner</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                 <default-value>true</default-value>
-                 <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.banner.descr%</description>
+      <display-name>%property.banner.name%</display-name>
+      <property-name>banner</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.mastHeader.descr%</description>
-			<display-name>%property.mastHeader.name%</display-name>
-			<property-name>mastHeader</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                 <default-value>true</default-value>
-                 <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.mastHeader.descr%</description>
+      <display-name>%property.mastHeader.name%</display-name>
+      <property-name>mastHeader</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			
-			<description>%property.mastFooter.descr%</description>
-			<display-name>%property.mastFooter.name%</display-name>
-			<property-name>mastFooter</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                 <default-value>true</default-value>
-                 <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.mastFooter.descr%</description>
+      <display-name>%property.mastFooter.name%</display-name>
+      <property-name>mastFooter</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogo.descr%</description>
-			<display-name>%property.productLogo.name%</display-name>
-			<property-name>productLogo</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                 <designer-extension>
-                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
-                     
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogo.descr%</description>
+      <display-name>%property.productLogo.name%</display-name>
+      <property-name>productLogo</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
                          todo
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogoClass.descr%</description>
-			<display-name>%property.productLogoClass.name%</display-name>
-			<property-name>productLogoClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogoStyle.descr%</description>
-			<display-name>%property.productLogoStyle.name%</display-name>
-			<property-name>productLogoStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>
-	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-	      		</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogoAlt.descr%</description>
-			<display-name>%property.productLogoAlt.name%</display-name>
-			<property-name>productLogoAlt</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogoWidth.descr%</description>
-			<display-name>%property.productLogoWidth.name%</display-name>
-			<property-name>productLogoWidth</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogoClass.descr%</description>
+      <display-name>%property.productLogoClass.name%</display-name>
+      <property-name>productLogoClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogoStyle.descr%</description>
+      <display-name>%property.productLogoStyle.name%</display-name>
+      <property-name>productLogoStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogoAlt.descr%</description>
+      <display-name>%property.productLogoAlt.name%</display-name>
+      <property-name>productLogoAlt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogoWidth.descr%</description>
+      <display-name>%property.productLogoWidth.name%</display-name>
+      <property-name>productLogoWidth</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -308,24 +280,21 @@
 						auto
 						inherit
 					</editor-parameter>
-					
-                    <tags>
+          <tags>
 						not-image-path
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.productLogoHeight.descr%</description>
-			<display-name>%property.productLogoHeight.name%</display-name>
-			<property-name>productLogoHeight</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.productLogoHeight.descr%</description>
+      <display-name>%property.productLogoHeight.name%</display-name>
+      <property-name>productLogoHeight</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -333,267 +302,244 @@
 						auto
 						inherit
 					</editor-parameter>
-					
-                    <tags>
+          <tags>
 						not-image-path
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.bannerApplicationLinks.descr%</description>
-			<display-name>%property.bannerApplicationLinks.name%</display-name>
-			<property-name>bannerApplicationLinks</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addBannerApplicationLink</property-add-method>
-                <designer-extension>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.bannerApplicationLinks.descr%</description>
+      <display-name>%property.bannerApplicationLinks.name%</display-name>
+      <property-name>bannerApplicationLinks</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addBannerApplicationLink</property-add-method>
+        <designer-extension>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-        	</property-extension>
-		</property>
-  		<property>
-			<description>%property.bannerUtilityLinks.descr%</description>
-			<display-name>%property.bannerUtilityLinks.name%</display-name>
-			<property-name>bannerUtilityLinks</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addBannerUtilityLink</property-add-method>
-                <designer-extension>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.bannerUtilityLinks.descr%</description>
+      <display-name>%property.bannerUtilityLinks.name%</display-name>
+      <property-name>bannerUtilityLinks</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addBannerUtilityLink</property-add-method>
+        <designer-extension>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-        	</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.titleBar.descr%</description>
-			<display-name>%property.titleBar.name%</display-name>
-			<property-name>titleBar</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                 <default-value>true</default-value>
-                 <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBar.descr%</description>
+      <display-name>%property.titleBar.name%</display-name>
+      <property-name>titleBar</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.titleBarName.descr%</description>
-			<display-name>%property.titleBarName.name%</display-name>
-			<property-name>titleBarName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                 <localizable>true</localizable>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.titleBarLabel.descr%</description>
-            <display-name>%property.titleBarLabel.name%</display-name>
-            <property-name>titleBarLabel</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                 <since>9.0.0.v00_03</since>
-                 <localizable>true</localizable>
-            </property-extension>
-        </property>
-  		<property>
-			<description>%property.titleBarTabs.descr%</description>
-			<display-name>%property.titleBarTabs.name%</display-name>
-			<property-name>titleBarTabs</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addTitleBarTab</property-add-method>
-        	</property-extension>
-		</property>
-  		<property>
-			
-			<description>%property.searchBar.descr%</description>
-			<display-name>%property.searchBar.name%</display-name>
-			<property-name>searchBar</property-name>
-			<property-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</property-class>
-			<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-                
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.placeBar.descr%</description>
-			<display-name>%property.placeBar.name%</display-name>
-			<property-name>placeBar</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                <default-value>true</default-value>
-                 <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBarName.descr%</description>
+      <display-name>%property.titleBarName.name%</display-name>
+      <property-name>titleBarName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBarLabel.descr%</description>
+      <display-name>%property.titleBarLabel.name%</display-name>
+      <property-name>titleBarLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.titleBarTabs.descr%</description>
+      <display-name>%property.titleBarTabs.name%</display-name>
+      <property-name>titleBarTabs</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addTitleBarTab</property-add-method>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.searchBar.descr%</description>
+      <display-name>%property.searchBar.name%</display-name>
+      <property-name>searchBar</property-name>
+      <property-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.placeBar.descr%</description>
+      <display-name>%property.placeBar.name%</display-name>
+      <property-name>placeBar</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.placeBarName.descr%</description>
-			<display-name>%property.placeBarName.name%</display-name>
-			<property-name>placeBarName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-                <designer-extension>
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.placeBarName.descr%</description>
+      <display-name>%property.placeBarName.name%</display-name>
+      <property-name>placeBarName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
                         localizable-text
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.placeBarLabel.descr%</description>
-            <display-name>%property.placeBarLabel.name%</display-name>
-            <property-name>placeBarLabel</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                 <since>9.0.0.v00_03</since>
-                 <localizable>true</localizable>
-            </property-extension>
-        </property>
-  		<property>
-			<description>%property.placeBarActions.descr%</description>
-			<display-name>%property.placeBarActions.name%</display-name>
-			<property-name>placeBarActions</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addPlaceBarAction</property-add-method>
-        	</property-extension>
-		</property>
-  		<property>
-			
-			<description>%property.footer.descr%</description>
-			<display-name>%property.footer.name%</display-name>
-			<property-name>footer</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-				
-                <default-value>true</default-value>
-                <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.placeBarLabel.descr%</description>
+      <display-name>%property.placeBarLabel.name%</display-name>
+      <property-name>placeBarLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.placeBarActions.descr%</description>
+      <display-name>%property.placeBarActions.name%</display-name>
+      <property-name>placeBarActions</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addPlaceBarAction</property-add-method>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.footer.descr%</description>
+      <display-name>%property.footer.name%</display-name>
+      <property-name>footer</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.footerLinks.descr%</description>
-			<display-name>%property.footerLinks.name%</display-name>
-			<property-name>footerLinks</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addFooterLink</property-add-method>
-        	</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.legal.descr%</description>
-			<display-name>%property.legal.name%</display-name>
-			<property-name>legal</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                <default-value>true</default-value>
-                
-                <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.footerLinks.descr%</description>
+      <display-name>%property.footerLinks.name%</display-name>
+      <property-name>footerLinks</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addFooterLink</property-add-method>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legal.descr%</description>
+      <display-name>%property.legal.name%</display-name>
+      <property-name>legal</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <default-value>true</default-value>
+        <designer-extension>
+          <tags>
                          runtime-default-true
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.legalLogo.descr%</description>
-			<display-name>%property.legalLogo.name%</display-name>
-			<property-name>legalLogo</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                 <designer-extension>
-                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
-                     
-                 </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.legalLogoClass.descr%</description>
-			<display-name>%property.legalLogoClass.name%</display-name>
-			<property-name>legalLogoClass</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>
-	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogo.descr%</description>
+      <display-name>%property.legalLogo.name%</display-name>
+      <property-name>legalLogo</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogoClass.descr%</description>
+      <display-name>%property.legalLogoClass.name%</display-name>
+      <property-name>legalLogoClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
                          todo
                      </tags>
-	      		</designer-extension>   
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.legalLogoStyle.descr%</description>
-			<display-name>%property.legalLogoStyle.name%</display-name>
-			<property-name>legalLogoStyle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-	      		<designer-extension>
-	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
-                     
-	      		</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.legalLogoAlt.descr%</description>
-			<display-name>%property.legalLogoAlt.name%</display-name>
-			<property-name>legalLogoAlt</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.legalLogoWidth.descr%</description>
-			<display-name>%property.legalLogoWidth.name%</display-name>
-			<property-name>legalLogoWidth</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogoStyle.descr%</description>
+      <display-name>%property.legalLogoStyle.name%</display-name>
+      <property-name>legalLogoStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogoAlt.descr%</description>
+      <display-name>%property.legalLogoAlt.name%</display-name>
+      <property-name>legalLogoAlt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogoWidth.descr%</description>
+      <display-name>%property.legalLogoWidth.name%</display-name>
+      <property-name>legalLogoWidth</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -601,231 +547,202 @@
 						auto
 						inherit
 					</editor-parameter>
-					
-					<tags>
+          <tags>
 						not-image-path
 					</tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.legalLogoHeight.descr%</description>
-			<display-name>%property.legalLogoHeight.name%</display-name>
-			<property-name>legalLogoHeight</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                     
-                     
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalLogoHeight.descr%</description>
+      <display-name>%property.legalLogoHeight.name%</display-name>
+      <property-name>legalLogoHeight</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						30px
 						50%
 						10em
 						auto
 						inherit
 					</editor-parameter>
-                     
-                     <tags>
+          <tags>
                          todo
                          not-image-path
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.legalText.descr%</description>
-			<display-name>%property.legalText.name%</display-name>
-			<property-name>legalText</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-			</property-extension>
-		</property>
-
-        <property>
-            <description>%property.leftColumnLabel.descr%</description>
-            <display-name>%property.leftColumnLabel.name%</display-name>
-            <property-name>leftColumnLabel</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <since>9.0.0.v00_03</since>
-                <localizable>true</localizable>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.rightColumnLabel.descr%</description>
-            <display-name>%property.rightColumnLabel.name%</display-name>
-            <property-name>rightColumnLabel</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <since>9.0.0.v00_03</since>
-                <localizable>true</localizable>
-            </property-extension>
-        </property>
-
-    	<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</base-complex-id>
-      		<tag-name>applicationConfiguration</tag-name>
-            <designer-extension>
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legalText.descr%</description>
+      <display-name>%property.legalText.name%</display-name>
+      <property-name>legalText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.leftColumnLabel.descr%</description>
+      <display-name>%property.leftColumnLabel.name%</display-name>
+      <property-name>leftColumnLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rightColumnLabel.descr%</description>
+      <display-name>%property.rightColumnLabel.name%</display-name>
+      <property-name>rightColumnLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.0.v00_03</since>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</base-complex-id>
+      <tag-name>applicationConfiguration</tag-name>
+      <designer-extension>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-    	</complex-extension>
-  	</complex-type>
-
-	<complex-type>
-    	<description>%complex-type.appSearchBar.descr%</description>
-    	<display-name>%complex-type.appSearchBar.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-class>
-    	
-  		<property>
-			<description>%property.pageName.descr%</description>
-			<display-name>%property.pageName.name%</display-name>
-			<property-name>pageName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-			    <required>true</required>
-                <designer-extension>
-                    <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.appSearchBar.descr%</description>
+    <display-name>%complex-type.appSearchBar.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</complex-class>
+    <property>
+      <description>%property.pageName.descr%</description>
+      <display-name>%property.pageName.name%</display-name>
+      <property-name>pageName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <required>true</required>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.PagePicker</editor>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-  			
-			<description>%property.queryParam.descr%</description>
-			<display-name>%property.queryParam.name%</display-name>
-			<property-name>queryParam</property-name>
-			<property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.queryParam.descr%</description>
+      <display-name>%property.queryParam.name%</display-name>
+      <property-name>queryParam</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.inactiveText.descr%</description>
-			<display-name>%property.inactiveText.name%</display-name>
-			<property-name>inactiveText</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-                <designer-extension>
-                     
-                     
-                     
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.inactiveText.descr%</description>
+      <display-name>%property.inactiveText.name%</display-name>
+      <property-name>inactiveText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.options.descr%</description>
-			<display-name>%property.options.name%</display-name>
-			<property-name>options</property-name>
-            <property-class>java.util.List</property-class>
-        	<property-extension>
-                <allow-run-time-binding>false</allow-run-time-binding>
-          		<collection-property>true</collection-property>
-          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
-            	<property-add-method>addOption</property-add-method>
-                <designer-extension>
-                     
-                     
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.options.descr%</description>
+      <display-name>%property.options.name%</display-name>
+      <property-name>options</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+        <property-add-method>addOption</property-add-method>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-                </designer-extension>
-        	</property-extension>
-		</property>
-  		<property>
-			<description>%property.optionsParam.descr%</description>
-			<display-name>%property.optionsParam.name%</display-name>
-			<property-name>optionsParam</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.optionsParam.descr%</description>
+      <display-name>%property.optionsParam.name%</display-name>
+      <property-name>optionsParam</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.rendered.descr%</description>
-			<display-name>%property.rendered.name%</display-name>
-			<property-name>rendered</property-name>
-			<property-class>boolean</property-class>
-			<property-extension>
-                <designer-extension>
-                     
-                     
-                     <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rendered.descr%</description>
+      <display-name>%property.rendered.name%</display-name>
+      <property-name>rendered</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
                          todo
                      </tags>
-                </designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.scopeTitle.descr%</description>
-			<display-name>%property.scopeTitle.name%</display-name>
-			<property-name>scopeTitle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-				<designer-extension>
-					<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.scopeTitle.descr%</description>
+      <display-name>%property.scopeTitle.name%</display-name>
+      <property-name>scopeTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
 						is-accessibility-title
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-  		<property>
-			<description>%property.inputTitle.descr%</description>
-			<display-name>%property.inputTitle.name%</display-name>
-			<property-name>inputTitle</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<localizable>true</localizable>
-				<designer-extension>
-					<tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.inputTitle.descr%</description>
+      <display-name>%property.inputTitle.name%</display-name>
+      <property-name>inputTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <tags>
 						is-accessibility-title
 					</tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-        <property>
-            <description>%property.legend.descr%</description>
-            <display-name>%property.legend.name%</display-name>
-            <property-name>legend</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-            </property-extension>
-        </property>
-    	
-    	<complex-extension>
-      		<tag-name>appSearchBar</tag-name>
-            
-    	</complex-extension>
-  	</complex-type>
-
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.legend.descr%</description>
+      <display-name>%property.legend.name%</display-name>
+      <property-name>legend</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>appSearchBar</tag-name>
+    </complex-extension>
+  </complex-type>
 </faces-config>

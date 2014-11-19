@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,105 +17,90 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
-	</faces-config-extension>
-
-	<complex-type>
-		<description>%complex-type.com.ibm.xsp.extlib.model.DataAccessorSource.descr%</description>
-		<display-name>%complex-type.com.ibm.xsp.extlib.model.DataAccessorSource.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</complex-id>
-		<complex-class>com.ibm.xsp.extlib.model.DataAccessorSource</complex-class>
-		<group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
-		
-		<property>
-			
-			<description>%property.clearOnRendering.descr%</description>
-			<display-name>%property.clearOnRendering.name%</display-name>
-			<property-name>clearOnRendering</property-name>
-			<property-class>boolean</property-class>
-		</property>
-        <property>
-            
-            <description>%property.cacheSuffix.descr%</description>
-            <display-name>%property.cacheSuffix.name%</display-name>
-            <property-name>cacheSuffix</property-name>
-            <property-class>java.lang.String</property-class>
-        </property>
-		
-		<complex-extension>
-			<base-complex-id>dataInterface</base-complex-id>
-		</complex-extension>
-	</complex-type>
-
-	<complex-type>
-		<description>%complex-type.com.ibm.xsp.extlib.model.DataAccessorBlockSource.descr%</description>
-		<display-name>%complex-type.com.ibm.xsp.extlib.model.DataAccessorBlockSource.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-id>
-		<complex-class>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-class>
-		<property>
-			<description>%property.maxBlockCount.descr%</description>
-			<display-name>%property.maxBlockCount.name%</display-name>
-			<property-name>maxBlockCount</property-name>
-			<property-class>int</property-class>
-		</property>
-        <property>
-            <description>%property.timeout.descr%</description>
-            <display-name>%property.timeout.name%</display-name>
-            <property-name>timeout</property-name>
-            <property-class>int</property-class>
-        </property>
-		
-		<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</base-complex-id>
-		</complex-extension>
-	</complex-type>
-
-	<complex-type>
-		<description>%complex-type.objectData.descr%</description>
-		<display-name>%complex-type.objectData.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.model.ObjectDataSource</complex-id>
-		<complex-class>com.ibm.xsp.extlib.model.ObjectDataSource</complex-class>
-		<group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
-		
-       	<property>
-       		
-        	<description>%property.readonly.descr%</description>
-         	<display-name>%property.readonly.name%</display-name>
-         	<property-name>readonly</property-name>
-         	<property-class>boolean</property-class>
-        	<property-extension>
-        	</property-extension>
-       	</property>
-		<property>
-			<description>%property.createObject.descr%</description>
-			<display-name>%property.createObject.name%</display-name>
-			<property-name>createObject</property-name>
-			<property-class>javax.faces.el.MethodBinding</property-class>
-			<property-extension>
-				<required>true</required>
-				<method-binding-property>true</method-binding-property>
-			</property-extension>
-		</property>
-		<property>
-			
-			<description>%property.saveObject.descr%</description>
-			<display-name>%property.saveObject.name%</display-name>
-			<property-name>saveObject</property-name>
-			<property-class>javax.faces.el.MethodBinding</property-class>
-			<property-extension>
-				<method-binding-property>true</method-binding-property>
-			</property-extension>
-		</property>
-		
-		<complex-extension>
-			<tag-name>objectData</tag-name>
-			<base-complex-id>dataInterface</base-complex-id>
-			<designer-extension>
-			</designer-extension>
-		</complex-extension>
-	</complex-type>
-
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+  </faces-config-extension>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.model.DataAccessorSource.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.model.DataAccessorSource.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</complex-id>
+    <complex-class>com.ibm.xsp.extlib.model.DataAccessorSource</complex-class>
+    <group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
+    <property>
+      <description>%property.clearOnRendering.descr%</description>
+      <display-name>%property.clearOnRendering.name%</display-name>
+      <property-name>clearOnRendering</property-name>
+      <property-class>boolean</property-class>
+    </property>
+    <property>
+      <description>%property.cacheSuffix.descr%</description>
+      <display-name>%property.cacheSuffix.name%</display-name>
+      <property-name>cacheSuffix</property-name>
+      <property-class>java.lang.String</property-class>
+    </property>
+    <complex-extension>
+      <base-complex-id>dataInterface</base-complex-id>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.com.ibm.xsp.extlib.model.DataAccessorBlockSource.descr%</description>
+    <display-name>%complex-type.com.ibm.xsp.extlib.model.DataAccessorBlockSource.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-id>
+    <complex-class>com.ibm.xsp.extlib.model.DataAccessorBlockSource</complex-class>
+    <property>
+      <description>%property.maxBlockCount.descr%</description>
+      <display-name>%property.maxBlockCount.name%</display-name>
+      <property-name>maxBlockCount</property-name>
+      <property-class>int</property-class>
+    </property>
+    <property>
+      <description>%property.timeout.descr%</description>
+      <display-name>%property.timeout.name%</display-name>
+      <property-name>timeout</property-name>
+      <property-class>int</property-class>
+    </property>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.model.DataAccessorSource</base-complex-id>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.objectData.descr%</description>
+    <display-name>%complex-type.objectData.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.model.ObjectDataSource</complex-id>
+    <complex-class>com.ibm.xsp.extlib.model.ObjectDataSource</complex-class>
+    <group-type-ref>com.ibm.xsp.model.group.DataSource</group-type-ref>
+    <property>
+      <description>%property.readonly.descr%</description>
+      <display-name>%property.readonly.name%</display-name>
+      <property-name>readonly</property-name>
+      <property-class>boolean</property-class>
+      <property-extension/>
+    </property>
+    <property>
+      <description>%property.createObject.descr%</description>
+      <display-name>%property.createObject.name%</display-name>
+      <property-name>createObject</property-name>
+      <property-class>javax.faces.el.MethodBinding</property-class>
+      <property-extension>
+        <required>true</required>
+        <method-binding-property>true</method-binding-property>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.saveObject.descr%</description>
+      <display-name>%property.saveObject.name%</display-name>
+      <property-name>saveObject</property-name>
+      <property-class>javax.faces.el.MethodBinding</property-class>
+      <property-extension>
+        <method-binding-property>true</method-binding-property>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>objectData</tag-name>
+      <base-complex-id>dataInterface</base-complex-id>
+      <designer-extension/>
+    </complex-extension>
+  </complex-type>
 </faces-config>

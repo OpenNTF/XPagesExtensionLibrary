@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,24 +17,22 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-	<faces-config-extension>
-		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
-		<default-prefix>xe</default-prefix>
-        <designer-extension>
-            <control-subpackage-name>layout</control-subpackage-name>
-        </designer-extension>
-	</faces-config-extension>
-
-	<complex-type>
-    	<description>%complex-type.oneuiApplication.descr%</description>
-    	<display-name>%complex-type.oneuiApplication.name%</display-name>
-    	<complex-id>com.ibm.xsp.extlib.component.layout.OneUIApplicationConfiguration</complex-id>
-    	<complex-class>com.ibm.xsp.extlib.component.layout.OneUIApplicationConfiguration</complex-class>
-
-    	<complex-extension>
-			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
-      		<tag-name>oneuiApplication</tag-name>
-    	</complex-extension>
-  	</complex-type>
-
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
+    <default-prefix>xe</default-prefix>
+    <designer-extension>
+      <control-subpackage-name>layout</control-subpackage-name>
+    </designer-extension>
+  </faces-config-extension>
+  <complex-type>
+    <description>%complex-type.oneuiApplication.descr%</description>
+    <display-name>%complex-type.oneuiApplication.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.component.layout.OneUIApplicationConfiguration</complex-id>
+    <complex-class>com.ibm.xsp.extlib.component.layout.OneUIApplicationConfiguration</complex-class>
+    <complex-extension>
+      <base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
+      <tag-name>oneuiApplication</tag-name>
+    </complex-extension>
+  </complex-type>
 </faces-config>

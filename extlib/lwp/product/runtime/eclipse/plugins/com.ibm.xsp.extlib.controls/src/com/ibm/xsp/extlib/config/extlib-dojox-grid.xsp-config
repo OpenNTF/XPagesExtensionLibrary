@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,187 +17,166 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>dojo.grid</control-subpackage-name>
+      <control-subpackage-name>dojo.grid</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-    
-    <component>
-        <description>%component.djxDataGrid.descr%</description>
-        <display-name>%component.djxDataGrid.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGrid</component-class>
-        
-        <property>
-            <description>%property.jsId.descr%</description>
-            <display-name>%property.jsId.name%</display-name>
-            <property-name>jsId</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    
-                    <tags>
+  <component>
+    <description>%component.djxDataGrid.descr%</description>
+    <display-name>%component.djxDataGrid.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGrid</component-class>
+    <property>
+      <description>%property.jsId.descr%</description>
+      <display-name>%property.jsId.name%</display-name>
+      <property-name>jsId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                         not-control-id-reference
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.store.descr%</description>
-            <display-name>%property.store.name%</display-name>
-            <property-name>store</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                    
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.rowSelector.descr%</description>
-            <display-name>%property.rowSelector.name%</display-name>
-            <property-name>rowSelector</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>format</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            
-            <description>%property.selectionMode.descr%</description>
-            <display-name>%property.selectionMode.name%</display-name>
-            <property-name>selectionMode</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.store.descr%</description>
+      <display-name>%property.store.name%</display-name>
+      <property-name>store</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rowSelector.descr%</description>
+      <display-name>%property.rowSelector.name%</display-name>
+      <property-name>rowSelector</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectionMode.descr%</description>
+      <display-name>%property.selectionMode.name%</display-name>
+      <property-name>selectionMode</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         none
                         single
                         multiple
                         extended 
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.headerMenu.descr%</description>
-            <display-name>%property.headerMenu.name%</display-name>
-            <property-name>headerMenu</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.autoHeight.descr%</description>
-            <display-name>%property.autoHeight.name%</display-name>
-            <property-name>autoHeight</property-name>
-            <property-class>int</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.headerMenu.descr%</description>
+      <display-name>%property.headerMenu.name%</display-name>
+      <property-name>headerMenu</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.autoHeight.descr%</description>
+      <display-name>%property.autoHeight.name%</display-name>
+      <property-name>autoHeight</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.singleClickEdit.descr%</description>
-            <display-name>%property.singleClickEdit.name%</display-name>
-            <property-name>singleClickEdit</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.loadingMessage.descr%</description>
-            <display-name>%property.loadingMessage.name%</display-name>
-            <property-name>loadingMessage</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.errorMessage.descr%</description>
-            <display-name>%property.errorMessage.name%</display-name>
-            <property-name>errorMessage</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.selectable.descr%</description>
-            <display-name>%property.selectable.name%</display-name>
-            <property-name>selectable</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.updateDelay.descr%</description>
-            <display-name>%property.updateDelay.name%</display-name>
-            <property-name>updateDelay</property-name>
-            <property-class>int</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.initialWidth.descr%</description>
-            <display-name>%property.initialWidth.name%</display-name>
-            <property-name>initialWidth</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>format</category>
-					
-					
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.singleClickEdit.descr%</description>
+      <display-name>%property.singleClickEdit.name%</display-name>
+      <property-name>singleClickEdit</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.loadingMessage.descr%</description>
+      <display-name>%property.loadingMessage.name%</display-name>
+      <property-name>loadingMessage</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.errorMessage.descr%</description>
+      <display-name>%property.errorMessage.name%</display-name>
+      <property-name>errorMessage</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.selectable.descr%</description>
+      <display-name>%property.selectable.name%</display-name>
+      <property-name>selectable</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.updateDelay.descr%</description>
+      <display-name>%property.updateDelay.name%</display-name>
+      <property-name>updateDelay</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.initialWidth.descr%</description>
+      <display-name>%property.initialWidth.name%</display-name>
+      <property-name>initialWidth</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						50%
 						30px
 						10em
@@ -205,306 +184,274 @@
 						auto
 						inherit
 					</editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.rowsPerPage.descr%</description>
-            <display-name>%property.rowsPerPage.name%</display-name>
-            <property-name>rowsPerPage</property-name>
-            <property-class>int</property-class>
-            <property-extension>
-                <default-value>20</default-value>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.query.descr%</description>
-            <display-name>%property.query.name%</display-name>
-            <property-name>query</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.escapeHTMLInData.descr%</description>
-            <display-name>%property.escapeHTMLInData.name%</display-name>
-            <property-name>escapeHTMLInData</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.onStyleRow.descr%</description>
-            <display-name>%property.onStyleRow.name%</display-name>
-            <property-name>onStyleRow</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>events</category>
-                    <event>true</event>
-                    <subcategory>container-event</subcategory>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.rowsPerPage.descr%</description>
+      <display-name>%property.rowsPerPage.name%</display-name>
+      <property-name>rowsPerPage</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <default-value>20</default-value>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.query.descr%</description>
+      <display-name>%property.query.name%</display-name>
+      <property-name>query</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.escapeHTMLInData.descr%</description>
+      <display-name>%property.escapeHTMLInData.name%</display-name>
+      <property-name>escapeHTMLInData</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onStyleRow.descr%</description>
+      <display-name>%property.onStyleRow.name%</display-name>
+      <property-name>onStyleRow</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+          <tags>
                         not-css-style
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.onRowClick.descr%</description>
-            <display-name>%property.onRowClick.name%</display-name>
-            <property-name>onRowClick</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>events</category>
-                    <event>true</event>
-                    <subcategory>container-event</subcategory>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.onRowDblClick.descr%</description>
-            <display-name>%property.onRowDblClick.name%</display-name>
-            <property-name>onRowDblClick</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>events</category>
-                    <event>true</event>
-                    <subcategory>container-event</subcategory>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.onRowContextMenu.descr%</description>
-            <display-name>%property.onRowContextMenu.name%</display-name>
-            <property-name>onRowContextMenu</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>events</category>
-                    <event>true</event>
-                    <subcategory>container-event</subcategory>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <property>
-            <description>%property.storeComponentId.descr%</description>
-            <display-name>%property.storeComponentId.name%</display-name>
-            <property-name>storeComponentId</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
-                    <editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onRowClick.descr%</description>
+      <display-name>%property.onRowClick.name%</display-name>
+      <property-name>onRowClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onRowDblClick.descr%</description>
+      <display-name>%property.onRowDblClick.name%</display-name>
+      <property-name>onRowDblClick</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.onRowContextMenu.descr%</description>
+      <display-name>%property.onRowContextMenu.name%</display-name>
+      <property-name>onRowContextMenu</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>events</category>
+          <event>true</event>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.storeComponentId.descr%</description>
+      <display-name>%property.storeComponentId.name%</display-name>
+      <property-name>storeComponentId</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+          <editor-parameter>
                         http://www.ibm.com/xsp/coreex|restService
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <component-extension>
-            <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
-            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</renderer-type>
-            <tag-name>djxDataGrid</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Dojo Layout</category>
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dojo.Widget</base-component-type>
+      <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGrid</renderer-type>
+      <tag-name>djxDataGrid</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Dojo Layout</category>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.djxDataGridRow.descr%</description>
-        <display-name>%component.djxDataGridRow.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridRow</component-class>
-
-        <component-extension>
-            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</renderer-type>
-            <tag-name>djxDataGridRow</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Dojo Layout</category>
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.djxDataGridRow.descr%</description>
+    <display-name>%component.djxDataGridRow.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridRow</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridRow</renderer-type>
+      <tag-name>djxDataGridRow</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Dojo Layout</category>
+        <tags>
                     no-faces-config-renderer
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-
-    <component>
-        <description>%component.djxDataGridColumn.descr%</description>
-        <display-name>%component.djxDataGridColumn.name%</display-name>
-        <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</component-type>
-        <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridColumn</component-class>
-        
-        <property>
-            <description>%property.field.descr%</description>
-            <display-name>%property.field.name%</display-name>
-            <property-name>field</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.width.descr%</description>
-            <display-name>%property.width.name%</display-name>
-            <property-name>width</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>format</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.cellType.descr%</description>
-            <display-name>%property.cellType.name%</display-name>
-            <property-name>cellType</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-                    <editor-parameter>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.djxDataGridColumn.descr%</description>
+    <display-name>%component.djxDataGridColumn.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dojo.grid.UIDojoDataGridColumn</component-class>
+    <property>
+      <description>%property.field.descr%</description>
+      <display-name>%property.field.name%</display-name>
+      <property-name>field</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.width.descr%</description>
+      <display-name>%property.width.name%</display-name>
+      <property-name>width</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>format</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.cellType.descr%</description>
+      <display-name>%property.cellType.name%</display-name>
+      <property-name>cellType</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
                         dojox.grid.cells.Cell
                         dojox.grid.cells.RowIndex
                         dojox.grid.cells.Select
                         dojox.grid.cells.AlwaysEdit
                         dojox.grid.cells.Bool
                     </editor-parameter>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.formatter.descr%</description>
-            <display-name>%property.formatter.name%</display-name>
-            <property-name>formatter</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                    <editor>com.ibm.designer.domino.client.script.editor</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.get.descr%</description>
-            <display-name>%property.get.name%</display-name>
-            <property-name>get</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>data</category>
-                    <editor>com.ibm.designer.domino.client.script.editor</editor>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.options.descr%</description>
-            <display-name>%property.options.name%</display-name>
-            <property-name>options</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.editable.descr%</description>
-            <display-name>%property.editable.name%</display-name>
-            <property-name>editable</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.formatter.descr%</description>
+      <display-name>%property.formatter.name%</display-name>
+      <property-name>formatter</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+          <editor>com.ibm.designer.domino.client.script.editor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.get.descr%</description>
+      <display-name>%property.get.name%</display-name>
+      <property-name>get</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>data</category>
+          <editor>com.ibm.designer.domino.client.script.editor</editor>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.options.descr%</description>
+      <display-name>%property.options.name%</display-name>
+      <property-name>options</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.editable.descr%</description>
+      <display-name>%property.editable.name%</display-name>
+      <property-name>editable</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.hidden.descr%</description>
-            <display-name>%property.hidden.name%</display-name>
-            <property-name>hidden</property-name>
-            <property-class>boolean</property-class>
-            <property-extension>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-        
-        <property>
-            <description>%property.label.descr%</description>
-            <display-name>%property.label.name%</display-name>
-            <property-name>label</property-name>
-            <property-class>java.lang.String</property-class>
-            <property-extension>
-                <localizable>true</localizable>
-                <designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-            </property-extension>
-        </property>
-
-        <component-extension>
-            <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
-            <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</renderer-type>
-            <tag-name>djxDataGridColumn</tag-name>
-            <designer-extension>
-                <in-palette>true</in-palette>
-                <category>Dojo Layout</category>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.hidden.descr%</description>
+      <display-name>%property.hidden.name%</display-name>
+      <property-name>hidden</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.label.descr%</description>
+      <display-name>%property.label.name%</display-name>
+      <property-name>label</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.dojo.DojoDataGrid</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dojo.grid.DojoDataGridColumn</renderer-type>
+      <tag-name>djxDataGridColumn</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Dojo Layout</category>
+        <tags>
                     no-faces-config-renderer
                 </tags>
-            </designer-extension>
-        </component-extension>
-    </component>
-    
-
-
-
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

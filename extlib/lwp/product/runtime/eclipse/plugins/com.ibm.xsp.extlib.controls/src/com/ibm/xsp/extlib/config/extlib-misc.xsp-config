@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,182 +17,164 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
-
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>misc</control-subpackage-name>
+      <control-subpackage-name>misc</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-			
-
-	<component>
-		<description>%component.keepSessionAlive.descr%</description>
-		<display-name>%component.keepSessionAlive.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</component-type>
-		<component-class>com.ibm.xsp.extlib.component.misc.UIKeepSessionAlive</component-class>
-
-  		<property>
-			<description>%property.delay.descr%</description>
-			<display-name>%property.delay.name%</display-name>
-			<property-name>delay</property-name>
-			<property-class>int</property-class>
-			<property-extension>
-				<designer-extension>
-                    <category>basics</category>
-                </designer-extension>
-			</property-extension>
-		</property>
-		
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Misc</component-family>
-			<renderer-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</renderer-type>
-			<tag-name>keepSessionAlive</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-	   
-		<description>%component.firebugLite.descr%</description>
-		<display-name>%component.firebugLite.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.misc.FirebugLite</component-type>
-		<component-class>com.ibm.xsp.extlib.component.misc.UIFirebugLite</component-class>
-
-  		<property>
-			<description>%property.url.descr%</description>
-			<display-name>%property.url.name%</display-name>
-			<property-name>url</property-name>
-			<property-class>java.lang.String</property-class>
-            <property-extension>
-				<designer-extension>
-                    <category>basics</category>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+  <component>
+    <description>%component.keepSessionAlive.descr%</description>
+    <display-name>%component.keepSessionAlive.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</component-type>
+    <component-class>com.ibm.xsp.extlib.component.misc.UIKeepSessionAlive</component-class>
+    <property>
+      <description>%property.delay.descr%</description>
+      <display-name>%property.delay.name%</display-name>
+      <property-name>delay</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Misc</component-family>
+      <renderer-type>com.ibm.xsp.extlib.misc.KeepSessionAlive</renderer-type>
+      <tag-name>keepSessionAlive</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.firebugLite.descr%</description>
+    <display-name>%component.firebugLite.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.misc.FirebugLite</component-type>
+    <component-class>com.ibm.xsp.extlib.component.misc.UIFirebugLite</component-class>
+    <property>
+      <description>%property.url.descr%</description>
+      <display-name>%property.url.name%</display-name>
+      <property-name>url</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 						https://getfirebug.com/firebug-lite.js
 					</editor-parameter>
-				</designer-extension>
-            </property-extension>
-		</property>
-		
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Misc</component-family>
-			<renderer-type>com.ibm.xsp.extlib.misc.FirebugLite</renderer-type>
-			<tag-name>firebugLite</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-      		</designer-extension>
-		</component-extension>
-	</component>
-
-
-	<component>
-	    
-		<description>%component.dumpObject.descr%</description>
-		<display-name>%component.dumpObject.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.misc.DumpObject</component-type>
-		<component-class>com.ibm.xsp.extlib.component.misc.UIDumpObject</component-class>
-
-		<property>
-			<description>%property.value.descr%</description>
-			<display-name>%property.value.name%</display-name>
-			<property-name>value</property-name>
-      		<property-class>java.lang.Object</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>	    
-			<description>%property.objectNames.descr%</description>
-			<display-name>%property.objectNames.name%</display-name>
-			<property-name>objectNames</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>
-		    
-			<description>%property.levels.descr%</description>
-			<display-name>%property.levels.name%</display-name>
-			<property-name>levels</property-name>
-      		<property-class>int</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>
-			<description>%property.startFilter.descr%</description>
-			<display-name>%property.startFilter.name%</display-name>
-			<property-name>startFilter</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>
-		    
-			<description>%property.title.descr%</description>
-			<display-name>%property.title.name%</display-name>
-			<property-name>title</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-      			
-      			<localizable>true</localizable>
-        		<designer-extension>
-                    <category>basics</category>
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Misc</component-family>
+      <renderer-type>com.ibm.xsp.extlib.misc.FirebugLite</renderer-type>
+      <tag-name>firebugLite</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.dumpObject.descr%</description>
+    <display-name>%component.dumpObject.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.misc.DumpObject</component-type>
+    <component-class>com.ibm.xsp.extlib.component.misc.UIDumpObject</component-class>
+    <property>
+      <description>%property.value.descr%</description>
+      <display-name>%property.value.name%</display-name>
+      <property-name>value</property-name>
+      <property-class>java.lang.Object</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.objectNames.descr%</description>
+      <display-name>%property.objectNames.name%</display-name>
+      <property-name>objectNames</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.levels.descr%</description>
+      <display-name>%property.levels.name%</display-name>
+      <property-name>levels</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.startFilter.descr%</description>
+      <display-name>%property.startFilter.name%</display-name>
+      <property-name>startFilter</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.title.descr%</description>
+      <display-name>%property.title.name%</display-name>
+      <property-name>title</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>true</localizable>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         not-accessibility-title
                     </tags>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>
-			<description>%property.maxGridRows.descr%</description>
-			<display-name>%property.maxGridRows.name%</display-name>
-			<property-name>maxGridRows</property-name>
-      		<property-class>int</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-		<property>
-			<description>%property.useBeanProperties.descr%</description>
-			<display-name>%property.useBeanProperties.name%</display-name>
-			<property-name>useBeanProperties</property-name>
-      		<property-class>boolean</property-class>
-      		<property-extension>
-        		<designer-extension>
-                    <category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-		</property>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.Misc</component-family>
-			<renderer-type>com.ibm.xsp.extlib.misc.DumpObject</renderer-type>
-			<tag-name>dumpObject</tag-name>
-			<designer-extension>
-			    <in-palette>true</in-palette>
-				<category>Extension Library</category>
-			</designer-extension>
-		</component-extension>
-	</component>
-	
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.maxGridRows.descr%</description>
+      <display-name>%property.maxGridRows.name%</display-name>
+      <property-name>maxGridRows</property-name>
+      <property-class>int</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.useBeanProperties.descr%</description>
+      <display-name>%property.useBeanProperties.name%</display-name>
+      <property-name>useBeanProperties</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.Misc</component-family>
+      <renderer-type>com.ibm.xsp.extlib.misc.DumpObject</renderer-type>
+      <tag-name>dumpObject</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+      </designer-extension>
+    </component-extension>
+  </component>
 </faces-config>

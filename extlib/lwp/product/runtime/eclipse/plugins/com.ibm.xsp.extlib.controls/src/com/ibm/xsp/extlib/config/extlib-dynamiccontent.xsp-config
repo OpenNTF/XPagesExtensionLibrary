@@ -1,4 +1,4 @@
-<faces-config>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
 <!-- Copyright IBM Corp. 2010, 2014                                      -->
@@ -17,203 +17,158 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 <!-- DO NOT EDIT. THIS FILE IS GENERATED. -->
+<faces-config>
   <faces-config-extension>
     <namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
     <default-prefix>xe</default-prefix>
     <designer-extension>
-        <control-subpackage-name>dynamiccontent</control-subpackage-name>
+      <control-subpackage-name>dynamiccontent</control-subpackage-name>
     </designer-extension>
   </faces-config-extension>
-
-    <group>
-        
-        <group-type>com.ibm.xsp.extlib.dynamiccontent.events</group-type>
-
-        
-        <property>
-            
-            <description>%property.beforeContentLoad.descr%</description>
-            <display-name>%property.beforeContentLoad.name%</display-name>
-            <property-name>beforeContentLoad</property-name>
-            <property-class>javax.faces.el.MethodBinding</property-class>
-            <property-extension>
-                <method-binding-property>true</method-binding-property>
-                <designer-extension>
-                    <category>events</category>
-                    <subcategory>container-event</subcategory>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <property>
-            
-            <description>%property.afterContentLoad.descr%</description>
-            <display-name>%property.afterContentLoad.name%</display-name>
-            <property-name>afterContentLoad</property-name>
-            <property-class>javax.faces.el.MethodBinding</property-class>
-            <property-extension>
-                <method-binding-property>true</method-binding-property>
-                <designer-extension>
-                    <category>events</category>
-                    <subcategory>container-event</subcategory>
-                </designer-extension>
-            </property-extension>
-        </property>
-        <group-extension>
-            <designer-extension>
-                <tags>
+  <group>
+    <group-type>com.ibm.xsp.extlib.dynamiccontent.events</group-type>
+    <property>
+      <description>%property.beforeContentLoad.descr%</description>
+      <display-name>%property.beforeContentLoad.name%</display-name>
+      <property-name>beforeContentLoad</property-name>
+      <property-class>javax.faces.el.MethodBinding</property-class>
+      <property-extension>
+        <method-binding-property>true</method-binding-property>
+        <designer-extension>
+          <category>events</category>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.afterContentLoad.descr%</description>
+      <display-name>%property.afterContentLoad.name%</display-name>
+      <property-name>afterContentLoad</property-name>
+      <property-class>javax.faces.el.MethodBinding</property-class>
+      <property-extension>
+        <method-binding-property>true</method-binding-property>
+        <designer-extension>
+          <category>events</category>
+          <subcategory>container-event</subcategory>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <group-extension>
+      <designer-extension>
+        <tags>
                     group-in-control
                 </tags>
-            </designer-extension>
-        </group-extension>
-    </group>
-
-	
-
-	<component>
-        
-		<description>%component.com.ibm.xsp.extlib.dynamiccontent.Dynamic.descr%</description>
-		<display-name>%component.com.ibm.xsp.extlib.dynamiccontent.Dynamic.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicControl</component-class>
-
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
-            <designer-extension>
-                
-                
-                
-                
-                
-                
-                <tags>
+      </designer-extension>
+    </group-extension>
+  </group>
+  <component>
+    <description>%component.com.ibm.xsp.extlib.dynamiccontent.Dynamic.descr%</description>
+    <display-name>%component.com.ibm.xsp.extlib.dynamiccontent.Dynamic.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicControl</component-class>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+      <designer-extension>
+        <tags>
                     todo
                 </tags>
-            </designer-extension>
-		</component-extension>
-	</component>
-	
-
-	<component>
-        
-		<description>%component.inPlaceForm.descr%</description>
-		<display-name>%component.inPlaceForm.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIInPlaceForm</component-class>
-        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
-		
-    	<property>
-      		<description>%property.partialEvents.component.inPlaceForm.descr%</description>
-      		<display-name>%property.partialEvents.component.inPlaceForm.name%</display-name>
-      		<property-name>partialEvents</property-name>
-      		<property-class>boolean</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-                    
-                    
-                    
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.inPlaceForm.descr%</description>
+    <display-name>%component.inPlaceForm.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIInPlaceForm</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+    <property>
+      <description>%property.partialEvents.component.inPlaceForm.descr%</description>
+      <display-name>%property.partialEvents.component.inPlaceForm.name%</display-name>
+      <property-name>partialEvents</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-
-		<component-extension>
-			<base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
-			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</renderer-type>
-			<tag-name>inPlaceForm</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-        		
-        		
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
+      <component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dynamiccontent.InPlaceForm</renderer-type>
+      <tag-name>inPlaceForm</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	
-
-	<component>
-		<description>%component.dynamicContent.descr%</description>
-		<display-name>%component.dynamicContent.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicContent</component-class>
-        <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
-		
-    	<property>
-      		<description>%property.partialEvents.component.inPlaceForm.descr%</description>
-            <display-name>%property.partialEvents.component.inPlaceForm.name%</display-name>
-      		<property-name>partialEvents</property-name>
-      		<property-class>boolean</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-                    
-                    
-                    
-                    
-                    
-                    <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.dynamicContent.descr%</description>
+    <display-name>%component.dynamicContent.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicContent</component-class>
+    <group-type-ref>com.ibm.xsp.extlib.dynamiccontent.events</group-type-ref>
+    <property>
+      <description>%property.partialEvents.component.inPlaceForm.descr%</description>
+      <display-name>%property.partialEvents.component.inPlaceForm.name%</display-name>
+      <property-name>partialEvents</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-    	<property>
-            
-      		<description>%property.useHash.descr%</description>
-      		<display-name>%property.useHash.name%</display-name>
-      		<property-name>useHash</property-name>
-      		<property-class>boolean</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.useHash.descr%</description>
+      <display-name>%property.useHash.name%</display-name>
+      <property-name>useHash</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-    	<property>
-            
-      		<description>%property.defaultFacet.component.dynamicContent.descr%</description>
-      		<display-name>%property.defaultFacet.component.dynamicContent.name%</display-name>
-      		<property-name>defaultFacet</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-                    
-                    <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.defaultFacet.component.dynamicContent.descr%</description>
+      <display-name>%property.defaultFacet.component.dynamicContent.name%</display-name>
+      <property-name>defaultFacet</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
                         todo
                     </tags>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-		
-		<component-extension>
-			<base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
-			<component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</renderer-type>
-			
-			<tag-name>dynamicContent</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-                
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <base-component-type>com.ibm.xsp.extlib.dynamiccontent.Dynamic</base-component-type>
+      <component-family>com.ibm.xsp.extlib.dynamiccontent.Dynamic</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dynamiccontent.DynamicContent</renderer-type>
+      <tag-name>dynamicContent</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                 </tags>
-        		<render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <render-markup>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;xp:view xmlns:xp="http://www.ibm.com/xsp/core"&gt;
 &lt;%
 var facetName="#{facetName}"
@@ -263,127 +218,110 @@ else{
 %&gt;
 &lt;/xp:view&gt;
              </render-markup>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	
-
-	<component>
-        
-        
-        
-		<description>%component.switchFacet.descr%</description>
-		<display-name>%component.switchFacet.name%</display-name>
-		<component-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-type>
-		<component-class>com.ibm.xsp.extlib.component.dynamiccontent.UISwitchFacet</component-class>
-		
-    	<property>
-            
-      		<description>%property.selectedFacet.descr%</description>
-      		<display-name>%property.selectedFacet.name%</display-name>
-      		<property-name>selectedFacet</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-    	<property>
-      		<description>%property.defaultFacet.component.switchFacet.descr%</description>
-      		<display-name>%property.defaultFacet.component.switchFacet.name%</display-name>
-      		<property-name>defaultFacet</property-name>
-      		<property-class>java.lang.String</property-class>
-      		<property-extension>
-        		<designer-extension>
-          			<category>basics</category>
-        		</designer-extension>
-      		</property-extension>
-    	</property>
-		
-		<component-extension>
-			<component-family>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-family>
-			<renderer-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</renderer-type>
-			<tag-name>switchFacet</tag-name>
-      		<designer-extension>
-        		<in-palette>true</in-palette>
-        		<category>Extension Library</category>
-                
-                
-                <tags>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <component>
+    <description>%component.switchFacet.descr%</description>
+    <display-name>%component.switchFacet.name%</display-name>
+    <component-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-type>
+    <component-class>com.ibm.xsp.extlib.component.dynamiccontent.UISwitchFacet</component-class>
+    <property>
+      <description>%property.selectedFacet.descr%</description>
+      <display-name>%property.selectedFacet.name%</display-name>
+      <property-name>selectedFacet</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.defaultFacet.component.switchFacet.descr%</description>
+      <display-name>%property.defaultFacet.component.switchFacet.name%</display-name>
+      <property-name>defaultFacet</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <component-extension>
+      <component-family>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</component-family>
+      <renderer-type>com.ibm.xsp.extlib.dynamiccontent.SwitchFacet</renderer-type>
+      <tag-name>switchFacet</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Extension Library</category>
+        <tags>
                     todo
                     no-faces-config-renderer
                 </tags>
-      		</designer-extension>
-		</component-extension>
-	</component>
-	
-	<complex-type>
-		<description>%complex-type.changeDynamicContentAction.descr%</description>
-		<display-name>%complex-type.changeDynamicContentAction.name%</display-name>
-		<complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
-		<complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
-		<property>
-			<description>%property.for.descr%</description>
-			<display-name>%property.for.name%</display-name>
-			<property-name>for</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-                <designer-extension>
-                    <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
-                    <editor-parameter>
+      </designer-extension>
+    </component-extension>
+  </component>
+  <complex-type>
+    <description>%complex-type.changeDynamicContentAction.descr%</description>
+    <display-name>%complex-type.changeDynamicContentAction.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
+    <complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
+    <property>
+      <description>%property.for.descr%</description>
+      <display-name>%property.for.name%</display-name>
+      <property-name>for</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+          <editor-parameter>
                         http://www.ibm.com/xsp/coreex|dynamicContent
                     </editor-parameter>
-                </designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			
-			<description>%property.facetName.descr%</description>
-			<display-name>%property.facetName.name%</display-name>
-			<property-name>facetName</property-name>
-			<property-class>java.lang.String</property-class>
-			<property-extension>
-				<designer-extension>
-					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
-					<editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.facetName.descr%</description>
+      <display-name>%property.facetName.name%</display-name>
+      <property-name>facetName</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
 					 -empty-
 					 -children-
 					 -default-
 					</editor-parameter>
-                    
-                    <tags>
+          <tags>
                         todo
                     </tags>
-				</designer-extension>
-			</property-extension>
-		</property>
-		<property>
-			
-			<description>%property.parameters.descr%</description>
-			<display-name>%property.parameters.name%</display-name>
-			<property-name>parameters</property-name>
-			<property-class>java.util.List</property-class>
-			<property-extension>
-				<collection-property>true</collection-property>
-				<property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
-				<property-add-method>addParameter</property-add-method>
-				<allow-run-time-binding>false</allow-run-time-binding>
-                
-                <tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.parameters.descr%</description>
+      <display-name>%property.parameters.name%</display-name>
+      <property-name>parameters</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.complex.Parameter</property-item-class>
+        <property-add-method>addParameter</property-add-method>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <tags>
                     todo
                 </tags>
-			</property-extension>
-		</property>
-		<complex-extension>
-			<tag-name>changeDynamicContentAction</tag-name>
-			<base-complex-id>simpleActionInterface</base-complex-id>
-			<designer-extension>
-                <category>%complex-category.basic%</category>
-				
-				<tags>todo</tags>
-			</designer-extension>
-		</complex-extension>
-	</complex-type>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>changeDynamicContentAction</tag-name>
+      <base-complex-id>simpleActionInterface</base-complex-id>
+      <designer-extension>
+        <category>%complex-category.basic%</category>
+        <tags>todo</tags>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
 </faces-config>
