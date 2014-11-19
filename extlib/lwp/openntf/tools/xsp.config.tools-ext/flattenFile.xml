@@ -35,7 +35,7 @@
 
 		<!-- === Set up the classpath === -->
 		<!-- set up the location of the xpages core -->
-		<!-- XSP plugin version eg:com.ibm.xsp.core_9.0.1.20131206-1400 would be 9.0.1.20131206-1400-->
+		<!-- XSP plugin version should match eg:com.ibm.xsp.core_9.0.1.20131206-1400 would be 9.0.1.20131206-1400-->
 		<property name="xsp.plugin.version" value="" />
 		<!-- WCT install directory should be <Notes_dir>/IBM/Notes/framework/shared/eclipse/plugins -->
 		<property name="wct.install.dir" value="" />
