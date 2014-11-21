@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -19,7 +19,7 @@ package com.ibm.domino.services.util;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Vector;
+import java.util.Collection;
 
 import lotus.domino.DateTime;
 import lotus.domino.NotesException;
@@ -151,13 +151,12 @@ public class JsonBuilder extends JsonGenerator.StringBuilderGenerator {
 					throw new AbstractIOException(ex,"");
 				}
 			}			
-			if(value instanceof Vector) {
+			if (value instanceof Collection) {
 				startArray();
-				Vector v = (Vector)value;
-				int count = v.size();
-				for(int i=0; i<count; i++) {
+				Collection v = (Collection) value;
+				for (Object raw : v) {
 					startArrayItem();
-					outDominoValue(v.get(i));
+					outDominoValue(raw);
 					endArrayItem();
 				}
 				endArray();
@@ -176,12 +175,12 @@ public class JsonBuilder extends JsonGenerator.StringBuilderGenerator {
 	
     
 	public String dateToString(Date value) throws IOException {
-		return ISO8601.format((Date)value);
+		return ISO8601.format(value);
     }
     
     public String dateToString(DateTime value) throws IOException {
 		try {
-			return ISO8601.format(((DateTime)value).toJavaDate());
+			return ISO8601.format(value.toJavaDate());
 		} catch(NotesException ex) {
 			throw new AbstractIOException(ex,"");
 		}
