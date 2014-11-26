@@ -229,7 +229,13 @@ public class JdbcUtil {
     }
 
     public static void appendColumnName(StringBuilder b, String colName) {
-        colName = colName.toUpperCase();
+        appendColumnName(b, colName, true);
+    }
+    
+    public static void appendColumnName(StringBuilder b, String colName, Boolean UCase) {
+    	if (UCase) {
+    		colName = colName.toUpperCase();
+    	}
         b.append(colName);
     }
     
