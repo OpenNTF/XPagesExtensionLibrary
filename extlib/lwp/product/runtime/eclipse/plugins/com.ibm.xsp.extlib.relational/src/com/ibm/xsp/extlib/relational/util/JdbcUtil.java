@@ -250,39 +250,6 @@ public class JdbcUtil {
 	// Count query
 	// ========================================================================
 
-<<<<<<< HEAD
-    public static void appendColumnName(StringBuilder b, String colName) {
-        appendColumnName(b, colName, true);
-    }
-    
-    public static void appendColumnName(StringBuilder b, String colName, Boolean UCase) {
-    	if (UCase) {
-    		colName = colName.toUpperCase();
-    	}
-        b.append(colName);
-    }
-    
-    
-    // ========================================================================
-    // Count query
-    // ========================================================================
-    
-    public static String getCountQuery(String q) throws SQLException {
-        // This function transforms a query into another query that actually counts the number
-        // of entry. It actually replaced the selection of the columns by a count(*)
-        // The query must be of the form
-        //  SELECT xxxx FROM <whatever>
-        // Note that it might not be optimal is all the cases. Also, the replacement is currently 
-        // done using basic string replacement, while a more robust code should actually fully
-        // parse the SQL.
-        int sel = StringUtil.indexOfIgnoreCase(q, "select", 0); // $NON-NLS-1$
-        int from = StringUtil.indexOfIgnoreCase(q, "from", 0); // $NON-NLS-1$
-        if(sel<0 || from<sel) {
-            throw new SQLException(StringUtil.format("Unable to create a 'count' query for the {0} {1}", "SQL", q)); // $NLX-JdbcUtil.Unabletocreateacountqueryforthe01-1$ $NON-NLS-2$
-        }
-        return q.substring(0,sel+6)+" count(*) "+q.substring(from); // $NON-NLS-1$
-    }
-=======
 	public static String getCountQuery(String q) throws SQLException {
 		// This function transforms a query into another query that actually
 		// counts the number
@@ -303,5 +270,4 @@ public class JdbcUtil {
 		}
 		return q.substring(0, sel + 6) + " count(*) " + q.substring(from); // $NON-NLS-1$
 	}
->>>>>>> wpca
 }
