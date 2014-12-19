@@ -1,7 +1,7 @@
 JUnit results, running against Notes 9.0.1
 using the Notes JVM
-Test ran 2014-02-21T16:52
-Lines in file: 1210
+Test ran 2014-12-11T11:45
+Lines in file: 1268
 
 ~ ExtlibTestSuite
 xsp.extlib.test.ExtlibTestSuite
@@ -41,7 +41,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDis
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoHorizontalSlider] boolean property with unexpected default value: true (expected false)
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoFormWidgetBase.isDisableClientSideValidation()[Called on UIDojoVerticalSlider] boolean property with unexpected default value: true (expected false)
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.BooleanPropertyDefaultTest.testPropertyDefaultValue(BooleanPropertyDefaultTest.java:310)
+	at com.ibm.xsp.test.framework.registry.BooleanPropertyDefaultTest.testPropertyDefaultValue(BooleanPropertyDefaultTest.java:311)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -73,6 +73,61 @@ com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:repeatTreeNode value Shou
 com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewIconColumn value Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.ValueHolder_complex.prop.value
 	at junit.framework.Assert.fail(Assert.java:47)
 	at com.ibm.xsp.test.framework.registry.GroupReuseTest.testGroupReuse(GroupReuseTest.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.ExtlibNamingConventionErrorTest
+testNamingConventions(xsp.extlib.test.registry.ExtlibNamingConventionErrorTest)
+junit.framework.AssertionFailedError: 1 fail(s). :
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.NamingConventionTest.testNamingConventions(NamingConventionTest.java:704)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
+	at java.lang.reflect.Method.invoke(Method.java:611)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at junit.framework.TestSuite.runTest(TestSuite.java:230)
+	at junit.framework.TestSuite.run(TestSuite.java:225)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+xsp.extlib.test.registry.ExtlibNamingConventionTest
+testNamingConventions(xsp.extlib.test.registry.ExtlibNamingConventionTest)
+junit.framework.AssertionFailedError: 2 fail(s). :
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13c] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration, expect subpackage [layout], was [theme.bootstrap.components.layout]
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.ibm.xsp.test.framework.registry.NamingConventionTest.testNamingConventions(NamingConventionTest.java:704)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -148,7 +203,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoTextarea.getRows()[C
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideDuration()[Called on UIDojoHorizontalSlider] double property with unexpected primitive default value: NaN (expected 0.0)
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideDuration()[Called on UIDojoVerticalSlider] double property with unexpected primitive default value: NaN (expected 0.0)
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.PropertyDefaultValueTest.testPropertyDefaultValue(PropertyDefaultValueTest.java:300)
+	at com.ibm.xsp.test.framework.registry.PropertyDefaultValueTest.testPropertyDefaultValue(PropertyDefaultValueTest.java:301)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -211,7 +266,7 @@ com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected summary attribute in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected caption attribute in table tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:199)
+	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:198)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -272,7 +327,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expe
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected accesskey attribute in input tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected tabindex attribute in input tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:252)
+	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:251)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -344,7 +399,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTimeTextBox readOnly 
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djCheckBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djRadioButton readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.InputReadOnlyPropertyTest.testInputReadOnlyProperty(InputReadOnlyPropertyTest.java:314)
+	at com.ibm.xsp.test.framework.registry.annotate.InputReadOnlyPropertyTest.testInputReadOnlyProperty(InputReadOnlyPropertyTest.java:310)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -492,7 +547,7 @@ com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Expect
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline Expected role property for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.RoleAccessibilityTest.testRoleAccessibility(RoleAccessibilityTest.java:162)
+	at com.ibm.xsp.test.framework.registry.annotate.RoleAccessibilityTest.testRoleAccessibility(RoleAccessibilityTest.java:161)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -764,7 +819,7 @@ com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker id not output as
 com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker dojoType= not as expected when userId set: null, expected com.example.test.SomeDijit
 com/ibm/xsp/extlib/config/extlib-picker.xsp-config UINamePicker dojoType= not as expected when compute dojoType: null, expected com.example.test.SomeDijit
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.DojoTypeTest.testDojoType(DojoTypeTest.java:423)
+	at com.ibm.xsp.test.framework.render.DojoTypeTest.testDojoType(DojoTypeTest.java:428)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -844,7 +899,7 @@ com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSaveState No out
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridRow No output rendered.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn No output rendered.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderControlTest.testRenderId(RenderControlTest.java:118)
+	at com.ibm.xsp.test.framework.render.RenderControlTest.testRenderId(RenderControlTest.java:117)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -959,7 +1014,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels nume
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels minimum  Property minimum="0" in .xsp not as expected in HTML output. Was (absent)
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djSliderRuleLabels maximum  Property maximum="0" in .xsp not as expected in HTML output. Was (absent)
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderDojoPropertyTest.testRenderDojoPropertyTest(RenderDojoPropertyTest.java:271)
+	at com.ibm.xsp.test.framework.render.RenderDojoPropertyTest.testRenderDojoPropertyTest(RenderDojoPropertyTest.java:270)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -1017,7 +1072,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Unexpect
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Unexpected id=clientId attribute on an inner tag (not main tag). The clientId should only be written to the control's outer tag, for partial refresh reasons.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Unexpected id= attribute in HTML. Should not be present when the id property is absent in the XPage source, and there is no default dojoType.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderIdTest.testRenderId(RenderIdTest.java:218)
+	at com.ibm.xsp.test.framework.render.RenderIdTest.testRenderId(RenderIdTest.java:217)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -1041,10 +1096,14 @@ com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Unexpe
 
 xsp.extlib.test.render.ExtlibRenderThemeControlTest
 testRenderControlsInThemes(xsp.extlib.test.render.ExtlibRenderThemeControlTest)
-junit.framework.AssertionFailedError: 15 fail(s). :
+junit.framework.AssertionFailedError: 19 fail(s). :
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:blackberry] No output rendered.
@@ -1058,7 +1117,7 @@ com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:andr
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:iphone] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blackberry] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:239)
+	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:242)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -1107,7 +1166,7 @@ com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:andr
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:iphone] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blackberry] Problem rendering page: java.lang.ClassCastException: com.ibm.xsp.extlib.component.outline.UISeparator incompatible with com.ibm.xsp.extlib.component.outline.AbstractOutline
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:239)
+	at com.ibm.xsp.test.framework.render.RenderThemeControlTest.testRenderControlsInThemes(RenderThemeControlTest.java:242)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -1185,7 +1244,7 @@ com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer No tit
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline No title property for accessibility.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:144)
+	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:143)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)

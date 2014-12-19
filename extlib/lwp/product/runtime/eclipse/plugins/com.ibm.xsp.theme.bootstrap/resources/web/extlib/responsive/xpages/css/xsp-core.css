@@ -146,3 +146,39 @@ ul.pagination {
 .xspGroupCaption {
 	font-weight: bold;
 }
+
+/** Fix alignment in date time pickers **/
+.xsp.dbootstrap .dijitCalendarContainer th, .dijitCalendarContainer td {
+	text-align: center;
+}
+/** Fix time spinner in date+time picker **/
+.xsp.dbootstrap tfoot .dijitTextBox.dijitSpinner{
+	line-height: 20px;
+}
+/** Fix arrows for month increment/decrement in DTPs **/
+.xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:first-child:before {
+    color: #428bca;
+    content: "\e079";
+    font-family: "Glyphicons Halflings";
+}
+.xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:last-child:before {
+    color: #428bca;
+    content: "\e080";
+    font-family: "Glyphicons Halflings";
+}
+.xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:first-child,
+.xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:last-child{
+    cursor: pointer;
+}
+.xsp.dbootstrap .dijitCalendarIncrease:before,
+.xsp.dbootstrap .dijitCalendarDecrease:before {
+	content: " ";
+}
+
+.bootstrap-theme .btn-default.btn-primary,
+.bootstrap-theme .btn-default.btn-success,
+.bootstrap-theme .btn-default.btn-info,
+.bootstrap-theme .btn-default.btn-danger,
+.bootstrap-theme .btn-default.btn-warning{
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}

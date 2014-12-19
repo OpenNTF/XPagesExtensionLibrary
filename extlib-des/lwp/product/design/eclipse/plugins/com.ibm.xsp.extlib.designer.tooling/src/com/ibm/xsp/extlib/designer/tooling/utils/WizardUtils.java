@@ -17,6 +17,17 @@
 package com.ibm.xsp.extlib.designer.tooling.utils;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
+
+import lotus.domino.Database;
+import lotus.domino.Form;
+import lotus.domino.NotesException;
+import lotus.domino.Session;
+import lotus.domino.View;
+import lotus.domino.ViewColumn;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
@@ -49,12 +60,17 @@ import com.ibm.designer.domino.ide.resources.dbproperties.XSPProperties;
 import com.ibm.designer.domino.ide.resources.extensions.DesignerProject;
 import com.ibm.designer.domino.ide.resources.project.IDominoDesignerProject;
 import com.ibm.designer.domino.product.ProductUtil;
+import com.ibm.designer.domino.ide.resources.extensions.NotesPlatform;
+import com.ibm.designer.domino.xsp.api.util.XPagesDataUtil;
+import com.ibm.designer.domino.xsp.dominoutils.DominoImportException;
+import com.ibm.designer.domino.xsp.dominoutils.DominoUtil;
 import com.ibm.designer.domino.xsp.utils.FormModelUtil;
 import com.ibm.xsp.extlib.designer.tooling.constants.IExtLibAttrNames;
 import com.ibm.xsp.library.StandardRegistryMaintainer;
 import com.ibm.xsp.registry.FacesDefinition;
 import com.ibm.xsp.registry.FacesRegistry;
 import com.ibm.xsp.registry.RegistryUtil;
+import com.ibm.xsp.extlib.designer.tooling.palette.singlepageapp.WizardSubPageDataSource.FormField;
 
 /**
  * @author Gary Marjoram
@@ -103,6 +119,17 @@ public class WizardUtils {
         
         return btn;
     }
+
+    //
+    // Utility function for creating a CheckBox with an indent
+    //
+    public static Button createCheckBox(Composite parent, String text, int span, boolean select, int indent) {
+        Button btn = createCheckBox(parent, text,span, select);
+        GridData gridData = (GridData) btn.getLayoutData();
+        gridData.horizontalIndent = indent;    
+        
+        return btn;
+    }
     
     //
     // Utility function for creating a Radio Button
@@ -119,6 +146,17 @@ public class WizardUtils {
         return btn;
     }
     
+    //
+    // Utility function for creating a Radio Button with an indent
+    //
+    public static Button createRadio(Composite parent, String text, int span, SelectionListener listener, int indent) {
+        Button btn = createRadio(parent, text, span, listener);
+        GridData gridData = (GridData) btn.getLayoutData();
+        gridData.horizontalIndent = indent;    
+
+        return btn;
+    }
+
     //
     // Utility function for creating a Group with a title
     //
@@ -145,20 +183,37 @@ public class WizardUtils {
     
     //
     // Utility function for enabling/disabling the controls in a group based 
-    // on the state of the first checkbox in the group
+    // on the state of the first checkbox in the group - checked meaning enabled
     //
     public static void setCheckGroupEnabledState(Group group) {
         boolean state = true;
         Control ctls[] = group.getChildren();
-        if(ctls[0] instanceof Button) {
-            ctls[0].setEnabled(group.isEnabled());
-            state = ctls[0].isEnabled() ? ((Button)ctls[0]).getSelection() : false;
+        if ((ctls != null) && (ctls.length > 0)) {
+            if(ctls[0] instanceof Button) {
+                ctls[0].setEnabled(group.isEnabled());
+                state = ctls[0].isEnabled() ? ((Button)ctls[0]).getSelection() : false;
+            }
+            
+            for(int i=1; i < ctls.length; i++) {
+                ctls[i].setEnabled(state);                
+                if(ctls[i] instanceof Group) {
+                    setCheckGroupEnabledState((Group) ctls[i]);
+                }
+            }
         }
-        
-        for(int i=1; i < ctls.length; i++) {
-            ctls[i].setEnabled(state);                
-            if(ctls[i] instanceof Group) {
-                setCheckGroupEnabledState((Group) ctls[i]);
+    }
+    
+    //
+    // Utility function for enabling/disabling the controls in a Group
+    //
+    public static void setGroupEnabledState(Group parent, boolean state) {
+        Control ctls[] = parent.getChildren();
+        if (ctls != null) {
+            for(int i=0; i < ctls.length; i++) {
+                ctls[i].setEnabled(state);                
+                if(ctls[i] instanceof Group) {
+                    setGroupEnabledState((Group)ctls[i], state);
+                }
             }
         }
     }
@@ -169,11 +224,21 @@ public class WizardUtils {
     public static Label createLabel(Composite parent, String text, int span) {
         Label label = new Label(parent, SWT.NONE);
         label.setText(text);
-        if (span > 1) {
-            GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-            gridData.horizontalSpan = span;
-            label.setLayoutData(gridData);
-        }
+        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+        gridData.horizontalSpan = span;
+        label.setLayoutData(gridData);
+
+        return label;
+    }
+    
+    //
+    // Utility function for creating a Label with an indent
+    //
+    public static Label createLabel(Composite parent, String text, int span, int indent) {
+        Label label = createLabel(parent, text, span);
+        GridData gridData = (GridData) label.getLayoutData();
+        gridData.horizontalIndent = indent;    
+
         return label;
     }
     
@@ -393,7 +458,7 @@ public class WizardUtils {
     // Utility function to read the value from a text box
     //
     public static String getTextValue(final Text txt, final String defVal) {
-        if (txt == null) {
+        if ((txt == null) || (txt.isDisposed())) {
             return defVal;
         }
         
@@ -404,7 +469,7 @@ public class WizardUtils {
     // Utility function to read the value from a checkbox box
     //
     public static boolean getCheckBoxValue(final Button chk, final boolean defVal) {
-        if (chk == null) {
+        if ((chk == null) || (chk.isDisposed())) {
             return defVal;
         }
 
@@ -415,7 +480,7 @@ public class WizardUtils {
     // Utility function to read the selection index from a combo
     //
     public static int getComboIndex(final Combo combo, final int defVal) {
-        if (combo == null) {
+        if ((combo == null) || (combo.isDisposed())) {
             return defVal;
         }
 
@@ -464,4 +529,258 @@ public class WizardUtils {
         return true;
     }
     
+    
+    //
+    // Helper function to get View Columns
+    //
+    public static String[][] getViewColumns(final String server,
+            final String database, final String viewName, 
+            final boolean sortableOnly, final boolean visibleOnly) throws DominoImportException {
+        if (server == null || database == null || viewName == null) {
+            return null;
+        }
+        final ArrayList<String> columnNames = new ArrayList<String>();
+        final ArrayList<String> columnTitles = new ArrayList<String>();
+        final DominoImportException[] die = new DominoImportException[1];
+        try {
+            NotesPlatform.getInstance().syncExec(new Runnable() {
+                
+                public void run() {
+                    if(StringUtil.isNotEmpty(database)){
+                        if(StringUtil.isEmpty(database.trim())){
+                            return;
+                        }
+                        if(database.length() == 1 && Character.isSpaceChar(database.charAt(0))){
+                            return;
+                        }
+                    }
+                    Database db = null;
+                    try {
+                        Session sess = NotesPlatform.getInstance().getSession();
+                        db = sess.getDatabase(XPagesDataUtil.getServerName(server), database);
+                        if (!db.isOpen()) {
+                            try{
+                                db.open();
+                            }catch(NotesException ne){
+                                if(StringUtil.equals(DominoUtil.LOCAL_CLIENT, server)){
+                                    die[0] = new DominoImportException(ne, "Unable to find Views in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindViewsinthedatabase-1$
+                                            + database);
+                                }else{
+                                    //there is a possibility that the db is on the local machine
+                                    db = sess.getDatabase(XPagesDataUtil.getServerName(DominoUtil.LOCAL_CLIENT), database);
+                                    if(!db.isOpen()){
+                                        db.open();
+                                    }
+                                }
+                            }
+                        }
+
+                        // at this level (API) we don't have ability to pull
+                        // in the design elements
+                        // cleanly. So for now, we'll pull in what we can
+                        // directly - forms, views
+                        // Creating a NoteCollection would find all the
+                        // elements we want, but not with
+                        // info we need.
+                        // 
+                        Vector<?> vel = db.getViews();
+                        Iterator<?> it = vel.iterator();
+                        while (it.hasNext()) {
+                            View vu = (View) it.next();
+                            String name = null;
+                            Vector<?> v = vu.getAliases();
+                            int size = v.size();
+                            if (size > 0) {
+                                name = (String) v.get(size - 1);
+                            } else {
+                                name = vu.getName();
+                            }
+                            if (viewName.equals(name)) {
+                                int columnSize = vu.getColumnCount();
+                                // Checking autoGen columns
+                                for (int col = 1; col <= columnSize; col++) {
+                                    ViewColumn viewCol = vu.getColumn(col);
+                                    boolean shouldViewColBeAdded = XPagesDataUtil.getViewColAddStatus(viewCol);
+                                    if(sortableOnly && shouldViewColBeAdded){
+                                        boolean sortable = viewCol.isResortAscending();
+                                        if(!sortable){
+                                            sortable = viewCol.isResortDescending();
+                                        }
+                                        shouldViewColBeAdded = sortable;
+                                    }
+                                    
+                                    if (visibleOnly && shouldViewColBeAdded) {
+                                        shouldViewColBeAdded = !viewCol.isHidden();
+                                    }
+                                    
+                                    if (shouldViewColBeAdded) {
+                                        String colTitle = StringUtil.getNonNullString(viewCol.getTitle());
+                                        String colName = StringUtil.getNonNullString(viewCol.getItemName());
+                                        
+                                        // GMAM9PBDPA - If there's no title use the name as the title
+                                        if (StringUtil.isNotEmpty(colTitle)) {
+                                            columnTitles.add(colTitle);                                            
+                                        } else {
+                                            columnTitles.add(colName);
+                                        }
+                                        
+                                        columnNames.add(colName);
+                                    }
+                                    viewCol.recycle();
+                                }
+                                vu.recycle();
+                                break;
+                            }
+                            vu.recycle();
+                        }
+                    } catch (NotesException e) {
+                        die[0] = new DominoImportException(e,
+                                "Unable to find Views in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindViewsinthedatabase.1-1$
+                                        + database);
+                    } catch (Throwable e) {
+                        die[0] = new DominoImportException(null,
+                                "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.2-1$
+                    }
+                    finally{
+                        if(db != null){
+                            try {
+                                db.recycle();
+                            } catch (NotesException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (Throwable e) {
+
+            die[0] = new DominoImportException(null,
+                    "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.3-1$
+        }
+
+        if (die[0] != null) {
+            throw die[0];
+        }
+        String[][] ret = new String[2][];
+        ret[0] = columnNames.toArray(new String[0]);
+        ret[1] = columnTitles.toArray(new String[0]);
+        return ret;
+    }
+    
+    //
+    // Helper function to get Form Fields
+    //
+    public static ArrayList<FormField> getFormFields(final String server, final String database, final String formName) throws DominoImportException {
+        if (server == null || database == null || formName == null) {
+            return null;
+        }
+        final ArrayList<FormField> fields = new ArrayList<FormField>();
+        final DominoImportException[] die = new DominoImportException[1];
+        try {
+            NotesPlatform.getInstance().syncExec(new Runnable() {
+
+                public void run() {
+                    if (StringUtil.isNotEmpty(database)) {
+                        if (StringUtil.isEmpty(database.trim())) {
+                            return;
+                        }
+                        if (database.length() == 1 && Character.isSpaceChar(database.charAt(0))) {
+                            return;
+                        }
+                    }
+                    Database db = null;
+                    try {
+                        Session sess = NotesPlatform.getInstance().getSession();
+                        db = sess.getDatabase(XPagesDataUtil.getServerName(server), database);
+                        if (!db.isOpen()) {
+                            try {
+                                db.open();
+                            } catch (NotesException ne) {
+                                if (StringUtil.equals(DominoUtil.LOCAL_CLIENT, server)) {
+                                    die[0] = new DominoImportException(ne, "Unable to find Forms in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindFormsinthedatabase-1$
+                                            + database);
+                                }
+                                else {
+                                    // there is a possibility that the db is on the local machine
+                                    db = sess.getDatabase(XPagesDataUtil.getServerName(DominoUtil.LOCAL_CLIENT), database);
+                                    if (!db.isOpen()) {
+                                        db.open();
+                                    }
+                                }
+                            }
+                        }
+
+                        // at this level (API) we don't have ability to pull
+                        // in the design elements
+                        // cleanly. So for now, we'll pull in what we can
+                        // directly - forms, views
+                        // Creating a NoteCollection would find all the
+                        // elements we want, but not with
+                        // info we need.
+                        //
+                        Vector<?> vel = db.getForms();
+                        Iterator<?> it = vel.iterator();
+                        while (it.hasNext()) {
+                            Form frm = (Form) it.next();
+                            String name = null;
+                            Vector<?> v = frm.getAliases();
+                            int size = v.size();
+                            if (size > 0) {
+                                name = (String) v.get(size - 1);
+                            }
+                            else {
+                                name = frm.getName();
+                            }
+                            if (formName.equals(name)) {
+                                Vector<?> fldVel = frm.getFields();
+                                Iterator<?> fldIt = fldVel.iterator();
+                                while (fldIt.hasNext()) {
+                                    String fieldName = (String) fldIt.next();
+                                    int type = frm.getFieldType(fieldName);
+                                    FormField frmFld = new FormField(fieldName, type);
+                                    if (frmFld.control != FormField.NOT_SUPPORTED) {
+                                        fields.add(0, frmFld);
+                                    }
+                                }
+                                frm.recycle();
+                                break;
+                            }
+                            frm.recycle();
+                        }
+                    } catch (NotesException e) {
+                        die[0] = new DominoImportException(e, "Unable to find Forms in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindFormsinthedatabase.1-1$
+                                + database);
+                    } catch (Throwable e) {
+                        die[0] = new DominoImportException(null, "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound-1$
+                    } finally {
+                        if (db != null) {
+                            try {
+                                db.recycle();
+                            } catch (NotesException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (Throwable e) {
+
+            die[0] = new DominoImportException(null, "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.1-1$
+        }
+
+        if (die[0] != null) {
+            throw die[0];
+        }
+        return fields;
+    }         
+    
+    //
+    // Utility function for setting an attribute on an element
+    //
+    public static void setAttributeIfNotEmpty(Element el, String attr, String val) {
+        if (StringUtil.isNotEmpty(val)) {
+            el.setAttribute(attr, val);
+        }
+    }
 }
+

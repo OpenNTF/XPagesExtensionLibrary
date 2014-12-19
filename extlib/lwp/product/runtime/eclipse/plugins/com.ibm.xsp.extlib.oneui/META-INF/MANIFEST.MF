@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extended Components Library for XPages - OneUI Support
 Bundle-SymbolicName: com.ibm.xsp.extlib.oneui;singleton:=true
-Bundle-Version: 9.0.1.v00_10_SNAPSHOT
+Bundle-Version: 9.0.1.v00_11_SNAPSHOT
 Bundle-Vendor: IBM
 Export-Package: com.ibm.xsp.extlib.component.layout,
  com.ibm.xsp.extlib.component.layout.bean,

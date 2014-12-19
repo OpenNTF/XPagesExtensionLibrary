@@ -21,10 +21,9 @@
 package xsp.extlib.test.control;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.mobile.UIApplication;
 import com.ibm.xsp.extlib.component.mobile.UIMobilePage;
@@ -60,8 +59,8 @@ public class MobileControlTooltipTest extends AbstractXspTest {
         // to render the non-initial controls to verify they don't output tooltip
         FacesContextEx context = (FacesContextEx) TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         String fails = "";
         for (FacesComponentDefinition def : TestProject.getLibComponents(reg, this)) {

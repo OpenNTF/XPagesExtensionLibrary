@@ -600,7 +600,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 		 newLine(w);
 		
 		 w.startElement("button",c); // $NON-NLS-1$
-		 w.writeAttribute("class","btn btn-default",null); // $NON-NLS-1$
+		 w.writeAttribute("class","btn btn-default applayout-searchbtn",null); // $NON-NLS-1$
 		 w.writeAttribute("onclick","javascript:"+submitSearch+"(); return false;",null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
 		 w.startElement("span",c); // $NON-NLS-1$
 		 w.writeAttribute("class", Resources.get().getIconClass("search"),null); // $NON-NLS-1$

@@ -16,6 +16,7 @@
 
 package com.ibm.domino.services.calendar.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_NOTICE;
 import static com.ibm.domino.services.calendar.service.CalendarService.CALENDAR_SERVICE_LOGGER;
 import static com.ibm.domino.services.calendar.service.CalendarService.FORMAT_ICALENDAR;
 import static com.ibm.domino.services.calendar.service.CalendarService.MEDIA_TYPE_ICALENDAR;
@@ -47,7 +48,6 @@ import net.fortuna.ical4j.data.UnfoldingReader;
 import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.json.JsonCalendarGenerator;
 import com.ibm.domino.services.calendar.service.CalendarService;
 import com.ibm.domino.services.calendar.store.StoreFactory;
@@ -63,8 +63,8 @@ public class NoticeResource {
         String jsonEntity = null;
         String eventString = null;
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_READ_NOTICE);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getNotice"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_NOTICE, STAT_READ_NOTICE);
 
         CalendarService.verifyDatabaseContext();
 

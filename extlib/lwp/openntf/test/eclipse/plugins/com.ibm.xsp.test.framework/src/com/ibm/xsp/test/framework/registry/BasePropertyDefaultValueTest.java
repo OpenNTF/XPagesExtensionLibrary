@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,7 +21,6 @@
 package com.ibm.xsp.test.framework.registry;
 
 
-import com.ibm.xsp.component.UIDataEx;
 import com.ibm.xsp.registry.FacesSharableRegistry;
 
 /**
@@ -35,7 +34,13 @@ public class BasePropertyDefaultValueTest extends PropertyDefaultValueTest {
      * @return
      */
     public static Object[] getUIDataRowsSkip() {
-    	return new Object[]{"rows", UIDataEx.class, 30};
+        Class<?> controlClass;
+        try {
+            controlClass = Class.forName("com.ibm.xsp.component.UIDataEx");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot use UIDataEx rows skip when UIDataEx is unknown - add dependancy on com.ibm.xsp.extsn plugin", e);
+        }
+        return new Object[]{"rows", controlClass, 30};
     }
 
 }

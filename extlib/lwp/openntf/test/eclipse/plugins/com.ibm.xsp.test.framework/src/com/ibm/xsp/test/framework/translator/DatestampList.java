@@ -139,6 +139,9 @@ public class DatestampList {
     }
     
     public boolean isFileDatestampChanged(String pageName, long newDatestamp){
+         if( translatorVersionChanged ){
+             return true;
+         }
          Date oldDate = changes.get(pageName);
          if( null != oldDate && oldDate.getTime() + 1000 >= newDatestamp ){
              // unchanged (note 1000ms leeway due to difference in Java time vs filesystem time).

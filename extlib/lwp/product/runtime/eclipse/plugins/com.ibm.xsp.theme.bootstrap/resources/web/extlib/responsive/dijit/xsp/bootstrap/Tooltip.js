@@ -25,7 +25,7 @@ dojo.declare(
 	    	this.inherited(arguments);
 	        // Add custom class to the tooltip
 	        dojo.attr(dijit.Tooltip._masterTT.domNode, 'class', 'tooltip right in');
-	        dojo.attr(dijit.Tooltip._masterTT.domNode.firstChild, 'class', 'tooltip-inner');
+	        dojo.addClass(dijit.Tooltip._masterTT.containerNode, 'tooltip-inner');
 	        dojo.attr(dijit.Tooltip._masterTT.domNode.childNodes, 'class', 'tooltip-arrow');
 	      },	
 	   	}
@@ -39,7 +39,7 @@ dojo.declare(
 	    	this.inherited(arguments);
 	        // Add custom class to the tooltip
 	        dojo.attr(dijit.Tooltip._masterTT.domNode, 'class', 'tooltip');
-	        dojo.attr(dijit.Tooltip._masterTT.domNode.firstChild, 'class', 'tooltip-inner');
+	        dojo.addClass(dijit.Tooltip._masterTT.containerNode, 'tooltip-inner');
 	        dojo.attr(dijit.Tooltip._masterTT.domNode.childNodes, 'class', 'tooltip-arrow');
 	      },	
 	   	}

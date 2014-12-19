@@ -29,8 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.component.UIViewRoot;
+
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesCompositeComponentDefinition;
 import com.ibm.xsp.registry.FacesContainerProperty;
@@ -71,10 +72,10 @@ public class PropertyDefaultValueTest extends AbstractXspTest {
     public void testPropertyDefaultValue() throws Exception {
         String failsStr = "";
         
-        // TODO should not need a FacesContext instance with a UIViewRootEx,
+        // TODO should not need a FacesContext instance with a UIViewRoot,
         // but some of the controls are using FacesContext.getCurrentInstance() 
         // in their constructors - should JUnit test to prevent that.
-        TestProject.createFacesContext(this).setViewRoot(new UIViewRootEx());
+        TestProject.createFacesContext(this).setViewRoot(new UIViewRoot());
         
         FacesSharableRegistry reg = TestProject.createRegistryWithAnnotater(
                 this, new PropertyTagsAnnotater());

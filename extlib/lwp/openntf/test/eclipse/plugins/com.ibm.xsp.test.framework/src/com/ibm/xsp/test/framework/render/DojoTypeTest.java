@@ -25,12 +25,11 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.dojo.DojoAttribute;
 import com.ibm.xsp.dojo.FacesDojoComponent;
 import com.ibm.xsp.library.LibraryServiceLoader;
@@ -60,8 +59,8 @@ public class DojoTypeTest extends AbstractXspTest {
         // create an empty view
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         String fails = "";
         FacesSharableRegistry reg = TestProject.createRegistry(this);
@@ -154,27 +153,30 @@ public class DojoTypeTest extends AbstractXspTest {
         	}
             
             boolean outputtedDojoType = null != existingRenderDojoType;
-            if( !StringUtil.equals(outputtedDojoType, root.isDojoParseOnLoad()) ){
+            boolean root_dojoParseOnLoad = ((Boolean)TypedUtil.getAttributes(root).get("dojoParseOnLoad")).booleanValue();
+            if( !StringUtil.equals(outputtedDojoType, root_dojoParseOnLoad) ){
                 fails += def.getFile().getFilePath()+" "
                         +XspTestUtil.getShortClass(def.getJavaClass())
                         + " rootEx.isDojoParseOnLoad not as expected when render un-modified blank control: "
-                        + root.isDojoParseOnLoad() + "\n";
+                        + root_dojoParseOnLoad + "\n";
             }
-            if( !StringUtil.equals(outputtedDojoType, root.isDojoTheme()) ){
+            boolean root_dojoTheme = ((Boolean)TypedUtil.getAttributes(root).get("dojoTheme")).booleanValue();
+            if( !StringUtil.equals(outputtedDojoType, root_dojoTheme) ){
                 fails += def.getFile().getFilePath()+" "
                     +XspTestUtil.getShortClass(def.getJavaClass())
                     + " rootEx.isDojoTheme not as expected when render un-modified blank control: "
-                    + root.isDojoTheme() + "\n";
+                    + root_dojoTheme + "\n";
             }
+            boolean root_loadXspClientDojoUI = ((Boolean)TypedUtil.getAttributes(root).get("loadXspClientDojoUI")).booleanValue();
             if( isShouldLoadXspClientDojoUI ){
-            	if( !StringUtil.equals(outputtedDojoType, root.isLoadXspClientDojoUI()) ){
+            	if( !StringUtil.equals(outputtedDojoType, root_loadXspClientDojoUI) ){
             		fails += def.getFile().getFilePath()+" "
             			+XspTestUtil.getShortClass(def.getJavaClass())
             			+ " rootEx.isLoadXspClientDojoUI not as expected when render un-modified blank control: "
-            			+ root.isLoadXspClientDojoUI() + "\n";
+            			+ root_loadXspClientDojoUI + "\n";
             	}
             }else{ // !isCanLoadXspClientDojoUI
-                if( root.isLoadXspClientDojoUI() ){
+                if( root_loadXspClientDojoUI ){
             		fails += def.getFile().getFilePath()+" "
             				+XspTestUtil.getShortClass(def.getJavaClass())
             				+ " rootEx.isLoadXspClientDojoUI is true when render un-modified blank control,"
@@ -216,28 +218,31 @@ public class DojoTypeTest extends AbstractXspTest {
             }
             
             outputtedDojoType = null != actualRenderDojoType;
-            if( ! StringUtil.equals(true, root.isDojoParseOnLoad()) ){
+            root_dojoParseOnLoad = ((Boolean)TypedUtil.getAttributes(root).get("dojoParseOnLoad")).booleanValue();
+            if( ! StringUtil.equals(true, root_dojoParseOnLoad) ){
                 fails += def.getFile().getFilePath()+" "
                         +XspTestUtil.getShortClass(def.getJavaClass())
                         + " rootEx.isDojoParseOnLoad not as expected when render dojoType control: "
-                        + root.isDojoParseOnLoad() + "\n";
+                        + root_dojoParseOnLoad + "\n";
             }
             boolean expectDojoTheme = null != existingRenderDojoType; // if the control uses dojo by default
-            if( !StringUtil.equals(expectDojoTheme, root.isDojoTheme()) ){
+            root_dojoTheme = ((Boolean)TypedUtil.getAttributes(root).get("dojoTheme")).booleanValue();
+            if( !StringUtil.equals(expectDojoTheme, root_dojoTheme) ){
                 fails += def.getFile().getFilePath()+" "
                         +XspTestUtil.getShortClass(def.getJavaClass())
                         + " rootEx.isDojoTheme not as expected when render dojoType control: "
-                        + root.isDojoTheme() + "\n";
+                        + root_dojoTheme + "\n";
             }
+            root_loadXspClientDojoUI = ((Boolean)TypedUtil.getAttributes(root).get("loadXspClientDojoUI")).booleanValue();
             if( isShouldLoadXspClientDojoUI ){
-                if( ! StringUtil.equals(true, root.isLoadXspClientDojoUI()) ){
+                if( ! StringUtil.equals(true, root_loadXspClientDojoUI) ){
                     fails += def.getFile().getFilePath()+" "
                             +XspTestUtil.getShortClass(def.getJavaClass())
                             + " rootEx.isLoadXspClientDojoUI not as expected when render dojoType control: "
-                            + root.isLoadXspClientDojoUI() + "\n";
+                            + root_loadXspClientDojoUI + "\n";
                 }
             }else{ // !isCanLoadXspClientDojoUI
-                if( root.isLoadXspClientDojoUI() ){
+                if( root_loadXspClientDojoUI ){
                     fails += def.getFile().getFilePath()+" "
                             +XspTestUtil.getShortClass(def.getJavaClass())
                             + " rootEx.isLoadXspClientDojoUI is true when render dojoTypeControl,"
@@ -329,7 +334,7 @@ public class DojoTypeTest extends AbstractXspTest {
             // set a userId and verify the dojoType is output and the id only appears once.
             String testId = "myId";
             // (note, the "view:" part of the clientID is only present for UIViewRootEx2.getClientId)
-            String rootClientId = UIViewRootEx.class.equals(root.getClass())? "" : "view:";
+            String rootClientId = UIViewRoot.class.equals(root.getClass())? "" : "view:";
             String testClientId = rootClientId+"_id1:"+testId;
             TypedUtil.getAttributes(instance).put("id", testId);
             XspRenderUtil.resetContainerChild(root, p, instance);
@@ -473,7 +478,7 @@ public class DojoTypeTest extends AbstractXspTest {
         return LibraryServiceLoader.isXPagesRuntimeLibrary(libraryId);
     }
     @SuppressWarnings("unchecked")
-    private Map<String, Object> getViewMap(UIViewRootEx root) {
+    private Map<String, Object> getViewMap(UIViewRoot root) {
         return root.getViewMap();
     }
     protected String[] getSkipFails() {

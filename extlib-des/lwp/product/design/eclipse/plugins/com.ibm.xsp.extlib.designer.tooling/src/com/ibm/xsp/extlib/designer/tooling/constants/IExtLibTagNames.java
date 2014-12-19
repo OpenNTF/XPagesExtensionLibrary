@@ -45,6 +45,10 @@ public interface IExtLibTagNames {
     public static final String EXT_LIB_TAG_FORM_TABLE           = "formTable"; // $NON-NLS-1$    
     public static final String EXT_LIB_TAG_FORM_ROW             = "formRow"; // $NON-NLS-1$    
     public static final String EXT_LIB_TAG_THIS_TREE_NODES      = "this.treeNodes"; // $NON-NLS-1$            
+    public static final String EXT_LIB_TAG_REST_SERVICE                 = "restService"; // $NON-NLS-1$            
+    public static final String EXT_LIB_TAG_THIS_SERVICE                 = "this.service"; // $NON-NLS-1$            
+    public static final String EXT_LIB_TAG_CALENDAR_JSON_LEGACY_SERVICE = "calendarJsonLegacyService"; // $NON-NLS-1$            
+    public static final String EXT_LIB_TAG_THIS_COMPACT                 = "this.compact"; // $NON-NLS-1$            
     
     public static final String TAG_THIS_PREFIX                  = "this."; // $NON-NLS-1$
 

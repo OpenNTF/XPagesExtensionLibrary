@@ -24,14 +24,10 @@ import java.util.Collection;
 import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIInputEx;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UISelectManyEx;
-import com.ibm.xsp.component.UISelectOneEx;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesDefinition;
 import com.ibm.xsp.registry.FacesProperty;
@@ -69,8 +65,8 @@ public class InputReadOnlyPropertyTest extends AbstractXspTest {
         // set up the page to be rendered
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         for (FacesComponentDefinition def : TestProject.getLibComponents(reg, this)) { 
             if( !def.isTag() ){
@@ -140,9 +136,9 @@ public class InputReadOnlyPropertyTest extends AbstractXspTest {
                 boolean hasReadonly2 = false;
                 FacesDefinition ancestorDefiningReadonly2 = null;
                 for (FacesDefinition ancestor = def; null != ancestor; ancestor = ancestor.getParent()) {
-                    if( UIInputEx.class.equals(ancestor.getJavaClass()) 
-                            || UISelectOneEx.class.equals(ancestor.getJavaClass())
-                            || UISelectManyEx.class.equals(ancestor.getJavaClass()) ){
+                    if( "com.ibm.xsp.component.UIInputEx".equals(ancestor.getJavaClass().getName()) 
+                            || "com.ibm.xsp.component.UISelectOneEx".equals(ancestor.getJavaClass().getName())
+                            || "com.ibm.xsp.component.UISelectManyEx".equals(ancestor.getJavaClass().getName()) ){
                         break;
                     }
                     

@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -155,19 +156,19 @@ public class ErrorHelper {
  
 
     public static Response createErrorResponse(Throwable e) {
-    	String message = null;
-    	
-    	try {
-	    	ByteArrayOutputStream os = new ByteArrayOutputStream();
-	    	e.printStackTrace(new PrintWriter(os, true));
-	    	os.flush();
-	    	message = os.toString();
-    	}
-    	catch (IOException ioe) {
-    		message = e.getMessage();
-    	}
-    	
-    	return createErrorResponse(message, Response.Status.INTERNAL_SERVER_ERROR);
+        String message = null;
+        
+        try {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            e.printStackTrace(new PrintWriter(os, true));
+            os.flush();
+            message = os.toString();
+        }
+        catch (IOException ioe) {
+            message = e.getMessage();
+        }
+        
+        return createErrorResponse(message, Response.Status.INTERNAL_SERVER_ERROR);
     }
     
     /**
@@ -235,11 +236,25 @@ public class ErrorHelper {
         writeProperty(jwriter, ATTR_TYPE, ATTR_TEXT);
         
         // data
-        jwriter.startProperty(ATTR_DATA);       
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        throwable.printStackTrace(pw);      
-        jwriter.outStringLiteral(sw.toString());
+        jwriter.startProperty(ATTR_DATA);
+        if ( ScnContext.getCurrentInstance().isScn() ) {
+            Throwable cause = throwable.getCause();
+            String data = null;
+            if ( cause == null ) {
+                data = getExceptionSummary(throwable);
+            }
+            else {
+                data = MessageFormat.format("{0} caused by {1}",  // $NLX-ErrorHelper.0causedby1-1$
+                        getExceptionSummary(throwable), getExceptionSummary(cause));
+            }
+            jwriter.outStringLiteral(data);
+        }
+        else {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            throwable.printStackTrace(pw);      
+            jwriter.outStringLiteral(sw.toString());
+        }
         jwriter.endProperty();
     }
 
@@ -261,5 +276,16 @@ public class ErrorHelper {
             }
         }
         
+    }
+    
+    private static String getExceptionSummary(Throwable t) {
+        String message = null;
+        if (t instanceof NotesException)
+            message = ((NotesException)t).text;
+        else
+            message = t.getMessage();
+        
+        return MessageFormat.format("{0} [{1}]", t.getClass().getName(), 
+                    message == null ? "" : message);
     }
 }

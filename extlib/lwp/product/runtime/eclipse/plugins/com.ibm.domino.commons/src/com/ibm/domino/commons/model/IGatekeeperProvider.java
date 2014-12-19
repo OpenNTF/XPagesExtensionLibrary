@@ -18,5 +18,34 @@ package com.ibm.domino.commons.model;
 
 public interface IGatekeeperProvider {
 
+    public static final int FEATURE_MUTED_THREADS                     = 483; 
+    public static final int FEATURE_REST_API_MAIL_ROOT                = 484;
+    public static final int FEATURE_REST_API_MAIL_INBOX               = 485;
+    public static final int FEATURE_REST_API_MAIL_OUTBOX              = 486;
+    public static final int FEATURE_REST_API_MAIL_DRAFTS              = 487;
+    public static final int FEATURE_REST_API_MAIL_SENT                = 488;
+    public static final int FEATURE_REST_API_MAIL_TRASH               = 489;
+    public static final int FEATURE_REST_API_MAIL_MESSAGE             = 490;
+    public static final int FEATURE_REST_API_MAIL_OOO                 = 491;
+    public static final int FEATURE_REST_API_MAIL_DELEGATES           = 492;
+    public static final int FEATURE_REST_API_MAIL_ACCESS              = 493;
+    public static final int FEATURE_REST_API_MAIL_QUOTA               = 494;
+    public static final int FEATURE_REST_API_MAIL_RECENT_CONTACTS     = 495;
+    public static final int FEATURE_REST_API_MAIL_FOLDERS             = 496;
+
+    public static final int FEATURE_REST_API_CALENDAR_ROOT            = 497;
+    public static final int FEATURE_REST_API_CALENDAR_EVENT_LIST      = 498;
+    public static final int FEATURE_REST_API_CALENDAR_INVITATION_LIST = 499;
+    public static final int FEATURE_REST_API_CALENDAR_EVENT           = 500;
+    public static final int FEATURE_REST_API_CALENDAR_NOTICE          = 501;
+
+    public static final int FEATURE_REST_API_FREEBUSY_ROOT            = 502;
+    public static final int FEATURE_REST_API_FREEBUSY_BUSY_TIME       = 503;
+    public static final int FEATURE_REST_API_FREEBUSY_FREE_ROOMS      = 504;
+    public static final int FEATURE_REST_API_FREEBUSY_DIRECTORIES     = 505;
+    public static final int FEATURE_REST_API_FREEBUSY_SITES           = 506;
+
+    public static final int TEST_MUTED_THREADS                        = 537;
+    
     public boolean isFeatureEnabled(int feature, String CustomerID, String userID);
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,17 +20,15 @@
  */
 package xsp.pages.pregenerated;
 
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
+
 import com.ibm.xsp.page.compiled.AbstractCompiledPage;
 import com.ibm.xsp.page.compiled.AbstractCompiledPageDispatcher;
-
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
 import com.ibm.xsp.page.compiled.NoSuchComponentException;
 import com.ibm.xsp.page.compiled.PageExpressionEvaluator;
 import com.ibm.xsp.test.framework.TestProject;
-
-import java.lang.String;
-import com.ibm.xsp.component.UIViewRootEx;
 
 @SuppressWarnings("all")
 public class Empty extends AbstractCompiledPageDispatcher{
@@ -65,7 +63,7 @@ public class Empty extends AbstractCompiledPageDispatcher{
         
         private UIComponent createView(FacesContext context, 
                 UIComponent parent, PageExpressionEvaluator evaluator) {
-            UIViewRootEx result = TestProject.createViewRootObject(context);
+            UIViewRoot result = TestProject.createViewRootObject(context);
             initViewRoot(result);
             return result;
         }

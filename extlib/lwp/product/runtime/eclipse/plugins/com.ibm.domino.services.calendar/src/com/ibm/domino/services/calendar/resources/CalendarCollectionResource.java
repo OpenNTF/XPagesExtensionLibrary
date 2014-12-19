@@ -20,6 +20,9 @@ import static com.ibm.domino.commons.json.JsonConstants.DISPLAY_NAME_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.DISTINGUISHED_NAME_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.EMAIL_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.HOME_SERVER_PROP;
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_ROOT;
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_EVENT_LIST;
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_INVITATION_LIST;
 import static com.ibm.domino.das.service.RestService.URL_PARAM_OWNER;
 import static com.ibm.domino.services.calendar.json.JsonConstants.JSON_HREF;
 import static com.ibm.domino.services.calendar.json.JsonConstants.JSON_LINKS;
@@ -33,6 +36,8 @@ import static com.ibm.domino.services.calendar.service.CalendarService.STAT_MISC
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -49,12 +54,14 @@ import lotus.domino.NotesException;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonException;
+import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonGenerator.Generator;
 import com.ibm.commons.util.io.json.JsonGenerator.StringBuilderGenerator;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
+import com.ibm.domino.commons.model.IGatekeeperProvider;
+import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ScnContext;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.das.utils.UserHelper;
 import com.ibm.domino.services.calendar.service.CalendarService;
 
@@ -73,8 +80,8 @@ public class CalendarCollectionResource {
     public Response getCalendars(@Context UriInfo uriInfo,
                             @QueryParam(URL_PARAM_OWNER) String owner) {
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getCalendars"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_ROOT, STAT_MISC);
         String jsonEntity = null;
 
         CalendarService.verifyNoDatabaseContext();
@@ -205,13 +212,7 @@ public class CalendarCollectionResource {
         generator.out("},");
         generator.nl();
         
-        // Start the array of links
-        
-        generator.indent();
-        generator.outPropertyName(JSON_LINKS);
-        generator.out(":[");
-        generator.incIndent();
-        generator.nl();
+        // Create the array of links
         
         URI calendarURI = null;
         if ( ScnContext.getCurrentInstance().isHideDbPath() ) {
@@ -229,19 +230,14 @@ public class CalendarCollectionResource {
         }
         calendarURI = UriHelper.appendPathSegment(calendarURI, PATH_SEGMENT_CALENDAR);
         
-        // Add event link
+        List<JsonJavaObject> links = createCalendarLinks(calendarURI);
         
-        writeLinkObject(generator, "events", UriHelper.appendPathSegment(calendarURI, PATH_SEGMENT_EVENTS), true); // $NON-NLS-1$
+        // Write the array of links
         
-        // Add invitations link
-        
-        writeLinkObject(generator, "invitations", UriHelper.appendPathSegment(calendarURI, PATH_SEGMENT_INVITATIONS), false); // $NON-NLS-1$
-        
-        // End the array of links
-        
-        generator.decIndent();
         generator.indent();
-        generator.out("]");
+        generator.outPropertyName(JSON_LINKS);
+        generator.out(":");
+        generator.toJson(links);
         generator.nl();
         
         // End the calendar object
@@ -251,33 +247,34 @@ public class CalendarCollectionResource {
         generator.out("}");
     }
     
-    private void writeLinkObject(Generator generator, String rel, URI url, boolean addComma) 
-                        throws IOException, JsonException {
+    private List<JsonJavaObject> createCalendarLinks(URI calendarURI) {
+        String customerId = ScnContext.getCurrentInstance().getCustomerId();
+        String userId = ScnContext.getCurrentInstance().getUserId();
+        IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
+        List<JsonJavaObject> links = new ArrayList<JsonJavaObject>();
         
-        generator.indent();
-        generator.out("{");
-        generator.incIndent();
-        generator.nl();
+        // Add event link
         
-        generator.indent();
-        generator.outPropertyName(JSON_RELATIONSHIP);
-        generator.out(":");
-        generator.outLiteral(rel);
-        generator.out(",");
-        generator.nl();
-        
-        generator.indent();
-        generator.outPropertyName(JSON_HREF);
-        generator.out(":");
-        generator.outLiteral(CalendarService.adaptUriToScn(url).toString());
-        generator.nl();
-        
-        generator.decIndent();
-        generator.indent();
-        generator.out("}");
-        if ( addComma ) {
-            generator.out(",");
+        if ( provider.isFeatureEnabled(FEATURE_REST_API_CALENDAR_EVENT_LIST, customerId, userId) ) {
+            addLinkObject(links, "events", UriHelper.appendPathSegment(calendarURI, PATH_SEGMENT_EVENTS)); // $NON-NLS-1$
         }
-        generator.nl();
+        
+        // Add invitations link
+        
+        if ( provider.isFeatureEnabled(FEATURE_REST_API_CALENDAR_INVITATION_LIST, customerId, userId) ) {
+            addLinkObject(links, "invitations", UriHelper.appendPathSegment(calendarURI, PATH_SEGMENT_INVITATIONS)); // $NON-NLS-1$
+        }
+        
+        return links;
+    }
+    
+    private void addLinkObject(List<JsonJavaObject> links, String rel, URI uri) {
+        uri = CalendarService.adaptUriToScn(uri);
+
+        JsonJavaObject link = new JsonJavaObject();
+        link.putJsonProperty(JSON_RELATIONSHIP, rel);
+        link.putJsonProperty(JSON_HREF, uri.toString());
+
+        links.add(link);
     }
 }

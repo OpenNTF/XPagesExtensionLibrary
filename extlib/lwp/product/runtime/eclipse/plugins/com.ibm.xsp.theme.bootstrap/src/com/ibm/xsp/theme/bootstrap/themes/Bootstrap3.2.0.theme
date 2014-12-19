@@ -29,14 +29,14 @@
     <!-- bootstrap core styles -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap.css</href>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap.min.css</href>
 	</resource>
 
 	<!-- Add the boostrap-theme css for additional 3d styling -->
     <!-- bootstrap theme styles -->
 	<resource>
 		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap-theme.css</href>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css</href>
 	</resource>
 	
 	<!-- dbootstrap styles -->
@@ -69,13 +69,13 @@
 	<!-- jquery core js -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/responsive/jquery/jquery-2.1.1/jquery-2.1.1.js</href>
+		<href>/.ibmxspres/.extlib/responsive/jquery/jquery-2.1.1/jquery-2.1.1.min.js</href>
 	</resource>
 
 	<!-- bootstrap core js -->
 	<resource>
 		<content-type>application/x-javascript</content-type>
-		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/js/bootstrap.js</href>
+		<href>/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/js/bootstrap.min.js</href>
 	</resource>
  
 	<!-- xpages/bootstrap mixin js -->
@@ -101,7 +101,7 @@
 		<name>ViewRoot</name>
 		<property mode="concat">
 			<name>styleClass</name>
-			<value>xsp dbootstrap</value>
+			<value>xsp dbootstrap bootstrap-theme</value>
 		</property>
 		<property>
 			<name>docType</name>
@@ -524,7 +524,7 @@
 		</property>
 		<property>
 			<name>rendererType</name>
-			<value>com.ibm.xsp.theme.bootstrap.form.Checkbox</value>
+			<value>com.ibm.xsp.theme.bootstrap.form.ViewHeaderCheckbox</value>
 		</property>
 	</control>
 		

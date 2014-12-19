@@ -16,6 +16,7 @@
 
 package com.ibm.domino.services.calendar.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_EVENT;
 import static com.ibm.domino.services.calendar.json.JsonConstants.JSON_HREF;
 import static com.ibm.domino.services.calendar.json.JsonConstants.JSON_NOTICES;
 import static com.ibm.domino.services.calendar.json.JsonConstants.JSON_SCHEDULE_METHOD;
@@ -57,7 +58,6 @@ import com.ibm.domino.calendar.store.ICalendarStore;
 import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.service.CalendarService;
 import com.ibm.domino.services.calendar.store.StoreFactory;
 import com.ibm.domino.services.calendar.util.Utils;
@@ -68,8 +68,8 @@ public class EventNoticeCollectionResource {
     @GET
     public Response getEventNotices(@Context UriInfo uriInfo, @PathParam(EVENT) String eventId) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEventNotices"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_MISC);
         String jsonEntity = null;
 
         CalendarService.verifyDatabaseContext();

@@ -21,3 +21,12 @@
 .xspWidgetContainer.panel{ 
 	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
 }
+
+/** dojo radio button **/
+.xsp.dbootstrap .dijitRadio.dijitRadioChecked:before {
+	line-height: 16px;
+}
+/** radio button with dojo type set **/
+.xsp.dbootstrap .radio .dijitRadio.dijitRadioChecked:before {
+    line-height: 22px;
+}

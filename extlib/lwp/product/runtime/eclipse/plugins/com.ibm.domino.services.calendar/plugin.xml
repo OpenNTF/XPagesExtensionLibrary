@@ -24,8 +24,7 @@
             class="com.ibm.domino.services.calendar.service.CalendarService"
             name="Calendar"
             path="calendar"
-            version="9.0.1"
-            gkf="423">
+            version="9.0.1">
         </serviceResources>         
    </extension>
 </plugin>

@@ -32,9 +32,12 @@ import lotus.domino.Session;
 import org.apache.wink.common.WinkApplication;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.domino.commons.model.IGatekeeperProvider;
+import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
 import com.ibm.domino.das.utils.ScnContext;
+import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.osgi.core.context.ContextInfo;
 import com.ibm.xsp.acl.NoAccessSignal;
 
@@ -225,4 +228,32 @@ public class RestService extends WinkApplication {
         
         return adapted;
     }
+
+    /**
+     * Common bookkeeping before handling a request.
+     * 
+     * <p>A resource class can call this method before doing request-specific processing.
+     * Currently, this method sets the statistics category and/or checks gatekeeper.
+     * In the future, other pre-processing may be added.
+     * 
+     * @param feature
+     * @param category
+     */
+    public static void beforeRequest(int feature, String category) {
+
+        if ( category != null ) {
+            StatsContext.getCurrentInstance().setRequestCategory(category);
+        }
+    
+        if ( feature != 0 && ScnContext.getCurrentInstance().isScn() ) {
+            String customerId = ScnContext.getCurrentInstance().getCustomerId();
+            String userId = ScnContext.getCurrentInstance().getUserId();
+            IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
+            if ( ! provider.isFeatureEnabled(feature, customerId, userId) ) {
+                String msg = MessageFormat.format("Feature {0} is disabled.", feature); // $NLX-RestService.Feature0isdisabled-1$
+                throw new WebApplicationException(ErrorHelper.createErrorResponse(msg, Response.Status.FORBIDDEN));
+            }
+        }
+    }
+    
 }

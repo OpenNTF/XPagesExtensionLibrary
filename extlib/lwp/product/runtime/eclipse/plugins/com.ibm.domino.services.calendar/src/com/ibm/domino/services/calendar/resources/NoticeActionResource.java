@@ -16,6 +16,7 @@
 
 package com.ibm.domino.services.calendar.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_NOTICE;
 import static com.ibm.domino.services.calendar.service.CalendarService.CALENDAR_SERVICE_LOGGER;
 import static com.ibm.domino.services.calendar.service.CalendarService.NOTICE;
 import static com.ibm.domino.services.calendar.service.CalendarService.PATH_PARAM_NOTICE;
@@ -40,7 +41,6 @@ import com.ibm.commons.util.io.json.JsonException;
 import com.ibm.domino.calendar.store.Action;
 import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.service.CalendarService;
 import com.ibm.domino.services.calendar.store.StoreFactory;
 import com.ibm.domino.services.calendar.util.Utils;
@@ -53,8 +53,8 @@ public class NoticeActionResource {
                         @Context UriInfo uriInfo, @PathParam(NOTICE) String id,
                         @QueryParam(URL_PARAM_ACTION_TYPE) String type) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "putNoticeAction"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_NOTICE, STAT_MISC);
 
         CalendarService.verifyDatabaseContext();
 

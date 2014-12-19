@@ -25,11 +25,10 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesProperty;
 import com.ibm.xsp.registry.FacesSharableRegistry;
@@ -66,8 +65,8 @@ public class RenderDojoPropertyTest extends AbstractXspTest {
         // create an empty view
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         FacesSharableRegistry reg = TestProject.createRegistryWithAnnotater(this, new PropertyTagsAnnotater());
         HashMap<Class<?>, Object[]> proposedValueMap = null;

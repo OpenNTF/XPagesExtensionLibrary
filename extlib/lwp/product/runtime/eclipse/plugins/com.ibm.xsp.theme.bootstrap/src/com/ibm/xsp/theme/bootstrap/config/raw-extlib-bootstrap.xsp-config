@@ -95,7 +95,7 @@
     	<complex-extension>
     		<layout-extension>
                 <responsive>true</responsive>
-                <layout-image>extlib/designer/markup/layout/bootstrapLayout.jpg</layout-image>
+                <layout-image>extlib/designer/wizard/layout/respAppLayout.png</layout-image>
             </layout-extension>
 			<base-complex-id>com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl</base-complex-id>
       		<tag-name>bootstrapResponsiveConfiguration</tag-name>

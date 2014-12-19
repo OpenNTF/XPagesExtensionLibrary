@@ -209,5 +209,20 @@ public interface IExtLibAttrNames {
     public final static String EXT_LIB_ATTR_FORCE_FULL_REFRESH    = "forceFullRefresh";      // $NON-NLS-1$
 
     public final static String EXT_LIB_ATTR_SAVE_DOCUMENT         = "saveDocument";          // $NON-NLS-1$
+
+    public final static String EXT_LIB_ATTR_PATH_INFO             = "pathInfo";              // $NON-NLS-1$
     
+    public static interface Calendar {
+        public final static String ATTR_COL_CALENDAR_DATE         = "colCalendarDate";       // $NON-NLS-1$
+        public final static String ATTR_COL_START_TIME            = "colStartTime";          // $NON-NLS-1$
+        public final static String ATTR_COL_END_TIME              = "colEndTime";            // $NON-NLS-1$
+        public final static String ATTR_COL_SUBJECT               = "colSubject";            // $NON-NLS-1$
+        public final static String ATTR_COL_CHAIR                 = "colChair";              // $NON-NLS-1$
+        public final static String ATTR_COL_ENTRY_ICON            = "colEntryIcon";          // $NON-NLS-1$
+        public final static String ATTR_COL_ALT_SUBJECT           = "colAltSubject";         // $NON-NLS-1$
+        public final static String ATTR_COL_CONFIDENTIAL          = "colConfidential";       // $NON-NLS-1$
+        public final static String ATTR_COL_CUSTOM_DATA           = "colCustomData";         // $NON-NLS-1$
+        public final static String ATTR_COL_ENTRY_TYPE            = "colEntryType";          // $NON-NLS-1$
+        public final static String ATTR_COL_STATUS                = "colStatus";             // $NON-NLS-1$
+    }    
 }

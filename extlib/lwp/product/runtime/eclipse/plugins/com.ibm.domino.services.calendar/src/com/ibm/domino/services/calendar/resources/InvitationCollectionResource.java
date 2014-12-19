@@ -16,14 +16,15 @@
 
 package com.ibm.domino.services.calendar.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_INVITATION_LIST;
 import static com.ibm.domino.services.calendar.service.CalendarService.CALENDAR_SERVICE_LOGGER;
+import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_INVITATIONS;
+import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_NOTICES;
+import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_SEPERATOR;
 import static com.ibm.domino.services.calendar.service.CalendarService.STAT_VIEW_INVITATIONS;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_ID;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_RECEIVED_SINCE;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_SINCE;
-import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_INVITATIONS;
-import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_NOTICES;
-import static com.ibm.domino.services.calendar.service.CalendarService.PATH_SEGMENT_SEPERATOR;
 
 import java.io.IOException;
 import java.net.URI;
@@ -47,7 +48,6 @@ import com.ibm.domino.calendar.store.ICalendarStore;
 import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.service.CalendarService;
 import com.ibm.domino.services.calendar.store.StoreFactory;
 import com.ibm.domino.services.calendar.util.Utils;
@@ -61,8 +61,8 @@ public class InvitationCollectionResource {
             @QueryParam(URL_PARAM_RECEIVED_SINCE) String since,
             @QueryParam(URL_PARAM_ID) String id) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_VIEW_INVITATIONS);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getInvitations"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_INVITATION_LIST, STAT_VIEW_INVITATIONS);
 
         CalendarService.verifyDatabaseContext();
 

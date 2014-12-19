@@ -34,6 +34,7 @@ public class JsonConstants {
     public static String DATE_PROP = "date"; //$NON-NLS-1$
     public static String HREF_PROP = "href"; //$NON-NLS-1$
     public static String CONTENT_PROP = "content"; //$NON-NLS-1$
+    public static String THREADID_PROP = "threadId"; //$NON-NLS-1$
     public static String READ_PROP = "read"; //$NON-NLS-1$
     
     // Person & room objects

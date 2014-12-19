@@ -26,7 +26,6 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.actions.client.AbstractClientSimpleAction;
 import com.ibm.xsp.binding.MethodBindingEx;
 import com.ibm.xsp.registry.FacesComplexDefinition;
 import com.ibm.xsp.registry.FacesDefinition;
@@ -60,6 +59,7 @@ public class SimpleActionCategoryTest extends AbstractXspTest {
                 "simpleActionInterface");
         assertNotNull(simpleActionBase);
         List<FacesDefinition> allSimpleActions = RegistryUtil.getSubstitutableDefinitions(simpleActionBase, reg);
+        Class<?> abstractClientBase = getAbstractClientBase();
         
         String fails = "";
         List<FacesComplexDefinition> complexDefs = TestProject.getLibComplexDefs(reg, this);
@@ -87,7 +87,8 @@ public class SimpleActionCategoryTest extends AbstractXspTest {
                         +" probably a Simple Action (implements MethodBindingEx) doesn't have <base-complex-type>simpleActionInterface<\n";
             }
             if( isDefinedAsSimpleAction || isProbablySimpleAction ){
-                boolean isUsingNewIn851AbstractClientBase = AbstractClientSimpleAction.class.isAssignableFrom(complex.getJavaClass());
+                boolean isUsingNewIn851AbstractClientBase = (null != abstractClientBase) 
+                        && abstractClientBase.isAssignableFrom(complex.getJavaClass());
                 if( isUsingNewIn851AbstractClientBase ){
                     if( !"client".equals(actionType) ){
                         fails += complex.getFile().getFilePath()+" "+XspRegistryTestUtil.descr(complex)
@@ -114,6 +115,18 @@ public class SimpleActionCategoryTest extends AbstractXspTest {
                 SkipFileContent.concatSkips(getSkips(), this, "testSimpleActionCategories"));
         if( fails.length() > 0 ){
             fail(XspTestUtil.getMultilineFailMessage(fails));
+        }
+    }
+    private Class<?> getAbstractClientBase() {
+        try {
+            // in 9.0.2, AbstractClientSimpleAction was moved to ..xsp.extsn
+            Class<?> clazz = Class.forName("com.ibm.xsp.actions.client.AbstractClientSimpleAction");
+            return clazz;
+        } catch (ClassNotFoundException e) {
+            // This test project can't see AbstractClientSimpleAction, which is in ..xsp.extsn
+            // so the library under test can't see it either,
+            // so none the library simple actions won't implement it.
+            return null;
         }
     }
     protected String[] getSkips(){

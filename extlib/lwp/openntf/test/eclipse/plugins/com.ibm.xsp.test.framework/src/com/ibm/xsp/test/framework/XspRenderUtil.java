@@ -20,16 +20,18 @@
 */
 package com.ibm.xsp.test.framework;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIComponentBase;
+import javax.faces.component.UIForm;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
-import com.ibm.xsp.component.UIFormEx;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.test.framework.render.TestControlInitializer;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.TypedUtil;
@@ -59,52 +61,92 @@ public class XspRenderUtil {
      * @param root
      * @return
      */
-    public static UIPassThroughTag createContainerParagraph(UIViewRootEx root) {
-        UIComponent rootChild = TypedUtil.getChildren(root).get(0);
-        UIComponent scriptCollector = null;
-        UIFormEx form;
-        if( rootChild instanceof UIFormEx ){
-            form = (UIFormEx) rootChild;
+    public static UIComponent createContainerParagraph(UIViewRoot root) {
+        List<UIComponent> rootKids = TypedUtil.getChildren(root);
+        
+        UIComponent insertParent;
+        if( rootKids.isEmpty() ){
+            insertParent = root;
         }else{
-            // rootChild is a UIScriptCollector
-            scriptCollector = rootChild;
-            form = (UIFormEx) TypedUtil.getChildren(scriptCollector).get(0);
+            UIComponent rootChild = rootKids.get(0);
+            if( rootChild instanceof UIForm ){
+                insertParent = (UIForm) rootChild;
+            }else{
+                // rootChild is a UIScriptCollector
+                UIComponent scriptCollector = rootChild;
+                insertParent = (UIForm) TypedUtil.getChildren(scriptCollector).get(0);
+            }
         }
-        UIPassThroughTag p = new UIPassThroughTag();
-        p.setTag("p");
-        TypedUtil.getChildren(form).add(p);
+        UIComponent p;
+		try {
+	        //UIPassThroughTag p = new UIPassThroughTag();
+	        //p.setTag("p");
+			String className = "com.ibm.xsp.component.UIPassThroughTag";
+			Class<?> tagClass = Class.forName(className);
+			p = (UIComponent) tagClass.newInstance();
+			TypedUtil.getAttributes(p).put("tag", "p");
+		}catch(Exception e){
+			// should only happen in ..xsp.core junit tests.
+			p = new UITestParagraph();
+		}
+        
+        TypedUtil.getChildren(insertParent).add(p);
         return p;
     }
+    private static final class UITestParagraph extends UIComponentBase{
+		@Override
+		public String getFamily() {
+			return null;
+		}
 
+		@Override
+		public void encodeBegin(FacesContext context) throws IOException {
+			context.getResponseWriter().startElement("p", this);
+			super.encodeBegin(context);
+		}
+
+		@Override
+		public void encodeEnd(FacesContext context) throws IOException {
+			super.encodeEnd(context);
+			context.getResponseWriter().endElement("p");
+		}
+    }
     /**
      * @param root
      * @param p
      * @param instance
      * @throws Exception
      */
-    public static void resetContainerChild(UIViewRootEx root, UIPassThroughTag p,
+    public static void resetContainerChild(UIViewRoot root, UIComponent p,
             UIComponent instance) throws Exception{
         
         // clear out any changes caused by the previous rendering/encode
-        root.setDojoParseOnLoad(false);
-        root.setDojoTheme(false);
-        root.setLoadXspClientDojoUI(false);
-        root.clearEncodeResources();
+        Map<String, Object> rootAttrs = TypedUtil.getAttributes(root);
+        rootAttrs.put("dojoParseOnLoad", false);
+        rootAttrs.put("dojoTheme", false);
+        rootAttrs.put("loadXspClientDojoUI",false);
+        if( ! UIViewRoot.class.equals(root.getClass()) ){
+            // UIViewRootEx and the other subclass have this clear.. method
+            // root.clearEncodeResources();
+            Method mtd = root.getClass().getMethod("clearEncodeResources", new Class[0]);
+            if( null != mtd ){
+                mtd.invoke(root, new Object[0]);
+            }
         //root._lastUniqueId = 100;
-        Class<?> viewRootClass = UIViewRootEx.class;
+            Class<?> viewRootClass = Class.forName("com.ibm.xsp.component.UIViewRootEx");
         Field lastIdField = viewRootClass.getDeclaredField("_lastUniqueId");
         lastIdField.setAccessible(true); // change private to public
         try{
             lastIdField.set(root, 100);
         }finally{
             lastIdField.setAccessible(false);
+            }
         }
         
         UIComponent rootChild = TypedUtil.getChildren(root).get(0);
-        if( !(rootChild instanceof UIFormEx) ){
+        if( !(rootChild instanceof UIForm) && rootChild.getClass().getName().contains("ScriptCollector") ){
             // rootChild is a UIScriptCollector
             UIComponent scriptCollector = rootChild;
-            
             // scriptCollector.reset();
             Method resetMethod = scriptCollector.getClass().getMethod("reset");
             resetMethod.invoke(scriptCollector);
