@@ -276,12 +276,6 @@ public class WizardSubPageFormTable extends WizardSubPage {
                         
                     case FormField.RICH_TEXT:
                         fldElement = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, XSPTagNames.XSP_TAG_INPUT_RICH_TEXT);
-                        Element dojoAttrs = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, "this.dojoAttributes"); // $NON-NLS-1$
-                        Element dojoAttr = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, "dojoAttribute"); // $NON-NLS-1$
-                        FormModelUtil.setAttribute(dojoAttr, XSPAttributeNames.XSP_ATTR_NAME, "toolbarType");  // $NON-NLS-1$
-                        FormModelUtil.setAttribute(dojoAttr, XSPAttributeNames.XSP_ATTR_VALUE, "Slim"); // $NON-NLS-1$
-                        dojoAttrs.appendChild(dojoAttr);
-                        fldElement.appendChild(dojoAttrs);
                         break;
                 }
                             

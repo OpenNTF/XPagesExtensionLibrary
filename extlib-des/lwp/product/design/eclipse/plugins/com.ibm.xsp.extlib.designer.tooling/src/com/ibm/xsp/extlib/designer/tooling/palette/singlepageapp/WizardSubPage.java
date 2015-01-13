@@ -36,6 +36,7 @@ public abstract class WizardSubPage extends WizardBasePage implements SelectionL
 
     protected WizardSubPage(WizardDataSub pd) {
         super();
+        setTitle(WizardData.PAGE_TYPES[pd.type]);
         pageData = pd;
     }
 

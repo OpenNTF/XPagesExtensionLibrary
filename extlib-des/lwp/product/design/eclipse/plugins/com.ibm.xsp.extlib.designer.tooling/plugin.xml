@@ -18,6 +18,7 @@
 <!-- ******************************************************************* -->
 <?eclipse version="3.4"?>
 <plugin>
+
     <extension
         point="com.ibm.designer.domino.xsp.editor.component">
         <components
@@ -148,6 +149,53 @@
                 </panels>
             </component> 
             
+            <!-- Extension Library - Application Layout - Responsive Bootstrap Configuration--> 
+            <component
+                tagName="applicationLayout/bootstrapResponsiveConfiguration">
+                <panels>
+                    <panel
+                        contextId="com.ibm.xsp.extlib.designer.tooling.panels.applicationlayout.ApplicationLayoutPageLinks"
+                        id="applayout.page.basics"
+                        title="%panels.applicationLayout.title">
+                    </panel>
+                    <panel
+                        id="applayout.page.banner"
+                        title="%panels.applicationLayout.banner">
+                    </panel>
+                    <panel
+                        id="applayout.page.bannerapplinks"
+                        title="%panels.applicationLayout.applicationlinks"
+                        indented="true">
+                    </panel>
+                    <panel
+                        id="applayout.page.bannerutilitylinks"
+                        title="%panels.applicationLayout.utilitylinks"
+                        indented="true">
+                    </panel>
+                    <panel
+                        id="applayout.page.titlebartabs"
+                        title="%panels.applicationLayout.titlebar">
+                    </panel>
+                    <panel
+                        id="applayout.page.search"
+                        title="%panels.applicationLayout.search"
+                        indented="true">
+                    </panel>
+                    <panel
+                        id="applayout.page.placebaractions"
+                        title="%panels.applicationLayout.placebar">
+                    </panel>
+                    <panel
+                        id="applayout.page.footerlinks"
+                        title="%panels.applicationLayout.footer">
+                    </panel>
+                    <panel
+                        id="applayout.page.legal"
+                        title="%panels.applicationLayout.legal">
+                    </panel>
+                </panels>
+            </component> 
+
             <!-- Extension Library - Application Layout - IBM Application Configuration--> 
             <component tagName="applicationLayout/IBMApplication">
                 <panels>
@@ -2944,6 +2992,8 @@
                     visible="true"
                     iconLarge="images/palette/ExtensionLibraryIcon_24.png"
                     iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
+                    <!--This drop action displays the iNotes Calendar Wizard-->
+                    <!--action="com.ibm.xsp.extlib.designer.tooling.palette.calendarview.CalendarViewDropAction"-->                             
                 <panels>
                     <panel
                         id="core.lib.basics.panel"
@@ -3488,6 +3538,12 @@
                 panelClass="com.ibm.xsp.extlib.designer.tooling.panels.complex.configuration.ApplicationLayoutApplicationPanel"
                 tagName="applicationConfiguration">
             </panel>
+            <!--The following panel is used by the iNotes Calendar Wizard-->
+            <!--panel
+                namespace="http://www.ibm.com/xsp/coreex/wizard/panels"
+                panelClass="com.ibm.xsp.extlib.designer.tooling.panels.complex.wizard.ChooseCalendarViewPanel"
+                tagName="chooseCalendarView">
+            </panel-->
         </panels>
     </extension>
    

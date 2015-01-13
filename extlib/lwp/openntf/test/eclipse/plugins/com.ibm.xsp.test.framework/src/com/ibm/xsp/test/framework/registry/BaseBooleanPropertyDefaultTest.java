@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,10 +23,6 @@ package com.ibm.xsp.test.framework.registry;
 import javax.faces.component.UIMessage;
 import javax.faces.component.UIMessages;
 
-import com.ibm.xsp.component.UIInputEx;
-import com.ibm.xsp.component.UISelectManyEx;
-import com.ibm.xsp.component.UISelectOneEx;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesSharableRegistry;
 
 /**
@@ -50,7 +46,13 @@ public class BaseBooleanPropertyDefaultTest extends BooleanPropertyDefaultTest {
      * @return
      */
     public static Object[] getUIInputExDisableModifiedFlagSkip() {
-        return new Object[]{"disableModifiedFlag", UIInputEx.class, true};
+        Class<?> controlClass;
+        try {
+            controlClass = Class.forName("com.ibm.xsp.component.UIInputEx");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot use UIInputEx disableModifiedFlag skip when UIInputEx is unknown - add dependancy on com.ibm.xsp.extsn plugin", e);
+        }
+        return new Object[]{"disableModifiedFlag", controlClass, true};
     }
 
     /**
@@ -59,7 +61,13 @@ public class BaseBooleanPropertyDefaultTest extends BooleanPropertyDefaultTest {
      * Used with {@link BooleanPropertyDefaultTest#getPrimitiveDefaultSkips(FacesSharableRegistry)}
      */
     public static Object[] getUISelectManyExDisableModifiedFlagSkip() {
-        return new Object[]{"disableModifiedFlag", UISelectManyEx.class, true};
+        Class<?> controlClass;
+        try {
+            controlClass = Class.forName("com.ibm.xsp.component.UISelectManyEx");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot use UISelectManyEx disableModifiedFlag skip when UISelectManyEx is unknown - add dependancy on com.ibm.xsp.extsn plugin", e);
+        }
+        return new Object[]{"disableModifiedFlag", controlClass, true};
     }
 
     /**
@@ -68,7 +76,13 @@ public class BaseBooleanPropertyDefaultTest extends BooleanPropertyDefaultTest {
      * Used with {@link BooleanPropertyDefaultTest#getPrimitiveDefaultSkips(FacesSharableRegistry)}
      */
     public static Object[] getUISelectOneExDisableModifiedFlagSkip() {
-        return new Object[]{"disableModifiedFlag", UISelectOneEx.class, true};
+        Class<?> controlClass;
+        try {
+            controlClass = Class.forName("com.ibm.xsp.component.UISelectOneEx");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot use UISelectOneEx disableModifiedFlag skip when UISelectOneEx is unknown - add dependancy on com.ibm.xsp.extsn plugin", e);
+        }
+        return new Object[]{"disableModifiedFlag", controlClass, true};
     }
     
     /**
@@ -76,7 +90,13 @@ public class BaseBooleanPropertyDefaultTest extends BooleanPropertyDefaultTest {
      * @return
      */
     public static Object[] getUIInputExMultipleTrimSkip() {
-    	return new Object[]{"multipleTrim", UIInputEx.class, true};
+        Class<?> inputEx;
+        try {
+            inputEx = Class.forName("com.ibm.xsp.component.UIInputEx");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Cannot use UIInputEx multipleTrim skip when UIInputEx is unknown - add dependancy on com.ibm.xsp.extsn plugin", e);
+        }
+    	return new Object[]{"multipleTrim", inputEx, true};
     }
 
     /**

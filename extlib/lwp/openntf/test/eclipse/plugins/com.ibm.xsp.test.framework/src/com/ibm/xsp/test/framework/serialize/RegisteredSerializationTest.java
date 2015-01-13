@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2006, 2012
+ * © Copyright IBM Corp. 2006, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -297,12 +297,15 @@ public class RegisteredSerializationTest extends AbstractXspTest {
             }
         }
         fails = XspTestUtil.removeMultilineFailSkips(fails,
-                SkipFileContent.concatSkips(null, this, "testRegisteredObjectsSerialization"));
+                SkipFileContent.concatSkips(getSkips(), this, "testRegisteredObjectsSerialization"));
         if( fails.length() > 0 ){
             fail( XspTestUtil.getMultilineFailMessage(fails.toString()) );
         }
     }
 
+	protected String[] getSkips(){
+		return StringUtil.EMPTY_STRING_ARRAY;
+	}
     private String callSingleSetter(FacesDefinition defUnderTest, 
             FacesDefinition containerDef, 
             Object containerObj, 

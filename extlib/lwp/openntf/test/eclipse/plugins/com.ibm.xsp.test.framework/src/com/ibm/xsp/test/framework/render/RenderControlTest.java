@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -21,11 +21,10 @@
 package com.ibm.xsp.test.framework.render;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesSharableRegistry;
 import com.ibm.xsp.test.framework.AbstractXspTest;
@@ -55,8 +54,8 @@ public class RenderControlTest extends AbstractXspTest {
         // set up the page to be rendered
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         // for each control
         FacesSharableRegistry reg = TestProject.createRegistryWithAnnotater(this, 

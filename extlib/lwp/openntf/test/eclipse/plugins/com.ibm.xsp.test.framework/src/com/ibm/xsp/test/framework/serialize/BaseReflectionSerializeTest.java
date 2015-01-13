@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,6 +22,8 @@ package com.ibm.xsp.test.framework.serialize;
 
 import java.util.List;
 
+import javax.faces.component.UIComponent;
+
 import com.ibm.xsp.binding.MethodBindingEx;
 import com.ibm.xsp.model.IndexedDataContext;
 import com.ibm.xsp.registry.FacesComplexDefinition;
@@ -33,10 +35,7 @@ import com.ibm.xsp.registry.FacesSharableRegistry;
 import com.ibm.xsp.registry.RegistryUtil;
 import com.ibm.xsp.test.framework.TestProject;
 import com.ibm.xsp.test.framework.XspTestUtil;
-import com.ibm.xsp.test.framework.serialize.BaseViewSerializeTest.ActionListenerImplComparator;
 import com.ibm.xsp.test.framework.serialize.BaseViewSerializeTest.IndexedDataContextComparator;
-import com.ibm.xsp.test.framework.serialize.BaseViewSerializeTest.ValidatorImplComparator;
-import com.ibm.xsp.validator.ValidatorImpl;
 
 /**
  * 
@@ -47,12 +46,7 @@ public class BaseReflectionSerializeTest extends ReflectionSerializeTest {
         super.initReflectionSerializer(serializer);
         // Available to override in subclasses
         Object existing;
-        existing = serializer.addComparator(ValidatorImpl.class, new ValidatorImplComparator());
-        assertNull(existing);
         existing = serializer.addComparator(IndexedDataContext.class, new IndexedDataContextComparator());
-        assertNull(existing);
-        existing = serializer.addComparator(com.ibm.xsp.event.ActionListenerImpl.class, 
-                new ActionListenerImplComparator());
         assertNull(existing);
     }
     protected Object[][] getReflectionCompareSkips(FacesSharableRegistry reg) {
@@ -103,8 +97,26 @@ public class BaseReflectionSerializeTest extends ReflectionSerializeTest {
     @Override
     protected Object[][] getSkipProperty(FacesSharableRegistry reg) {
         Object[][] skips = super.getSkipProperty(reg);
-        boolean hasControls = !TestProject.getLibComponents(reg, this).isEmpty();
-        if( hasControls ){
+        // { UIComponent.class, "binding", UIComponent.class }
+        boolean isTestingSomeControl = false;
+        List<FacesComponentDefinition> comps = TestProject.getLibComponents(reg, this);
+        if( ! comps.isEmpty() ){
+            for (FacesComponentDefinition def : comps) {
+                if( def.isTag() ){
+                    isTestingSomeControl = true;
+                    break;
+                }
+            }
+        }else{
+            Class<?>[] extraDefClasses = getExtraDefsToTest();
+            for (Class<?> extraDefClass : extraDefClasses) {
+                if( UIComponent.class.isAssignableFrom(extraDefClass) ){
+                    isTestingSomeControl = true;
+                    break;
+                }
+            }
+        }
+        if( isTestingSomeControl ){
             skips = XspTestUtil.concat(skips, BaseRegisteredSerializationTest.getPropertySkips_UIComponent());
         }
         return skips;

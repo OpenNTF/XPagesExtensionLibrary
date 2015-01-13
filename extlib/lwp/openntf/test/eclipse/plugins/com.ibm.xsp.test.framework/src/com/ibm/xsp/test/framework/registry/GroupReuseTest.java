@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -148,7 +148,7 @@ public class GroupReuseTest extends AbstractXspTest {
                                 ") differs from the original by: " +allChanges+
                                 " [expected reuse-changes: " +expectedReuseChanges+
                                 "] [reuse-family original is in: " +ParseUtil.getTagRef(original.def)+"]\n";
-                    };
+                    }
                     // Already has a reuse-family so shouldn't suggest reuse.
 			        continue;
 			    }

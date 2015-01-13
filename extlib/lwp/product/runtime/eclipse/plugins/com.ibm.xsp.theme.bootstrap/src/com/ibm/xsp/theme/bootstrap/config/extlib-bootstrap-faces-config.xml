@@ -157,11 +157,6 @@
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.picker.NamePickerRenderer</renderer-class>
     </renderer>
     <renderer>
-      <component-family>javax.faces.Panel</component-family>
-      <renderer-type>com.ibm.xsp.theme.bootstrap.tagcloud.TagCloud</renderer-type>
-      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.tagcloud.TagCloudRenderer</renderer-class>
-    </renderer>
-    <renderer>
       <component-family>javax.faces.Input</component-family>
       <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox</renderer-type>
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.CheckboxRenderer</renderer-class>
@@ -170,6 +165,21 @@
       <component-family>javax.faces.Input</component-family>
       <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox.ReadOnly</renderer-type>
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ReadOnlyCheckboxRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.SelectMany</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.SelectManyCheckboxListRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.SelectMany</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox.ReadOnly</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ReadOnlyCheckboxGroupRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.form.ViewHeaderCheckbox</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ViewHeaderCheckboxRenderer</renderer-class>
     </renderer>
     <renderer>
       <component-family>javax.faces.Input</component-family>
@@ -190,16 +200,6 @@
       <component-family>javax.faces.SelectOne</component-family>
       <renderer-type>com.ibm.xsp.theme.bootstrap.form.Radio.ReadOnly</renderer-type>
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ReadOnlyRadioGroupRenderer</renderer-class>
-    </renderer>
-    <renderer>
-      <component-family>javax.faces.SelectMany</component-family>
-      <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox</renderer-type>
-      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.SelectManyCheckboxListRenderer</renderer-class>
-    </renderer>
-    <renderer>
-      <component-family>javax.faces.SelectMany</component-family>
-      <renderer-type>com.ibm.xsp.theme.bootstrap.form.Checkbox</renderer-type>
-      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ReadOnlyCheckboxGroupRenderer</renderer-class>
     </renderer>
   </render-kit>
 </faces-config>

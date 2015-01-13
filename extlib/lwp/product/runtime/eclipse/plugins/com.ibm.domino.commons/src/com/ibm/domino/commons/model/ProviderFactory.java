@@ -37,6 +37,7 @@ public class ProviderFactory {
     private static IRecentContactsProvider s_recentContactsProvider = null;
     private static IGatekeeperProvider s_gatekeeperProvider = null;
     private static ICustomerProvider s_customerProvider = null;
+    private static IMutedThreadsProvider s_mutedThreadsProvider = null;
     
     private static IProviderLoader s_loader = null;
     private static boolean s_loaderNotFound = false;
@@ -247,5 +248,14 @@ public class ProviderFactory {
         }
 
         return s_customerProvider;
+    }
+
+    public static IMutedThreadsProvider getMutedThreadsProvider() {
+        if ( s_mutedThreadsProvider == null ) {
+            s_mutedThreadsProvider = (IMutedThreadsProvider)loadFromFragment(IMutedThreadsProvider.class);
+        }
+
+        return s_mutedThreadsProvider;
+        
     }
 }

@@ -21,17 +21,6 @@ import static com.ibm.xsp.extlib.designer.tooling.constants.IExtLibAttrNames.EXT
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
-import lotus.domino.Database;
-import lotus.domino.Form;
-import lotus.domino.NotesException;
-import lotus.domino.Session;
-import lotus.domino.View;
-import lotus.domino.ViewColumn;
-
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.wizard.Wizard;
@@ -62,11 +51,9 @@ import com.ibm.commons.xml.DOMUtil;
 import com.ibm.designer.domino.constants.XSPAttributeNames;
 import com.ibm.designer.domino.constants.XSPTagNames;
 import com.ibm.designer.domino.ide.resources.extensions.DesignerProject;
-import com.ibm.designer.domino.ide.resources.extensions.NotesPlatform;
 import com.ibm.designer.domino.xsp.api.panels.PanelExtraData;
 import com.ibm.designer.domino.xsp.api.panels.complex.ComplexPanelComposite;
 import com.ibm.designer.domino.xsp.api.util.XPagesDOMUtil;
-import com.ibm.designer.domino.xsp.api.util.XPagesDataUtil;
 import com.ibm.designer.domino.xsp.api.util.XPagesKey;
 import com.ibm.designer.domino.xsp.api.util.XPagesPropertiesViewUtils;
 import com.ibm.designer.domino.xsp.dominoutils.DominoImportException;
@@ -78,7 +65,6 @@ import com.ibm.xsp.extlib.designer.tooling.constants.IExtLibTagNames;
 import com.ibm.xsp.extlib.designer.tooling.utils.ExtLibToolingLogger;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 import com.ibm.xsp.extlib.designer.tooling.visualizations.AbstractCommonControlVisualizer;
-import com.ibm.xsp.registry.FacesDefinition;
 import com.ibm.xsp.registry.FacesRegistry;
 
 /**
@@ -207,7 +193,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
             }
         }
         dn.setDataProvider(new SingleCollection(viewDOMElement));
-        getXPagesKey();
+        getPanelKey();
         return dn;        
     }
     
@@ -228,20 +214,11 @@ public class WizardSubPageDataSource extends WizardSubPage {
     //
     // Gets the key for the UI Panel to display
     //
-    private void getXPagesKey() {
-        List<FacesDefinition> defs;        
+    private void getPanelKey() {
         if (dsType == DS_DOC) {
-            // Get all of the data sources that support document data
-            defs = XPagesDataUtil.getDocumentDataSources(extraData.getDesignerProject().getFacesRegistry());
+            key = new XPagesKey(AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, XSPTagNames.XSP_TAG_DATASOURCE_DOMINO_DOCUMENT);
         } else {
-            // Get all of the data sources that support view data
-            defs = XPagesDataUtil.getViewPanelDataSources(extraData.getDesignerProject().getFacesRegistry());            
-        }
-        if(defs != null){
-            for(FacesDefinition def : defs){
-                key = new XPagesKey(def.getNamespaceUri(), def.getTagName());
-                return;
-            }
+            key = new XPagesKey(AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, XSPTagNames.XSP_TAG_DATASOURCE_DOMINO_VIEW);
         }
     }
     
@@ -373,17 +350,8 @@ public class WizardSubPageDataSource extends WizardSubPage {
     // Gets column Titles and Names for the selected View
     //
     public String [][] getViewColumns() {
-        String dbName = null;
-        if(childDataSourceDataNode != null){
-            IMember member = childDataSourceDataNode.getMember(XSPAttributeNames.XSP_ATTR_DATABASE_NAME);
-            if (member instanceof IAttribute) {
-                try {
-                    dbName = childDataSourceDataNode.getValue((IAttribute) member);
-                }
-                catch (NodeException e) {
-                }
-            }
-        }
+        String dbName = getDbName();
+
         DesignerProject prj = extraData.getDesignerProject();
         if (StringUtil.isEmpty(dbName)) {
             if (prj != null) {
@@ -403,17 +371,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
             serverName = dbName.substring(0, dbName.indexOf(DominoUtil.DB_SERVER_SEPARATOR));
             dbName = dbName.substring(dbName.indexOf(DominoUtil.DB_SERVER_SEPARATOR) + 2);
         }
-        String viewName = null;
-        if(childDataSourceDataNode != null){
-            IMember member = childDataSourceDataNode.getMember(XSPAttributeNames.XSP_ATTR_VIEW_NAME);
-            if (member instanceof IAttribute) {
-                try {
-                    viewName = childDataSourceDataNode.getValue((IAttribute) member);
-                }
-                catch (NodeException e) {
-                }
-            }
-        }
+        String viewName = getViewName();
         if (StringUtil.isEmpty(viewName)) {
             return null;
         }
@@ -430,7 +388,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
         
         try {
             // GMAM9PBDPA - Show hidden columns
-            String[][] columns = getViewColumns(serverName, dbName, viewName, false, false);
+            String[][] columns = WizardUtils.getViewColumns(serverName, dbName, viewName, false, false);
             if (columns != null && columns.length > 0) {
                 savedViewColumns = columns;
             }
@@ -445,17 +403,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
     // Gets form fields for the selected Form
     //
     public ArrayList<FormField> getFormFields() {
-        String dbName = null;
-        if(childDataSourceDataNode != null){
-            IMember member = childDataSourceDataNode.getMember(XSPAttributeNames.XSP_ATTR_DATABASE_NAME);
-            if (member instanceof IAttribute) {
-                try {
-                    dbName = childDataSourceDataNode.getValue((IAttribute) member);
-                }
-                catch (NodeException e) {
-                }
-            }
-        }
+        String dbName = getDbName();
         DesignerProject prj = extraData.getDesignerProject();
         if (StringUtil.isEmpty(dbName)) {
             if (prj != null) {
@@ -475,17 +423,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
             serverName = dbName.substring(0, dbName.indexOf(DominoUtil.DB_SERVER_SEPARATOR));
             dbName = dbName.substring(dbName.indexOf(DominoUtil.DB_SERVER_SEPARATOR) + 2);
         }
-        String formName = null;
-        if(childDataSourceDataNode != null){
-            IMember member = childDataSourceDataNode.getMember(XSPAttributeNames.XSP_ATTR_FORM_NAME);
-            if (member instanceof IAttribute) {
-                try {
-                    formName = childDataSourceDataNode.getValue((IAttribute) member);
-                }
-                catch (NodeException e) {
-                }
-            }
-        }
+        String formName = getFormName();
         if (StringUtil.isEmpty(formName)) {
             return new ArrayList<FormField>();
         }
@@ -501,7 +439,7 @@ public class WizardSubPageDataSource extends WizardSubPage {
         savedFormFields = new ArrayList<FormField>();
     
         try {
-            savedFormFields = getFormFields(serverName, dbName, formName);
+            savedFormFields = WizardUtils.getFormFields(serverName, dbName, formName);
         }
         catch (DominoImportException e) {
         }
@@ -509,7 +447,9 @@ public class WizardSubPageDataSource extends WizardSubPage {
         return savedFormFields;
     }
     
-    
+    //
+    // Returns the dataSource type
+    //
     public int getType() {
         return dsType;
     }
@@ -600,250 +540,6 @@ public class WizardSubPageDataSource extends WizardSubPage {
         base.appendChild(dataEl);
     }
     
-    //
-    // Helper function to get Form Fields
-    //
-    private ArrayList<FormField> getFormFields(final String server, final String database, final String formName) throws DominoImportException {
-        if (server == null || database == null || formName == null) {
-            return null;
-        }
-        final ArrayList<FormField> fields = new ArrayList<FormField>();
-        final DominoImportException[] die = new DominoImportException[1];
-        try {
-            NotesPlatform.getInstance().syncExec(new Runnable() {
-
-                public void run() {
-                    if (StringUtil.isNotEmpty(database)) {
-                        if (StringUtil.isEmpty(database.trim())) {
-                            return;
-                        }
-                        if (database.length() == 1 && Character.isSpaceChar(database.charAt(0))) {
-                            return;
-                        }
-                    }
-                    Database db = null;
-                    try {
-                        Session sess = NotesPlatform.getInstance().getSession();
-                        db = sess.getDatabase(XPagesDataUtil.getServerName(server), database);
-                        if (!db.isOpen()) {
-                            try {
-                                db.open();
-                            } catch (NotesException ne) {
-                                if (StringUtil.equals(DominoUtil.LOCAL_CLIENT, server)) {
-                                    die[0] = new DominoImportException(ne, "Unable to find Forms in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindFormsinthedatabase-1$
-                                            + database);
-                                }
-                                else {
-                                    // there is a possibility that the db is on the local machine
-                                    db = sess.getDatabase(XPagesDataUtil.getServerName(DominoUtil.LOCAL_CLIENT), database);
-                                    if (!db.isOpen()) {
-                                        db.open();
-                                    }
-                                }
-                            }
-                        }
-
-                        // at this level (API) we don't have ability to pull
-                        // in the design elements
-                        // cleanly. So for now, we'll pull in what we can
-                        // directly - forms, views
-                        // Creating a NoteCollection would find all the
-                        // elements we want, but not with
-                        // info we need.
-                        //
-                        Vector vel = db.getForms();
-                        Iterator it = vel.iterator();
-                        while (it.hasNext()) {
-                            Form frm = (Form) it.next();
-                            String name = null;
-                            Vector v = frm.getAliases();
-                            int size = v.size();
-                            if (size > 0) {
-                                name = (String) v.get(size - 1);
-                            }
-                            else {
-                                name = frm.getName();
-                            }
-                            if (formName.equals(name)) {
-                                Vector fldVel = frm.getFields();
-                                Iterator fldIt = fldVel.iterator();
-                                while (fldIt.hasNext()) {
-                                    String fieldName = (String) fldIt.next();
-                                    int type = frm.getFieldType(fieldName);
-                                    FormField frmFld = new FormField(fieldName, type);
-                                    if (frmFld.control != FormField.NOT_SUPPORTED) {
-                                        fields.add(0, frmFld);
-                                    }
-                                }
-                                frm.recycle();
-                                break;
-                            }
-                            frm.recycle();
-                        }
-                    } catch (NotesException e) {
-                        die[0] = new DominoImportException(e, "Unable to find Forms in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindFormsinthedatabase.1-1$
-                                + database);
-                    } catch (Throwable e) {
-                        die[0] = new DominoImportException(null, "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound-1$
-                    } finally {
-                        if (db != null) {
-                            try {
-                                db.recycle();
-                            } catch (NotesException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            });
-        } catch (Throwable e) {
-
-            die[0] = new DominoImportException(null, "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.1-1$
-        }
-
-        if (die[0] != null) {
-            throw die[0];
-        }
-        return fields;
-    }     
-    
-    //
-    // Helper function to get View Columns
-    //
-    public static String[][] getViewColumns(final String server,
-            final String database, final String viewName, 
-            final boolean sortableOnly, final boolean visibleOnly) throws DominoImportException {
-        if (server == null || database == null || viewName == null) {
-            return null;
-        }
-        final ArrayList<String> columnNames = new ArrayList<String>();
-        final ArrayList<String> columnTitles = new ArrayList<String>();
-        final DominoImportException[] die = new DominoImportException[1];
-        try {
-            NotesPlatform.getInstance().syncExec(new Runnable() {
-                
-                public void run() {
-                    if(StringUtil.isNotEmpty(database)){
-                        if(StringUtil.isEmpty(database.trim())){
-                            return;
-                        }
-                        if(database.length() == 1 && Character.isSpaceChar(database.charAt(0))){
-                            return;
-                        }
-                    }
-                    Database db = null;
-                    try {
-                        Session sess = NotesPlatform.getInstance().getSession();
-                        db = sess.getDatabase(XPagesDataUtil.getServerName(server), database);
-                        if (!db.isOpen()) {
-                            try{
-                                db.open();
-                            }catch(NotesException ne){
-                                if(StringUtil.equals(DominoUtil.LOCAL_CLIENT, server)){
-                                    die[0] = new DominoImportException(ne, "Unable to find Views in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindViewsinthedatabase-1$
-                                            + database);
-                                }else{
-                                    //there is a possibility that the db is on the local machine
-                                    db = sess.getDatabase(XPagesDataUtil.getServerName(DominoUtil.LOCAL_CLIENT), database);
-                                    if(!db.isOpen()){
-                                        db.open();
-                                    }
-                                }
-                            }
-                        }
-
-                        // at this level (API) we don't have ability to pull
-                        // in the design elements
-                        // cleanly. So for now, we'll pull in what we can
-                        // directly - forms, views
-                        // Creating a NoteCollection would find all the
-                        // elements we want, but not with
-                        // info we need.
-                        // 
-                        Vector vel = db.getViews();
-                        Iterator it = vel.iterator();
-                        while (it.hasNext()) {
-                            View vu = (View) it.next();
-                            String name = null;
-                            Vector v = vu.getAliases();
-                            int size = v.size();
-                            if (size > 0) {
-                                name = (String) v.get(size - 1);
-                            } else {
-                                name = vu.getName();
-                            }
-                            if (viewName.equals(name)) {
-                                int columnSize = vu.getColumnCount();
-                                // Checking autoGen columns
-                                for (int col = 1; col <= columnSize; col++) {
-                                    ViewColumn viewCol = vu.getColumn(col);
-                                    boolean shouldViewColBeAdded = XPagesDataUtil.getViewColAddStatus(viewCol);
-                                    if(sortableOnly && shouldViewColBeAdded){
-                                        boolean sortable = viewCol.isResortAscending();
-                                        if(!sortable){
-                                            sortable = viewCol.isResortDescending();
-                                        }
-                                        shouldViewColBeAdded = sortable;
-                                    }
-                                    
-                                    if (visibleOnly && shouldViewColBeAdded) {
-                                        shouldViewColBeAdded = !viewCol.isHidden();
-                                    }
-                                    
-                                    if (shouldViewColBeAdded) {
-                                        String colTitle = StringUtil.getNonNullString(viewCol.getTitle());
-                                        String colName = StringUtil.getNonNullString(viewCol.getItemName());
-                                        
-                                        // GMAM9PBDPA - If there's no title use the name as the title
-                                        if (StringUtil.isNotEmpty(colTitle)) {
-                                            columnTitles.add(colTitle);                                            
-                                        } else {
-                                            columnTitles.add(colName);
-                                        }
-                                        
-                                        columnNames.add(colName);
-                                    }
-                                    viewCol.recycle();
-                                }
-                                vu.recycle();
-                                break;
-                            }
-                            vu.recycle();
-                        }
-                    } catch (NotesException e) {
-                        die[0] = new DominoImportException(e,
-                                "Unable to find Views in the database: "  // $NLE-WizardSubPageDataSource.UnabletofindViewsinthedatabase.1-1$
-                                        + database);
-                    } catch (Throwable e) {
-                        die[0] = new DominoImportException(null,
-                                "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.2-1$
-                    }
-                    finally{
-                        if(db != null){
-                            try {
-                                db.recycle();
-                            } catch (NotesException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            });
-        } catch (Throwable e) {
-
-            die[0] = new DominoImportException(null,
-                    "Notes client not found");  // $NLE-WizardSubPageDataSource.Notesclientnotfound.3-1$
-        }
-
-        if (die[0] != null) {
-            throw die[0];
-        }
-        String[][] ret = new String[2][];
-        ret[0] = columnNames.toArray(new String[0]);
-        ret[1] = columnTitles.toArray(new String[0]);
-        return ret;
-    }
-        
     //
     // Checks has the DataSource changed
     //

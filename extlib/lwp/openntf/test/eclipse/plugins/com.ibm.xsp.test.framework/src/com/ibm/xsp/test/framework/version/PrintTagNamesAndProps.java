@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIIncludeComposite;
 import com.ibm.xsp.library.StandardRegistryMaintainer;
 import com.ibm.xsp.registry.FacesComplexDefinition;
 import com.ibm.xsp.registry.FacesComponentDefinition;
@@ -302,7 +301,7 @@ public class PrintTagNamesAndProps {
                 }
                 String name = prefix + ":" + def.getTagName();
                 if( ! def.isTag() ){
-                    boolean isCustomControlBase = UIIncludeComposite.class.equals(def.getJavaClass());
+                    boolean isCustomControlBase = "com.ibm.xsp.IncludeComposite".equals(def.getReferenceId());
                     if( null != def.getExtension(parentTag) ){
                         // non-tag that is ancestor of something in fullRegistry
                         name = prefix + "-"+def.getId();

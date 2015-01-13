@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2006, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -397,6 +397,16 @@ public class GeneratePagesTest extends AbstractXspTest{
         Map<String, Object> options = new HashMap<String, Object>();
         options.put(Translator.OPTION_APPLICATION_VERSION, applicationVersion);
         options.put(Translator.OPTION_ERROR_HANDLER, errHandler);
+        if( null != projectObjs ){
+        	// array copied from ControlClassUtil.initCache(Translator, Map<String, Object>)
+        	String[] keys = {"text","tag","custom-base","include-page","property-map-instance"};
+        	for (String transKey : keys) {
+        		Object value = projectObjs.get(transKey);
+        		if( value != null ){
+        			options.put(transKey, (Class<?>) value);
+        		}
+        	}
+        }
         Translator compiler = new Translator(registry, options);
         
         boolean isCustomControl = customsPageNames.contains(pageInfo.pageName);

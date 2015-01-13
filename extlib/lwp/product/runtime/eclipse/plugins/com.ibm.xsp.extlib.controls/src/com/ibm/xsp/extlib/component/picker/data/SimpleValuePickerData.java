@@ -119,7 +119,7 @@ public class SimpleValuePickerData extends ValueBindingObjectImpl implements IVa
     public void restoreState(FacesContext _context, Object _state) {
         Object _values[] = (Object[]) _state;
         super.restoreState(_context, _values[0]);
-        valueList = (String)_values[1];
+        valueList = _values[1];
         valueListSeparator = (String)_values[2];
         labelSeparator = (String)_values[3];
         caseInsensitive = (Boolean)_values[4];

@@ -630,9 +630,10 @@ public class DasServlet extends AbstractRestServlet {
                     // gatekeeper feature.  When running in SAAS, this makes sure
                     // the service is enabled for the customer.
                     if ( service.getGkf() != 0 ) {
+                        String userId = ScnContext.getCurrentInstance().getUserId();
                         IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
                         enabled = provider.isFeatureEnabled(service.getGkf(), 
-                                    customerId, null);
+                                    customerId, userId);
 
                         if ( !enabled && DAS_LOGGER.getLogger().isLoggable(Level.FINE)) {
                             DAS_LOGGER.getLogger().fine(StringUtil.format(
@@ -835,6 +836,12 @@ public class DasServlet extends AbstractRestServlet {
         if ( StringUtil.isNotEmpty(customerId) ) {
             ctx.setCustomerId(customerId);
         }
+        
+        String userId = request.getHeader("X-DominoUserID"); // $NON-NLS-1$
+        if ( StringUtil.isNotEmpty(userId) ) {
+            ctx.setUserId(userId);
+        }
+
     }
     
     /**

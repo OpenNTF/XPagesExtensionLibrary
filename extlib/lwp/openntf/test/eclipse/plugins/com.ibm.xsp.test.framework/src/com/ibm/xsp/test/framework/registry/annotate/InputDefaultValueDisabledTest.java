@@ -24,16 +24,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.application.Application;
+import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.component.UISelectMany;
 import javax.faces.component.UISelectOne;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesProperty;
 import com.ibm.xsp.registry.FacesSharableRegistry;
@@ -71,8 +71,8 @@ public class InputDefaultValueDisabledTest extends AbstractXspTest {
         String fullViewName = "/pages/pregenerated/empty.xsp";
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         for (FacesComponentDefinition def : TestProject.getLibComponents(reg, this)) { 
         	if( ! def.isTag() ){

@@ -16,6 +16,7 @@
 
 package com.ibm.domino.services.calendar.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_EVENT_LIST;
 import static com.ibm.domino.services.calendar.service.CalendarService.CALENDAR_SERVICE_LOGGER;
 import static com.ibm.domino.services.calendar.service.CalendarService.FORMAT_ICALENDAR;
 import static com.ibm.domino.services.calendar.service.CalendarService.MEDIA_TYPE_ICALENDAR;
@@ -78,7 +79,6 @@ import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.commons.json.JsonIllegalValueException;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.json.JsonCalendarGenerator;
 import com.ibm.domino.services.calendar.json.JsonCalendarParser;
 import com.ibm.domino.services.calendar.service.CalendarService;
@@ -113,8 +113,8 @@ public class EventCollectionResource {
                         @QueryParam(URL_PARAM_START) String start,
                         @QueryParam(URL_PARAM_FIELDS) String fields) {
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_VIEW_EVENTS);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEvents"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT_LIST, STAT_VIEW_EVENTS);
         
         String jsonEntity = null;
         String eventString = null;
@@ -235,8 +235,8 @@ public class EventCollectionResource {
     public Response createJsonEvent(String requestEntity, @Context UriInfo uriInfo,
             @QueryParam(URL_PARAM_WORKFLOW) String workflow) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_CREATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "createJsonEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT_LIST, STAT_CREATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -339,8 +339,8 @@ public class EventCollectionResource {
     public Response createEvent(String requestEntity, @Context UriInfo uriInfo,
             @QueryParam(URL_PARAM_WORKFLOW) String workflow) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_CREATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "createEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT_LIST, STAT_CREATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 

@@ -27,12 +27,11 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.render.Renderer;
 
 import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesSharableRegistry;
@@ -99,7 +98,7 @@ public class RenderThemeControlTest extends AbstractXspTest {
                 context.setSessionProperty("xsp.theme", themeId);
             }
             
-            UIViewRootEx root = TestProject.loadEmptyPage(this, context);
+            UIViewRoot root = TestProject.loadEmptyPage(this, context);
             String expectedThemeName = (null != themeId)? themeId : 
                     Platform.getInstance().isPlatform("Notes")? "notes" : "webstandard";
                 if( !expectedThemeName.equals(context.getStyleKit().getName()) ){
@@ -108,7 +107,7 @@ public class RenderThemeControlTest extends AbstractXspTest {
                             ", current theme is: " +actualCurrentTheme+"\n";
                     problemWithTheme = true;
                 }
-            UIPassThroughTag p = problemWithTheme? null : XspRenderUtil.createContainerParagraph(root);
+                UIComponent p = problemWithTheme? null : XspRenderUtil.createContainerParagraph(root);
             
             if( problemWithTheme ){
                 contexts[i++] = null;
@@ -144,8 +143,8 @@ public class RenderThemeControlTest extends AbstractXspTest {
                 }
                 String themeId = objs.themeId;
                 FacesContextEx context = objs.context;
-                UIViewRootEx root = objs.root;
-                UIPassThroughTag p = objs.p;
+                UIViewRoot root = objs.root;
+                UIComponent p = objs.p;
                 
                 setCurrentContext(context);
                 
@@ -188,11 +187,13 @@ public class RenderThemeControlTest extends AbstractXspTest {
                     try{
                         page = ResponseBuffer.encode(p, context);
                     }catch(Exception e){
-                        e.printStackTrace();
                         currentDefFail = "Problem rendering page: "+e;
-                        defFails += XspTestUtil.loc(def)
+                        String msg = XspTestUtil.loc(def)
                                 +" [theme:" +themeId+"]"
-                                + " " +currentDefFail+"\n";
+                                + " " +currentDefFail;
+                        System.err.println("RenderThemeControlTest.testRenderControlsInThemes() "+msg);
+                        e.printStackTrace();
+                        defFails += msg+"\n";
                         ResponseBuffer.clear(context);
                     }
                 }
@@ -289,9 +290,9 @@ public class RenderThemeControlTest extends AbstractXspTest {
     private static class ContextAndPage{
         public String themeId;
         public FacesContextEx context;
-        public UIViewRootEx root;
-        public UIPassThroughTag p;
-        public ContextAndPage(String themeId, FacesContextEx context, UIViewRootEx root, UIPassThroughTag p) {
+        public UIViewRoot root;
+        public UIComponent p;
+        public ContextAndPage(String themeId, FacesContextEx context, UIViewRoot root, UIComponent p) {
             super();
             this.context = context;
             this.root = root;

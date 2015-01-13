@@ -41,6 +41,9 @@ public class SinglePageAppDropWizard extends Wizard implements IPageChangingList
     
     @Override
     public void addPages() {
+        // Set the Wizard Title
+        setWindowTitle(WizardData.WIZARD_TITLE);
+        
         // Add the start Page
         addPage(wizardData.startPage);
     }

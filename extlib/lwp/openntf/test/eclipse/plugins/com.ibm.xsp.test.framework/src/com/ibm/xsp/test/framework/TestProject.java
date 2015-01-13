@@ -48,21 +48,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.application.ApplicationEx;
-import com.ibm.xsp.binding.MethodBindingEx;
-import com.ibm.xsp.binding.ValueBindingEx;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.config.BootStrap;
 import com.ibm.xsp.config.BootStrapFactory;
 import com.ibm.xsp.context.DojoLibraryFactory;
 import com.ibm.xsp.controller.FacesController;
 import com.ibm.xsp.controller.FacesControllerFactory;
 import com.ibm.xsp.controller.FacesControllerFactoryImpl;
-import com.ibm.xsp.controller.FacesControllerImpl;
 import com.ibm.xsp.controller.FacesRequest;
 import com.ibm.xsp.controller.FacesRequestImpl;
-import com.ibm.xsp.factory.FactoryLookup;
 import com.ibm.xsp.library.ConfigFileMaintainer;
 import com.ibm.xsp.library.CoreLibrary;
 import com.ibm.xsp.library.DirectoryResourceBundleSource;
@@ -419,22 +413,48 @@ public class TestProject {
         String dir = System.getProperty("user.dir") + "/";
         File fileSystem = new File(dir);
         // _servletContext = TestUtil.createServletContext(TestUtil.getUserDir());
-        Hashtable<?, ?> config = new Hashtable<Object, Object>();
-        LocalServletContext servletContext = new LocalServletContext(fileSystem, config);
         
-        List<String> facesConfigPaths = findFacesConfigPaths(test);
-        // _bootStrap = BootStrapFactory.createBootStrap();
-        BootStrap bootStrap = BootStrapFactory.createBootStrap();
-        for (String file : facesConfigPaths) {
-            bootStrap.addConfigFile(file);
+        // the libraries that have the faces-config paths we want to register
+        List<String> runtimeLibraryIds = findRuntimeLibraryIds(test);
+        
+        // the CLBootStrap constructor always loads all the global library faces-config paths
+        List<String> unexpectedGlobals;
+        List<String> globalLibraryIds = new ArrayList<String>();
+        {
+            for (LibraryWrapper globalLib : LibraryServiceLoader.getGlobalLibraryServices()) {
+                globalLibraryIds.add(globalLib.getLibraryId());
+            }
+            List<String> tmp = new ArrayList<String>(globalLibraryIds);
+            tmp.removeAll(runtimeLibraryIds);
+            unexpectedGlobals = tmp;
         }
+        if( !unexpectedGlobals.isEmpty() ){
+            throw new RuntimeException("Unexpected global libraryIds " 
+                    +"not configured in config.properties, but found through environment libs: "
+                    +XspTestUtil.concatStrings(StringUtil.toStringArray(unexpectedGlobals)));
+        }
+        // the CLBootStrap will load the extra library's faces-config paths in the init(servletContext) method
+        List<String> requiredExtra;
+        {
+            List<String> tmp= new ArrayList<String>(runtimeLibraryIds);
+            tmp.removeAll(globalLibraryIds);
+            requiredExtra = tmp;
+        }
+        String extraDepends = XspTestUtil.concatStrings(StringUtil.toStringArray(requiredExtra)).replace(" ", "");
+        // String extraDepends = context.getInitParameter();//$NON-NLS-1$
+        Hashtable<Object, Object> initParams = new Hashtable<Object, Object>();
+        initParams.put("xsp.library.extra", extraDepends);
+        LocalServletContext servletContext = new LocalServletContext(fileSystem, initParams);
+        // _bootStrap = BootStrapFactory.createBootStrap();
+        
+        BootStrap bootStrap = BootStrapFactory.createBootStrap();
         bootStrap.init(servletContext);
         test.getTestLocalVars().put("bootStrap", bootStrap);
         test.getTestLocalVars().put("servletContext", servletContext);
         
         // _controller = createFacesController(_servletContext)
         FacesControllerFactory factory2;
-        if( facesConfigPaths.contains("META-INF/designer-faces-config.xml") ){
+        if( runtimeLibraryIds.contains("com.ibm.xsp.designer.library") ){
             // if using DesignerApplicationFactoryImpl (referenced from
             // the designer-faces-config.xml file.):
             
@@ -476,72 +496,6 @@ public class TestProject {
             factory2 = (FacesControllerFactory) Class.forName(
                     "com.ibm.xsp.controller.DesignerFacesControllerFactory")
                     .newInstance();
-        }else if( facesConfigPaths.contains("META-INF/extsn-faces-config.xml") ){
-            // only depending on ..extsn, not on ..designer
-            // so can't expect DesignerFacesController to register the javascript: factory
-            final String[][] lookupNameToFactory = new String[][]{
-                    {"com.ibm.xsp.EXTSN_DATAMODEL_FACTORY", "com.ibm.xsp.model.ExtsnDataModelFactory"},
-                    {"com.ibm.xsp.JAVASCRIPT_FACTORY",      "com.ibm.xsp.javascript.JavaScriptFactoryImpl"},
-                    {"id",         "com.ibm.xsp.binding.id.ClientIdBindingFactory"},
-                    {"javascript", "com.ibm.xsp.binding.javascript.JavaScriptBindingFactoryImpl"},
-                    {"xpath",      "com.ibm.xsp.binding.xpath.XPathBindingFactoryImpl"},
-                    {"com.ibm.xsp.EXTSN_JSRESOLVER_FACTORY", "com.ibm.xsp.javascript.JavaScriptPropertyResolverFactory"},
-                    {"com.ibm.xsp.EXTSN_JSONRESOLVER_FACTORY", "com.ibm.xsp.javascript.JSONPropertyResolverFactory"},
-                    //{"com.ibm.xsp.JAVASCRIPT_FACTORY_EX",     "xsp.JavaScriptFactoryImpl"},
-                    //  {"com.ibm.xsp.XML_XPATH_FACTORY",     "com.ibm.commons.xml.xpath.xml.XmlXPathExpressionFactory"},
-                };
-            factory2 = new FacesControllerFactoryImpl(){
-                @Override
-                public FacesController createFacesController(
-                        ServletContext context) throws FacesExceptionEx {
-                    return new FacesControllerImpl(){
-                        @Override
-                        public void init(Object context)
-                                throws FacesExceptionEx {
-                            super.init(context);
-                            try{
-                                ApplicationEx application = getApplication();
-                                FactoryLookup lookup = application.getFactoryLookup();
-                                for (String[] pair : lookupNameToFactory) {
-                                    String name = pair[0];
-                                    Class<?> factoryClass = Class.forName(pair[1]);
-                                    lookup.setFactory(name, factoryClass);
-                                }
-                                
-                                // Needed to use ExtendedJSContext so the JS global methods
-                                // like "println" are available (in a test suite, 
-                                // this will be called more than once, so only re-initialize 
-                                // when not a ExtendedJSContext)
-                                //  Do not edit the staticContext:
-                                //    // if( !( JSContext.getStaticContext() instanceof ExtendedJSContext ) ){
-                                //    if( ! cExtendedJSContext.isAssignableFrom(staticContext.getClass()) ){
-                                //        // com.ibm.jscript.JSContext.init(new ExtendedJSContext(false))
-                                //        Object inst = cExtendedJSContext.getConstructor(boolean.class).newInstance(false);
-                                //        cJSContext.getMethod("init", cJSContext).invoke(null, inst);
-                                //    }
-                                Class<?> cJSContext = Class.forName("com.ibm.jscript.JSContext");
-                                Object staticContext = cJSContext.getMethod("getStaticContext").invoke(null);
-                                // if( JavaScriptUtil.getJSContext() == JSContext.getStaticContext() ){
-                                Class<?> cJavaScriptUtil = Class.forName("com.ibm.xsp.util.JavaScriptUtil");
-                                Object utilContext = cJavaScriptUtil.getMethod("getJSContext").invoke(null);
-                                if( utilContext == staticContext ){
-                                    // JavaScriptUtil.initJSContext(new ExtendedJSContext(false));
-                                    Class<?> cExtendedJSContext = Class.forName("com.ibm.jscript.engine.ExtendedJSContext");
-                                    Object inst = cExtendedJSContext.getConstructor(boolean.class).newInstance(false);
-                                    cJavaScriptUtil.getMethod("initJSContext", cJSContext).invoke(null, inst);
-                                    
-                                    // JavaScriptUtil.initJSContext sets these to false:
-                                    ValueBindingEx.ENABLE_SOURCEID = true;
-                                    MethodBindingEx.ENABLE_SOURCEID = true;
-                                    
-                                }
-                            }catch(Exception e){
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    };
-                }
-            };
         }else{
             factory2 = new FacesControllerFactoryImpl();
         }
@@ -555,9 +509,8 @@ public class TestProject {
 	 * @param test
 	 * @return
 	 */
-	public static List<String> findFacesConfigPaths(AbstractXspTest test) {
+	public static List<String> findRuntimeLibraryIds(AbstractXspTest test) {
 		String libraryId = ConfigUtil.getTargetLibrary(test);
-        List<String> facesConfigPaths = new ArrayList<String>();
         List<String> libIds = new ArrayList<String>();
         
         boolean isAddAutoInstalledLibraries;
@@ -578,23 +531,16 @@ public class TestProject {
         if( isAddAutoInstalledLibraries ){
             // first depend on the XPages runtime library faces-config files
             String[] autoInstalledIds = LibraryServiceLoader.getOrderedAutoInstalledLibraryIds();
-            for (String autoInstalledId : autoInstalledIds) {
-                if( libIds.contains(autoInstalledId) ){
-                    continue;
+            Collections.addAll(libIds, autoInstalledIds);
+            if( null == LibraryServiceLoader.getLibrary("com.ibm.xsp.rcp.library") ){
+                // The ..xsp.rcp library can be absent in the test environment
+                // and it is not necessarily a problem.
+                libIds.remove("com.ibm.xsp.rcp.library");
                 }
-                libIds.add(autoInstalledId);
-
+            for (String autoInstalledId : libIds) {
                 LibraryWrapper depend = LibraryServiceLoader.getLibrary(autoInstalledId);
-                if( null == depend ){
-                    if( "com.ibm.xsp.rcp.library".equals(autoInstalledId) ){
-                        // The ..xsp.rcp library can be absent in the test environment
-                        // and it is not necessarily a problem.
-                    }else{ // the other auto-installed libraries plug-ins should be in the junit project's depends lists
+                if( null == depend ){ // &&! "com.ibm.xsp.rcp.library"
                         throw new RuntimeException("autoInstalled library not found: "+autoInstalledId);
-                    }
-                }
-                for (String file : depend.getFacesConfigFiles() ) {
-                    facesConfigPaths.add(file);
                 }
             }
         } 
@@ -613,17 +559,10 @@ public class TestProject {
                     continue;
                 }
                 libIds.add(dependId);
-
                 LibraryWrapper depend = LibraryServiceLoader.getLibrary(dependId);
-                for (String file : depend.getFacesConfigFiles() ) {
-                    facesConfigPaths.add(file);
-                }
+                if( null == depend ) throw new NullPointerException();
             }
             libIds.add(libraryId);
-
-            for (String file : lib.getFacesConfigFiles() ) {
-                facesConfigPaths.add(file);
-            }
         }
         String[] extraDependIds = ConfigUtil.getExtraLibraryDependsRuntime(test);
         for (String extraLibId : extraDependIds) {
@@ -638,20 +577,32 @@ public class TestProject {
                 continue;
             }
             libIds.add(extraLibId);
-            
             LibraryWrapper depend = LibraryServiceLoader.getLibrary(extraLibId);
             if( null == depend ){
                throw new RuntimeException("extra library not found: "+extraLibId);
-            }
-            for (String file : depend.getFacesConfigFiles() ) {
-                facesConfigPaths.add(file);
             }
         }
         if( ! libIds.contains(CoreLibrary.LIBRARY_ID) ){
             throw new RuntimeException(
                     "Core library neither used by target library nor in extra library depends list");
         }
-		return facesConfigPaths;
+		return libIds;
+	}
+    
+	/**
+	 * @param test
+	 * @return
+	 */
+	public static List<String> findFacesConfigPaths(AbstractXspTest test) {
+        List<String> libIds = findRuntimeLibraryIds(test);
+        List<String> facesConfigPaths = new ArrayList<String>();
+        for (String libId : libIds) {
+            LibraryWrapper lib = LibraryServiceLoader.getLibrary(libId);
+            for (String file : lib.getFacesConfigFiles() ) {
+                facesConfigPaths.add(file);
+            }
+        }
+        return facesConfigPaths;
 	}
     private static boolean dojoLibrariesInitialized = false;
     public static void initDojoLibraries() {
@@ -674,11 +625,11 @@ public class TestProject {
     		return false;
     	}	
     }
-    public static UIViewRootEx loadEmptyPage(AbstractXspTest test, FacesContext context) throws Exception{
+    public static UIViewRoot loadEmptyPage(AbstractXspTest test, FacesContext context) throws Exception{
         String pageName = "/pages/pregenerated/empty.xsp";
         Application application = lazyApplication(test);
         ViewHandler viewHandler = application.getViewHandler();
-        UIViewRootEx root = (UIViewRootEx) viewHandler.createView(context, pageName);
+        UIViewRoot root = viewHandler.createView(context, pageName);
         if( null == root ){
             throw new RuntimeException("JUnit test could not load the empty page "+pageName);
         }
@@ -928,8 +879,8 @@ public class TestProject {
      * @param context
      * @return
      */
-    public static UIViewRootEx createViewRootObject(FacesContext context) {
-        UIViewRootEx result;
+    public static UIViewRoot createViewRootObject(FacesContext context) {
+        UIViewRoot result;
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         if( null == classLoader ) classLoader = TestProject.class.getClassLoader();
         
@@ -948,12 +899,12 @@ public class TestProject {
             try{
                 String rootEx2ClassName = "com.ibm.xsp.component.UIViewRootEx2";
                 Class<?> rootEx2Class = classLoader.loadClass(rootEx2ClassName);
-                result = (UIViewRootEx) rootEx2Class.newInstance();
+                result = (UIViewRoot) rootEx2Class.newInstance();
             }catch(Exception e){
                 throw new RuntimeException(e);
             }
         }else{
-            result = new UIViewRootEx();
+            result = new UIViewRoot();
         }
         return result;
     }

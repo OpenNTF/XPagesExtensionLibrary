@@ -21,11 +21,10 @@
 package com.ibm.xsp.test.framework.registry.annotate;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesProperty;
 import com.ibm.xsp.registry.FacesSharableRegistry;
@@ -62,8 +61,8 @@ public class RoleAccessibilityTest extends AbstractXspTest {
         // set up the page to be rendered
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         for (FacesComponentDefinition def : TestProject.getLibComponents(reg, this)) {
             if( !def.isTag() ){

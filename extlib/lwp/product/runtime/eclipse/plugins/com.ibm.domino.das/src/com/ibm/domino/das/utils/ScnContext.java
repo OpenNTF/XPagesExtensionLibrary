@@ -26,6 +26,7 @@ public class ScnContext {
 	private boolean _scn = true;
     private String _ownerId = null;
     private String _customerId = null;
+    private String _userId = null;
 	
     private ScnContext() {
 	}
@@ -46,6 +47,7 @@ public class ScnContext {
 	    ctx.setScn(false);
 	    ctx.setOwnerId(null);
 	    ctx.setCustomerId(null);
+	    ctx.setUserId(null);
 	    
 	    return ctx;
 	}
@@ -111,4 +113,22 @@ public class ScnContext {
         _customerId = customerId;
     }
 
+    /**
+     * Returns the user ID for this request.
+     * 
+     * <p>The user ID corresponds to the X-DominoUserID
+     * header.
+     * 
+     * @return the customerId
+     */
+    public String getUserId() {
+        return _userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        _userId = userId;
+    }
 }

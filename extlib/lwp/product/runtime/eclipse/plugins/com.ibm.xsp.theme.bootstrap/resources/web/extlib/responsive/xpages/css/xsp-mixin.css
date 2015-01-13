@@ -159,6 +159,9 @@ select.form-control {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+.applayout-searchbtn {
+	z-index: 5;
+}
 .applayout-banner-container .applayout-searchbar {	
 	margin-top: 8px;
 	margin-bottom: 8px;
@@ -167,7 +170,7 @@ select.form-control {
 	margin-right: 7px;
 }
 .applayout-titlebar {	
-	z-index: 998;
+	z-index: 999;
 	margin-bottom: 0;
 }
 .applayout-titlebar-border {
@@ -201,7 +204,7 @@ select.form-control {
 	vertical-align: middle;
 	margin-bottom: 0px;
   	min-height: 20px;
-  	z-index: 999;
+  	z-index: 998;
   	border-bottom-width: 1px;
   	border-color: #DDDDDD;
  }
@@ -399,6 +402,10 @@ re-worked if/when that switch happens */
 
 .tooltip .tooltip-inner {
 	max-width: none;
+	background-color: #000;
+    border-radius: 4px;
+    color: #fff;
+    padding: 3px 8px;
 }
 
 /* Display Error Message/Messages */
@@ -416,6 +423,11 @@ span .alert.alert-warning ul,
 span .alert.alert-danger,
 span .alert.alert-danger ul{
 	margin-bottom: 0px;
+}
+
+.alert.alert-warning,
+.alert.alert-danger {
+	display: block;
 }
 
 /* Tab Panel */
@@ -937,6 +949,7 @@ div.glyphicon.xspReadIcon{
     width: 0;
 }
 
+/** Use glyphicons in dojo checkbox and dojo radio button **/
 .xsp.dbootstrap .dijitCheckBox.dijitCheckBoxChecked:before{
     content: "\e013";
     font-family: "Glyphicons Halflings";
@@ -946,14 +959,32 @@ div.glyphicon.xspReadIcon{
     color: #428bca;
 }
 
+/** dojo radio button **/
 .xsp.dbootstrap .dijitRadio.dijitRadioChecked:before {
     content: "\2022";
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 34px;
-    line-height: 12px;
+    line-height: 14px;
     text-align: center;
 }
 
+/** radio button with dojo type set **/
+.xsp.dbootstrap .radio .dijitRadio.dijitRadioChecked:before {
+    line-height: 20px;
+}
+.dj_chrome .xsp.dbootstrap .radio .dijitRadio.dijitRadioChecked:before {
+    line-height: 14px;
+}
+
+/**.dj_chrome .xsp.dbootstrap .dijitRadio.dijitRadioChecked:before {
+	line-height: 14px;
+}**/
+
+.xsp.dbootstrap .dijitRadio{
+	margin: 0px 2px;
+}
+
+/** Use glyphicons for arrows on dojo menu buttons */
 .xsp.dbootstrap tr.dijitMenuItem td:last-child {
     padding-right: 10px;
 }
@@ -980,13 +1011,12 @@ div.glyphicon.xspReadIcon{
     font-family: "Glyphicons Halflings";
     color: #428bca;
 }
-.xsp .icon-arrow-left:before, .xsp.dbootstrap .dijitCalendarDecrease:before {
-    content: "\e079";
+.xsp .icon-arrow-left:before {
     font-family: "Glyphicons Halflings";
     color: #428bca;
 }
 
-.xsp .icon-arrow-right:before, .xsp.dbootstrap .dijitCalendarIncrease:before {
+.xsp .icon-arrow-right:before{
     content: "\e080";
     font-family: "Glyphicons Halflings";
     color: #428bca;

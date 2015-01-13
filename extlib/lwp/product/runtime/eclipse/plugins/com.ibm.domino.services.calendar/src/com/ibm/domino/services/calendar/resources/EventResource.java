@@ -19,6 +19,7 @@ package com.ibm.domino.services.calendar.resources;
 import static com.ibm.domino.calendar.store.ICalendarStore.FLAG_NO_WORKFLOW;
 import static com.ibm.domino.calendar.store.ICalendarStore.FLAG_REPLACE_COMPLETELY;
 import static com.ibm.domino.calendar.store.ICalendarStore.FLAG_SMART_SEQUENCE;
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_CALENDAR_EVENT;
 import static com.ibm.domino.services.calendar.service.CalendarService.CALENDAR_SERVICE_LOGGER;
 import static com.ibm.domino.services.calendar.service.CalendarService.EVENT;
 import static com.ibm.domino.services.calendar.service.CalendarService.FORMAT_ICALENDAR;
@@ -99,7 +100,6 @@ import com.ibm.domino.calendar.store.StoreException;
 import com.ibm.domino.commons.json.JsonIllegalValueException;
 import com.ibm.domino.commons.util.UriHelper;
 import com.ibm.domino.das.utils.ErrorHelper;
-import com.ibm.domino.das.utils.StatsContext;
 import com.ibm.domino.services.calendar.json.JsonCalendarGenerator;
 import com.ibm.domino.services.calendar.json.JsonCalendarParser;
 import com.ibm.domino.services.calendar.json.JsonEventAdapter;
@@ -123,8 +123,8 @@ public class EventResource {
     public Response getEvent(@Context UriInfo uriInfo, @PathParam(EVENT) String id,
                         @QueryParam(URL_PARAM_FORMAT) String format) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_READ_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_READ_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -153,8 +153,8 @@ public class EventResource {
         
         String jsonEntity = null;
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEventInstances"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_MISC);
 
         CalendarService.verifyDatabaseContext();
 
@@ -275,8 +275,8 @@ public class EventResource {
                         @PathParam(INSTANCE) String instanceId,
                         @QueryParam(URL_PARAM_FORMAT) String format) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_READ_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEventInstance"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_READ_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -312,8 +312,8 @@ public class EventResource {
 
         String responseEntity = null;
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_UPDATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "updateJsonEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_UPDATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -353,8 +353,8 @@ public class EventResource {
 
         String responseEntity = null;
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_UPDATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "updateJsonEventInstance"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_UPDATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -445,8 +445,8 @@ public class EventResource {
         
         String responseEntity = null;
 
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_UPDATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "updateEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_UPDATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -482,8 +482,8 @@ public class EventResource {
         
         String responseEntity = null;
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_UPDATE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "updateEventInstance"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_UPDATE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -516,8 +516,8 @@ public class EventResource {
     @DELETE
     public Response deleteEvent(@PathParam(EVENT) String id, @QueryParam(URL_PARAM_WORKFLOW) String workflow) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_DELETE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "deleteEvent"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_DELETE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -541,8 +541,8 @@ public class EventResource {
             @PathParam(INSTANCE) String instanceId, @QueryParam(URL_PARAM_RECURRENCERANGE) String range,
             @QueryParam(URL_PARAM_WORKFLOW) String workflow) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_DELETE_EVENT);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "deleteEventInstance"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_DELETE_EVENT);
 
         CalendarService.verifyDatabaseContext();
 
@@ -568,8 +568,8 @@ public class EventResource {
                         @Context UriInfo uriInfo, @PathParam(EVENT) String id,
                         @QueryParam(URL_PARAM_ACTION_TYPE) String type) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "putEventAction"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_MISC);
 
         CalendarService.verifyDatabaseContext();
 
@@ -589,8 +589,8 @@ public class EventResource {
             @PathParam(INSTANCE) String instanceId,  @QueryParam(URL_PARAM_RECURRENCERANGE) String range,
             @QueryParam(URL_PARAM_ACTION_TYPE) String type) {
         
-        StatsContext.getCurrentInstance().setRequestCategory(STAT_MISC);
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "putEventActionInstance"); // $NON-NLS-1$
+        CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT, STAT_MISC);
 
         CalendarService.verifyDatabaseContext();
 

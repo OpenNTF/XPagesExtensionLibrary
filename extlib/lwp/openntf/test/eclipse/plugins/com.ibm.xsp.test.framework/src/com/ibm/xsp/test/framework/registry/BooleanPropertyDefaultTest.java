@@ -28,9 +28,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesCompositeComponentDefinition;
 import com.ibm.xsp.registry.FacesDefinition;
 import com.ibm.xsp.registry.FacesProperty;
@@ -84,7 +84,8 @@ public class BooleanPropertyDefaultTest extends AbstractXspTest {
         // TODO should not need a FacesContext instance with a UIViewRootEx,
         // but some of the controls are using FacesContext.getCurrentInstance() 
         // in their constructors - should JUnit test to prevent that.
-        TestProject.createFacesContext(this).setViewRoot(new UIViewRootEx());
+        FacesContext context = TestProject.createFacesContext(this);
+        context.setViewRoot(TestProject.loadEmptyPage(this, context));
         
         FacesSharableRegistry reg = TestProject.createRegistryWithAnnotater(
                 this, new PropertyTagsAnnotater(), new DescriptionDisplayNameAnnotater());

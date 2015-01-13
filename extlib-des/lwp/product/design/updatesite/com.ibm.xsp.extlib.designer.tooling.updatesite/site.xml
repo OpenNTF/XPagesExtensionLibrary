@@ -1,7 +1,7 @@
 <site>
-   <feature url="features/com.ibm.xsp.extlib.designer.tooling.feature_9.0.1.v00_10_qualifier.jar" id="com.ibm.xsp.extlib.designer.tooling.feature" version="9.0.1.v00_10_qualifier"/>
-   <feature url="features/com.ibm.xsp.extlib.feature_9.0.1.v00_10_qualifier.jar" id="com.ibm.xsp.extlib.feature" version="9.0.1.v00_10_qualifier"/>
-   <feature url="features/com.ibm.domino.das.feature_9.0.1.v00_10_qualifier.jar" id="com.ibm.domino.das.feature" version="9.0.1.v00_10_qualifier"/>
-   <feature url="features/com.ibm.wink.feature_9.0.1.v00_10_qualifier.jar" id="com.ibm.wink.feature" version="9.0.1.v00_10_qualifier"/>
+   <feature url="features/com.ibm.xsp.extlib.designer.tooling.feature_9.0.1.v00_11_qualifier.jar" id="com.ibm.xsp.extlib.designer.tooling.feature" version="9.0.1.v00_11_qualifier"/>
+   <feature url="features/com.ibm.xsp.extlib.feature_9.0.1.v00_11_qualifier.jar" id="com.ibm.xsp.extlib.feature" version="9.0.1.v00_11_qualifier"/>
+   <feature url="features/com.ibm.domino.das.feature_9.0.1.v00_11_qualifier.jar" id="com.ibm.domino.das.feature" version="9.0.1.v00_11_qualifier"/>
+   <feature url="features/com.ibm.wink.feature_9.0.1.v00_11_qualifier.jar" id="com.ibm.wink.feature" version="9.0.1.v00_11_qualifier"/>
    <feature url="features/org.apache.wink.feature_1.1.2.qualifier.jar" id="org.apache.wink.feature" version="1.1.2.qualifier"/>
 </site>

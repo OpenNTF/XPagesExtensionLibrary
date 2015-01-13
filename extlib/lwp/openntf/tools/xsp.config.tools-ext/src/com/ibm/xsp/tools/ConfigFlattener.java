@@ -145,7 +145,7 @@ public class ConfigFlattener {
 
         String str = ToolsUtil.convertToString(document);
         if( input.isInlineMode() ){
-            str = insertLine(str, "<!-- The raw files are not used at runtime nor in Designer, and will be removed from the build output. -->\n");
+            str = insertLine(str, "<!-- The raw files are not used at runtime nor in Designer, and will be removed from the build output. -->"+NEWLINE);
         }
         
         str = changeNewlines(str);

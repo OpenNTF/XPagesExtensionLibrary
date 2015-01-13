@@ -20,13 +20,9 @@
 */
 package com.ibm.xsp.test.framework.serialize;
 
-import com.ibm.xsp.component.UIInputEx;
-import com.ibm.xsp.component.UIRepeat;
-import com.ibm.xsp.event.ActionListenerImpl;
 import com.ibm.xsp.model.IndexedDataContext;
 import com.ibm.xsp.test.framework.XspTestUtil;
 import com.ibm.xsp.test.framework.serialize.SerializationComparatorSet.PostSerializationComparator;
-import com.ibm.xsp.validator.ValidatorImpl;
 
 /**
  * 
@@ -39,12 +35,7 @@ public class BaseViewSerializeTest extends ViewSerializeTest {
         super.initSerializer(serializer);
         
         Object existing;
-        existing = serializer.addComparator(ValidatorImpl.class, new ValidatorImplComparator());
-        assertNull(existing);
         existing = serializer.addComparator(IndexedDataContext.class, new IndexedDataContextComparator());
-        assertNull(existing);
-        existing = serializer.addComparator(com.ibm.xsp.event.ActionListenerImpl.class, 
-                new ActionListenerImplComparator());
         assertNull(existing);
     }
     
@@ -61,8 +52,8 @@ public class BaseViewSerializeTest extends ViewSerializeTest {
     public Object[][] getCompareSkips_UIRepeat(){
         Object[][] skips = new Object[][]{
                 // note, UIRepeat rows and first are not serialized as they are only used at page load.
-                {"getRows", UIRepeat.class, false},
-                {"getFirst", UIRepeat.class, false},
+                {"getRows", "com.ibm.xsp.component.UIRepeat", false},
+                {"getFirst", "com.ibm.xsp.component.UIRepeat", false},
         };
         return skips;
     }
@@ -73,8 +64,8 @@ public class BaseViewSerializeTest extends ViewSerializeTest {
         // These 2 methods depend directly on that value,
         // skipping them entirely instead of checking for non-ValueBinding
         Object[][] skips = new Object[][]{
-                {"getValueAsString", UIInputEx.class, false},
-                {"getValueAsList", UIInputEx.class, false},
+                {"getValueAsString", "com.ibm.xsp.component.UIInputEx", false},
+                {"getValueAsList", "com.ibm.xsp.component.UIInputEx", false},
         };
         return skips;
     }
@@ -87,25 +78,6 @@ public class BaseViewSerializeTest extends ViewSerializeTest {
     private static String compareObjects(SerializationCompareContext context,
             String message, String methodName, Object object1, Object object2) {
         return SerializationStructureCompare.compareWithFailsResult(context, message, methodName, object1, object2);
-    }
-
-    public static class ValidatorImplComparator implements PostSerializationComparator{
-        public Class<?> getTargetClass(){
-            return ValidatorImpl.class;
-        }
-        public String compare(SerializationCompareContext context,
-                String message, String methodName, Object object1,
-                Object object2) {
-            ValidatorImpl v1 = (ValidatorImpl) object1;
-            ValidatorImpl v2 = (ValidatorImpl) object2;
-            message += "(" +XspTestUtil.getShortClass(ValidatorImpl.class)+")";
-            String fails = "";
-            fails += compareObjects(context, message+".getValidatorId()", 
-                        "getValidatorId", 
-                        v1.getValidatorId(), 
-                        v2.getValidatorId());
-            return fails;
-        }
     }
     public static class IndexedDataContextComparator implements PostSerializationComparator{
         public Class<?> getTargetClass(){
@@ -128,26 +100,6 @@ public class BaseViewSerializeTest extends ViewSerializeTest {
             return fails;
         }
         
-    }
-    public static class ActionListenerImplComparator implements PostSerializationComparator{
-        public Class<?> getTargetClass(){
-            return com.ibm.xsp.event.ActionListenerImpl.class;
-        }
-        public String compare(SerializationCompareContext context,
-                String message, String methodName, Object object1,
-                Object object2) {
-            ActionListenerImpl one = (ActionListenerImpl) object1;
-            ActionListenerImpl two = (ActionListenerImpl) object2;
-            
-            message += "(" +XspTestUtil.getShortClass(ActionListenerImpl.class)+")";
-            
-            String fails = "";
-            fails += compareObjects(context, message + ".getType()",
-                        "getType", 
-                        one.getType(), 
-                        two.getType());
-            return fails;
-        }
     }
 
 }

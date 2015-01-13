@@ -24,11 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.component.UIPassThroughTag;
-import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.registry.FacesComponentDefinition;
 import com.ibm.xsp.registry.FacesSharableRegistry;
 import com.ibm.xsp.test.framework.AbstractXspTest;
@@ -53,8 +52,8 @@ public class RenderIdTest extends AbstractXspTest {
         // set up the page to be rendered
         FacesContext context = TestProject.createFacesContext(this);
         ResponseBuffer.initContext(context);
-        UIViewRootEx root = TestProject.loadEmptyPage(this, context);
-        UIPassThroughTag p = XspRenderUtil.createContainerParagraph(root);
+        UIViewRoot root = TestProject.loadEmptyPage(this, context);
+        UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         // for each control
         FacesSharableRegistry reg = TestProject.createRegistry(this);

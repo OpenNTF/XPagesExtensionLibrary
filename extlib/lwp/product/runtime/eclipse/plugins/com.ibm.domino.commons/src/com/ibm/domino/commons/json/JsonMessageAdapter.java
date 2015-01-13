@@ -28,6 +28,7 @@ import static com.ibm.domino.commons.json.JsonConstants.IN_REPLY_TO_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.MESSAGE_ID_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.RECEIPT_TO_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.SUBJECT_PROP;
+import static com.ibm.domino.commons.json.JsonConstants.THREADID_PROP;
 import static com.ibm.domino.commons.json.JsonConstants.TO_PROP;
 
 import java.text.SimpleDateFormat;
@@ -72,6 +73,7 @@ public class JsonMessageAdapter implements JsonObject {
     private static final String SUBJECT_ITEM = "Subject"; // $NON-NLS-1$
     private static final String BODY_ITEM = "Body"; // $NON-NLS-1$
     private static final String INET_PREFIX = "INet"; // $NON-NLS-1$
+    private static final String THREADID_ITEM = "$TUA"; // $NON-NLS-1$
     
 	private static SimpleDateFormat ISO8601 = getUtcFormatter();
 	
@@ -122,6 +124,7 @@ public class JsonMessageAdapter implements JsonObject {
 				// The JSON IO classes shouldn't call remove
 			}
 			
+            @SuppressWarnings("unchecked")
             private String[] getProperties() {
                 if ( _propertyNames != null ) {
                     return _propertyNames;
@@ -182,6 +185,14 @@ public class JsonMessageAdapter implements JsonObject {
                     properties.add(DATE_PROP);
                     properties.add(HREF_PROP);
                     properties.add(CONTENT_PROP);
+                    
+					items = _document.getItemValue(THREADID_ITEM);
+					if (items != null) {
+						Iterator<Object> iterator = items.iterator();
+						if (iterator.hasNext()) {
+							properties.add(THREADID_PROP);
+						}
+					}
                 }
                 catch(NotesException e) {
                     // Ignore
@@ -205,6 +216,7 @@ public class JsonMessageAdapter implements JsonObject {
 		};
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Object getJsonProperty(String property) {
 		Object value = null;
 		
@@ -333,6 +345,11 @@ public class JsonMessageAdapter implements JsonObject {
 					JsonMimeEntityAdapter.addEntityAdapter(adapters, entity);
 				}
 				value = adapters;
+			} else if ( THREADID_PROP.equals(property) ) {
+				Vector values = _document.getItemValue(THREADID_ITEM);
+				if ( values != null && values.size() > 0 ) {
+					value = values.get(0).toString();
+				}
 			}
 		}
 		catch (NotesException e) {

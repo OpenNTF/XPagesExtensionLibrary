@@ -73,13 +73,13 @@ public class WizardStartPage extends WizardBasePage implements SelectionListener
 
     protected WizardStartPage(WizardData wd) {
         super();
-        setTitle(WizardData.WIZARD_TITLE);
         wizardData = wd;
     }
 
     @Override
     public void refreshData() {
         super.refreshData();
+        setTitle("Application Pages"); // $NLX-WizardStartPage.ApplicationPages-1$
         setMessage(getStepTxt() + "Configure the Application Pages for this Single Page Application.", IMessageProvider.INFORMATION); // $NLX-WizardStartPage.ConfiguretheApplicationPagesforth-1$
     }
     

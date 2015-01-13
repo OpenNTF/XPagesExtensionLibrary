@@ -83,12 +83,18 @@ public class BaseRegisteredSerializationTest extends
         boolean isTestingSomeControl = false;
         List<FacesComponentDefinition> comps = TestProject.getLibComponents(reg, this);
         if( ! comps.isEmpty() ){
-            isTestingSomeControl = true;
+            for (FacesComponentDefinition def : comps) {
+                if( def.isTag() ){
+                    isTestingSomeControl = true;
+                    break;
+                }
+            }
         }else{
             Class<?>[] extraDefClasses = getExtraDefsToTest();
             for (Class<?> extraDefClass : extraDefClasses) {
                 if( UIComponent.class.isAssignableFrom(extraDefClass) ){
                     isTestingSomeControl = true;
+                    break;
                 }
             }
         }

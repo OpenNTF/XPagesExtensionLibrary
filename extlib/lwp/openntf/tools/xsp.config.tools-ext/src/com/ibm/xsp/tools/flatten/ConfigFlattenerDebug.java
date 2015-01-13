@@ -94,17 +94,25 @@ public class ConfigFlattenerDebug {
         "--outFileName", 
         "jsf-ri-html-components.xsp-config", 
         };
-
+    public static final String[] CONFIG_EXTLIB_CLIENTACTION = new String[]{
+        "--outFolder",
+        DEBUG_OUT_FOLDER,
+        "--in",
+    	"C:\\build_root\\extlib\\lwp\\product\\runtime\\eclipse\\plugins\\com.ibm.xsp.extlib.controls\\src\\com\\ibm\\xsp\\extlib\\config\\raw-extlib-clientaction.xsp-config",
+        "--outFileName", 
+        "extlib-clientaction.xsp-config", 
+    };
 
     public static void main(String[] args) {
         String[] argsToUse = 
-            CONFIG_JSF_BASE;
+//            CONFIG_JSF_BASE;
 //             CONFIG_CORE_COMMON;
 //            CONFIG_CORE_ACTIONS;
 //            CONFIG_IBM_EXTENDED;
 //            CONFIG_DESIGNER;
 //            CONFIG_DESIGNER_ACTIONS;
 //            CONFIG_CORE_TEST;
+        		CONFIG_EXTLIB_CLIENTACTION;
         new ConfigFlattener().run(new ConfigFlattenerInput(argsToUse));
     }
 
