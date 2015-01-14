@@ -16,7 +16,7 @@
 <!--                                                                     -->
 <!-- ******************************************************************* -->
 
-<project name="extlib" default="development" basedir=".">
+<project name="extlib" basedir=".">
   <import file="${env.WPLC_IMPORT}/std_props.xml"/>
 
   <import file="${env.WPLC_IMPORT}/root_build.xml"/>

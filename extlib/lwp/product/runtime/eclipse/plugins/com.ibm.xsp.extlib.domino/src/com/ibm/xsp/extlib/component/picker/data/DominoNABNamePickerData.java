@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
 import lotus.domino.Database;
+import lotus.domino.Name;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.View;
@@ -164,7 +165,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		if (null != this.returnNameFormat) {
 			if (null == this.returnNameFormatAsNameFormat) {
 				for (NameFormat nameFormat : NameFormat.values()) {
-					if (this.returnNameFormat.equals(nameFormat.name())) {
+					if (this.returnNameFormat.equals(nameFormat.getValue())) {
 						setReturnNameFormatAsNameFormat(nameFormat);
 					}
 				}
@@ -377,6 +378,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 	@Override
 	protected EntryMetaData createEntryMetaData(IPickerOptions options) throws NotesException {
+		getReturnNameFormat();
 		String list = getNameList();
 		if (StringUtil.isEmpty(list)) {
 			boolean people = isPeople();
@@ -391,11 +393,11 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		}
 		if (StringUtil.isNotEmpty(list)) {
 			if (list.equals("peopleAndGroups")) { // $NON-NLS-1$
-				return new _EntryMetaDataPeopleAndGroup(options, getReturnNameFormat());
+				return new _EntryMetaDataPeopleAndGroup(options, getReturnNameFormatAsNameFormat());
 			} else if (list.equals("peopleByLastName")) { // $NON-NLS-1$
-				return new _EntryMetaDataPeopleByLastName(options, getReturnNameFormat());
+				return new _EntryMetaDataPeopleByLastName(options, getReturnNameFormatAsNameFormat());
 			} else if (list.equals("people")) { // $NON-NLS-1$
-				return new _EntryMetaDataPeople(options, getReturnNameFormat());
+				return new _EntryMetaDataPeople(options, getReturnNameFormatAsNameFormat());
 			} else if (list.equals("groups")) { // $NON-NLS-1$
 				return new _EntryMetaDataGroup(options);
 			}
@@ -406,6 +408,11 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 	public abstract class _EntryMetaData extends EntryMetaData {
 		protected _EntryMetaData(IPickerOptions options) throws NotesException {
 			super(options);
+		}
+
+		protected _EntryMetaData(IPickerOptions options, NameFormat returnNameFormat) throws NotesException {
+			super(options);
+			setReturnNameFormatType(returnNameFormat);
 		}
 
 		protected abstract String getViewName();
@@ -519,9 +526,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 			super(options);
 		}
 
-		protected _EntryMetaDataPeople(IPickerOptions options, String nameFormat) throws NotesException {
-			super(options);
-			setReturnNameFormatType(returnNameFormatType);
+		protected _EntryMetaDataPeople(IPickerOptions options, NameFormat nameFormat) throws NotesException {
+			super(options, nameFormat);
 		}
 
 		@Override
@@ -542,8 +548,23 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 		@Override
 		protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
-
-			return columnValues.get(0);
+			NameFormat format = getMetaData().getReturnNameFormatType();
+			if (null == format) {
+				return columnValues.get(0);
+			} else {
+				String baseName = (String) columnValues.get(0);
+				Session sess = ExtLibUtil.getCurrentSession();
+				Name nm = sess.createName(baseName);
+				if (format.equals(NameFormat.ABBREVIATED)) {
+					return nm.getAbbreviated();
+				} else if (format.equals(NameFormat.CANONICAL)) {
+					return nm.getCanonical();
+				} else if (format.equals(NameFormat.COMMON)) {
+					return nm.getCommon();
+				} else {
+					return baseName;
+				}
+			}
 		}
 
 		@Override
@@ -577,7 +598,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 			super(options);
 		}
 
-		protected _EntryMetaDataPeopleByLastName(IPickerOptions options, String nameFormat) throws NotesException {
+		protected _EntryMetaDataPeopleByLastName(IPickerOptions options, NameFormat nameFormat) throws NotesException {
 			super(options);
 			setReturnNameFormatType(returnNameFormatType);
 		}
@@ -600,7 +621,23 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 		@Override
 		protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
-			return columnValues.get(1);
+			NameFormat format = getMetaData().getReturnNameFormatType();
+			if (null == format) {
+				return columnValues.get(1);
+			} else {
+				String baseName = (String) columnValues.get(1);
+				Session sess = ExtLibUtil.getCurrentSession();
+				Name nm = sess.createName(baseName);
+				if (format.equals(NameFormat.ABBREVIATED)) {
+					return nm.getAbbreviated();
+				} else if (format.equals(NameFormat.CANONICAL)) {
+					return nm.getCanonical();
+				} else if (format.equals(NameFormat.COMMON)) {
+					return nm.getCommon();
+				} else {
+					return baseName;
+				}
+			}
 		}
 
 		@Override
@@ -670,9 +707,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 			super(options);
 		}
 
-		protected _EntryMetaDataPeopleAndGroup(IPickerOptions options, String nameFormat) throws NotesException {
-			super(options);
-			setReturnNameFormatType(returnNameFormatType);
+		protected _EntryMetaDataPeopleAndGroup(IPickerOptions options, NameFormat nameFormat) throws NotesException {
+			super(options, nameFormat);
 		}
 
 		@Override
@@ -693,7 +729,28 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 		@Override
 		protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
-			return columnValues.get(1);
+			NameFormat format = getMetaData().getReturnNameFormatType();
+			if ("G".equals(columnValues.get(0))) {
+				// Groups are never canonical, only have a basic value
+				return columnValues.get(1);
+			} else {
+				if (null == format) {
+					return columnValues.get(1);
+				} else {
+					String baseName = (String) columnValues.get(1);
+					Session sess = ExtLibUtil.getCurrentSession();
+					Name nm = sess.createName(baseName);
+					if (format.equals(NameFormat.ABBREVIATED)) {
+						return nm.getAbbreviated();
+					} else if (format.equals(NameFormat.CANONICAL)) {
+						return nm.getCanonical();
+					} else if (format.equals(NameFormat.COMMON)) {
+						return nm.getCommon();
+					} else {
+						return baseName;
+					}
+				}
+			}
 		}
 
 		@Override
