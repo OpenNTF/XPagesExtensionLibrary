@@ -410,11 +410,6 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 			super(options);
 		}
 
-		protected _EntryMetaData(IPickerOptions options, NameFormat returnNameFormat) throws NotesException {
-			super(options);
-			setReturnNameFormatType(returnNameFormat);
-		}
-
 		protected abstract String getViewName();
 
 		protected NameFormat returnNameFormatType;
@@ -527,7 +522,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		}
 
 		protected _EntryMetaDataPeople(IPickerOptions options, NameFormat nameFormat) throws NotesException {
-			super(options, nameFormat);
+			super(options);
+			setReturnNameFormatType(nameFormat);
 		}
 
 		@Override
@@ -708,7 +704,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		}
 
 		protected _EntryMetaDataPeopleAndGroup(IPickerOptions options, NameFormat nameFormat) throws NotesException {
-			super(options, nameFormat);
+			super(options);
+			setReturnNameFormatType(nameFormat);
 		}
 
 		@Override
