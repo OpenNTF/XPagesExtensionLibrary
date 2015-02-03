@@ -1035,6 +1035,14 @@ div.glyphicon.xspReadIcon{
 	font-size: 28px;
 }
 
+/* Fix for comboboxes in modal dialogs, from https://github.com/OpenNTF/Bootstrap4XPages/issues/67 */
+.xspmodal {
+z-index:950 !important;
+}
+.dijitDialogUnderlayWrapper {
+z-index: 949 !important;
+}
+
 /* dojo border container/pane - needs more work
 .dijitSplitContainer-child, .dijitBorderContainer-child {
     border: 1px solid #CCCCCC;
