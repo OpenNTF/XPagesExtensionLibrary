@@ -169,6 +169,46 @@
 				</designer-extension>
 			</property-extension>
 		</property>
+    <property>
+      <description>%property.returnNameFormat.descr%</description>
+      <display-name>%property.returnNameFormat.name%</display-name>
+      <property-name>returnNameFormat</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.12015</since>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+						Abbreviated
+						Common
+						Canonical
+					</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+        <property>
+            <!-- # "match" "ftSearch" and "startFrom" should not be translated -->
+            <description>Define the type of search to be applied. The options are "match", meaning the search value is matched to a key or keys in the view, "ftSearch" meaning the value is found in a full text search of the entry and "startFrom", the default search type, which matches the value as a key and then returns that entry and all subsequent entries.</description>
+            <display-name>Type of Search</display-name>
+            <property-name>searchType</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <since>9.0.12015</since>
+                <designer-extension>
+                    <!-- This is a non-translatable search type, 
+                    not translatable label text. -->
+                    <tags>
+                        not-localizable
+                    </tags>
+          			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          			<editor-parameter>
+						startFrom
+						match
+						ftSearch
+                    </editor-parameter>
+                </designer-extension>
+            </property-extension>
+        </property>
 
     	<complex-extension>
     		<base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>

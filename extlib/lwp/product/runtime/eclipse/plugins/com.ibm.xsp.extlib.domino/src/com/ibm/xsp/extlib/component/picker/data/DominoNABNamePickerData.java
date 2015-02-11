@@ -48,6 +48,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 	public static final String NAB_FIRSTPUBLIC = "first-public"; // $NON-NLS-1$
 	public static final String NAB_DATABASENAME = "db-name"; // $NON-NLS-1$
 
+	public String searchType;
+
 	private static enum NameFormat {
 		ABBREVIATED("Abbreviated"), COMMON("Common"), CANONICAL("Canonical");
 
@@ -221,7 +223,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 	@Override
 	public Object saveState(FacesContext context) {
-		Object[] state = new Object[7];
+		Object[] state = new Object[8];
 		state[0] = super.saveState(context);
 		state[1] = addressBookSel;
 		state[2] = addressBookDb;
@@ -229,6 +231,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		state[4] = people;
 		state[5] = groups;
 		state[6] = returnNameFormat;
+		state[7] = searchType;
 		return state;
 	}
 
@@ -242,6 +245,7 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 		this.people = (Boolean) state[4];
 		this.groups = (Boolean) state[5];
 		this.returnNameFormat = (String) state[6];
+		this.searchType = (String) state[7];
 	}
 
 	// ====================================================================
@@ -774,5 +778,22 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
 
 			return b.toString();
 		}
+	}
+
+	@Override
+	public String getSearchType() {
+		if (searchType != null) {
+			return searchType;
+		}
+		ValueBinding vb = getValueBinding("searchType"); //$NON-NLS-1$
+		if (vb != null) {
+			return (String) vb.getValue(getFacesContext());
+		}
+
+		return null;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 }

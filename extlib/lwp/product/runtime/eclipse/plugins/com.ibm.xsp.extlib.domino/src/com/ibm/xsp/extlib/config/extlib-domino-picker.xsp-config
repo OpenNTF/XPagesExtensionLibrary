@@ -159,6 +159,26 @@
         </designer-extension>
       </property-extension>
     </property>
+    <property>
+      <description>%property.searchType.descr%</description>
+      <display-name>%property.searchType.name%</display-name>
+      <property-name>searchType</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>8.5.32003</since>
+        <designer-extension>
+          <tags>
+                        not-localizable
+                    </tags>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+						startFrom
+						match
+						ftSearch
+                    </editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
     <complex-extension>
       <base-complex-id>com.ibm.xsp.extlib.component.picker.data.INamePickerData</base-complex-id>
       <tag-name>dominoNABNamePicker</tag-name>
