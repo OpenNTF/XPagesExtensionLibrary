@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!-- Copyright IBM Corp. 2010, 2015                                      -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -268,8 +268,8 @@ else{
     <complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
     <complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
     <property>
-      <description>%property.for.descr%</description>
-      <display-name>%property.for.name%</display-name>
+      <description>%property.for.complex-type.changeDynamicContentAction.descr%</description>
+      <display-name>%property.for.complex-type.changeDynamicContentAction.name%</display-name>
       <property-name>for</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
@@ -301,8 +301,8 @@ else{
       </property-extension>
     </property>
     <property>
-      <description>%property.parameters.descr%</description>
-      <display-name>%property.parameters.name%</display-name>
+      <description>%property.parameters.complex-type.changeDynamicContentAction.descr%</description>
+      <display-name>%property.parameters.complex-type.changeDynamicContentAction.name%</display-name>
       <property-name>parameters</property-name>
       <property-class>java.util.List</property-class>
       <property-extension>
@@ -321,6 +321,50 @@ else{
       <designer-extension>
         <category>%complex-category.basic%</category>
         <tags>todo</tags>
+      </designer-extension>
+    </complex-extension>
+  </complex-type>
+  <complex-type>
+    <description>%complex-type.inPlaceFormAction.descr%</description>
+    <display-name>%complex-type.inPlaceFormAction.name%</display-name>
+    <complex-id>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-id>
+    <complex-class>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-class>
+    <property>
+      <description>%property.for.complex-type.inPlaceFormAction.descr%</description>
+      <display-name>%property.for.complex-type.inPlaceFormAction.name%</display-name>
+      <property-name>for</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+          <editor-parameter>
+						http://www.ibm.com/xsp/coreex|inPlaceForm
+							</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.formAction.descr%</description>
+      <display-name>%property.formAction.name%</display-name>
+      <property-name>formAction</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+								toggle
+								show
+								hide
+						</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <complex-extension>
+      <tag-name>inPlaceFormAction</tag-name>
+      <since>9.0.1.v00_12</since>
+      <base-complex-id>simpleActionInterface</base-complex-id>
+      <designer-extension>
+        <category>%complex-category.basic%</category>
       </designer-extension>
     </complex-extension>
   </complex-type>

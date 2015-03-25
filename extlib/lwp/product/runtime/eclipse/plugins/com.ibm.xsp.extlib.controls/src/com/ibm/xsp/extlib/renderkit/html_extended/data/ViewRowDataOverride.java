@@ -18,7 +18,6 @@
 package com.ibm.xsp.extlib.renderkit.html_extended.data;
 
 import javax.faces.application.ViewHandler;
-import javax.faces.context.FacesContext;
 
 import lotus.domino.Database;
 import lotus.domino.NotesException;
@@ -30,6 +29,7 @@ import lotus.domino.Name;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.domino.xsp.module.nsf.platform.PlatformUtil;
 import com.ibm.xsp.FacesExceptionEx;
+import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.model.domino.DatabaseConstants;
 import com.ibm.xsp.model.domino.DominoViewDataModel;
 import com.ibm.xsp.model.domino.wrapped.DominoViewEntry;
@@ -46,7 +46,7 @@ public class ViewRowDataOverride {
 
 	public String getOpenPageURL(String pageName, boolean readOnly) {
     	try {
-			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesContextEx facesContext = FacesContextEx.getCurrentInstance();
 			StringBuilder buff = new StringBuilder();
 	
 			// If there is a query string, preserve it
@@ -68,13 +68,22 @@ public class ViewRowDataOverride {
 			}
 			buff.append(pageName).append('?'); //$NON-NLS-1$
 			
-			// MWD: no need to include databaseName parameter if this is Domino AND the dbName in the datasource is null
-			// SPR# EGLN92PHT6 Without the databaseName the link will default to the current database anyway
-			boolean includeDatabaseName = true;
-			if( _wrappedObject instanceof DominoViewEntry ){
-				DominoViewEntry dve = (DominoViewEntry)_wrappedObject;
-				if (dve.getDatabaseName() == null) {
+			boolean includeDatabaseName;
+			boolean suppressDatabaseNameParam = getBooleanProperty(facesContext,
+					"xsp.dominoView.url.databaseName.suppress", //$NON-NLS-1$
+					/*default*/false);
+			if( suppressDatabaseNameParam ){
+				// For SPR#MKEE9U9HF3 added an option to suppress the databaseName URL part.
+				// The xsp.properties file has explicitly suppressed the databaseName in the URL.
+				includeDatabaseName = false;
+			}else{
+				// MWD: no need to include databaseName parameter if this is Domino AND the dbName in the datasource is null
+				// SPR# EGLN92PHT6 Without the databaseName the link will default to the current database anyway
+				if( _wrappedObject instanceof DominoViewEntry 
+						&& null == ((DominoViewEntry)_wrappedObject).getDatabaseName() ){
 					includeDatabaseName = false;
+				}else{
+					includeDatabaseName = true;
 				}
 			}
 			// PHIL: we use the universal ID here so we can easily transform this to an HTTP server URL
@@ -97,6 +106,13 @@ public class ViewRowDataOverride {
     		throw new FacesExceptionEx(ex);
     	}
 	}
+    private boolean getBooleanProperty(FacesContextEx facesContext, String optionName, boolean optionDefault) {
+        boolean suppressDatabaseNameParam;
+        String optionAsString = facesContext.getProperty(optionName);
+        suppressDatabaseNameParam = (null == optionAsString)? optionDefault : "true".equalsIgnoreCase(optionAsString); //$NON-NLS-1$
+        return suppressDatabaseNameParam;
+    }
+	
 	/**
 	 * Return the name of Database contain the View this View Entry comes from.
      * If Database is remote - then name is <db server>!!<database file path>

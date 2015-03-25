@@ -17,7 +17,9 @@
 package xsp.extlib.test.registry;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
@@ -31,10 +33,12 @@ import com.ibm.xsp.extlib.component.dynamicview.UIDynamicViewPanel;
 import com.ibm.xsp.extlib.component.layout.UIApplicationLayout;
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
 import com.ibm.xsp.extlib.component.outline.UIOutlineGeneric;
+import com.ibm.xsp.extlib.component.picker.data.CollectionValuePickerData;
 import com.ibm.xsp.extlib.component.picker.data.DominoViewNamePickerData;
 import com.ibm.xsp.extlib.component.picker.data.INamePickerData;
 import com.ibm.xsp.extlib.component.picker.data.IPickerData;
 import com.ibm.xsp.extlib.component.picker.data.IValuePickerData;
+import com.ibm.xsp.extlib.component.picker.data.MapValuePickerData;
 import com.ibm.xsp.extlib.component.picker.data.SimpleValuePickerData;
 import com.ibm.xsp.extlib.component.rest.AbstractRestService;
 import com.ibm.xsp.extlib.component.rest.UIBaseRestService;
@@ -149,6 +153,20 @@ public class ExtlibPropertiesHaveSettersTest extends
         }
         if( ITreeNode.class.equals( prop.getJavaClass() ) ){
             return new BasicLeafTreeNode();
+        }
+        if( "options".equals(prop.getName()) && MapValuePickerData.class.equals(def.getJavaClass()) ){
+            LinkedHashMap<String, String> orderedMap = new LinkedHashMap<String, String>();
+            orderedMap.put("Cat", "CAT");
+            orderedMap.put("Dog", "DOG");
+            orderedMap.put("Fish", "FISH");
+            return orderedMap;
+        }
+        if( "collection".equals(prop.getName()) && CollectionValuePickerData.class.equals(def.getJavaClass()) ){
+            ArrayList<String> list = new ArrayList<String>();
+            list.add("Cat");
+            list.add("Dog");
+            list.add("Fish");
+            return list;
         }
         return super.getSomeValue(def, prop, javaClass);
     }

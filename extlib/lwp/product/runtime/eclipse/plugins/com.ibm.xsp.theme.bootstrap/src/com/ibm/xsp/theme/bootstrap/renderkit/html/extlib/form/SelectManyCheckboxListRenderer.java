@@ -38,8 +38,8 @@ import com.ibm.xsp.renderkit.html_basic.AttrsUtil;
  * @author Brian Gleeson (brian.gleeson@ie.ibm.com)
  */
 public class SelectManyCheckboxListRenderer extends com.ibm.xsp.renderkit.html_basic.SelectManyCheckboxListRenderer {
-	
-	@Override
+    
+    @Override
     protected void renderBeginText(UIComponent component, int border,
             boolean alignVertical, FacesContext context, boolean outerTable) throws IOException {
         renderBeginText(component, border, alignVertical, context);
@@ -63,9 +63,9 @@ public class SelectManyCheckboxListRenderer extends com.ibm.xsp.renderkit.html_b
             //Start the containing div for the checkbox group
             writer.startElement("div", component); // $NON-NLS-1$
             if(checkboxGroup.getDojoType()==null) {
-            	writer.writeAttribute("class", "checkbox", "class");
+                writer.writeAttribute("class", "checkbox", "class"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
             }else{
-            	writer.writeAttribute("style", "display: inline;", "style");
+                writer.writeAttribute("style", "display: inline;", "style"); // $NON-NLS-2$ $NON-NLS-1$ $NON-NLS-3$
             }
             
             //dojoType and dojoAttributes if they are present
@@ -130,7 +130,7 @@ public class SelectManyCheckboxListRenderer extends com.ibm.xsp.renderkit.html_b
                 if (StringUtil.isNotEmpty(lang)) {
                     writer.writeAttribute("lang", lang, null); // $NON-NLS-1$
                 }
-                writer.writeAttribute("class", "xspGroupCaption", null);
+                writer.writeAttribute("class", "xspGroupCaption", null); // $NON-NLS-2$ $NON-NLS-1$
                 writer.writeText(legend, "legend"); // $NON-NLS-1$
                 writer.endElement("caption"); // $NON-NLS-1$
             }

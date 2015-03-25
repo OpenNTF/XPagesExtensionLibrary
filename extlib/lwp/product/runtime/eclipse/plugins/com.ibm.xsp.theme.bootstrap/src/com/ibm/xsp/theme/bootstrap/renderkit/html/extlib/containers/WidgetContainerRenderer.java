@@ -29,64 +29,64 @@ import com.ibm.xsp.util.FacesUtil;
 
 public class WidgetContainerRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.containers.WidgetContainerRenderer {
 
-	protected static final int PROP_TWISTYCLASSIMGOPEN = 20;
-	protected static final int PROP_TWISTYCLASSIMGCLOSE = 21;
-	protected static final int PROP_CSSHEADERCLASS = 31;
+    protected static final int PROP_TWISTYCLASSIMGOPEN = 20;
+    protected static final int PROP_TWISTYCLASSIMGCLOSE = 21;
+    protected static final int PROP_CSSHEADERCLASS = 31;
 
-	public WidgetContainerRenderer() {}
+    public WidgetContainerRenderer() {}
 
-	@Override
-	protected Object getProperty(int prop) {
-		switch (prop) {
-			// Main
-			case PROP_CSSWIDGETBASIC:                   return "panel xspWidgetContainer"; // $NON-NLS-1$
-			case PROP_CSSWIDGETSIDEBAR:                 return "panel xspWidgetContainer"; // $NON-NLS-1$
-			case PROP_CSSWIDGETPLAIN:                   return "panel xspWidgetContainer"; // $NON-NLS-1$
-			case PROP_CONTAINER_STYLE_DEFAULT:          return null;
-			// Title Bar
-			case PROP_TAGTITLE:                         return "div"; // $NON-NLS-1$
-			case PROP_CSSTITLEBAR:                      return "panel-heading"; // $NON-NLS-1$
-			case PROP_STYLETITLEBAR:                    return "overflow: auto; cursor: auto;"; // $NON-NLS-1$
-			case PROP_TAGTITLETEXT:                     return "h5"; // $NON-NLS-1$
-			case PROP_CSSTITLETEXT:                     return "panel-title pull-left"; // $NON-NLS-1$
-			case PROP_TREEDROPDOWN:                     return new WidgetDropDownRenderer();
-			// title bar looks ok when no text present - no need to insert nbsp
-			case PROP_TITLE_PREVENT_BLANK:              return false;
-			case PROP_TWISTYCLASSIMGOPEN:               return Resources.get().getIconClass("chevron-down") + " pull-left"; // $NON-NLS-1$ $NON-NLS-2$
-			case PROP_TWISTYCLASSIMGCLOSE:              return Resources.get().getIconClass("chevron-right") + " pull-left"; // $NON-NLS-1$ $NON-NLS-2$
-			// Header
-			case PROP_TAGHEADER:                        return "div"; // $NON-NLS-1$
-			case PROP_CSSHEADERCLASS:                   return "xspWidgetHeader"; // $NON-NLS-1$
-			// Body
-			case PROP_CSSSCROLLUP:                      return "widget-section-scroll"; // $NON-NLS-1$
-			case PROP_CSSSCROLLUPLINK:                  return "widget-section-arrow " + Resources.get().getIconClass("arrow-up"); // $NON-NLS-1$
-			case PROP_CSSSCROLLUPALTTEXT:               return "&#x25b2;"; //$NON-NLS-1$
-			case PROP_CSSSCROLLDOWN:                    return "widget-section-scroll"; // $NON-NLS-1$
-			case PROP_CSSSCROLLDOWNLINK:                return "widget-section-arrow " + Resources.get().getIconClass("arrow-down"); // $NON-NLS-1$
-			case PROP_CSSSCROLLDOWNALTTEXT:             return "&#x25bc;"; //$NON-NLS-1$
-			// body looks ok when no text present - no need to insert nbsp
-			case PROP_BODY_PREVENT_BLANK:               return false;
-			// Footer
-			case PROP_TAGFOOTER:                        return "div"; // $NON-NLS-1$
-			case PROP_CSSFOOTER:                        return "panel-footer"; // $NON-NLS-1$
-			case PROP_CSSBODY:                          return "xspWidgetBody"; // $NON-NLS-1$
-		}
-		return null;
-	}
+    @Override
+    protected Object getProperty(int prop) {
+        switch (prop) {
+            // Main
+            case PROP_CSSWIDGETBASIC:                   return "panel xspWidgetContainer"; // $NON-NLS-1$
+            case PROP_CSSWIDGETSIDEBAR:                 return "panel xspWidgetContainer"; // $NON-NLS-1$
+            case PROP_CSSWIDGETPLAIN:                   return "panel xspWidgetContainer"; // $NON-NLS-1$
+            case PROP_CONTAINER_STYLE_DEFAULT:          return null;
+            // Title Bar
+            case PROP_TAGTITLE:                         return "div"; // $NON-NLS-1$
+            case PROP_CSSTITLEBAR:                      return "panel-heading"; // $NON-NLS-1$
+            case PROP_STYLETITLEBAR:                    return "overflow: auto; cursor: auto;"; // $NON-NLS-1$
+            case PROP_TAGTITLETEXT:                     return "h5"; // $NON-NLS-1$
+            case PROP_CSSTITLETEXT:                     return "panel-title pull-left"; // $NON-NLS-1$
+            case PROP_TREEDROPDOWN:                     return new WidgetDropDownRenderer();
+            // title bar looks ok when no text present - no need to insert nbsp
+            case PROP_TITLE_PREVENT_BLANK:              return false;
+            case PROP_TWISTYCLASSIMGOPEN:               return Resources.get().getIconClass("chevron-down") + " pull-left"; // $NON-NLS-1$ $NON-NLS-2$
+            case PROP_TWISTYCLASSIMGCLOSE:              return Resources.get().getIconClass("chevron-right") + " pull-left"; // $NON-NLS-1$ $NON-NLS-2$
+            // Header
+            case PROP_TAGHEADER:                        return "div"; // $NON-NLS-1$
+            case PROP_CSSHEADERCLASS:                   return "xspWidgetHeader"; // $NON-NLS-1$
+            // Body
+            case PROP_CSSSCROLLUP:                      return "widget-section-scroll"; // $NON-NLS-1$
+            case PROP_CSSSCROLLUPLINK:                  return "widget-section-arrow " + Resources.get().getIconClass("arrow-up"); // $NON-NLS-1$ $NON-NLS-2$
+            case PROP_CSSSCROLLUPALTTEXT:               return "&#x25b2;"; //$NON-NLS-1$
+            case PROP_CSSSCROLLDOWN:                    return "widget-section-scroll"; // $NON-NLS-1$
+            case PROP_CSSSCROLLDOWNLINK:                return "widget-section-arrow " + Resources.get().getIconClass("arrow-down"); // $NON-NLS-1$ $NON-NLS-2$
+            case PROP_CSSSCROLLDOWNALTTEXT:             return "&#x25bc;"; //$NON-NLS-1$
+            // body looks ok when no text present - no need to insert nbsp
+            case PROP_BODY_PREVENT_BLANK:               return false;
+            // Footer
+            case PROP_TAGFOOTER:                        return "div"; // $NON-NLS-1$
+            case PROP_CSSFOOTER:                        return "panel-footer"; // $NON-NLS-1$
+            case PROP_CSSBODY:                          return "xspWidgetBody"; // $NON-NLS-1$
+        }
+        return null;
+    }
 
-	@Override
-	protected void writeDropDown(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
-		w.startElement("div", null);
-		w.writeAttribute("class", "pull-right", null);
-		super.writeDropDown(context, w, c);
-		w.endElement("div");
-	}
-	
-	// ================================================================
+    @Override
+    protected void writeDropDown(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
+        w.startElement("div", null); // $NON-NLS-1$
+        w.writeAttribute("class", "pull-right", null); // $NON-NLS-1$ $NON-NLS-2$
+        super.writeDropDown(context, w, c);
+        w.endElement("div"); // $NON-NLS-1$
+    }
+    
+    // ================================================================
     // Header
     // ================================================================
     @Override
-	protected void writeHeader(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
+    protected void writeHeader(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
         UIComponent header = c.getFacet(UIWidgetContainer.FACET_HEADER);
         if(header!=null) {
             String tag = (String)getProperty(PROP_TAGHEADER);
@@ -106,7 +106,7 @@ public class WidgetContainerRenderer extends com.ibm.xsp.extlib.renderkit.html_e
     }
     
     @Override
-	protected void writeCollapsible(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
+    protected void writeCollapsible(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
         if(c.isCollapsible()) {
             boolean closed = c.isClosed();
             String id = c.getClientId(context);

@@ -65,6 +65,10 @@ select.form-control {
 	background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
 	background-position: -48px -24px;
 }
+/* Dojo popups z-index fix */
+.xsp .dijitPopup{
+	z-index: 1050 !important;
+}
 
 /* fix for combo boxes in RT editor in Bootstrap 3 */
 .cke *, .cke_editor * {
@@ -161,6 +165,7 @@ select.form-control {
 }
 .applayout-searchbtn {
 	z-index: 5;
+	height: 34px;
 }
 .applayout-banner-container .applayout-searchbar {	
 	margin-top: 8px;
@@ -169,8 +174,8 @@ select.form-control {
 .applayout-searchbar select {
 	margin-right: 7px;
 }
-.applayout-titlebar {	
-	z-index: 999;
+.applayout-main .navbar.applayout-titlebar {
+	z-index: 995;
 	margin-bottom: 0;
 }
 .applayout-titlebar-border {
@@ -200,11 +205,11 @@ select.form-control {
   	min-height: 20px;
   	border-radius: 0px;
 }
-.applayout-placebar {
+.xsp .navbar.applayout-placebar {
 	vertical-align: middle;
 	margin-bottom: 0px;
   	min-height: 20px;
-  	z-index: 998;
+  	z-index: 994;
   	border-bottom-width: 1px;
   	border-color: #DDDDDD;
  }
@@ -349,8 +354,11 @@ re-worked if/when that switch happens */
   margin-left: -280px;
   overflow: none;
 }
+.xspmodal * {
+  z-index: 1050 !important;
+}
 .dijitDialogUnderlayWrapper {
-	z-index: 1049 !important;
+	z-index: 1040 !important;
 }
 .form-control:focus {
 	outline: 0px none;
@@ -363,7 +371,7 @@ re-worked if/when that switch happens */
 	color: #666;
 }
 
-/*Bootstrap relies on the href attribute on a's to show the correct cursos: fix for XPage pagination that by default doesn't have that*/
+/*Bootstrap relies on the href attribute on a's to show the correct cursor: fix for XPage pagination that by default doesn't have that*/
 .nav, .pagination, .carousel a {
 	cursor: pointer;
 }
@@ -674,9 +682,11 @@ div.glyphicon.xspReadIcon{
 }
 .xsp .navbar-brand-img{
 	padding: 6px 12px;
+	float: left;
 }
 .xsp .navbar-brand-txt{
 	padding: 13px 12px;
+	float: left;
 }
 /*fix for #54: right margin in full width layout*/
 @media (min-width: 768px) {
@@ -694,7 +704,7 @@ div.glyphicon.xspReadIcon{
     overflow-x: hidden;
     overflow-y: auto;
     padding: 15px 6px;
-    z-index: 1000;
+    z-index: 996;
     position: relative;
 }
 
@@ -711,10 +721,10 @@ div.glyphicon.xspReadIcon{
   }
 }
 
-.xspDashboardBannerTitle{
+.xspSimpleNavbarText{
 	font-size: 18px;
 	font-weight: bold;
-	padding: 15px 6px;
+	padding: 13px 12px;
 	float:left;
 }
 
@@ -728,13 +738,20 @@ div.glyphicon.xspReadIcon{
 .xspDash {
 	text-align: center;
 	align-content: center;
+	padding-top: 6px;
+	padding-bottom: 6px;
 }
 .xspDash .xspDashTitle{
 	margin-bottom: 0px;
 }
+.xspDash .glyphicon{
+	font-size: 72pt;
+}
 
 .xspCollapsibleMenu {
-	padding: 8px 6px; 
+	padding: 8px 6px;
+}
+.applayout-banner-container .xspCollapsibleMenu{
 	float: left;
 }
 .xspCollapsibleMenu ul.dropdown-menu{
@@ -743,21 +760,96 @@ div.glyphicon.xspReadIcon{
 	min-width: 200px;
 }
 
-.xspNavbar{
-	vertical-align: middle;
-	text-align: center;
-	padding:6px;
+.xspDash .dashBadge {
+	font-size: 18px;
+	margin-left: 4px;
+	top: -2px;
+	position: relative;
 }
 
+.xspDash .xspNodeDescription {
+	display: block;
+}
+
+/**
+ * Carousel styles
+ */
+ .xspCarousel {
+     margin-bottom: 20px;
+ }
+ .xspCarousel .item {
+     text-align: center;
+ }
+ .xspCarousel .item h1{
+     font-size: 72px;
+ }
+.xspCarousel .prev-slide,
+.xspCarousel .next-slide {
+	opacity: 1.0;
+}
+ .xspCarousel .item .slideDescr{
+     font-size: 16px;
+ }
+ .xspCarousel .item .slideBtnContainer{
+     padding: 10px;
+ }
+ .xspCarousel .carousel-control:focus{
+     outline: 0px;
+ }
+/**
+ * Navbar styles
+ */
 .xsp .navbar.navbar-inverse{
 	color: #dddddd;
 }
-.xspNavbar .xspNavbarContent{ 
-	display:inline-block;
+.navbar-inverse div.navbar-brand,
+.navbar-inverse div.navbar-brand:focus {
+	color: #DDDDDD;
 }
-.xspNavbar .xspNavbarElement {
-	height: 100%;
-	padding: 0px 6px;
+.xspNavbar .navbar-text,
+.xspNavbar .navbar-link {
+	margin-top: 13px;
+	margin-bottom: 13px;
+}
+.xspNavbar .navbar-link,
+.xspNavbar .navbar-btn {
+	float: inherit;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.xspNavbar .navbar-text:hover{
+	cursor: default;
+}
+.xspNavbar .navbar-form{
+	float: inherit;
+}
+.xspNavbar .navbar-form .form-control{
+	margin-left: 4px;
+	margin-right: 4px
+}
+.navbar.navbar-static-top,
+.navbar.navbar-static-bottom,
+.navbar.navbar{
+	z-index: 997;
+}
+
+@media (max-width: 768px) {
+	.xspNavbar .navbar-form {
+		margin-left:0px;
+		margin-right:0px;
+	}
+	.xspNavbar .navbar-form .form-control {
+		margin-top: 4px;
+		margin-bottom:4px;
+	}
+}
+.container .xspNavbar {
+	margin-top:20px;
+}
+.container .xspNavbar.navbar-fixed-top,
+.container .xspNavbar.navbar-static-top,
+.container .xspNavbar.navbar-fixed-bottom{
+	margin-top:0px;
 }
 
 /***********************************************************************	

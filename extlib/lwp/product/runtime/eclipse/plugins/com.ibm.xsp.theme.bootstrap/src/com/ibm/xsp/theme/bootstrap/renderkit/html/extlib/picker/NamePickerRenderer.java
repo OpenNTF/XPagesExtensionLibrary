@@ -117,7 +117,7 @@ public class NamePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extend
             if(StringUtil.isNotEmpty(icon)) {
                 w.startElement("img", null); // $NON-NLS-1$
                 w.writeAttribute("src", HtmlRendererUtil.getImageURL(context,icon), null); // $NON-NLS-1$
-                String iconAlt = "Open Picker"; // $NLS-AbstractPickerRenderer.OpenPicker-1$
+                String iconAlt = "Open picker"; // $NLS-AbstractPickerRenderer.OpenPicker-1$
                 w.writeAttribute("alt", iconAlt, null); // $NON-NLS-1$
                 w.endElement("img"); // $NON-NLS-1$
             }

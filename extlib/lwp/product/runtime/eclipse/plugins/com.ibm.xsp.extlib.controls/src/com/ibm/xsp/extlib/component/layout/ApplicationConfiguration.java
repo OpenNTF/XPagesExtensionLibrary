@@ -27,5 +27,7 @@ public interface ApplicationConfiguration {
 
 	public String getNavigationPath();
 	
-	public String getDefaultNavigationPath();	
+	public String getDefaultNavigationPath();
+
+    public String getLayoutRendererType();
 }

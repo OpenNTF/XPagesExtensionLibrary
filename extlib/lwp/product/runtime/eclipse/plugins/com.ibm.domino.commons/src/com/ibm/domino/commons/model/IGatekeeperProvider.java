@@ -45,7 +45,7 @@ public interface IGatekeeperProvider {
     public static final int FEATURE_REST_API_FREEBUSY_DIRECTORIES     = 505;
     public static final int FEATURE_REST_API_FREEBUSY_SITES           = 506;
 
-    public static final int TEST_MUTED_THREADS                        = 537;
+    public static final int TEST_MUTED_THREADS                        = 544;
     
     public boolean isFeatureEnabled(int feature, String CustomerID, String userID);
 }

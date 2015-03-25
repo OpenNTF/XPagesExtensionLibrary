@@ -182,3 +182,13 @@ ul.pagination {
 .bootstrap-theme .btn-default.btn-warning{
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
+/* Type Ahead Styling */
+.dijitComboBoxMenuPopup .dijitComboBoxMenu .dijitMenuItem pre {
+	background-color: inherit;
+	border-radius: 0px;
+	border: 0px none;
+	padding: 0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: 0px;
+	font-size: 14px;
+}

@@ -874,6 +874,12 @@ public class DelegateProvider implements IDelegateProvider {
     
     private void validateDelegateAccess(DelegateAccess access) throws ModelException {
         
+        // SPR# BBRL9S9AWZ:  You have to have access to something.
+        
+        if ( access.getWhat() == DelegateAccess.What.NOTHING ) {
+            throw new ModelException("A delegate must have access to something (mail or calendar).", ModelException.ERR_INVALID_INPUT); // $NLX-DelegateProvider.Adelegatemusthaveaccesstosomethin.1-1$
+        }
+        
         // SPR# XZHU9AD9FQ:  You can't have just delete access.
         
         if ( access.isDelete() && !(access.isRead() || access.isCreate() || access.isEdit()) ) {

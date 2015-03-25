@@ -39,9 +39,9 @@ public class AccordionRenderer extends AbstractTreeRenderer {
     public AccordionRenderer(String accordionClientId) {
         this.accordionClientId = accordionClientId;
         if(StringUtil.isNotEmpty(accordionInnerId)) {
-        	this.accordionInnerId = StringUtil.replace(this.accordionClientId, ':', '_');
+            this.accordionInnerId = StringUtil.replace(this.accordionClientId, ':', '_');
         } else {
-        	this.accordionInnerId = Util.computeUniqueId();
+            this.accordionInnerId = Util.computeUniqueId();
         }
     }
     
@@ -73,7 +73,7 @@ public class AccordionRenderer extends AbstractTreeRenderer {
 
         writer.startElement("div", null); // $NON-NLS-1$
         writer.writeAttribute("id",getInnerId(),null); // $NON-NLS-1$
-        writer.writeAttribute("class","xspAccordion panel-group",null); // $NON-NLS-1$
+        writer.writeAttribute("class","xspAccordion panel-group",null); // $NON-NLS-1$ $NON-NLS-2$
         
         writer.write('\n');
     }
@@ -87,12 +87,12 @@ public class AccordionRenderer extends AbstractTreeRenderer {
 
     @Override
     protected void preRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
     protected void postRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
@@ -131,36 +131,36 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         if(StringUtil.isNotEmpty(style)) {
             writer.writeAttribute("style",style,null); // $NON-NLS-1$
         }
-        styleClass = ExtLibUtil.concatStyleClasses("panel panel-default",styleClass);
+        styleClass = ExtLibUtil.concatStyleClasses("panel panel-default",styleClass); // $NON-NLS-1$
         writer.writeAttribute("class",styleClass,null); // $NON-NLS-1$
         
         if(hasLink) {
             if (StringUtil.isNotEmpty(onclick)) {
-            	// What to do here?
+                // What to do here?
                 //attrs.put("onClick", onclick); // $NON-NLS-1$ $NON-NLS-2$
             }           
         }
 
         writer.startElement("div", null); // $NON-NLS-1$
-        writer.writeAttribute("class","panel-heading",null); // $NON-NLS-1$
+        writer.writeAttribute("class","panel-heading",null); // $NON-NLS-1$ $NON-NLS-2$
 
         writer.startElement("h4", null); // $NON-NLS-1$
-        writer.writeAttribute("class","panel-title",null); // $NON-NLS-1$
+        writer.writeAttribute("class","panel-title",null); // $NON-NLS-1$ $NON-NLS-2$
 
         writer.startElement("a", null); // $NON-NLS-1$
-        writer.writeAttribute("class","accordion-toggle",null); // $NON-NLS-1$
-        writer.writeAttribute("data-toggle","collapse",null); // $NON-NLS-1$
+        writer.writeAttribute("class","accordion-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
+        writer.writeAttribute("data-toggle","collapse",null); // $NON-NLS-1$ $NON-NLS-2$
         writer.writeAttribute("data-parent","#"+getInnerId(),null); // $NON-NLS-1$
         writer.writeAttribute("href","#"+bodyId,null); // $NON-NLS-1$
 
-		if(hasImage) {
-			writer.startElement("img", null);
-			if(StringUtil.isNotEmpty(image)) {
-				image=HtmlRendererUtil.getImageURL(context, image);
-				writer.writeAttribute("src", image, null);
-			}
-			writer.endElement("img");
-		}
+        if(hasImage) {
+            writer.startElement("img", null); // $NON-NLS-1$
+            if(StringUtil.isNotEmpty(image)) {
+                image=HtmlRendererUtil.getImageURL(context, image);
+                writer.writeAttribute("src", image, null); // $NON-NLS-1$
+            }
+            writer.endElement("img"); // $NON-NLS-1$
+        }
         
         if(StringUtil.isNotEmpty(label)) {
             writer.writeText(label, null); // $NON-NLS-1$
@@ -174,9 +174,9 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         
         writer.startElement("div", null); // $NON-NLS-1$
         writer.writeAttribute("id",bodyId,null); // $NON-NLS-1$
-        String bodyClass = "panel-collapse collapse";
+        String bodyClass = "panel-collapse collapse"; // $NON-NLS-1$
         if(tree.getNode().isSelected()) {
-        	bodyClass = ExtLibUtil.concatStyleClasses(bodyClass,"in");
+            bodyClass = ExtLibUtil.concatStyleClasses(bodyClass,"in"); // $NON-NLS-1$
         }
         writer.writeAttribute("class",bodyClass,null); // $NON-NLS-1$
         

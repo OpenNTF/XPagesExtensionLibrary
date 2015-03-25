@@ -19,7 +19,7 @@
 <feature
       id="org.openntf.extlib.apache.wink.feature"
       label="%feature.name"
-      version="9.0.1.v00_11_SNAPSHOT"
+      version="9.0.1.v00_12_SNAPSHOT"
       provider-name="%feature.provider">
 
    <description>

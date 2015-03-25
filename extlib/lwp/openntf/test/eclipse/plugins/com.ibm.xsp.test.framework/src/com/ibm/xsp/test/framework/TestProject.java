@@ -449,6 +449,7 @@ public class TestProject {
         
         BootStrap bootStrap = BootStrapFactory.createBootStrap();
         bootStrap.init(servletContext);
+        
         test.getTestLocalVars().put("bootStrap", bootStrap);
         test.getTestLocalVars().put("servletContext", servletContext);
         
@@ -536,11 +537,11 @@ public class TestProject {
                 // The ..xsp.rcp library can be absent in the test environment
                 // and it is not necessarily a problem.
                 libIds.remove("com.ibm.xsp.rcp.library");
-                }
+            }
             for (String autoInstalledId : libIds) {
                 LibraryWrapper depend = LibraryServiceLoader.getLibrary(autoInstalledId);
                 if( null == depend ){ // &&! "com.ibm.xsp.rcp.library"
-                        throw new RuntimeException("autoInstalled library not found: "+autoInstalledId);
+                    throw new RuntimeException("autoInstalled library not found: "+autoInstalledId);
                 }
             }
         } 

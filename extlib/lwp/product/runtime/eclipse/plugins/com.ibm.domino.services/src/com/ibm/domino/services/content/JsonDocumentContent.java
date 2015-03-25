@@ -40,12 +40,14 @@ import static com.ibm.domino.services.rest.RestServiceConstants.TYPE_MULTIPART;
 import static com.ibm.domino.services.rest.RestServiceConstants.TYPE_RICHTEXT;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.Vector;
 
 import lotus.domino.DateTime;
@@ -78,6 +80,9 @@ public class JsonDocumentContent extends JsonContent {
     private boolean strongType;
     private String rtType;
     private String baseUri;
+    
+    private static final SimpleDateFormat DATETIME_FORMAT = getDateTimeFormatter();
+    private static final int DATETIME_LENGTH = "2015-02-03T17:22:01Z".length(); //$NON-NLS-1$
     
     public JsonDocumentContent(Document document) {
         this.document = document;
@@ -569,10 +574,35 @@ public class JsonDocumentContent extends JsonContent {
         Vector<?> vector = new Vector<Object>((List<?>)list);
         document.replaceItemValue(itemName, vector);
     }
-
-    private void updateDateTime(String itemName, Object value)
-            throws NotesException {
+    
+    private DateTime toDateTime(Object value) throws NotesException {
         DateTime datetime = null;
+        
+        if ( value instanceof String ) {
+            // SPR# DDEY9SRL6C: If possible, parse to Java Date.  This approach
+            // gives the same result regardless of regional settings in the OS.
+            
+            SimpleDateFormat formatter = null;
+            if ( ((String)value).length() == DATETIME_LENGTH && ((String)value).endsWith("Z") ) {
+                formatter = DATETIME_FORMAT;
+            }
+            
+            // TODO: Ideally, we should parse date-only values (e.g. "2015-02-03") in Java too.  
+            // However, the result of parsing such a value is different in Notes.  In Notes
+            // it truly is a date without a time.  In Java the time defaults to midnight UTC.
+            // For now, rely on the Notes parser -- even though regional settings may vary the result.
+            
+            if ( formatter != null ) {
+                try {
+                    value = formatter.parse((String)value);
+                }
+                catch (Throwable t) {
+                    // Ignore parser exceptions and fall through
+                    // to Notes parser below
+                }
+            }
+        }
+        
         if (value instanceof Date){
             datetime = document.getParentDatabase().getParent().createDateTime((Date)value); 
         }
@@ -583,6 +613,14 @@ public class JsonDocumentContent extends JsonContent {
             }
             datetime = document.getParentDatabase().getParent().createDateTime(dtString);
         }
+        
+        return datetime;
+    }
+
+    private void updateDateTime(String itemName, Object value)
+            throws NotesException {
+        DateTime datetime = toDateTime(value);
+
         if (datetime != null) {
             document.replaceItemValue(itemName, datetime);
             datetime.recycle();
@@ -594,17 +632,7 @@ public class JsonDocumentContent extends JsonContent {
             throws NotesException {
         Vector<DateTime> datetimes = new Vector<DateTime>();
         for(Object value: list) {
-            DateTime datetime = null;
-            if (value instanceof Date){
-                datetime = document.getParentDatabase().getParent().createDateTime((Date)value); 
-            }
-            else if (value instanceof String){                          
-                String dtString = (String)value;
-                if (dtString.endsWith("Z")) { // $NON-NLS-1$
-                    dtString = dtString.substring(0, dtString.lastIndexOf('Z')) + " GMT"; // $NON-NLS-1$ // $NON-NLS-2$
-                }
-                datetime = document.getParentDatabase().getParent().createDateTime(dtString);
-            }
+            DateTime datetime = toDateTime(value);
             datetimes.add(datetime);
         }
         if (datetimes != null) {
@@ -746,6 +774,13 @@ public class JsonDocumentContent extends JsonContent {
     		context.setCurrentEntityAdapter(adapter);
     		adapter.flushJsonProperties(lastEntity);
     	}
+    }
+
+    private static SimpleDateFormat getDateTimeFormatter() {
+        TimeZone tz = TimeZone.getTimeZone("UTC"); // $NON-NLS-1$
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); //$NON-NLS-1$
+        formatter.setTimeZone(tz);
+        return formatter;
     }
 
 }

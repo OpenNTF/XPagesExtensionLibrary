@@ -1,5 +1,5 @@
  /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2014
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -47,5 +47,10 @@ public class AbstractApplicationConfiguration extends ValueBindingObjectImpl imp
         // to return a value set in the All Properties view in Designer
         return null;
     }
-
+    
+    public String getLayoutRendererType() {
+        // default implementation does nothing. 
+        // Is likely to be overridden in the subclass 
+    	return "";
+    }
 }

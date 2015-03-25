@@ -56,7 +56,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
      *      javax.faces.component.UIComponent)
      */
     @Override
-	public void encodeEnd(FacesContext context, UIComponent component)
+    public void encodeEnd(FacesContext context, UIComponent component)
             throws IOException {
         // validate the context and component
         if (context == null || component == null) {
@@ -80,7 +80,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
         String name = UIInputRadio.getClientGroupName(context, radio);
         
         // start the wrapping div tag
-        writer.startElement("div", component);
+        writer.startElement("div", component); // $NON-NLS-1$
         encodeHtmlStyleAttributes(writer, component);
         
         // start the label
@@ -169,7 +169,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
         }
        
         //end the div
-        writer.endElement("div");
+        writer.endElement("div"); // $NON-NLS-1$
         
         InputRendererUtil.encodeValidation(context, context.getResponseWriter(), (UIInput)component);
         

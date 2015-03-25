@@ -1,0 +1,11 @@
+#Localization file used by Workplace Designer
+#Fri Feb 27 12:37:53 GMT 2015
+resourceHandlerClass=ResourceHandler
+propertiesFileName=messages.properties
+resourceHandlerPackage=com.ibm.xsp.theme.bootstrap
+loggingId=CLFAD
+loggingPropertiesFileName=logging.properties
+componentOwner=brian.gleeson@ie.ibm.com
+specialAudienceProperties=specialAudience_en_en_en_en_en_en.properties
+translationLevel=G11N GA UA -- General Audience resources follow
+srcFolderName=com.ibm.xsp.theme.bootstrap/src

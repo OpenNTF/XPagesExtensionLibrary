@@ -31,12 +31,13 @@
 	<target name="setup" depends="setupFlattener">
 	
         <!-- Check the extlib plugins folder exists so specify where it is located
-        eg: c:\snaps\git\testRepo\extlib\lwp\product\runtime\eclipse
+        eg: c:/snaps/git/testRepo/extlib/lwp/product/runtime/eclipse/plugins
         -->
-        <property name="xsp.runtime.extlib" value="" />
+        <property name="xsp.runtime.extlib" value="source-control-folder-not-configured" />
+        <!-- <property name="xsp.runtime.extlib" value="C:/git/github_XPagesExtensionLibrary/extlib/lwp/product/runtime/eclipse/plugins" /> -->
 	      
         <available property="xsp.runtime.extlib.exists" file="${xsp.runtime.extlib}" type="dir" />
-        <fail unless="xsp.runtime.extlib.exists" message="The product/runtime plugins folder was not found at ${basedir}/${xsp.runtime.extlib}" />
+        <fail unless="xsp.runtime.extlib.exists" message="The product/runtime/eclipse/plugins folder was not found at ${xsp.runtime.extlib}" />
 		
 		<!-- Set up some common variables used in the targets below. -->
 		<property name="extlibSrcMeta" value="${xsp.runtime.extlib}/com.ibm.xsp.extlib.controls/src/com/ibm/xsp/extlib/config" />

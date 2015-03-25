@@ -1,6 +1,6 @@
 Bundle-Name: Domino Access Services Plug-in
 Bundle-SymbolicName: com.ibm.domino.das;singleton:=true
-Bundle-Version: 9.0.1.v00_11_SNAPSHOT
+Bundle-Version: 9.0.1.v00_12_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ClassPath: .
 Eclipse-ExtensibleAPI: true

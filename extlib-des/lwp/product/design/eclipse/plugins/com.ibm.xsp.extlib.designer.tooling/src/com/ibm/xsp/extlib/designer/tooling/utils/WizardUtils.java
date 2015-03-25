@@ -29,6 +29,7 @@ import lotus.domino.View;
 import lotus.domino.ViewColumn;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
@@ -79,6 +80,21 @@ import com.ibm.xsp.extlib.designer.tooling.palette.singlepageapp.WizardSubPageDa
 public class WizardUtils {
     
     //
+    // Utility function for creating a Button with a layout and a span
+    //
+    public static Button createButton(Composite parent, String text, SelectionListener listener, int layout, int span) {
+        Button btn = new Button(parent, SWT.NONE);
+        GridData gd = new GridData(layout);
+        gd.horizontalSpan = span;
+        btn.setLayoutData(gd);
+        btn.setText(text);
+        if (listener != null) {
+            btn.addSelectionListener(listener);            
+        }
+        return btn;
+    }
+
+    //
     // Utility function for creating a Button with a layout
     //
     public static Button createButton(Composite parent, String text, SelectionListener listener, int layout) {
@@ -107,7 +123,7 @@ public class WizardUtils {
     }
 
     //
-    // Utility function for creating a CheckBox
+    // Utility function for creating a CheckBox with a span
     //
     public static Button createCheckBox(Composite parent, String text, int span, boolean select) {
         Button btn = new Button(parent, SWT.CHECK);
@@ -121,7 +137,7 @@ public class WizardUtils {
     }
 
     //
-    // Utility function for creating a CheckBox with an indent
+    // Utility function for creating a CheckBox with an indent and a span
     //
     public static Button createCheckBox(Composite parent, String text, int span, boolean select, int indent) {
         Button btn = createCheckBox(parent, text,span, select);
@@ -132,7 +148,7 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for creating a Radio Button
+    // Utility function for creating a Radio Button with a span
     //
     public static Button createRadio(Composite parent, String text, int span, SelectionListener listener) {
         Button btn = new Button(parent, SWT.RADIO);
@@ -147,7 +163,7 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for creating a Radio Button with an indent
+    // Utility function for creating a Radio Button with an indent and a span
     //
     public static Button createRadio(Composite parent, String text, int span, SelectionListener listener, int indent) {
         Button btn = createRadio(parent, text, span, listener);
@@ -167,18 +183,26 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for creating a Group
+    // Utility function for creating a Group with an indent and span
     //
-    public static Group createGroup(Composite parent, int span, int cols) {
+    public static Group createGroup(Composite parent, int span, int cols, int indent) {
         Group group = new Group(parent, SWT.NONE);
         GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
         gridData.horizontalSpan = span;
+        gridData.horizontalIndent = indent;
         group.setLayoutData(gridData);
         GridLayout layout = new GridLayout();
         group.setLayout(layout);
         layout.numColumns = cols;        
         
-        return group;
+        return group;        
+    }
+    
+    //
+    // Utility function for creating a Group with a span
+    //
+    public static Group createGroup(Composite parent, int span, int cols) {
+        return createGroup(parent, span, cols, 0);
     }
     
     //
@@ -219,12 +243,26 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for creating a Label
+    // Utility function for creating a Label with a span
     //
     public static Label createLabel(Composite parent, String text, int span) {
-        Label label = new Label(parent, SWT.NONE);
+        return createLabel(parent, text, span, SWT.NONE);
+    }
+    
+    //
+    // Utility function for creating a Label with a span and style
+    //
+    public static Label createLabel(Composite parent, String text, int span, int style) {
+        return createLabel(parent, text, span, SWT.NONE, GridData.HORIZONTAL_ALIGN_FILL);
+    }
+    
+    //
+    // Utility function for creating a Label
+    //
+    public static Label createLabel(Composite parent, String text, int span, int style, int fill) {
+        Label label = new Label(parent, style);
         label.setText(text);
-        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
+        GridData gridData = new GridData(fill);
         gridData.horizontalSpan = span;
         label.setLayoutData(gridData);
 
@@ -232,10 +270,13 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for creating a Label with an indent
+    // Utility function for creating a Label with an indent and bold option
     //
-    public static Label createLabel(Composite parent, String text, int span, int indent) {
-        Label label = createLabel(parent, text, span);
+    public static Label createLabel(Composite parent, String text, int span, int indent, boolean bold, int fill) {
+        Label label = createLabel(parent, text, span, SWT.NONE, fill);
+        if (bold) {
+            label.setFont(JFaceResources.getDialogFontDescriptor().withStyle(SWT.BOLD).createFont(null));
+        }
         GridData gridData = (GridData) label.getLayoutData();
         gridData.horizontalIndent = indent;    
 
@@ -273,10 +314,20 @@ public class WizardUtils {
     }    
     
     //
-    // Utility function for creating a Combo with items
+    // Utility function for creating a read only Combo with items
     //
     public static Combo createCombo(Composite parent, int span, String[] items, int index, SelectionListener listener) {
         Combo combo = createCombo(parent, span, listener);
+        combo.setItems(items);
+        combo.select(index);
+        return combo;
+    }
+
+    //
+    // Utility function for creating a editable Combo with items
+    //
+    public static Combo createEditCombo(Composite parent, int span, String[] items, int index, SelectionListener listener) {
+        Combo combo = createEditCombo(parent, span, listener);
         combo.setItems(items);
         combo.select(index);
         return combo;
@@ -294,8 +345,39 @@ public class WizardUtils {
     //
     // Utility function for creating a Text with a span
     //
-    public static Text createText(Composite parent, int span) {        
+    public static Text createText(Composite parent, int span) {
+        return createText(parent, span, 0);      
+    }
+
+    //
+    // Utility function for creating a Text with a span, indent and fill
+    //
+    public static Text createText(Composite parent, int style, int span, int indent, int fill) {        
+        Text text = new Text(parent, style);
+        GridData gd = new GridData(fill);
+        gd.horizontalSpan = span;
+        gd.horizontalIndent = indent;
+        text.setLayoutData(gd);
+        return text;
+    }
+
+    //
+    // Utility function for creating a Text with a span and indent
+    //
+    public static Text createText(Composite parent, int span, int indent) {        
         Text text = new Text(parent, SWT.BORDER | SWT.SINGLE);
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        gd.horizontalSpan = span;
+        gd.horizontalIndent = indent;
+        text.setLayoutData(gd);
+        return text;
+    }
+
+    //
+    // Utility function for creating a Password Text with a span
+    //
+    public static Text createPasswordText(Composite parent, int span) {        
+        Text text = new Text(parent, SWT.PASSWORD | SWT.BORDER | SWT.SINGLE);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         gd.horizontalSpan = span;
         text.setLayoutData(gd);
@@ -331,16 +413,23 @@ public class WizardUtils {
     }
     
     //
-    // Utility function for crreating a TableViewer with columns
+    // Utility function for creating a TableViewer with columns
     //
     public static TableViewer createTableViewer(Composite parent, int span, int cols, int[] weights) {
         return createTableViewer(parent, span, cols, weights, SWT.FULL_SELECTION | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
     }
     
     //
-    // Utility function for crreating a TableViewer with columns
+    // Utility function for creating a TableViewer with columns and options
     //
     public static TableViewer createTableViewer(Composite parent, int span, int cols, int[] weights, int options) {
+        return createTableViewer(parent, span, cols, weights, options, 0);            
+    }
+    
+    //
+    // Utility function for creating a TableViewer with columns and indent
+    //
+    public static TableViewer createTableViewer(Composite parent, int span, int cols, int[] weights, int options, int indent) {
         TableViewer table = new TableViewer(parent, options);
 
         GridData gd = new GridData(SWT.DEFAULT);
@@ -349,6 +438,7 @@ public class WizardUtils {
         gd.grabExcessVerticalSpace = true;
         gd.horizontalAlignment = GridData.FILL;
         gd.grabExcessHorizontalSpace = true;
+        gd.horizontalIndent = indent;
         table.getTable().setLayoutData(gd);
         
         table.getTable().setHeaderVisible(true);
@@ -365,10 +455,9 @@ public class WizardUtils {
                 
         return table;
     }
-    
 
     //
-    // Utility function for crreating a TableViewer with columns and a checkbox
+    // Utility function for creating a TableViewer with columns and a checkbox
     //
     public static TableViewer createCheckboxTableViewer(Composite parent, int cols) {
         TableViewer table = new TableViewer(parent, SWT.CHECK | SWT.FULL_SELECTION | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);

@@ -69,13 +69,15 @@ public class XspRenderUtil {
             insertParent = root;
         }else{
             UIComponent rootChild = rootKids.get(0);
+            UIForm form;
             if( rootChild instanceof UIForm ){
-                insertParent = (UIForm) rootChild;
+                form = (UIForm) rootChild;
             }else{
                 // rootChild is a UIScriptCollector
                 UIComponent scriptCollector = rootChild;
-                insertParent = (UIForm) TypedUtil.getChildren(scriptCollector).get(0);
+                form = (UIForm) TypedUtil.getChildren(scriptCollector).get(0);
             }
+            insertParent = form;
         }
         UIComponent p;
 		try {
@@ -110,7 +112,10 @@ public class XspRenderUtil {
 			super.encodeEnd(context);
 			context.getResponseWriter().endElement("p");
 		}
+		
+    	
     }
+
     /**
      * @param root
      * @param p
@@ -132,14 +137,14 @@ public class XspRenderUtil {
             if( null != mtd ){
                 mtd.invoke(root, new Object[0]);
             }
-        //root._lastUniqueId = 100;
+            //root._lastUniqueId = 100;
             Class<?> viewRootClass = Class.forName("com.ibm.xsp.component.UIViewRootEx");
-        Field lastIdField = viewRootClass.getDeclaredField("_lastUniqueId");
-        lastIdField.setAccessible(true); // change private to public
-        try{
-            lastIdField.set(root, 100);
-        }finally{
-            lastIdField.setAccessible(false);
+            Field lastIdField = viewRootClass.getDeclaredField("_lastUniqueId");
+            lastIdField.setAccessible(true); // change private to public
+            try{
+                lastIdField.set(root, 100);
+            }finally{
+                lastIdField.setAccessible(false);
             }
         }
         

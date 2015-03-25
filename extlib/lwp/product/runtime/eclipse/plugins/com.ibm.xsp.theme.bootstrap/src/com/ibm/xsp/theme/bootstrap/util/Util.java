@@ -17,9 +17,9 @@ package com.ibm.xsp.theme.bootstrap.util;
 
 public class Util {
 
-	private static int uniqueId;
+    private static int uniqueId;
 
-	public static String computeUniqueId() {
-		return "xbt_" + Integer.toString(uniqueId++, 36);
-	}
+    public static String computeUniqueId() {
+        return "xbt_" + Integer.toString(uniqueId++, 36); // $NON-NLS-1$
+    }
 }
