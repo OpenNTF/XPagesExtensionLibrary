@@ -1157,6 +1157,16 @@ div.glyphicon.xspReadIcon{
 	font-size: 28px;
 }
 
+/* dojo dialogs - Fix z-index to allow comboboxs to show ABOVE the dialog. */
+.xspmodal {
+	z-index:950 !important;
+}
+
+.dijitDialogUnderlayWrapper {
+	z-index: 949 !important;
+}
+
+
 /* dojo border container/pane - needs more work
 .dijitSplitContainer-child, .dijitBorderContainer-child {
     border: 1px solid #CCCCCC;
