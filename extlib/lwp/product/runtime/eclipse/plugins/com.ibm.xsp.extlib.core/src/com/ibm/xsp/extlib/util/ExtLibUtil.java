@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2013
+ * ï¿½ Copyright IBM Corp. 2010, 2013
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -206,6 +206,13 @@ public class ExtLibUtil {
     public static Object resolveVariable(FacesContext facesContext, String name) {
         Object value =  facesContext.getApplication().getVariableResolver().resolveVariable(facesContext, name);
         return value;
+    }
+    
+    /**
+     * Resolve the specified variable using the current {@link FacesContext} instance.
+     */
+    public static Object resolveVariable(String name) {
+    	return resolveVariable(FacesContext.getCurrentInstance(), name);
     }
 
     /**
