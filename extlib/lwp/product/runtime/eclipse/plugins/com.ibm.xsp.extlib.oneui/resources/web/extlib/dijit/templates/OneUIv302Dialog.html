@@ -6,7 +6,7 @@
 					<span dojoAttachPoint="titleNode" id="${id}_title"></span>
 					
 				</h1>
-				<a dojoAttachPoint="closeButtonNode" title="${buttonCancel}" class="lotusDialogClose" href="javascript:;" dojoAttachEvent="onclick: onCancel">
+				<a dojoAttachPoint="closeButtonNode" title="${buttonCancel}" class="lotusDialogClose" href="javascript:;" dojoAttachEvent="onclick: onCancel" onclick="javascript: event.preventDefault()">
 					<img aria-label="close button" alt="" src="${_blankGif}"><span class="lotusAltText">X</span></img>
 				</a>
 			</div>

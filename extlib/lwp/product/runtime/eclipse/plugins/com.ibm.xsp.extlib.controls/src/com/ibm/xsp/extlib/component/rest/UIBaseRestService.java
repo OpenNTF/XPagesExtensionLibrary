@@ -116,10 +116,7 @@ public abstract class UIBaseRestService extends UIComponentBase implements Faces
         	url += (hasQ?"&":"?") + AjaxUtil.AJAX_AXTARGET + "=" + axTarget; 
             hasQ = true;
         }
-        
-        //PEDS9NSJMG
-        url=DominoUtils.handleProxyPrefix(url);
-        
+       
         return url;
 	}
 	
@@ -145,7 +142,11 @@ public abstract class UIBaseRestService extends UIComponentBase implements Faces
 	        }
         }
         
-        return b.toString();
+        //MNIA9UCECY
+        String url= b.toString();
+        url=DominoUtils.handleProxyPrefix(url);
+        
+        return url;
 	}
 	
 	public String getAjaxViewid(FacesContext context) {

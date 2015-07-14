@@ -7,5 +7,5 @@ loggingId=CLFAD
 loggingPropertiesFileName=logging.properties
 componentOwner=brian.gleeson@ie.ibm.com
 specialAudienceProperties=specialAudience.properties
-translationLevel=G11N GA UA -- General Audience resources follow
+translationLevel=G11N GA UI -- General Audience resources follow
 srcFolderName=com.ibm.xsp.extlib.relational/src

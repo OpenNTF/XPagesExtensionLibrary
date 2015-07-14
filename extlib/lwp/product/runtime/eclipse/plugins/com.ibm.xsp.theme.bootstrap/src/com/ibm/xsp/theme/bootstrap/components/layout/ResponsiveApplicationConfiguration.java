@@ -23,9 +23,10 @@ import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImp
 public class ResponsiveApplicationConfiguration extends BasicApplicationConfigurationImpl {
 	
 
-	public static final String WIDTH_FULL = "full"; //$NON-NLS-1$
+	public static final String WIDTH_FULL  = "full";  //$NON-NLS-1$
 	public static final String WIDTH_FLUID = "fluid"; //$NON-NLS-1$
 	public static final String WIDTH_FIXED = "fixed"; //$NON-NLS-1$
+	public static final String WIDTH_NONE  = "none";  //$NON-NLS-1$
 	
 	public static final String NAVBAR_FIXED_TOP 			= "fixed-top"; //$NON-NLS-1$
 	public static final String NAVBAR_FIXED_BOTTOM 			= "fixed-bottom"; //$NON-NLS-1$

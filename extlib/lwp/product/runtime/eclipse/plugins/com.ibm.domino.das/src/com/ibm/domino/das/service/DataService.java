@@ -41,6 +41,14 @@ import com.ibm.domino.osgi.core.context.ContextInfo;
  */
 public class DataService extends RestService {
 
+    public static final String STAT_DB_COLLECTION         = "DbCollection"; // $NON-NLS-1$
+    public static final String STAT_DOCUMENT              = "Document"; // $NON-NLS-1$
+    public static final String STAT_DOC_COLLECTION        = "DocCollection"; // $NON-NLS-1$
+    public static final String STAT_VIEW_COLLECTION       = "ViewCollection"; // $NON-NLS-1$
+    public static final String STAT_VIEW_DESIGN           = "ViewDesign"; // $NON-NLS-1$
+    public static final String STAT_VIEW_ENTRIES          = "ViewEntryCollection"; // $NON-NLS-1$
+    public static final String STAT_VIEW_ENTRY            = "ViewEntry"; // $NON-NLS-1$
+
     private static Boolean s_useRelativeUrls = null;
     private static int s_maxViewEntries = -1;
     

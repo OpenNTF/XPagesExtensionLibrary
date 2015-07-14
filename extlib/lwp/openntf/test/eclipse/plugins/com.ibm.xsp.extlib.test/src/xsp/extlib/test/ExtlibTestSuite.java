@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2014
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,6 +24,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import xsp.extlib.test.application.ExtlibReflectionSerializeTest;
 import xsp.extlib.test.application.ExtlibRegisteredSerializationTest;
+import xsp.extlib.test.context.BluemixContextTest;
 import xsp.extlib.test.control.ApplicationConfigurationDefaultsTest;
 import xsp.extlib.test.control.ChangeDynamicContentTest;
 import xsp.extlib.test.control.DataViewDetailsOnClientTest;
@@ -31,6 +32,7 @@ import xsp.extlib.test.control.DojoCheckBoxDefaultValueDisabledTest;
 import xsp.extlib.test.control.MobileAppPageEventTest;
 import xsp.extlib.test.control.MobileControlTooltipTest;
 import xsp.extlib.test.control.NavigatorContainerNodeTest;
+import xsp.extlib.test.lifecycle.ExtlibRegisteredDecodeTest;
 import xsp.extlib.test.page.translator.ExtlibGeneratePagesTest;
 import xsp.extlib.test.registry.ExtlibBooleanPropertyDefaultTest;
 import xsp.extlib.test.registry.ExtlibEventPropsHaveSubCategoryTest;
@@ -67,7 +69,6 @@ import xsp.extlib.test.version.ExtlibSinceVersionsSetTest;
 
 import com.ibm.xsp.test.framework.SampleTestSuite;
 import com.ibm.xsp.test.framework.TestClassList;
-import com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest;
 import com.ibm.xsp.test.framework.registry.BaseComplexCheckTest;
 import com.ibm.xsp.test.framework.registry.BaseComplexNotRunTimeBindingTest;
 import com.ibm.xsp.test.framework.registry.BaseComponentRendererTest;
@@ -108,7 +109,7 @@ public class ExtlibTestSuite extends TestSuite {
     /**
      * See {@link ExtlibSuiteSetupTest} and {@link SampleTestSuite}.
      */
-    public static final long BASED_ON_SAMPLE_SUITE_VERSION = 41;
+    public static final long BASED_ON_SAMPLE_SUITE_VERSION = 42;
     
     public static List<Class<?>> getTestClassList() { 
         TestClassList suite = new TestClassList();
@@ -128,6 +129,9 @@ public class ExtlibTestSuite extends TestSuite {
         // (extlib test) BootstrapJunitableTest
         suite.addTestSuite(BootstrapJunitableTest.class);
         
+        // .context
+        suite.addTestSuite(BluemixContextTest.class);
+        
         // .control
         suite.addTestSuite(ApplicationConfigurationDefaultsTest.class);
         suite.addTestSuite(ChangeDynamicContentTest.class);
@@ -139,7 +143,8 @@ public class ExtlibTestSuite extends TestSuite {
         
         // .lifecycle tests
         // - RegisteredDecodeTest
-        suite.addTestSuite(RegisteredDecodeTest.class);
+        suite.addTestSuite(ExtlibRegisteredDecodeTest.class);
+        // (end .lifecycle)
         
         // .registry
         // - BaseBooleanPropertyDefaultTest
@@ -269,6 +274,7 @@ public class ExtlibTestSuite extends TestSuite {
         suite.addTestSuite(BaseSerializeValueBindingTest.class);
         // - BaseViewSerializeTest
         suite.addTestSuite(ExtlibViewSerializeTest.class);
+        // (end .serialize)
         
 //        //xsp.editor.registry
 //        suite.addTestSuite(StrictDesignerTest.class);

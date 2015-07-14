@@ -56,10 +56,13 @@ import com.ibm.xsp.registry.FacesDefinition;
  * 9.0.1.v00_10 is an OpenNTF 9.0.1 release
  *              ExtensionLibraryOpenNTF-901v00_10.20141105-0922.zip
  *              Released on: 10 Nov 2014.
- * 9.0.1.v00_11 this will be the eleventh OpenNTF 9.0.1 release
+ * 9.0.1.v00_11 is an OpenNTF 9.0.1 release
  *              ExtensionLibraryOpenNTF-901v00_11.20141217-1000.zip
  *              Released on: 19 Dec 2014.
- * 9.0.1.v00_12 this will be the twelfth OpenNTF 9.0.1 release
+ * 9.0.1.v00_12 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_12.20150311-1316.zip
+ *              Released on: 25 Mar 2015.
+ * 9.0.1.v00_13 this will be the thirteent OpenNTF 9.0.1 release
  * 
  * @author Brian Gleeson (brian.gleeson@ie.ibm.com)
  */
@@ -79,7 +82,7 @@ public class RelationalVersion {
          * from Notes/Domino in-development stream. */
         boolean isOpenNTFRelease = true;
         if( isOpenNTFRelease ){
-            versionStr = "9.0.1.v00_12"; // $NON-NLS-1$
+            versionStr = "9.0.1.v00_13"; // $NON-NLS-1$
             if( RelationalLogger.RELATIONAL.isTraceDebugEnabled() ){
             	RelationalLogger.RELATIONAL.traceDebugp(RelationalVersion.class, "computeCurrentVersion", //$NON-NLS-1$ 
                         "Current Relational version is "+versionStr); //$NON-NLS-1$

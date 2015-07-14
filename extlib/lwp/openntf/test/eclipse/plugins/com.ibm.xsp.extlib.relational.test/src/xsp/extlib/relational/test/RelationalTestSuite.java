@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2014
+ * © Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,7 +42,7 @@ import xsp.extlib.test.registry.annotate.BaseExtlibControlCategoryKnownTest;
 
 import com.ibm.xsp.test.framework.SampleTestSuite;
 import com.ibm.xsp.test.framework.TestClassList;
-import com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest;
+import com.ibm.xsp.test.framework.lifecycle.BaseRegisteredDecodeTest;
 import com.ibm.xsp.test.framework.registry.BaseComplexCheckTest;
 import com.ibm.xsp.test.framework.registry.BaseComplexNotRunTimeBindingTest;
 import com.ibm.xsp.test.framework.registry.BaseComponentRendererTest;
@@ -101,7 +101,7 @@ public class RelationalTestSuite extends TestSuite {
     /**
      * See {@link RelationalSuiteSetupTest} and {@link SampleTestSuite}.
      */
-    public static final long BASED_ON_SAMPLE_SUITE_VERSION = 41;
+    public static final long BASED_ON_SAMPLE_SUITE_VERSION = 42;
     
     public static List<Class<?>> getTestClassList() { 
         TestClassList suite = new TestClassList();
@@ -122,7 +122,7 @@ public class RelationalTestSuite extends TestSuite {
         
         // .lifecycle tests
         // - RegisteredDecodeTest
-        suite.addTestSuite(RegisteredDecodeTest.class);
+        suite.addTestSuite(BaseRegisteredDecodeTest.class);
         
         // .registry
         // - BaseBooleanPropertyDefaultTest
@@ -133,7 +133,7 @@ public class RelationalTestSuite extends TestSuite {
         suite.addTestSuite(BaseComponentRendererTest.class);
         // - BaseComponentTypeTest
         suite.addTestSuite(BaseComponentTypeTest.class);
-        // - RelationalGroupReuseTest
+        // - BaseGroupReuseTest
         suite.addTestSuite(RelationalExtlibGroupReuseTest.class);
         // - BaseInheritRendererTypeGetterTest
         suite.addTestSuite(BaseInheritRendererTypeGetterTest.class);
@@ -211,7 +211,7 @@ public class RelationalTestSuite extends TestSuite {
         suite.addTestSuite(BaseRoleAccessibilityTest.class);
         // - BaseTodoTaggedTest
         suite.addTestSuite(BaseTodoTaggedTest.class);
-        // - RelationalTranslatableStringsTest
+        // - BaseTranslatableStringsTest
         suite.addTestSuite(RelationalTranslatableStringsTest.class);
         // - BaseVarEditorTest
         suite.addTestSuite(BaseVarEditorTest.class);
@@ -249,9 +249,10 @@ public class RelationalTestSuite extends TestSuite {
         suite.addTestSuite(BaseSerializeValueBindingTest.class);
         // - BaseViewSerializeTest
         suite.addTestSuite(RelationalViewSerializeTest.class);
+        // (end .serialize)
         
         // .version
-        // - RelationalSinceVersionsSetTest
+        // - BaseSinceVersionsSetTest
         suite.addTestSuite(RelationalSinceVersionSetTest.class);
         
         return suite.getTests();

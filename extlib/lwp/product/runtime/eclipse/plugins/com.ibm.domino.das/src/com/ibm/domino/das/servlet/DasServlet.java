@@ -106,7 +106,6 @@ public class DasServlet extends AbstractRestServlet {
     private static final String DATA_SERVICE_PATH = "data";//$NON-NLS-1$
     private static final String VERSION_ZERO = "0.0.0";  //$NON-NLS-1$
     private static final String DATA_SERVICE_VERSION = "9.0.1"; //$NON-NLS-1$
-    private static final int DATA_SERVICE_GKF = 426; // Defined by core SAAS code
     
     private static final String CORE_SERVICE_NAME = "Core";//$NON-NLS-1$
     private static final String CORE_SERVICE_PATH = "core";//$NON-NLS-1$
@@ -475,7 +474,7 @@ public class DasServlet extends AbstractRestServlet {
             
             // Add the service to our map
             DasService service = new DasService(DATA_SERVICE_NAME, DATA_SERVICE_PATH, 
-                                        DATA_SERVICE_VERSION, DATA_SERVICE_GKF, application);
+                                        DATA_SERVICE_VERSION, 0, application);
             s_services.put(DATA_SERVICE_PATH, service);
 
             DAS_LOGGER.getLogger().fine("Registered the data service"); // $NON-NLS-1$

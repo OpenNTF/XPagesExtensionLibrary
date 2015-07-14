@@ -261,7 +261,8 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         
         //container div
         w.startElement("div",c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass + "applayout-banner-container", null); // $NON-NLS-1$ $NON-NLS-2$
+        String bannerClass = ExtLibUtil.concatStyleClasses(pageWidthClass, "applayout-banner-container"); // $NON-NLS-1$
+        w.writeAttribute("class", bannerClass , null); // $NON-NLS-1$
 
         writeBannerContent(context, w, c, configuration);
 
@@ -418,7 +419,8 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             
             //container div
             w.startElement("div", c); // $NON-NLS-1$
-            w.writeAttribute("class", pageWidthClass + "applayout-titlebar-inner", null); // $NON-NLS-1$ $NON-NLS-2$
+            String titleClass = ExtLibUtil.concatStyleClasses(pageWidthClass, "applayout-titlebar-inner"); // $NON-NLS-1$
+            w.writeAttribute("class", titleClass , null); // $NON-NLS-1$
             
             writeSearchBar(context, w, c, configuration);
             
@@ -672,7 +674,9 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
         //container div
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
+        if(StringUtil.isNotEmpty(pageWidthClass)) {
+            w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
+        }
 
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("class", "applayout-placebar-title", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -741,16 +745,11 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             String pageWidthClass, boolean collapseLeftColumn, String collapseLeftTarget,
             String collapseLeftColumnButtonLabel) throws IOException {
         
-        ResponsiveApplicationConfiguration respConfig = asBootstrapConfig(configuration);
-        String pageWidth = "";
-        if(respConfig != null) {
-            pageWidth = respConfig.getPageWidth();
-        }
-        
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
         
-        if (StringUtil.isNotEmpty(pageWidth) && !pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FULL)) {
+        // Empty pageWidthClass means pageWidth=none, therefore add no container class or row
+        if (StringUtil.isNotEmpty(pageWidthClass)) {
+            w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
             w.startElement("div", c); // $NON-NLS-1$
             w.writeAttribute("class", "row", null); // $NON-NLS-1$ $NON-NLS-2$
         }
@@ -776,7 +775,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         writeRightColumn(context, w, c, rightSize, configuration);
 
         // Close the main content
-        if (StringUtil.isNotEmpty(pageWidth) && !pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FULL)) {
+        if (StringUtil.isNotEmpty(pageWidthClass)) {
             w.endElement("div"); // $NON-NLS-1$
             newLine(w, "row"); // $NON-NLS-1$
         }
@@ -879,20 +878,23 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
     protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
             BasicApplicationConfigurationImpl configuration, String pageWidthClass) throws IOException {
-        w.startElement("footer", c); // $NON-NLS-1$
+    	w.startElement("footer", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar navbar-bottom applayout-footer", null); // $NON-NLS-1$ $NON-NLS-2$
         newLine(w);
         
         //container div
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass + "applayout-titlebar-inner", null); // $NON-NLS-1$ $NON-NLS-2$
+        if(StringUtil.isNotEmpty(pageWidthClass)) {
+            w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
+        }
+        newLine(w);
 
         writeFooterLinks(context, w, c, configuration);
 
         w.endElement("div"); // $NON-NLS-1$
         newLine(w, "container"); // $NON-NLS-1$
         w.endElement("footer"); // $NON-NLS-1$
-        newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
+        newLine(w, "footer"); // $NON-NLS-1$
     }
 
     protected void writeFooterLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
@@ -917,7 +919,9 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         
         //container div
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass + "applayout-titlebar-inner", null); // $NON-NLS-1$ $NON-NLS-2$
+        if(StringUtil.isNotEmpty(pageWidthClass)) {
+            w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
+        }
 
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("style", "display: table; margin-left: auto; margin-right: auto; text-align: center;", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -932,7 +936,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         w.endElement("div"); // $NON-NLS-1$
         newLine(w, "container"); // $NON-NLS-1$
         w.endElement("footer"); // $NON-NLS-1$
-        newLine(w, "footer"); // $NON-NLS-1$ $NON-NLS-2$
+        newLine(w, "footer"); // $NON-NLS-1$
     }
 
     protected void writeLegalLogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
@@ -989,10 +993,15 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
                     return "container-fluid"; // $NON-NLS-1$
                 } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FIXED)) {
                    return "container"; // $NON-NLS-1$
+                } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FULL)) {
+                    return "container-full"; // $NON-NLS-1$
+                } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_NONE)) {
+                    return ""; // $NON-NLS-1$
                 }
             }
         }
-        return "";
+        // Fluid container by default
+        return "container-fluid";  // $NON-NLS-1$
     }
     // ==================================================================
     // JSF renderer methods

@@ -40,6 +40,7 @@ public class SimpleResponsiveApplicationConfiguration extends AbstractApplicatio
     public static final String WIDTH_FULL                   = "full"; //$NON-NLS-1$
     public static final String WIDTH_FLUID                  = "fluid"; //$NON-NLS-1$
     public static final String WIDTH_FIXED                  = "fixed"; //$NON-NLS-1$
+	public static final String WIDTH_NONE                   = "none";  //$NON-NLS-1$
     
     public static final String NAVBAR_FIXED_TOP             = "fixed-top"; //$NON-NLS-1$
     public static final String NAVBAR_FIXED_BOTTOM          = "fixed-bottom"; //$NON-NLS-1$
@@ -206,7 +207,7 @@ public class SimpleResponsiveApplicationConfiguration extends AbstractApplicatio
                 return s;
             }
         }
-        return null;//WIDTH_FULL
+        return null;
     }
     public void setPageWidth(String pageWidth) {
         this.pageWidth = pageWidth;

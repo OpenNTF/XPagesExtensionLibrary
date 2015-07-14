@@ -19,7 +19,7 @@
 <feature id="org.openntf.extlib.feature.source" 
 		label="%feature.name" 
 		provider-name="IBM" 
-		version="9.0.1.v00_12_qualifier">
+		version="9.0.1.v00_13_qualifier">
 
 	<description>
 		%feature.description
@@ -234,7 +234,7 @@
 	<plugin id="org.openntf.extlib.feature.source"
 		download-size="0" 
 		install-size="0" 
-		version="9.0.1.v00_12_qualifier"
+		version="9.0.1.v00_13_qualifier"
 		unpack="true"
 		/>
 </feature>

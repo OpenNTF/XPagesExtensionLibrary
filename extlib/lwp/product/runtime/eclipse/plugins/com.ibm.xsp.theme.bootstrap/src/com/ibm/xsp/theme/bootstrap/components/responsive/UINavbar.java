@@ -57,6 +57,8 @@ public class UINavbar extends UIPanel implements ThemeControl {
 
     public static final String WIDTH_FLUID             = "fluid"; //$NON-NLS-1$
     public static final String WIDTH_FIXED             = "fixed"; //$NON-NLS-1$
+    public static final String WIDTH_FULL              = "full"; //$NON-NLS-1$
+    public static final String WIDTH_NONE              = "none"; //$NON-NLS-1$
 
     public static final String COMPONENT_TYPE    = "com.ibm.xsp.theme.bootstrap.components.responsive.Navbar"; //$NON-NLS-1$
     //public static final String COMPONENT_FAMILY  = "javax.faces.Panel"; //$NON-NLS-1$

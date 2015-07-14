@@ -19,7 +19,7 @@
 <feature
       id="com.ibm.domino.services.samples.feature"
       label="%feature.name"
-      version="9.0.1.v00_12_qualifier"
+      version="9.0.1.v00_13_qualifier"
       provider-name="%feature.provider">
 
    <description>

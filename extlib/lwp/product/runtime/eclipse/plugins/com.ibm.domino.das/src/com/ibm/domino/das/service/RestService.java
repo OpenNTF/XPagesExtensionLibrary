@@ -245,9 +245,11 @@ public class RestService extends WinkApplication {
             StatsContext.getCurrentInstance().setRequestCategory(category);
         }
     
-        if ( feature != 0 && ScnContext.getCurrentInstance().isScn() ) {
-            String customerId = ScnContext.getCurrentInstance().getCustomerId();
-            String userId = ScnContext.getCurrentInstance().getUserId();
+        if ( feature != 0 ) {
+            ScnContext ctx = ScnContext.getCurrentInstance();
+            String customerId = ctx.getCustomerId();
+            String userId = ctx.getUserId();
+            
             IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
             if ( ! provider.isFeatureEnabled(feature, customerId, userId) ) {
                 String msg = MessageFormat.format("Feature {0} is disabled.", feature); // $NLX-RestService.Feature0isdisabled-1$

@@ -3,7 +3,7 @@
 <feature
       id="org.openntf.extlib.relational.feature"
       label="%feature.name"
-      version="9.0.1.v00_12_SNAPSHOT"
+      version="9.0.1.v00_13_SNAPSHOT"
       provider-name="%feature.provider">
 
    <description url="http://extlib.openntf.org">

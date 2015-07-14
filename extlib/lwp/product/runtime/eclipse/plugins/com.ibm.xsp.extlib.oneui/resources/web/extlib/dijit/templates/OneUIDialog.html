@@ -3,7 +3,7 @@
 	<div dojoAttachPoint="titleBar">
 	<h1 style="margin:0;">
 		<span dojoAttachPoint="closeButtonNode" tabindex="0">
-			<a title="${buttonCancel}" class="lotusBtnImg lotusClose" href="javascript:;" role="button" dojoAttachEvent="onclick: onCancel">
+			<a title="${buttonCancel}" class="lotusBtnImg lotusClose" href="javascript:;" role="button" dojoAttachEvent="onclick: onCancel" onclick="javascript: event.preventDefault()">
 				<img alt="" src="${_blankGif}"><span class="lotusAltText">X</span></img>
 			</a>
 		</span>

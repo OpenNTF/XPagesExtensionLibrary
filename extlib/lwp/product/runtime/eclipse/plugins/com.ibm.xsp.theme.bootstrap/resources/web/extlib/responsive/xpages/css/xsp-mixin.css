@@ -833,6 +833,11 @@ div.glyphicon.xspReadIcon{
 	z-index: 997;
 }
 
+.navbar.navbar-fixed-top,
+.navbar.navbar-fixed-bottom{
+	z-index: 998;
+}
+
 @media (max-width: 768px) {
 	.xspNavbar .navbar-form {
 		margin-left:0px;

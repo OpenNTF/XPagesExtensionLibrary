@@ -69,7 +69,7 @@ public class NavbarRenderer extends FacesRendererEx {
         String style        = "";
         String styleClass   = "";
         String title        = "";
-        String pageWidth    = "";
+        String pageWidth    = null;
         boolean hasChildren = false;
         ITree beforeLinks   = null;
         ITree afterLinks    = null;
@@ -146,11 +146,21 @@ public class NavbarRenderer extends FacesRendererEx {
         
         //container div
         w.startElement("div", component); // $NON-NLS-1$
-        if ( pageWidth != null && pageWidth.equals(UINavbar.WIDTH_FLUID)) {
-            w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
-        } else if ( pageWidth != null && pageWidth.equals(UINavbar.WIDTH_FIXED)) {
-            w.writeAttribute("class", "container", null); // $NON-NLS-1$ $NON-NLS-2$
+        if ( pageWidth != null) {
+            if (pageWidth.equals(UINavbar.WIDTH_FLUID)) {
+                w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
+            } else if (pageWidth.equals(UINavbar.WIDTH_FIXED)) {
+                w.writeAttribute("class", "container", null); // $NON-NLS-1$ $NON-NLS-2$
+            } else if ( pageWidth.equals(UINavbar.WIDTH_FULL)) {
+                w.writeAttribute("class", "container-full", null); // $NON-NLS-1$ $NON-NLS-2$
+            } else if ( pageWidth.equals(UINavbar.WIDTH_NONE)) {
+                // don't write a container class to the div
+            } else {
+                // default to container-fluid
+                w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
         } else {
+            // default to container-fluid
             w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
         }
         

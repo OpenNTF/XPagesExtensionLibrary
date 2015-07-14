@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XPages Responsive Bootstrap Theme
 Bundle-SymbolicName: com.ibm.xsp.theme.bootstrap;singleton:=true
-Bundle-Version: 9.0.1.v00_12_SNAPSHOT
+Bundle-Version: 9.0.1.v00_13_qualifier
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.commons.xml,
  com.ibm.xsp.core,
  com.ibm.xsp.extsn,
- com.ibm.xsp.domino,
  com.ibm.xsp.designer,
+ com.ibm.xsp.domino,
  com.ibm.xsp.extlib.core,
  com.ibm.xsp.extlib.controls,
  com.ibm.designer.runtime,

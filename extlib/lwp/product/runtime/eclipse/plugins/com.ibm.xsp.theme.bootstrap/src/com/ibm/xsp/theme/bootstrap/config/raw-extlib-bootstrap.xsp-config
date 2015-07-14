@@ -79,8 +79,8 @@
 		</property>
 		
 		<property>
-			<!-- # When inside quotes: "full", "fluid", "fixed" should not be translated -->
-			<description>Determines the width of the page: "full" means full width, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width.</description>
+			<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
+			<description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
 			<display-name>Page Width</display-name>
 			<property-name>pageWidth</property-name>
 			<property-class>java.lang.String</property-class>
@@ -91,6 +91,7 @@
 					<editor-parameter>full
 						fluid
 						fixed
+						none
 					</editor-parameter>
 				</designer-extension>
 			</property-extension>
@@ -172,7 +173,8 @@
 		</property>
 		
 		<property>
-			<description>Determines the width of the page: "full" means use the full width of the browser, "fluid" means use the Bootstrap fluid container (almost full width), fixed means use the Bootstrap fixed width container, which fixes the width of the content of the container to a central column in the application.</description>
+			<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
+			<description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
 			<display-name>Page Width</display-name>
 			<property-name>pageWidth</property-name>
 			<property-class>java.lang.String</property-class>
@@ -182,6 +184,7 @@
 					<editor-parameter>full
 						fluid
 						fixed
+						none
 					</editor-parameter>
 				</designer-extension>
 			</property-extension>
@@ -962,8 +965,8 @@
 		
     
       <property>
-        <!-- # When inside quotes: "fluid", "fixed" should not be translated --> 
-        <description>Determines the width of the page: "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed container width.</description>
+		<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
+        <description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
         <display-name>Page Width</display-name>
         <property-name>pageWidth</property-name>
             <property-class>java.lang.String</property-class>
@@ -974,6 +977,8 @@
                     <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
                     <editor-parameter>fluid
                         fixed
+                        full
+                        none
                     </editor-parameter>
                </designer-extension>
            </property-extension>

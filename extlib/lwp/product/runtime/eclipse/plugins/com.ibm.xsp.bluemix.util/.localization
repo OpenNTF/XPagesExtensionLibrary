@@ -1,0 +1,11 @@
+#Localization file used by Workplace Designer
+#Mon Apr 13 13:39:42 BST 2015
+resourceHandlerClass=ResourceHandler
+propertiesFileName=messages.properties
+resourceHandlerPackage=com.ibm.xsp.bluemix.util
+loggingId=CLFAD
+loggingPropertiesFileName=logging.properties
+specialAudienceProperties=specialAudience.properties
+componentOwner=padraic.edwards@ie.ibm.com
+translationLevel=G11N GA UI -- General Audience resources follow
+srcFolderName=com.ibm.xsp.bluemix.util/src

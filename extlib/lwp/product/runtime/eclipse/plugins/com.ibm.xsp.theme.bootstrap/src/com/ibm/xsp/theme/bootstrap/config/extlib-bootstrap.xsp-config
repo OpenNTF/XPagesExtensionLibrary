@@ -95,6 +95,7 @@
           <editor-parameter>full
 						fluid
 						fixed
+						none
 					</editor-parameter>
         </designer-extension>
       </property-extension>
@@ -166,8 +167,8 @@
       </property-extension>
     </property>
     <property>
-      <description>%property.pageWidth.complex-type.simpleResponsiveConfiguration.descr%</description>
-      <display-name>%property.pageWidth.complex-type.simpleResponsiveConfiguration.name%</display-name>
+      <description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+      <display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
       <property-name>pageWidth</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
@@ -176,6 +177,7 @@
           <editor-parameter>full
 						fluid
 						fixed
+						none
 					</editor-parameter>
         </designer-extension>
       </property-extension>
@@ -906,8 +908,8 @@
       </property-extension>
     </property>
     <property>
-      <description>%property.pageWidth.component.navbar.descr%</description>
-      <display-name>%property.pageWidth.component.navbar.name%</display-name>
+      <description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+      <display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
       <property-name>pageWidth</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
@@ -917,6 +919,8 @@
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>fluid
                         fixed
+                        full
+                        none
                     </editor-parameter>
         </designer-extension>
       </property-extension>

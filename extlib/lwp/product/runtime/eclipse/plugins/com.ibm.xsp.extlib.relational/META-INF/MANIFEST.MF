@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Relational Database Access Capability for XPages
 Bundle-SymbolicName: com.ibm.xsp.extlib.relational;singleton:=true
-Bundle-Version: 9.0.1.v00_12_SNAPSHOT
+Bundle-Version: 9.0.1.v00_13_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.extlib.relational,

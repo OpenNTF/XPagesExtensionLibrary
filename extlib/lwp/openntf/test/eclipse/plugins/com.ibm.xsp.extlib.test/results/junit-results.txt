@@ -1,39 +1,10 @@
 JUnit results, running against Notes 9.0.1
 using the Notes JVM
-Test ran 2015-02-20T10:35
-Lines in file: 1437
+Test ran 2015-04-08T19:10
+Lines in file: 1408
 
 ~ ExtlibTestSuite
 xsp.extlib.test.ExtlibTestSuite
-com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest
-testDecodeRegisteredComponents(com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest)
-junit.framework.AssertionFailedError: 3 fail(s). :
-com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard decode() throws: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
-com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar decode() throws: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
-com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel decode() throws: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
-	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest.testDecodeRegisteredComponents(RegisteredDecodeTest.java:99)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
-	at java.lang.reflect.Method.invoke(Method.java:611)
-	at junit.framework.TestCase.runTest(TestCase.java:164)
-	at junit.framework.TestCase.runBare(TestCase.java:130)
-	at junit.framework.TestResult$1.protect(TestResult.java:106)
-	at junit.framework.TestResult.runProtected(TestResult.java:124)
-	at junit.framework.TestResult.run(TestResult.java:109)
-	at junit.framework.TestCase.run(TestCase.java:120)
-	at junit.framework.TestSuite.runTest(TestSuite.java:230)
-	at junit.framework.TestSuite.run(TestSuite.java:225)
-	at junit.framework.TestSuite.runTest(TestSuite.java:230)
-	at junit.framework.TestSuite.run(TestSuite.java:225)
-	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-
 xsp.extlib.test.registry.ExtlibBooleanPropertyDefaultTest
 testPropertyDefaultValue(xsp.extlib.test.registry.ExtlibBooleanPropertyDefaultTest)
 junit.framework.AssertionFailedError: 32 fail(s). :

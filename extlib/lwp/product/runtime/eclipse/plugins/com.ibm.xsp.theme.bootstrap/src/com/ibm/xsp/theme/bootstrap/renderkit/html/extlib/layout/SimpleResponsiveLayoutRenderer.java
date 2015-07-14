@@ -23,12 +23,6 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration;
-import com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.SearchOptionsRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.UtilityLinksRenderer;
-import com.ibm.xsp.theme.bootstrap.resources.Resources;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
 import com.ibm.xsp.component.xp.XspEventHandler;
@@ -43,6 +37,12 @@ import com.ibm.xsp.extlib.tree.ITreeNode;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
+import com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration;
+import com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.ApplicationLinksRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.SearchOptionsRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.UtilityLinksRenderer;
+import com.ibm.xsp.theme.bootstrap.resources.Resources;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JSUtil;
@@ -104,7 +104,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         boolean collapseLeftColumn    = false;
         String collapseLeftTarget     = "";
         String collapsedLeftMenuLabel = "";
-        String pageWidthClass = SimpleResponsiveApplicationConfiguration.WIDTH_FULL;
+        String pageWidthClass = "";
         
         if(configuration!=null) {
             invertedNavbar = configuration.isInvertedNavbar();
@@ -195,7 +195,8 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         
         //container div
         w.startElement("div",c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass + "applayout-banner-container", null); // $NON-NLS-1$ $NON-NLS-2$
+        String navbarClass = ExtLibUtil.concatStyleClasses(pageWidthClass, "applayout-banner-container"); // $NON-NLS-1$
+        w.writeAttribute("class", navbarClass, null); // $NON-NLS-1$
 
         writeNavbarContent(context, w, c, configuration, navbarInverted);
 
@@ -224,7 +225,9 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$ $NON-NLS-2$
         newLine(w);
-        
+
+        writeNavbarApplicationLinks(context, w, c, configuration);
+        newLine(w);
         writeNavbarUtilityLinks(context, w, c, configuration);
         newLine(w);
         writeSearchBar(context, w, c, configuration);
@@ -317,7 +320,17 @@ protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UI
             w.endElement("div"); // $NON-NLS-1$
         }
     }
-
+    
+    protected void writeNavbarApplicationLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
+        ITree tree = TreeImpl.get(configuration.getNavbarAppLinks());
+        if (tree != null) {
+            AbstractTreeRenderer renderer = new ApplicationLinksRenderer();
+            if (renderer != null) {
+                renderer.render(context, c, "al", tree, w); // $NON-NLS-1$
+            }
+        }
+    }
+    
     protected void writeNavbarUtilityLinks(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
         ITree tree = TreeImpl.get(configuration.getNavbarUtilityLinks());
         if (tree != null) {
@@ -521,16 +534,12 @@ protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UI
             SimpleResponsiveApplicationConfiguration configuration, boolean collapseLeftColumn, String pageWidthClass, String collapseLeftTarget,
             String collapseLeftColumnButtonLabel) throws IOException {
         
-        String pageWidth = "";
-        if(configuration != null) {
-            pageWidth = configuration.getPageWidth();
-        }
-        
         //container div
         w.startElement("div",c); // $NON-NLS-1$
-        w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
         
-        if (StringUtil.isNotEmpty(pageWidth) && !pageWidth.equals(SimpleResponsiveApplicationConfiguration.WIDTH_FULL)) {
+        // Empty pageWidthClass means pageWidth=none, therefore add no container class and no row
+        if (StringUtil.isNotEmpty(pageWidthClass)) {
+            w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
             w.startElement("div", c); // $NON-NLS-1$
             w.writeAttribute("class", "row", null); // $NON-NLS-1$ $NON-NLS-2$
         }
@@ -556,7 +565,7 @@ protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UI
         writeRightColumn(context, w, c, rightSize, configuration, collapseLeftColumn);
         
         // Close the main content
-        if (StringUtil.isNotEmpty(pageWidth) && !pageWidth.equals(SimpleResponsiveApplicationConfiguration.WIDTH_FULL)) {
+        if (StringUtil.isNotEmpty(pageWidthClass)) {
             w.endElement("div"); // $NON-NLS-1$
             newLine(w, "row"); // $NON-NLS-1$
         }
@@ -635,10 +644,15 @@ protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UI
                     return "container-fluid"; // $NON-NLS-1$
                 } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FIXED)) {
                    return "container"; // $NON-NLS-1$
+                } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_FULL)) {
+                    return "container-full"; // $NON-NLS-1$
+                } else if ( pageWidth.equals(ResponsiveApplicationConfiguration.WIDTH_NONE)) {
+                    return ""; // $NON-NLS-1$
                 }
             }
         }
-        return "";
+        // Fluid container by default
+        return "container-fluid";  // $NON-NLS-1$
     }
 
     // ==================================================================
