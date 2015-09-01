@@ -170,7 +170,7 @@ public class ToolsUtil {
                 i++;
             }
         }
-        }
+    }
 
     public static Map<String, String> processArgs(String[] args){
             Map<String, String> argsMap = new HashMap<String, String>(args.length / 2);

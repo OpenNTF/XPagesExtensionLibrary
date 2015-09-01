@@ -27,7 +27,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.application.ApplicationEx;
+import com.ibm.xsp.application.XspPropertyConstants;
 import com.ibm.xsp.component.UIViewRootEx;
+import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.calendar.UICalendarView;
 import com.ibm.xsp.extlib.component.domino.ExtlibJsIdUtil;
 import com.ibm.xsp.extlib.resources.domino.DojoResourceConstants;
@@ -40,7 +43,10 @@ import com.ibm.xsp.renderkit.FacesRenderer;
  *        renderer for calendar view
  */
 public class CalendarViewRenderer extends FacesRenderer {
-
+	
+	private String XSP_DISABLE_DRAGNDROP_CALENDAR = "xsp.calendar.dragndrop.disable"; // $NON-NLS-1$
+	private String XSP_DISABLE_INLINE_EDIT_CALENDAR = "xsp.calendar.inlineedit.disable"; // $NON-NLS-1$
+    
     @Override
     public void decode(FacesContext facescontext, UIComponent uicomponent) {
     }
@@ -103,6 +109,22 @@ public class CalendarViewRenderer extends FacesRenderer {
             String datetext = sdf.format(cal.getTime());
             w.writeAttribute("date", datetext, null); // $NON-NLS-1$
         }
+        
+        //MNAA9UBBLH
+        boolean disableDragNDropCalendar = "true".equals( //$NON-NLS-1$
+				FacesContextEx.getCurrentInstance().getApplicationEx()
+		        .getProperty(XSP_DISABLE_DRAGNDROP_CALENDAR, "false")); //$NON-NLS-1$
+        
+        if(disableDragNDropCalendar)
+        	w.writeAttribute("nCalViewDragDrop", "0", null); // $NON-NLS-1$
+        
+        //MNAA9VSHWR
+        boolean disableInLineEditCalendar = "true".equals( //$NON-NLS-1$
+				FacesContextEx.getCurrentInstance().getApplicationEx()
+		        .getProperty(XSP_DISABLE_INLINE_EDIT_CALENDAR, "false")); //$NON-NLS-1$
+        
+        if(disableInLineEditCalendar)
+        	w.writeAttribute("fDisableInPlaceEdit", "true", null); // $NON-NLS-1$ //$NON-NLS-2$
         
         uiComponent.writeActionHandlerScripts(w);
     }

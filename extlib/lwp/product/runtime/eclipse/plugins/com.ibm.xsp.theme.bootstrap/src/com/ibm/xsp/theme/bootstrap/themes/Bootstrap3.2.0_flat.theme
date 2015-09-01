@@ -801,6 +801,32 @@
 		</property>
 	</control>
 
+	<!-- ============= Responsive Controls (dependency on Bootstrap theme ================= -->
+	
+	<control>
+		<name>Responsive.Navbar</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.components.responsive.Navbar</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Responsive.Dashboard</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.components.responsive.Dashboard</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Responsive.Carousel</name>
+		<property>
+			<name>rendererType</name>
+			<value>com.ibm.xsp.theme.bootstrap.components.responsive.Carousel</value>
+		</property>
+	</control>
+	
 	<!-- ==================================================  END::CONTROLS =================== -->
 	
 </theme>

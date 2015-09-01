@@ -25,9 +25,11 @@ import static com.ibm.domino.services.calendar.service.CalendarService.STAT_CREA
 import static com.ibm.domino.services.calendar.service.CalendarService.STAT_VIEW_EVENTS;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_BEFORE;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_COUNT;
+import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_DAYS;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_FIELDS;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_FORMAT;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_SINCE;
+import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_SINCE_NOW;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_START;
 import static com.ibm.domino.services.calendar.service.CalendarService.URL_PARAM_WORKFLOW;
 import static com.ibm.domino.services.calendar.service.CalendarService.WORKSPACE_TITLE;
@@ -86,15 +88,15 @@ import com.ibm.domino.services.calendar.store.StoreFactory;
 import com.ibm.domino.services.calendar.util.Utils;
 
 /**
- * <p>TODO: Handle event update 
- * <p>TODO: Implement streaming for reading and writing events in iCalendar format
- *
+ * Event collection resource
  */
 @Workspace(workspaceTitle = WORKSPACE_TITLE, collectionTitle = "Events") // $NON-NLS-1$
 @Path("calendar/events") // $NON-NLS-1$
 public class EventCollectionResource {
 
     private static final String UNKNOWN_UID = "unknown"; // $NON-NLS-1$
+    private static final long ONE_DAY = 24L * 60 * 60 * 1000; 
+    
 
     /**
      * Gets events.
@@ -111,7 +113,9 @@ public class EventCollectionResource {
                         @QueryParam(URL_PARAM_BEFORE) String before,
                         @QueryParam(URL_PARAM_COUNT) String count,
                         @QueryParam(URL_PARAM_START) String start,
-                        @QueryParam(URL_PARAM_FIELDS) String fields) {
+                        @QueryParam(URL_PARAM_FIELDS) String fields,
+                        @QueryParam(URL_PARAM_SINCE_NOW) String sincenow,
+                        @QueryParam(URL_PARAM_DAYS) String days) {
 
         CALENDAR_SERVICE_LOGGER.traceEntry(this, "getEvents"); // $NON-NLS-1$
         CalendarService.beforeRequest(FEATURE_REST_API_CALENDAR_EVENT_LIST, STAT_VIEW_EVENTS);
@@ -125,13 +129,30 @@ public class EventCollectionResource {
         CalendarService.verifyDatabaseContext();
 
         try {
+            // Validate parameters
+            
+            if ( StringUtil.isNotEmpty(since) && StringUtil.isNotEmpty(sincenow) ) {
+                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the since and sincenow parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththesince-1$
+                        Response.Status.BAD_REQUEST));
+            }
+
+            if ( StringUtil.isNotEmpty(before) && StringUtil.isNotEmpty(days) ) {
+                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the before and days parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththebefor-1$
+                        Response.Status.BAD_REQUEST));
+            }
+
             // Get date range (if any)
             
-            if ( since != null && since.length() > 0 ) {
+            Date now = new Date();
+            if ( StringUtil.isNotEmpty(since) ) {
                 fromDate = Utils.dateFromString(since);
             }
+            else if ( StringUtil.isNotEmpty(sincenow) ) {
+                int iSinceNow = CalendarService.getParameterInt(URL_PARAM_SINCE_NOW, sincenow, false);
+                fromDate = new Date(now.getTime() + (ONE_DAY * iSinceNow));
+            }
             
-            if ( before != null && before.length() > 0 ) {
+            if ( StringUtil.isNotEmpty(before) ) {
                 toDate = Utils.dateFromString(before);
                 
                 if ( fromDate != null && (toDate.getTime() <= fromDate.getTime()) ) {
@@ -140,6 +161,20 @@ public class EventCollectionResource {
                                 "The \"before\" date must be after the \"since\" date", // $NLX-EventCollectionResource.Beforedatecannotbelessthanorequal-1$ 
                                 Response.Status.BAD_REQUEST));
                 }
+            }
+            else if ( StringUtil.isNotEmpty(days) ) {
+                int iDays = CalendarService.getParameterInt(URL_PARAM_DAYS, days, false);
+                if ( iDays <= 0 ) {
+                    throw new WebApplicationException(CalendarService.createErrorResponse(
+                            MessageFormat.format("Invalid days parameter: {0}.  It must be greater than 0.", iDays), // $NLX-EventCollectionResource.Invaliddaysparameter0Itmustbegrea-1$
+                            Response.Status.BAD_REQUEST));
+                }
+                
+                if ( fromDate == null ) {
+                    fromDate = now;
+                }
+                
+                toDate = new Date(fromDate.getTime() + (ONE_DAY * iDays));
             }
             
             // Parse paging parameters
@@ -260,7 +295,7 @@ public class EventCollectionResource {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             CalendarOutputter outputter = new CalendarOutputter(false);
             outputter.output(calendar, baos);
-            String icalendar = baos.toString();
+            String icalendar = baos.toString("UTF-8");//$NON-NLS-1$
             
             // Store new event
             

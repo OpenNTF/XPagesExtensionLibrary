@@ -18,7 +18,7 @@
 <!-- ******************************************************************* -->
 <site>
    <feature 
-      url="features/com.ibm.domino.services.samples.feature_9.0.1.v00_11_qualifier.jar" 
+      url="features/com.ibm.domino.services.samples.feature_9.0.1.v00_14_qualifier.jar" 
       id="com.ibm.domino.services.samples.feature"
-      version="9.0.1.v00_11_qualifier"/>
+      version="9.0.1.v00_14_qualifier"/>
 </site>

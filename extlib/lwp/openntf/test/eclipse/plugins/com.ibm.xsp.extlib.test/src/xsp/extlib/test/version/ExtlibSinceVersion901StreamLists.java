@@ -42,6 +42,7 @@ public class ExtlibSinceVersion901StreamLists {
         list.add(new Extlib901v00_02List());
         list.add(new Extlib901v00_08List());
         list.add(new Extlib901v00_10List());
+        list.add(new Extlib901v00_12List());
         return list;
     }
     public static class Extlib901v00_00List implements SinceVersionList{
@@ -160,6 +161,172 @@ public class ExtlibSinceVersion901StreamLists {
         }
         public String sinceVersion() {
             return "9.0.1.v00_10";
+        }
+        public String[] skips() {
+            return skips;
+        }
+    }
+    public static class Extlib901v00_12List implements SinceVersionList{
+        private Object[][] tagsAndProps = new Object[][]{
+            new Object[]{"xe:carousel", true, new String[]{
+                "autoCycle",
+                "heightExtraSmall",
+                "heightLarge",
+                "heightMedium",
+                "heightSmall",
+                "indicatorStyle",
+                "indicatorStyleClass",
+                "pause",
+                "slideInterval",
+                "slideNodes",
+                "style",
+                "styleClass",
+                "title",
+                "wrapped",
+            }},
+            new Object[]{"xe:collectionValuePicker", true, new String[]{
+                "caseInsensitive",
+                "collection",
+                "preventFiltering",
+                "searchRange",
+                "searchType",
+            }},
+            new Object[]{"xe:dashNode", true, new String[]{
+                "badgeEnabled",
+                "badgeLabel",
+                "badgeStyle",
+                "badgeStyleClass",
+                "description",
+                "descriptionStyleClass",
+                "descriptionStyle",
+                "icon",
+                "iconEnabled",
+                "iconSize",
+                "iconStyle",
+                "iconTag",
+                "iconTitle",
+                "imageAlt",
+                "imageStyleClass",
+                "imageHeight",
+                "imageSrc",
+                "imageStyle",
+                "imageWidth",
+                "labelStyleClass",
+                "labelHref",
+                "labelStyle",
+                "labelText",
+                "sizeExtraSmall",
+                "sizeLarge",
+                "sizeMedium",
+                "sizeSmall",
+                "style",
+                "styleClass",
+                "title",
+            }},
+            new Object[]{"xe:dashboard", true, new String[]{
+                "dashNodes",
+                "heading",
+                "headingStyle",
+                "headingStyleClass",
+                "style",
+                "styleClass",
+                "title",
+            }},
+            new Object[]{"xe:mapValuePicker", true, new String[]{
+                "caseInsensitive",
+                "options",
+                "preventFiltering",
+                "searchRange",
+                "searchType",
+            }},
+            new Object[]{"xe:navbar", true, new String[]{
+                "fixed",
+                "headingStyle",
+                "headingStyleClass",
+                "headingText",
+                "inverted",
+                "navbarAfterLinks",
+                "navbarBeforeLinks",
+                "pageWidth",
+                "style",
+                "styleClass",
+                "title",
+            }},
+            new Object[]{"xe:simpleResponsiveConfiguration", true, new String[]{
+                "collapseLeftColumn",
+                "collapseLeftTarget",
+                "collapsedLeftMenuLabel",
+                "defaultNavigationPath",
+                "fixedNavbar",
+                "invertedNavbar",
+                "leftColumnLabel",
+                "navbar",
+                "navbarAppLinks",
+                "navbarLogo",
+                "navbarLogoAlt",
+                "navbarLogoStyleClass",
+                "navbarLogoStyle",
+                "navbarText",
+                "navbarTextStyle",
+                "navbarTextStyleClass",
+                "navbarUtilityLinks",
+                "pageWidth",
+                "rightColumnLabel",
+                "searchBar",
+            }},
+            new Object[]{"xe:slide", true, new String[]{
+                "backgroundColor",
+                "backgroundSrc",
+                "buttonHref",
+                "buttonLabel",
+                "buttonStyle",
+                "buttonStyleClass",
+                "captionStyle",
+                "captionStyleClass",
+                "captionTag",
+                "captionText",
+                "descriptionStyle",
+                "descriptionStyleClass",
+                "descriptionText",
+                "headingStyle",
+                "headingStyleClass",
+                "headingTag",
+                "headingText",
+                "style",
+                "styleClass",
+                "title",
+            }},
+            new Object[]{"xe:inPlaceFormAction", true, new String[]{
+            		"for",
+            		"formAction",
+            }},
+        };
+        private String[] skips = new String[]{};
+        public Object[][] tagsAndProps() {
+            return tagsAndProps;
+        }
+        public String sinceVersion() {
+            return "9.0.1.v00_12";
+        }
+        public String[] skips() {
+            return skips;
+        }
+    }
+
+    public static class Extlib901v00_14List implements SinceVersionList{
+        private Object[][] tagsAndProps = new Object[][]{
+            new Object[]{"xe:dominoNABNamePicker", false, new String[]{
+                "searchType",
+                "valueNameFormat",
+            }},
+        };
+        private String[] skips = new String[]{
+        };
+        public Object[][] tagsAndProps() {
+            return tagsAndProps;
+        }
+        public String sinceVersion() {
+            return "9.0.1.v00_14";
         }
         public String[] skips() {
             return skips;

@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_VIEW_ENTRIES;
+import static com.ibm.domino.das.service.DataService.STAT_VIEW_ENTRIES;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.HttpServiceConstants.HEADER_CONTENT_RANGE;
 import static com.ibm.domino.services.HttpServiceConstants.HEADER_RANGE;
@@ -89,6 +91,7 @@ public class ViewEntryCollectionResource extends ViewBaseResource {
             @QueryParam(PARAM_VIEW_ENTRYCOUNT) final String entryCount) {
 
         DAS_LOGGER.traceEntry(this, "getViewEntries"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_ENTRIES, STAT_VIEW_ENTRIES);
                 
         final Database database = this.getDatabase(DB_ACCESS_VIEWS);
         if ( database == null ) {
@@ -269,8 +272,8 @@ public class ViewEntryCollectionResource extends ViewBaseResource {
             @QueryParam(PARAM_VIEW_PARENTID) String parentId) {
 
         DAS_LOGGER.traceEntry(this, "postViewEntry");        // $NON-NLS-1$
-        
-//      String jsonEntity = null;
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_ENTRIES, STAT_VIEW_ENTRIES);
+    
         URI location = null;
         View view = null;
         
@@ -393,6 +396,7 @@ public class ViewEntryCollectionResource extends ViewBaseResource {
             @PathParam("value") final String keyValue) { // $NON-NLS-1$
 
         DAS_LOGGER.traceEntry(this, "putFolderOperations"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_ENTRIES, STAT_VIEW_ENTRIES);
         
         View view = null;
         

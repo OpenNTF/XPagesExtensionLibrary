@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -82,7 +82,15 @@ public class PropertyAllowsValueTest extends AbstractXspTest {
                             && !simple.isAllowRunTimeBinding()) {
                         fails += def.getFile().getFilePath()+" "+descr(def, name)+" property cannot be set to a primitive nor a binding\n";
                     }
-                }else{
+                }else{ // non-primitive, usually complex-type
+                    if( !simple.isAllowNonBinding() ){
+                        // not allow complex-type, so should allow runtime or load time binding.
+                        if( !simple.isAllowLoadTimeBinding()
+                            && !simple.isAllowRunTimeBinding() ){
+                            fails += def.getFile().getFilePath()+" "+descr(def, name)+" property cannot be set to a binding nor a complex-type\n";
+                        }
+                    }else{ // allow non-binding, so should have a corresponding complex-type
+                        
                     Class<?> propertyClass = simple.getJavaClass();
                     Boolean hasComplex = propertyClassToHasComplex.get(propertyClass);
                     if( null == hasComplex ){
@@ -100,8 +108,9 @@ public class PropertyAllowsValueTest extends AbstractXspTest {
                     if( ! hasComplex.booleanValue() ){
                         String fail = def.getFile().getFilePath()+" "+descr(def, name)
                                 + " No complex-type that can be set for property-class "
-                                + propertyClass.getName();
+                                + propertyClass.getName() + " and not explicitly preventing non-binding";
                         fails += fail + "\n";
+                    }
                     }
                 }
             }

@@ -67,33 +67,33 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
             
             case PROP_COLLAPSEICON:             return Resources.get().BLANK_GIF;
             case PROP_COLLAPSEICONSTYLE:        return "padding-right:8px"; // $NON-NLS-1$
-            case PROP_COLLAPSEICONCLASS: 		return Resources.get().getIconClass("minus-sign");	
+            case PROP_COLLAPSEICONCLASS:        return Resources.get().getIconClass("minus-sign");   // $NON-NLS-1$
             case PROP_EXPANDICON:               return Resources.get().BLANK_GIF;            
             case PROP_EXPANDICONSTYLE:          return "padding-right:8px"; // $NON-NLS-1$
-            case PROP_EXPANDICONCLASS: 			return Resources.get().getIconClass("plus-sign");	
+            case PROP_EXPANDICONCLASS:          return Resources.get().getIconClass("plus-sign");    // $NON-NLS-1$
             
             case PROP_TABLEROWINDENTPX:         return 20;
-            case PROP_TABLEFIRSTCELLCLASS:      return "xspFirstCell";
+            case PROP_TABLEFIRSTCELLCLASS:      return "xspFirstCell"; // $NON-NLS-1$
             case PROP_SHOWICONDETAILSCLASS:     return Resources.get().getIconClass("chevron-down"); // $NON-NLS-1$
             case PROP_HIDEICONDETAILSCLASS:     return Resources.get().getIconClass("chevron-up"); // $NON-NLS-1$
             
-            case PROP_UNREADICONCLASS:          return Resources.get().getIconClass("file")+ " xspUnreadIcon";
-            case PROP_READICONCLASS:            return Resources.get().getIconClass("file")+" xspReadIcon";
+            case PROP_UNREADICONCLASS:          return Resources.get().getIconClass("file")+ " xspUnreadIcon"; // $NON-NLS-1$ $NON-NLS-2$
+            case PROP_READICONCLASS:            return Resources.get().getIconClass("file")+" xspReadIcon"; // $NON-NLS-1$ $NON-NLS-2$
             
-            case PROP_TABLEHDRCOLIMAGE_SORTBOTH_ASCENDING:   return Resources.get().getIconClass("sort-by-attributes");
-            case PROP_TABLEHDRCOLIMAGE_SORTBOTH_DESCENDING:  return Resources.get().getIconClass("sort-by-attributes-alt");
-            case PROP_TABLEHDRCOLIMAGE_SORTBOTH:             return Resources.get().getIconClass("sort");
-            case PROP_TABLEHDRCOLIMAGE_SORTED_ASCENDING:     return Resources.get().getIconClass("sort-by-attributes");
-            case PROP_TABLEHDRCOLIMAGE_SORTED_DESCENDING:    return Resources.get().getIconClass("sort-by-attributes-alt");
+            case PROP_TABLEHDRCOLIMAGE_SORTBOTH_ASCENDING:   return Resources.get().getIconClass("sort-by-attributes"); // $NON-NLS-1$
+            case PROP_TABLEHDRCOLIMAGE_SORTBOTH_DESCENDING:  return Resources.get().getIconClass("sort-by-attributes-alt"); // $NON-NLS-1$
+            case PROP_TABLEHDRCOLIMAGE_SORTBOTH:             return Resources.get().getIconClass("sort"); // $NON-NLS-1$
+            case PROP_TABLEHDRCOLIMAGE_SORTED_ASCENDING:     return Resources.get().getIconClass("sort-by-attributes"); // $NON-NLS-1$
+            case PROP_TABLEHDRCOLIMAGE_SORTED_DESCENDING:    return Resources.get().getIconClass("sort-by-attributes-alt"); // $NON-NLS-1$
             
             // the bootstrap sort header icons are 16x13 px
             case PROP_TABLEHDRCOLIMAGE_SORT_WIDTH:           return "16"; //$NON-NLS-1$
             case PROP_TABLEHDRCOLIMAGE_SORT_HEIGHT:          return "13"; //$NON-NLS-1$
             
             // adjust the empty icon style for better indentation
-            case PROP_EMPTYICONSTYLE:                        return "width:20px;height:13px;";
+            case PROP_EMPTYICONSTYLE:                        return "width:20px;height:13px;"; // $NON-NLS-1$
             
-            case PROP_SUMMARYTITLECLASS:                     return "xspDataViewSummary";
+            case PROP_SUMMARYTITLECLASS:                     return "xspDataViewSummary"; // $NON-NLS-1$
         }
         return super.getProperty(prop);
     }
@@ -128,7 +128,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         w.startElement("span",c); // $NON-NLS-1$    
         w.writeAttribute("class",clazz,null); // $NON-NLS-1$
         
-        String spanId = c.getClientId(context) + "_shChevron";
+        String spanId = c.getClientId(context) + "_shChevron"; // $NON-NLS-1$
         w.writeAttribute("id",spanId,null); // $NON-NLS-1$
         
         if(detailsOnClient) {
@@ -137,16 +137,16 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
             //c.getClientId(context) gives back the id of the row
             String rowId = c.getClientId(context);
             String dataViewID = rowId.substring(0, rowId.lastIndexOf(":"+viewDef.dataModel.getRowIndex()));
-            w.writeAttribute("onclick", "javascript:XSP.xbtShowHideDetails('"+ dataViewID + "', '"+ viewDef.dataModel.getRowIndex() + "', '" 
-            	+ viewDef.rowPosition + "', " + viewDef.summaryOrDetailVisible + ", '" + getProperty(PROP_SHOWICONDETAILSCLASS)+ "', '" 
-            	+ getProperty(PROP_HIDEICONDETAILSCLASS) + "', '" + getProperty(PROP_SHOWICONDETAILSTOOLTIP) + "', '" 
-            	+ getProperty(PROP_HIDEICONDETAILSTOOLTIP) + "')", null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
+            w.writeAttribute("onclick", "javascript:XSP.xbtShowHideDetails('"+ dataViewID + "', '"+ viewDef.dataModel.getRowIndex() + "', '"  // $NON-NLS-2$ $NON-NLS-1$
+                + viewDef.rowPosition + "', " + viewDef.summaryOrDetailVisible + ", '" + getProperty(PROP_SHOWICONDETAILSCLASS)+ "', '" 
+                + getProperty(PROP_HIDEICONDETAILSCLASS) + "', '" + getProperty(PROP_SHOWICONDETAILSTOOLTIP) + "', '" 
+                + getProperty(PROP_HIDEICONDETAILSTOOLTIP) + "')", null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
         }
         
         if( viewDef.rowDetailVisible ){
-            w.writeAttribute("title", "Hide",null); // $NLS-AbstractWebDataViewRenderer.Hide_HideDetailIconAlt-1$
+            w.writeAttribute("title", "Hide",null); // $NON-NLS-1$ $NLS-DataViewRenderer.Hide-2$
         }else{
-        	 w.writeAttribute("title", "Show",null); // $NLS-AbstractWebDataViewRenderer.Show-1$
+             w.writeAttribute("title", "Show",null); // $NON-NLS-1$ $NLS-DataViewRenderer.Show-2$
         }
         w.endElement("span"); // $NON-NLS-1$
         w.endElement("a");
@@ -175,7 +175,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
     }   
     
     @Override
-	protected void writeExpandCollapseIcon(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+    protected void writeExpandCollapseIcon(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
         boolean leaf = isRowLeaf(context, c, viewDef);
         if(leaf) {
             String icon = (String)getProperty(PROP_EMPTYICON);
@@ -316,9 +316,9 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         
         //Remove padding-top when collapse/expand icon is displayed
         if(viewDef.collapsibleRows) {
-        	String summaryStyle = viewDef.summaryColumn.getStyle();
-        	String style = ExtLibUtil.concatStyles("padding-top:0px;", summaryStyle);
-        	viewDef.summaryColumn.setStyle(style);
+            String summaryStyle = viewDef.summaryColumn.getStyle();
+            String style = ExtLibUtil.concatStyles("padding-top:0px;", summaryStyle); // $NON-NLS-1$
+            viewDef.summaryColumn.setStyle(style);
         }
         // Write the summary data
         writeSummary(context, w, c, viewDef);
@@ -331,7 +331,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
     }
     
     @Override
-	protected void writeColumnHeader(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, ValueColumn vc, int colIndex) throws IOException {
+    protected void writeColumnHeader(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, ValueColumn vc, int colIndex) throws IOException {
         // Write the summary column
         w.startElement("th",c); // $NON-NLS-1$
         w.writeAttribute("scope", "col", null); // $NON-NLS-1$ $NON-NLS-2$

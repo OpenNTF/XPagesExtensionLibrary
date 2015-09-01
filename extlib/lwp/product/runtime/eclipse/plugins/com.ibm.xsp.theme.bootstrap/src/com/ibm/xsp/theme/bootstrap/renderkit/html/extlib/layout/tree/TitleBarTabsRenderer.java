@@ -30,21 +30,21 @@ public class TitleBarTabsRenderer extends NavRenderer {
     }
 
     @Override
-	protected boolean makeSelectedActive(TreeContextImpl node) {
-    	return true;
+    protected boolean makeSelectedActive(TreeContextImpl node) {
+        return true;
     }
 
     @Override
-	protected String getContainerStyleClass(TreeContextImpl node) {
-    	if(node.getDepth()==1) {
-        	return "nav nav-tabs applayout-titlebar-tabs";
-    	}
-    	return super.getContainerStyleClass(node);
+    protected String getContainerStyleClass(TreeContextImpl node) {
+        if(node.getDepth()==1) {
+            return "nav nav-tabs applayout-titlebar-tabs"; // $NON-NLS-1$
+        }
+        return super.getContainerStyleClass(node);
     }
     
     @Override
-	protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
-    	return super.getItemStyleClass(tree, enabled, selected);
+    protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
+        return super.getItemStyleClass(tree, enabled, selected);
     }
     
     @Override

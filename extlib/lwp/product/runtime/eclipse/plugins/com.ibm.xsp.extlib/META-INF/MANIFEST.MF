@@ -22,11 +22,12 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.xsp.extlib.mobile;visibility:=reexport,
  com.ibm.xsp.extlib.oneui;visibility:=reexport,
  com.ibm.xsp.extlib.domino;visibility:=reexport,
- com.ibm.xsp.theme.bootstrap;visibility:=reexport
+ com.ibm.xsp.theme.bootstrap;visibility:=reexport,
+ com.ibm.xsp.bluemix.util;visibility:=reexport
 Export-Package: com.ibm.xsp.extlib,
  com.ibm.xsp.extlib.library
 Eclipse-LazyStart: true
 Bundle-Activator: com.ibm.xsp.extlib.library.ExtlibActivator
-Bundle-Version: 9.0.1.v00_11_SNAPSHOT
+Bundle-Version: 9.0.1.v00_14_qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -74,7 +74,7 @@ public class DominoResourceProvider extends BundleResourceProvider {
 				else if(name.startsWith("/"+DWA_PREFIX+"-")){ // $NON-NLS-1$ // $NON-NLS-2$
 					if(ExtlibDominoLogger.DOMINO.isWarnEnabled()){
 						// warnMessage = "Cannot find URL "+ name +". Version "+ name.substring(name.indexOf("-"), name.indexOf("/", 1))+" is not available. The current version is "+ExtlibVersion.getCurrentVersionString()+".";
-						String warnMessage = "Cannot find URL {0}. Version {1} is not available. The current extlib version is {2}.";
+						String warnMessage = "Cannot find URL {0}. Version {1} is not available. The current extlib version is {2}."; // $NLW-DominoResourceProvider.CannotfindURL0Version1isnotavaila-1$
 						String urlVersion = name.substring(name.indexOf("-"), name.indexOf("/", 1));
 						warnMessage = StringUtil.format(warnMessage, name, urlVersion, ExtlibVersion.getCurrentVersionString());
 						ExtlibDominoLogger.DOMINO.warnp(this, "getResource", // $NON-NLS-1$

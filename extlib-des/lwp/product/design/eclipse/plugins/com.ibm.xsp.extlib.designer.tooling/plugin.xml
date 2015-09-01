@@ -3644,5 +3644,131 @@
             </tag>
         </provider>
     </extension>
+
+    <extension point="com.ibm.designer.domino.xsp.editor.component">
+        <components
+            id="%extension.library.responsive.library.id"
+            name="%extension.library.responsive.library.name"
+            panelsFactory="com.ibm.xsp.extlib.designer.tooling.panels.core.ExtensionLibPanelsFactory"
+            schemaUri="http://www.ibm.com/xsp/coreex">
+            
+            <!-- Responsive - Carousel -->
+            <component    
+                tagName="carousel">
+                <paletteItem
+                    description="%palette.entry.control.responsive.carousel.description"
+                    label="%palette.entry.control.responsive.carousel.label"
+                    visible="true"
+                    iconLarge="images/palette/ExtensionLibraryIcon_24.png"
+                    iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
+                <panels>
+                    <panel
+                        id="core.lib.basics.panel"
+                        title="%panels.carousel.title">
+                    </panel>     
+                    <panel
+                        id="core.lib.style.panel"
+                        title="%panels.style.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.font.panel"
+                        indented="true"
+                        title="%panels.font.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.background.panel"
+                        indented="true"
+                        title="%panels.styling.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.margin.panel"
+                        indented="true"
+                        title="%panels.margins.panel.title">
+                    </panel>             
+                </panels>
+            </component>
+                        
+            <!-- Responsive - Dashboard -->
+            <component    
+                tagName="dashboard">
+                <paletteItem
+                    description="%palette.entry.control.responsive.dashboard.description"
+                    label="%palette.entry.control.responsive.dashboard.label"
+                    visible="true"
+                    iconLarge="images/palette/ExtensionLibraryIcon_24.png"
+                    iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
+                <panels>
+                    <panel
+                        id="core.lib.basics.panel"
+                        title="%panels.dashboard.title">
+                    </panel>     
+                    <panel
+                        id="core.lib.style.panel"
+                        title="%panels.style.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.font.panel"
+                        indented="true"
+                        title="%panels.font.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.background.panel"
+                        indented="true"
+                        title="%panels.styling.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.margin.panel"
+                        indented="true"
+                        title="%panels.margins.panel.title">
+                    </panel>             
+                </panels>
+            </component>
+
+            <!-- Responsive - Navbar -->
+            <component    
+                tagName="navbar">
+                <paletteItem
+                    description="%palette.entry.control.responsive.navbar.description"
+                    label="%palette.entry.control.responsive.navbar.label"
+                    visible="true"
+                    iconLarge="images/palette/ExtensionLibraryIcon_24.png"
+                    iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
+                <panels>
+                    <panel
+                        id="core.lib.basics.panel"
+                        title="%panels.navbar.title">
+                    </panel>     
+                    <panel
+                        id="core.lib.style.panel"
+                        title="%panels.style.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.font.panel"
+                        indented="true"
+                        title="%panels.font.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.background.panel"
+                        indented="true"
+                        title="%panels.styling.panel.title">
+                    </panel>
+                    <panel
+                        id="core.lib.margin.panel"
+                        indented="true"
+                        title="%panels.margins.panel.title">
+                    </panel>             
+                </panels>
+            </component>
+
+            <paletteInfo>
+                <category
+                    description="%extension.library.responsive.library.description"
+                    label="%extension.library.responsive.library.label"
+                    visible="true">
+                </category>
+            </paletteInfo>
+            
+        </components>
+    </extension>
     
 </plugin>

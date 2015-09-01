@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_VIEW_COLLECTION;
+import static com.ibm.domino.das.service.DataService.STAT_VIEW_COLLECTION;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.rest.RestParameterConstants.PARAM_COMPACT;
 
@@ -59,6 +61,8 @@ public class ViewCollectionResource extends AbstractDasResource{
             @QueryParam(PARAM_COMPACT) final boolean compact) {
         
         DAS_LOGGER.traceEntry(this, "getViews"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_COLLECTION, STAT_VIEW_COLLECTION);
+
         StreamingOutput streamJsonEntity = new StreamingOutput(){
 
             //@Override

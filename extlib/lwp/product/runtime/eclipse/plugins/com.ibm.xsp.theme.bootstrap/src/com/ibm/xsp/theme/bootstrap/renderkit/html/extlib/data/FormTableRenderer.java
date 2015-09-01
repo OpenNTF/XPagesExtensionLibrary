@@ -32,13 +32,13 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
 
     protected static final int PROP_CONTAINERSTYLECLASS              = 300;
     
-	@Override
-	protected Object getProperty(int prop) {
+    @Override
+    protected Object getProperty(int prop) {
         switch(prop) {
           case PROP_TABLESTYLECLASS:          return "form-table"; // $NON-NLS-1$
           
           case PROP_STYLECLASSERRORSUMMARY:   return "alert alert-danger"; // $NON-NLS-1$
-          case PROP_ERRORSUMMARYMAINTEXT:     return "Please check the following:"; 
+          case PROP_ERRORSUMMARYMAINTEXT:     return "Please check the following:";  // $NLS-FormTableRenderer.Pleasecheckthefollowing-1$
           case PROP_ERRORSUMMARYCLASS:        return "text-error"; // $NON-NLS-1$
           case PROP_WARNSUMMARYMAINTEXT:      return getProperty(PROP_ERRORSUMMARYMAINTEXT);
           case PROP_WARNSUMMARYCLASS:         return "text-warning"; // $NON-NLS-1$
@@ -54,15 +54,15 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
 
           case PROP_ERRORROWCLASS:            return "text-error"; // $NON-NLS-1$
 
-          case PROP_ERRORMSGALTTEXT:          return "Error:";
+          case PROP_ERRORMSGALTTEXT:          return "Error:"; // $NLS-FormTableRenderer.Error-1$
           case PROP_ERRORMSGALTTEXTCLASS:     return "lotusAltText"; // $NON-NLS-1$
-          case PROP_FATALMSGALTTEXT:          return "Fatal:"; 
+          case PROP_FATALMSGALTTEXT:          return "Fatal:";  // $NLS-FormTableRenderer.Fatal-1$
           case PROP_ERRORROWSTYLE:            return "padding: 6px 25px 0px 25px;"; //$NON-NLS-1$
 
-          case PROP_WARNMSGALTTEXT:           return "Warning:"; 
+          case PROP_WARNMSGALTTEXT:           return "Warning:";  // $NLS-FormTableRenderer.Warning-1$
           case PROP_WARNMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
 
-          case PROP_INFOMSGALTTEXT:           return "Information:"; 
+          case PROP_INFOMSGALTTEXT:           return "Information:";  // $NLS-FormTableRenderer.Information-1$
           case PROP_INFOMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
 
           case PROP_FIELDROWCLASS:            return "control-group"; // $NON-NLS-1$
@@ -73,8 +73,8 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
 
           case PROP_HELPIMGCLASS:             return null;
           case PROP_HELPIMGSRC:               return null;
-          case PROP_HELPIMGALT:               return "Help"; 
-          case PROP_HELPMSGALTTEXT:           return "Help"; 
+          case PROP_HELPIMGALT:               return "Help";  // $NLS-FormTableRenderer.Help-1$
+          case PROP_HELPMSGALTTEXT:           return "Help";  // $NLS-FormTableRenderer.Help.1-1$
           case PROP_HELPMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
           
           case PROP_CONTAINERSTYLECLASS:      return "xspFormTableContainer"; // $NON-NLS-1$
@@ -83,8 +83,8 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
       
         return super.getProperty(prop);
     }
-	
-	@Override
+    
+    @Override
     protected void writeFormLayout(FacesContext context, ResponseWriter w, FormLayout c) throws IOException {
         ComputedFormData formData = createFormData(context, c);
         String style = c.getStyle();
@@ -142,8 +142,8 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
         }
         newLine(w);
     }
-	
-	// ================================================================
+    
+    // ================================================================
     // Error Summary
     // ================================================================
     @Override
@@ -180,7 +180,7 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
     protected void writeFormRow(FacesContext context, ResponseWriter w, FormLayout c, ComputedFormData formData, UIFormLayoutRow row) throws IOException {
         ComputedRowData rowData = createRowData(context, c, formData, row);
         UIInput edit = row.getForComponent();
-        String errorStyleClass = "has-error";
+        String errorStyleClass = "has-error"; // $NON-NLS-1$
         if(edit!=null) {
             // Write the error messages, if any
             if(!formData.isDisableRowError()) {

@@ -27,27 +27,27 @@ import com.ibm.xsp.extlib.tree.ITreeRenderer;
 
 public class OutlineMenuRenderer extends AbstractOutlineRenderer {
 
-	@Override
-	protected ITreeRenderer findTreeRenderer(FacesContext context, AbstractOutline outline) {
-		MenuRenderer r = createMenuRenderer(context, outline);
-		if(outline instanceof UIOutlineNavigator) {
-			UIOutlineNavigator nav = (UIOutlineNavigator)outline;
-			r.setExpandable(nav.isExpandable());
-			r.setExpandEffect(nav.getExpandEffect());
-			//r.setKeepState(nav.isKeepState());
-			r.setExpandLevel(nav.getExpandLevel());
-		}
-		return r;
-	}
-	
-	protected MenuRenderer createMenuRenderer(FacesContext context, AbstractOutline outline) {
-		int type = MenuRenderer.TYPE_PILL;
-		if(outline!=null) {
-			String styleClass = outline.getStyleClass();
-			if(StringUtil.isNotEmpty(styleClass) && styleClass.contains("nav-list")) {
-				type = MenuRenderer.TYPE_LIST;
-			}
-		}
-		return new MenuRenderer(outline,type);
-	}
+    @Override
+    protected ITreeRenderer findTreeRenderer(FacesContext context, AbstractOutline outline) {
+        MenuRenderer r = createMenuRenderer(context, outline);
+        if(outline instanceof UIOutlineNavigator) {
+            UIOutlineNavigator nav = (UIOutlineNavigator)outline;
+            r.setExpandable(nav.isExpandable());
+            r.setExpandEffect(nav.getExpandEffect());
+            //r.setKeepState(nav.isKeepState());
+            r.setExpandLevel(nav.getExpandLevel());
+        }
+        return r;
+    }
+    
+    protected MenuRenderer createMenuRenderer(FacesContext context, AbstractOutline outline) {
+        int type = MenuRenderer.TYPE_PILL;
+        if(outline!=null) {
+            String styleClass = outline.getStyleClass();
+            if(StringUtil.isNotEmpty(styleClass) && styleClass.contains("nav-list")) { // $NON-NLS-1$
+                type = MenuRenderer.TYPE_LIST;
+            }
+        }
+        return new MenuRenderer(outline,type);
+    }
 }

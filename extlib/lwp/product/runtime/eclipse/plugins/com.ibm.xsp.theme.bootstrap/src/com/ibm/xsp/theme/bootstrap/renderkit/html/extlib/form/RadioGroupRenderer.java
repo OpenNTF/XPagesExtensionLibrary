@@ -40,7 +40,7 @@ import com.ibm.xsp.renderkit.html_basic.AttrsUtil;
  */
 public class RadioGroupRenderer extends com.ibm.xsp.renderkit.html_basic.RadioRenderer {
 
-	@Override
+    @Override
     protected void renderBeginText(UIComponent component, int border,
             boolean alignVertical, FacesContext context, boolean outer) throws IOException {
 
@@ -80,10 +80,10 @@ public class RadioGroupRenderer extends com.ibm.xsp.renderkit.html_basic.RadioRe
                 writer.writeAttribute("role", role, null); // $NON-NLS-1$
             }
             if (radioGroup.isRequired()) {
-        	writer.writeAttribute("aria-required", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            writer.writeAttribute("aria-required", "true", null); // $NON-NLS-1$ $NON-NLS-2$
             }
             if (!radioGroup.isValid()) {
-        	writer.writeAttribute("aria-invalid", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            writer.writeAttribute("aria-invalid", "true", null); // $NON-NLS-1$ $NON-NLS-2$
             }
             if (StringUtil.isNotEmpty(style)) {
                 writer.writeAttribute("style", style, null); // $NON-NLS-1$
@@ -124,7 +124,7 @@ public class RadioGroupRenderer extends com.ibm.xsp.renderkit.html_basic.RadioRe
                 if (StringUtil.isNotEmpty(lang)) {
                     writer.writeAttribute("lang", lang, null); // $NON-NLS-1$
                 }
-                writer.writeAttribute("class", "xspGroupCaption", null);
+                writer.writeAttribute("class", "xspGroupCaption", null); // $NON-NLS-1$ $NON-NLS-2$
                 writer.writeText(legend, "legend"); // $NON-NLS-1$
                 writer.endElement("caption"); // $NON-NLS-1$
             }

@@ -24,7 +24,7 @@ public class ForumPostRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
             case PROP_AUTHORCLASS:              return "pull-left";    // $NON-NLS-1$
             case PROP_AUTHORAVATARCLASS:        return "media-object";    // $NON-NLS-1$
             case PROP_POSTCLASS:                return "media-body"; // $NON-NLS-1$
-            case PROP_POSTTITLECLASS:         	return "media-heading";
+            case PROP_POSTTITLECLASS:           return "media-heading"; // $NON-NLS-1$
         }
         return super.getProperty(prop);
     }

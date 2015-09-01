@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extended Components Library for XPages - Mobile device Support
 Bundle-SymbolicName: com.ibm.xsp.extlib.mobile;singleton:=true
-Bundle-Version: 9.0.1.v00_11_SNAPSHOT
+Bundle-Version: 9.0.1.v00_14_SNAPSHOT
 Bundle-Vendor: IBM
 Export-Package: com.ibm.xsp.extlib.actions,
  com.ibm.xsp.extlib.component.mobile,

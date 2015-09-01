@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extended Components Library for XPages Core
 Bundle-SymbolicName: com.ibm.xsp.extlib.core;singleton:=true
-Bundle-Version: 9.0.1.v00_11_SNAPSHOT
+Bundle-Version: 9.0.1.v00_14_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.xsp.extlib,

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -55,8 +55,14 @@ public interface IPickerData {
 	public IPickerResult readEntries(IPickerOptions options);
 	
 	/**
-	 * Load values.
-	 * Load the value entries for a set of ids.
+	 * This is used by the PickerValidator to confirm that a selected ID or IDs 
+	 * matches to a corresponding ID in the data set. The results List will be the same
+	 * size as the ids array length. The value at any index may be null, 
+	 * which indicates that the id at that index did not match any entry in the data set.
+	 * Also it is used by the DojoExtListTextBoxRenderer (xe:djextListTextBox), 
+	 * to find, for a given set of selected values,
+	 * the corresponding entries and hence the corresponding Labels.
+	 * The IDs are expected to match an {@link IPickerEntry#getValue()} value, that is, not the label.
 	 */
 	public List<IPickerEntry> loadEntries(Object[] ids, String[] attributeNames);
 }

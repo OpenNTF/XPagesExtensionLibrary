@@ -70,7 +70,7 @@ public class DojoDropDownButtonRenderer extends DropDownButtonRenderer {
         writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
         
         writer.writeAttribute("href", "javascript:;", null); // $NON-NLS-2$ $NON-NLS-1$
-
+        
         String image = tree.getNode().getImage();
         boolean hasImage = StringUtil.isNotEmpty(image);
         if(hasImage) {

@@ -54,6 +54,16 @@ public class DropDownButtonRenderer extends HtmlDivSpanRenderer {
         if(StringUtil.isNotEmpty(clientId)) {
             writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
         }
+        
+        String style = tree.getNode().getStyle();
+        if(StringUtil.isNotEmpty(style)) {
+            writer.writeAttribute("style", style, null); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
+        String styleClass = tree.getNode().getStyleClass();
+        if(StringUtil.isNotEmpty(styleClass)) {
+            writer.writeAttribute("class", styleClass, null); // $NON-NLS-1$ $NON-NLS-2$
+        }
 
         String image = tree.getNode().getImage();
         boolean hasImage = StringUtil.isNotEmpty(image);

@@ -201,5 +201,30 @@
       <renderer-type>com.ibm.xsp.theme.bootstrap.form.Radio.ReadOnly</renderer-type>
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.ReadOnlyRadioGroupRenderer</renderer-class>
     </renderer>
+    <renderer>
+      <component-family>com.ibm.xsp.extlib.layout.ApplicationLayout</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.responsive.SimpleResponsiveAppLayout</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.SimpleResponsiveLayoutRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.NotImplementedRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.Navbar</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.NavbarRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.Dashboard</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.DashboardRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Panel</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.Carousel</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.CarouselRenderer</renderer-class>
+    </renderer>
   </render-kit>
 </faces-config>

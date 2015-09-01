@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,15 +18,15 @@ package com.ibm.xsp.theme.bootstrap.components.layout;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl;
 
 public class ResponsiveApplicationConfiguration extends BasicApplicationConfigurationImpl {
 	
 
-	public static final String WIDTH_FULL = "full"; //$NON-NLS-1$
+	public static final String WIDTH_FULL  = "full";  //$NON-NLS-1$
 	public static final String WIDTH_FLUID = "fluid"; //$NON-NLS-1$
 	public static final String WIDTH_FIXED = "fixed"; //$NON-NLS-1$
+	public static final String WIDTH_NONE  = "none";  //$NON-NLS-1$
 	
 	public static final String NAVBAR_FIXED_TOP 			= "fixed-top"; //$NON-NLS-1$
 	public static final String NAVBAR_FIXED_BOTTOM 			= "fixed-bottom"; //$NON-NLS-1$
@@ -41,11 +41,10 @@ public class ResponsiveApplicationConfiguration extends BasicApplicationConfigur
 	
 	public ResponsiveApplicationConfiguration() {}
 	
-	//TODO add getRendererType back in future release if extra responsive layouts added 
-    //@Override 
-	//public String getRendererType() {
-    //	return "com.ibm.xsp.theme.bootstrap.layout.ResponsiveApplicationConfiguratoin";
-    //}
+	@Override 
+	public String getLayoutRendererType() {
+    	return "";
+    }
     
     public boolean isInvertedNavbar() {
         if(invertedNavbar != null) {
@@ -71,7 +70,7 @@ public class ResponsiveApplicationConfiguration extends BasicApplicationConfigur
         ValueBinding vb = getValueBinding("fixedNavbar"); // $NON-NLS-1$
         if(vb!=null) {
             String s = (String)vb.getValue(getFacesContext());
-            if(s!=null && (StringUtil.equals(s, NAVBAR_FIXED_TOP) || StringUtil.equals(s, NAVBAR_FIXED_BOTTOM) || StringUtil.equals(s, NAVBAR_UNFIXED_TOP))) {
+            if(s!=null) {
                 return s;
             }
         }
@@ -140,7 +139,7 @@ public class ResponsiveApplicationConfiguration extends BasicApplicationConfigur
         ValueBinding vb = getValueBinding("pageWidth"); // $NON-NLS-1$
         if(vb!=null) {
         	String s = (String)vb.getValue(getFacesContext());
-            if(s!=null && (StringUtil.equals(s, WIDTH_FIXED) || StringUtil.equals(s, WIDTH_FLUID) || StringUtil.equals(s, WIDTH_FULL))) {
+            if(s!=null) {
                 return s;
             }
         }

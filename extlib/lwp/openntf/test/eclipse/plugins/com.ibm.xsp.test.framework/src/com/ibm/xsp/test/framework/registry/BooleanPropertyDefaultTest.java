@@ -81,7 +81,7 @@ public class BooleanPropertyDefaultTest extends AbstractXspTest {
     public void testPropertyDefaultValue() throws Exception {
         String failsStr = "";
         
-        // TODO should not need a FacesContext instance with a UIViewRootEx,
+        // TODO should not need a FacesContext instance with a UIViewRoot,
         // but some of the controls are using FacesContext.getCurrentInstance() 
         // in their constructors - should JUnit test to prevent that.
         FacesContext context = TestProject.createFacesContext(this);

@@ -187,7 +187,7 @@ dojo.declare(
 			this.oDataLoaders[i].aoEventsByDate = {};
 			if (this.oDataLoaders[i].clear)
 				this.oDataLoaders[i].clear();
-		}
+		}		
 	},
 	reload: function(){
 		if (this.oStartDate && this.oEndDate) {
@@ -594,3 +594,8 @@ dwa.cv.calendarDataStore.getInstance = function(){
 	}
 	return dwa.cv.calendarDataStore._instance;
 };
+
+dwa.cv.calendarDataStore.clearInstance=function(){
+	//ASHH9UB5RH
+	dwa.cv.calendarDataStore._instance = null;
+}; 

@@ -34,8 +34,8 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
     @Override
     protected Object getProperty(int prop) {
         switch(prop) {
-        	case PROP_BLANKIMG:                 return Resources.get().BLANK_GIF;
-        	
+            case PROP_BLANKIMG:                 return Resources.get().BLANK_GIF;
+            
             // note, for an Alt, there's a difference between the empty string and null
             case PROP_BLANKIMGALT:              return ""; //$NON-NLS-1$
             case PROP_ALTTEXTCLASS:             return "lotusAltText";   // $NON-NLS-1$
@@ -76,7 +76,7 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
     }
     
     @Override
-	protected void startChildren(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+    protected void startChildren(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
         w.startElement("div",c); // $NON-NLS-1$
         String iconStyleClass = (String)getProperty(PROP_CHILDLISTICONCLASS);
         if(StringUtil.isNotEmpty(iconStyleClass)) {
@@ -97,7 +97,7 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
     }
     
     @Override
-	protected void startItem(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, boolean emitId) throws IOException {
+    protected void startItem(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, boolean emitId) throws IOException {
         w.startElement("li",c); // $NON-NLS-1$
         if(emitId) {
             String id = viewDef.dataView.getClientId(context)+NamingContainer.SEPARATOR_CHAR+UIDataView.ROW_ID; 
@@ -154,7 +154,7 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
         w.startElement("span",c); // $NON-NLS-1$    
         w.writeAttribute("class",clazz,null); // $NON-NLS-1$
         
-        String spanId = c.getClientId(context) + "_shChevron";
+        String spanId = c.getClientId(context) + "_shChevron"; // $NON-NLS-1$
         w.writeAttribute("id",spanId,null); // $NON-NLS-1$
         
         if(detailsOnClient) {
@@ -163,16 +163,16 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
             //c.getClientId(context) gives back the id of the row
             String rowId = c.getClientId(context);
             String dataViewID = rowId.substring(0, rowId.lastIndexOf(":"+viewDef.dataModel.getRowIndex()));
-            w.writeAttribute("onclick", "javascript:XSP.xbtShowHideDetails('"+ dataViewID + "', '"+ viewDef.dataModel.getRowIndex() + "', '" 
-                	+ viewDef.rowPosition + "', " + viewDef.summaryOrDetailVisible + ", '" + getProperty(PROP_SHOWICONDETAILSCLASS)+ "', '" 
-                	+ getProperty(PROP_HIDEICONDETAILSCLASS) + "', '" + getProperty(PROP_SHOWICONDETAILSTOOLTIP) + "', '" 
-                	+ getProperty(PROP_HIDEICONDETAILSTOOLTIP) + "')", null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
+            w.writeAttribute("onclick", "javascript:XSP.xbtShowHideDetails('"+ dataViewID + "', '"+ viewDef.dataModel.getRowIndex() + "', '"  // $NON-NLS-2$ $NON-NLS-1$
+                    + viewDef.rowPosition + "', " + viewDef.summaryOrDetailVisible + ", '" + getProperty(PROP_SHOWICONDETAILSCLASS)+ "', '" 
+                    + getProperty(PROP_HIDEICONDETAILSCLASS) + "', '" + getProperty(PROP_SHOWICONDETAILSTOOLTIP) + "', '" 
+                    + getProperty(PROP_HIDEICONDETAILSTOOLTIP) + "')", null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
         }
         
         if( viewDef.rowDetailVisible ){
-            w.writeAttribute("title", "Hide",null); // $NLS-AbstractWebDataViewRenderer.Hide_HideDetailIconAlt-1$
+            w.writeAttribute("title", "Hide",null); // $NON-NLS-1$ $NLS-ForumViewRenderer.Hide-2$
         }else{
-        	 w.writeAttribute("title", "Show",null); // $NLS-AbstractWebDataViewRenderer.Show-1$
+             w.writeAttribute("title", "Show",null); // $NON-NLS-1$ $NLS-ForumViewRenderer.Show-2$
         }
         w.endElement("span"); // $NON-NLS-1$
         w.endElement("a");

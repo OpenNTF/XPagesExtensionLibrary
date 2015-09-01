@@ -22,7 +22,6 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.wizard.Wizard;
 
 import com.ibm.xsp.extlib.designer.relational.utils.RelationalLogger;
-import com.ibm.xsp.extlib.designer.tooling.utils.ExtLibToolingLogger;
 
 /**
  * @author Gary Marjoram
@@ -100,7 +99,7 @@ public class JdbcPluginWizard extends Wizard {
             
             // Log error
             if (RelationalLogger.EXT_LIB_RELATIONAL_LOGGER.isInfoEnabled()) {
-                ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.info(exception[0], "performFinish : Error generating plugin / updateSite "); // $NLI-JdbcPluginWizard.performFinisherrorgeneratingplugi-1$
+                RelationalLogger.EXT_LIB_RELATIONAL_LOGGER.info(exception[0], "performFinish : Error generating plugin / updateSite "); // $NLI-JdbcPluginWizard.performFinisherrorgeneratingplugi-1$
             }
 
             // Failure - keep the Wizard open

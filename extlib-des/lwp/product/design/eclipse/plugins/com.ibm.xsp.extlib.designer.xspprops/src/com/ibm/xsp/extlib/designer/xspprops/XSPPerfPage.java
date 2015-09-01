@@ -169,22 +169,6 @@ public class XSPPerfPage extends DCPanel implements XSPAllPropertyConstants {
         ifSmallerDoMemory = XSPEditorUtil.createTextNoFill(memInsteadComp, "pagePersistenceThreshold", 1, 0, 6); // $NON-NLS-1$
         ifSmallerDoMemory.setValidator(IntegerValidator.positiveInstance);
         
-        Section locSection = XSPEditorUtil.createSection(toolkit, parent, "Temporary Locations", 2, 1); // $NLX-XSPPerfPage.TemporaryLocations-1$
-        Composite locComp = XSPEditorUtil.createSectionChild(locSection, 2);
-        
-        Label attDirLabel = XSPEditorUtil.createLabel(locComp, "Attachment:", 1); // $NLX-XSPPerfPage.Attachment-1$
-        attDirLabel.setToolTipText("Define the directory where document attachments are temporarily persisted. \nDefaults to <tempdir>/xsppers"); // $NLX-XSPPerfPage.Defaultstotempdirxsppers-1$
-        XSPEditorUtil.createText(locComp, "attachmentPersistDir", 1, 0, 0); // $NON-NLS-1$
-        Label ulDirLabel = XSPEditorUtil.createLabel(locComp, "Upload:", 1); // $NLX-XSPPerfPage.Upload-1$
-        ulDirLabel.setToolTipText("Define the directory where the temporary uploaded files are stored.  \n" + // $NLX-XSPPerfPage.Definethedirectorywherethetempora-1$
-                                  "Defaults to <tempdir>/xspupload."); // $NLX-XSPPerfPage.Defaultstotempdirxspupload-1$
-        XSPEditorUtil.createText(locComp, "uploadPersistDir", 1, 0, 0); // $NON-NLS-1$
-        
-        Label ppdLabel = XSPEditorUtil.createLabel(locComp, "Pages:", 1); // $NLX-XSPPerfPage.Pages-1$
-        ppdLabel.setToolTipText("Define the directory where the JSF pages are persisted.  Defaults to <tempdir>/xspstate"); // $NLX-XSPPerfPage.DefinethedirectorywheretheJSFpage-1$
-        XSPEditorUtil.createText(locComp, "pagePersistDir", 1, 0, 0); // $NON-NLS-1$
-        
-        locSection.setClient(locComp);
         persSection.setClient(persComp);
     }
     

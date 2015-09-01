@@ -1,8 +1,8 @@
 XPages Extension Library
-(c) Copyright IBM Corp. 2010, 2013
+(c) Copyright IBM Corp. 2010, 2015
 
-This product includes software developed at
-OpenNTF (http://www.OpenNTF.Org/).
+This product includes software developed for
+OpenNTF (http://www.OpenNTF.Org/) with contributions from Paul Withers, Cameron Gregor and M Bourak.    
 
 The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms."
 
@@ -291,6 +291,108 @@ dbootstrap v0.1.1
 Licensed under the Apache 2.0 License
 Available from http://thesociable.github.io/dbootstrap
 
+Cloud Foundry Client Lib 1.02
+Licensed under the Apache 2.0 License
+Available from http://docs.run.pivotal.io/buildpacks/java/java-client.html
+
+AOP alliance 1
+Contributed to the Public Domain
+Available from http://aopalliance.sourceforge.net/
+
+Commons-Codec 1.3
+Licensed under the Apache 2.0 License
+Available from https://commons.apache.org/proper/commons-codec/
+
+Commons-IO 2.1
+Licensed under the Apache 2.0 License
+Available from http://commons.apache.org/proper/commons-io/
+   Copyright 2002-2011 The Apache Software Foundation
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+Commons-Logging 1.1.1
+Licensed under the Apache 2.0 License
+Available from http://commons.apache.org/proper/commons-logging/
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+HttpComponents Httpclient 4.2.5
+Licensed under the Apache 2.0 License
+Available from http://hc.apache.org/httpcomponents-client-4.2.x/
+   Copyright 1999-2012 The Apache Software Foundation
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+HttpComponents HttpCore 4.2.4
+Licensed under the Apache 2.0 License
+Available from http://hc.apache.org/httpcomponents-client-4.2.x/
+   Copyright 2005-2013 The Apache Software Foundation
+   This product includes software developed at
+   The Apache Software Foundation (http://www.apache.org/).
+   This project contains annotations derived from JCIP-ANNOTATIONS
+   Copyright (c) 2005 Brian Goetz and Tim Peierls. See http://www.jcip.net
+
+Jackson-Core 1.9.2
+Licensed under the Apache 2.0 License
+Available from http://jackson.codehaus.org/
+
+Jackson-Mapper-ASL 1.9.2
+Licensed under the Apache 2.0 License
+Available from http://jackson.codehaus.org/
+
+Log4j 1.2.14
+Licensed under the Apache 2.0 License
+Available from http://logging.apache.org/log4j/1.2/
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+snakeyaml 1.13
+Licensed under the Apache 2.0 License
+Available from https://code.google.com/p/snakeyaml/
+
+Spring-AOP 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-beans 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-context 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-core 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-Expression (SpEL) 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-security-config 3.1.3
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-security-core 3.1.3
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-security-oauth2 1.0.0
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-security-web 3.1.3
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-Web 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
+
+Spring-WebMVC 3.2.2
+Licensed under the Apache 2.0 License
+Available from http://spring.io/projects
 
 The MIT License:
 Permission is hereby granted, free  of charge, to any person obtaining

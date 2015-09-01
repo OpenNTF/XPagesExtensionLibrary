@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Designer Extensions Framework Common Plug-in
 Bundle-SymbolicName: com.ibm.xsp.extlib.designer;singleton:=true
-Bundle-Version: 9.0.1.v00_10_qualifier
+Bundle-Version: 9.0.1.v00_14_qualifier
 Bundle-Activator: com.ibm.xsp.extlib.designer.DesignerExtensionActivator
 Bundle-Vendor: IBM
 Require-Bundle: org.eclipse.core.runtime,

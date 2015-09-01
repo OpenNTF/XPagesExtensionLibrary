@@ -62,8 +62,11 @@ public class JsonMessageAdapter implements JsonObject {
     public static final String REPLY_FORM = "Reply"; // $NON-NLS-1$
     
     private static final String SENDTO_ITEM = "SendTo"; // $NON-NLS-1$
+    private static final String ENTERSENDTO_ITEM = "EnterSendTo"; // $NON-NLS-1$
     private static final String COPYTO_ITEM = "CopyTo"; // $NON-NLS-1$
+    private static final String ENTERCOPYTO_ITEM = "EnterCopyTo"; // $NON-NLS-1$
     private static final String BLINDCOPYTO_ITEM = "BlindCopyTo"; // $NON-NLS-1$
+    private static final String ENTERBLINDCOPYTO_ITEM = "EnterBlindCopyTo"; // $NON-NLS-1$
     private static final String FROM_ITEM = "From"; // $NON-NLS-1$
     private static final String MESSAGE_ID_ITEM = "$MessageID"; // $NON-NLS-1$
     private static final String IN_REPLY_TO_ITEM = "In_Reply_To"; // $NON-NLS-1$
@@ -73,6 +76,7 @@ public class JsonMessageAdapter implements JsonObject {
     private static final String SUBJECT_ITEM = "Subject"; // $NON-NLS-1$
     private static final String BODY_ITEM = "Body"; // $NON-NLS-1$
     private static final String INET_PREFIX = "INet"; // $NON-NLS-1$
+    private static final String ENTER_PREFIX = "Enter"; // $NON-NLS-1$
     private static final String THREADID_ITEM = "$TUA"; // $NON-NLS-1$
     
 	private static SimpleDateFormat ISO8601 = getUtcFormatter();
@@ -102,6 +106,9 @@ public class JsonMessageAdapter implements JsonObject {
 	public JsonMessageAdapter(Document document, ParserContext context) {
 		_document = document;
 		_context = context;
+		
+		// SPR #BBRL9QYA6A: Remove old items from the document
+		removeOldItems();
 	}
 
 	public Iterator<String> getJsonProperties() {
@@ -124,8 +131,8 @@ public class JsonMessageAdapter implements JsonObject {
 				// The JSON IO classes shouldn't call remove
 			}
 			
-            @SuppressWarnings("unchecked")
-            private String[] getProperties() {
+            @SuppressWarnings("unchecked")//$NON-NLS-1$
+			private String[] getProperties() {
                 if ( _propertyNames != null ) {
                     return _propertyNames;
                 }
@@ -144,6 +151,17 @@ public class JsonMessageAdapter implements JsonObject {
                         if ( iterator.hasNext() ) {
                             properties.add(TO_PROP);
                         }
+                        // SPR #BBRL9R99N7: replace item "SendTo" with "EnterSendTo" when there is no "SendTo" in Drafts view
+                        // Similar with "CopyTo" and "BlindCopyTo"
+                        else if ( !_document.hasItem(POSTEDDATE_ITEM ) ) {
+                            items = _document.getItemValue(ENTERSENDTO_ITEM);
+                            if ( items != null ) {
+                                iterator = items.iterator();
+                                if ( iterator.hasNext() ) {
+                                    properties.add(TO_PROP);
+                                }
+                            }
+                        }
                     }
 
                     items = _document.getItemValue(COPYTO_ITEM);
@@ -152,6 +170,15 @@ public class JsonMessageAdapter implements JsonObject {
                         if ( iterator.hasNext() ) {
                             properties.add(CC_PROP);
                         }
+                        else if ( !_document.hasItem(POSTEDDATE_ITEM ) ) {
+                            items = _document.getItemValue(ENTERCOPYTO_ITEM);
+                            if ( items != null ) {
+                                iterator = items.iterator();
+                                if ( iterator.hasNext() ) {
+                                    properties.add(CC_PROP);
+                                }
+                            }
+                        }
                     }
 
                     items = _document.getItemValue(BLINDCOPYTO_ITEM);
@@ -159,6 +186,15 @@ public class JsonMessageAdapter implements JsonObject {
                         Iterator<Object> iterator = items.iterator();
                         if ( iterator.hasNext() ) {
                             properties.add(BCC_PROP);
+                        }
+                        else if ( !_document.hasItem(POSTEDDATE_ITEM ) ) {
+                            items = _document.getItemValue(ENTERBLINDCOPYTO_ITEM);
+                            if ( items != null ) {
+                                iterator = items.iterator();
+                                if ( iterator.hasNext() ) {
+                                    properties.add(BCC_PROP);
+                                }
+                            }
                         }
                     }
 
@@ -216,7 +252,7 @@ public class JsonMessageAdapter implements JsonObject {
 		};
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")//$NON-NLS-1$
 	public Object getJsonProperty(String property) {
 		Object value = null;
 		
@@ -329,13 +365,31 @@ public class JsonMessageAdapter implements JsonObject {
 				value = _url;
 			}
 			else if ( TO_PROP.equals(property) ) {
-				value = getAddressList(SENDTO_ITEM);
-			}
-			else if ( CC_PROP.equals(property) ) {
-				value = getAddressList(COPYTO_ITEM);
-			}
+			    List<JsonPersonAdapter> listValue = getAddressList(SENDTO_ITEM);
+			    if ( listValue.size() > 0 ) {
+			        value = listValue;
+			    }
+			    else if ( !_document.hasItem(POSTEDDATE_ITEM) ) {
+			        value = getAddressList(ENTERSENDTO_ITEM);
+			    }
+            }
+            else if ( CC_PROP.equals(property) ) {
+                List<JsonPersonAdapter> listValue = getAddressList(COPYTO_ITEM);
+                if ( listValue.size() > 0 ) {
+                    value = listValue;
+                }
+                else if ( !_document.hasItem(POSTEDDATE_ITEM) ) {
+                    value = getAddressList(ENTERCOPYTO_ITEM);
+                }
+            }
             else if ( BCC_PROP.equals(property) ) {
-                value = getAddressList(BLINDCOPYTO_ITEM);
+                List<JsonPersonAdapter> listValue = getAddressList(BLINDCOPYTO_ITEM);
+                if ( listValue.size() > 0 ) {
+                    value = listValue;
+                }
+                else if ( !_document.hasItem(POSTEDDATE_ITEM) ) {
+                    value = getAddressList(ENTERBLINDCOPYTO_ITEM);
+                }
             }
 			else if ( CONTENT_PROP.equals(property) ) {
 				List<JsonMimeEntityAdapter> adapters = new ArrayList<JsonMimeEntityAdapter>();
@@ -363,6 +417,11 @@ public class JsonMessageAdapter implements JsonObject {
 
 	public void putJsonProperty(String property, Object value) {
 		// This method is called when converting JSON to a message
+	    
+	    // PLEASE READ if you are adding a new JSON property here.
+	    // When you write a document item here, you should also remove 
+	    // it in removeOldItems().  That's important when updating
+	    // an existing document from the JSON input.
 		
 		try {
 			if ( TO_PROP.equals(property) ) {
@@ -535,18 +594,30 @@ public class JsonMessageAdapter implements JsonObject {
     }
     
     /**
-     * Removes "@{domain}" from a distinguished name.
-     * 
-     * @param name
-     * @return
+     * Removes old items from the document.
      */
-//    private String trimDistinguishedName(String name) {
-//        String token[] = name.split("@");
-//        if ( token != null && token[0] != null ) {
-//            name = token[0];
-//        }
-//        
-//        return name;
-//    }
-    
+    private void removeOldItems() {
+        try {
+            _document.removeItem(SENDTO_ITEM);
+            _document.removeItem(ENTER_PREFIX + SENDTO_ITEM);
+            _document.removeItem(INET_PREFIX + SENDTO_ITEM);
+            
+            _document.removeItem(COPYTO_ITEM);
+            _document.removeItem(ENTER_PREFIX + COPYTO_ITEM);
+            _document.removeItem(INET_PREFIX + COPYTO_ITEM);
+            
+            _document.removeItem(BLINDCOPYTO_ITEM);
+            _document.removeItem(ENTER_PREFIX + BLINDCOPYTO_ITEM);
+            _document.removeItem(INET_PREFIX + BLINDCOPYTO_ITEM);
+            
+            _document.removeItem(SUBJECT_ITEM);
+            _document.removeItem(IN_REPLY_TO_ITEM);
+            _document.removeItem(DISPOSITION_NOTIFICATION_TO_ITEM);
+            _document.removeItem(RETURN_RECEIPT_ITEM);
+            _document.removeItem(BODY_ITEM);
+        }
+        catch (NotesException e) {
+            // Ignore
+        }
+    }
 }

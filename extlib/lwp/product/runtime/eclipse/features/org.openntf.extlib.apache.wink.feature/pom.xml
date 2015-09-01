@@ -3,11 +3,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <modelVersion>4.0.0</modelVersion>
 <artifactId>org.openntf.extlib.apache.wink.feature</artifactId>
 <packaging>eclipse-feature</packaging>
-<version>9.0.1.v00_11-SNAPSHOT</version>
+<version>9.0.1.v00_14-SNAPSHOT</version>
 <parent>
 <groupId>com.ibm.xsp.extlib</groupId>
 <artifactId>product.runtime.eclipse.features</artifactId>
-<version>9.0.1.v00_11-SNAPSHOT</version>
+<version>9.0.1.v00_14-SNAPSHOT</version>
 <relativePath>../</relativePath>
 </parent>
 

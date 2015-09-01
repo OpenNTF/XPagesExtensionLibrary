@@ -25,7 +25,6 @@ import javax.faces.el.ValueBinding;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.stylekit.StyleKitExtLibDefault;
-import com.ibm.xsp.extlib.util.ThemeUtil;
 import com.ibm.xsp.stylekit.ThemeControl;
 import com.ibm.xsp.util.DataPublisher;
 import com.ibm.xsp.util.DataPublisher.ShadowedObject;
@@ -132,7 +131,7 @@ public class UIApplicationLayout extends UIVarPublisherBase implements ThemeCont
      * @param context
      */
     @Override
-    protected void revokeControlData(List<ShadowedObject> shadowedData, FacesContext context) {
+    protected void revokeControlData(List shadowedData, FacesContext context) {
         // pop the configuration from the shadowedData list
         super.revokeControlData(shadowedData, context);
     }
@@ -148,7 +147,24 @@ public class UIApplicationLayout extends UIVarPublisherBase implements ThemeCont
     }
 
     public void setConfiguration(ApplicationConfiguration configuration) {
+        //In the twitter bootstrap theme, we provide more than one ApplicationLayout renderer
+        //To allow that, we check here for a renderer type in the ApplicationConfiguration object
+        //If a renderer type exists, we apply it as the chosen renderer
+        //If no renderer type found, we don't set anything. The renderer is set in the .theme file
+        // or in the rendererType property of the appLayout configuration
         this.configuration =  configuration;
+        String layoutRenderer = configuration.getLayoutRendererType();
+        String rendererType = this.getRendererType();
+        
+        if(!StringUtil.equals(RENDERER_TYPE, rendererType)) {
+            //Do nothing
+        }else{
+            if(StringUtil.isNotEmpty(layoutRenderer)) {
+                this.setRendererType(layoutRenderer);
+            }else{
+                //Do nothing. No specialised renderer found in application configuration
+            }
+        }
     }
 
     public String getOnItemClick() {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,6 +17,7 @@ package com.ibm.xsp.extlib.component.picker.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Vector;
 
@@ -24,6 +25,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
 import lotus.domino.Database;
+import lotus.domino.Name;
 import lotus.domino.NotesException;
 import lotus.domino.Session;
 import lotus.domino.View;
@@ -32,8 +34,11 @@ import lotus.domino.ViewEntry;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.acl.NoAccessSignal;
+import com.ibm.xsp.context.FacesContextEx;
+import com.ibm.xsp.extlib.domino.ExtlibDominoLogger;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.domino.DominoUtils;
+import com.ibm.xsp.component.UIViewRootEx;
 
 
 
@@ -54,6 +59,8 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
     private String nameList;
     private Boolean people;
     private Boolean groups;
+    private String searchType;
+    private String valueNameFormat;
     
     public DominoNABNamePickerData() {
     }
@@ -137,16 +144,59 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
         this.groups = groups;
     }
 
+    @Override
+    public String getSearchType() {
+        if (searchType != null) {
+            return searchType;
+        }
+        ValueBinding vb = getValueBinding("searchType"); //$NON-NLS-1$
+        if (vb != null) {
+            return (String) vb.getValue(getFacesContext());
+        }
 
+        return null;
+    }
+
+    public void setSearchType(String searchType) {
+        this.searchType = searchType;
+    }
+
+    /**
+     * Gets the format a name should be returned as.
+     * 
+     * @return String specific format
+     */
+    public String getValueNameFormat() {
+        if (null != this.valueNameFormat) {
+            return this.valueNameFormat;
+        }
+        ValueBinding _vb = getValueBinding("valueNameFormat"); //$NON-NLS-1$
+        if (_vb != null) {
+            return (String) _vb.getValue(getFacesContext());
+        }
+        return null;
+    }
+    /**
+     * Loads the value name format (String)
+     * 
+     * @param valueNameFormat
+     *            String
+     * @author withersp
+     */
+    public void setValueNameFormat(String valueNameFormat) {
+        this.valueNameFormat = valueNameFormat;
+    }
     @Override
     public Object saveState(FacesContext context) {
-        Object[] state = new Object[6];
+        Object[] state = new Object[8];
         state[0] = super.saveState(context);
         state[1] = addressBookSel;
         state[2] = addressBookDb;
         state[3] = nameList;
         state[4] = people;
         state[5] = groups;
+        state[6] = valueNameFormat;
+        state[7] = searchType;
         return state;
     }
     
@@ -159,6 +209,58 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
         this.nameList = (String)state[3]; 
         this.people = (Boolean)state[4]; 
         this.groups = (Boolean)state[5]; 
+        this.valueNameFormat = (String) state[6];
+        this.searchType = (String) state[7];
+    }
+
+    private static enum NameFormat {
+        ABBREVIATED, COMMON, CANONICAL, UNFORMATTED
+    }
+    private NameFormat parseNameFormat(String nameFormatStr){
+        if( null != nameFormatStr && nameFormatStr.length() > 0 ){
+            // from returnNameFormat="common" to COMMON (only 4 possible values, don't care about locale)
+            String upper = nameFormatStr.toUpperCase(Locale.US);
+            try{
+                NameFormat specified = NameFormat.valueOf(upper);
+                return specified;
+            }catch(IllegalArgumentException ex){
+                // unknown string in XPage source default to unformatted,
+                // not usually log (traceDebug is disabled by default).
+                if( ExtlibDominoLogger.DOMINO.isTraceDebugEnabled() ){
+                    String debugMsg = "Unknown property value for valueNameFormat=\"{0}\" on the tag xe:dominoNABNamePicker in the XPage {1}."; //$NON-NLS-1$
+                    String pageName = "<unknown>"; //$NON-NLS-1$
+                    FacesContextEx context = FacesContextEx.getCurrentInstance();
+                    UIViewRootEx viewRoot = (null == context)? null : (UIViewRootEx)context.getViewRoot();
+                    String viewPageName = (null == viewRoot)? null : viewRoot.getPageName();
+                    if( null != viewPageName){
+                        pageName = viewPageName;
+                    }
+                    debugMsg = StringUtil.format(debugMsg, nameFormatStr, pageName);
+                    ExtlibDominoLogger.DOMINO.traceDebugp(this, "parseNameFormat", ex, debugMsg); //$NON-NLS-1$
+                }
+            }
+        }
+        return NameFormat.UNFORMATTED;
+    }
+    private static String formatName(String baseName, NameFormat format) throws NotesException {
+        // optionally reformat the name, as contributed in #14 subpart D1:
+        // https://github.com/OpenNTF/XPagesExtensionLibrary/pull/14
+        if( StringUtil.isEmpty(baseName) ){
+            // don't format empty string
+            return baseName;
+        }
+        if (NameFormat.UNFORMATTED == format) {
+            return baseName;
+        } else {
+            Session sess = ExtLibUtil.getCurrentSession();
+            Name nm = sess.createName(baseName); // throws NotesException
+            switch(format){
+                case ABBREVIATED: return nm.getAbbreviated();
+                case CANONICAL: return nm.getCanonical();
+                case COMMON: return nm.getCommon();
+                default: return baseName; // won't happen
+            }
+        }
     }
     
     
@@ -314,8 +416,11 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
     }
     
     public abstract class _EntryMetaData extends EntryMetaData {
+        private NameFormat nameFormatEnum;
         protected _EntryMetaData(IPickerOptions options) throws NotesException {
             super(options);
+            String nameFormatStr = getValueNameFormat();
+            nameFormatEnum = parseNameFormat(nameFormatStr);
         }
         protected abstract String getViewName();
         @Override
@@ -427,7 +532,9 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
         }
         @Override
         protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
-            return columnValues.get(0);
+            String value = (String) columnValues.get(0);
+            NameFormat format = getMetaData().nameFormatEnum;
+            return formatName(value, format);
         }
         @Override
         protected Object readLabel(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
@@ -473,7 +580,9 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
         }
         @Override
         protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
-            return columnValues.get(1);
+            String value = (String) columnValues.get(1);
+            NameFormat format = getMetaData().nameFormatEnum;
+            return formatName(value, format);
         }
         @Override
         protected Object readLabel(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
@@ -552,7 +661,16 @@ public class DominoNABNamePickerData extends AbstractDominoViewPickerData implem
         }
         @Override
         protected Object readValue(ViewEntry ve, Vector<Object> columnValues) throws NotesException {
+            // optionally reformat the name, as contributed in #14 subpart D1:
+            // https://github.com/OpenNTF/XPagesExtensionLibrary/pull/14
+			if ("G".equals(columnValues.get(0))) {
+				// Groups are never canonical, only have a basic value
             return columnValues.get(1);
+			} else {
+	            String value = (String) columnValues.get(1);
+	            NameFormat format = getMetaData().nameFormatEnum;
+	            return formatName(value, format);
+			}
         }
         @Override
         protected Object readLabel(ViewEntry ve, Vector<Object> columnValues) throws NotesException {

@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_DOC_COLLECTION;
+import static com.ibm.domino.das.service.DataService.STAT_DOC_COLLECTION;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.rest.RestParameterConstants.*;
 import static com.ibm.domino.services.rest.RestServiceConstants.ITEM_FORM;
@@ -73,6 +75,8 @@ public class DocumentCollectionResource extends AbstractDasResource{
             @QueryParam(PARAM_DOC_SINCE) final String since) {
         
         DAS_LOGGER.traceEntry(this, "getDocuments"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOC_COLLECTION, STAT_DOC_COLLECTION);
+
         StreamingOutput streamJsonEntity = new StreamingOutput(){
 
             //@Override
@@ -127,8 +131,8 @@ public class DocumentCollectionResource extends AbstractDasResource{
             @QueryParam(PARAM_DOC_PARENTID) String parentId) {
 
         DAS_LOGGER.traceEntry(this, "postDocument"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOC_COLLECTION, STAT_DOC_COLLECTION);
 
-        // String jsonEntity = null;
         URI location = null;
         Document document = null;
         Document parent = null;

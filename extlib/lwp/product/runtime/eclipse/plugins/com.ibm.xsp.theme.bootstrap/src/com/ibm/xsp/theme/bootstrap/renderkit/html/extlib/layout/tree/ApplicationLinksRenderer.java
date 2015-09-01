@@ -26,15 +26,15 @@ public class ApplicationLinksRenderer extends NavRenderer {
     }
 
     @Override
-	protected boolean makeSelectedActive(TreeContextImpl node) {
-    	return false;
+    protected boolean makeSelectedActive(TreeContextImpl node) {
+        return false;
     }
 
     @Override
-	protected String getContainerStyleClass(TreeContextImpl node) {
-    	if(node.getDepth()==1) {
-        	return "nav navbar-nav applayout-links";
-    	}
-    	return super.getContainerStyleClass(node);
+    protected String getContainerStyleClass(TreeContextImpl node) {
+        if(node.getDepth()==1) {
+            return "nav navbar-nav applayout-links"; // $NON-NLS-1$
+        }
+        return super.getContainerStyleClass(node);
     }
 }
