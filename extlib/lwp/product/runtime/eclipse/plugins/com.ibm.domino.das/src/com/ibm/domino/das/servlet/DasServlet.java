@@ -76,6 +76,7 @@ import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.das.service.CoreService;
 import com.ibm.domino.das.service.DataService;
 import com.ibm.domino.das.service.RestService;
+import com.ibm.domino.das.service.IRestServiceExt;
 import com.ibm.domino.das.servlet.DasStats.MutableDouble;
 import com.ibm.domino.das.servlet.DasStats.MutableInteger;
 import com.ibm.domino.das.utils.ErrorHelper;
@@ -707,6 +708,31 @@ public class DasServlet extends AbstractRestServlet {
         
         return enabled;
     }
+	
+	protected Application getService(HttpServletRequest request) {
+		String requestPath = null;
+		Application app = null;
+		if (request.getPathInfo() != null) {
+			StringTokenizer tokenizer = new StringTokenizer(request.getPathInfo(), "/");
+			try {
+				requestPath = tokenizer.nextToken();
+				if (requestPath != null) {
+					requestPath.toLowerCase();
+				}
+			} catch (NoSuchElementException e) {
+				// Ignore this
+			}
+		}
+
+		if (requestPath != null) {
+			refreshServiceMap();
+			DasService service = s_services.get(requestPath);
+			if (service != null) {
+				app = service.getApplication();
+			}
+		}
+		return app;
+	}
     
     /**
      * Refreshes the service map.
