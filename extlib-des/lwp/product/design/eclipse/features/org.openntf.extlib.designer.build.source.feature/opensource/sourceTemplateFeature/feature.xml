@@ -18,7 +18,7 @@
 <!-- ******************************************************************* -->
 <feature 
 		id="org.openntf.extlib.designer.tooling.feature.opensource"
-		version="9.0.1.v00_12_qualifier"
+		version="9.0.1.v00_14_qualifier"
 		label="%feature.label"
 		provider-name="%feature.provider">
 	<description >

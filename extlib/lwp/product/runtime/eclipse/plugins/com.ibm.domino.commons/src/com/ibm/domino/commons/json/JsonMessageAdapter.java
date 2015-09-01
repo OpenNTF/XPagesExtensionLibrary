@@ -131,7 +131,7 @@ public class JsonMessageAdapter implements JsonObject {
 				// The JSON IO classes shouldn't call remove
 			}
 			
-            @SuppressWarnings("unchecked")
+            @SuppressWarnings("unchecked")//$NON-NLS-1$
 			private String[] getProperties() {
                 if ( _propertyNames != null ) {
                     return _propertyNames;
@@ -252,7 +252,7 @@ public class JsonMessageAdapter implements JsonObject {
 		};
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")//$NON-NLS-1$
 	public Object getJsonProperty(String property) {
 		Object value = null;
 		

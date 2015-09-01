@@ -114,22 +114,20 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
         }
         
         String styleClass = ExtLibUtil.concatStyleClasses(tree.getNode().getStyleClass(),(String)getProperty(PROP_DROPDOWN_BUTTON_CLASS));
-        if(StringUtil.isNotEmpty(styleClass)) {
-            writer.writeAttribute("class", styleClass, "class"); // $NON-NLS-1$ $NON-NLS-2$
-        }
-
+       
         if(popup) {
             // A popup button requires an id
             String clientId = tree.getClientId(context,"ab",1); // $NON-NLS-1$
             if(StringUtil.isNotEmpty(clientId)) {
                 writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
             }
-            writer.writeAttribute("class","btn btn-default dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
+            styleClass = ExtLibUtil.concatStyleClasses(styleClass, "dropdown-toggle"); //$NON-NLS-1$
             writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
-        } else {
-            writer.writeAttribute("class","btn btn-default",null); // $NON-NLS-1$ $NON-NLS-2$
         }
-
+        if(StringUtil.isNotEmpty(styleClass)) {
+            writer.writeAttribute("class", styleClass, "class"); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
         String image = tree.getNode().getImage();
         boolean hasImage = StringUtil.isNotEmpty(image);
         if(hasImage) {

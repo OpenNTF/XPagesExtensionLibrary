@@ -105,7 +105,8 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
     protected void writerPages(FacesContext context, ResponseWriter w, UIPagerSizes pager, FacesDataIterator dataIterator, String text, int pos) throws IOException {
         String sizestr = pager.getSizes();
         if (StringUtil.isEmpty(sizestr)) {
-            sizestr = "10|25|50|all"; // $NLS-PagerSizesRenderer.102550all-1$
+            // note, not a translatable string.
+            sizestr = "10|25|50|all";//$NON-NLS-1$
         }
         if (StringUtil.isNotEmpty(sizestr)) {
             String[] sizes = StringUtil.splitString(sizestr, '|', true);

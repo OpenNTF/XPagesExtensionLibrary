@@ -40,6 +40,7 @@ import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.tree.NavbarL
 //import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.tree.NavbarRightLinksRenderer;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
+import com.ibm.xsp.util.JavaScriptUtil;
 
 /**
  *
@@ -170,7 +171,8 @@ public class NavbarRenderer extends FacesRendererEx {
 
         // start collapse container div
         w.startElement("div", component); // $NON-NLS-1$
-        w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+        // SPR #BGLN9ZCMXK Custom collapse class for each navbar needed
+        w.writeAttribute("class", "collapse navbar-collapse " + JavaScriptUtil.encodeFunctionName(context, component, "collapse-target"), null); // $NON-NLS-1$ $NON-NLS-2$ //$NON-NLS-3$
         
         // write navbar before links
         if(beforeLinks != null) {
@@ -250,11 +252,12 @@ public class NavbarRenderer extends FacesRendererEx {
     }
     
     protected void writeCollapsedLink(FacesContext context, ResponseWriter w, UINavbar c) throws IOException {
+        String dataTargetClass = "." + JavaScriptUtil.encodeFunctionName(context, c, "collapse-target"); //$NON-NLS-1$ //$NON-NLS-2$
         w.startElement("button", c); // $NON-NLS-1$
         w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
-        w.writeAttribute("data-target", ".navbar-collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("data-target", dataTargetClass, null); // $NON-NLS-1$ $NON-NLS-2$
         
         w.startElement("span", c); // $NON-NLS-1$
         w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$

@@ -69,7 +69,7 @@ public  class DbcpPoolDataSource implements IJdbcResourceFactory {
 
                     Properties properties = new Properties();
                     properties.setProperty("user", username); // $NON-NLS-1$
-                    properties.setProperty("password", password); // $NON-NLS-1$
+                    properties.setProperty("password", (StringUtil.isEmpty(password) ? "":password)); // $NON-NLS-1$
 
                     ConnectionFactory connectionFactory = new DriverConnectionFactory(driver, url, properties);
 

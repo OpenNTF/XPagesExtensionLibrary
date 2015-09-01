@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sample REST Service Plug-in
 Bundle-SymbolicName: com.ibm.domino.services.sample;singleton:=true
-Bundle-Version: 9.0.1.v00_13_qualifier
+Bundle-Version: 9.0.1.v00_14_qualifier
 Bundle-Vendor: IBM
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.ibm.wink,

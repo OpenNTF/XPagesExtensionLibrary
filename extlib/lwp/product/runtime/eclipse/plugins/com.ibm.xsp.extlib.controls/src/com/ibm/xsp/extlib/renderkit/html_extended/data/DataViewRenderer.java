@@ -1011,7 +1011,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         if(level>0) {
             Integer indentPx = (Integer)getProperty(PROP_TABLEROWINDENTPX);
             if(indentPx>0) {
-            	String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:";
+                String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:"; //$NON-NLS-1$ //$NON-NLS-2$
                 String style = paddingDir + (level * indentPx) + "px !important"; // $NON-NLS-1$ $NON-NLS-2$
                 return style;
             }
@@ -1037,7 +1037,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
 		            	// Quick remedy is just to increase the width by an arbitrary number of pixels
 		                Integer indentPxCol = indentPxSub + 10; 
 		                int padValue = (indentPxCol * level) + (indentPxSub * sublevel);
-		                String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:";
+		                String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:"; //$NON-NLS-1$ //$NON-NLS-2$
 		                String style = paddingDir + (padValue) + "px !important"; // $NON-NLS-1$ $NON-NLS-2$
 		                return style;
 		            }

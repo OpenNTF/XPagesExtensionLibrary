@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Wink Plug-in
 Bundle-SymbolicName: com.ibm.wink;singleton:=true
-Bundle-Version: 9.0.1.v00_13_SNAPSHOT
+Bundle-Version: 9.0.1.v00_14_SNAPSHOT
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .
 Require-Bundle: org.eclipse.equinox.http.registry,

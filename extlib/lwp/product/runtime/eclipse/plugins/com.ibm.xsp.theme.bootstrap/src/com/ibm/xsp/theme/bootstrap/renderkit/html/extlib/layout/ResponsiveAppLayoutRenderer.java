@@ -64,6 +64,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
     
     public static final int PROP_BANNER_FIXEDTOP_PADDING       = 20;
     public static final int PROP_BANNER_FIXEDBOTTOM_PADDING    = 21;
+    public static final int PROP_BANNER_COLLAPSE_CLASS         = 22;
     
 
     @Override
@@ -80,6 +81,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             //Fixed banner padding
             case PROP_BANNER_FIXEDTOP_PADDING:       return "body {padding-top:51px;} @media (min-width: 768px) {.applayout-main .sidebar{top:52px;bottom:0px;}}"; // $NON-NLS-1$
             case PROP_BANNER_FIXEDBOTTOM_PADDING:    return "body {padding-bottom:51px;}  @media (min-width: 768px) {.applayout-main .sidebar{top:0px;bottom:52px;}}"; // $NON-NLS-1$
+            case PROP_BANNER_COLLAPSE_CLASS:         return "navbar-collapse-target"; // $NON-NLS-1$
         }
         return null;
     }
@@ -277,18 +279,25 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             w.writeComment("Start Banner"); // $NON-NLS-1$
             newLine(w);
         }
+
+        boolean hasChildren = c.getChildCount() > 0;
+        ITree appLinks      = TreeImpl.get(configuration.getBannerApplicationLinks());
+        ITree utilityLinks  = TreeImpl.get(configuration.getBannerUtilityLinks());
+        boolean bannerHasContent = hasChildren || appLinks != null || utilityLinks != null;
         
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar-header", null);       // $NON-NLS-1$ $NON-NLS-2$
         
-        writeBannerLink(context, w, c, configuration);
+        if(bannerHasContent) {
+            writeBannerLink(context, w, c, configuration);
+        }
         newLine(w);
         writeBannerProductlogo(context, w, c, configuration);
         
         w.endElement("div"); // $NON-NLS-1$
         
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("class",  ExtLibUtil.concatStyleClasses((String)getProperty(PROP_BANNER_COLLAPSE_CLASS), "navbar-collapse collapse"), null); // $NON-NLS-1$ $NON-NLS-2$
         newLine(w);
         
         writeBannerApplicationLinks(context, w, c, configuration);
@@ -311,7 +320,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
-        w.writeAttribute("data-target", ".navbar-collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("data-target", "." + getProperty(PROP_BANNER_COLLAPSE_CLASS), null); // $NON-NLS-1$
         
         w.startElement("span", c); // $NON-NLS-1$
         w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -442,10 +451,6 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
     
             // Close the banner
             w.endElement("div"); // $NON-NLS-1$
-            newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
-            w.endElement("div"); // $NON-NLS-1$
-            newLine(w, "navbar-static-top"); // $NON-NLS-1$
-    
             w.endElement("div"); // $NON-NLS-1$
         }
     }
@@ -709,10 +714,6 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
         // Close the banner
         w.endElement("div"); // $NON-NLS-1$
-        newLine(w, ""); // $NON-NLS-1$ $NON-NLS-2$
-        w.endElement("div"); // $NON-NLS-1$
-        newLine(w, "navbar-static-top"); // $NON-NLS-1$
-
         w.endElement("div"); // $NON-NLS-1$
     }
 
@@ -942,7 +943,6 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
     protected void writeLegalLogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
         String logoImg=configuration.getLegalLogo();
         if(StringUtil.isNotEmpty(logoImg)) {
-            w.startElement("td", c); // $NON-NLS-1$
             w.startElement("span", c); // $NON-NLS-1$
             String clazz=configuration.getLegalLogoClass();
             if(StringUtil.isNotEmpty(clazz)) {
@@ -970,17 +970,13 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             }
             w.endElement("img"); // $NON-NLS-1$
             w.endElement("span"); // $NON-NLS-1$
-            w.endElement("td"); // $NON-NLS-1$
         }
     }
 
     protected void writeLegalText(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
         String legalText = configuration.getLegalText();
         if (StringUtil.isNotEmpty(legalText)) {
-            w.startElement("td", c); // $NON-NLS-1$
-            // w.writeAttribute("class",legalTextClass,null); // $NON-NLS-1$
             w.writeText(legalText, null);
-            w.endElement("td"); // $NON-NLS-1$
         }
     }
 

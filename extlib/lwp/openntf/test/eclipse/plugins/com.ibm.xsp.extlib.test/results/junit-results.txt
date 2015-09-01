@@ -1,7 +1,7 @@
 JUnit results, running against Notes 9.0.1
 using the Notes JVM
-Test ran 2015-04-08T19:10
-Lines in file: 1408
+Test ran 2015-08-17T13:01
+Lines in file: 1406
 
 ~ ExtlibTestSuite
 xsp.extlib.test.ExtlibTestSuite
@@ -1236,8 +1236,6 @@ com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [them
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneui_idx_v1.3] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneui_idx_v1.3_base] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.

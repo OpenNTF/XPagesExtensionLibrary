@@ -75,69 +75,64 @@ public class BluemixContext{
 	// ------------------------------------------------
 
 	public DataService getDataServiceByName(final String instanceName) {
-		checkOnBluemix();
+		return getDataService(/*isByName*/true, instanceName);
+	}
+	public DataService getDataService() {
+		return getDataService(/*isByName*/false, /*instanceName*/null);
+	}
+
+    private DataService getDataService(boolean isByName, final String instanceName) {
+	    checkOnBluemix();
 		JsonJavaObject asJson = getVCAP_SERVICES_asJson();
 		if( null == asJson ){
-			throw new FacesException("No services found.");
+			throw new FacesException("No services found."); // $NLS-BluemixContext.Noservicesfound-1$
 		}
 		if( !asJson.containsKey(XPAGES_DATA_SERVICE_NAME) ){
-			throw new FacesException("No data services found.");
+			throw new FacesException("No data services found."); // $NLS-BluemixContext.Nodataservicesfound-1$
 		}
 		JsonJavaArray services = asJson.getAsArray(XPAGES_DATA_SERVICE_NAME);
 		if( null == services ){
-			throw new FacesException("Bad syntax: not array.");
+			throw new FacesException("Bad syntax: not array."); // $NLS-BluemixContext.Badsyntaxnotarray-1$
 		}
 		if( 0 == services.length() ){
-			throw new FacesException("Data services count is zero.");
+			throw new FacesException("Data services count is zero."); // $NLS-BluemixContext.Dataservicescountiszero-1$
 		}
 		
 		for (Iterator<Object> iterator = services.iterator(); iterator.hasNext();) {
 			Object object = iterator.next();
 			if (object instanceof JsonJavaObject) {
 				JsonJavaObject service = (JsonJavaObject) object;
+				if( ! isByName ){
+					return new DataService(service);
+				}else{ // isByName
 					String name = service.getAsString("name"); // $NON-NLS-1$
 					if (null != name && name.equals(instanceName)) {
 						return new DataService(service);
 					}
+				}
 			}else{
-				throw new FacesException("Bad object type in data services array: "+(null == object? null : object.getClass()));
+				String userMsg = msgDataServiceArrayBadType(object);
+				throw new FacesException(userMsg);
 			}
 		}
-		throw new FacesException("No data service with name "+instanceName);
+		if( !isByName ){
+			throw new FacesException("No data service found."); // $NLS-BluemixContext.Nodataservicefound-1$
+		}else{ // isByName
+			String userMsg = "No data service with name {0}"; // $NLS-BluemixContext.Nodataservicewithname0-1$
+			userMsg = StringUtil.format(userMsg, instanceName);
+			throw new FacesException(userMsg);
+		}
 	}
-
-	public DataService getDataService() {
-		checkOnBluemix();
-		JsonJavaObject asJson = getVCAP_SERVICES_asJson();
-		if( null == asJson ){
-			throw new FacesException("No services found.");
-		}
-		if( !asJson.containsKey(XPAGES_DATA_SERVICE_NAME) ){
-			throw new FacesException("No data services found.");
-		}
-		JsonJavaArray services = asJson.getAsArray(XPAGES_DATA_SERVICE_NAME);
-		if( null == services ){
-			throw new FacesException("Bad syntax: not array.");
-		}
-		if( 0 == services.length() ){
-			throw new FacesException("Data services count is zero.");
-		}
-		
-		for (Iterator<Object> iterator = services.iterator(); iterator.hasNext();) {
-			Object object = iterator.next();
-			if (object instanceof JsonJavaObject) {
-				JsonJavaObject service = (JsonJavaObject) object;
-				// any name.
-//					String name = service.getAsString("name"); // $NON-NLS-1$
-//					if (null != name && name.equalsIgnoreCase(instanceName)) {
-						return new DataService(service);
-//					}
-			}else{
-				throw new FacesException("Bad object type in data services array: "+(null == object? null : object.getClass()));
-			}
-		}
-		throw new FacesException("No data service found.");
-	}
+	/**
+	 * @param object
+	 * @return
+	 */
+    private String msgDataServiceArrayBadType(Object object) {
+	    String type = (null == object)? null : object.getClass().getName();
+	    String userMsg = "Bad object type in data services array: {0}"; // $NLS-BluemixContext.Badobjecttypeindataservicesarray0-1$
+	    userMsg = StringUtil.format(userMsg, type);
+	    return userMsg;
+    }
 
 	public boolean isDataServiceExists() {
 		checkOnBluemix();
@@ -189,7 +184,8 @@ public class BluemixContext{
 						return true;
 					} // else continue looping
 			}else{
-				throw new FacesException("Bad object type in data services array: "+(null == object? null : object.getClass()));
+				String userMsg = msgDataServiceArrayBadType(object);
+				throw new FacesException(userMsg);
 			}
 		}
 		return false;
@@ -263,12 +259,15 @@ public class BluemixContext{
                             Object result = JsonParser.fromJson(JsonJavaFactory.instanceEx, asString);
                             return result;
                 		} catch (JsonException e) {
-                	        throw new FacesException("Problem parsing JSON in VCAP_SERVICES environment variable", e);
+                	        throw new FacesException("Problem parsing JSON in VCAP_SERVICES environment variable", e); // $NLS-BluemixContext.ProblemparsingJSONinVCAP_SERVICES-1$
                         }
                     }
                 });
     		if( !(jsonAnyType instanceof JsonJavaObject) ){
-    	        throw new FacesException("Unexpected type in VCAP_SERVICES environment variable. Not JSON Object. Is: "+jsonAnyType);
+    			String jsonValue = (null == jsonAnyType)? null : jsonAnyType.toString();
+    	        String userMsg = "Unexpected type in VCAP_SERVICES environment variable. Not JSON Object. Is: {0}"; // $NLS-BluemixContext.UnexpectedtypeinVCAP_SERVICESenvi-1$
+    	        userMsg = StringUtil.format(userMsg, jsonValue);
+				throw new FacesException(userMsg);
     		}
     		/*
     		 * if (null != _VCAP_SERVICES) { for (Iterator<String> i =
@@ -440,14 +439,17 @@ public class BluemixContext{
 		if (StringUtil.isEmpty(isBluemixPlatform) || StringUtil.equals(isBluemixPlatform, "0")) { // $NON-NLS-1$
 			detectedOnBluemix = false;
 		}else{
-			detectedOnBluemix = (null != java.lang.System.getenv("VCAP_APP_PORT"));
+			detectedOnBluemix = (null != java.lang.System.getenv("VCAP_APP_PORT")); // $NON-NLS-1$
 		}
 		_onBluemix = Boolean.valueOf(detectedOnBluemix);
 		return detectedOnBluemix;
 	}
 	private void checkOnBluemix(){
 		if( !isRunningOnBluemix() ){
-			throw new FacesException("Not running on bluemix.");
+			String productName = "IBM Bluemix"; //$NON-NLS-1$
+			String userMsg = "Not running in the {0} cloud platform."; // $NLS-BluemixContext.Notrunninginthe0cloudplatform-1$
+			userMsg = StringUtil.format(userMsg, productName);
+			throw new FacesException(userMsg);
 		}
 	}
 

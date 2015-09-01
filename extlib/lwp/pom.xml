@@ -3,7 +3,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <modelVersion>4.0.0</modelVersion>
 <artifactId>com.ibm.xsp.extlib.parent</artifactId>
 <packaging>pom</packaging>
-<version>9.0.1.v00_13-SNAPSHOT</version>
+<version>9.0.1.v00_14-SNAPSHOT</version>
 <groupId>com.ibm.xsp.extlib</groupId>
 
 <modules>
@@ -25,10 +25,30 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <repository>
 <id>notes</id>
 <layout>p2</layout>
-<url>file:///C:\updateSite901FP1</url>
+<url>file:///C:\updateSite</url>
 </repository>
 </repositories>
 
+<profiles>
+		<!--
+			Look for the used-by-convention "notes-platform" property and, if
+			present, override the hard-coded Update Site path.
+		-->
+		<profile>
+			<activation>
+				<property>
+					<name>notes-platform</name>
+				</property>
+			</activation>
+			<repositories>
+				<repository>
+					<id>notes</id>
+					<layout>p2</layout>
+				<url>${notes-platform}</url>
+				</repository>
+			</repositories>
+		</profile>
+</profiles>
 
 <build>
 		<plugins>

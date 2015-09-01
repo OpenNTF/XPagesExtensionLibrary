@@ -71,7 +71,7 @@ public class RecentContactsProvider implements IRecentContactsProvider {
       final List<RecentContact> returnList = new LinkedList<RecentContact>();
 
       // This is for debug - currently not printed anywhere
-      @SuppressWarnings("unused")
+      @SuppressWarnings("unused")//$NON-NLS-1$
       int badNames = 0;
       int docsScanned = 0;
 

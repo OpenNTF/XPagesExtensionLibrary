@@ -192,12 +192,12 @@ public class UserHelper {
 			    if ( localFileExists(session, mailFile + DOT_NSF) ) {
 	                url = localServerBaseUrl + "/" + mailFile.replace('\\', '/') + DOT_NSF; //$NON-NLS-1$
 	                if ( DAS_LOGGER.getLogger().isLoggable(Level.FINEST) ) {
-	                    DAS_LOGGER.getLogger().finest("Mail file " + mailFile + " exists locally"); //$NON-NLS-1$
+	                    DAS_LOGGER.getLogger().finest("Mail file " + mailFile + " exists locally"); //$NON-NLS-1$ //$NON-NLS-2$
 	                }
 			    }
 			    else {
                     if ( DAS_LOGGER.getLogger().isLoggable(Level.FINEST) ) {
-                        DAS_LOGGER.getLogger().finest("Mail file " + mailFile + " does NOT exist locally"); //$NON-NLS-1$
+                        DAS_LOGGER.getLogger().finest("Mail file " + mailFile + " does NOT exist locally"); //$NON-NLS-1$ //$NON-NLS-2$
                     }
 			    }
 			}

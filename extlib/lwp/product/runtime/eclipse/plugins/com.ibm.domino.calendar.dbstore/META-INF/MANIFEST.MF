@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Calendar Database Store
 Bundle-SymbolicName: com.ibm.domino.calendar.dbstore;singleton:=true
-Bundle-Version: 9.0.1.v00_13_SNAPSHOT
+Bundle-Version: 9.0.1.v00_14_SNAPSHOT
 Bundle-Vendor: IBM
 Require-Bundle: com.ibm.notes.java.api,
  com.ibm.domino.calendar.store,

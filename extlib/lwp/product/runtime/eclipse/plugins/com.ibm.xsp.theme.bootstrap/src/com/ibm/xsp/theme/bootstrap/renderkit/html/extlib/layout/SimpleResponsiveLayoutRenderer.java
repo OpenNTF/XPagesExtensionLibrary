@@ -70,6 +70,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
     
     public static final int PROP_BANNER_FIXEDTOP_PADDING    = 20;
     public static final int PROP_BANNER_FIXEDBOTTOM_PADDING = 21;
+    public static final int PROP_BANNER_COLLAPSE_CLASS      = 22;
     
     
     @Override
@@ -87,6 +88,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
             //Fixed banner padding
             case PROP_BANNER_FIXEDTOP_PADDING:       return "body {padding-top:51px;} @media (min-width: 768px) {.applayout-main .sidebar{top:52px;bottom:0px;}}"; // $NON-NLS-1$
             case PROP_BANNER_FIXEDBOTTOM_PADDING:    return "body {padding-bottom:51px;}  @media (min-width: 768px) {.applayout-main .sidebar{top:0px;bottom:52px;}}"; // $NON-NLS-1$
+            case PROP_BANNER_COLLAPSE_CLASS:         return "navbar-collapse-target"; // $NON-NLS-1$
         
         }
         return super.getProperty(prop);
@@ -223,7 +225,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         w.endElement("div"); // $NON-NLS-1$
         
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", "navbar-collapse collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("class", ExtLibUtil.concatStyleClasses((String)getProperty(PROP_BANNER_COLLAPSE_CLASS), "navbar-collapse collapse"), null); // $NON-NLS-1$ $NON-NLS-2$
         newLine(w);
 
         writeNavbarApplicationLinks(context, w, c, configuration);
@@ -245,7 +247,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
             w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
             w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
             w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
-            w.writeAttribute("data-target", ".navbar-collapse", null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("data-target", "." + getProperty(PROP_BANNER_COLLAPSE_CLASS), null); // $NON-NLS-1$
             
             w.startElement("span", c); // $NON-NLS-1$
             w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$

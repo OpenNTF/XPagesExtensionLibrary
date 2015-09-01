@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,7 +17,6 @@
 package com.ibm.xsp.extlib.renderkit.html_extended.mobile;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponent;
@@ -28,7 +27,6 @@ import javax.faces.context.ResponseWriter;
 import lotus.domino.ViewEntry;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.application.UniqueViewIdManager;
 import com.ibm.xsp.component.UIDataIterator;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.data.*;
@@ -39,11 +37,9 @@ import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.ViewRowData;
 import com.ibm.xsp.renderkit.FacesRenderer;
-import com.ibm.xsp.renderkit.html_basic.FormRenderer;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
 import com.ibm.xsp.util.FacesUtil;
-import com.ibm.xsp.util.JavaScriptUtil;
 
 /**
  * The MobileViewRenderer is a DataViewRenderer specifically tailored for
@@ -252,14 +248,14 @@ public class MobileViewRenderer extends DataViewRenderer {
             
             w.writeAttribute("dataRows", viewDef.rows, null);//$NON-NLS-1$
             //changing the id because the partial refresh requires the outermost id to be sent in the request.
-            viewId+="_is";
+            viewId+="_is"; //$NON-NLS-1$
             
             w.writeAttribute("dataViewId", viewId , null);//$NON-NLS-1$
-            w.writeAttribute("roundCornerMask", "true", null);//$NON-NLS-1$
+            w.writeAttribute("roundCornerMask", "true", null);//$NON-NLS-1$ //$NON-NLS-2$
             w.writeAttribute("radius","5",null);//$NON-NLS-1$
             
             // adding the scrollPosition as a div attribute to pass it at the ScrollablePane.js
-            String scroll = (String)context.getExternalContext().getRequestParameterMap().get(SUBMIT_SCROLL + "_" + spId);
+            String scroll = (String)context.getExternalContext().getRequestParameterMap().get(SUBMIT_SCROLL + "_" + spId); //$NON-NLS-1$
             if(scroll != null) {
                 w.writeAttribute("scrollToPos",scroll,null);//$NON-NLS-1$
             }
@@ -276,10 +272,10 @@ public class MobileViewRenderer extends DataViewRenderer {
             
             if(style != null) { 
                 w.writeAttribute("style",style,null);//$NON-NLS-1$
-                int hIndex = style.indexOf("height:");
+                int hIndex = style.indexOf("height:"); //$NON-NLS-1$
                 if(hIndex > -1 ) {
-                    String hVal = style.substring(hIndex + "height:".length());
-                    int commaIndex = hVal.indexOf(";");
+                    String hVal = style.substring(hIndex + "height:".length()); //$NON-NLS-1$
+                    int commaIndex = hVal.indexOf(";"); //$NON-NLS-1$
                     if(commaIndex > 0) {
                         hVal = hVal.substring(0,commaIndex);
                     }
@@ -322,8 +318,8 @@ public class MobileViewRenderer extends DataViewRenderer {
         if (viewDef.isInfiniteScroll) {
             w.startElement(FacesRenderer.INPUT, null);
             w.writeAttribute(FacesRenderer.TYPE, HIDDEN, null);
-            w.writeAttribute(FacesRenderer.NAME, SUBMIT_SCROLL + "_" + spId, null);
-            w.writeAttribute(FacesRenderer.ID, spId + "_hif", null);
+            w.writeAttribute(FacesRenderer.NAME, SUBMIT_SCROLL + "_" + spId, null); //$NON-NLS-1$
+            w.writeAttribute(FacesRenderer.ID, spId + "_hif", null); //$NON-NLS-1$
             w.endElement(FacesRenderer.INPUT);
             
             String pane = (String) getProperty(PROP_WRAPPERTAG);

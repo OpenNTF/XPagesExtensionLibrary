@@ -124,7 +124,7 @@ public class CalendarViewRenderer extends FacesRenderer {
 		        .getProperty(XSP_DISABLE_INLINE_EDIT_CALENDAR, "false")); //$NON-NLS-1$
         
         if(disableInLineEditCalendar)
-        	w.writeAttribute("fDisableInPlaceEdit", "true", null); // $NON-NLS-1$
+        	w.writeAttribute("fDisableInPlaceEdit", "true", null); // $NON-NLS-1$ //$NON-NLS-2$
         
         uiComponent.writeActionHandlerScripts(w);
     }

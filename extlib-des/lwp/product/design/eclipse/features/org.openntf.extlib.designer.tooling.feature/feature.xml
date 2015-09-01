@@ -19,7 +19,7 @@
 <feature
       id="org.openntf.extlib.designer.tooling.feature"
       label="%feature.label"
-      version="9.0.1.v00_12_qualifier"
+      version="9.0.1.v00_14_qualifier"
       provider-name="%feature.provider">
 
    <description>
@@ -262,5 +262,18 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+		 
+   <plugin
+         id="com.ibm.xsp.extlib.designer.bluemix"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>		 
 
+   <plugin
+         id="com.ibm.xsp.extlib.designer.bluemix.lib"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>		
 </feature>

@@ -312,4 +312,24 @@ public class ExtlibSinceVersion901StreamLists {
             return skips;
         }
     }
+
+    public static class Extlib901v00_14List implements SinceVersionList{
+        private Object[][] tagsAndProps = new Object[][]{
+            new Object[]{"xe:dominoNABNamePicker", false, new String[]{
+                "searchType",
+                "valueNameFormat",
+            }},
+        };
+        private String[] skips = new String[]{
+        };
+        public Object[][] tagsAndProps() {
+            return tagsAndProps;
+        }
+        public String sinceVersion() {
+            return "9.0.1.v00_14";
+        }
+        public String[] skips() {
+            return skips;
+        }
+    }
 }

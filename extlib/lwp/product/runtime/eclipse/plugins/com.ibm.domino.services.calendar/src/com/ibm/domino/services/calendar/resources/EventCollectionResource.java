@@ -295,7 +295,7 @@ public class EventCollectionResource {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             CalendarOutputter outputter = new CalendarOutputter(false);
             outputter.output(calendar, baos);
-            String icalendar = baos.toString("UTF-8");
+            String icalendar = baos.toString("UTF-8");//$NON-NLS-1$
             
             // Store new event
             

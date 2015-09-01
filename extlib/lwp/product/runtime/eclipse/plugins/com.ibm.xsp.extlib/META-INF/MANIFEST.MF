@@ -28,6 +28,6 @@ Export-Package: com.ibm.xsp.extlib,
  com.ibm.xsp.extlib.library
 Eclipse-LazyStart: true
 Bundle-Activator: com.ibm.xsp.extlib.library.ExtlibActivator
-Bundle-Version: 9.0.1.v00_13_qualifier
+Bundle-Version: 9.0.1.v00_14_qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

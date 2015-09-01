@@ -186,6 +186,15 @@ public class TestProject {
 
         registry = maintainer.getRegistry();
         
+        if( ConfigUtil.isTestJsfAssignCoreTagNames(test) ){
+            String coreId = "com.ibm.xsp.core.library";
+            XspRegistryManager manager = XspRegistryManager.getManager();
+            FacesSharableRegistry coreReg = manager.getRegistryProvider(coreId).getRegistry();
+            assignTagName(coreReg, "javax.faces.ViewRoot", "view");
+            assignTagName(coreReg, "javax.faces.SelectItem", "selectItem");
+            assignTagName(coreReg, "javax.faces.SelectItems", "selectItems");
+        }
+        
         FacesSharableRegistry riReg = handleHtmlReg(test);
         if( null != riReg && ! registry.getDepends().contains(riReg ) ){
             throw new RuntimeException("Testing local project and RI configs but local proj xsp.properties does not depend on RI library.");
@@ -203,13 +212,6 @@ public class TestProject {
             riReg = manager.getRegistryProvider("com.ibm.xsp.core-html.library").getRegistry();
             if( null == riReg ){
                 throw new RuntimeException("Could not find JSF html library registry.");
-            }
-            if( ConfigUtil.isTestJsfAssignCoreTagNames(test) ){
-                String coreId = "com.ibm.xsp.core.library";
-                FacesSharableRegistry coreReg = manager.getRegistryProvider(coreId).getRegistry();
-                assignTagName(coreReg, "javax.faces.ViewRoot", "view");
-                assignTagName(coreReg, "javax.faces.SelectItem", "selectItem");
-                assignTagName(coreReg, "javax.faces.SelectItems", "selectItems");
             }
         }
         return riReg;

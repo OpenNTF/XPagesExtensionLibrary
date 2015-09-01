@@ -19,7 +19,7 @@
 <feature
       id="org.openntf.extlib.feature"
       label="%feature.name"
-      version="9.0.1.v00_13_SNAPSHOT"
+      version="9.0.1.v00_14_SNAPSHOT"
       provider-name="%feature.provider">
 
    <description url="http://extlib.openntf.org">
