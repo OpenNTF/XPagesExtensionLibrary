@@ -186,7 +186,7 @@ public class DasHttpResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      *  Inner class EncodedOutputStream used to support encodings like gzip and deflate.
-     *  Cache is require to emit the Conent-Length and used to support persistent connections.
+     *  Cache is require to emit the Content-Length and used to support persistent connections.
      **/
     private static class EncodedOutputStream extends ServletOutputStream {
         
