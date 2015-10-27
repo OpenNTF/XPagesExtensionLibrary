@@ -76,6 +76,10 @@ public class Loader extends ExtLibLoaderExtension {
 			prefixes.put("3B3b", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/js"); //$NON-NLS-1$ //$NON-NLS-2$
 			prefixes.put("3B3c", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css"); //$NON-NLS-1$ //$NON-NLS-2$
 			prefixes.put("3B3d", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/fonts"); //$NON-NLS-1$ //$NON-NLS-2$
+			prefixes.put("3B3e", "/.ibmxspres/.extlib/responsive/bootstrap-3.3.5-dist"); //$NON-NLS-1$ //$NON-NLS-2$
+			prefixes.put("3B3f", "/.ibmxspres/.extlib/responsive/bootstrap-3.3.5-dist/js"); //$NON-NLS-1$ //$NON-NLS-2$
+			prefixes.put("3B3g", "/.ibmxspres/.extlib/responsive/bootstrap-3.3.5-dist/css"); //$NON-NLS-1$ //$NON-NLS-2$
+			prefixes.put("3B3h", "/.ibmxspres/.extlib/responsive/bootstrap-3.3.5-dist/fonts"); //$NON-NLS-1$ //$NON-NLS-2$
 
 			prefixes.put("3Dba", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1"); //$NON-NLS-1$ //$NON-NLS-2$
 			prefixes.put("3Dbb", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme"); //$NON-NLS-1$ //$NON-NLS-2$
