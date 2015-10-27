@@ -52,7 +52,7 @@ public class DynamicControlRenderer extends FacesRendererEx {
         //w.writeAttribute("style", "display: none", "style");
         
         if(component instanceof UIDynamicControl) {
-        	w.writeAttribute("data-param", ((UIDynamicControl) component).getContentParam(), null);
+        	w.writeAttribute("data-param", ((UIDynamicControl) component).getContentParam(), null); //$NON-NLS-1$
         }
         
         // Add the newly added resources, if some
