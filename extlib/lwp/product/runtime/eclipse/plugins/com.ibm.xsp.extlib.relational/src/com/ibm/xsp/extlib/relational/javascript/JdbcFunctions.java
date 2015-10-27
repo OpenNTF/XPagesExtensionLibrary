@@ -1,16 +1,16 @@
 /*
  * © Copyright IBM Corp. 2010
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+ * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
 package com.ibm.xsp.extlib.relational.javascript;
@@ -48,33 +48,32 @@ import com.ibm.xsp.extlib.relational.util.JdbcUtil;
 /**
  * Extended Notes/Domino formula language for JDBC
  * <p>
- * This class implements a set of new functions available to the JavaScript interpreter.
- * They become available to Domino Designer in the category "@JDBC". 
+ * This class implements a set of new functions available to the JavaScript interpreter. 
+ * They become available to Domino Designer in the category "@JDBC".
  * </p>
  */
 public class JdbcFunctions extends FBSDefaultObject {
 
     // Functions IDs
-    private static final int FCT_GETCONNECTION      = 1;
-    private static final int FCT_DBCOLUMN           = 2;
-    
-    private static final int FCT_EXECUTEQUERY       = 3;
-    private static final int FCT_INSERT             = 4;
-    private static final int FCT_UPDATE             = 5;
-    private static final int FCT_DELETE             = 6;
-    
-    
+    private static final int FCT_GETCONNECTION = 1;
+    private static final int FCT_DBCOLUMN = 2;
+
+    private static final int FCT_EXECUTEQUERY = 3;
+    private static final int FCT_INSERT = 4;
+    private static final int FCT_UPDATE = 5;
+    private static final int FCT_DELETE = 6;
+
     // ============================= CODE COMPLETION ==========================
     //
     // Even though JavaScript is an untyped language, the XPages JavaScript
-    // interpreter can make use of symbolic information defining the 
+    // interpreter can make use of symbolic information defining the
     // objects/functions exposed. This is particularly used by Domino Designer
     // to provide the code completion facility and help the user writing code.
     //
-    // Each function expose by a library can then have one or multiple 
+    // Each function expose by a library can then have one or multiple
     // "prototypes", defining its parameters and the returned value type. To
     // make this definition as efficient as possible, the parameter definition
-    // is compacted within a string, where all the parameters are defined 
+    // is compacted within a string, where all the parameters are defined
     // within parenthesis followed by the returned value type.
     // A parameter is defined by its name, followed by a colon and its type.
     // Generally, the type is defined by a single character (see bellow) or a
@@ -83,27 +82,27 @@ public class JdbcFunctions extends FBSDefaultObject {
     //
     // Here is, for example, the definition of the "@Date" function which can
     // take 3 different set of parameters:
-    //    "(time:Y):Y", 
-    //    "(years:Imonths:Idays:I):Y", 
-    //    "(years:Imonths:Idays:Ihours:Iminutes:Iseconds:I):Y");
+    // "(time:Y):Y",
+    // "(years:Imonths:Idays:I):Y",
+    // "(years:Imonths:Idays:Ihours:Iminutes:Iseconds:I):Y");
     //
     // List of types
-    //  V void
-    //  C char
-    //  B byte
-    //  S short
-    //  I int
-    //  J long
-    //  F float
-    //  D double
-    //  Z boolean
-    //  T string
-    //  Y date/time
-    //  W any (variant)
-    //  N multiple (...)
-    //  L<name>; object
-    //      ex:
-    //          (entries:[Lcom.ibm.xsp.extlib.MyClass;):V
+    // V void
+    // C char
+    // B byte
+    // S short
+    // I int
+    // J long
+    // F float
+    // D double
+    // Z boolean
+    // T string
+    // Y date/time
+    // W any (variant)
+    // N multiple (...)
+    // L<name>; object
+    // ex:
+    // (entries:[Lcom.ibm.xsp.extlib.MyClass;):V
     //
     // =========================================================================
 
@@ -112,10 +111,10 @@ public class JdbcFunctions extends FBSDefaultObject {
         super(jsContext, null, false);
 
         addFunction(FCT_GETCONNECTION, "@JdbcGetConnection", "(data:T):Ljava.sql.Connection;"); // $NON-NLS-1$ $NON-NLS-2$
-        addFunction(FCT_DBCOLUMN, "@JdbcDbColumn", "(connection:Wtable:Tcolumn:T):A", "(connection:Wtable:Tcolumn:Twhere:T):A", "(connection:Wtable:Tcolumn:Twhere:TorderBy:T):A", "(connection:Wtable:Tcolumn:Twhere:TorderBy:Tparams:A):A"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ $NON-NLS-5$
+        addFunction(FCT_DBCOLUMN, "@JdbcDbColumn", "(connection:Wtable:Tcolumn:T):A", "(connection:Wtable:Tcolumn:Twhere:T):A", "(connection:Wtable:Tcolumn:Twhere:TorderBy:T):A","(connection:Wtable:Tcolumn:Twhere:TorderBy:Tparams:A):A"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ $NON-NLS-5$
         addFunction(FCT_EXECUTEQUERY, "@JdbcExecuteQuery", "(connection:Wsql:T):Ljava.sql.ResultSet;", "(connection:Wsql:Tparams:A):Ljava.sql.ResultSet;"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-        addFunction(FCT_INSERT, "@JdbcInsert", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:WcolumnNames:A):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-        addFunction(FCT_UPDATE, "@JdbcUpdate", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:Wwhere:T):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:A):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
+        addFunction(FCT_INSERT, "@JdbcInsert", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:WcolumnNames:A):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:AcolToUpperCase:Z):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
+        addFunction(FCT_UPDATE, "@JdbcUpdate", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:Wwhere:T):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:A):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:AcolToUpperCase:Z):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ $NON-NLS-5$
         addFunction(FCT_DELETE, "@JdbcDelete", "(connection:Wtable:Twhere:T):I", "(connection:Wtable:Twhere:Tparams:A):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
     }
 
@@ -171,7 +170,7 @@ public class JdbcFunctions extends FBSDefaultObject {
         /**
          * Return the list of the function parameters.
          * <p>
-         * Note that this list is not used at runtime, at least for now, but 
+         * Note that this list is not used at runtime, at least for now, but
          * consumed by Designer code completion.<br>
          * A function can expose multiple parameter sets.
          * </p>
@@ -184,15 +183,14 @@ public class JdbcFunctions extends FBSDefaultObject {
         /**
          * Function name, as exposed by Designer and use at runtime.
          * <p>
-         * This function is exposed in the JavaScript global namespace, so
-         * you should be careful to avoid any name conflict.
+         * This function is exposed in the JavaScript global namespace, so you
+         * should be careful to avoid any name conflict.
          * </p>
          */
         @Override
         public String getFunctionName() {
             return this.functionName;
         }
-
 
         /**
          * Actual code execution.
@@ -275,89 +273,19 @@ public class JdbcFunctions extends FBSDefaultObject {
                         }
                     } break;
 
-                    case FCT_INSERT: {
-                        if(args.size()>=2) {
-                            Connection c = getConnection(args.get(0));
-                            String tbName = args.get(1).stringValue();
-                            FBSValue values = args.get(2);
-                            FBSValue idColumnNames = args.size()>3 && !args.get(3).isNull() ? args.get(3) : null;;
-                            
-                            StringBuilder b = new StringBuilder();
-                            b.append("INSERT INTO "); // $NON-NLS-1$
-                            JdbcUtil.appendTableName(b, tbName);
-                            List<Object> v = initInsertValues(b, values);
-                            b.append(" VALUES("); // $NON-NLS-1$
-                            for(int i=0; i<v.size(); i++) {
-                                if(i!=0) {
-                                    b.append(',');
-                                }
-                                b.append('?');
-                            }
-                            b.append(")");
-                            String sql = b.toString();
-                            PreparedStatement st = null;
-                            if(idColumnNames == null) {
-                                st = c.prepareStatement(sql);
-                            }
-                            else {
-                                List<Object> vNames = initInsertValues(null, idColumnNames);
-                                String[] columnNames = new String[vNames.size()];
-                                for(int i=0; i<vNames.size(); i++) {
-                                    columnNames[i] = (String) vNames.get(i); 
-                                }                               
-                                st = c.prepareStatement(sql, columnNames);
-                            }
-                            try {
-                                for(int i=0; i<v.size(); i++) {
-                                    st.setObject(i+1,v.get(i));
-                                }
-                                int count = st.executeUpdate();
-                                if(idColumnNames != null) {
-                                	ResultSet rs = st.getGeneratedKeys();
-                                    if(rs.next()) {
-                                        Object value = rs.getBigDecimal(1);
-                                        return FBSUtility.wrap(context.getJSContext(),value);
-                                    }
-                                }
-                                return FBSUtility.wrap(context.getJSContext(),count);
-                            } finally {
-                                st.close();
-                            }
-                        }
-                    } break;
-
-                    case FCT_UPDATE: {
-                        if(args.size()>=3) {
-                            Connection c = getConnection(args.get(0));
-                            String tbName = args.get(1).stringValue();
-                            FBSValue values = args.get(2);
-                            String where = args.size()>=3 && !args.get(3).isNull()? args.get(3).stringValue() : null;
-                            FBSValue params = args.size()>=4 && !args.get(4).isNull()? args.get(4) : null;
-                            
-                            StringBuilder b = new StringBuilder();
-                            b.append("UPDATE "); // $NON-NLS-1$
-                            JdbcUtil.appendTableName(b, tbName);
-                            List<Object> v = initUpdateValues(b, values);
-                            if(StringUtil.isNotEmpty(where)) {
-                                b.append(" WHERE "); // $NON-NLS-1$
-                                b.append(where);
-                            }
-                            String sql = b.toString();
-                            PreparedStatement st = c.prepareStatement(sql);
-                            try {
-                                for(int i=0; i<v.size(); i++) {
-                                    st.setObject(i+1,v.get(i));
-                                }
-                                if(params!=null) {
-                                    initParameters(st, params, v.size());
-                                }
-                                int count = st.executeUpdate();
-                                return FBSUtility.wrap(context.getJSContext(),count);
-                            } finally {
-                                st.close();
-                            }
-                        }
-                    } break;
+	                case FCT_INSERT: {
+	                    final FBSValue retVal_ = doInsert(args, context);
+	                    if (null != retVal_) {
+	                        return retVal_;
+	                    }
+	                } break;
+	
+	                case FCT_UPDATE: {
+	                    final FBSValue retVal_ = doUpdate(args, context);
+	                    if (null != retVal_) {
+	                        return retVal_;
+	                    }
+	                } break;
 
                     case FCT_DELETE: {
                         if(args.size()>=2) {
@@ -480,51 +408,138 @@ public class JdbcFunctions extends FBSDefaultObject {
         }
     }
     
-    protected static List<Object> initInsertValues(StringBuilder b, FBSValue params) throws SQLException, InterpretException {
+    protected static List<Object> initInsertValues(StringBuilder b, FBSValue params, Boolean colToUpperCase) throws SQLException, InterpretException {
         SQLValues sqlValues = new SQLValues(params);
         // In case of an array
-        if(sqlValues.values!=null) {
+        if (sqlValues.values != null) {
             return sqlValues.values;
         }
-        if(sqlValues.namedValues!=null) {
+        if (sqlValues.namedValues != null) {
             boolean first = true;
             sqlValues.values = new ArrayList<Object>(sqlValues.namedValues.size());
             b.append(" (");
-            for(Map.Entry<String, Object> e: sqlValues.namedValues.entrySet()) {
-                if(!first) {
+            for (Map.Entry<String, Object> e : sqlValues.namedValues.entrySet()) {
+                if (!first) {
                     b.append(',');
                 } else {
-                    first=false;
+                    first = false;
                 }
-                JdbcUtil.appendColumnName(b,e.getKey());
+                JdbcUtil.appendColumnName(b, e.getKey(), colToUpperCase);
                 sqlValues.values.add(e.getValue());
             }
             b.append(')');
             return sqlValues.values;
         }
-        
+
         throw new SQLException(StringUtil.format("No valid values passed to the {0} statement", "INSERT")); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen-1$ $NON-NLS-2$
     }
-    
-    protected static List<Object> initUpdateValues(StringBuilder b, FBSValue params) throws SQLException, InterpretException {
+
+    protected static List<Object> initUpdateValues(StringBuilder b, FBSValue params, Boolean colToUpperCase) throws SQLException, InterpretException {
         SQLValues sqlValues = new SQLValues(params);
-        if(sqlValues.namedValues!=null) {
+        if (sqlValues.namedValues != null) {
             boolean first = true;
             sqlValues.values = new ArrayList<Object>(sqlValues.namedValues.size());
             b.append(" SET "); // $NON-NLS-1$
-            for(Map.Entry<String, Object> e: sqlValues.namedValues.entrySet()) {
-                if(!first) {
+            for (Map.Entry<String, Object> e : sqlValues.namedValues.entrySet()) {
+                if (!first) {
                     b.append(',');
                 } else {
-                    first=false;
+                    first = false;
                 }
-                JdbcUtil.appendColumnName(b,e.getKey());
+                JdbcUtil.appendColumnName(b, e.getKey(), colToUpperCase);
                 b.append("=?");
                 sqlValues.values.add(e.getValue());
             }
             return sqlValues.values;
         }
-        
+
         throw new SQLException(StringUtil.format("No valid values passed to the {0} statement", "UPDATE")); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen.1-1$ $NON-NLS-2$
+    }
+
+    protected static FBSValue doInsert(FBSValueVector args, IExecutionContext context) throws SQLException, InterpretException {
+        if (args.size() >= 2) {
+            Connection c = getConnection(args.get(0));
+            String tbName = args.get(1).stringValue();
+            FBSValue values = args.get(2);
+            FBSValue idColumnNames = args.size() > 3 && !args.get(3).isNull() ? args.get(3) : null;
+            Boolean colToUpperCase = args.size() > 4 && !args.get(4).isNull() ? args.get(4).booleanValue() : null;
+
+            StringBuilder b = new StringBuilder();
+            b.append("INSERT INTO "); // $NON-NLS-1$
+            JdbcUtil.appendTableName(b, tbName);
+            List<Object> v = initInsertValues(b, values, colToUpperCase);
+            b.append(" VALUES("); // $NON-NLS-1$
+            for (int i = 0; i < v.size(); i++) {
+                if (i != 0) {
+                    b.append(',');
+                }
+                b.append('?');
+            }
+            b.append(")");
+            String sql = b.toString();
+            PreparedStatement st = null;
+            if (idColumnNames == null) {
+                st = c.prepareStatement(sql);
+            } else {
+                List<Object> vNames = initInsertValues(null, idColumnNames, colToUpperCase);
+                String[] columnNames = new String[vNames.size()];
+                for (int i = 0; i < vNames.size(); i++) {
+                    columnNames[i] = (String) vNames.get(i);
+                }
+                st = c.prepareStatement(sql, columnNames);
+            }
+            try {
+                for (int i = 0; i < v.size(); i++) {
+                    st.setObject(i + 1, v.get(i));
+                }
+                int count = st.executeUpdate();
+                if (idColumnNames != null) {
+                    ResultSet rs = st.getGeneratedKeys();
+                    if (rs.next()) {
+                        Object value = rs.getBigDecimal(1);
+                        return FBSUtility.wrap(context.getJSContext(), value);
+                    }
+                }
+                return FBSUtility.wrap(context.getJSContext(), count);
+            } finally {
+                st.close();
+            }
+        }
+        return null;
+    }
+
+    public static FBSValue doUpdate(FBSValueVector args, IExecutionContext context) throws SQLException, InterpretException {
+        if (args.size() >= 3) {
+            Connection c = getConnection(args.get(0));
+            String tbName = args.get(1).stringValue();
+            FBSValue values = args.get(2);
+            String where = args.size() >= 3 && !args.get(3).isNull() ? args.get(3).stringValue() : null;
+            FBSValue params = args.size() >= 4 && !args.get(4).isNull() ? args.get(4) : null;
+            Boolean colToUpperCase = args.size() >= 5 && !args.get(5).isNull() ? args.get(5).booleanValue() : true;
+
+            StringBuilder b = new StringBuilder();
+            b.append("UPDATE "); // $NON-NLS-1$
+            JdbcUtil.appendTableName(b, tbName);
+            List<Object> v = initUpdateValues(b, values, colToUpperCase);
+            if (StringUtil.isNotEmpty(where)) {
+                b.append(" WHERE "); // $NON-NLS-1$
+                b.append(where);
+            }
+            String sql = b.toString();
+            PreparedStatement st = c.prepareStatement(sql);
+            try {
+                for (int i = 0; i < v.size(); i++) {
+                    st.setObject(i + 1, v.get(i));
+                }
+                if (params != null) {
+                    initParameters(st, params, v.size());
+                }
+                int count = st.executeUpdate();
+                return FBSUtility.wrap(context.getJSContext(), count);
+            } finally {
+                st.close();
+            }
+        }
+        return null;
     }
 }

@@ -230,7 +230,7 @@ public class ImportJob extends Job {
                                         // Create the link to the deployment directory
                                         DominoDesignerProject ddp = BluemixUtil.getDesignerProjectFromWorkspace(info.getFullPath());
                                         if (ddp != null) {
-                                            ConfigManager.getInstance().setConfig(ddp, _config, false);
+                                            ConfigManager.getInstance().setConfig(ddp, _config, false, null);
                                         }
                                     }
                                 });

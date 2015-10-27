@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Extended Components Library for XPages Controls
 Bundle-SymbolicName: com.ibm.xsp.extlib.controls;singleton:=true
-Bundle-Version: 9.0.1.v00_14_SNAPSHOT
+Bundle-Version: 9.0.1.v00_15_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.core.runtime,

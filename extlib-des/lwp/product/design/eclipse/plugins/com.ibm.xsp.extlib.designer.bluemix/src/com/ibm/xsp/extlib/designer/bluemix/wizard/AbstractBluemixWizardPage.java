@@ -30,6 +30,8 @@ public abstract class AbstractBluemixWizardPage extends WizardPage {
 
     protected AbstractBluemixWizard _wiz;
     protected boolean               _firstDisplay = true;
+    protected boolean               _hasChanged = false;
+    protected boolean               _alwaysShowError = false;
 
     protected AbstractBluemixWizardPage(String pageName) {
         super(pageName);
@@ -47,8 +49,13 @@ public abstract class AbstractBluemixWizardPage extends WizardPage {
     @Override
     public void setVisible(boolean visible) {
         if (visible) {
+            if (_wiz.advancing && _firstDisplay) {
+                initialisePageState();
+            }
+            
             validatePage();
             _firstDisplay = false;
+            _hasChanged = false;
         }
         super.setVisible(visible);
     }
@@ -58,13 +65,29 @@ public abstract class AbstractBluemixWizardPage extends WizardPage {
             setErrorMessage(null);
             setPageComplete(true);
         } else {
-            setErrorMessage(_firstDisplay ? null : msg);
+            setErrorMessage(_firstDisplay && (!_alwaysShowError) ? null : msg);
             setPageComplete(false);
         }
     }
     
+    protected void showWarning(String msg) {
+        if (StringUtil.isEmpty(msg)) {
+            setMessage(StringUtil.format(getPageMsg(), "\n"), IMessageProvider.INFORMATION); // $NON-NLS-1$
+        } else {
+            setMessage(msg, IMessageProvider.WARNING);        
+        }
+    }    
+    
+    protected void initialisePageState() {        
+    }
+
+    protected void savePageState() {        
+    }
+
+    protected void validatePage() {
+        showError(null);
+    }
     
     protected abstract String getPageTitle();
     protected abstract String getPageMsg();
-    protected abstract void validatePage();
 }

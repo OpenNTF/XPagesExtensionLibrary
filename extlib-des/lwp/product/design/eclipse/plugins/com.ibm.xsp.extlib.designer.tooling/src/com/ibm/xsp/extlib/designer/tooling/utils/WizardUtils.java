@@ -148,6 +148,18 @@ public class WizardUtils {
     }
     
     //
+    // Utility function for creating a CheckBox
+    //
+    public static Button createCheckBox(Composite parent, String text, int span, boolean select, int indent, boolean bold) {
+        Button btn = createCheckBox(parent, text,span, select, indent);
+        if (bold) {
+            btn.setFont(JFaceResources.getDialogFontDescriptor().withStyle(SWT.BOLD).createFont(null));
+        }        
+        
+        return btn;
+    }
+
+    //
     // Utility function for creating a Radio Button with a span
     //
     public static Button createRadio(Composite parent, String text, int span, SelectionListener listener) {
@@ -253,7 +265,7 @@ public class WizardUtils {
     // Utility function for creating a Label with a span and style
     //
     public static Label createLabel(Composite parent, String text, int span, int style) {
-        return createLabel(parent, text, span, SWT.NONE, GridData.HORIZONTAL_ALIGN_FILL);
+        return createLabel(parent, text, span, style, GridData.HORIZONTAL_ALIGN_FILL);
     }
     
     //
@@ -870,6 +882,42 @@ public class WizardUtils {
         if (StringUtil.isNotEmpty(val)) {
             el.setAttribute(attr, val);
         }
+    }
+        
+    //
+    // Utility function for setting the text in a Text control
+    //
+    public static void safeSetText(Text control, String text) {
+        if (StringUtil.isNotEmpty(text)) {
+            control.setText(text);
+        } else {
+            control.setText("");
+        }
+    }
+
+    //
+    // Utility function for setting a selection in a radio / checkbox
+    //
+    public static void safeSetSelection(Button control, Boolean value) {
+        if (value != null) {
+            control.setSelection(value);
+        } else {
+            control.setSelection(false);
+        }
+    }
+    
+    //
+    // Utility function for setting span
+    //
+    public static void setSpan(Control control, int span) {
+        ((GridData)(control).getLayoutData()).horizontalSpan = span;
+    }
+
+    //
+    // Utility function for setting indent
+    //
+    public static void setIndent(Control control, int indent) {
+        ((GridData)(control).getLayoutData()).horizontalIndent = indent;        
     }
 }
 

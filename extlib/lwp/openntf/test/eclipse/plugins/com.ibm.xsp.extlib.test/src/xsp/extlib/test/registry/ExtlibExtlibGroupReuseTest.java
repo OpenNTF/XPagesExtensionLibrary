@@ -40,6 +40,9 @@ public class ExtlibExtlibGroupReuseTest extends BaseExtlibGroupReuseTest {
             
             // It is an accessibility title, but the <since> version differs
             "com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:com.ibm.xsp.extlib.tree.complex.BasicComplexTreeNode title Should reuse <group-type-ref> for an existing complex group: com.ibm.xsp.extlib.group.core_complex.prop.title",
+         
+            // It is an accessibility title, but the <since> version differs
+            "com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:com.ibm.xsp.extlib.data.AbstractPager title Should reuse <group-type-ref> for an existing control group: com.ibm.xsp.group.core.prop.title",
             
             // This is not an accessibility title, overridden to change the description & category
             "com/ibm/xsp/extlib/config/extlib-dojo-layout.xsp-config xe:djTabPane title Should reuse <group-type-ref> for an existing control group: com.ibm.xsp.group.core.prop.title",

@@ -16,13 +16,11 @@
 
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
-import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
-
 import org.eclipse.jface.dialogs.PageChangingEvent;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardDialog;
 
-import com.ibm.designer.domino.preferences.DominoPreferenceManager;
+import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
 import com.ibm.xsp.extlib.designer.bluemix.job.ImportJob;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
 
@@ -37,9 +35,6 @@ public class ImportBluemixWizard extends AbstractBluemixWizard {
     private final CopyMethodBluemixWizardPage  _importCopyMethodPage;
     private final CopyMethodBluemixWizardPage  _deployCopyMethodPage;
     private final CloudSpaceBluemixWizardPage  _orgSpacePage;
-    
-    private String                             _zipFileName;
-    private String                             _importCopyMethod;
 
     public ImportBluemixWizard() {
         super();
@@ -59,13 +54,18 @@ public class ImportBluemixWizard extends AbstractBluemixWizard {
     @Override
     public boolean performFinish() {
         // Store the copy methods in the prefs for the next time the wizard is run
-        DominoPreferenceManager.getInstance().setValue(KEY_BLUEMIX_IMPORT_COPY_METHOD, _importCopyMethod);        
-        DominoPreferenceManager.getInstance().setValue(KEY_BLUEMIX_DEPLOY_COPY_METHOD, newConfig.copyMethod);        
+        _importCopyMethodPage.savePageState();
+        _deployCopyMethodPage.savePageState();
+        _orgSpacePage.savePageState();
 
         // Do the import
-        newConfig.org = _orgSpacePage.getOrg();
-        newConfig.space = _orgSpacePage.getSpace();        
-        new ImportJob(newConfig, _zipFileName, _importCopyMethod).start();
+        BluemixConfig config = new BluemixConfig();
+        config.directory = _dirPage.getDirectory();
+        config.org = _orgSpacePage.getOrg();
+        config.space = _orgSpacePage.getSpace();       
+        config.copyMethod = _deployCopyMethodPage.getCopyMethod();
+        
+        new ImportJob(config, _zipFilePage.getZipFile(), _importCopyMethodPage.getCopyMethod()).start();
         return true;
     }
 
@@ -75,28 +75,26 @@ public class ImportBluemixWizard extends AbstractBluemixWizard {
         advancing = false;
         if (event.getCurrentPage() == _zipFilePage) {
             if (event.getTargetPage() == _importCopyMethodPage) {
-                _zipFileName = _zipFilePage.getZipFile();
                 advancing = true;
             }
         }
         else if (event.getCurrentPage() == _importCopyMethodPage) {
             if (event.getTargetPage() == _dirPage) {
-                _importCopyMethod = _importCopyMethodPage.getCopyMethod();
                 advancing = true;
             }
         }
         else if (event.getCurrentPage() == _dirPage) {
             if (event.getTargetPage() == _deployCopyMethodPage) {
-                newConfig.directory = _dirPage.getDirectory();
                 advancing = true;
             }
         }
         else if (event.getCurrentPage() == _deployCopyMethodPage) {
             if (event.getTargetPage() == _orgSpacePage) {
-                newConfig.copyMethod = _deployCopyMethodPage.getCopyMethod();
                 advancing = true;
-                if (!runJob(_deployCopyMethodPage, _getOrgsAndSpaces)) {
-                    event.doit = false;
+                if (_orgSpacePage._firstDisplay) {
+                    if (!runJob(_orgSpacePage.getOrgsAndSpaces)) {
+                        event.doit = false;
+                    }
                 }
             }
         }

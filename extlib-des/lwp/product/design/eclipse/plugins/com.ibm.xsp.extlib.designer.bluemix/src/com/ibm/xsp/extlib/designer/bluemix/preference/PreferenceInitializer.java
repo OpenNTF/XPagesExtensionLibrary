@@ -35,5 +35,12 @@ public class PreferenceInitializer extends AbstractDominoPreferenceInitializer {
         prefMgr.setDefault(KEY_BLUEMIX_DEPLOY_WAIT_SHOW_SUCCESS, true);
         prefMgr.setDefault(KEY_BLUEMIX_DEPLOY_COPY_METHOD, "copy"); // $NON-NLS-1$
         prefMgr.setDefault(KEY_BLUEMIX_IMPORT_COPY_METHOD, "copy"); // $NON-NLS-1$
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_SERVER_ADDR, "");
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_SERVER_NAME, "");
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_RUNTIME_SERVER_NAME, "");
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_RUNTIME_ID_FILE, "");
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_DA_ENABLE, false);
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_DA_DOMAIN, "");
+        prefMgr.setDefault(KEY_BLUEMIX_HYBRID_DA_DIR_FILENAME, "names.nsf"); // $NON-NLS-1$
     }
 }

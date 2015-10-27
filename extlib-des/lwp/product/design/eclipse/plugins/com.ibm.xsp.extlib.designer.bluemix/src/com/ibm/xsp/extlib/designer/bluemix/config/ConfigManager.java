@@ -17,6 +17,7 @@
 package com.ibm.xsp.extlib.designer.bluemix.config;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -95,7 +96,7 @@ public class ConfigManager {
         return _instance;
     }
     
-    public void setConfig(IDominoDesignerProject project, BluemixConfig config, boolean replaceManifest) {
+    public void setConfig(IDominoDesignerProject project, BluemixConfig config, boolean replaceManifest, LinkedHashMap<String, String> extraEnv) {
         // Write the NSF -> deploy dir config file
         _mapProps.setProperty(getProjectKey(project), config.directory);
         BluemixUtil.writeProperties(_mapProps, _mapPath);
@@ -104,10 +105,10 @@ public class ConfigManager {
         Properties bmProps = new Properties();
         bmProps.setProperty(_ORG, config.org);
         bmProps.setProperty(_SPACE, config.space);
-        if (config.copyMethod != null) {
+        if (StringUtil.isNotEmpty(config.copyMethod)) {
             bmProps.setProperty(_COPY_METHOD, config.copyMethod);
         }
-        if (config.uri != null) {
+        if (StringUtil.isNotEmpty(config.uri)) {
             bmProps.setProperty(_URI, config.uri);
         }
         
@@ -116,7 +117,7 @@ public class ConfigManager {
         
         // Write the default manifest to the deploy dir
         if (replaceManifest) {
-            ManifestUtil.writeDefaultManifest(config, project.getDatabaseName());
+            ManifestUtil.writeDefaultManifest(config, project.getDatabaseName(), extraEnv);
         }
     }
     

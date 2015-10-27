@@ -43,6 +43,8 @@ public class ExtlibSinceVersion901StreamLists {
         list.add(new Extlib901v00_08List());
         list.add(new Extlib901v00_10List());
         list.add(new Extlib901v00_12List());
+        list.add(new Extlib901v00_14List());
+        list.add(new Extlib901v00_15List());
         return list;
     }
     public static class Extlib901v00_00List implements SinceVersionList{
@@ -327,6 +329,25 @@ public class ExtlibSinceVersion901StreamLists {
         }
         public String sinceVersion() {
             return "9.0.1.v00_14";
+        }
+        public String[] skips() {
+            return skips;
+        }
+    }
+    
+    public static class Extlib901v00_15List implements SinceVersionList{
+        private Object[][] tagsAndProps = new Object[][]{     
+        		new Object[]{"xe-com.ibm.xsp.extlib.data.AbstractPager", false, new String[]{
+        				"title",
+        			}},
+        };
+        private String[] skips = new String[]{
+        };
+        public Object[][] tagsAndProps() {
+            return tagsAndProps;
+        }
+        public String sinceVersion() {
+            return "9.0.1.v00_15";
         }
         public String[] skips() {
             return skips;

@@ -18,6 +18,10 @@ package com.ibm.xsp.extlib.designer.bluemix.manifest.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -45,7 +49,7 @@ import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
  * @author Gary Marjoram
  *
  */
-public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWindowListener {
+public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWindowListener, ISelectionProvider {
     
     private IEditorInput           _editorInput;
     private ManifestTextEditor     _srcEditor;
@@ -54,6 +58,7 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
     private ManifestBeanLoader     _beanLoader;
     private ManifestBean           _bean;
     private IDominoDesignerProject _designerProject;
+    private ISelection             _editorSelection = null;
 
     public ManifestMultiPageEditor() {
     }
@@ -88,7 +93,7 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
             _visualEditor.getDataNode().setModelModified(false);   
             addPage(_visualEditor);
             setPageText(0, "Application"); // $NLX-ManifestMultiPageEditor.Application-1$
-            _visualEditor.refreshTables();
+            _visualEditor.refreshUI();
 
             // Add the Source page
             _srcEditor = new ManifestTextEditor();
@@ -111,7 +116,7 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
             _bean.loadFromString(contents);
             if (_bean.isManifestValid()) {
                 _visualEditor.getDataNode().notifyInvalidate(null);
-                _visualEditor.refreshTables();
+                _visualEditor.refreshUI();
                 _visualEditor.hideError();
             } else {
                 _visualEditor.displayError();
@@ -130,6 +135,7 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
         _bean = new ManifestBean((FileStoreEditorInput)editorInput);
         
         super.init(editorSite, editorInput);
+        getSite().setSelectionProvider(this);
     }
 
     @Override
@@ -223,5 +229,26 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
                 firePropertyChange(IEditorPart.PROP_DIRTY); 
             }
         }        
+    }
+
+    @Override
+    public void addSelectionChangedListener(ISelectionChangedListener arg0) {
+    }
+
+    @Override
+    public ISelection getSelection() {
+        if (_editorSelection == null) {
+            _editorSelection = new StructuredSelection(getDesignerProject());
+        }
+        return _editorSelection;
+    }
+
+    @Override
+    public void removeSelectionChangedListener(ISelectionChangedListener arg0) {
+    }
+
+    @Override
+    public void setSelection(ISelection selection) {
+        _editorSelection = selection;
     }
 }

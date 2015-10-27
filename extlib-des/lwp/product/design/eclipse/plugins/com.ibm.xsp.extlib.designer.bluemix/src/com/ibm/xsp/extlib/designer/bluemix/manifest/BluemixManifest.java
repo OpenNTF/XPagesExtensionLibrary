@@ -162,6 +162,14 @@ public class BluemixManifest {
         return null;
     }
 
+    public String getStack(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getStack() != null ? appProps.getStack() : _baseProps.getStack();
+        }
+        return null;
+    }
+
     public String getPath(String appName) {
         ManifestAppProps appProps = _appMap.get(appName);
         if (appProps != null) {

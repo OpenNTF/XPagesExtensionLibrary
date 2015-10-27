@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.domino.services.util.JsonBuilder;
+import com.ibm.xsp.component.UIInputEx;
 import com.ibm.xsp.dojo.FacesDojoComponent;
 import com.ibm.xsp.extlib.component.dojoext.form.UIDojoExtListTextBox;
 import com.ibm.xsp.extlib.component.picker.data.IPickerData;
@@ -52,13 +53,20 @@ public class DojoExtListTextBoxRenderer extends DojoFormWidgetRenderer {
     @Override
     protected void initDojoAttributes(FacesContext context, FacesDojoComponent dojoComponent, Map<String,String> attrs) throws IOException {
         super.initDojoAttributes(context, dojoComponent, attrs);
-        if(dojoComponent instanceof UIDojoExtListTextBox) {
-            UIDojoExtListTextBox c = (UIDojoExtListTextBox)dojoComponent;
-            String msep = c.getMultipleSeparator();
+        String msep = null;
+        if(dojoComponent instanceof UIInputEx) {
+            UIInputEx c = (UIInputEx)dojoComponent;
+            // Both NameTextBox and ListTextBox support msep
+            // SPR#MKEEA2DH2H, name msep wasn't being output, as reported by: 
+            // https://github.com/OpenNTF/XPagesExtensionLibrary/issues/23
+            msep = c.getMultipleSeparator();
             if(!StringUtil.equals(msep, ",")) {
                 DojoRendererUtil.addDojoHtmlAttributes(attrs,"msep",msep); // $NON-NLS-1$
             }
-            
+        }
+        if(dojoComponent instanceof UIDojoExtListTextBox) {
+            UIDojoExtListTextBox c = (UIDojoExtListTextBox)dojoComponent;
+            // displayLabel only supported by ListTextBox (not by NameTextBox)
             // Fill the labels if required
             if(c.isDisplayLabel()) {
                 DojoRendererUtil.addDojoHtmlAttributes(attrs,"displayLabel",true); // $NON-NLS-1$
