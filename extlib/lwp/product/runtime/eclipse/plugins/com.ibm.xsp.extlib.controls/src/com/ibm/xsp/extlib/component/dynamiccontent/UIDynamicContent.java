@@ -45,18 +45,18 @@ import com.ibm.xsp.util.TypedUtil;
  */
 public class UIDynamicContent extends UIDynamicControl {
 
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.dynamiccontent.DynamicContent"; // $NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.dynamiccontent.DynamicContent"; //$NON-NLS-1$
     public static final String RENDERER_TYPE = "com.ibm.xsp.extlib.dynamiccontent.DynamicContent"; //$NON-NLS-1$
     
     
-    public static final String XSPCONTENT_PARAM = "content"; // $NON-NLS-1$
-    public static final String PSEUDO_FACET_EMPTY = "-empty-"; // $NON-NLS-1$
-    public static final String PSEUDO_FACET_CHILDREN = "-children-"; // $NON-NLS-1$
-    public static final String PSEUDO_FACET_DEFAULT = "-default-"; // $NON-NLS-1$
+    public static final String PSEUDO_FACET_EMPTY = "-empty-"; //$NON-NLS-1$
+    public static final String PSEUDO_FACET_CHILDREN = "-children-"; //$NON-NLS-1$
+    public static final String PSEUDO_FACET_DEFAULT = "-default-"; //$NON-NLS-1$
 
     private Boolean partialEvents;
     private Boolean useHash;
     private String defaultFacet;
+    private String contentParam;
     // The currently displayed facet, not a property in the All Properties.
     // This does not vary for different clientIds, as it reflects the 
     // structure of the UIComponent tree.
@@ -140,6 +140,27 @@ public class UIDynamicContent extends UIDynamicControl {
         this.defaultFacet = defaultFacet;
     }
     
+    /**
+     * @return the user-specified content parameter name, if specified and non-empty, or
+     * 	{@link UIDynamicControl#XSPCONTENT_PARAM} otherwise
+     */
+    @Override
+	public String getContentParam() {
+    	if(StringUtil.isNotEmpty(this.contentParam)) {
+    		return this.contentParam;
+    	}
+    	ValueBinding _vb = getValueBinding("defaultFacet"); //$NON-NLS-1$
+    	if(_vb != null) {
+    		return (String)_vb.getValue(getFacesContext());
+    	} else {
+    		return XSPCONTENT_PARAM;
+    	}
+    }
+    
+    public void setContentParam(String contentParam) {
+    	this.contentParam = contentParam;
+    }
+    
     
     @Override
     public MethodBinding getBeforeContentLoad() {
@@ -197,7 +218,7 @@ public class UIDynamicContent extends UIDynamicControl {
         // facet is non-empty here
         if( !StringUtil.equals(PSEUDO_FACET_EMPTY, facet) ) {
             pushParameters(context, parameters);
-            TypedUtil.getRequestMap(context.getExternalContext()).put(XSPCONTENT_PARAM,facet);
+            TypedUtil.getRequestMap(context.getExternalContext()).put(getContentParam(),facet);
             createContent(context);
         } else {
             deleteContent(context);
@@ -210,15 +231,15 @@ public class UIDynamicContent extends UIDynamicControl {
         StringBuilder b = new StringBuilder();
         if(StringUtil.isNotEmpty(facet)) {
             try {
-                b.append(XSPCONTENT_PARAM);
+                b.append(getContentParam());
                 b.append('=');
-                b.append(URLEncoder.encode(facet,"UTF-8")); // $NON-NLS-1$
+                b.append(URLEncoder.encode(facet,"UTF-8")); //$NON-NLS-1$
                 if(parameters!=null) {
                     for(Map.Entry<String, String> e: parameters.entrySet()) {
                         b.append('&');
-                        b.append(URLEncoder.encode(e.getKey().toString(), "UTF-8")); // $NON-NLS-1$
+                        b.append(URLEncoder.encode(e.getKey().toString(), "UTF-8")); //$NON-NLS-1$
                         b.append('=');
-                        b.append(URLEncoder.encode(e.getValue().toString(),"UTF-8")); // $NON-NLS-1$
+                        b.append(URLEncoder.encode(e.getValue().toString(),"UTF-8")); //$NON-NLS-1$
                     }
                 }
             } catch(UnsupportedEncodingException ex) {}
@@ -250,7 +271,7 @@ public class UIDynamicContent extends UIDynamicControl {
             String id = ctx.getPartialRefreshId();
             if(StringUtil.equals(id, getClientId(ctx))) {
                 // We should check that this is the initial request
-                String xspContent = (String)ctx.getExternalContext().getRequestParameterMap().get(XSPCONTENT_PARAM);
+                String xspContent = (String)ctx.getExternalContext().getRequestParameterMap().get(getContentParam());
                 return StringUtil.isNotEmpty(xspContent);
             }
         }
@@ -285,7 +306,7 @@ public class UIDynamicContent extends UIDynamicControl {
     @Override
     protected void buildDynamicContents(FacesContext context, FacesComponentBuilder builder) throws FacesException {
         // Build the facet if passed as a parameter
-        String xspFacet = ExtLibUtil.readParameter(context,XSPCONTENT_PARAM);
+        String xspFacet = ExtLibUtil.readParameter(context,getContentParam());
         // the pseudo-facet will have been pre-processed by the show(..) method,
         // so it will not be "", -empty- or -default-, but it may still be -children-
         buildFacet(context, builder, xspFacet);
@@ -354,11 +375,12 @@ public class UIDynamicContent extends UIDynamicControl {
         currentFacet = (String)_values[4];
         beforeContentLoad = StateHolderUtil.restoreMethodBinding(_context, this, _values[5]);
         afterContentLoad = StateHolderUtil.restoreMethodBinding(_context, this, _values[6]);
+        contentParam = (String)_values[7];
     }
 
     @Override
     public Object saveState(FacesContext _context) {
-        Object _values[] = new Object[7];
+        Object _values[] = new Object[8];
         _values[0] = super.saveState(_context);
         _values[1] = partialEvents;
         _values[2] = useHash;
@@ -366,6 +388,7 @@ public class UIDynamicContent extends UIDynamicControl {
         _values[4] = currentFacet;
         _values[5] = StateHolderUtil.saveMethodBinding(_context, beforeContentLoad);
         _values[6] = StateHolderUtil.saveMethodBinding(_context, afterContentLoad);
+        _values[7] = contentParam;
         return _values;
     }
 }
