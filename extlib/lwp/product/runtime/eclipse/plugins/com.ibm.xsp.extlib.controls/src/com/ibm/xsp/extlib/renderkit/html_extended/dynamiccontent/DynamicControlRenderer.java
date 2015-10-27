@@ -26,6 +26,7 @@ import javax.faces.context.ResponseWriter;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.component.dynamiccontent.AbstractDynamicContent;
+import com.ibm.xsp.extlib.component.dynamiccontent.UIDynamicControl;
 import com.ibm.xsp.extlib.controls.ExtlibControlsLogger;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.resource.Resource;
@@ -49,6 +50,10 @@ public class DynamicControlRenderer extends FacesRendererEx {
         w.startElement("div", component); // $NON-NLS-1$
         w.writeAttribute("id", clientId, "id"); // $NON-NLS-1$ $NON-NLS-2$
         //w.writeAttribute("style", "display: none", "style");
+        
+        if(component instanceof UIDynamicControl) {
+        	w.writeAttribute("data-param", ((UIDynamicControl) component).getContentParam(), null);
+        }
         
         // Add the newly added resources, if some
         if(AbstractDynamicContent.USE_DYNAMIC_RESOURCES) {

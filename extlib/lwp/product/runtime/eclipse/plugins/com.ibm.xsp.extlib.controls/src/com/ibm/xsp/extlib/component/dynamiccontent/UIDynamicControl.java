@@ -44,8 +44,11 @@ public abstract class UIDynamicControl extends AbstractDynamicContent implements
     // the execId control to be a NamingContainer, and otherwise will not validate
     // the content of that control.
 
-    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.dynamiccontent.Dynamic"; // $NON-NLS-1$
-    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.dynamiccontent.Dynamic"; // $NON-NLS-1$
+    public static final String COMPONENT_FAMILY = "com.ibm.xsp.extlib.dynamiccontent.Dynamic"; //$NON-NLS-1$
+    public static final String COMPONENT_TYPE = "com.ibm.xsp.extlib.dynamiccontent.Dynamic"; //$NON-NLS-1$
+
+    
+    public static final String XSPCONTENT_PARAM = "content"; //$NON-NLS-1$
 
     // FacesDynamicContainer
     private String sourcePageName;
@@ -68,6 +71,10 @@ public abstract class UIDynamicControl extends AbstractDynamicContent implements
     @Override
     public String getFamily() {
         return COMPONENT_FAMILY;
+    }
+    
+    public String getContentParam() {
+    	return XSPCONTENT_PARAM;
     }
 
     
@@ -99,7 +106,7 @@ public abstract class UIDynamicControl extends AbstractDynamicContent implements
 			    //[dc] If the content parameter is present as parameter that means the URL was of the form http://my.web/myxsp.xsp?content=key
                 // in this case we build the actual "key" facet, so the whole page with the correct content will be returned to the client. 
                 // This is needed when a web crawler visit the page following the link.
-                String xspFacet = ExtLibUtil.readParameter(context,UIDynamicContent.XSPCONTENT_PARAM);
+                String xspFacet = ExtLibUtil.readParameter(context,getContentParam());
                 if(xspFacet != null && builder.isFacetAvailable(context, this, xspFacet)) {
                     buildDynamicContents(context, builder);
                 }else {
@@ -129,6 +136,7 @@ public abstract class UIDynamicControl extends AbstractDynamicContent implements
 	// FacesDynamicContainer implementation
 	// ========================================================
 	
+	@Override
 	public String getSourcePageName() {
 		return sourcePageName;
 	}

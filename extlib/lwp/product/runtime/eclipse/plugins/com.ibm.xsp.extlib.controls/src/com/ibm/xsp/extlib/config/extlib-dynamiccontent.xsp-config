@@ -144,6 +144,20 @@
       </property-extension>
     </property>
     <property>
+      <description>%property.contentParam.component.dynamicContent.descr%</description>
+      <display-name>%property.contentParam.component.dynamicContent.name%</display-name>
+      <property-name>contentParam</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>basics</category>
+          <tags>
+                        todo
+                    </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
       <description>%property.defaultFacet.component.dynamicContent.descr%</description>
       <display-name>%property.defaultFacet.component.dynamicContent.name%</display-name>
       <property-name>defaultFacet</property-name>

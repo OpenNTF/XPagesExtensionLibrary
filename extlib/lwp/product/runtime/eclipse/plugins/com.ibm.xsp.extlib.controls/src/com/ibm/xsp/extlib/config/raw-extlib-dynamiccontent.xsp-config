@@ -201,11 +201,8 @@
       		</property-extension>
     	</property>
     	<property>
-            <!-- TODO better description of what this means - and include the # symbol in the description 
-            as the word hash is european - it's known as pound in the USA,
-            explain that it isn't just #facetName, it's #value=facetName
-            which is weird actually - maybe should configure that? -->
-      		<description>Indicate that the control should manage its state using a URL hash, that is some text after a "#" symbol in the URL, like: /page1.xsp#detail</description>
+            <!-- TODO better description of what this means -->
+      		<description>Indicate that the control should manage its state using a URL hash, that is some text after a "#" symbol in the URL, like: /page1.xsp#content=detail</description>
       		<display-name>Use URL Hash</display-name>
       		<property-name>useHash</property-name>
       		<property-class>boolean</property-class>
@@ -229,6 +226,20 @@
           			<category>basics</category>
                     <!-- TODO see ChangeDynamicContentAction facetName below, which talks about the pseudo-facets
                     are any of them in common use so that they should be described here?-->
+                    <tags>
+                        todo
+                    </tags>
+        		</designer-extension>
+      		</property-extension>
+    	</property>
+    	<property>
+      		<description>The URL/hash parameter name to use when determining the current facet. If empty, it defaults to "content".</description>
+      		<display-name>Content Parameter Name</display-name>
+      		<property-name>contentParam</property-name>
+      		<property-class>java.lang.String</property-class>
+      		<property-extension>
+        		<designer-extension>
+          			<category>basics</category>
                     <tags>
                         todo
                     </tags>

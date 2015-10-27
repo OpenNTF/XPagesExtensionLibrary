@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * Â© Copyright IBM Corp. 2010
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,8 +16,22 @@
 dojo.provide("extlib.dijit.DynamicContent");
 
 XSP.showContent = function xe_sct(panelid,content,params) {
-	params = dojo.mixin(params,{content:content})
-	if(XSP._hashContentId==panelid) {
+	params = dojo.mixin(params, dojo.queryToObject(dojo.hash()));
+	
+	var mixParams = {};
+	var elem = dojo.byId(panelid);
+	var contentParam = "content";
+	if(elem != null) {
+		var elemContentParam = elem.getAttribute("data-param");
+		if(elemContentParam) {
+			contentParam = elemContentParam;
+		}
+	}
+	mixParams[contentParam] = content;
+	
+	params = dojo.mixin(params,mixParams)
+	console.log("updating with params " + dojo.objectToQuery(params));
+	if(XSP._hashContentId && XSP._hashContentId[contentParam]==panelid) {
 		XSP.updateHash(dojo.objectToQuery(params))
 		XSP.partialRefreshGet(panelid,{params:XSP._hash})
 	} else {
@@ -26,14 +40,48 @@ XSP.showContent = function xe_sct(panelid,content,params) {
 }
 
 XSP.registerHash = function xe_rhs(panelid) {
-	XSP._hashContentId=panelid
+	if(!XSP._hashContent) {
+		XSP._hashContent = {};
+	}
+	
+	var elem = dojo.byId(panelid);
+	if(!elem) { return; }
+	var contentParam = elem.getAttribute("data-param");
+	
+	if(!XSP._hashContent[contentParam]) {
+		XSP._hashContent[contentParam] = {
+			id: panelid,
+			value: ""
+		};
+	}
+	
 	if(!XSP._hashCallback) {
 		dojo.require("dojo.hash");
 		XSP._hashCallback = function(hash) {
-			// Only refresh if the has is different from the last one
-			if(XSP._hash!=hash) {
-				XSP._hash=hash
-				XSP.partialRefreshGet(XSP._hashContentId,{params:hash})
+			var hashObj = dojo.queryToObject(hash);
+			var refreshIds = [];
+			for(var paramName in hashObj) {
+				// Only refresh if the hash is different from the last one for that panel
+				if(XSP._hashContent[paramName] && XSP._hashContent[paramName].value != hashObj[paramName]) {
+					refreshIds.push(XSP._hashContent[paramName].id);
+					XSP._hashContent[paramName].value = hashObj[paramName];
+				}
+			}
+			
+			// Cycle through IDs needing an update in sequence
+			if(refreshIds.length > 0) {
+				XSP._hash=hash;
+				
+				var refresh = function() {
+					var id = refreshIds.pop();
+					if(id) {
+						XSP.partialRefreshGet(id, {
+							params: hash,
+							onComplete: refresh
+						});
+					}
+				}
+				refresh();
 			}
 		}
 		dojo.addOnLoad( function() {
@@ -47,6 +95,16 @@ XSP.registerHash = function xe_rhs(panelid) {
 
 // Update the copy of the hash while preventing the event processing
 XSP.updateHash = function xs_uhs(h) {
+	// Split it apart to update only the specific part of the hash
+	var updateObj = dojo.queryToObject(h);
+	var hashObj = dojo.queryToObject(dojo.hash());
+	
+	for(var updateKey in updateObj) {
+		hashObj[updateKey] = updateObj[updateKey];
+	}
+	
+	h = dojo.objectToQuery(hashObj);
+	
 	XSP._hash=h
 	dojo.hash(h)
 }
