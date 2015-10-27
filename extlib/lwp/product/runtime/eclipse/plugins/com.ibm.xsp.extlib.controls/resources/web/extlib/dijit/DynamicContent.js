@@ -30,8 +30,10 @@ XSP.showContent = function xe_sct(panelid,content,params) {
 	mixParams[contentParam] = content;
 	
 	params = dojo.mixin(params,mixParams)
-	console.log("updating with params " + dojo.objectToQuery(params));
-	if(XSP._hashContentId && XSP._hashContentId[contentParam]==panelid) {
+	// If the param is set up for useHash, update the hash as well.
+	// This doesn't check the id property in order to maintain consistency with
+	// previous behavior.
+	if(XSP._hashContent && XSP._hashContent[contentParam]) {
 		XSP.updateHash(dojo.objectToQuery(params))
 		XSP.partialRefreshGet(panelid,{params:XSP._hash})
 	} else {
