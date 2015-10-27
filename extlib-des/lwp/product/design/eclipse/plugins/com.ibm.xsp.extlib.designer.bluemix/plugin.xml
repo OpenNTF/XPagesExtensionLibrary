@@ -95,6 +95,7 @@
             customDefinitionClass="com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestMetaModel"
             id="metamodel.bluemix.manifest"
             name="%bluemix.manifest"
+            isEfsFile="true"
             path="manifest.yml">
         </metamodel>
     </extension>

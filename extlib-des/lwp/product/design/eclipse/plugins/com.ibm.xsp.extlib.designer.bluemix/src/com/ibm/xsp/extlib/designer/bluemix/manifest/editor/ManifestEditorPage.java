@@ -40,10 +40,12 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -69,6 +71,7 @@ import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
 import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
 import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.bluemix.wizard.HybridBluemixWizard;
 import com.ibm.xsp.extlib.designer.xspprops.XSPEditorUtil;
 import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
 
@@ -76,7 +79,7 @@ import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
  * @author Gary Marjoram
  *
  */
-public class ManifestEditorPage extends DCPanel {
+public class ManifestEditorPage extends DCPanel implements SelectionListener {
     
     private ManifestMultiPageEditor _mpe;
     private FormToolkit             _toolkit;
@@ -91,6 +94,8 @@ public class ManifestEditorPage extends DCPanel {
     private final Image             _errorImage;
     private Font                    _errorFont;
     private Font                    _titleFont;
+    private Button                  _hybridBtn;
+    private Label                   _hybridLabel;
 
     public ManifestEditorPage(Composite parent, FormToolkit toolkit, ManifestMultiPageEditor mpe) {   
         super(parent, SWT.NONE);
@@ -162,6 +167,7 @@ public class ManifestEditorPage extends DCPanel {
         _rightComposite.setLayout(gridLayout);        
         
         // Create each area
+        createHybridArea(_rightComposite);            
         createRuntimeArea(_rightComposite);
         createEnvArea(_rightComposite);
     }
@@ -214,6 +220,10 @@ public class ManifestEditorPage extends DCPanel {
         tLabel.setToolTipText(BluemixUtil.productizeString("Use the path attribute to tell %BM_PRODUCT% where to find your application.")); // $NLX-ManifestEditorPage.UsethepathattributetotellIBMBluemixw-1$
         XSPEditorUtil.createText(container, "path", 2, 0, 1); // $NON-NLS-1$
         
+        tLabel = XSPEditorUtil.createLabel(container, "Stack:", 1); // $NLX-ManifestEditorPage.Stack-1$
+        tLabel.setToolTipText("Use the stack attribute to specify an alternative root filesystem (rootfs) for your application."); // $NLX-ManifestEditorPage.Usethestackattributetospecifyanal-1$
+        XSPEditorUtil.createText(container, "stack", 2, 0, 1); // $NON-NLS-1$
+
         section.setClient(container);        
     }
     
@@ -234,7 +244,21 @@ public class ManifestEditorPage extends DCPanel {
         
         section.setClient(container);        
     }
+    
+    private void createHybridArea(Composite parent) {
+        Section section = XSPEditorUtil.createSection(_toolkit, parent, "Hybrid Configuration", 1, 1); // $NLX-ManifestEditorPage.HybridConfiguration-1$
+        Composite container = XSPEditorUtil.createSectionChild(section, 1);
+        
+        _hybridLabel = XSPEditorUtil.createLabel(container, "", 1); 
+        ((GridData)_hybridLabel.getLayoutData()).horizontalAlignment = SWT.FILL;
+        ((GridData)_hybridLabel.getLayoutData()).grabExcessHorizontalSpace = true;
 
+        _hybridBtn = XSPEditorUtil.createButton(container, SWT.PUSH, "Edit..."); // $NLX-ManifestEditorPage.Edit-1$
+        _hybridBtn.addSelectionListener(this);
+
+        section.setClient(container);        
+    }
+    
     private void createRuntimeArea(Composite parent) {
         Section section = XSPEditorUtil.createSection(_toolkit, parent, "XPages Runtime Environment Variables", 1, 1); // $NLX-ManifestEditorPage.XPagesRuntimeEnvironmentVariables-1$
         Composite container = XSPEditorUtil.createSectionChild(section, 3);
@@ -277,7 +301,7 @@ public class ManifestEditorPage extends DCPanel {
         
         // Create the table
         CustomTable table = new CustomTable(container, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION, "bluemix.env"); // $NON-NLS-1$
-        table.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
+        table.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
         table.setLinesVisible(true);
         table.setHeaderVisible(true);
         table.setRows(4);
@@ -409,6 +433,7 @@ public class ManifestEditorPage extends DCPanel {
         // Create the buttons
         Composite btnContainer = new Composite(container, SWT.NONE);   
         btnContainer.setLayout(SWTLayoutUtils.createLayoutNoMarginDefaultSpacing(2));
+        btnContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         btnContainer.setBackground(getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
         
         // Add Button
@@ -434,7 +459,7 @@ public class ManifestEditorPage extends DCPanel {
                 }
             }
         });
-
+        
         section.setClient(container);        
     }
 
@@ -446,7 +471,7 @@ public class ManifestEditorPage extends DCPanel {
         
         // Create the Table
         CustomTable table = new CustomTable(container, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION, "bluemix.services"); // $NON-NLS-1$
-        table.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false));
+        table.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
         table.setLinesVisible(true);
         table.setHeaderVisible(true);
         table.setRows(3);
@@ -556,7 +581,7 @@ public class ManifestEditorPage extends DCPanel {
         // Create the Buttons
         Composite btnContainer = new Composite(container, SWT.NONE);   
         btnContainer.setLayout(SWTLayoutUtils.createLayoutNoMarginDefaultSpacing(3));
-        btnContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1));
+        btnContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
         btnContainer.setBackground(getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
         
         // Add Button
@@ -644,8 +669,13 @@ public class ManifestEditorPage extends DCPanel {
         }  
     }
     
+    public void refreshUI() {
+        refreshTables();
+        refreshHybridLabel();
+    }
+    
     // Refresh the Env and Service Tables from the bean
-    public void refreshTables() {
+    private void refreshTables() {
         if (_mpe.getBean().isManifestValid()) {
             Map<String, Object> envMap = _mpe.getBean().getManifestProperties().getUserEnv();
             _envList.clear();
@@ -667,7 +697,21 @@ public class ManifestEditorPage extends DCPanel {
                     _serviceList.add(new Service(entry));
                 }
             }
-            _serviceTable.refresh();
+            _serviceTable.refresh();            
+        }
+    }
+    
+    private void refreshHybridLabel() {
+        if (_mpe.getBean().isManifestValid()) {
+            if (_mpe.getBean().getManifestProperties().isHybridConnectionEnabled()) {
+                String txt = StringUtil.format("{0} ({1})", _mpe.getBean().getManifestProperties().getAppRemoteDataServerName(), 
+                                                           _mpe.getBean().getManifestProperties().getAppRemoteDataServerAddress());
+                _hybridLabel.setText(txt);                
+                _hybridLabel.setEnabled(true);
+            } else {
+                _hybridLabel.setText("Domino Bluemix services only."); // $NLX-ManifestEditorPage.DominoBluemixservicesonly-1$
+                _hybridLabel.setEnabled(false);
+            }
         }
     }
     
@@ -823,5 +867,20 @@ public class ManifestEditorPage extends DCPanel {
         _mainLabel.setImage(null);
         _mainLabel.layout();
         _mainLabel.getParent().layout();
+    }
+
+    @Override
+    public void widgetDefaultSelected(SelectionEvent event) {
+    }
+
+    @Override
+    public void widgetSelected(SelectionEvent event) {
+        if (event.widget == _hybridBtn) {
+            BluemixConfig config = ConfigManager.getInstance().getConfig(_mpe.getDesignerProject());
+            if (HybridBluemixWizard.launch(_mpe.getBean().getManifestProperties(), config.directory) == Window.OK) {
+                _mpe.writeContentsFromBean();  
+                refreshHybridLabel();
+            }
+        }
     }
 }

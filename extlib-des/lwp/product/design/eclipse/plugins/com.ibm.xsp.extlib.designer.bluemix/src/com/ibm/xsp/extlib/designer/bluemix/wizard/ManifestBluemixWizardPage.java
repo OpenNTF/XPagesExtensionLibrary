@@ -66,7 +66,7 @@ public class ManifestBluemixWizardPage extends AbstractBluemixWizardPage impleme
         GridLayout layout = WizardUtils.createGridLayout(1, 5);
         container.setLayout(layout);
 
-        _overwriteRadio = WizardUtils.createRadio(container, "Overwrite the existing Manifest", 1, this, 0); // $NLX-ManifestBluemixWizardPage.OverwritetheexistingManifest-1$
+        _overwriteRadio = WizardUtils.createRadio(container, "Create a new Manifest", 1, this, 0); // $NLX-ManifestBluemixWizardPage.CreateanewManifest-1$
         _useExistingRadio = WizardUtils.createRadio(container, "Use the existing Manifest", 1, this, 0); // $NLX-ManifestBluemixWizardPage.UsetheexistingManifest-1$
 
         _fileLabel = WizardUtils.createText(container, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.READ_ONLY, 1, 20, GridData.FILL_BOTH);
@@ -77,27 +77,24 @@ public class ManifestBluemixWizardPage extends AbstractBluemixWizardPage impleme
     }
     
     @Override
-    public void setVisible(boolean visible) {
-        if (visible && _wiz.advancing) {
-            _useExistingRadio.setSelection(true);
-            _overwriteRadio.setSelection(false);
-            Scanner scanner = null;
-            try {
-                scanner = new Scanner(ManifestUtil.getManifestFile(_wiz.newConfig.directory));
-                String text = scanner.useDelimiter("\\A").next(); // $NON-NLS-1$
-                _fileLabel.setText(text);
-            } catch (FileNotFoundException e) {
-                if (BluemixLogger.BLUEMIX_LOGGER.isErrorEnabled()) {
-                    BluemixLogger.BLUEMIX_LOGGER.errorp(this, "setVisible", e, "Failed to get manifest file"); // $NON-NLS-1$ $NLE-ManifestBluemixWizardPage.Failedtogetmanifestfile-2$
-                }
-            } finally {
-                if (scanner != null) {
-                    scanner.close();
-                }
+    protected void initialisePageState() {
+        _useExistingRadio.setSelection(true);
+        _overwriteRadio.setSelection(false);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(ManifestUtil.getManifestFile(((ConfigBluemixWizard)_wiz).getDirectoryPage().getDirectory()));
+            String text = scanner.useDelimiter("\\A").next(); // $NON-NLS-1$
+            _fileLabel.setText(text);
+        } catch (FileNotFoundException e) {
+            if (BluemixLogger.BLUEMIX_LOGGER.isErrorEnabled()) {
+                BluemixLogger.BLUEMIX_LOGGER.errorp(this, "setVisible", e, "Failed to get manifest file"); // $NON-NLS-1$ $NLE-ManifestBluemixWizardPage.Failedtogetmanifestfile-2$
             }
-        }
-        super.setVisible(visible);
-    }    
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }        
+    }
     
     @Override
     public void widgetDefaultSelected(SelectionEvent event) {
@@ -112,10 +109,4 @@ public class ManifestBluemixWizardPage extends AbstractBluemixWizardPage impleme
     public boolean getUseExistingManifest() {
         return WizardUtils.getCheckBoxValue(_useExistingRadio, true);
     }
-
-    @Override
-    protected void validatePage() {
-        showError(null);
-    }
-    
 }

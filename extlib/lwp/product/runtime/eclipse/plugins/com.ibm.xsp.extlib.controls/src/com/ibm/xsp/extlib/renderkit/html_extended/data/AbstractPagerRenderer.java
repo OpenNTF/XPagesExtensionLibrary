@@ -122,6 +122,10 @@ public abstract class AbstractPagerRenderer extends FacesRendererEx {
             if(StringUtil.isNotEmpty(ariaLabel)) {
                 w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
             }
+            String title = pager.getTitle();
+            if(StringUtil.isNotEmpty(title)) {
+                w.writeAttribute("title", title, null); // $NON-NLS-1$
+            }
             String style = ExtLibUtil.concatStyles(pager.getStyle(), (String)getProperty(PROP_PAGERSTYLE));
             if(StringUtil.isNotEmpty(style)) {
                 w.writeAttribute("style", style, null); // $NON-NLS-1$

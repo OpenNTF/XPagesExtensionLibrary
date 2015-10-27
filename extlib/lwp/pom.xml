@@ -3,7 +3,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <modelVersion>4.0.0</modelVersion>
 <artifactId>com.ibm.xsp.extlib.parent</artifactId>
 <packaging>pom</packaging>
-<version>9.0.1.v00_14-SNAPSHOT</version>
+<version>9.0.1.v00_15-SNAPSHOT</version>
 <groupId>com.ibm.xsp.extlib</groupId>
 
 <modules>

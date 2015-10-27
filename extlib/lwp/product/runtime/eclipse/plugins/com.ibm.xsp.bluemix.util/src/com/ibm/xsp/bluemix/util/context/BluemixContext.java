@@ -63,6 +63,15 @@ public class BluemixContext{
 	private String _APP_VERBOSE_STAGING;
 	private String _APP_INCLUDE_XPAGES_TOOLBOX;
 	private String _APP_JVM_HEAPSIZE;
+	// XSP env vars ctd. - Added in R15 of Extlib
+	private String _APP_REMOTE_DATA_SERVER_NAME;
+	private String _APP_REMOTE_DATA_SERVER_ADDRESS;
+	private String _APP_RUNTIME_SERVER_NAME;
+	private String _APP_RUNTIME_SERVER_IDFILE;
+	private String _APP_DA_ENABLED;
+	private String _APP_DA_DOMAIN;
+	private String _APP_DA_ADDRESS_BOOK;
+
 
 	private Boolean _onBluemix;
 	
@@ -81,8 +90,8 @@ public class BluemixContext{
 		return getDataService(/*isByName*/false, /*instanceName*/null);
 	}
 
-    private DataService getDataService(boolean isByName, final String instanceName) {
-	    checkOnBluemix();
+	private DataService getDataService(boolean isByName, final String instanceName) {
+		checkOnBluemix();
 		JsonJavaObject asJson = getVCAP_SERVICES_asJson();
 		if( null == asJson ){
 			throw new FacesException("No services found."); // $NLS-BluemixContext.Noservicesfound-1$
@@ -127,12 +136,12 @@ public class BluemixContext{
 	 * @param object
 	 * @return
 	 */
-    private String msgDataServiceArrayBadType(Object object) {
-	    String type = (null == object)? null : object.getClass().getName();
-	    String userMsg = "Bad object type in data services array: {0}"; // $NLS-BluemixContext.Badobjecttypeindataservicesarray0-1$
-	    userMsg = StringUtil.format(userMsg, type);
-	    return userMsg;
-    }
+	private String msgDataServiceArrayBadType(Object object) {
+		String type = (null == object)? null : object.getClass().getName();
+		String userMsg = "Bad object type in data services array: {0}"; // $NLS-BluemixContext.Badobjecttypeindataservicesarray0-1$
+		userMsg = StringUtil.format(userMsg, type);
+		return userMsg;
+	}
 
 	public boolean isDataServiceExists() {
 		checkOnBluemix();
@@ -251,35 +260,35 @@ public class BluemixContext{
 		if( null == asString || asString.isEmpty() ){
 			jsonObj = null;
 		}else{
-    		Object jsonAnyType;
-    			jsonAnyType = AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                    public Object run() {
-                        // privileged code goes here:
-                		try {
-                            Object result = JsonParser.fromJson(JsonJavaFactory.instanceEx, asString);
-                            return result;
-                		} catch (JsonException e) {
-                	        throw new FacesException("Problem parsing JSON in VCAP_SERVICES environment variable", e); // $NLS-BluemixContext.ProblemparsingJSONinVCAP_SERVICES-1$
-                        }
-                    }
-                });
-    		if( !(jsonAnyType instanceof JsonJavaObject) ){
-    			String jsonValue = (null == jsonAnyType)? null : jsonAnyType.toString();
-    	        String userMsg = "Unexpected type in VCAP_SERVICES environment variable. Not JSON Object. Is: {0}"; // $NLS-BluemixContext.UnexpectedtypeinVCAP_SERVICESenvi-1$
-    	        userMsg = StringUtil.format(userMsg, jsonValue);
+			Object jsonAnyType;
+				jsonAnyType = AccessController.doPrivileged(new PrivilegedAction<Object>() {
+					public Object run() {
+						// privileged code goes here:
+						try {
+							Object result = JsonParser.fromJson(JsonJavaFactory.instanceEx, asString);
+							return result;
+						} catch (JsonException e) {
+							throw new FacesException("Problem parsing JSON in VCAP_SERVICES environment variable", e); // $NLS-BluemixContext.ProblemparsingJSONinVCAP_SERVICES-1$
+						}
+					}
+				});
+			if( !(jsonAnyType instanceof JsonJavaObject) ){
+				String jsonValue = (null == jsonAnyType)? null : jsonAnyType.toString();
+				String userMsg = "Unexpected type in VCAP_SERVICES environment variable. Not JSON Object. Is: {0}"; // $NLS-BluemixContext.UnexpectedtypeinVCAP_SERVICESenvi-1$
+				userMsg = StringUtil.format(userMsg, jsonValue);
 				throw new FacesException(userMsg);
-    		}
-    		/*
-    		 * if (null != _VCAP_SERVICES) { for (Iterator<String> i =
-    		 * _VCAP_SERVICES.getJsonProperties(); i.hasNext();) {
-    		 * String jso_property = (String) i.next();
-    		 * System.out.println("jso_property: " + jso_property); } }
-    		 */
-    //		try {
-    			jsonObj = (JsonJavaObject) jsonAnyType;
-    //    	} catch (Exception e) {
-    //    		e.printStackTrace();
-    //    	}
+			}
+			/*
+			 * if (null != _VCAP_SERVICES) { for (Iterator<String> i =
+			 * _VCAP_SERVICES.getJsonProperties(); i.hasNext();) {
+			 * String jso_property = (String) i.next();
+			 * System.out.println("jso_property: " + jso_property); } }
+			 */
+	//		try {
+				jsonObj = (JsonJavaObject) jsonAnyType;
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//		}
 		}
 		_VCAP_SERVICES_asJson = jsonObj;
 		_VCAP_SERVICES_asJson_set = true;
@@ -424,6 +433,76 @@ public class BluemixContext{
 			_APP_JVM_HEAPSIZE = java.lang.System.getenv("APP_JVM_HEAPSIZE"); // $NON-NLS-1$
 		}
 		return _APP_JVM_HEAPSIZE;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_REMOTE_DATA_SERVER_NAME() {
+		checkOnBluemix();
+		if (null == _APP_REMOTE_DATA_SERVER_NAME) {
+			_APP_REMOTE_DATA_SERVER_NAME = java.lang.System.getenv("APP_REMOTE_DATA_SERVER_NAME"); // $NON-NLS-1$
+		}
+		return _APP_REMOTE_DATA_SERVER_NAME;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_REMOTE_DATA_SERVER_ADDRESS() {
+		checkOnBluemix();
+		if (null == _APP_REMOTE_DATA_SERVER_ADDRESS) {
+			_APP_REMOTE_DATA_SERVER_ADDRESS = java.lang.System.getenv("APP_REMOTE_DATA_SERVER_ADDRESS"); // $NON-NLS-1$
+		}
+		return _APP_REMOTE_DATA_SERVER_ADDRESS;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_RUNTIME_SERVER_NAME() {
+		checkOnBluemix();
+		if (null == _APP_RUNTIME_SERVER_NAME) {
+			_APP_RUNTIME_SERVER_NAME = java.lang.System.getenv("APP_RUNTIME_SERVER_NAME"); // $NON-NLS-1$
+		}
+		return _APP_RUNTIME_SERVER_NAME;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_RUNTIME_SERVER_IDFILE() {
+		checkOnBluemix();
+		if (null == _APP_RUNTIME_SERVER_IDFILE) {
+			_APP_RUNTIME_SERVER_IDFILE = java.lang.System.getenv("APP_RUNTIME_SERVER_IDFILE"); // $NON-NLS-1$
+		}
+		return _APP_RUNTIME_SERVER_IDFILE;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_DA_ENABLED() {
+		checkOnBluemix();
+		if (null == _APP_DA_ENABLED) {
+			_APP_DA_ENABLED = java.lang.System.getenv("APP_DA_ENABLED"); // $NON-NLS-1$
+		}
+		return _APP_DA_ENABLED;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_DA_DOMAIN() {
+		checkOnBluemix();
+		if (null == _APP_DA_DOMAIN) {
+			_APP_DA_DOMAIN = java.lang.System.getenv("APP_DA_DOMAIN"); // $NON-NLS-1$
+		}
+		return _APP_DA_DOMAIN;
+	}
+
+	// ------------------------------------------------
+
+	public String getAPP_DA_ADDRESS_BOOK() {
+		checkOnBluemix();
+		if (null == _APP_DA_ADDRESS_BOOK) {
+			_APP_DA_ADDRESS_BOOK = java.lang.System.getenv("APP_DA_ADDRESS_BOOK"); // $NON-NLS-1$
+		}
+		return _APP_DA_ADDRESS_BOOK;
 	}
 
 	// ------------------------------------------------

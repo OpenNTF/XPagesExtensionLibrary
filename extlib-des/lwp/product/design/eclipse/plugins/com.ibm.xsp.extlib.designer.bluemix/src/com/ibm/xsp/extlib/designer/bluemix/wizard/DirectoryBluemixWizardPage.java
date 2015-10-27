@@ -17,7 +17,6 @@
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
 import java.io.File;
-import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -31,6 +30,8 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Text;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
+import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
@@ -44,6 +45,7 @@ public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implem
     private Text                _dirText;
     private Button              _dirBtn;
     private final boolean       _dirMustBeEmpty;
+    private BluemixConfig       _origConfig;
 
     protected DirectoryBluemixWizardPage(String pageName, boolean dirMustBeEmpty) {
         super(pageName);
@@ -63,6 +65,7 @@ public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implem
     @Override
     public void createControl(Composite parent) {
         super.createControl(parent);
+        _origConfig = ConfigManager.getInstance().getConfig(_wiz.project);
         
         Composite container = new Composite(parent, SWT.NONE);
         GridLayout layout = WizardUtils.createGridLayout(3, 5);
@@ -76,9 +79,6 @@ public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implem
         _dirText.addModifyListener(this);
         _dirBtn = WizardUtils.createButton(container, "Browse...", this); // $NLX-DirectoryBluemixWizardPage.Browse-1$
         _dirBtn.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END));
-        if (_wiz.origConfig.isValid(false)) {
-            _dirText.setText(_wiz.origConfig.directory);
-        }
 
         setControl(container);
     }
@@ -103,16 +103,16 @@ public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implem
     @Override
     public void modifyText(ModifyEvent event) {
         if (event.widget == _dirText) {
-            if (_wiz.origConfig.isValid(false)) {
-                if (!StringUtil.equalsIgnoreCase(_wiz.origConfig.directory, getDirectory())) {
-                    setMessage("Warning, you are changing the deployment directory for this application. The existing configuration will be lost.", // $NLX-DirectoryBluemixWizardPage.Warningyouarechangingthedeploymen-1$
-                               IMessageProvider.WARNING);
+            if (_origConfig.isValid(false)) {
+                if (!StringUtil.equalsIgnoreCase(_origConfig.directory, getDirectory())) {
+                    showWarning("Warning, you are changing the deployment directory for this application. The existing configuration will be lost."); // $NLX-DirectoryBluemixWizardPage.Warningyouarechangingthedeploymen-1$
                 }
                 else {
-                    setMessage(getPageMsg(), IMessageProvider.INFORMATION);
+                    showWarning(null);
                 }
             }
             
+            _hasChanged = true;
             validatePage();
         }
     }
@@ -169,5 +169,12 @@ public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implem
 
         // All good
         showError(null);
+    }
+
+    @Override
+    protected void initialisePageState() {
+        if (_origConfig.isValid(false)) {
+            _dirText.setText(_origConfig.directory);
+        }        
     }
 }

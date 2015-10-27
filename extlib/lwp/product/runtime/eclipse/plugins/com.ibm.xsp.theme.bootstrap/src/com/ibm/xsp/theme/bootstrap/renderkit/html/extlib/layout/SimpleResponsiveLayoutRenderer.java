@@ -59,13 +59,13 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
     public static final String COLUMN_SMALL_OFFSET          = "col-sm-offset-"; // $NON-NLS-1$
     public static final String COLUMN_MEDIUM_OFFSET         = "col-md-offset-"; // $NON-NLS-1$
     
-    protected static final int PROP_CONTENT_SIZE            = 1;
-    protected static final int PROP_LEFT_SIZE               = 2;
-    protected static final int PROP_SMALL_LEFT_SIZE         = 3;
-    protected static final int PROP_RIGHT_SIZE              = 4;
-    protected static final int PROP_SMALL_RIGHT_SIZE        = 5;
+    public static final int PROP_CONTENT_SIZE               = 1;
+    public static final int PROP_LEFT_SIZE                  = 2;
+    public static final int PROP_SMALL_LEFT_SIZE            = 3;
+    public static final int PROP_RIGHT_SIZE                 = 4;
+    public static final int PROP_SMALL_RIGHT_SIZE           = 5;
 
-    private static final int COLLAPSE_LEFT_COLUMN_TARGET    = 10;
+    public static final int COLLAPSE_LEFT_COLUMN_TARGET     = 10;
     public static final int COLLAPSE_LEFT_MENU_LABEL        = 11;
     
     public static final int PROP_BANNER_FIXEDTOP_PADDING    = 20;
@@ -101,6 +101,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
     // ================================================================
 
     protected void writeMainFrame(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
+        boolean isNavbar              = false;
         boolean invertedNavbar        = false;
         String fixedNavbar            = "";
         boolean collapseLeftColumn    = false;
@@ -109,6 +110,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         String pageWidthClass = "";
         
         if(configuration!=null) {
+            isNavbar = configuration.isNavbar();
             invertedNavbar = configuration.isInvertedNavbar();
             collapseLeftColumn = configuration.isCollapseLeftColumn();
             
@@ -130,7 +132,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         newLine(w);
         
         //CSS required for fixed Banner
-        if (!StringUtil.isEmpty(fixedNavbar)) {
+        if (isNavbar && !StringUtil.isEmpty(fixedNavbar)) {
             String navbarPadding = "";
             boolean addStyle = false;
             if(fixedNavbar.equals(ResponsiveApplicationConfiguration.NAVBAR_FIXED_TOP)) {
@@ -157,7 +159,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         
         if (configuration != null) {
             // Start the navbar
-            if (configuration.isNavbar()) {
+            if (isNavbar) {
                 writeNavbar(context, w, c, configuration, invertedNavbar, fixedNavbar, pageWidthClass);
             }
             
@@ -240,9 +242,11 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
     }
 
     protected void writeNavbarLink(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
-        List<ITreeNode> util = configuration.getNavbarUtilityLinks();
+        List<ITreeNode> utilLinks = configuration.getNavbarUtilityLinks();
+        List<ITreeNode> appLinks  = configuration.getNavbarAppLinks();
+        SearchBar searchBar       = configuration.getSearchBar();
         
-        if(util != null && util.size() > 0) {
+        if((utilLinks != null && utilLinks.size() > 0) || (appLinks != null && appLinks.size() > 0) || (searchBar != null && searchBar.isRendered())) {
             w.startElement("button", c); // $NON-NLS-1$
             w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
             w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -267,7 +271,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         }
     }
 
-protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
+    protected void writeNavbarProductlogo(FacesContext context, ResponseWriter w, UIApplicationLayout c, SimpleResponsiveApplicationConfiguration configuration) throws IOException {
         
         w.startElement("div",c); // $NON-NLS-1$
         

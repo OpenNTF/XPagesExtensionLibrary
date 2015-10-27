@@ -85,20 +85,14 @@ public class CopyMethodBluemixWizardPage extends AbstractBluemixWizardPage {
 
         WizardUtils.createLabel(container, StringUtil.format(_labelTxt, "\n"), 1); // $NON-NLS-1$
         
-        String initialValue =  DominoPreferenceManager.getInstance().getValue(_prefKey, false);
-
         _copyRadio = WizardUtils.createRadio(container, _radioTxt[0], 1, null, 20);
-        _copyRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "copy")); // $NON-NLS-1$ $NON-NLS-2$
-        
         GridData gd = (GridData) _copyRadio.getLayoutData();
         gd.verticalIndent = 7;
         
         _replicaRadio = WizardUtils.createRadio(container, _radioTxt[1], 1, null, 20);
-        _replicaRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "replica")); // $NON-NLS-1$
 
         if (StringUtil.equals(getName(), "deployCopyPage") == false) { // $NON-NLS-1$        
             _actualRadio = WizardUtils.createRadio(container, _radioTxt[2], 1, null, 20);
-            _actualRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "actual")); // $NON-NLS-1$
         }
             
         setControl(container);
@@ -120,7 +114,18 @@ public class CopyMethodBluemixWizardPage extends AbstractBluemixWizardPage {
     }
 
     @Override
-    protected void validatePage() {
-        showError(null);
+    protected void initialisePageState() {
+        String initialValue =  DominoPreferenceManager.getInstance().getValue(_prefKey, false);
+        
+        _copyRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "copy"));  // $NON-NLS-1$   
+        _replicaRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "replica")); // $NON-NLS-1$
+        if (_actualRadio != null) {
+            _actualRadio.setSelection(StringUtil.equalsIgnoreCase(initialValue, "actual")); // $NON-NLS-1$            
+        }
+    }
+
+    @Override
+    protected void savePageState() {
+        DominoPreferenceManager.getInstance().setValue(_prefKey, getCopyMethod());        
     }
 }

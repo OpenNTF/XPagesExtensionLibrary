@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.Properties;
 
@@ -471,4 +472,45 @@ public class BluemixUtil {
         return newDbPath;
     }    
     
+    public static boolean validateDominoServerName(String serverName, boolean allowEmpty) {
+        if (StringUtil.isEmpty(serverName)) {
+            return allowEmpty;
+        }
+        
+        if (!serverName.contains("/")) {
+            return false;
+        }
+        
+        if ((serverName.charAt(0) == '/') || (serverName.charAt(serverName.length()-1) == '/')) {
+            return false;
+        }
+        
+        return true;
+    }    
+    
+    public static boolean validateAddress(String address) {
+        try {
+            InetAddress.getByName(address);
+        } catch (Exception e) {
+            if (BluemixLogger.BLUEMIX_LOGGER.isWarnEnabled()) {
+                BluemixLogger.BLUEMIX_LOGGER.warnp(null, "validateAddress", e, "Failed to resolve \"{0}\"", address); // $NON-NLS-1$ $NLW-BluemixUtil.Failedtoresolve0-2$
+            }
+            return false;
+        }
+        
+        return true;
+    }        
+    
+    // Check for Defect187654 exception - retrieving non string env vars
+    public static boolean isDefect187654Exception(Exception e) {
+        if (e instanceof ClassCastException) {
+            if (e.getStackTrace().length > 0) {
+                if (StringUtil.equalsIgnoreCase(e.getStackTrace()[0].getClassName(), "org.cloudfoundry.client.lib.domain.CloudApplication")  && // $NON-NLS-1$
+                    StringUtil.equalsIgnoreCase(e.getStackTrace()[0].getMethodName(), "setEnv")) { // $NON-NLS-1$
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

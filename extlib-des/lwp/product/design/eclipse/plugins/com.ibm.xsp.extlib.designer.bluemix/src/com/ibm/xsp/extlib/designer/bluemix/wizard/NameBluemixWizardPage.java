@@ -16,9 +16,17 @@
 
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
-import java.util.ArrayList;
+import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.KEY_BLUEMIX_SERVER_URL;
 
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.cloudfoundry.client.lib.CloudFoundryClient;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudDomain;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
@@ -43,6 +51,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.extlib.designer.bluemix.BluemixLogger;
+import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
+import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
@@ -51,14 +62,20 @@ import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
  */
 public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener, ModifyListener, ControlListener, ISelectionChangedListener {
     
-    private Text                _nameText;
-    private Text                _hostText;
-    private Label               _domainLabel;
-    private Button              _newRadio; 
-    private Button              _existingRadio; 
-    private TableViewer         _appViewer;
-    private Group               _hostGroup;
+    private Text                    _nameText;
+    private Text                    _hostText;
+    private Label                   _domainLabel;
+    private Button                  _newRadio; 
+    private Button                  _existingRadio; 
+    private TableViewer             _appViewer;
+    private Group                   _hostGroup;
     
+    private CloudFoundryClient      _clientCloudSpace;
+    private List<CloudApplication>  _applications;
+    private String                  _defaultDomain;
+    private String                  _org;
+    private String                  _space;
+    private String                  _warningMsg;
 
     protected NameBluemixWizardPage(String pageName) {
         super(pageName);
@@ -114,27 +131,24 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
 
         setControl(container);
     }
-
+    
     @Override
-    public void setVisible(boolean visible) {
-        if (visible && _wiz.advancing) {
-            setErrorMessage(null);
-            _newRadio.setSelection(true);
-            _existingRadio.setSelection(false);
-            _nameText.setText("");
-            _hostText.setText("");
-            _domainLabel.setText("." + _wiz.getDefaultDomain());
-            _hostGroup.layout();
-            if (_wiz.applications.size() == 0) {
-                _existingRadio.setEnabled(false);
-            } else {
-                _existingRadio.setEnabled(true);                
-            }
-            _appViewer.setInput(getApplications());
-            _appViewer.refresh();        
-            _appViewer.getTable().select(0);            
+    protected void initialisePageState() {
+        _newRadio.setSelection(true);
+        _existingRadio.setSelection(false);
+        _nameText.setText("");
+        _hostText.setText("");
+        _domainLabel.setText("." + _defaultDomain);
+        _hostGroup.layout();
+        if (_applications.size() == 0) {
+            _existingRadio.setEnabled(false);
+        } else {
+            _existingRadio.setEnabled(true);                
         }
-        super.setVisible(visible);
+        _appViewer.setInput(getApplications());
+        _appViewer.refresh();        
+        _appViewer.getTable().select(0);    
+        showWarning(_warningMsg);
     }
 
     @Override
@@ -173,7 +187,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
             String name = _nameText.getText().trim();
             if (name.length() > 0) {
                 boolean error = false;
-                for (CloudApplication app : _wiz.applications) {
+                for (CloudApplication app : _applications) {
                     if (StringUtil.equalsIgnoreCase(name, app.getName())) {
                         error = true;
                         break;
@@ -242,7 +256,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
     
     private String[] getApplications() {
         ArrayList <String> list = new ArrayList<String>();
-        for (CloudApplication app : _wiz.applications) {
+        for (CloudApplication app : _applications) {
             list.add(app.getName());
         }
         return list.toArray(new String[list.size()]);
@@ -252,7 +266,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
         if (_newRadio.getSelection()) {
             return WizardUtils.getTextValue(_nameText, "");
         } else {
-            return _wiz.applications.get(_appViewer.getTable().getSelectionIndex()).getName();
+            return _applications.get(_appViewer.getTable().getSelectionIndex()).getName();
         }
     }
     
@@ -261,7 +275,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
     }
     
     private String getExistingAppHost() {
-        for (String uri:_wiz.applications.get(_appViewer.getTable().getSelectionIndex()).getUris()) {
+        for (String uri:_applications.get(_appViewer.getTable().getSelectionIndex()).getUris()) {
             uri = uri.trim();
             if (uri.endsWith(_domainLabel.getText())) {
                 // Trim the domain from the URI
@@ -274,4 +288,66 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
     private void setHostText(String txt) {
         _hostText.setText(txt.trim().replace(" ", "-"));   
     }
+
+    public void setCloudSpace(String org, String space) {
+        _org = org;
+        _space = space;
+    }
+    
+    public IRunnableWithProgress getApplications  = new IRunnableWithProgress() {
+        
+        public void run(IProgressMonitor monitor) {
+            try {
+                _warningMsg = "";
+                monitor.beginTask(BluemixUtil.productizeString("%BM_PRODUCT%"), IProgressMonitor.UNKNOWN);  // $NON-NLS-1$
+    
+                try {
+                    if (_clientCloudSpace != null) {
+                        _clientCloudSpace.logout();
+                    }
+        
+                    monitor.subTask("Connecting to Cloud Space..."); // $NLX-NameBluemixWizardPage.ConnectingtoCloudSpace-1$
+                    String target = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_URL, "");
+                    _clientCloudSpace = new CloudFoundryClient(_wiz._credentials, URI.create(target).toURL(), _org, _space);
+                    _clientCloudSpace.login();
+                } catch (Exception e) {
+                    throw new Exception("Error connecting to Cloud Space", e); // $NLX-NameBluemixWizardPage.ErrorconnectingtoCloudSpace-1$
+                }
+                
+                monitor.subTask("Retrieving domains..."); // $NLX-NameBluemixWizardPage.Retrievingdomains-1$
+                try {
+                    List<CloudDomain> domains = _clientCloudSpace.getSharedDomains();
+                    if (!domains.isEmpty()) {
+                        _defaultDomain = domains.get(0).getName();
+                    } else {
+                        _defaultDomain = "";
+                    }
+                } catch (Exception e) {
+                    throw new Exception("Error retrieving default domain", e); // $NLX-NameBluemixWizardPage.Errorretrievingdefaultdomain-1$
+                }
+
+                monitor.subTask("Retrieving applications..."); // $NLX-NameBluemixWizardPage.Retrievingapplications-1$
+                try {
+                    _applications = _clientCloudSpace.getApplications();
+                } catch (Exception e) {
+                    if (BluemixUtil.isDefect187654Exception(e)) {
+                        // Probably Defect187654 - retrieving non string env vars
+                        // Allow the wizard to continue with a warning message
+                        _applications = new ArrayList<CloudApplication>();
+                        _warningMsg = "Could not retrieve application list from Cloud Space"; // $NLX-NameBluemixWizardPage.Couldnotretrieveapplicationlistfr-1$                        
+                        if (BluemixLogger.BLUEMIX_LOGGER.isWarnEnabled()) {
+                            BluemixLogger.BLUEMIX_LOGGER.warnp(null, "run", e, "Failed to retrieve application list from Cloud Space"); // $NON-NLS-1$ $NLW-NameBluemixWizardPage.Failedtoretrieveapplicationlistfr-2$
+                        }                        
+                    } else {
+                        throw new Exception("Error retrieving applications", e); // $NLX-NameBluemixWizardPage.Errorretrievingapplications-1$
+                    }
+                }
+    
+                monitor.done();
+            } catch (Exception e) {
+                _wiz.setJobException(e);
+                _clientCloudSpace = null;
+            }
+        }
+    };    
 }

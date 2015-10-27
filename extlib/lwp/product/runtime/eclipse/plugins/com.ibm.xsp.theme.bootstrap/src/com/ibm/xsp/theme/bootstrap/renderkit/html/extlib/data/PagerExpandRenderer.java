@@ -27,6 +27,7 @@ import com.ibm.xsp.event.PagerEvent;
 import com.ibm.xsp.extlib.component.data.AbstractPager;
 import com.ibm.xsp.extlib.component.data.UIPagerExpand;
 import com.ibm.xsp.extlib.renderkit.html_extended.data.AbstractPagerRenderer;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 public class PagerExpandRenderer extends AbstractPagerRenderer {
 
@@ -50,13 +51,13 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
     protected void writePagerContent(FacesContext context, ResponseWriter w, AbstractPager _pager, FacesDataIterator dataIterator) throws IOException {
         UIPagerExpand pager = (UIPagerExpand) _pager;
         w.startElement("div", null); // $NON-NLS-1$
-        String pgClass = pager.getStyleClass();
+
+        w.startElement("ul", null); // $NON-NLS-1$
+        String styleClass = pager.getStyleClass();
+        String pgClass = ExtLibUtil.concatStyleClasses("pagination", styleClass); // $NON-NLS-1$
         if (StringUtil.isNotEmpty(pgClass)) {
             w.writeAttribute("class", pgClass, null); // $NON-NLS-1$
         }
-
-        w.startElement("ul", null); // $NON-NLS-1$
-        w.writeAttribute("class", "pagination", null); // $NON-NLS-1$ $NON-NLS-2$
 
         writeCollapseAll(context, w, pager, dataIterator);
         writeSeparator(context, w, pager, dataIterator);

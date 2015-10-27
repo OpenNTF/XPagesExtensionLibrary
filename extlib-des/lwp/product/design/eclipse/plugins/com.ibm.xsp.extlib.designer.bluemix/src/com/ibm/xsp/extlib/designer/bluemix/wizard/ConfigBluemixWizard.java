@@ -16,14 +16,11 @@
 
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
-import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
-
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.PageChangingEvent;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardDialog;
 
-import com.ibm.designer.domino.preferences.DominoPreferenceManager;
 import com.ibm.xsp.extlib.designer.bluemix.action.ToolbarAction;
 import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
 import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
@@ -39,7 +36,7 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
     
     private static final String               _WIZARD_TITLE = BluemixUtil.productizeString("Configure Application For Deployment");  // $NLX-ConfigBluemixWizard.ConfigureApplicationForDeployment-1$
     
-    private final CloudSpaceBluemixWizardPage _orgSpacePage;
+    private final CloudSpaceBluemixWizardPage _cloudSpacePage;
     private final DirectoryBluemixWizardPage  _dirPage;
     private final NameBluemixWizardPage       _namePage;
     private final ConfigBluemixWizardPage     _configPage;
@@ -51,12 +48,10 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
 
         // Get the project and existing config if any
         project = ToolbarAction.project;
-        origConfig = ConfigManager.getInstance().getConfig(project);
-        newConfig = (BluemixConfig) origConfig.clone();
         
         // Create the pages
         _dirPage = new DirectoryBluemixWizardPage("dirPage", false); // $NON-NLS-1$
-        _orgSpacePage = new CloudSpaceBluemixWizardPage("orgSpacePage"); // $NON-NLS-1$
+        _cloudSpacePage = new CloudSpaceBluemixWizardPage("cloudSpacePage"); // $NON-NLS-1$
         _configPage = new ConfigBluemixWizardPage("configPage"); // $NON-NLS-1$
         _namePage = new NameBluemixWizardPage("namePage"); // $NON-NLS-1$
         _manifestPage = new ManifestBluemixWizardPage("manifestPage"); // $NON-NLS-1$
@@ -70,39 +65,61 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
 
     @Override
     public boolean performFinish() {
-        boolean replaceManifest = false;
+        BluemixConfig newConfig;
         
-        if (getContainer().getCurrentPage() == _namePage) {
-            // Get the appName and host
+        if (getContainer().getCurrentPage() == _configPage) {
+            newConfig = ConfigManager.getInstance().getConfigFromDirectory(_dirPage.getDirectory());
+            
+            // User is linking nsf to an existing config
+            ConfigManager.getInstance().setConfig(project, newConfig, false, null);            
+        } 
+        else if (getContainer().getCurrentPage() == _manifestPage) {
+            newConfig = ConfigManager.getInstance().getConfigFromDirectory(_dirPage.getDirectory());
+            newConfig.org = _cloudSpacePage.getOrg();
+            newConfig.space = _cloudSpacePage.getSpace();
+            newConfig.copyMethod = _copyMethodPage.getCopyMethod();
+            
+            // Write the bluemix.properties file, manifest.yml is not changing
+            ConfigManager.getInstance().setConfig(project, newConfig, false, null);
+            
+            // Save the wizard state
+            _cloudSpacePage.savePageState();
+            _copyMethodPage.savePageState();
+        } 
+        else if (getContainer().getCurrentPage() == _namePage) {
+            newConfig = new BluemixConfig();
+            newConfig.directory = _dirPage.getDirectory();
+            newConfig.org = _cloudSpacePage.getOrg();
+            newConfig.space = _cloudSpacePage.getSpace();
+            newConfig.copyMethod = _copyMethodPage.getCopyMethod();            
             newConfig.appName = _namePage.getAppName();
             newConfig.host = _namePage.getHost();
             
-            // If we're on the namePage we're replacing the manifest
-            replaceManifest = true;
-        }  
-        ConfigManager.getInstance().setConfig(project, newConfig, replaceManifest);
+            // Write the bluemix.properties and manifest.yml files
+            ConfigManager.getInstance().setConfig(project, newConfig, true, null);
 
-        // Store the copy method in the prefs for the next time the wizard is run        
-        if (getContainer().getCurrentPage() != _configPage) {
-            // If we were on the config page we haven't chosen a copy method so
-            // no need to save the preference
-            DominoPreferenceManager.getInstance().setValue(KEY_BLUEMIX_DEPLOY_COPY_METHOD, newConfig.copyMethod);                    
-        }
-                        
+            // Save the wizard state
+            _cloudSpacePage.savePageState();
+            _copyMethodPage.savePageState();
+        }  
+
         return true;
     }
-
+        
     @Override
     public void handlePageChanging(PageChangingEvent event) {
         event.doit = true;
         advancing = false;
         if (event.getCurrentPage() == _dirPage) {
+            if (_dirPage._hasChanged) {
+                _configPage._firstDisplay = true;
+                _manifestPage._firstDisplay = true;
+                _dirPage._hasChanged = false;
+            }
             if (event.getTargetPage() == _configPage) {
                 advancing = true;
-                newConfig = ConfigManager.getInstance().getConfigFromDirectory(_dirPage.getDirectory());
             } else if (event.getTargetPage() == _copyMethodPage) {
                 advancing = true;
-                newConfig.directory = _dirPage.getDirectory();
             }
         }
         else if (event.getCurrentPage() == _configPage) {
@@ -111,33 +128,40 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
             }
         }
         else if (event.getCurrentPage() == _copyMethodPage) {
-            if (event.getTargetPage() == _orgSpacePage) {
+            if (event.getTargetPage() == _cloudSpacePage) {
                 advancing = true;
-                newConfig.copyMethod = _copyMethodPage.getCopyMethod();
-                if (!runJob(_copyMethodPage, _getOrgsAndSpaces)) {
-                    event.doit = false;
+                if(_cloudSpacePage._firstDisplay) {
+                    if (!runJob(_cloudSpacePage.getOrgsAndSpaces)) {
+                        event.doit = false;
+                    }
                 }
             }
         }
-        else if (event.getCurrentPage() == _orgSpacePage) {
+        else if (event.getCurrentPage() == _cloudSpacePage) {
+            if (_cloudSpacePage._hasChanged) {
+                _namePage._firstDisplay = true;
+                _cloudSpacePage._hasChanged = false;
+            }            
             if (event.getTargetPage() == _namePage) {
                 advancing = true;
-                newConfig.org = _orgSpacePage.getOrg();
-                newConfig.space = _orgSpacePage.getSpace();
-                if (!runJob(_orgSpacePage, _getApplications)) {
-                    event.doit = false;
+                if (_namePage._firstDisplay) {
+                    _namePage.setCloudSpace(_cloudSpacePage.getOrg(), _cloudSpacePage.getSpace());
+                    if (!runJob(_namePage.getApplications)) {
+                        event.doit = false;
+                    }
                 }
             } else if (event.getTargetPage() == _manifestPage) {
                 advancing = true;
-                newConfig.org = _orgSpacePage.getOrg();
-                newConfig.space = _orgSpacePage.getSpace();                
             }
         }
         else if (event.getCurrentPage() == _manifestPage) {
             if (event.getTargetPage() == _namePage) {
                 advancing = true;
-                if (!runJob(_manifestPage, _getApplications)) {
-                    event.doit = false;
+                if (_namePage._firstDisplay) {
+                    _namePage.setCloudSpace(_cloudSpacePage.getOrg(), _cloudSpacePage.getSpace());
+                    if (!runJob(_namePage.getApplications)) {
+                        event.doit = false;
+                    }
                 }
             }             
         }
@@ -153,9 +177,9 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
                 return _copyMethodPage;
             }
         } else if (page == _copyMethodPage) {
-            return _orgSpacePage;
-        } else if (page == _orgSpacePage) {
-            if (ManifestUtil.getManifestFile(newConfig.directory).exists()) {
+            return _cloudSpacePage;
+        } else if (page == _cloudSpacePage) {
+            if (ManifestUtil.getManifestFile(_dirPage.getDirectory()).exists()) {
                 // There's a manifest in the chosen directory
                 return _manifestPage;
             } else {
@@ -181,7 +205,7 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
         addPage(_dirPage);
         addPage(_configPage);
         addPage(_copyMethodPage);
-        addPage(_orgSpacePage);
+        addPage(_cloudSpacePage);
         addPage(_manifestPage);        
         addPage(_namePage);
     }
@@ -198,6 +222,14 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
         }   
         
         return false;
+    }
+    
+    public DirectoryBluemixWizardPage getDirectoryPage() {
+        return _dirPage;
+    }
+    
+    public CloudSpaceBluemixWizardPage getCloudSpacePage() {
+        return _cloudSpacePage;
     }
     
     static public void launch() {
