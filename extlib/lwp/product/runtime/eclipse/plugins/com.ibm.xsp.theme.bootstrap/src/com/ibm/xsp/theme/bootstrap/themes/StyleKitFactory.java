@@ -30,6 +30,10 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
                 return getThemeFromBundle(folderPath + "/Bootstrap3.2.0.theme"); //$NON-NLS-1$
             }else if(themeId.equalsIgnoreCase("Bootstrap3.2.0_flat")) { //$NON-NLS-1$
                 return getThemeFromBundle(folderPath + "/Bootstrap3.2.0_flat.theme"); //$NON-NLS-1$
+            } else if(themeId.equalsIgnoreCase("Bootstrap3.3.5")) { //$NON-NLS-1$
+            	return getThemeFromBundle(folderPath + "/Bootstrap3.3.5.theme"); //$NON-NLS-1$
+            } else if(themeId.equalsIgnoreCase("Bootstrap3.3.5_flat")) { //$NON-NLS-1$
+            	return getThemeFromBundle(folderPath + "/Bootstrap3.3.5_flat.theme"); //$NON-NLS-1$
             }
         }
         return null;
@@ -41,6 +45,8 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
             String folderPath = "com/ibm/xsp/theme/bootstrap/themes"; //$NON-NLS-1$
             if (themeId.equalsIgnoreCase("Bootstrap3.2.0") || themeId.equalsIgnoreCase("Bootstrap3.2.0_flat")) { //$NON-NLS-1$ $NON-NLS-2$
                 return getThemeFromBundle(folderPath + "/Bootstrap3.2.0_extlib.theme"); //$NON-NLS-1$
+            } else if(themeId.equalsIgnoreCase("Bootstrap3.3.5") || themeId.equalsIgnoreCase("Bootstrap3.3.5_flat")) { //$NON-NLS-1$ $NON-NLS-2$
+            	return getThemeFromBundle(folderPath + "/Bootstrap3.3.5_extlib.theme"); //$NON-NLS-1$
             }
         }
         return null;
@@ -55,7 +61,9 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
     public String[] getThemeIds(){
         return new String[]{
             "Bootstrap3.2.0", // $NON-NLS-1$
-            "Bootstrap3.2.0_flat" // $NON-NLS-1$
+            "Bootstrap3.2.0_flat", // $NON-NLS-1$
+            "Bootstrap3.3.5", //$NON-NLS-1$
+            "Bootstrap3.3.5_flat" //$NON-NLS-1$
         };
     }
 }
