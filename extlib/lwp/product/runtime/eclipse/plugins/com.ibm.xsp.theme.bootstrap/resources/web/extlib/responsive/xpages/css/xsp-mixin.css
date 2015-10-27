@@ -1085,6 +1085,9 @@ div.glyphicon.xspReadIcon{
 .xsp.dbootstrap tr.dijitMenuItem td:last-child {
     padding-right: 10px;
 }
+.xsp.dbootstrap .dijitTitlePane .dijitArrowNode {
+    margin-right: 15px;
+}
 .xsp.dbootstrap .dijitMenuArrowCell .dijitMenuExpand:before,
 .xsp.dbootstrap .dijitTitlePane .dijitClosed .dijitArrowNode:before {
     font-family: "Glyphicons Halflings";
@@ -1095,7 +1098,16 @@ div.glyphicon.xspReadIcon{
     top: -1px;
     color: #428bca;
 }
-
+.xsp.dbootstrap .dijitMenuArrowCell .dijitMenuCollapse:before,
+.xsp.dbootstrap .dijitTitlePane .dijitOpen .dijitArrowNode:before {
+    font-family: "Glyphicons Halflings";
+    content: "\e114";
+    font-size: 12px;
+    padding-left: 10px;
+    position: relative;
+    top: -1px;
+    color: #428bca;
+}
 .xsp.dbootstrap .dijitInputContainer {
     padding: 4px;
 }

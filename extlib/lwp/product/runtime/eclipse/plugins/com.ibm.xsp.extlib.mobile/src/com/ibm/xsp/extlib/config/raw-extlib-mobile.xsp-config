@@ -113,8 +113,9 @@
     from this base instead of the original base,
     so that they do not contain a tooltip property.  -->
     <component>
-        <description>%/com.ibm.xsp.extlib.dojo.WidgetBase/descr%</description>
-        <display-name>%/com.ibm.xsp.extlib.dojo.WidgetBase/name%</display-name>
+        <!-- # "tooltip" should not be translated -->
+        <description>This is the mobile base Dojo widget. It is a base class for the other mobile Dojo widgets to inherit from. It is similar to the general base Dojo widget, except that it does not contain a "tooltip" property, because tooltips cannot be displayed on mobile devices.</description>
+        <display-name>Mobile Dojo Widget Base</display-name>
         <component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</component-type>
         <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
         

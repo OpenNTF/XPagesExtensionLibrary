@@ -46,7 +46,7 @@ public class ManifestUtil {
     
     private final static String _MANIFEST_FILENAME = "manifest.yml"; // $NON-NLS-1$
 
-    public static void writeDefaultManifest(BluemixConfig config, String dbName) {
+    public static void writeDefaultManifest(BluemixConfig config, String dbName, LinkedHashMap<String, String> extraEnv) {
         // Create the manifest objects
         Map<Object, Object> manifest = new LinkedHashMap<Object, Object>();
         List<Map<Object, Object>> applications = new ArrayList<Map<Object, Object>>();
@@ -65,6 +65,10 @@ public class ManifestUtil {
         LinkedHashMap<String, String> envMap = new LinkedHashMap<String, String>();
         envMap.put("APP_HOME_URL", "/" + BluemixUtil.getNsfName(dbName)); // $NON-NLS-1$
         envMap.put("APP_PRELOAD_DB", BluemixUtil.getNsfName(dbName)); // $NON-NLS-1$
+        if (extraEnv != null) {
+            envMap.putAll(extraEnv);
+        }
+        
         application.put(ManifestAppProps.ENV_TAG, envMap);
         
         // Add application 
@@ -325,9 +329,9 @@ public class ManifestUtil {
     protected static void setZeroOneBooleanValue(Map<String, Object> containingMap, String key, Boolean value) {
         if (value != null) {
             if (value) {
-                containingMap.put(key, 1);
+                containingMap.put(key, "1");
             } else {
-                containingMap.put(key, 0);                
+                containingMap.put(key, "0");                
             }
         } else {
             containingMap.remove(key);

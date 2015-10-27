@@ -80,7 +80,7 @@ public class CvwRestPage extends WizardPage implements SelectionListener {
         _notStandardCheckbox = WizardUtils.createCheckBox(_colGroup, txt, 2, false);
         _notStandardCheckbox.addSelectionListener(this);
         for (String[] column: restCols) {
-            WizardUtils.createLabel(_colGroup, column[0] + " :", 1, 20);            
+            WizardUtils.createLabel(_colGroup, column[0] + " :", 1);            
             _colMap.put(column[0], new ColumnCombo(_colGroup, column[1]));
         }
         

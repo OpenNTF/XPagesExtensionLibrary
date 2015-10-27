@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
+import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
@@ -67,7 +69,7 @@ public class ConfigBluemixWizardPage extends AbstractBluemixWizardPage implement
         GridLayout layout = WizardUtils.createGridLayout(1, 5);
         container.setLayout(layout);
 
-        _overwriteRadio = WizardUtils.createRadio(container, "Overwite the existing configuration", 1, this, 0); // $NLX-ConfigBluemixWizardPage.Overwitetheexistingconfiguration-1$
+        _overwriteRadio = WizardUtils.createRadio(container, "Create a new configuration", 1, this, 0); // $NLX-ConfigBluemixWizardPage.Createanewconfiguration-1$
         _useExistingRadio = WizardUtils.createRadio(container, "Use the existing configuration", 1, this, 0); // $NLX-ConfigBluemixWizardPage.Usetheexistingconfiguration-1$
 
         _group = WizardUtils.createGroup(container, 1, 2, 20);
@@ -93,43 +95,39 @@ public class ConfigBluemixWizardPage extends AbstractBluemixWizardPage implement
     }
   
     @Override
-    public void setVisible(boolean visible) {
-        if (visible && _wiz.advancing) {
-            // Set the initial state
-            _useExistingRadio.setSelection(true);
-            _overwriteRadio.setSelection(false);
-            WizardUtils.setGroupEnabledState(_group, true);            
-            setErrorMessage(null);
-            _dirLabel.setText(_wiz.newConfig.directory);
+    protected void initialisePageState() {
+        BluemixConfig config = ConfigManager.getInstance().getConfigFromDirectory(((ConfigBluemixWizard)_wiz).getDirectoryPage().getDirectory());
+        
+        // Set the initial state
+        _useExistingRadio.setSelection(true);
+        _overwriteRadio.setSelection(false);
+        WizardUtils.setGroupEnabledState(_group, true);            
+        _dirLabel.setText(config.directory);
 
-            if (_wiz.newConfig.appName != null) {
-                _nameLabel.setText(_wiz.newConfig.appName);
-            } else {
-                _nameLabel.setText("");                
-            }
-  
-            if (_wiz.newConfig.host != null) {
-                _hostLabel.setText(_wiz.newConfig.host);
-            } else {
-                _hostLabel.setText("");                
-            }
-            _orgLabel.setText(_wiz.newConfig.org);
-            _spaceLabel.setText(_wiz.newConfig.space);
-            
-            if (StringUtil.equalsIgnoreCase(_wiz.newConfig.copyMethod, "actual")) { // $NON-NLS-1$
-                _copyLabel.setText("Actual File"); // $NLX-ConfigBluemixWizardPage.ActualFile-1$
-            } else if (StringUtil.equalsIgnoreCase(_wiz.newConfig.copyMethod, "replica")) { // $NON-NLS-1$
-                _copyLabel.setText("Application Replica"); // $NLX-ConfigBluemixWizardPage.ApplicationReplica-1$
-            } else {
-                // Deploy process defaults to Copy
-                _copyLabel.setText("Application Copy"); // $NLX-ConfigBluemixWizardPage.ApplicationCopy-1$
-            }
+        if (config.appName != null) {
+            _nameLabel.setText(config.appName);
+        } else {
+            _nameLabel.setText("");                
         }
 
-        super.setVisible(visible);
+        if (config.host != null) {
+            _hostLabel.setText(config.host);
+        } else {
+            _hostLabel.setText("");                
+        }
+        _orgLabel.setText(config.org);
+        _spaceLabel.setText(config.space);
+        
+        if (StringUtil.equalsIgnoreCase(config.copyMethod, "actual")) { // $NON-NLS-1$
+            _copyLabel.setText("Actual File"); // $NLX-ConfigBluemixWizardPage.ActualFile-1$
+        } else if (StringUtil.equalsIgnoreCase(config.copyMethod, "replica")) { // $NON-NLS-1$
+            _copyLabel.setText("Application Replica"); // $NLX-ConfigBluemixWizardPage.ApplicationReplica-1$
+        } else {
+            // Deploy process defaults to Copy
+            _copyLabel.setText("Application Copy"); // $NLX-ConfigBluemixWizardPage.ApplicationCopy-1$
+        }
     }
-
-   
+    
     @Override
     public void widgetDefaultSelected(SelectionEvent event) {
     }
@@ -147,10 +145,5 @@ public class ConfigBluemixWizardPage extends AbstractBluemixWizardPage implement
     
     public boolean getUseExistingConfig() {
         return WizardUtils.getCheckBoxValue(_useExistingRadio, true);
-    }
-
-    @Override
-    protected void validatePage() {
-        showError(null);
     }
 }

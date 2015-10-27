@@ -79,6 +79,7 @@
 		</property>
 		
 		<property>
+			<!--  key: property.pageWidth.complex-type.bootstrapResponsiveConfiguration. -->
 			<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
 			<description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
 			<display-name>Page Width</display-name>
@@ -173,9 +174,9 @@
 		</property>
 		
 		<property>
-			<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
-			<description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
-			<display-name>Page Width</display-name>
+			<!-- Reuse descr/name from above -->
+			<description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+			<display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
 			<property-name>pageWidth</property-name>
 			<property-class>java.lang.String</property-class>
 			<property-extension>
@@ -965,9 +966,9 @@
 		
     
       <property>
-		<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
-        <description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
-        <display-name>Page Width</display-name>
+        <!-- Reuse descr/name from above -->
+        <description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+        <display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
         <property-name>pageWidth</property-name>
             <property-class>java.lang.String</property-class>
             <property-extension>

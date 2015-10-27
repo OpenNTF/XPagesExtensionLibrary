@@ -10,7 +10,6 @@ public class ResourceHandler {
     private static ExtLibResourceHandlerImpl impl(){
         if (s_impl == null) {
             s_impl = AccessController.doPrivileged(new PrivilegedAction<ExtLibResourceHandlerImpl>() {
-            	@Override
                 public ExtLibResourceHandlerImpl run() {
                     // privileged code goes here:
                     return new ExtLibResourceHandlerImpl(ResourceHandler.class, 

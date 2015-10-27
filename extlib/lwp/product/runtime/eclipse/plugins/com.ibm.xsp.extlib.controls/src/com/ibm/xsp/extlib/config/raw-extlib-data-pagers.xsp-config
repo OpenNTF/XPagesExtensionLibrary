@@ -97,7 +97,6 @@
         <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
         <group-type-ref>com.ibm.xsp.extlib.partial</group-type-ref>
         <group-type-ref>com.ibm.xsp.extlib.group.aria_label</group-type-ref>
-
         <property>
             <description>Holds the ID of the repeating control that this pager is to effect. The For Identifier is not needed when this control placed in a container repeating control.</description>
             <display-name>For Identifier</display-name>
@@ -110,6 +109,20 @@
                 </designer-extension>
             </property-extension>
         </property>
+    <property>
+      <description>%/com.ibm.xsp.group.core.prop.title/title/descr%</description>
+      <display-name>%/com.ibm.xsp.group.core.prop.title/title/name%</display-name>
+      <property-name>title</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <since>9.0.1.v00_15</since>
+        <localizable>true</localizable>
+        <designer-extension>
+        	<category>accessibility</category>
+          <tags>is-accessibility-title</tags>
+        </designer-extension>
+      </property-extension>
+    </property>
         
         <component-extension>
             <component-family>com.ibm.xsp.extlib.data.Pager</component-family>

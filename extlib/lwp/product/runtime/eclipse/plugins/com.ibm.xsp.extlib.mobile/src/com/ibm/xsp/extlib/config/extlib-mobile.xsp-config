@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Copyright IBM Corp. 2010, 2014                                      -->
+<!-- Copyright IBM Corp. 2010, 2015                                      -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -105,8 +105,8 @@
     </group-extension>
   </group>
   <component>
-    <description>%/com.ibm.xsp.extlib.dojo.WidgetBase/descr%</description>
-    <display-name>%/com.ibm.xsp.extlib.dojo.WidgetBase/name%</display-name>
+    <description>%component.com.ibm.xsp.extlib.dojo.WidgetBaseEx.descr%</description>
+    <display-name>%component.com.ibm.xsp.extlib.dojo.WidgetBaseEx.name%</display-name>
     <component-type>com.ibm.xsp.extlib.dojo.WidgetBaseEx</component-type>
     <component-class>com.ibm.xsp.extlib.component.dojo.UIDojoWidgetBase</component-class>
     <group-type-ref>com.ibm.xsp.extlib.group.FacesDojoComponent</group-type-ref>

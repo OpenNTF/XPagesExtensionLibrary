@@ -63,7 +63,7 @@ public class AbstractPager extends UIPanel implements FacesComponent, ThemeContr
 	private String refreshId;
     private String style;
     private String styleClass;
-
+    private String title;
     private String ariaLabel;
 
 	private transient FacesDataIterator dataIterator;
@@ -194,6 +194,21 @@ public class AbstractPager extends UIPanel implements FacesComponent, ThemeContr
 		}
 	}
 
+	public String getTitle() {
+		if (null != this.title) {
+			return this.title;
+		}
+		ValueBinding _vb = getValueBinding("title"); //$NON-NLS-1$
+		if (_vb != null) {
+			return (java.lang.String) _vb.getValue(FacesContext.getCurrentInstance());
+		} else {
+			return null;
+		}
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public void setAriaLabel(java.lang.String ariaLabel) {
 		this.ariaLabel = ariaLabel;
 	}
@@ -298,11 +313,12 @@ public class AbstractPager extends UIPanel implements FacesComponent, ThemeContr
 		this.style = (String)values[5];
 		this.styleClass = (String)values[6];
 		this.ariaLabel = (String)values[7];
+		this.title = (String)values[8];	
 	}
 
 	@Override
 	public Object saveState(FacesContext context) {
-		Object values[] = new Object[8];
+		Object values[] = new Object[9];
 		values[0] = super.saveState(context);
 	    values[1] = _for;
 	    values[2] = partialExecute;
@@ -311,6 +327,8 @@ public class AbstractPager extends UIPanel implements FacesComponent, ThemeContr
 	    values[5] = style;
 	    values[6] = styleClass;
 	    values[7] = ariaLabel;
+	    values[8] = title;
+	    
 		return values;
 	}
 	

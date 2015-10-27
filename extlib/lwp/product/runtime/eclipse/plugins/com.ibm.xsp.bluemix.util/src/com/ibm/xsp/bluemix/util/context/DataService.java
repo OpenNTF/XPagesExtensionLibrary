@@ -26,6 +26,7 @@ package com.ibm.xsp.bluemix.util.context;
 
 import java.util.Vector;
 
+import com.ibm.commons.util.PathUtil;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 
 public class DataService{
@@ -122,8 +123,16 @@ public class DataService{
 	public String getRootDir() {
 		return _ROOTDIR;
 	}
+
+	// ------------------------------------------------
+
 	public String findDatabaseName(){
 		return getHost()+"!!"+getAppPath();
+	}
+	public String findDatabaseByName(String dbPath){
+		String path1 = getHost()+"!!"+getRootDir();
+		String concatPath = PathUtil.concat(path1, dbPath, '/');
+		return concatPath;
 	}
 	public Vector<String> atDbName(){
 		Vector<String> v = new Vector<String>();
@@ -131,6 +140,16 @@ public class DataService{
 		v.add(getAppPath());
 		return v;
 	}
+	public Vector<String> atDbByName(String dbPath){
+		String path1 = getRootDir();
+		String concatPath = PathUtil.concat(path1, dbPath, '/');
+		
+		Vector<String> v = new Vector<String>();
+		v.add(getHost());
+		v.add(concatPath);
+		return v;
+	}
+
 	public String getValue(String name){
 		return instanceData.getAsString(name);
 	}

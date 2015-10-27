@@ -20,7 +20,10 @@ import java.io.File;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
@@ -162,15 +165,50 @@ public class ManifestMetaModel extends IDesignElementExtension {
     }
     
     public class BluemixManifestEditorInput extends FileStoreEditorInput {
+        
+        public  final static String MANIFEST_PATH = "manifest.yml"; // $NON-NLS-1$
+
         private final IDominoDesignerProject _designerProject;
+        private final IFile                  _fileLink;
      
         public BluemixManifestEditorInput(IFileStore fileStore, IDominoDesignerProject project) {
             super(fileStore);
             _designerProject = project;
+            
+            // Get the file link for the manifest - This allows us to sync with
+            // the Navigator and close the manifest when the project is closing
+            _fileLink = project.getProject().getFile(MANIFEST_PATH);
+            try {                
+                // Is the correct file link in place ?
+                if (_fileLink.getLocationURI().equals(getURI())) {
+                    // Yes, refresh the resource - this is needed or we run into
+                    // file sync problems, not sure why !!!
+                    _fileLink.refreshLocal(IResource.DEPTH_ZERO, null);
+                } else {
+                    // No, create the link - this modifies the .project file
+                    // The link has to be created in the project root, links in sub-dirs
+                    // cause exceptions when opening an NSF
+                    _fileLink.createLink(getURI(), IResource.REPLACE, null);
+                }
+
+            } catch (CoreException e) {
+                if (BluemixLogger.BLUEMIX_LOGGER.isErrorEnabled()) {
+                    BluemixLogger.BLUEMIX_LOGGER.errorp(this, "BluemixManifestEditorInput", e, "Failed to create or refresh the manifest file link"); // $NON-NLS-1$ $NLE-ManifestMetaModel.Failedtocreateorrefreshthemanifes-2$
+                }
+            }
+            
         }
 
         public IDominoDesignerProject getDesignerProject() {
             return _designerProject;
         }
+        
+        @SuppressWarnings("rawtypes") // $NON-NLS-1$
+        public Object getAdapter(Class adapter) {
+            if (adapter.equals(IFile.class) || adapter.equals(IResource.class)) {
+                return _fileLink;
+            }
+            return super.getAdapter(adapter);
+        }            
     }
 }

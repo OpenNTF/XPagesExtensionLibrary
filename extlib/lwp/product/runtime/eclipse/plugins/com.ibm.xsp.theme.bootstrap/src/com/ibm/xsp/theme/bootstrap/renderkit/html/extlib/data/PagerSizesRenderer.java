@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,6 +27,7 @@ import com.ibm.xsp.event.PagerEvent;
 import com.ibm.xsp.extlib.component.data.AbstractPager;
 import com.ibm.xsp.extlib.component.data.UIPagerSizes;
 import com.ibm.xsp.extlib.renderkit.html_extended.data.AbstractPagerRenderer;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 public class PagerSizesRenderer extends AbstractPagerRenderer {
 
@@ -47,13 +48,13 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
     protected void writePagerContent(FacesContext context, ResponseWriter w, AbstractPager _pager, FacesDataIterator dataIterator) throws IOException {
         UIPagerSizes pager = (UIPagerSizes) _pager;
         w.startElement("div", null); // $NON-NLS-1$
-        String pgClass = pager.getStyleClass();
+
+        w.startElement("ul", null); // $NON-NLS-1$
+        String styleClass = pager.getStyleClass();
+        String pgClass = ExtLibUtil.concatStyleClasses("pagination", styleClass); // $NON-NLS-1$
         if (StringUtil.isNotEmpty(pgClass)) {
             w.writeAttribute("class", pgClass, null); // $NON-NLS-1$
         }
-
-        w.startElement("ul", null); // $NON-NLS-1$
-        w.writeAttribute("class", "pagination", null); // $NON-NLS-1$ $NON-NLS-2$
 
         String text = pager.getText();
         if (StringUtil.isEmpty(text)) {

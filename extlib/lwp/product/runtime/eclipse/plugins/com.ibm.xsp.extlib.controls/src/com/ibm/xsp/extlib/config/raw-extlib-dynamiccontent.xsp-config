@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Â© Copyright IBM Corp. 2010, 2011                                    -->
+<!-- Â© Copyright IBM Corp. 2010, 2015                                    -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -468,7 +468,7 @@ else{
 				</property-extension>
 		</property>
 		<property>
-		     <!--# Do not transalte "show", "hide" or "toggle"  -->
+		     <!--# Do not translate "show", "hide" or "toggle"  -->
 			<description>The action to perform on the In Place Form. The options are "show", which displays the form, "hide" which hides the form or "toggle" which changes its state to either show or hide the form.</description>
 			<display-name>Form Action</display-name>
 			<property-name>formAction</property-name>

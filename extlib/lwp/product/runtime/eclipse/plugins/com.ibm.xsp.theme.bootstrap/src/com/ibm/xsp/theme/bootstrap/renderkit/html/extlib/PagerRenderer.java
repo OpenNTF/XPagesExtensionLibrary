@@ -34,6 +34,7 @@ import com.ibm.xsp.component.xp.XspPager;
 import com.ibm.xsp.component.xp.XspPagerControl;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.event.PagerEvent;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.AjaxUtilEx;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JavaScriptUtil;
@@ -125,16 +126,17 @@ public class PagerRenderer extends Renderer {
         boolean RTL = false;
 
         w.startElement("div", null); // $NON-NLS-1$
-        String pgClass = pager.getStyleClass();
+        
+        w.startElement("ul", null); // $NON-NLS-1$
+        String styleClass = pager.getStyleClass();
+        String pgClass = ExtLibUtil.concatStyleClasses("pagination", styleClass); // $NON-NLS-1$
         if (StringUtil.isNotEmpty(pgClass)) {
             w.writeAttribute("class", pgClass, null); // $NON-NLS-1$
         }
         if (StringUtil.isNotEmpty(pagerId)) {
             w.writeAttribute("id", pagerId, null); // $NON-NLS-1$
         }
-        w.startElement("ul", null); // $NON-NLS-1$
-        w.writeAttribute("class", "pagination", null); // $NON-NLS-1$ $NON-NLS-2$
-
+        
         List<?> listControls = pager.getChildren();
         if (listControls.isEmpty()) {
             return;

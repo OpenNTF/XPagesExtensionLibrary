@@ -18,7 +18,9 @@ package com.ibm.xsp.extlib.designer.bluemix.job;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -140,7 +142,7 @@ public class DeployJob extends Job {
                             tmpFilePath = BluemixUtil.createLocalDatabaseCopy(db, tmpDbName);
                         }
                         
-                        // Copy the actual or temporary to the target location
+                        // Copy the temporary replica/copy to the target location
                         monitor.subTask("Copying to deployment directory..."); // $NLX-DeployJob.Copyingtodeploymentdirectory-1$
                         BluemixUtil.copyFile(new File(tmpFilePath), new File(targetDbName));
                                                 
@@ -202,13 +204,25 @@ public class DeployJob extends Job {
                     throw new Exception("Error connecting to Cloud Space", e); // $NLX-DeployJob.ErrorconnectingtoCloudSpace-1$
                 }
                 
-                List<CloudApplication> existingApps;                
+                List<CloudApplication> existingApps;         
+                boolean couldNotGetAppList = false;
                 if (monitor.isCanceled()) return Status.CANCEL_STATUS;
                 monitor.subTask("Retrieving applications..."); // $NLX-DeployJob.RetrievingApplications-1$
                 try {
                     existingApps = client.getApplications();
                 } catch (Exception e) {
-                    throw new Exception("Error retrieving applications from Cloud Space", e); // $NLX-DeployJob.ErrorretrievingApplicationsfromCloud-1$
+                    if (BluemixUtil.isDefect187654Exception(e)) {
+                        // Probably Defect187654 - retrieving non string env vars
+                        // Allow deploy to continue, try to create each app and if 
+                        // this fails try to update an existing one
+                        existingApps = new ArrayList<CloudApplication>();
+                        couldNotGetAppList = true;
+                        if (BluemixLogger.BLUEMIX_LOGGER.isWarnEnabled()) {
+                            BluemixLogger.BLUEMIX_LOGGER.warnp(null, "run", e, "Failed to retrieve application list from Cloud Space"); // $NON-NLS-1$ $NLW-DeployJob.Failedtoretrieveapplicationlistfr-2$
+                        }                        
+                    } else {
+                        throw new Exception("Error retrieving applications from Cloud Space", e); // $NLX-DeployJob.ErrorretrievingApplicationsfromCloud-1$
+                    }
                 }
                 
                 for (String appName : applications) {
@@ -219,12 +233,45 @@ public class DeployJob extends Job {
                         firstAppName = appName;
                     }
 
-                    // Is the app already on Bluemix ?
-                    boolean newApp = true;
-                    for (CloudApplication cloudApp : existingApps) {
-                        if (StringUtil.equalsIgnoreCase(appName, cloudApp.getName())) {
-                            newApp = false;
-                            break;
+                    // Check if the app is already on Bluemix
+                    // Assume it is not to begin with 
+                    boolean createNewApp = true;
+                    if (couldNotGetAppList) {
+                        // No app list - Defect187654
+                        try {
+                            if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+                            monitor.subTask(StringUtil.format("Retrieving application details : {0}", appName)); // $NLX-DeployJob.RetrievingApplicationDetails0-1$
+
+                            // Try to get each individual app
+                            client.getApplication(appName);                            
+
+                            // Success - app already exists
+                            createNewApp = false;
+                        } catch (Exception e) {
+                            if (BluemixUtil.isDefect187654Exception(e)) {
+                                // App already exists - but env needs to be cleared (Defect187654)
+                                // They'll be re-written later on in the deploy process
+                                createNewApp = false;
+                                try {
+                                    if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+                                    monitor.subTask(StringUtil.format("Clearing environment variables : {0}", appName)); // $NLX-DeployJob.ClearingEnvironmentVariables0-1$
+
+                                    // Erase the env vars
+                                    client.updateApplicationEnv(appName, new LinkedHashMap<String, String>());
+                                } catch (Exception ex) {
+                                    if (BluemixLogger.BLUEMIX_LOGGER.isWarnEnabled()) {
+                                        BluemixLogger.BLUEMIX_LOGGER.warnp(null, "run", e, "Failed to clear {} env vars", appName); // $NON-NLS-1$ $NLW-DeployJob.Failedtoclearenvvars-2$
+                                    }                                                            
+                                }
+                            }
+                        }
+                    } else {
+                        // Have the app list - search for the app
+                        for (CloudApplication cloudApp : existingApps) {
+                            if (StringUtil.equalsIgnoreCase(appName, cloudApp.getName())) {
+                                createNewApp = false;
+                                break;
+                            }
                         }
                     }
                     
@@ -232,18 +279,20 @@ public class DeployJob extends Job {
                     String buildPack = manifest.getBuildPack(appName);
                     String command = manifest.getCommand(appName);
                     Integer timeout = manifest.getTimeout(appName);
-                    Staging staging = new Staging(command, buildPack, null, timeout);      
+                    String stack = manifest.getStack(appName);
+                    Staging staging = new Staging(command, buildPack, stack, timeout);      
                     
                     // Memory
                     Integer memory = manifest.getMemory(appName);
                     
-                    if (newApp) {
+                    if (createNewApp) {
                         // New Application
                         if (monitor.isCanceled()) return Status.CANCEL_STATUS;
                         monitor.subTask(StringUtil.format("Creating new application : {0}", appName)); // $NLX-DeployJob.CreatingnewApplication0-1$
-                        try {
+
+                        try {                          
                             // Create the Application with staging and memory
-                            client.createApplication(appName, staging, memory, null, null);                            
+                            client.createApplication(appName, staging, memory, null, null);
                         } catch (Exception e) {
                             throw new Exception("Error creating application", e); // $NLX-DeployJob.ErrorcreatingApplication-1$
                         }
@@ -276,6 +325,18 @@ public class DeployJob extends Job {
                                 throw new Exception("Error updating application memory", e); // $NLX-DeployJob.ErrorupdatingApplicationme-1$
                             }                            
                         }
+                    }
+                    
+                    // Env
+                    Map<String, Object> env = manifest.getEnv(appName);
+                    if (env != null) {
+                        if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+                        monitor.subTask(StringUtil.format("Updating environment variables...")); // $NLX-DeployJob.UpdatingEnv-1$
+                        try {
+                            client.updateApplicationEnv(appName, ManifestUtil.convertToStringMap(env));
+                        } catch (Exception e) {
+                            throw new Exception("Error updating application environment variables", e); // $NLX-DeployJob.ErrorupdatingApplicationen-1$
+                        }                            
                     }
                     
                     // Instances
@@ -321,19 +382,7 @@ public class DeployJob extends Job {
                         } else {
                             _config.uri = "";
                         }
-                        ConfigManager.getInstance().setConfig(_project, _config, false);
-                    }
-                    
-                    // Env
-                    Map<String, Object> env = manifest.getEnv(appName);
-                    if (env != null) {
-                        if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-                        monitor.subTask(StringUtil.format("Updating environment variables...")); // $NLX-DeployJob.UpdatingEnv-1$
-                        try {
-                            client.updateApplicationEnv(appName, ManifestUtil.convertToStringMap(env));
-                        } catch (Exception e) {
-                            throw new Exception("Error updating application environment variables", e); // $NLX-DeployJob.ErrorupdatingApplicationen-1$
-                        }                            
+                        ConfigManager.getInstance().setConfig(_project, _config, false, null);
                     }
                     
                     // Services

@@ -16,10 +16,15 @@
 
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
+import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
+import org.cloudfoundry.client.lib.CloudFoundryClient;
 import org.cloudfoundry.client.lib.domain.CloudOrganization;
 import org.cloudfoundry.client.lib.domain.CloudSpace;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
@@ -36,7 +41,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.designer.domino.preferences.DominoPreferenceManager;
+import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
+import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
+
+import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
 
 /**
  * @author Gary Marjoram
@@ -44,8 +54,11 @@ import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
  */
 public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage implements ControlListener, ISelectionChangedListener {
     
-    private TableViewer _orgViewer;
-    private TableViewer _spaceViewer;
+    private TableViewer             _orgViewer;
+    private TableViewer             _spaceViewer;
+    private CloudFoundryClient      _client;
+    private List<CloudOrganization> _orgs;
+    private List<CloudSpace>        _spaces;
 
     protected CloudSpaceBluemixWizardPage(String pageName) {
         super(pageName);
@@ -103,15 +116,22 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
     }
     
     @Override
-    public void setVisible(boolean visible) {
-        if (visible && _wiz.advancing) {
-            String [] orgs = getOrgs();
-            int orgIdx = orgs.length > 0 ? 0 : -1;
-            _orgViewer.setInput(orgs);
-            _orgViewer.getTable().select(orgIdx);
-            updateSpaces(orgIdx);
+    protected void initialisePageState() {     
+        String savedOrg = DominoPreferenceManager.getInstance().getValue(KEY_BLUEMIX_CLOUDSPACE_ORG, false);
+        String savedSpace = DominoPreferenceManager.getInstance().getValue(KEY_BLUEMIX_CLOUDSPACE_SPACE, false);
+
+        String [] orgs = getOrgs();
+        _orgViewer.setInput(orgs);
+        int orgIdx = orgs.length > 0 ? 0 : -1;
+        for (int i=0; i < orgs.length; i++) {
+            if (StringUtil.equalsIgnoreCase(orgs[i], savedOrg)) {
+                orgIdx = i;
+                break;
+            }
         }
-        super.setVisible(visible);
+        
+        _orgViewer.getTable().select(orgIdx);
+        updateSpaces(orgIdx, savedSpace);        
     }
 
     @Override
@@ -127,15 +147,24 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
     @Override
     public void selectionChanged(SelectionChangedEvent event) {
         if (event.getSource() == _orgViewer) {
-            updateSpaces(_orgViewer.getTable().getSelectionIndex());
+            updateSpaces(_orgViewer.getTable().getSelectionIndex(), null);
         }
+        _hasChanged = true;
     }
     
-    public void updateSpaces(int orgIdx) {
+    public void updateSpaces(int orgIdx, String space) {
         if (orgIdx >= 0) {
-            _spaceViewer.setInput(getSpaces(_wiz.orgs.get(orgIdx).getName()));
+            String [] spaces = getSpaces(_orgs.get(orgIdx).getName());
+            int spaceIdx = 0;
+            for (int i=0; i < spaces.length; i++) {
+                if (StringUtil.equalsIgnoreCase(spaces[i], space)) {
+                    spaceIdx = i;
+                    break;
+                }
+            }        
+            _spaceViewer.setInput(spaces);
             _spaceViewer.refresh();        
-            _spaceViewer.getTable().select(0);
+            _spaceViewer.getTable().select(spaceIdx);
         } else {
             _spaceViewer.setInput(null);
             _spaceViewer.refresh();        
@@ -145,7 +174,7 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
     
     private String[] getOrgs() {
         ArrayList <String> list = new ArrayList<String>();
-        for (CloudOrganization org : _wiz.orgs) {
+        for (CloudOrganization org : _orgs) {
             list.add(org.getName());
         }
         return list.toArray(new String[list.size()]);
@@ -153,7 +182,7 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
 
     private String[] getSpaces(String org) {
         ArrayList <String> list = new ArrayList<String>();
-        for (CloudSpace space : _wiz.spaces) {
+        for (CloudSpace space : _spaces) {
             if (StringUtil.equalsIgnoreCase(org, space.getOrganization().getName())) {
                 list.add(space.getName());
             }
@@ -163,7 +192,7 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
     
     public String getOrg() {
         if (!_orgViewer.getTable().isDisposed()) {
-            return _wiz.orgs.get(_orgViewer.getTable().getSelectionIndex()).getName();
+            return _orgs.get(_orgViewer.getTable().getSelectionIndex()).getName();
         }        
         return "";
     }
@@ -184,4 +213,47 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
         }
     }
 
+    @Override
+    protected void savePageState() {
+        DominoPreferenceManager.getInstance().setValue(KEY_BLUEMIX_CLOUDSPACE_ORG, getOrg());        
+        DominoPreferenceManager.getInstance().setValue(KEY_BLUEMIX_CLOUDSPACE_SPACE, getSpace());        
+    }
+    
+    public IRunnableWithProgress getOrgsAndSpaces = new IRunnableWithProgress() {
+        public void run(IProgressMonitor monitor) {
+            try {
+                monitor.beginTask(BluemixUtil.productizeString("%BM_PRODUCT%"), IProgressMonitor.UNKNOWN);  // $NON-NLS-1$
+    
+                if (_client == null) {
+                    try {
+                        monitor.subTask("Connecting to Server..."); // $NLX-CloudSpaceBluemixWizardPage.ConnectingtoServer-1$
+                        String target = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_URL, "");
+                        _client = new CloudFoundryClient(_wiz._credentials, URI.create(target).toURL());
+                        _client.login();
+                    } catch (Exception e) {
+                        throw new Exception("Error connecting to Server", e); // $NLX-CloudSpaceBluemixWizardPage.ErrorconnectingtoServer-1$
+                    }
+                }
+    
+                try {
+                    monitor.subTask("Retrieving organizations..."); // $NLX-CloudSpaceBluemixWizardPage.Retrievingorganizations-1$
+                    _orgs = _client.getOrganizations();
+                } catch (Exception e) {
+                    throw new Exception("Error retrieving organizations", e); // $NLX-CloudSpaceBluemixWizardPage.Errorretrievingorganizations-1$
+                }
+    
+                try {
+                    monitor.subTask("Retrieving spaces..."); // $NLX-CloudSpaceBluemixWizardPage.Retrievingspaces-1$
+                    _spaces = _client.getSpaces();
+                } catch (Exception e) {
+                    throw new Exception("Error retrieving spaces", e); // $NLX-CloudSpaceBluemixWizardPage.Errorretrievingspaces-1$
+                }
+    
+                monitor.done();
+            } catch (Exception e) {
+                _wiz.setJobException(e);
+                _client = null;
+            }
+        }
+    };
 }
