@@ -47,6 +47,7 @@ public abstract class BasicComplexTreeNode extends AbstractComplexTreeNode {
     private Boolean expanded;
 	private Boolean selected;
 	private Boolean enabled;
+	private Boolean escape;
 	
 	public BasicComplexTreeNode() {
 	}
@@ -273,6 +274,25 @@ public abstract class BasicComplexTreeNode extends AbstractComplexTreeNode {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
+    }
+    
+    @Override
+    public boolean isEscape() {
+    	if(null != this.escape) {
+    		return this.escape;
+    	}
+    	ValueBinding _vb = getValueBinding("escape"); //$NON-NLS-1$
+    	if(_vb != null) {
+    		Object obj = _vb.getValue(getFacesContext());
+    		if(obj instanceof Boolean) {// non-null
+    			return (Boolean)obj;
+    		}
+    	}
+    	return super.isEscape();
+    }
+    
+    public void setEscape(boolean escape) {
+    	this.escape = escape;
     }
 
 	@Override
