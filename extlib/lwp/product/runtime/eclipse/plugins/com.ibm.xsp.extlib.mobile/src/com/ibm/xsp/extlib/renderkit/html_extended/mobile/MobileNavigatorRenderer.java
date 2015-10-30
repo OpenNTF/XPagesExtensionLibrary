@@ -132,6 +132,7 @@ public class MobileNavigatorRenderer extends AbstractTreeRenderer {
     protected JsonJavaObject renderEntryNode(TreeContextImpl tree) throws IOException {
         boolean enabled = tree.getNode().isEnabled();
         boolean selected = tree.getNode().isSelected();
+        boolean escape = tree.getNode().isEscape();
         
         /*
          * json for a menu item
@@ -165,6 +166,7 @@ public class MobileNavigatorRenderer extends AbstractTreeRenderer {
 
         jsonTreeItem.putJsonProperty("disabled", Boolean.toString(!enabled)); // $NON-NLS-1$
         jsonTreeItem.putJsonProperty("iconClass", ""); // $NON-NLS-1$ $NON-NLS-2$
+        jsonTreeItem.putJsonProperty("escape", Boolean.toString(escape)); // $NON-NLS-1$
         
         // Fix for SPR#BGLN9HYDW9 - No icon image appearing for nodes
         // Pass in the iconImg, iconHeight & iconWidth params

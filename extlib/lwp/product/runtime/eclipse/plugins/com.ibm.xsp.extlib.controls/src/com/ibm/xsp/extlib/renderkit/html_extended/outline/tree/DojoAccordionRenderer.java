@@ -129,6 +129,7 @@ public class DojoAccordionRenderer extends AbstractTreeRenderer {
         boolean enabled = tree.getNode().isEnabled();
         String style = getItemStyle(tree,enabled,false);
         String styleClass = getItemStyleClass(tree,enabled,false);
+        boolean escape = tree.getNode().isEscape();
 
         boolean leaf = tree.getNode().getType()==ITreeNode.NODE_LEAF;
         String href = null;
@@ -180,7 +181,11 @@ public class DojoAccordionRenderer extends AbstractTreeRenderer {
 //      }
         if(StringUtil.isNotEmpty(label)) {
             //writer.writeAttribute("title", label, null); // $NON-NLS-1$
-        	attrs.put("title", HtmlUtil.toHTMLContentString(label, false)); //$NON-NLS-1$
+        	if(escape) {
+        		attrs.put("title", HtmlUtil.toHTMLContentString(label, false)); //$NON-NLS-1$
+        	} else {
+        		attrs.put("title", label); //$NON-NLS-1$
+        	}
         }
 
         DojoRendererUtil.writeDojoHtmlAttributes(context, getComponent(), dojoType, attrs);

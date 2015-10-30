@@ -93,6 +93,7 @@ public class HtmlComboBoxRenderer extends ComboBoxRenderer {
             if(selected) {
                 writer.writeAttribute("selected", "selected", "selected"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
             }
+            // Don't obey escape=false here, since HTML inside option tags would be invalid
             writer.writeText(label,"label"); // $NON-NLS-1$
             writer.endElement("option"); // $NON-NLS-1$
             JSUtil.writeln(writer);

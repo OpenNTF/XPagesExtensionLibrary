@@ -97,7 +97,11 @@ public class DojoDropDownButtonRenderer extends DropDownButtonRenderer {
         // Render the text
         String label = tree.getNode().getLabel();
         if(StringUtil.isNotEmpty(label)) {
-            writer.writeText(label, "label"); // $NON-NLS-1$
+        	if(tree.getNode().isEscape()) {
+        		writer.writeText(label, "label"); // $NON-NLS-1$
+        	} else {
+        		writer.write(label);
+        	}
         }
         writer.writeText(" ",null); // $NON-NLS-1$
         

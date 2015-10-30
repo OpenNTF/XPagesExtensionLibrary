@@ -248,7 +248,11 @@ public class DojoMenuRenderer extends AbstractTreeRenderer {
         if(StringUtil.isNotEmpty(label)) {
             if(hasp) script.append(","); else hasp=true;
             script.append("label:"); // $NON-NLS-1$
-            JavaScriptUtil.addString(script, HtmlUtil.toHTMLContentString(label, false));
+            if(tree.getNode().isEscape()) {
+            	JavaScriptUtil.addString(script, HtmlUtil.toHTMLContentString(label, false));
+            } else {
+            	JavaScriptUtil.addString(script, label);
+            }
         }
 
         boolean enabled = tree.getNode().isEnabled();

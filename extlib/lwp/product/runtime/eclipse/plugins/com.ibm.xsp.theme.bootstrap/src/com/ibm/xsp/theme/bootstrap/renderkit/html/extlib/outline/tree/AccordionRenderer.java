@@ -114,6 +114,7 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         boolean enabled = tree.getNode().isEnabled();
         String style = getItemStyle(tree,enabled,false);
         String styleClass = getItemStyleClass(tree,enabled,false);
+        boolean escape = tree.getNode().isEscape();
 
         boolean leaf = tree.getNode().getType()==ITreeNode.NODE_LEAF;
         String href = null;
@@ -163,7 +164,11 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         }
         
         if(StringUtil.isNotEmpty(label)) {
-            writer.writeText(label, null); // $NON-NLS-1$
+        	if(escape) {
+        		writer.writeText(label, null); // $NON-NLS-1$
+        	} else {
+        		writer.write(label);
+        	}
         }
 
         writer.endElement("a"); // $NON-NLS-1$
