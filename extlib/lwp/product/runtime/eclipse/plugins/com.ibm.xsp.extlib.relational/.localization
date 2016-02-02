@@ -1,6 +1,6 @@
 #Localization file used by Workplace Designer
 #Fri May 16 11:06:47 BST 2014
-resourceHandlerClass=ResourceHandler
+resourceHandlerClass=RelationalResourceHandler
 propertiesFileName=messages.properties
 resourceHandlerPackage=com.ibm.xsp.extlib.relational
 loggingId=CLFAD

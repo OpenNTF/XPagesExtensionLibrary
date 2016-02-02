@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,10 +26,23 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
     public InputStream getThemeAsStream(String themeId, int scope) {
         if (scope == StyleKitFactory.STYLEKIT_GLOBAL) {
             String folderPath = "com/ibm/xsp/theme/bootstrap/themes"; //$NON-NLS-1$
-            if (themeId.equalsIgnoreCase("Bootstrap3.2.0")) { //$NON-NLS-1$
-                return getThemeFromBundle(folderPath + "/Bootstrap3.2.0.theme"); //$NON-NLS-1$
+            if (themeId.equalsIgnoreCase("Bootstrap3")) { //$NON-NLS-1$
+                return getThemeFromBundle(folderPath + "/Bootstrap3.theme"); //$NON-NLS-1$
+            }else if(themeId.equalsIgnoreCase("Bootstrap3_flat")) { //$NON-NLS-1$
+                return getThemeFromBundle(folderPath + "/Bootstrap3_flat.theme"); //$NON-NLS-1$
+            }
+            // Any time an old theme name was used, provide the renamed theme.
+            // There will only ever be one v3 version of Bootstrap in the ExtLib.
+            // Therefore the minor version numbers are not in the theme name.
+            // The theme names only use the major version number, which will apply
+            // for all future Bootstrap versions.
+            // And whenever a Bootstrap version is updated, e.g. from 3.3.6 to 3.3.7
+            // or 4.0.0 to 4.0.1, the respective theme names remain the same using only
+            // the major version number.
+            else if(themeId.equalsIgnoreCase("Bootstrap3.2.0")) { //$NON-NLS-1$
+                return getThemeFromBundle(folderPath + "/Bootstrap3.theme"); //$NON-NLS-1$
             }else if(themeId.equalsIgnoreCase("Bootstrap3.2.0_flat")) { //$NON-NLS-1$
-                return getThemeFromBundle(folderPath + "/Bootstrap3.2.0_flat.theme"); //$NON-NLS-1$
+                return getThemeFromBundle(folderPath + "/Bootstrap3_flat.theme"); //$NON-NLS-1$
             }
         }
         return null;
@@ -37,12 +50,10 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
 
     @Override
     public InputStream getThemeFragmentAsStream(String themeId, int scope) {
-        if (scope == StyleKitFactory.STYLEKIT_GLOBAL) {
-            String folderPath = "com/ibm/xsp/theme/bootstrap/themes"; //$NON-NLS-1$
-            if (themeId.equalsIgnoreCase("Bootstrap3.2.0") || themeId.equalsIgnoreCase("Bootstrap3.2.0_flat")) { //$NON-NLS-1$ $NON-NLS-2$
-                return getThemeFromBundle(folderPath + "/Bootstrap3.2.0_extlib.theme"); //$NON-NLS-1$
-            }
-        }
+        //Removing the "_extlib" theme fragment as it appears to be redundant
+        //and could cause issues in the future
+        
+        // No fragments are contributed
         return null;
     }
 
@@ -54,8 +65,8 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
     @Override
     public String[] getThemeIds(){
         return new String[]{
-            "Bootstrap3.2.0", // $NON-NLS-1$
-            "Bootstrap3.2.0_flat" // $NON-NLS-1$
+            "Bootstrap3", // $NON-NLS-1$
+            "Bootstrap3_flat" // $NON-NLS-1$
         };
     }
 }

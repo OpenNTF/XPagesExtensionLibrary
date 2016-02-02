@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2014, 2016                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
 <faces-config>
 	<faces-config-extension>
 		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
@@ -69,7 +85,7 @@
 		</property>
 		
 		<property>
-			<description>Label on the menu button shown when the left column is collapsed. "Menu" by default.</description>
+			<description>Label on the menu button shown when the left column is collapsed. "Menu" is the default value.</description>
 			<display-name>Collapsed Left Column Menu Label</display-name>
 			<property-name>collapseLeftMenuLabel</property-name>
 			<property-class>java.lang.String</property-class>
@@ -164,7 +180,7 @@
 		</property>
 		
 		<property>
-			<description>Label on the menu button shown when the left column is collapsed. "Menu" by default.</description>
+			<description>Label on the menu button shown when the left column is collapsed. "Menu" is the default value.</description>
 			<display-name>Collapsed Left Column Menu Label</display-name>
 			<property-name>collapsedLeftMenuLabel</property-name>
 			<property-class>java.lang.String</property-class>
@@ -472,7 +488,7 @@
     <complex-class>com.ibm.xsp.theme.bootstrap.components.responsive.DashNode</complex-class>
     
     <property>
-      <description>Defines the width in number of columns of the dash node for large-sized displays. This is a boostrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for large displays, over 1200px wide.</description>
+      <description>Defines the width in number of columns of the dash node for large-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for large displays, over 1200px wide.</description>
         <display-name>Large Column Size</display-name>
         <property-name>sizeLarge</property-name>
         <property-class>int</property-class>
@@ -497,7 +513,7 @@
       </property-extension>
     </property>
     <property>
-      <description>Defines the width in number of columns of the dash node for medium-sized displays. This is a boostrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for medium displays, over 990px and under 1200px wide.</description>
+      <description>Defines the width in number of columns of the dash node for medium-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for medium displays, over 990px and under 1200px wide.</description>
         <display-name>Medium Column Size</display-name>
         <property-name>sizeMedium</property-name>
         <property-class>int</property-class>
@@ -522,7 +538,7 @@
       </property-extension>
     </property>
     <property>
-      <description>Defines the width in number of columns of the dash node for small-sized displays. This is a boostrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for small displays, such as tablets, over 768px and under 990px wide.</description>
+      <description>Defines the width in number of columns of the dash node for small-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for small displays, such as tablets, over 768px and under 990px wide.</description>
         <display-name>Small Column Size</display-name>
         <property-name>sizeSmall</property-name>
         <property-class>int</property-class>
@@ -547,7 +563,7 @@
       </property-extension>
     </property>
     <property>
-      <description>Defines the width in number of columns of the dash node for extra-small-sized displays. This is a boostrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for extra small displays, such as mobile phones, under 768px wide.</description>
+      <description>Defines the width in number of columns of the dash node for extra-small-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for extra small displays, such as mobile phones, under 768px wide.</description>
         <display-name>Extra Small Column Size</display-name>
         <property-name>sizeExtraSmall</property-name>
         <property-class>int</property-class>
@@ -689,7 +705,7 @@
       </property-extension>
     </property>
     <property>
-      <description>Title text to add to the GLYPHICON, used by assistive technologies.</description>
+      <description>Title text to add to the font icon, used by assistive technologies.</description>
       <display-name>Icon Title</display-name>
       <property-name>iconTitle</property-name>
       <property-class>java.lang.String</property-class>
@@ -792,8 +808,7 @@
       </property-extension>
     </property>
     <property>
-      <!-- # "GLYPHICON" is a technical term and product name, it should not be translated anywhere in this file -->
-      <description>A CSS style or styles for the GLYPHICON.</description>
+      <description>A CSS style or styles for the font icon.</description>
       <display-name>Icon Style</display-name>
       <property-name>iconStyle</property-name>
       <property-class>java.lang.String</property-class>
@@ -808,13 +823,13 @@
       </property-extension>
     </property>
     <property>
-		<description>Indicates if a GLYPHICON should be used instead of an image. GLYPHICONs are a set of icons provided in a font file that are built into Bootstrap. False by default. When enabled the image properties will be ignored.</description>
+		<description>Indicates if a font icon should be used instead of an image. Font icons are a set of icons provided in a font file that are built into Bootstrap. False by default. When enabled the image properties will be ignored.</description>
 		<display-name>Icon Enabled</display-name>
 		<property-name>iconEnabled</property-name>
 		<property-class>boolean</property-class>
 	</property>
 	<property>
-      <description>The GLYPHICON to use in the dash node.</description>
+      <description>The font icon to use in the dash node.</description>
       <display-name>Icon</display-name>
       <property-name>icon</property-name>
       <property-class>java.lang.String</property-class>
@@ -835,7 +850,7 @@
       </property-extension>
     </property>
 	<property>
-      <description>The HTML tag to use for the GLYPHICON. "div" tag used by default</description>
+      <description>The HTML tag to use for the font icon. "div" tag used by default</description>
       <display-name>Icon Tag</display-name>
       <property-name>iconTag</property-name>
       <property-class>java.lang.String</property-class>
@@ -856,7 +871,7 @@
       </property-extension>
     </property>
     <property>
-		<description>The font size of the GLYPHICON. "72pt" is the default size.</description>
+		<description>The font size of the font icon. "72pt" is the default size.</description>
 		<display-name>Icon Size</display-name>
 		<property-name>iconSize</property-name>
 		<property-class>java.lang.String</property-class>
@@ -1199,7 +1214,7 @@
 			</property-extension>
       </property>
       <property>
-          <description>Indicates if the carousel should automatically cycle once loaded. When enabled, the carousel will automatically move from one slide to the next, with a dealy equal to the value of the slideInterval property. True by default.</description>
+          <description>Indicates if the carousel should automatically cycle once loaded. When enabled, the carousel will automatically move from one slide to the next, with a delay equal to the value of the slideInterval property. True by default.</description>
           <display-name>Auto Cycle</display-name>
           <property-name>autoCycle</property-name>
           <property-class>boolean</property-class>
@@ -1265,7 +1280,7 @@
           </property-extension>
       </property>
       <property>
-      <description>A CSS style or styles for the slide indicators of the carousel. The slide indicators are a set of small buttons at the bottom of the carousel, each button repesenting a slide. Each button can be clicked to take the user to that particular slide. The currently active slide is indicated by a solid circle in the set of indicators.</description>
+      <description>A CSS style or styles for the slide indicators of the carousel. The slide indicators are a set of small buttons at the bottom of the carousel, each button representing a slide. Each button can be clicked to take the user to that particular slide. The currently active slide is indicated by a solid circle in the set of indicators.</description>
       <display-name>Carousel Indicator Style</display-name>
       <property-name>indicatorStyle</property-name>
       <property-class>java.lang.String</property-class>
@@ -1385,8 +1400,8 @@
       </property-extension>
     </property>
     <property>
-      <description>The URI value for the href property of the button on the slide. If the button label is empty, no link will be added.</description>
-      <display-name>Button Href</display-name>
+      <description>The URL value for the "href" property of the button on the slide. If the button label is empty, no link will be added.</description>
+      <display-name>Button URL Reference</display-name>
       <property-name>buttonHref</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
@@ -1483,7 +1498,7 @@
     </property>
     <property>
       <description>The background image to be displayed in the slide</description>
-      <display-name>Background Image Src</display-name>
+      <display-name>Background Image Source</display-name>
       <property-name>backgroundSrc</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>

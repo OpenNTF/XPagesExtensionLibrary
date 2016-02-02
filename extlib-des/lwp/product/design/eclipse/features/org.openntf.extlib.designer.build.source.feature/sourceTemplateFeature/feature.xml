@@ -20,7 +20,7 @@
 		id="org.openntf.extlib.designer.tooling.feature.source" 
 		label="%feature.label" 
 		provider-name="IBM" 
-		version="9.0.1.v00_15_qualifier">
+		version="9.0.1.v00_16_qualifier">
 	<description>
 		%feature.description
 	</description>
@@ -32,7 +32,7 @@
 	</license>
 	<plugin
 		id="org.openntf.extlib.designer.tooling.feature.source"
-		version="9.0.1.v00_15_qualifier"
+		version="9.0.1.v00_16_qualifier"
 		download-size="0" 
 		install-size="0"/>
 	<!-- note there is a build fail if that version is set to 0.0.0 -->

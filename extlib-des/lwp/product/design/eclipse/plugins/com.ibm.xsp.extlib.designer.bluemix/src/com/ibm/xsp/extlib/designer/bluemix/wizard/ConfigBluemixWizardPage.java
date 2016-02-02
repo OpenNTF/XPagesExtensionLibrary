@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,13 +29,14 @@ import org.eclipse.swt.widgets.Label;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
 import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class ConfigBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener {
+public class ConfigBluemixWizardPage extends AbstractWizardPage implements SelectionListener {
     
     private Label _dirLabel;
     private Label _orgLabel;

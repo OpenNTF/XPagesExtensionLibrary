@@ -38,8 +38,9 @@ import com.ibm.commons.swt.controls.custom.CustomTable;
 import com.ibm.commons.swt.controls.custom.CustomTableColumn;
 import com.ibm.commons.swt.data.dialog.SimpleDialog;
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestEditorPage.Service;
+import com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestTableEditor.EditTableItem;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestEditorPage.TableEntry;;
 
 /**
  * @author Gary Marjoram
@@ -47,11 +48,11 @@ import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
  */
 public class ManifestServicesDialog extends SimpleDialog {
     
-    private final ArrayList<CloudService> _cloudServices;
-    private final ArrayList<Service>      _serviceList;
-    private TableViewer                   _serviceTable;
+    private final ArrayList<CloudService>  _cloudServices;
+    private final ArrayList<EditTableItem> _serviceList;
+    private TableViewer                    _serviceTable;
     
-    public ManifestServicesDialog(Shell shell, ArrayList<CloudService> cloudServices, ArrayList<Service> serviceList) {
+    public ManifestServicesDialog(Shell shell, ArrayList<CloudService> cloudServices, ArrayList<EditTableItem> serviceList) {
         super(shell);
         _cloudServices = cloudServices;
         _serviceList = serviceList;
@@ -158,8 +159,8 @@ public class ManifestServicesDialog extends SimpleDialog {
         for (TableItem item : items) {
             if (item.getData() instanceof CloudService) {
                 CloudService cs = (CloudService) item.getData();
-                for (Service service : _serviceList) {
-                    if (StringUtil.equals(service.getName(), cs.getName())) {
+                for (EditTableItem service : _serviceList) {
+                    if (StringUtil.equals(service.getColumn(0), cs.getName())) {
                         item.setChecked(true);
                         break;
                     }
@@ -178,7 +179,7 @@ public class ManifestServicesDialog extends SimpleDialog {
             if (item.getChecked() == true) {
                 if (item.getData() instanceof CloudService) {
                     CloudService cs = (CloudService) item.getData();
-                    _serviceList.add(new Service(cs.getName()));
+                    _serviceList.add(new TableEntry(cs.getName()));
                 }
             }
         }

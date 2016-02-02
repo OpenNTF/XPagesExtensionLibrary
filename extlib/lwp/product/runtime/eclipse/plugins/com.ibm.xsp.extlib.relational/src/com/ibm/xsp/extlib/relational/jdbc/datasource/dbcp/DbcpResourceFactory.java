@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010 - 2014
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,7 +27,6 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.cpdsadapter.DriverAdapterCPDS;
 import org.apache.commons.dbcp.datasources.SharedPoolDataSource;
 
-import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.runtime.util.pool.PoolException;
 import com.ibm.xsp.extlib.relational.RelationalLogger;
 import com.ibm.xsp.extlib.relational.resources.IJdbcResourceFactory;
@@ -37,6 +36,7 @@ import com.ibm.xsp.extlib.relational.resources.IJdbcResourceFactory;
  * @author dtaieb
  * @deprecated
  */
+// Note, this class seems to be unused (2015-11-23 9.0.1N)
 public  class DbcpResourceFactory implements IJdbcResourceFactory {
     
     public static final String TYPE = "JDBC"; // $NON-NLS-1$
@@ -74,7 +74,9 @@ public  class DbcpResourceFactory implements IJdbcResourceFactory {
                 }
             });
         } catch (Exception e) {
-            throw new PoolException( e, StringUtil.format("Unable to initialize the shared pool {0}", "DataSource")); // $NLX-DbcpResourceFactory.Unabletoinitializethesharedpool0-1$ $NON-NLS-2$
+            // "Unable to initialize the shared connection pool DataSource"
+            String msg = com.ibm.xsp.extlib.relational.RelationalResourceHandler.getSpecialAudienceString("DbcpPoolDataSource.Unabletoinitializethesharedconnec");//$NON-NLS-1$
+            throw new PoolException( e, msg);
         }
     }
 

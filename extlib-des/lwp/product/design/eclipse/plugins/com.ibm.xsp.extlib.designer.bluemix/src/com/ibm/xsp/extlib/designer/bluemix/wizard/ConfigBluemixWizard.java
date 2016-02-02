@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -43,7 +43,7 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
     private final ManifestBluemixWizardPage   _manifestPage;
     private final CopyMethodBluemixWizardPage _copyMethodPage;    
 
-    public ConfigBluemixWizard() {
+    private ConfigBluemixWizard() {
         super();
 
         // Get the project and existing config if any
@@ -111,10 +111,10 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
         event.doit = true;
         advancing = false;
         if (event.getCurrentPage() == _dirPage) {
-            if (_dirPage._hasChanged) {
-                _configPage._firstDisplay = true;
-                _manifestPage._firstDisplay = true;
-                _dirPage._hasChanged = false;
+            if (_dirPage.hasChanged()) {
+                _configPage.setFirstDisplay(true);
+                _manifestPage.setFirstDisplay(true);
+                _dirPage.setHasChanged(false);
             }
             if (event.getTargetPage() == _configPage) {
                 advancing = true;
@@ -130,7 +130,7 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
         else if (event.getCurrentPage() == _copyMethodPage) {
             if (event.getTargetPage() == _cloudSpacePage) {
                 advancing = true;
-                if(_cloudSpacePage._firstDisplay) {
+                if(_cloudSpacePage.isFirstDisplay()) {
                     if (!runJob(_cloudSpacePage.getOrgsAndSpaces)) {
                         event.doit = false;
                     }
@@ -138,13 +138,13 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
             }
         }
         else if (event.getCurrentPage() == _cloudSpacePage) {
-            if (_cloudSpacePage._hasChanged) {
-                _namePage._firstDisplay = true;
-                _cloudSpacePage._hasChanged = false;
+            if (_cloudSpacePage.hasChanged()) {
+                _namePage.setFirstDisplay(true);
+                _cloudSpacePage.setHasChanged(false);
             }            
             if (event.getTargetPage() == _namePage) {
                 advancing = true;
-                if (_namePage._firstDisplay) {
+                if (_namePage.isFirstDisplay()) {
                     _namePage.setCloudSpace(_cloudSpacePage.getOrg(), _cloudSpacePage.getSpace());
                     if (!runJob(_namePage.getApplications)) {
                         event.doit = false;
@@ -157,7 +157,7 @@ public class ConfigBluemixWizard extends AbstractBluemixWizard {
         else if (event.getCurrentPage() == _manifestPage) {
             if (event.getTargetPage() == _namePage) {
                 advancing = true;
-                if (_namePage._firstDisplay) {
+                if (_namePage.isFirstDisplay()) {
                     _namePage.setCloudSpace(_cloudSpacePage.getOrg(), _cloudSpacePage.getSpace());
                     if (!runJob(_namePage.getApplications)) {
                         event.doit = false;

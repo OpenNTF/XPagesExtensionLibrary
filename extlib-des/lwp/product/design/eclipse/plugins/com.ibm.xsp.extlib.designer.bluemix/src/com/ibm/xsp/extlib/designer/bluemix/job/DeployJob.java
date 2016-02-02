@@ -366,7 +366,7 @@ public class DeployJob extends Job {
                     // URIs
                     List<CloudDomain> domains = client.getSharedDomains();
                     String defaultDomain = domains.isEmpty() ? "" : domains.get(0).getName();
-                    List<String> uris = manifest.getUris(appName, defaultDomain);
+                    List<String> uris = manifest.getRoutes(appName, defaultDomain);
                     if (uris != null) {
                         if (monitor.isCanceled()) return Status.CANCEL_STATUS;
                         monitor.subTask(StringUtil.format("Updating URIs...")); // $NLX-DeployJob.UpdatingURIs-1$

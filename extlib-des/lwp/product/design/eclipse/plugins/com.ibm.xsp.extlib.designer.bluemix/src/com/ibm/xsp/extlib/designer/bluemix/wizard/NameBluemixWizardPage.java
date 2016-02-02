@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -54,13 +54,14 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.designer.bluemix.BluemixLogger;
 import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener, ModifyListener, ControlListener, ISelectionChangedListener {
+public class NameBluemixWizardPage extends AbstractWizardPage implements SelectionListener, ModifyListener, ControlListener, ISelectionChangedListener {
     
     private Text                    _nameText;
     private Text                    _hostText;
@@ -308,7 +309,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
         
                     monitor.subTask("Connecting to Cloud Space..."); // $NLX-NameBluemixWizardPage.ConnectingtoCloudSpace-1$
                     String target = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_URL, "");
-                    _clientCloudSpace = new CloudFoundryClient(_wiz._credentials, URI.create(target).toURL(), _org, _space);
+                    _clientCloudSpace = new CloudFoundryClient(((AbstractBluemixWizard)_wiz)._credentials, URI.create(target).toURL(), _org, _space);
                     _clientCloudSpace.login();
                 } catch (Exception e) {
                     throw new Exception("Error connecting to Cloud Space", e); // $NLX-NameBluemixWizardPage.ErrorconnectingtoCloudSpace-1$
@@ -345,7 +346,7 @@ public class NameBluemixWizardPage extends AbstractBluemixWizardPage implements 
     
                 monitor.done();
             } catch (Exception e) {
-                _wiz.setJobException(e);
+                ((AbstractBluemixWizard)_wiz).setJobException(e);
                 _clientCloudSpace = null;
             }
         }

@@ -2,7 +2,7 @@ XPages Extension Library
 (c) Copyright IBM Corp. 2010, 2015
 
 This product includes software developed for
-OpenNTF (http://www.OpenNTF.Org/) with contributions from Paul Withers, Cameron Gregor and M Bourak.    
+OpenNTF (http://www.OpenNTF.Org/) with contributions from Paul Withers, Jesse Gallagher, Eric McCormack, Cameron Gregor and M Bourak.    
 
 The project contains XPages Social Features which uses network services such as Dropbox and Facebook.  It is your responsibility to ensure that your use of such services is in compliance with their associated Terms of Use or Terms of Service.  Further, use of the Twitter API is subject to the Twitter API Terms - https://dev.twitter.com/terms/api-terms and Twitters Terms of Service - http://twitter.com/tos, under your own contract with Twitter.  It is your responsibility to ensure compliance with these Terms."
 
@@ -273,7 +273,7 @@ Licensed under Apache 2.0
 Available from https://github.com/twitter/twitter-text-java/blob/master/src/com/twitter/regex/Spaces.java and 
 https://github.com/twitter/twitter-text-java/blob/master/src/com/twitter/Regex.java
 
-Bootstrap v3.2.0
+Bootstrap v3.2.0, v3.3.6, v4.0
 Licensed under the MIT license - https://github.com/twbs/bootstrap/blob/master/LICENSE
 Copyright (c) 2011-2014 Twitter, Inc
 Available from http://getbootstrap.com/

@@ -1,15 +1,16 @@
-<div class="pickerlist">
-	<style>
-		.xspPickerButton{width:70px!important;margin:0 8px 0 5px;}
-	</style>
-	<div style="padding:10px">
-		<div dojoAttachPoint="bodyWrapper" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" 
-			dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
-			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
-		</div>
-	</div>
-	<div class="modal-footer">
-		<button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerList_Cancel}</button>
-		<button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerList_OK}</button>
-	</div>
+<div>
+    <div class="modal-body container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div dojoAttachPoint="bodyWrapper" class="xspPickerBodyWrapper xspPickerValueList" 
+                    dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
+                    <ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%" role="listbox" tabindex="0" aria-label="${PickerName_unSelectedListLabel}" aria-multiselectable="${allowMultiple}"></ul>
+                </div>
+            </div>
+       </div>
+   </div>
+    <div class="modal-footer">
+        <button dojoAttachPoint="pkCancel" class="btn btn-default" type="button">${PickerList_Cancel}</button>
+        <button dojoAttachPoint="pkOk" class="btn btn-primary" type="button">${PickerList_OK}</button>
+    </div>
 </div>

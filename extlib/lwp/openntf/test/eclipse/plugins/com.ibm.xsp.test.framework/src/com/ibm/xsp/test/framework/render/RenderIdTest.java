@@ -524,4 +524,71 @@ public class RenderIdTest extends AbstractXspTest {
 	    
 	    return null == text? null : text;
 	}
+    public static String findTableCaptionText(String page, String tableTagName, String captionTagName) throws BadXmlException{
+        {
+            if( "<p/>".equals(page) ){
+                return null;
+            }
+            if( ! (page.startsWith("<p>") && page.endsWith("</p>"))){
+                throw new RuntimeException("Expected container paragraph not found");
+            }
+            page = page.substring("<p>".length(), page.length()-"</p>".length());
+        }
+        // find the text in the caption tag:
+        // <table>
+        //   <caption>Quarterly results for Q3</caption>
+        if( !"table".equals(tableTagName)|| ! "caption".equals(captionTagName) ){
+            throw new IllegalArgumentException("Bad table or caption param, was "+tableTagName+" and "+captionTagName);
+        }
+        
+        String tableTagContents;
+        {
+            String searchFor = "<" + tableTagName;
+            int foundIndex = page.indexOf(searchFor);
+            if( -1 == foundIndex ){
+                return null;
+            }
+            int endOpenTag = page.indexOf('>');
+            if( -1 != endOpenTag && foundIndex > endOpenTag ){
+                // foundIndex is not in the 1st HTML element.
+                return null;
+            }
+            if( page.indexOf("/>") == (endOpenTag -1) ){
+                // self-closing tag like <table id="foo"/>
+                return null; // no inner <caption> tag
+            }else{
+                String closeSearchFor = "</"+tableTagName+">";
+                int startCloseTag = page.indexOf(closeSearchFor, /*fromIndex*/foundIndex);
+                if( -1 == startCloseTag ){
+                    throw new RenderIdTest.BadXmlException(searchFor+" not matched by "+closeSearchFor);
+                }
+                tableTagContents = page.substring(endOpenTag+1, startCloseTag);
+            }
+        }
+        // find caption tag
+        {
+            String searchFor = "<" + captionTagName;
+            int foundIndex = tableTagContents.indexOf(searchFor);
+            if( -1 != foundIndex ){
+                int endOpenTag = tableTagContents.indexOf('>');
+                if( -1 != endOpenTag && foundIndex > endOpenTag ){
+                    // foundIndex is not in the 1st HTML element.
+                    return null;
+                }
+                if( tableTagContents.indexOf("/>") == (endOpenTag -1) ){
+                    // self-closing tag like <caption/>
+                    throw new RenderIdTest.BadXmlException("<caption/> should not be self-closing - should be <caption>text</caption>");
+                }else{
+                    String closeSearchFor = "</"+captionTagName+">";
+                    int startCloseTag = tableTagContents.indexOf(closeSearchFor, /*fromIndex*/foundIndex);
+                    if( -1 == startCloseTag ){
+                        throw new RenderIdTest.BadXmlException(searchFor+" not matched by "+closeSearchFor);
+                    }
+                    String captionTagContents = tableTagContents.substring(endOpenTag+1, startCloseTag);
+                    return captionTagContents;
+                }
+            }
+        }
+        return null;
+    }
 }

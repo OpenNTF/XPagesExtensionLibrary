@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -128,7 +128,7 @@ public class WizardUtils {
     public static Button createCheckBox(Composite parent, String text, int span, boolean select) {
         Button btn = new Button(parent, SWT.CHECK);
         btn.setText(" " + text);
-        GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
         gridData.horizontalSpan = span;
         btn.setLayoutData(gridData);
         btn.setSelection(select);
@@ -589,6 +589,17 @@ public class WizardUtils {
     }   
     
     //
+    // Utility function to read the text from a combo
+    //
+    public static String getComboText(final Combo combo, final String defVal) {
+        if ((combo == null) || (combo.isDisposed())) {
+            return defVal;
+        }
+
+        return (combo.getText());
+    }   
+    
+    //
     // Checks if a dependency is needed for a uri/tagName and adds
     // the dependency if needed and the user grants permission 
     //
@@ -918,6 +929,13 @@ public class WizardUtils {
     //
     public static void setIndent(Control control, int indent) {
         ((GridData)(control).getLayoutData()).horizontalIndent = indent;        
+    }
+
+    //
+    // Utility function for setting indent
+    //
+    public static void setVerticalIndent(Control control, int indent) {
+        ((GridData)(control).getLayoutData()).verticalIndent = indent;        
     }
 }
 

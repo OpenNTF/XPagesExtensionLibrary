@@ -378,6 +378,7 @@ else{
 		<complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
 		<complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
 		<property>
+			<!-- key: property.for. -->
 			<description>The ID of the Dynamic Content control whose state will be changed by this action. If empty, it uses the closest Dynamic Content Control in the parent hierarchy.</description>
 			<display-name>For</display-name>
 			<property-name>for</property-name>
@@ -449,12 +450,12 @@ else{
 	</complex-type>
 	
 	<complex-type>
-		<description>An action to change the state of an In Place Form control so that it will show or hide the form or toggle its state.</description>
+		<description>An action to change the state of an In Place Form control so that it will show or hide the control or toggle its state.</description>
 		<display-name>In Place Form Action</display-name>
 		<complex-id>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-id>
 		<complex-class>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-class>
 		<property>
-			<description>ID of the In Place Form control whose state will be changed by this action. If empty, it uses the closest In Place Form Control in the parent hierarchy.</description>
+			<description>ID of the In Place Form control whose state will be changed by this action. If empty, it uses the closest In Place Form control in the parent hierarchy.</description>
 			<display-name>Target Control</display-name>
 			<property-name>for</property-name>
 			<property-class>java.lang.String</property-class>

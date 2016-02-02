@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -877,13 +877,13 @@ public class DelegateProvider implements IDelegateProvider {
         // SPR# BBRL9S9AWZ:  You have to have access to something.
         
         if ( access.getWhat() == DelegateAccess.What.NOTHING ) {
-            throw new ModelException("A delegate must have access to something (mail or calendar).", ModelException.ERR_INVALID_INPUT); // $NLX-DelegateProvider.Adelegatemusthaveaccesstosomethin.1-1$
+            throw new ModelException("A delegate must have access to either mail or calendar.", ModelException.ERR_INVALID_INPUT); // $NLX-DelegateProvider.Adelegatemusthaveaccesstosomethin.1-1$
         }
         
         // SPR# XZHU9AD9FQ:  You can't have just delete access.
         
         if ( access.isDelete() && !(access.isRead() || access.isCreate() || access.isEdit()) ) {
-            throw new ModelException("Cannot delete documents without at least read access.", ModelException.ERR_INVALID_INPUT); // $NLX-DelegateProvider.Cannotdeletedocumentswithoutatlea-1$
+            throw new ModelException("You must have at least read access to delete documents.", ModelException.ERR_INVALID_INPUT); // $NLX-DelegateProvider.Cannotdeletedocumentswithoutatlea-1$
         }
     }
     

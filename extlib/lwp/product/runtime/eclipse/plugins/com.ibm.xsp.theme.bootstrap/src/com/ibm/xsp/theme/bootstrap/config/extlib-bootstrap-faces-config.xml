@@ -226,5 +226,15 @@
       <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.Carousel</renderer-type>
       <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.CarouselRenderer</renderer-class>
     </renderer>
+    <renderer>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.form.InputDateDetect</renderer-type>
+      <renderer-class>com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.form.InputDateDetectRenderer</renderer-class>
+    </renderer>
+    <renderer>
+      <component-family>javax.faces.Input</component-family>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.form.InputDateDetect.ReadOnly</renderer-type>
+      <renderer-class>com.ibm.xsp.renderkit.html_basic.ReadOnlyValueRenderer</renderer-class>
+    </renderer>
   </render-kit>
 </faces-config>

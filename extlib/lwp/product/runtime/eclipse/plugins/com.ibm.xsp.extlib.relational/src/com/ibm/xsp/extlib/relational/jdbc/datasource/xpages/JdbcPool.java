@@ -64,7 +64,7 @@ public class JdbcPool extends Pool {
                 }
             });
         } catch( Exception e ) {
-            throw new PoolException( e, "Error loading JDBC driver class {0}. If running the server, check that an OSGi plugin wrapper for the corresponding JDBC driver is available on the server, or that the corresponding package is available in the WEB-INF/lib directory. If running the studio, check that the corresponding package is available in your client library.", driverClass ); //$NLS-JDBCPool.JDBCDriverLoading.Exception-1$
+            throw new PoolException( e, "Error loading JDBC driver class {0}. Check that an OSGi plugin wrapper for the corresponding JDBC driver is available, or that the corresponding package is available in the WEB-INF/lib directory in the application.", driverClass ); //$NLS-JDBCPool.JDBCDriverLoading.Exception-1$
         }
     }
 

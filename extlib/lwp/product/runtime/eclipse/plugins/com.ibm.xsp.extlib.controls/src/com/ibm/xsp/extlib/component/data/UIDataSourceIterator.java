@@ -49,6 +49,7 @@ import com.ibm.xsp.stylekit.ThemeControl;
 import com.ibm.xsp.util.DataPublisher;
 import com.ibm.xsp.util.DataPublisher.ShadowedObject;
 import com.ibm.xsp.util.FacesUtil;
+import com.ibm.xsp.util.HtmlUtil;
 
 
 /**
@@ -80,6 +81,13 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
     // publish/revokeControlData during the process* methods, as that's already
     // handled in the superclass.
     transient private String _toggledVisibleDetail; // Just for rendering purposes when a position had been toggled
+    
+    /**
+     * This is the key of a value stored in the attributes map and not a clientId suffix,
+     * nor is it an actual clientId.  It is used to maintain the currently focussed category
+     * link within a View Panel during partial refresh expand/collapse interactions.
+     */
+    public static final String TOGGLE_ACTION_CLIENT_ID = "__toggleActionClientId__"; //$NON-NLS-1$
     
     public UIDataSourceIterator() {
     }
@@ -448,9 +456,15 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
 
     @Override
     public void broadcast(FacesEvent event) throws AbortProcessingException {
+        
         if (event instanceof ToggleRowEvent) {
             ToggleRowEvent ev = (ToggleRowEvent)event;
             DataModel dataModel = getDataModel();
+            
+            //>tmg:a11y
+            FacesContext context = getFacesContext();
+            //<tmg:a11y
+            
             if(dataModel instanceof TabularDataModel){
                 TabularDataModel model = (TabularDataModel)dataModel;
                 if (ev.isExpand()) {
@@ -458,13 +472,21 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
                 } else {
                     model.collapseRow(ev.getPosition());
                 }
+
+                //>tmg:a11y
+                HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+                //<tmg:a11y
             }
             
             // Tell JSF to switch to render response, like regular commands
-            FacesContext context = getFacesContext();
             context.renderResponse();
         } else if (event instanceof ToggleDetailEvent) {
             ToggleDetailEvent ev = (ToggleDetailEvent)event;
+            
+            //>tmg:a11y
+            FacesContext context = getFacesContext();
+            //<tmg:a11y
+            
             String[] pos = ev.getTogglePositions();
             for(int i=0; i<pos.length; i++) {
                 if(StringUtil.isNotEmpty(pos[i])) {
@@ -472,14 +494,22 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
                     _toggledVisibleDetail = pos[i];
                 }
             }
+
+            //>tmg:a11y
+            HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+            //<tmg:a11y
             
             // Tell JSF to switch to render response, like regular commands
-            FacesContext context = getFacesContext();
             context.renderResponse();
 
         } else if (event instanceof ToggleSortColumnEvent) {
             ToggleSortColumnEvent ev = (ToggleSortColumnEvent)event;
             DataModel dm = getDataModel();
+        	
+            //>tmg:a11y
+            FacesContext context = getFacesContext();
+            //<tmg:a11y
+            
             if(dm instanceof TabularDataModel) {
                 TabularDataModel tbm = (TabularDataModel)dm;
                 
@@ -489,17 +519,20 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
                     // SPR# BGLN85FFWC sort state only maintained on current column
                     tbm.resetResortState( previouslySortedColumn );
                 }
-                
+               
                 if (tbm.getResortType(ev.getColumnName()) == TabularDataModel.RESORT_ASCENDING)
                     tbm.setResortOrder(ev.getColumnName(), TabularDataModel.SORT_ASCENDING);
                 else if (tbm.getResortType(ev.getColumnName()) == TabularDataModel.RESORT_DESCENDING) 
                     tbm.setResortOrder(ev.getColumnName(), TabularDataModel.SORT_DESCENDING);   
                 else
                     tbm.setResortOrder(ev.getColumnName(), TabularDataModel.SORT_TOGGLE);
+
+                //>tmg:a11y
+                HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+                //<tmg:a11y
             }
             
             // Tell JSF to switch to render response, like regular commands
-            FacesContext context = getFacesContext();
             context.renderResponse();
         } else {
             super.broadcast(event);

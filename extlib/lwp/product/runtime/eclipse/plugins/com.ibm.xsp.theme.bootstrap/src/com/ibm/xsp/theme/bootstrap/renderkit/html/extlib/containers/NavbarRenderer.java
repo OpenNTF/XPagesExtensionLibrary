@@ -37,7 +37,6 @@ import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.theme.bootstrap.BootstrapLogger;
 import com.ibm.xsp.theme.bootstrap.components.responsive.UINavbar;
 import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.tree.NavbarLinksRenderer;
-//import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.tree.NavbarRightLinksRenderer;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JavaScriptUtil;
@@ -52,12 +51,73 @@ public class NavbarRenderer extends FacesRendererEx {
     protected static final int PROP_CLASSCONTAINER                 = 1;
     protected static final int PROP_STYLECONTAINER                 = 2;
     
+    protected static final int PROP_NAVBARFIXEDTOP                 = 3;
+    protected static final int PROP_NAVBARFIXEDBOTTOM              = 4;
+    protected static final int PROP_NAVBARSTATICTOP                = 5;
+    protected static final int PROP_NAVBARBASE_CLASS               = 6;
+    protected static final int PROP_NAVBARDEFAULT                  = 7;
+    protected static final int PROP_NAVBARINVERSE                  = 8;
+    protected static final int PROP_NAVBARCHILDREN_WRAPPER         = 9;
+    protected static final int PROP_NAVBARHEADER_CLASS             = 10;
+    protected static final int PROP_NAVBARBRAND_CLASS              = 11;
+    
+    protected static final int PROP_NAVBARFIXEDTOP_PADDING         = 20;
+    protected static final int PROP_NAVBARFIXEDBOTTOM_PADDING      = 21;
+    
+    protected static final int PROP_NAVBARCONTAINER_FLUID          = 22;
+    protected static final int PROP_NAVBARCONTAINER_FIXED          = 23;
+    protected static final int PROP_NAVBARCONTAINER_FULL           = 24;
+    
+    protected static final int PROP_NAVBARCOLLAPSE_CONTAINER       = 25;
+    protected static final int PROP_NAVBARCOLLAPSE_TARGET          = 26;
+    protected static final int PROP_NAVBARCOLLAPSEBUTTON_CLASS     = 27;
+    
+    protected static final int PROP_NAVBARITEM_PREFIX              = 28;
+    protected static final int PROP_NAVBARITEM_DEFAULTCLASS        = 29;
+    
+    protected static final int PROP_NAVBARCOLLAPSEBUTTON_ARIALABEL = 30;
+    protected static final int PROP_NAVBARTITLE                    = 31;
+    protected static final int PROP_NAVBARARIAROLE                 = 32;
+    
     @Override
     protected Object getProperty(int prop) {
         switch(prop) {
             // Container div
-            case PROP_CLASSCONTAINER:                return "xspNavbar"; //$NON-NLS-1$
-            case PROP_STYLECONTAINER:                return ""; //$NON-NLS-1$
+            case PROP_CLASSCONTAINER:                 return "xspNavbar"; //$NON-NLS-1$
+            case PROP_STYLECONTAINER:                 return ""; //$NON-NLS-1$
+            
+            case PROP_NAVBARFIXEDTOP:                 return "navbar-fixed-top"; //$NON-NLS-1$
+            case PROP_NAVBARFIXEDBOTTOM:              return "navbar-fixed-bottom"; //$NON-NLS-1$
+            case PROP_NAVBARSTATICTOP:                return "navbar-static-top"; //$NON-NLS-1$
+            case PROP_NAVBARBASE_CLASS:               return "navbar"; //$NON-NLS-1$
+            case PROP_NAVBARDEFAULT:                  return "navbar-default"; //$NON-NLS-1$
+            case PROP_NAVBARINVERSE:                  return "navbar-inverse"; //$NON-NLS-1$
+            case PROP_NAVBARCHILDREN_WRAPPER:         return "nav navbar-nav"; //$NON-NLS-1$
+            case PROP_NAVBARHEADER_CLASS:             return "navbar-header"; //$NON-NLS-1$
+            case PROP_NAVBARBRAND_CLASS:              return "navbar-brand"; //$NON-NLS-1$
+            
+            //Fixed navbar padding
+            case PROP_NAVBARFIXEDTOP_PADDING:         return "body {padding-top:51px;} @media (min-width: 768px) {.sidebar{top:52px;bottom:0px;}}"; //$NON-NLS-1$
+            case PROP_NAVBARFIXEDBOTTOM_PADDING:      return "body {padding-bottom:51px;}  @media (min-width: 768px) {.sidebar{top:0px;bottom:52px;}}"; //$NON-NLS-1$
+            
+            // Navbar container classes
+            case PROP_NAVBARCONTAINER_FLUID:          return "container-fluid"; //$NON-NLS-1$
+            case PROP_NAVBARCONTAINER_FIXED:          return "container"; //$NON-NLS-1$
+            case PROP_NAVBARCONTAINER_FULL:           return "container-full"; //$NON-NLS-1$
+            
+            //Collapse classes
+            case PROP_NAVBARCOLLAPSE_CONTAINER:       return "collapse navbar-collapse"; //$NON-NLS-1$
+            case PROP_NAVBARCOLLAPSE_TARGET:          return true;
+            case PROP_NAVBARCOLLAPSEBUTTON_CLASS:     return "navbar-toggle"; //$NON-NLS-1$
+            
+            case PROP_NAVBARITEM_PREFIX:              return "navbar-"; //$NON-NLS-1$
+            case PROP_NAVBARITEM_DEFAULTCLASS:        return "navbar-text"; //$NON-NLS-1$
+            
+            //Accessibility properties
+            case PROP_NAVBARCOLLAPSEBUTTON_ARIALABEL: return "Toggle navigation menu"; // $NLS-NavbarRenderer.Togglenavigationmenu-1$
+            case PROP_NAVBARTITLE:                    return "navigation bar"; // $NLS-NavbarRenderer.navigationbar-1$
+            case PROP_NAVBARARIAROLE:                 return "navigation"; //$NON-NLS-1$
+            
         }
         return super.getProperty(prop);
     }
@@ -92,32 +152,39 @@ public class NavbarRenderer extends FacesRendererEx {
         
         if(HtmlUtil.isUserId(component.getId())) {
             String clientId = component.getClientId(context);
-            w.writeAttribute("id", clientId, null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("id", clientId, null); // $NON-NLS-1$
         }
 
         if(StringUtil.isNotEmpty(title)) {
             w.writeAttribute("title", title, null); // $NON-NLS-1$
         }else{
-            w.writeAttribute("title", "navigation bar", null); // $NON-NLS-1$ $NLS-NavbarRenderer.navigationbar-2$
+            w.writeAttribute("title", (String)getProperty(PROP_NAVBARTITLE), null); // $NON-NLS-1$
         }
         
-        String role = "navigation"; // $NON-NLS-1$
-        w.writeAttribute("role", role, null); // $NON-NLS-1$
-
+        String role = (String)getProperty(PROP_NAVBARARIAROLE);
+        if(StringUtil.isNotEmpty(role)) {
+            w.writeAttribute("role", role, null); // $NON-NLS-1$
+        }
+        
         String fixedClass = "";
         if(!StringUtil.isEmpty(fixed)){
             if(fixed.equals(UINavbar.NAVBAR_FIXED_TOP)) {
-                fixedClass = "navbar-fixed-top"; // $NON-NLS-1$
+                fixedClass = (String)getProperty(PROP_NAVBARFIXEDTOP);
             }else if(fixed.equals(UINavbar.NAVBAR_FIXED_BOTTOM)) {
-                fixedClass = "navbar-fixed-bottom"; // $NON-NLS-1$
+                fixedClass = (String)getProperty(PROP_NAVBARFIXEDBOTTOM);
             }else if(fixed.equals(UINavbar.NAVBAR_UNFIXED_TOP)) {
-                fixedClass = "navbar-static-top"; // $NON-NLS-1$
+                fixedClass = (String)getProperty(PROP_NAVBARSTATICTOP);
             }else{
                 fixedClass = "";
             }
         }
         
-        String navClass = ExtLibUtil.concatStyleClasses("navbar " + (inverted ? "navbar-inverse " : "navbar-default ") + fixedClass, styleClass); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+        //String navClass  = ExtLibUtil.concatStyleClasses("navbar " + (inverted ? "navbar-inverse " : "navbar-default ") + fixedClass, styleClass); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+        String navColour = inverted ? (String)getProperty(PROP_NAVBARINVERSE) : (String)getProperty(PROP_NAVBARDEFAULT);
+        String navClass  = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_NAVBARBASE_CLASS), navColour);
+        navClass         = ExtLibUtil.concatStyleClasses(navClass, fixedClass);
+        navClass         = ExtLibUtil.concatStyleClasses(navClass, styleClass);
+        
         String containerMixinClass = ExtLibUtil.concatStyleClasses(navClass, (String)getProperty(PROP_CLASSCONTAINER));
         if(StringUtil.isNotEmpty(containerMixinClass)) {
             w.writeAttribute("class", containerMixinClass, null); // $NON-NLS-1$
@@ -134,9 +201,9 @@ public class NavbarRenderer extends FacesRendererEx {
                 w.startElement("style", component); // $NON-NLS-1$
                 w.writeAttribute("type", "text/css", null); // $NON-NLS-1$ $NON-NLS-2$
                 if(fixed.equals(UINavbar.NAVBAR_FIXED_TOP)) {
-                    w.writeText("body {padding-top:51px;} @media (min-width: 768px) {.sidebar{top:52px;bottom:0px;}}", null); // $NON-NLS-1$
+                    w.writeText((String)getProperty(PROP_NAVBARFIXEDTOP_PADDING), null);
                 }else if(fixed.equals(UINavbar.NAVBAR_FIXED_BOTTOM)){ // $NON-NLS-1$
-                    w.writeText("body {padding-bottom:51px;}  @media (min-width: 768px) {.sidebar{top:0px;bottom:52px;}}", null); // $NON-NLS-1$
+                    w.writeText((String)getProperty(PROP_NAVBARFIXEDBOTTOM_PADDING), null);
                 }else{
                     // don't write any styles
                 }
@@ -149,31 +216,26 @@ public class NavbarRenderer extends FacesRendererEx {
         w.startElement("div", component); // $NON-NLS-1$
         if ( pageWidth != null) {
             if (pageWidth.equals(UINavbar.WIDTH_FLUID)) {
-                w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", (String)getProperty(PROP_NAVBARCONTAINER_FLUID), null); // $NON-NLS-1$
             } else if (pageWidth.equals(UINavbar.WIDTH_FIXED)) {
-                w.writeAttribute("class", "container", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", (String)getProperty(PROP_NAVBARCONTAINER_FIXED), null); // $NON-NLS-1$
             } else if ( pageWidth.equals(UINavbar.WIDTH_FULL)) {
-                w.writeAttribute("class", "container-full", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", (String)getProperty(PROP_NAVBARCONTAINER_FULL), null); // $NON-NLS-1$
             } else if ( pageWidth.equals(UINavbar.WIDTH_NONE)) {
                 // don't write a container class to the div
             } else {
                 // default to container-fluid
-                w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", (String)getProperty(PROP_NAVBARCONTAINER_FLUID), null); // $NON-NLS-1$
             }
         } else {
             // default to container-fluid
-            w.writeAttribute("class", "container-fluid", null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("class", (String)getProperty(PROP_NAVBARCONTAINER_FLUID), null); // $NON-NLS-1$
         }
         
         // write navbar-header
         boolean collapsible = hasChildren || beforeLinks != null || afterLinks != null;
         writeHeading(context, w, component, collapsible);
 
-        // start collapse container div
-        w.startElement("div", component); // $NON-NLS-1$
-        // SPR #BGLN9ZCMXK Custom collapse class for each navbar needed
-        w.writeAttribute("class", "collapse navbar-collapse " + JavaScriptUtil.encodeFunctionName(context, component, "collapse-target"), null); // $NON-NLS-1$ $NON-NLS-2$ //$NON-NLS-3$
-        
         // write navbar before links
         if(beforeLinks != null) {
             writeBeforeLinks(context, w, component, beforeLinks);
@@ -181,7 +243,7 @@ public class NavbarRenderer extends FacesRendererEx {
         // write navbar children
         if(hasChildren && getRendersChildren()) {
             w.startElement("div", component); // $NON-NLS-1$
-            w.writeAttribute("class", "nav navbar-nav", null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("class", (String)getProperty(PROP_NAVBARCHILDREN_WRAPPER), null); // $NON-NLS-1$
             renderChildren(context, w, component);
             w.endElement("div"); // $NON-NLS-1$
         }
@@ -207,7 +269,10 @@ public class NavbarRenderer extends FacesRendererEx {
         
         //start header div
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", "navbar-header", null); // $NON-NLS-1$ $NON-NLS-2$
+        String navbarHeader = (String)getProperty(PROP_NAVBARHEADER_CLASS);
+        if(StringUtil.isNotEmpty(navbarHeader)) {
+            w.writeAttribute("class", navbarHeader, null); // $NON-NLS-1$
+        }
         
         //Write hidden div for attaching collapsible menus
         if(linksExist) {
@@ -217,20 +282,32 @@ public class NavbarRenderer extends FacesRendererEx {
         // start brand div
         if(StringUtil.isNotEmpty(headingText)) {
             w.startElement("div", c); // $NON-NLS-1$
-            String headerClazz = ExtLibUtil.concatStyleClasses("navbar-brand", headingClass); // $NON-NLS-1$
+            String headerClazz = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_NAVBARBRAND_CLASS), headingClass);
             if(StringUtil.isNotEmpty(headerClazz)) {
                 w.writeAttribute("class", headerClazz, null); // $NON-NLS-1$
             }
             if(StringUtil.isNotEmpty(headingStyle)) {
                 w.writeAttribute("style", headingStyle, null); // $NON-NLS-1$
             }
-            w.writeText(headingText, null); // $NON-NLS-1$
+            w.writeText(headingText, null);
             
             //end brand div
             w.endElement("div"); // $NON-NLS-1$
         }
         // close header div
         w.endElement("div"); // $NON-NLS-1$
+        
+        // start collapse container div
+        w.startElement("div", c); // $NON-NLS-1$
+        // SPR #BGLN9ZCMXK Custom collapse class for each navbar needed
+        String collapseClass  = (String)getProperty(PROP_NAVBARCOLLAPSE_CONTAINER);
+        String collapseTarget = (Boolean)getProperty(PROP_NAVBARCOLLAPSE_TARGET) ? JavaScriptUtil.encodeFunctionName(context, c, "collapse-target") : ""; // $NON-NLS-1$ $NON-NLS-2$
+        collapseClass = ExtLibUtil.concatStyleClasses(collapseClass, collapseTarget);
+        
+        if(StringUtil.isNotEmpty(collapseClass)) {
+            w.writeAttribute("class", collapseClass, null); // $NON-NLS-1$
+        }
+        
     }
     
     protected void writeBeforeLinks(FacesContext context, ResponseWriter w, UINavbar c, ITree beforeLinks) throws IOException {
@@ -252,15 +329,17 @@ public class NavbarRenderer extends FacesRendererEx {
     }
     
     protected void writeCollapsedLink(FacesContext context, ResponseWriter w, UINavbar c) throws IOException {
-        String dataTargetClass = "." + JavaScriptUtil.encodeFunctionName(context, c, "collapse-target"); //$NON-NLS-1$ //$NON-NLS-2$
+        String dataTargetClass = "." + JavaScriptUtil.encodeFunctionName(context, c, "collapse-target"); //$NON-NLS-1$ $NON-NLS-2$
         w.startElement("button", c); // $NON-NLS-1$
-        w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
-        w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("type", "button",  null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("aria-label", (String)getProperty(PROP_NAVBARCOLLAPSEBUTTON_ARIALABEL),  null); // $NON-NLS-1$
+        w.writeAttribute("class", (String)getProperty(PROP_NAVBARCOLLAPSEBUTTON_CLASS), null); // $NON-NLS-1$
         w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
-        w.writeAttribute("data-target", dataTargetClass, null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("data-target", dataTargetClass, null); // $NON-NLS-1$
         
         w.startElement("span", c); // $NON-NLS-1$
         w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeText((String)getProperty(PROP_NAVBARCOLLAPSEBUTTON_ARIALABEL),  null);
         w.endElement("span"); // $NON-NLS-1$
         
         w.startElement("span", c); // $NON-NLS-1$
@@ -296,14 +375,14 @@ public class NavbarRenderer extends FacesRendererEx {
                     Method method = child.getClass().getMethod("getStyleClass", (Class[])null); // $NON-NLS-1$
                     Object result = method.invoke(child, (Object[])null);
                     String styleClass = (result != null) ? (String)result : null;
-                    if(styleClass != null && styleClass.contains("navbar-")){ // $NON-NLS-1$
+                    if(styleClass != null && styleClass.contains((String)getProperty(PROP_NAVBARITEM_PREFIX))){
                         //navbar class already assigned, don't do anything
                         addDiv = false;
                     }else{
                         //no navbar class assigned, wrap the control in a div with class 'navbar-text'
                         addDiv = true;
                         w.startElement("div", component); // $NON-NLS-1$
-                        w.writeAttribute("class", "navbar-text", null); // $NON-NLS-1$ $NON-NLS-2$
+                        w.writeAttribute("class", (String)getProperty(PROP_NAVBARITEM_DEFAULTCLASS), null); // $NON-NLS-1$
                     }
                 } catch (Exception e) {
                     if(BootstrapLogger.BOOTSTRAP.isErrorEnabled()) {

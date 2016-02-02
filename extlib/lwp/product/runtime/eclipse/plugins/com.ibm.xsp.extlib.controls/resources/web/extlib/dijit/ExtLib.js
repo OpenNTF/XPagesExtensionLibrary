@@ -71,3 +71,15 @@ XSP._cpOnLoad = function xe_cpol(node) {
 	delete XSP._cpOnLoadScript; 
 	XSP._loaded();
 }
+
+
+XSP.xbtIsTriggerKey = function(evt) {
+	/* Detect if ENTER or SPACE was the key pressed */
+	var key = evt.keyCode ? evt.keyCode : evt.which;
+	
+	if(key === dojo.keys.ENTER || key === dojo.keys.SPACE || key === " "){
+		return true;
+	}else{
+		return false;
+	}
+}

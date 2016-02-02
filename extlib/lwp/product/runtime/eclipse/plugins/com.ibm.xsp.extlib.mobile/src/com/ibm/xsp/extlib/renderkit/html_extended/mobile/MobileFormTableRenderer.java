@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2013
+ * © Copyright IBM Corp. 2011, 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -81,12 +81,11 @@ public class MobileFormTableRenderer extends FormTableRenderer {
             case PROP_FIELDROWSTYLE:    return ""; // $NON-NLS-1$
             case PROP_HELPROWSTYLE:     return "padding-right: 8px;"; // $NON-NLS-1$
             case PROP_TABLESTYLECLASS:  return "mobileFormTable"; // $NON-NLS-1$
-            case PROP_ERRORSUMMARYMAINTEXT:     return "Error"; // $NLS-MobileFormTableRenderer.Error-1$
             case PROP_STYLECLASSERRORSUMMARY:   return "mobileFormTableErrorDiv"; // $NON-NLS-1$
             case PROP_ERRORDIVSHADECLASS: return "mobileFormTableErrorShade"; // $NON-NLS-1$
             case PROP_FIELDCOLUMNSTYLECLASS:    return "labelCell"; // $NON-NLS-1$
             case PROP_FIELDEDITCLASS:   return "dataCell"; // $NON-NLS-1$
-            case PROP_FIELDEDITNOLABELCLASS:	return "dataCellNoLabel"; // $NON-NLS-1$ 
+            case PROP_FIELDEDITNOLABELCLASS:    return "dataCellNoLabel"; // $NON-NLS-1$ 
             case PROP_HELPROWCLASS:     return "helpCell"; // $NON-NLS-1$
             case PROP_TAGFORMTITLE:     return "div"; // $NON-NLS-1$
             case PROP_TAGFORMDESC:      return "div"; // $NON-NLS-1$
@@ -373,14 +372,14 @@ public class MobileFormTableRenderer extends FormTableRenderer {
         
         String fieldStyle = row.getStyle();
         if(StringUtil.isEmpty(fieldStyle)) {
-        	fieldStyle = (String)getProperty(PROP_FIELDROWSTYLE);
+            fieldStyle = (String)getProperty(PROP_FIELDROWSTYLE);
         }
         if(StringUtil.isNotEmpty(fieldStyle)) {
             w.writeAttribute("style", fieldStyle, null); // $NON-NLS-1$
         }
         String fieldClass = row.getStyleClass();
         if(StringUtil.isEmpty(fieldClass)) {
-        	fieldClass = (String)getProperty(PROP_FIELDROWCLASS);
+            fieldClass = (String)getProperty(PROP_FIELDROWCLASS);
         }
         if(StringUtil.isNotEmpty(fieldClass)) {
             w.writeAttribute("class", fieldClass, null); // $NON-NLS-1$

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -32,13 +32,14 @@ import org.eclipse.swt.widgets.Text;
 import com.ibm.xsp.extlib.designer.bluemix.BluemixLogger;
 import com.ibm.xsp.extlib.designer.bluemix.manifest.ManifestUtil;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class ManifestBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener {    
+public class ManifestBluemixWizardPage extends AbstractWizardPage implements SelectionListener {    
     
     private Text _fileLabel;
     private Button _useExistingRadio;

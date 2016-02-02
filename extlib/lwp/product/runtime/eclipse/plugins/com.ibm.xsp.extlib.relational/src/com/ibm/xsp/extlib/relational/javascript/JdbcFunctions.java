@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -431,7 +431,7 @@ public class JdbcFunctions extends FBSDefaultObject {
             return sqlValues.values;
         }
 
-        throw new SQLException(StringUtil.format("No valid values passed to the {0} statement", "INSERT")); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen-1$ $NON-NLS-2$
+        throw new SQLException("No valid values passed to the INSERT statement"); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen-1$
     }
 
     protected static List<Object> initUpdateValues(StringBuilder b, FBSValue params, Boolean colToUpperCase) throws SQLException, InterpretException {
@@ -453,7 +453,7 @@ public class JdbcFunctions extends FBSDefaultObject {
             return sqlValues.values;
         }
 
-        throw new SQLException(StringUtil.format("No valid values passed to the {0} statement", "UPDATE")); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen.1-1$ $NON-NLS-2$
+        throw new SQLException("No valid values passed to the UPDATE statement"); // $NLX-JdbcFunctions.Novalidvaluespassedtothe0statemen.1-1$
     }
 
     protected static FBSValue doInsert(FBSValueVector args, IExecutionContext context) throws SQLException, InterpretException {

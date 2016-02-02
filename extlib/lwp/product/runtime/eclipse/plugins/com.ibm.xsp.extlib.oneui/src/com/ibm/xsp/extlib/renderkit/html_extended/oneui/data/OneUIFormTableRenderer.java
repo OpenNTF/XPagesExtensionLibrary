@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2013
+ * © Copyright IBM Corp. 2010, 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -33,7 +33,6 @@ public class OneUIFormTableRenderer extends FormTableRenderer {
             case PROP_TABLESTYLECLASS:          return "lotusFormTable"; // $NON-NLS-1$
             
             case PROP_STYLECLASSERRORSUMMARY:   return "lotusFormErrorSummary"; // $NON-NLS-1$
-            case PROP_ERRORSUMMARYMAINTEXT:     return "Please check the following:"; // $NLS-OneUIFormTableRenderer.Pleasecheckthefollowing-1$
             case PROP_ERRORSUMMARYCLASS:        return "lotusFormRequired"; // $NON-NLS-1$
             case PROP_WARNSUMMARYMAINTEXT:      return getProperty(PROP_ERRORSUMMARYMAINTEXT);
             case PROP_WARNSUMMARYCLASS:         return null;
@@ -52,35 +51,26 @@ public class OneUIFormTableRenderer extends FormTableRenderer {
             case PROP_ERRORIMGSTYLE:            return null;
             case PROP_ERRORIMGCLASS:            return null;
             case PROP_ERRORIMGSRC:              return OneUIResources.get().ICON_ERROR;
-            case PROP_ERRORIMGALT:              return "Error"; // $NLS-OneUIFormTableRenderer.Error-1$
-            case PROP_ERRORMSGALTTEXT:          return "Error:"; // $NLS-OneUIFormTableRenderer.Error.1-1$
             case PROP_ERRORMSGALTTEXTCLASS:     return "lotusAltText"; // $NON-NLS-1$
-            case PROP_FATALMSGALTTEXT:          return "Fatal:"; // $NLS-OneUIFormTableRenderer.Fatal_messagePrefix-1$
 
             case PROP_WARNIMGSTYLE:             return null;
             case PROP_WARNIMGCLASS:             return null;
             case PROP_WARNIMGSRC:               return OneUIResources.get().ICON_WARN;
-            case PROP_WARNIMGALT:               return "Warning"; // $NLS-OneUIFormTableRenderer.Warning-1$
-            case PROP_WARNMSGALTTEXT:           return "Warning:"; // $NLS-OneUIFormTableRenderer.Warning.1-1$
             case PROP_WARNMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
 
             case PROP_INFOIMGSTYLE:             return null;
             case PROP_INFOIMGCLASS:             return null;
             case PROP_INFOIMGSRC:               return OneUIResources.get().ICON_INFO;
-            case PROP_INFOIMGALT:               return "Information"; // $NLS-OneUIFormTableRenderer.Information.1-1$
-            case PROP_INFOMSGALTTEXT:           return "Information:"; // $NLS-OneUIFormTableRenderer.Information.2-1$
             case PROP_INFOMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
 
             case PROP_FIELDROWCLASS:            return "lotusFormFieldRow"; // $NON-NLS-1$
-            case PROP_FIELDLABELWIDTH:          return "15%";
+            case PROP_FIELDLABELWIDTH:          return "15%"; // $NON-NLS-1$
             case PROP_FIELDLABELCLASS:          return "lotusFormLabel"; // $NON-NLS-1$
             case PROP_FIELDLABELREQUIREDCLASS:  return "lotusFormRequired"; // $NON-NLS-1$
-            case PROP_FIELDLABELREQUIREDTEXT:   return "*";
+            case PROP_FIELDLABELREQUIREDTEXT:   return "*"; // $NON-NLS-1$
 
             case PROP_HELPIMGCLASS:             return null;
             case PROP_HELPIMGSRC:               return OneUIResources.get().ICON_HELP;
-            case PROP_HELPIMGALT:               return "Help"; // $NLS-OneUIFormTableRenderer.Help-1$
-            case PROP_HELPMSGALTTEXT:           return "Help"; // $NLS-OneUIFormTableRenderer.Help.1-1$
             case PROP_HELPMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
         }
         

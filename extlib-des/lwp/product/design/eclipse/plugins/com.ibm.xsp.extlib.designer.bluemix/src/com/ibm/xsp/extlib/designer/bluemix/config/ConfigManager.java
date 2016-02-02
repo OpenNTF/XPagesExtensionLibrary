@@ -147,7 +147,7 @@ public class ConfigManager {
             Set<String>appNames = manifest.getAppNames();
             for (String appName:appNames) {
                 config.appName = appName;
-                config.host = manifest.getHost(appName);
+                config.host = manifest.getFirstHost(appName);
                 break;
             }
         }

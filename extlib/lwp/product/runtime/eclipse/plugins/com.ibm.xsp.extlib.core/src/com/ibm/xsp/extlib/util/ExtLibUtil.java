@@ -199,7 +199,18 @@ public class ExtLibUtil {
     public static XSPContext getXspContext() {
         return XSPContext.getXSPContext(FacesContext.getCurrentInstance());
     }
-    
+    //PR35 - Erik McCormick
+    //https://github.com/OpenNTF/XPagesExtensionLibrary/pull/35/files
+    /**
+     * Returns a XSP property value
+     */
+    public static String getXspProperty(String name) {
+    	XSPContext context = getXspContext();
+    	if(context!=null)
+    		return context.getProperty(name);
+    	else
+    		return null;
+    }
     /**
      * Resolve the specified variable.
      */

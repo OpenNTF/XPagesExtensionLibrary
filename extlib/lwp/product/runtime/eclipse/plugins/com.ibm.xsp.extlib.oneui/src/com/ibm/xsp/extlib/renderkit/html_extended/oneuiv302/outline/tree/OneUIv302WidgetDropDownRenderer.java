@@ -44,7 +44,9 @@ public class OneUIv302WidgetDropDownRenderer extends OneUIWidgetDropDownRenderer
         }
         writer.writeAttribute("class","lotusIcon lotusActionIcon",null); // $NON-NLS-1$ $NON-NLS-2$
         writer.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-        writer.writeAttribute("title","click for actions",null); // $NON-NLS-1$ $NLS-OneUIWidgetDropDownRenderer.clickforactions-2$
+        // "Click for actions"
+        String buttonTitle = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DropDownButtonRenderer.Clickforactions"); // $NON-NLS-1$
+        writer.writeAttribute("title", buttonTitle, null); // $NON-NLS-1$
         writer.writeAttribute("aria-haspopup","true",null); // $NON-NLS-1$ $NON-NLS-2$
         writer.startElement("img",null); // $NON-NLS-1$
         writer.writeAttribute("src", HtmlRendererUtil.getImageURL(context,OneUIResources.get().BLANK_GIF), null); // $NON-NLS-1$
@@ -53,7 +55,9 @@ public class OneUIv302WidgetDropDownRenderer extends OneUIWidgetDropDownRenderer
         writer.endElement("img"); // $NON-NLS-1$
         writer.startElement("span",null); // $NON-NLS-1$
         writer.writeAttribute("class","lotusAltText",null); // $NON-NLS-1$ $NON-NLS-2$
-        writer.writeText("Actions",null); // $NLS-OneUIWidgetDropDownRenderer.Actions-1$
+        // "Actions"
+        String buttonText = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DropDownButtonRenderer.Actions"); // $NON-NLS-1$
+        writer.writeText(buttonText, null);
         writer.endElement("span"); // $NON-NLS-1$
         writer.endElement("a");
         JSUtil.writeln(writer);

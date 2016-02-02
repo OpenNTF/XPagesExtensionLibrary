@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2014
+ * © Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,6 +26,8 @@ import javax.faces.context.FacesContext;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.registry.FacesComponentDefinition;
+import com.ibm.xsp.registry.FacesExtensibleNode;
+import com.ibm.xsp.registry.FacesProperty;
 import com.ibm.xsp.registry.FacesSharableRegistry;
 import com.ibm.xsp.registry.parse.ParseUtil;
 import com.ibm.xsp.test.framework.AbstractXspTest;
@@ -33,6 +35,7 @@ import com.ibm.xsp.test.framework.TestProject;
 import com.ibm.xsp.test.framework.XspRenderUtil;
 import com.ibm.xsp.test.framework.XspTestUtil;
 import com.ibm.xsp.test.framework.registry.annotate.DefinitionTagsAnnotater;
+import com.ibm.xsp.test.framework.registry.annotate.DesignerExtensionSubsetAnnotater;
 import com.ibm.xsp.test.framework.setup.SkipFileContent;
 import com.ibm.xsp.util.TypedUtil;
 
@@ -57,14 +60,24 @@ public class RenderTitleTest extends AbstractXspTest {
         UIComponent p = XspRenderUtil.createContainerParagraph(root);
         
         // for each control
-        FacesSharableRegistry reg = TestProject.createRegistry(this);
+        FacesSharableRegistry reg = TestProject.createRegistryWithAnnotater(
+                this, new PropertyDeprecatedAnnotater(), new DefinitionTagsAnnotater());
         for (FacesComponentDefinition def : TestProject.getLibComponents(reg, this)) {
             if( !def.isTag() ){
                 continue; // skip non-tags
             }
             if(  DefinitionTagsAnnotater.isTaggedNoRenderedOutput(def) ){
-                // no HTML output, so don't check for role property, 
-                // verified in RenderControlTest
+                // no HTML output, so not expect title property, 
+                // no-rendered-output verified in RenderControlTest
+                
+                FacesProperty titleProp = def.getProperty("title");
+                if( null != titleProp ){ // expect no title property
+                    String deprecatedStr = (String) titleProp.getExtension("is-deprecated");
+                    boolean deprecated = (null != deprecatedStr) && "true".equals(deprecatedStr);
+                    if( ! deprecated ){
+                        fails += XspTestUtil.loc(def) + " Unexpected title property for control with <tags>no-rendered-output</ is not deprecated\n";
+                    }// unexpected title property is deprecated - will give compile-time warning
+                }
                 continue;
             }
             
@@ -151,4 +164,18 @@ public class RenderTitleTest extends AbstractXspTest {
 	protected String[] getSkipFails() {
 		return StringUtil.EMPTY_STRING_ARRAY;
 	}
+
+    public static class PropertyDeprecatedAnnotater extends DesignerExtensionSubsetAnnotater{
+        @Override
+        protected boolean isApplicableExtensibleNode(FacesExtensibleNode parsed) {
+            return parsed instanceof FacesProperty;
+        }
+        @Override
+        protected String[] createExtNameArr() {
+            return new String[]{
+            // http://www-10.lotus.com/ldd/ddwiki.nsf/dx/XPages_configuration_file_format_page_3#property+is-deprecated
+                    "is-deprecated",
+            };
+        }
+    }
 }

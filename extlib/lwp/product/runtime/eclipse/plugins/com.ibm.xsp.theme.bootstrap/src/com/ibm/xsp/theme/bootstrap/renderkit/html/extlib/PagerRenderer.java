@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -43,7 +43,28 @@ import com.ibm.xsp.util.TypedUtil;
 public class PagerRenderer extends Renderer {
 
     public static final String VAR_PAGE = "page"; //$NON-NLS-1$
+    
+    protected static final int PROP_PAGERCLASS        = 1;
+    protected static final int PROP_LISTITEMCLASS     = 2;
+    protected static final int PROP_PAGERLINKCLASS    = 3;
+    protected static final int PROP_ACTIVECLASS       = 4;
+    protected static final int PROP_DISABLEDCLASS     = 5;
 
+    protected static final int PROP_PAGERARIAROLE     = 10;
+    
+    protected Object getProperty(int prop) {
+        switch(prop) {
+            case PROP_PAGERCLASS:     return "pagination"; // $NON-NLS-1$
+            case PROP_LISTITEMCLASS:  return ""; // $NON-NLS-1$
+            case PROP_PAGERLINKCLASS: return ""; // $NON-NLS-1$
+            case PROP_ACTIVECLASS:    return "active"; // $NON-NLS-1$
+            case PROP_DISABLEDCLASS:  return "disabled"; // $NON-NLS-1$
+            
+            case PROP_PAGERARIAROLE:  return "navigation"; // $NON-NLS-1$
+        }
+        return null;
+    }
+    
     @Override
     public void decode(FacesContext context, UIComponent component) {
         super.decode(context, component);
@@ -126,10 +147,22 @@ public class PagerRenderer extends Renderer {
         boolean RTL = false;
 
         w.startElement("div", null); // $NON-NLS-1$
+        String pagerRole = (String)getProperty(PROP_PAGERARIAROLE);
+        if(StringUtil.isNotEmpty(pagerRole)) {
+            w.writeAttribute("role", pagerRole, null); // $NON-NLS-1$
+        }
+        
+        // "Pager" is default aria label
+        String pagerAriaLabel = pager.getAriaLabel();
+        String ariaLabel = StringUtil.isNotEmpty(pagerAriaLabel) ? pagerAriaLabel : com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Pager"); //$NON-NLS-1
+        if(StringUtil.isNotEmpty(ariaLabel)) {
+            w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
+        }
         
         w.startElement("ul", null); // $NON-NLS-1$
+        
         String styleClass = pager.getStyleClass();
-        String pgClass = ExtLibUtil.concatStyleClasses("pagination", styleClass); // $NON-NLS-1$
+        String pgClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_PAGERCLASS), styleClass);
         if (StringUtil.isNotEmpty(pgClass)) {
             w.writeAttribute("class", pgClass, null); // $NON-NLS-1$
         }
@@ -156,12 +189,18 @@ public class PagerRenderer extends Renderer {
                             encodeAction(context, pager, st, w, control, type, start, end, RTL);
                         } else {
                             w.startElement("li", null); // $NON-NLS-1$
-                            w.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                            String disabledClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LISTITEMCLASS), (String)getProperty(PROP_DISABLEDCLASS));
+                            if(StringUtil.isNotEmpty(disabledClass)) {
+                                w.writeAttribute("class", disabledClass, null); // $NON-NLS-1$
+                            }
                             w.startElement("a", null);
-                            w.writeAttribute("style", "cursor:auto;", null); // $NON-NLS-1$ $NON-NLS-2$
+                            String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+                            if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                                w.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
+                            }
                             w.writeText(getMayBeMorePages(), null);
                             w.endElement("li"); // $NON-NLS-1$
-                            w.endElement("a");
+                            w.endElement("a"); // $NON-NLS-1$
                         }
                         continue;
                     } else if (type.equalsIgnoreCase(UIPagerControl.TYPE_GROUP)) {
@@ -178,7 +217,9 @@ public class PagerRenderer extends Renderer {
                         continue;
                     }
                 }
-                String msg = StringUtil.format("Unknown control type {0}", type); // $NLS-PagerRenderer.Unknowncontroltype0-1$
+                // "Unknown control type {0}"
+                String msg = com.ibm.xsp.extsn.ResourceHandler.getString("PagerRenderer.Unknowncontroltype0"); //$NON-NLS-1$
+                msg = StringUtil.format(msg, type);
                 throw new FacesExceptionEx(msg);
             }
         }
@@ -187,33 +228,51 @@ public class PagerRenderer extends Renderer {
         w.endElement("div"); // $NON-NLS-1$
     }
 
-    private void encodeAction(FacesContext context, XspPager pager, UIPager.PagerState st, ResponseWriter writer, XspPagerControl control, String type, int start, int end,
+    protected void encodeAction(FacesContext context, XspPager pager, UIPager.PagerState st, ResponseWriter writer, XspPagerControl control, String type, int start, int end,
             boolean RTL) throws IOException {
         String clientId = pager.getClientId(context);
         String controlId = clientId + "__" + type;
 
         String defaultText = "";
+        String ariaLabel = "";
         boolean renderLink = true;
 
+        //TODO need to handle BIDI here for the unicode symbols
         if (isFirst(type)) {
             renderLink = st.getCurrentPage() > start;
-            defaultText = "\u00AB"; // First $NON-NLS-1$
+            // "\u00AB" FirstSymbol
+            defaultText = "\u00AB"; //$NON-NLS-1$
+            // "First page"
+            ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Firstpage"); //$NON-NLS-1$
         } else if (isPrevious(type)) {
             renderLink = st.getCurrentPage() > start;
-            defaultText = "\u2039"; // Previous $NON-NLS-1$
+            // "\u2039" PreviousSymbol
+            defaultText = "\u2039"; //$NON-NLS-1$
+            // "Previous page"
+            ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Previouspage"); //$NON-NLS-1$
         } else if (isNext(type)) {
             renderLink = st.getCurrentPage() < end - 1;
-            defaultText = "\u203A"; // Next $NON-NLS-1$
+            // "\u203A" NextSymbol
+            defaultText = "\u203A"; //$NON-NLS-1$;
+            // "Next page"
+            ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Nextpage"); //$NON-NLS-1$
         } else if (isLast(type)) {
             renderLink = st.getCurrentPage() < end - 1;
-            defaultText = "\u00BB"; // Last $NON-NLS-1$
+            // "\u00BB" LastSymbol
+            defaultText = "\u00BB"; //$NON-NLS-1$
+            // "Last page"
+            ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Lastpage"); //$NON-NLS-1$
         }
 
         writer.startElement("li", null); // $NON-NLS-1$
+        String listItemClass = (String)getProperty(PROP_LISTITEMCLASS);
         if(!renderLink) {
             //If current page is the first, disable first/previous pagers
             //and if current page is the last, disable last/next pagers
-            writer.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+            listItemClass = ExtLibUtil.concatStyleClasses(listItemClass, (String)getProperty(PROP_DISABLEDCLASS));
+        }
+        if(StringUtil.isNotEmpty(listItemClass)) {
+            writer.writeAttribute("class", listItemClass, null); // $NON-NLS-1$
         }
 
         // Generate the image link
@@ -224,15 +283,23 @@ public class PagerRenderer extends Renderer {
 
         // Generate the text link
         if (StringUtil.isNotEmpty(val)) {
-            writer.startElement("a", null);
+            writer.startElement("a", null); // $NON-NLS-1$
             if(!renderLink) {
-                //removes disabled cursor
-                writer.writeAttribute("style", "cursor:auto;", null); // $NON-NLS-2$ $NON-NLS-1$
+                //add a11y attributes
+                writer.writeAttribute("aria-disabled", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                writer.writeAttribute("aria-disabled", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+                writer.writeAttribute("href", "#", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
+            String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+            if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                writer.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
             }
             writer.writeAttribute("id", controlId + "__lnk", null); // $NON-NLS-1$ $NON-NLS-2$
-            writer.writeAttribute("href", "#", null); // $NON-NLS-1$
+            writer.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            writer.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
             writer.writeText(val, null);
-            writer.endElement("a");
+            writer.endElement("a"); // $NON-NLS-1$
             if (renderLink) {
                 setupSubmitOnClick(context, pager, st, controlId, controlId + "__lnk"); // $NON-NLS-1$
             }
@@ -241,7 +308,7 @@ public class PagerRenderer extends Renderer {
         writer.endElement("li"); // $NON-NLS-1$
     }
 
-    private void encodeGroup(FacesContext context, XspPager pager, UIPager.PagerState st, ResponseWriter writer, XspPagerControl control, int start, int end) throws IOException {
+    protected void encodeGroup(FacesContext context, XspPager pager, UIPager.PagerState st, ResponseWriter writer, XspPagerControl control, int start, int end) throws IOException {
         // Save the old page value
         Map<String, Object> requestMap = TypedUtil.getRequestMap(context.getExternalContext());
         Object oldPage = requestMap.get(VAR_PAGE);
@@ -256,8 +323,12 @@ public class PagerRenderer extends Renderer {
             boolean renderLink = (i != st.getCurrentPage());
 
             writer.startElement("li", null); // $NON-NLS-1$
+            String listItemClass = (String)getProperty(PROP_LISTITEMCLASS);
             if (!renderLink) {
-                writer.writeAttribute("class", "active", null); // $NON-NLS-1$ $NON-NLS-2$
+                listItemClass = ExtLibUtil.concatStyleClasses(listItemClass, (String)getProperty(PROP_ACTIVECLASS));
+            }
+            if(StringUtil.isNotEmpty(listItemClass)) {
+                writer.writeAttribute("class", listItemClass, null); // $NON-NLS-1$
             }
 
             String val = (String) control.getValue();
@@ -269,8 +340,26 @@ public class PagerRenderer extends Renderer {
             if (StringUtil.isNotEmpty(val)) {
                 writer.startElement("a", control); //$NON-NLS-1$
                 writer.writeAttribute("id", controlId + "__lnk__" + i, null); // $NON-NLS-1$ $NON-NLS-2$
+                // "Page {0}"
+                String ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerRenderer.Page0"); //$NON-NLS-1$
+                ariaLabel = StringUtil.format(ariaLabel, val);
+                writer.writeAttribute("aria-label", ariaLabel , null); // $NON-NLS-1$
+                writer.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                
+                String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+                if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                    writer.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
+                }
+                
+                if (renderLink) {
+                    //make sure the a is tab-able
+                    writer.writeAttribute("tabindex", "0", null); // $NON-NLS-1$ $NON-NLS-2$
+                    writer.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+                }else{
+                    writer.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+                }
                 writer.writeText(val, null);
-                writer.endElement("a");
+                writer.endElement("a"); // $NON-NLS-1$
                 if (renderLink) {
                     setupSubmitOnClick(context, pager, st, controlId + "__lnk__" + i, controlId + "__lnk__" + i); // $NON-NLS-1$ $NON-NLS-2$
                 }
@@ -283,10 +372,18 @@ public class PagerRenderer extends Renderer {
         if (!pager.isAlwaysCalculateLast()) {
             if (end < st.getLastPage() || st.hasMoreRows()) {
                 writer.startElement("li", null); // $NON-NLS-1$
-                writer.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                String listItemClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LISTITEMCLASS), (String)getProperty(PROP_DISABLEDCLASS));
+                if(StringUtil.isNotEmpty(listItemClass)) {
+                    writer.writeAttribute("class", listItemClass, null); // $NON-NLS-1$
+                }
+                
                 writer.startElement("a", control); //$NON-NLS-1$
+                String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+                if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                    writer.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
+                }
                 writer.writeText(getMayBeMorePages(), null);
-                writer.endElement("a");
+                writer.endElement("a"); // $NON-NLS-1$
                 writer.endElement("li"); // $NON-NLS-1$
             }
         }
@@ -300,7 +397,7 @@ public class PagerRenderer extends Renderer {
 
     }
 
-    private void setupSubmitOnClick(FacesContext context, XspPager component, UIPager.PagerState st, String clientId, String sourceId) {
+    protected void setupSubmitOnClick(FacesContext context, XspPager component, UIPager.PagerState st, String clientId, String sourceId) {
         boolean immediate = false;
 
         UIComponent subTree = ((FacesContextEx) context).getSubTreeComponent();
@@ -372,88 +469,102 @@ public class PagerRenderer extends Renderer {
         return (String) component.getAttributes().get("onError"); // $NON-NLS-1$
     }
 
-    private void encodeStatus(FacesContext context, UIPager.PagerState st, ResponseWriter writer, XspPager pager, XspPagerControl control, int start, int end) throws IOException {
+    protected void encodeStatus(FacesContext context, UIPager.PagerState st, ResponseWriter writer, XspPager pager, XspPagerControl control, int start, int end) throws IOException {
         writer.startElement("li", null); // $NON-NLS-1$
-        writer.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
-
+        String listItemClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LISTITEMCLASS), (String)getProperty(PROP_DISABLEDCLASS));
+        if(StringUtil.isNotEmpty(listItemClass)) {
+            writer.writeAttribute("class", listItemClass, null); // $NON-NLS-1$
+        }
+        
         String val = (String) control.getValue();
         if (StringUtil.isEmpty(val)) {
-            val = "{0}";
+            val = "{0}"; // $NON-NLS-1$
         }
         if (StringUtil.isNotEmpty(val) && st.getLastPage() > 0) {
-            writer.startElement("a", null);
-            writer.writeAttribute("style", "cursor:auto;", null); // $NON-NLS-2$ $NON-NLS-1$
+            writer.startElement("a", null); // $NON-NLS-1$
+            String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+            if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                writer.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
+            }
+            writer.writeAttribute("role", "button", null); // $NON-NLS-2$ $NON-NLS-1$
             val = StringUtil.format(val, st.getCurrentPage() + 1, st.getLastPage(), start, end);
             writer.writeText(val, null);
-            writer.endElement("a");
+            writer.endElement("a"); // $NON-NLS-1$
         }
 
         writer.endElement("li"); // $NON-NLS-1$
     }
 
-    private void encodeSeparator(FacesContext context, ResponseWriter writer, XspPagerControl control, String type) throws IOException {
+    protected void encodeSeparator(FacesContext context, ResponseWriter writer, XspPagerControl control, String type) throws IOException {
         String val = (String) control.getValue();
 
         writer.startElement("li", null); // $NON-NLS-1$
 
         if (StringUtil.isEmpty(val)) {
-            String defaultSeparator = "|";
+            String defaultSeparator = "|"; // $NON-NLS-1$
             if (type.equalsIgnoreCase(UIPagerControl.TYPE_SEPARATORPAGE)) {
-                defaultSeparator = "Page"; // $NON-NLS-1$
+                // "Page"
+                defaultSeparator = com.ibm.xsp.extsn.ResourceHandler.getString("PagerRenderer.Page"); //$NON-NLS-1$
             }
             val = defaultSeparator;
         }
-        writer.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+        String listItemClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LISTITEMCLASS), (String)getProperty(PROP_DISABLEDCLASS));
+        if(StringUtil.isNotEmpty(listItemClass)) {
+            writer.writeAttribute("class", listItemClass, null); // $NON-NLS-1$
+        }
         
         // Generate the text link
         if (StringUtil.isNotEmpty(val)) {
-            writer.startElement("a", null);
-            writer.writeAttribute("style", "cursor:auto;", null); // $NON-NLS-1$ $NON-NLS-2$
+            writer.startElement("a", null); // $NON-NLS-1$
+            String pagerLinkClass = (String)getProperty(PROP_PAGERLINKCLASS);
+            if(StringUtil.isNotEmpty(pagerLinkClass)) {
+                writer.writeAttribute("class", pagerLinkClass, null); // $NON-NLS-1$
+            }
             writer.writeText(val, null);
-            writer.endElement("a");
+            writer.endElement("a"); // $NON-NLS-1$
         }
 
         writer.endElement("li"); // $NON-NLS-1$
     }
 
-    private void encodeGoto() {
+    protected void encodeGoto() {
         // Do not exists in core XPages yet..
     }
 
-    private int getStart(UIPager.PagerState st, int pageCount) {
+    protected int getStart(UIPager.PagerState st, int pageCount) {
         int start = (st.getFirst() / st.getRows()) - pageCount / 2;
         start = Math.min(Math.max(0, st.getLastPage() - pageCount), Math.max(0, start));
         return start;
     }
 
-    private int getEnd(UIPager.PagerState st, int pageCount, int start) {
+    protected int getEnd(UIPager.PagerState st, int pageCount, int start) {
         int sizeOfPageRange = Math.min(start + pageCount, st.getLastPage()) - start;
         int end = start + sizeOfPageRange;
         return end;
     }
 
-    private boolean isFirst(String type) {
+    protected boolean isFirst(String type) {
         return (type.equalsIgnoreCase(UIPagerControl.TYPE_FIRST) || type.equalsIgnoreCase(UIPagerControl.TYPE_FIRSTARROW) || type.equalsIgnoreCase(UIPagerControl.TYPE_FIRSTIMAGE));
     }
 
-    private boolean isNext(String type) {
+    protected boolean isNext(String type) {
         return (type.equalsIgnoreCase(UIPagerControl.TYPE_NEXT) || type.equalsIgnoreCase(UIPagerControl.TYPE_NEXTARROW) || type.equalsIgnoreCase(UIPagerControl.TYPE_NEXTIMAGE));
     }
 
-    private boolean isLast(String type) {
+    protected boolean isLast(String type) {
         return (type.equalsIgnoreCase(UIPagerControl.TYPE_LAST) || type.equalsIgnoreCase(UIPagerControl.TYPE_LASTARROW) || type.equalsIgnoreCase(UIPagerControl.TYPE_LASTIMAGE));
     }
 
-    private boolean isPrevious(String type) {
+    protected boolean isPrevious(String type) {
         return (type.equalsIgnoreCase(UIPagerControl.TYPE_PREVIOUS) || type.equalsIgnoreCase(UIPagerControl.TYPE_PREVIOUSARROW) || type
                 .equalsIgnoreCase(UIPagerControl.TYPE_PREVIOUSIMAGE));
     }
 
-    private boolean isSeparator(String type) {
+    protected boolean isSeparator(String type) {
         return (type.equalsIgnoreCase(UIPagerControl.TYPE_SEPARATOR) || type.equalsIgnoreCase(UIPagerControl.TYPE_SEPARATORPAGE));
     }
 
-    private String getMayBeMorePages() {
-        return "..."; // $NLS-PagerRenderer.MayBeMorePages-1$
+    protected String getMayBeMorePages() {
+        return "..."; // $NON-NLS-1$
     }
 }

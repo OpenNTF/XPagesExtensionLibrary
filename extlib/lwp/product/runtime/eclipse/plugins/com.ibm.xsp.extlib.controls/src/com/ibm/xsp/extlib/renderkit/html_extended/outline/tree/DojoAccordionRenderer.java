@@ -37,6 +37,18 @@ public class DojoAccordionRenderer extends AbstractTreeRenderer {
     private static final long serialVersionUID = 1L;
 
     private String accordionClientId;
+
+    protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap DataViewRenderer.
+            String str = "";
+            str = "Accordion tab panel"; // $NLS-DojoAccordionRenderer.Accordiontabpanel-1$
+            // end strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        return null;
+    }
     
     public DojoAccordionRenderer(String accordionClientId) {
         this.accordionClientId = accordionClientId;
@@ -99,12 +111,12 @@ public class DojoAccordionRenderer extends AbstractTreeRenderer {
 
     @Override
     protected void preRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
     protected void postRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
@@ -184,10 +196,10 @@ public class DojoAccordionRenderer extends AbstractTreeRenderer {
 
         DojoRendererUtil.writeDojoHtmlAttributes(context, getComponent(), dojoType, attrs);
         
-    	writer.startElement(new HtmlListRenderer().getContainerTag(), null);
-    	writer.writeAttribute("style", "list-style-type:none; margin:0; padding:0", null); //$NON-NLS-1$ //$NON-NLS-2$
+        writer.startElement(new HtmlListRenderer().getContainerTag(), null);
+        writer.writeAttribute("style", "list-style-type:none; margin:0; padding:0", null); //$NON-NLS-1$ //$NON-NLS-2$
         renderChildren(context, writer, tree);
-    	writer.endElement(new HtmlListRenderer().getContainerTag());
+        writer.endElement(new HtmlListRenderer().getContainerTag());
         
         writer.endElement("div"); // $NON-NLS-1$
         writer.write('\n');

@@ -159,6 +159,9 @@ public abstract class AbstractDataViewRenderer extends DataSourceIteratorRendere
 
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+    	//>tmg:a11y
+        super.encodeEnd(context, component);
+        //<tmg:a11y
     }
 
     /**

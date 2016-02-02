@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -38,6 +38,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
+import com.ibm.commons.iloader.node.NodeException;
 import com.ibm.commons.iloader.node.collections.SingleCollection;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.domino.ide.resources.project.IDominoDesignerProject;
@@ -51,14 +52,24 @@ import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
  */
 public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWindowListener, ISelectionProvider {
     
-    private IEditorInput           _editorInput;
-    private ManifestTextEditor     _srcEditor;
-    private ManifestEditorPage     _visualEditor;
-    private FormToolkit            _toolkit;
-    private ManifestBeanLoader     _beanLoader;
-    private ManifestBean           _bean;
-    private IDominoDesignerProject _designerProject;
-    private ISelection             _editorSelection = null;
+    private static final int            PAGE_GENERAL = 0;
+    private static final int            PAGE_ENV     = 1;
+    private static final int            PAGE_HYBRID  = 2;
+    private static final int            PAGE_SOURCE  = 3;
+
+    private ManifestEditorPage          _genEditor;
+    private ManifestHybridEditorPage    _hybridEditor;
+    private ManifestEnvEditorPage       _envEditor;
+    private ManifestTextEditor          _srcEditor;
+
+    private IEditorInput                _editorInput;
+    private FormToolkit                 _toolkit;    
+    private ManifestBeanLoader          _beanLoader;
+    private ManifestBean                _bean;
+    private IDominoDesignerProject      _designerProject;
+    private ISelection                  _editorSelection = null;
+    private int                         _currentPage = PAGE_GENERAL;
+
 
     public ManifestMultiPageEditor() {
     }
@@ -86,19 +97,22 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
         });
         
         try {
-            // Add the Application page
-            _visualEditor = new ManifestEditorPage(this.getContainer(), _toolkit, this);
-            _visualEditor.getDataNode().setClassDef(_beanLoader.getClassOf(_bean));
-            _visualEditor.getDataNode().setDataProvider(new SingleCollection(_bean));
-            _visualEditor.getDataNode().setModelModified(false);   
-            addPage(_visualEditor);
-            setPageText(0, "Application"); // $NLX-ManifestMultiPageEditor.Application-1$
-            _visualEditor.refreshUI();
+            // Add the General page
+            _genEditor = new ManifestEditorPage(this.getContainer(), _toolkit, this);
+            setupPage(PAGE_GENERAL, _genEditor, "General");  // $NLX-ManifestMultiPageEditor.General-1$
+
+            // Add the Environment Variables page
+            _envEditor = new ManifestEnvEditorPage(this.getContainer(), _toolkit, this);
+            setupPage(PAGE_ENV, _envEditor, "Environment Variables"); // $NLX-ManifestMultiPageEditor.EnvironmentVariables-1$
+
+            // Add the Hybrid Configuration page
+            _hybridEditor = new ManifestHybridEditorPage(this.getContainer(), _toolkit, this);
+            setupPage(PAGE_HYBRID, _hybridEditor, "Hybrid Configuration"); // $NLX-ManifestMultiPageEditor.HybridConfiguration-1$
 
             // Add the Source page
             _srcEditor = new ManifestTextEditor();
             addPage(_srcEditor, _editorInput);
-            setPageText(1, "Source"); // $NLX-ManifestMultiPageEditor.Source-1$
+            setPageText(PAGE_SOURCE, "Source"); // $NLX-ManifestMultiPageEditor.Source-1$
         } catch (Exception e) {
             if (BluemixLogger.BLUEMIX_LOGGER.isErrorEnabled()) {
                 BluemixLogger.BLUEMIX_LOGGER.errorp(this, "createPages", e, "Failed to create visual editor"); // $NON-NLS-1$ $NLE-ManifestMultiPageEditor.Failedtocreatevisualeditor-2$
@@ -107,22 +121,53 @@ public class ManifestMultiPageEditor extends MultiPageEditorPart implements IWin
         
         PlatformUI.getWorkbench().addWindowListener(this);
     }
+    
+    protected void setupPage(int index, AbstractManifestEditorPage page, String tabText) throws NodeException {
+        page.getDataNode().setClassDef(_beanLoader.getClassOf(_bean));
+        page.getDataNode().setDataProvider(new SingleCollection(_bean));
+        page.getDataNode().setModelModified(false);   
+        addPage(page);
+        setPageText(index, tabText);
+        page.refreshUI();
+    }
 
     @Override
     protected void pageChange(int newPageIndex) {
-        if (newPageIndex != 1) {
+        if (_currentPage == PAGE_SOURCE) {
             // Moving from the Source Editor to visual - update the bean from the src
             String contents = getSrcEditor().getDocumentProvider().getDocument(_editorInput).get();     
             _bean.loadFromString(contents);
-            if (_bean.isManifestValid()) {
-                _visualEditor.getDataNode().notifyInvalidate(null);
-                _visualEditor.refreshUI();
-                _visualEditor.hideError();
-            } else {
-                _visualEditor.displayError();
-            }
         }
+        
+        switch (newPageIndex) {
+            case PAGE_GENERAL:
+                refreshPage(_genEditor);
+                break;
+                
+            case PAGE_ENV:
+                refreshPage(_envEditor);
+                break;
+
+            case PAGE_HYBRID:
+                refreshPage(_hybridEditor);
+                break;
+                
+            default:
+                break;
+        }
+        
         super.pageChange(newPageIndex);
+        _currentPage = this.getActivePage();
+    }
+    
+    public void refreshPage(AbstractManifestEditorPage page) {
+        if (_bean.isManifestValid()) {
+            page.getDataNode().notifyInvalidate(null);
+            page.refreshUI();
+            page.hideError();
+        } else {
+            page.displayError();
+        }        
     }
 
     @Override

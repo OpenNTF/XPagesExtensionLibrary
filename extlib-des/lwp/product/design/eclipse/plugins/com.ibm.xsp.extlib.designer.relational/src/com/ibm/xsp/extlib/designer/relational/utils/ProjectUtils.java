@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -252,7 +252,7 @@ public class ProjectUtils {
 
         IMarker[] markers = project.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
         if (markers.length > 0) {
-            throw new Exception("Plug-in project did not compile : Ensure that the Class and JAR files are correct."); // $NLX-ProjectUtils.PluginprojectdidnotcompileEnsuret-1$
+            throw new Exception("Plug-in project did not compile. Ensure that the Class and JAR files are correct."); // $NLX-ProjectUtils.PluginprojectdidnotcompileEnsuret-1$
         }
     }
 

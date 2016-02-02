@@ -29,6 +29,10 @@ public class ToggleDetailEvent extends ActionEvent {
 	private static final long serialVersionUID = 1L;
 
     private String[] togglePositions;
+    
+    //>tmg:a11y
+    private String clientId;
+    //<tmg:a11y
 
     public ToggleDetailEvent(UIComponent component) {
         super(component);
@@ -41,4 +45,14 @@ public class ToggleDetailEvent extends ActionEvent {
 	public void setTogglePositions(String[] togglePositions) {
 		this.togglePositions = togglePositions;
 	}
+
+	//>tmg:a11y
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+    //<tmg:a11y
 }

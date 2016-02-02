@@ -1,4 +1,4 @@
 ({
-ListBoxAria_Remove: "\uc81c\uac70",
+ListBoxAria_Remove: "\ubaa9\ub85d\uc5d0\uc11c \uc774 \ud56d\ubaa9\uc744 \uc81c\uac70\ud558\ub3c4\ub85d \uc120\ud0dd",
 ListBoxAria_ReadOnly: "${0}. \uc77d\uae30 \uc804\uc6a9"
 })

@@ -512,17 +512,22 @@ public class WidgetContainerRenderer extends FacesRendererEx {
             if(StringUtil.isNotEmpty(script)) {
                 w.writeAttribute("onClick", script, null); // $NON-NLS-1$
             }
-            String alt = (String)getProperty(PROP_CSSSCROLLUPALTTEXT);
-            if(StringUtil.isNotEmpty(alt)) {
-                w.startElement("span", c); // $NON-NLS-1$
-                w.writeAttribute("class", "lotusAltText", null); //$NON-NLS-1$ //$NON-NLS-2$
-                w.writeText(alt, "\u25B2"); //$NON-NLS-1$
-                w.endElement("span"); // $NON-NLS-1$
-            }
+            writeBodyScrollUpAltText(context, w, c);
             w.endElement("a");
             w.endElement("div"); // $NON-NLS-1$
         }
     }
+    
+    protected void writeBodyScrollUpAltText(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
+        String alt = (String)getProperty(PROP_CSSSCROLLUPALTTEXT);
+        if(StringUtil.isNotEmpty(alt)) {
+            w.startElement("span", c); // $NON-NLS-1$
+            w.writeAttribute("class", "lotusAltText", null); //$NON-NLS-1$ //$NON-NLS-2$
+            w.writeText(alt, "\u25B2"); //$NON-NLS-1$
+            w.endElement("span"); // $NON-NLS-1$
+        }
+    }
+    
     protected void writeBodyScrollDown(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
         if(!c.isDisableScrollDown()) {
             w.startElement("div", c); // $NON-NLS-1$
@@ -542,17 +547,22 @@ public class WidgetContainerRenderer extends FacesRendererEx {
             if(StringUtil.isNotEmpty(script)) {
                 w.writeAttribute("onClick", script, null); // $NON-NLS-1$
             }
-            String alt = (String)getProperty(PROP_CSSSCROLLDOWNALTTEXT);
-            if(StringUtil.isNotEmpty(alt)) {
-                w.startElement("span", c); // $NON-NLS-1$
-                w.writeAttribute("class", "lotusAltText", null); //$NON-NLS-1$ //$NON-NLS-2$
-                w.writeText(alt, "\u25BC"); //$NON-NLS-1$
-                w.endElement("span"); // $NON-NLS-1$
-            }
+            writeBodyScrollDownAltText(context, w, c);
             w.endElement("a");
             w.endElement("div"); // $NON-NLS-1$
         }
     }
+    
+    protected void writeBodyScrollDownAltText(FacesContext context, ResponseWriter w, UIWidgetContainer c) throws IOException {
+        String alt = (String)getProperty(PROP_CSSSCROLLDOWNALTTEXT);
+        if(StringUtil.isNotEmpty(alt)) {
+            w.startElement("span", c); // $NON-NLS-1$
+            w.writeAttribute("class", "lotusAltText", null); //$NON-NLS-1$ //$NON-NLS-2$
+            w.writeText(alt, "\u25BC"); //$NON-NLS-1$
+            w.endElement("span"); // $NON-NLS-1$
+        }
+    }
+    
         
     
     // ================================================================

@@ -22,7 +22,6 @@ dojo.declare(
 	'extlib.responsive.dijit.xsp.bootstrap.PickerList',
 	[extlib.dijit.PickerList],
 	{
-        listWidth: "100%",
 		templateString: dojo.cache("extlib.responsive.dijit.xsp.bootstrap", "templates/PickerList.html")
 	}
 );

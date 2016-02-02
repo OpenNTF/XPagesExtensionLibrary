@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,8 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ibm.commons.util.StringUtil;
-
 /**
  * @author Gary Marjoram
  *
@@ -41,6 +39,8 @@ public class ManifestBaseProps {
     public final static String       ENV_TAG        = "env";        // $NON-NLS-1$
     public final static String       DISK_QUOTA_TAG = "disk_quota"; // $NON-NLS-1$
     public final static String       SERVICES_TAG   = "services";   // $NON-NLS-1$
+    public final static String       HOSTS_TAG      = "hosts";      // $NON-NLS-1$
+    public final static String       DOMAINS_TAG    = "domains";    // $NON-NLS-1$
     
     // App Environment Variable Tags
     public final static String       APP_HOME_URL_TAG                   = "APP_HOME_URL";                   // $NON-NLS-1$
@@ -72,6 +72,8 @@ public class ManifestBaseProps {
     private String                   _path;
     private Map<String, Object>      _env;
     private List<String>             _services;
+    private List<String>             _hosts;
+    private List<String>             _domains;
     
     // App Environment Variables
     private String                   _appHomeUrl;
@@ -108,6 +110,8 @@ public class ManifestBaseProps {
             _path = ManifestUtil.getStringValue(manifest, PATH_TAG);
             _env = ManifestUtil.getMapValueAsStrings(manifest, ENV_TAG);
             _services = (List<String>) ManifestUtil.getListValue(manifest, SERVICES_TAG);
+            _hosts = (List<String>) ManifestUtil.getListValue(manifest, HOSTS_TAG);
+            _domains = (List<String>) ManifestUtil.getListValue(manifest, DOMAINS_TAG);
             extractAppEnv();
         }
     }
@@ -252,6 +256,22 @@ public class ManifestBaseProps {
         _services = services;
     }    
     
+    public List<String> getHosts() {
+        return _hosts;
+    }
+
+    public void setHosts(List<String> hosts) {
+        _hosts = hosts;
+    }    
+
+    public List<String> getDomains() {
+        return _domains;
+    }
+
+    public void setDomains(List<String> domains) {
+        _domains = domains;
+    }    
+
     public String getAppHomeUrl() {
         return _appHomeUrl;
     }
@@ -369,32 +389,6 @@ public class ManifestBaseProps {
         _appDaAddressBook = appDaAddressBook;
     }
     
-    public boolean isHybridConnectionEnabled() {
-        if (StringUtil.isNotEmpty(_appRemoteDataServerAddress) &&
-            StringUtil.isNotEmpty(_appRemoteDataServerName) &&
-            StringUtil.isNotEmpty(_appRuntimeServerName) &&
-            StringUtil.isNotEmpty(_appRuntimeServerIdfile)) {
-            return true;
-        }
-        
-        return false;
-    }
-
-    public boolean areAnyHybridVarsSet() {
-        if ((_appRemoteDataServerAddress != null) ||
-            (_appRemoteDataServerName != null) ||
-            (_appRuntimeServerName != null) ||
-            (_appRuntimeServerIdfile != null) || 
-            (_appRuntimeServerPassword != null) || 
-            (_appDaEnabled != null) || 
-            (_appDaDomain != null) || 
-            (_appDaAddressBook != null)) {
-            return true;
-        }
-        
-        return false;
-    }
-
     public void convertToMap(Map<String, Object> map) {
         ManifestUtil.setStringValue (map, HOST_TAG, _host, false);
         ManifestUtil.setStringValue (map, DOMAIN_TAG, _domain, false);
@@ -409,6 +403,8 @@ public class ManifestBaseProps {
         ManifestUtil.setStringValue (map, PATH_TAG, _path, false);
         ManifestUtil.setMapValue    (map, ENV_TAG, getEnv());
         ManifestUtil.setListValue   (map, SERVICES_TAG, _services);
+        ManifestUtil.setListValue   (map, HOSTS_TAG, _hosts);
+        ManifestUtil.setListValue   (map, DOMAINS_TAG, _domains);
     }    
     
     private void extractAppEnv() {

@@ -59,6 +59,15 @@ public class ForumPostRenderer extends FacesRendererEx {
     
     @Override
     protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap ForumPostRenderer.
+            String str = "";
+            str = "Author avatar"; // $NLS-ForumPostRenderer.Authoravatar-1$
+            // end strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
         switch(prop) {
             //case PROP_TAGHEADER:      return "div";
         }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -33,13 +33,14 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.designer.bluemix.config.BluemixConfig;
 import com.ibm.xsp.extlib.designer.bluemix.config.ConfigManager;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class DirectoryBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener, ModifyListener {
+public class DirectoryBluemixWizardPage extends AbstractWizardPage implements SelectionListener, ModifyListener {
     
     private static final String _LABEL_TXT  = BluemixUtil.productizeString("You must specify a local directory on your file system that will be used to store the configuration{0}and to deploy this application to %BM_PRODUCT%."); // $NLX-DirectoryBluemixWizardPage.Youmustspecifyalocaldirectoryonyo-1$
     private Text                _dirText;

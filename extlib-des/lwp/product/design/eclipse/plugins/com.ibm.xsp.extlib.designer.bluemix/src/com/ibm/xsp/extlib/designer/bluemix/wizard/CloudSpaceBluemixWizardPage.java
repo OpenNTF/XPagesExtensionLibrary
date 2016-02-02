@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -44,6 +44,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.domino.preferences.DominoPreferenceManager;
 import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
@@ -52,7 +53,7 @@ import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
  * @author Gary Marjoram
  *
  */
-public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage implements ControlListener, ISelectionChangedListener {
+public class CloudSpaceBluemixWizardPage extends AbstractWizardPage implements ControlListener, ISelectionChangedListener {
     
     private TableViewer             _orgViewer;
     private TableViewer             _spaceViewer;
@@ -228,7 +229,7 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
                     try {
                         monitor.subTask("Connecting to Server..."); // $NLX-CloudSpaceBluemixWizardPage.ConnectingtoServer-1$
                         String target = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_URL, "");
-                        _client = new CloudFoundryClient(_wiz._credentials, URI.create(target).toURL());
+                        _client = new CloudFoundryClient(((AbstractBluemixWizard)_wiz)._credentials, URI.create(target).toURL());
                         _client.login();
                     } catch (Exception e) {
                         throw new Exception("Error connecting to Server", e); // $NLX-CloudSpaceBluemixWizardPage.ErrorconnectingtoServer-1$
@@ -251,7 +252,7 @@ public class CloudSpaceBluemixWizardPage extends AbstractBluemixWizardPage imple
     
                 monitor.done();
             } catch (Exception e) {
-                _wiz.setJobException(e);
+                ((AbstractBluemixWizard)_wiz).setJobException(e);
                 _client = null;
             }
         }

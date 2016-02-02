@@ -15,13 +15,14 @@
  */
 package com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.data;
 
+
 public class ForumPostRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.data.ForumPostRenderer {
 
     @Override
     protected Object getProperty(int prop) {
         switch(prop) {
-            case PROP_MAINCLASS:                return "media xspForumPost"; // $NON-NLS-1$
-            case PROP_AUTHORCLASS:              return "pull-left";    // $NON-NLS-1$
+            case PROP_MAINCLASS:                return "xspForumPost"; // $NON-NLS-1$
+            case PROP_AUTHORCLASS:              return "media-left";    // $NON-NLS-1$
             case PROP_AUTHORAVATARCLASS:        return "media-object";    // $NON-NLS-1$
             case PROP_POSTCLASS:                return "media-body"; // $NON-NLS-1$
             case PROP_POSTTITLECLASS:           return "media-heading"; // $NON-NLS-1$

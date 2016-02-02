@@ -41,7 +41,7 @@ import com.ibm.commons.util.io.StreamUtil;
 import com.ibm.domino.osgi.core.context.ContextInfo;
 
 /**
- * This class is basded on ContentEncodingResponseFilter from org.apache.wink and modified for DAS Wink.
+ * This class is based on ContentEncodingResponseFilter from org.apache.wink and modified for DAS Wink.
  * 
  * Original Class: org.apache.wink.server.internal.servlet.contentencode.ContentEncodingResponseFilter
  * It wraps the original ServletResponse with gzip/deflate encoding for the OutputStream support
@@ -186,7 +186,7 @@ public class DasHttpResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      *  Inner class EncodedOutputStream used to support encodings like gzip and deflate.
-     *  Cache is require to emit the Conent-Length and used to support persistent connections.
+     *  Cache is require to emit the Content-Length and used to support persistent connections.
      **/
     private static class EncodedOutputStream extends ServletOutputStream {
         

@@ -135,7 +135,7 @@ public class DeviceImpl extends ResourceImpl implements Device {
 
     @Override
     public void setField(String key, Object value) {
-        throw new FacesExceptionEx(null,"The DeviceImpl object is read only. Use the sessionScope instead to store the user related data"); // $NLX-DeviceImpl.TheDeviceImplobjectisreadonlyUset-1$
+        throw new FacesExceptionEx("\"Device\" objects cannot be modified."); // $NLX-DeviceImpl.TheDeviceImplobjectisreadonlyUset-1$
     }
     
     @Override

@@ -18,7 +18,7 @@
     <td>
 	<div class="xspPicker">
 		<div dojoAttachPoint="bodyWrapper" style="width:${listWidth};height:${listHeight};overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none;" class="xspPickerBodyWrapper" dojoAttachEvent="onclick:_handleClick, ondblclick:_handleDblClick, onkeypress:_handleKeyPress">
-			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%"></ul>
+			<ul dojoAttachPoint="containerNode" class="xspPickerBody" style="width: 100%" role="listbox" tabindex="0" aria-label="${PickerName_unSelectedListLabel}" aria-multiselectable="${allowMultiple}"></ul>
 		</div>
 	</div>
 	</td>

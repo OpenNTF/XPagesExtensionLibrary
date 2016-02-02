@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.ibm.xsp.bluemix.util
 Bundle-SymbolicName: com.ibm.xsp.bluemix.util;singleton:=true
-Bundle-Version: 9.0.1.v00_15_qualifier
+Bundle-Version: 9.0.1.v00_16_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

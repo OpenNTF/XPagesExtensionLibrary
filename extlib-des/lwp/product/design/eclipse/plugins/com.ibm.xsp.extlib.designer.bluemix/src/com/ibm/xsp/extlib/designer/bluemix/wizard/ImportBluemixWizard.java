@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -36,7 +36,7 @@ public class ImportBluemixWizard extends AbstractBluemixWizard {
     private final CopyMethodBluemixWizardPage  _deployCopyMethodPage;
     private final CloudSpaceBluemixWizardPage  _orgSpacePage;
 
-    public ImportBluemixWizard() {
+    private ImportBluemixWizard() {
         super();
 
         _zipFilePage = new ZipFileBluemixWizardPage("zipFilePage"); // $NON-NLS-1$
@@ -91,7 +91,7 @@ public class ImportBluemixWizard extends AbstractBluemixWizard {
         else if (event.getCurrentPage() == _deployCopyMethodPage) {
             if (event.getTargetPage() == _orgSpacePage) {
                 advancing = true;
-                if (_orgSpacePage._firstDisplay) {
+                if (_orgSpacePage.isFirstDisplay()) {
                     if (!runJob(_orgSpacePage.getOrgsAndSpaces)) {
                         event.doit = false;
                     }

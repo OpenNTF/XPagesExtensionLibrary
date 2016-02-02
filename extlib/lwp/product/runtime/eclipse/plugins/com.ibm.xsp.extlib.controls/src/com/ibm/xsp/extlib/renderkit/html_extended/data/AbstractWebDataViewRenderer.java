@@ -29,6 +29,7 @@ import lotus.domino.ViewEntry;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UIScriptCollector;
 import com.ibm.xsp.extlib.component.data.AbstractDataView;
+import com.ibm.xsp.extlib.component.data.UIDataSourceIterator;
 import com.ibm.xsp.extlib.component.data.UIDataView;
 import com.ibm.xsp.extlib.component.data.ValueColumn;
 import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
@@ -37,6 +38,7 @@ import com.ibm.xsp.model.ViewRowData;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
 import com.ibm.xsp.util.FacesUtil;
+import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JSUtil;
 import com.ibm.xsp.util.JavaScriptUtil;
 
@@ -61,7 +63,34 @@ public abstract class AbstractWebDataViewRenderer extends AbstractDataViewRender
     protected static final int PROP_DETAILSTYLE         = 131;
     protected static final int PROP_DETAILCLASS         = 132;
 
+    //>tmg:a11y
     @Override
+	public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+		super.encodeEnd(context, component);
+
+		// only working with the actual source row of the action event in here...
+		if(component instanceof AbstractDataView.RowComponent) {
+            AbstractDataView c = (AbstractDataView)component.getParent();
+	        String _toggleActionClientId = (String)HtmlUtil.readEncodeParameter(context, c, UIDataSourceIterator.TOGGLE_ACTION_CLIENT_ID, /*remove*/ true);
+	        if(null != _toggleActionClientId){
+	        	// flip the event client id... show vs hide... hide vs show...
+	        	if(_toggleActionClientId.contains(HIDE_DELIMITER)){
+	                _toggleActionClientId = _toggleActionClientId.replaceAll(HIDE_DELIMITER, SHOW_DELIMITER);
+	            }else if(_toggleActionClientId.contains(SHOW_DELIMITER)){
+	                _toggleActionClientId = _toggleActionClientId.replaceAll(SHOW_DELIMITER, HIDE_DELIMITER);
+	            }
+	
+	            StringBuilder js = new StringBuilder();
+	            js.append("XSP.setFocus("); //$NON-NLS-1$
+	            JavaScriptUtil.addString(js, _toggleActionClientId);
+	            js.append(");\n"); //$NON-NLS-1$
+	            JavaScriptUtil.addScriptOnLoad(js.toString());
+	        }
+		}
+	}
+    //<tmg:a11y
+
+	@Override
     protected Object getProperty(int prop) {
         switch(prop) {
             case PROP_DETAILTAG:        return "div"; // $NON-NLS-1$
@@ -116,21 +145,8 @@ public abstract class AbstractWebDataViewRenderer extends AbstractDataViewRender
             String tagName = (String)getProperty(PROP_SUMMARYTITLETAG);
             w.startElement(tagName,c);
             w.writeAttribute("id",clientIdSummary,null); // $NON-NLS-1$
-            String style = viewDef.summaryColumn.getStyle();
-            if(StringUtil.isEmpty(style)) {
-                style = (String)getProperty(PROP_SUMMARYTITLESTYLE);
-            }
-            style = ExtLibUtil.concatStyles(style, hideStyle);          
-            String styleClass = viewDef.summaryColumn.getStyleClass();
-            if(StringUtil.isEmpty(styleClass)) {
-                styleClass = (String)getProperty(PROP_SUMMARYTITLECLASS);
-            }
             
-            if(StringUtil.isNotEmpty(styleClass)) {
-                w.writeAttribute("class",styleClass,null); // $NON-NLS-1$
-            }
-            style = ExtLibUtil.concatStyles("margin: 0",style); // $NON-NLS-1$
-            w.writeAttribute("style",style,null); // $NON-NLS-1$
+            writeSummaryTitleStyles(context, w, c, viewDef, hideStyle);
             
             // Expand/collapse icon
             if(viewDef.collapsibleRows) {
@@ -188,8 +204,24 @@ public abstract class AbstractWebDataViewRenderer extends AbstractDataViewRender
         }
     }
     
-    
-
+    protected void writeSummaryTitleStyles(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, String hideStyle) throws IOException {
+        String style = viewDef.summaryColumn.getStyle();
+        if(StringUtil.isEmpty(style)) {
+            style = (String)getProperty(PROP_SUMMARYTITLESTYLE);
+        }
+        style = ExtLibUtil.concatStyles(style, hideStyle);
+        String styleClass = viewDef.summaryColumn.getStyleClass();
+        if(StringUtil.isEmpty(styleClass)) {
+            styleClass = (String)getProperty(PROP_SUMMARYTITLECLASS);
+        }
+        
+        if(StringUtil.isNotEmpty(styleClass)) {
+            w.writeAttribute("class",styleClass,null); // $NON-NLS-1$
+        }
+        style = ExtLibUtil.concatStyles("margin: 0",style); // $NON-NLS-1$
+        w.writeAttribute("style",style,null); // $NON-NLS-1$
+        
+    }
 
     protected void writeExpandCollapseIcon(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
         boolean leaf = isRowLeaf(context, c, viewDef);
@@ -460,5 +492,5 @@ public abstract class AbstractWebDataViewRenderer extends AbstractDataViewRender
             FacesUtil.renderComponent(context, detail);
             w.endElement(tagName);
         }
-    }   
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- © Copyright IBM Corp. 2010                                          -->
+<!-- © Copyright IBM Corp. 2010, 2016                                    -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -3468,6 +3468,22 @@
             schemaUri="http://www.ibm.com/xsp/coreex">
             
             <!-- Data Access - Remote Services -->
+            <component    
+                tagName="jdbcConnectionManager">
+                <paletteItem
+                    description="%palette.entry.control.dataaccess.jdbcConnectionManager.description"
+                    label="%palette.entry.control.dataaccess.jdbcConnectionManager.label"
+                    visible="true"
+                    iconLarge="images/palette/ExtensionLibraryIcon_24.png"
+                    iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
+                <panels>
+                    <panel
+                        id="core.lib.basics.panel"
+                        title="%panels.jdbcConnectionManager.title">
+                    </panel>     
+                </panels>
+            </component>            
+            
             <component    
                 tagName="jsonRpcService"
                 visualizationFactory="com.ibm.xsp.extlib.designer.tooling.visualizations.dataaccess.JsonRpcServiceVisualizer">

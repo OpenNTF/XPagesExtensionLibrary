@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -42,6 +42,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IFileEditorInput;
@@ -470,7 +471,7 @@ public class BluemixUtil {
         }
         
         return newDbPath;
-    }    
+    }        
     
     public static boolean validateDominoServerName(String serverName, boolean allowEmpty) {
         if (StringUtil.isEmpty(serverName)) {
@@ -512,5 +513,14 @@ public class BluemixUtil {
             }
         }
         return false;
+    }
+
+    public static String launchChooseFileDialog(String file, String[] filterExts, String[] filterNames) {
+        FileDialog dlg = new FileDialog(Display.getCurrent().getActiveShell());
+        dlg.setFileName(file);
+        dlg.setText("Choose file"); // $NLX-BluemixUtil.Choosefile-1$
+        dlg.setFilterExtensions(filterExts);
+        dlg.setFilterNames(filterNames);
+        return dlg.open();
     }
 }

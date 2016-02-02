@@ -92,9 +92,9 @@ public class ExtLibControlsLoader extends ExtLibLoaderExtension {
         if(prefixes!=null) {
             prefixes.put("E","extlib."); //$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("2Ea","extlib.dojo"); //$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("2Eb","extlib.dojo.data"); //$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("2Ec","extlib.dojo.helper"); //$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("2Eg","extlib.dijit"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("2Eb","extlib.dijit"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("2Ec","extlib.dojo.data"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("2Ed","extlib.dojo.helper"); //$NON-NLS-1$ //$NON-NLS-2$
             prefixes.put("2Et","extlib.theme"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
@@ -113,8 +113,9 @@ public class ExtLibControlsLoader extends ExtLibLoaderExtension {
 
         /// PREFIXES
         if(prefixes!=null) {
-            prefixes.put("2Ea","/.ibmxspres/.extlib/"); //$NON-NLS-1$ //$NON-NLS-2$
-            prefixes.put("E","/.ibmxspres/.extlib/css/"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("E","/.ibmxspres/.extlib/"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("2Ee","/.ibmxspres/.extlib/css/"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("2Ef","/.ibmxspres/.extlib/dijit/themes"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

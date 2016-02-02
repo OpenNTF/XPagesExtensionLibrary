@@ -621,13 +621,16 @@ public class InputDateRenderer extends Renderer implements ClientSideConverter{
     }
 
     private String getMessageDate() {
-        return "This field is not a valid date."; // $NLS-DateTimeConverter.Thisfieldisnotavaliddate-1$
+        // "This field is not a valid date."
+        return com.ibm.xsp.extsn.ResourceHandler.getString("DateTimeConverter.Thisfieldisnotavaliddate"); //$NON-NLS-1$
     }
     private String getMessageTime() {
-        return "This field is not a valid time."; // $NLS-DateTimeConverter.Thisfieldisnotavalidtime-1$
+        // "This field is not a valid time."
+        return com.ibm.xsp.extsn.ResourceHandler.getString("DateTimeConverter.Thisfieldisnotavalidtime"); //$NON-NLS-1$
     }
     private String getMessageBoth() {
-        return "This field is not a valid DateTime."; // $NLS-DateTimeConverter.ThisfieldisnotavalidDateTime-1$
+        // "This field is not a valid DateTime."
+        return com.ibm.xsp.extsn.ResourceHandler.getString("DateTimeConverter.ThisfieldisnotavalidDateTime"); //$NON-NLS-1$
     }
     
     private int getValueType(UIInput uiInput) {

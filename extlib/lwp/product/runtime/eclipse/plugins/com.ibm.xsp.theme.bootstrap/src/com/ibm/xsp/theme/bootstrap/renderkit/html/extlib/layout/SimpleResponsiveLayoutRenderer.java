@@ -35,6 +35,7 @@ import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
 import com.ibm.xsp.extlib.tree.ITree;
 import com.ibm.xsp.extlib.tree.ITreeNode;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration;
@@ -71,7 +72,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
     public static final int PROP_BANNER_FIXEDTOP_PADDING    = 20;
     public static final int PROP_BANNER_FIXEDBOTTOM_PADDING = 21;
     public static final int PROP_BANNER_COLLAPSE_CLASS      = 22;
-    
+    public static final int PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL = 23;
     
     @Override
     protected Object getProperty(int prop) {
@@ -83,12 +84,13 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
             case PROP_SMALL_RIGHT_SIZE:            return 3;
             
             case COLLAPSE_LEFT_COLUMN_TARGET:      return ".applayout-column-left"; // $NON-NLS-1$
-            case COLLAPSE_LEFT_MENU_LABEL:         return "Menu"; // $NLS-SimpleResponsiveLayoutRenderer.Menu-1$
+            case COLLAPSE_LEFT_MENU_LABEL:         return com.ibm.xsp.extlib.controls.ResourceHandler.getString("MenuRenderer.Menu"); // $NON-NLS-1$
             
             //Fixed banner padding
             case PROP_BANNER_FIXEDTOP_PADDING:       return "body {padding-top:51px;} @media (min-width: 768px) {.applayout-main .sidebar{top:52px;bottom:0px;}}"; // $NON-NLS-1$
             case PROP_BANNER_FIXEDBOTTOM_PADDING:    return "body {padding-bottom:51px;}  @media (min-width: 768px) {.applayout-main .sidebar{top:0px;bottom:52px;}}"; // $NON-NLS-1$
             case PROP_BANNER_COLLAPSE_CLASS:         return "navbar-collapse-target"; // $NON-NLS-1$
+            case PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL: return "Toggle navigation menu"; // $NLS-NavbarRenderer.Togglenavigationmenu-1$
         
         }
         return super.getProperty(prop);
@@ -195,7 +197,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
                 (navbarInverted ? "navbar-inverse " : "navbar-default ") + navbarFixedClass; // $NON-NLS-1$ $NON-NLS-2$
         
         w.writeAttribute("class", navClass, null); // $NON-NLS-1$
-        newLine(w);
+        w.writeAttribute("role", "banner", null); // $NON-NLS-1$ $NON-NLS-2$
         
         //container div
         w.startElement("div",c); // $NON-NLS-1$
@@ -248,13 +250,15 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         
         if((utilLinks != null && utilLinks.size() > 0) || (appLinks != null && appLinks.size() > 0) || (searchBar != null && searchBar.isRendered())) {
             w.startElement("button", c); // $NON-NLS-1$
-            w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("type", "button",  null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeAttribute("aria-label",(String)getProperty(PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL),  null); // $NON-NLS-1$
             w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
             w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
             w.writeAttribute("data-target", "." + getProperty(PROP_BANNER_COLLAPSE_CLASS), null); // $NON-NLS-1$
             
             w.startElement("span", c); // $NON-NLS-1$
             w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeText((String)getProperty(PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL),  null); // $NON-NLS-1$
             w.endElement("span"); // $NON-NLS-1$
             
             w.startElement("span", c); // $NON-NLS-1$
@@ -291,7 +295,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
             w.startElement("img",c); // $NON-NLS-1$
             w.writeURIAttribute("src",imgSrc,null); // $NON-NLS-1$
    
-            if(isAltNotEmpty(logoAlt)) {
+            if(ExtLibRenderUtil.isAltPresent(logoAlt)) {
                 w.writeAttribute("alt",logoAlt,null); // $NON-NLS-1$
             }
             w.endElement("img"); // $NON-NLS-1$
@@ -542,6 +546,7 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         
         //container div
         w.startElement("div",c); // $NON-NLS-1$
+        w.writeAttribute("role", "main", null); // $NON-NLS-1$ $NON-NLS-2$
         
         // Empty pageWidthClass means pageWidth=none, therefore add no container class and no row
         if (StringUtil.isNotEmpty(pageWidthClass)) {
@@ -835,12 +840,4 @@ public class SimpleResponsiveLayoutRenderer extends FacesRendererEx {
         // No children, so the list is empty
         return true;
     }
-
-    private boolean isAltNotEmpty(String alt) {
-        // Note, do not use StringUtil.isNotEmpty for alt text
-        // because for accessibility reasons there's a difference
-        // between alt="" and no alt attribute set,
-        // so we treat null and "" as different for alt.
-        return null != alt;
-    }   
 }

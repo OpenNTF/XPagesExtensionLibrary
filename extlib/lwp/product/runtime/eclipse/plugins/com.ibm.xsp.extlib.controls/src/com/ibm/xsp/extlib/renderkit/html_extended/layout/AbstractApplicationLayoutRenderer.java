@@ -186,6 +186,25 @@ public class AbstractApplicationLayoutRenderer extends FacesRendererEx {
     protected static final int PROP_LEGALTEXTCLASS                  = 170;
 
     
+    @Override
+    protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap and oneui FormTableRenderer.
+            String str = "";
+            str = "Title bar"; // $NLS-AbstractApplicationLayoutRenderer.Titlebar-1$
+            str = "Title bar tabs"; // $NLS-AbstractApplicationLayoutRenderer.Titlebartabs-1$
+            str = "Place bar"; // $NLS-AbstractApplicationLayoutRenderer.Placebar-1$
+            str = "Place bar tabs"; // $NLS-AbstractApplicationLayoutRenderer.Placebartabs-1$
+            str = "Footer links";  // $NLS-AbstractApplicationLayoutRenderer.Footerlinks-1$
+            str = "Legal footer";  // $NLS-AbstractApplicationLayoutRenderer.Legalfooter-1$
+            // end xe:applicationLayout strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
+        
+        return null;
+    }
     // ================================================================
     // Main Frame
     // ================================================================
@@ -902,7 +921,7 @@ public class AbstractApplicationLayoutRenderer extends FacesRendererEx {
             //TODO consider removing as not used
             String searchButtonAlt = (String)getProperty(PROP_SEARCHBUTTONALT);
             if( !isAltNotEmpty(searchButtonAlt) ){
-                searchButtonAlt = "Search"; // // $NON-NLS-1$
+                searchButtonAlt = "Search"; // $NLS-AbstractApplicationLayoutRenderer.Search.1-1$
             }
             w.writeAttribute("alt",searchButtonAlt,null); // $NON-NLS-1$
             w.writeAttribute("onclick","javascript:"+submitSearch+"(); return false;",null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
@@ -949,7 +968,7 @@ public class AbstractApplicationLayoutRenderer extends FacesRendererEx {
             
             w.startElement("span", c); // $NON-NLS-1$
             w.writeAttribute("class", "lotusAltText", null); // $NON-NLS-1$ $NON-NLS-2$
-            w.writeText("Search", null);  // $NLS-AbstractApplicationLayoutRenderer.Search.1-1$
+            w.writeText("Search", null); // $NLS-AbstractApplicationLayoutRenderer.Search.1-1$
             w.endElement("span"); // $NON-NLS-1$
             
             w.endElement("a");

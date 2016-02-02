@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.yaml.snakeyaml.DumperOptions;
@@ -56,7 +57,7 @@ public class ManifestUtil {
         application.put(ManifestAppProps.NAME_TAG, config.appName);
         application.put(ManifestAppProps.HOST_TAG, config.host);
         application.put(ManifestAppProps.INSTANCES_TAG, new Integer(1));
-        application.put(ManifestAppProps.MEMORY_TAG, "512M"); // $NON-NLS-1$
+        application.put(ManifestAppProps.MEMORY_TAG, "256M"); // $NON-NLS-1$
         application.put(ManifestAppProps.TIMEOUT_TAG, new Integer(180));
         application.put(ManifestAppProps.BUILD_PACK_TAG, "xpages_buildpack"); // $NON-NLS-1$
         application.put(ManifestAppProps.COMMAND_TAG, "/app/launch_xpages_webcontainer"); // $NON-NLS-1$
@@ -89,7 +90,7 @@ public class ManifestUtil {
         try {
             File file = getManifestFile(config);
             os = new FileOutputStream(file);
-            os.write(manifestString.getBytes());
+            os.write(manifestString.getBytes(ResourcesPlugin.getEncoding()));
         } catch (Exception e) {
             if (BluemixLogger.BLUEMIX_LOGGER.isErrorEnabled()) {
                 BluemixLogger.BLUEMIX_LOGGER.errorp(ManifestUtil.class, "writeDefaultManifest", e, "Failed to write Manifest"); // $NON-NLS-1$ $NLE-ManifestUtil.FailedtowriteManifest-2$

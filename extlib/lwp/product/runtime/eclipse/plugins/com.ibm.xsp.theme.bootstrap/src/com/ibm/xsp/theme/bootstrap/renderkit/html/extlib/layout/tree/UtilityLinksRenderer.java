@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -14,6 +14,11 @@
  * permissions and limitations under the License.
  */
 package com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree;
+
+import java.io.IOException;
+
+import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 
 import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.util.NavRenderer;
 
@@ -52,5 +57,13 @@ public class UtilityLinksRenderer extends NavRenderer {
     public boolean isNodeEnabled(ITreeNode node) {
         // The user node should not be enabled by default...
         return !(node instanceof UserTreeNode);
+    }
+    
+    @Override
+    protected void renderEntryItemLinkAttributes(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
+        if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
+            writer.writeAttribute("aria-haspopup", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        super.renderEntryItemLinkAttributes(context, writer, tree, enabled, selected);
     }
 }

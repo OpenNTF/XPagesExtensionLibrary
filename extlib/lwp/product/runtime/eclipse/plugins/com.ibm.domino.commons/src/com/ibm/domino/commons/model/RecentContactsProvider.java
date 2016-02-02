@@ -179,7 +179,7 @@ public class RecentContactsProvider implements IRecentContactsProvider {
 
       }
       catch (final NotesException e) {
-          throw new ModelException("Unexpected error in recent contacts provider", e);
+          throw new ModelException("Unexpected error in recent contacts provider", e); // $NLX-RecentContactsProvider.Unexpectederrorinrecentcontactspr-1$
       }
       finally {
           BackendUtil.safeRecycle(collection);

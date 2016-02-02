@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2011
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -58,7 +58,9 @@ public class SqlParameter extends ValueBindingObjectImpl {
                 Object value = paramComplex.getValue();
                 if(value!=null) {
                     if(!(value instanceof Serializable)) {
-                        throw new FacesExceptionEx(null, StringUtil.format("The value returned by the {0} parameter #{1} must be {2} ({3})", "SQL", i, "Serializable", value.getClass().getName())); // $NLX-SqlParameter.Thevaluereturnedbythe0parameter1m-1$ $NON-NLS-2$ $NON-NLS-3$
+                        String msg = "The value returned by the SQL parameter #{0} must be Serializable ({1})"; // $NLX-SqlParameter.Thevaluereturnedbythe0parameter1m-1$
+                        msg = StringUtil.format(msg, i, value.getClass().getName());
+                        throw new FacesExceptionEx(null, msg);
                     }
                 }
                 parameters.add(value);
@@ -89,7 +91,7 @@ public class SqlParameter extends ValueBindingObjectImpl {
         _value = value;
         if( null != value ){
             if(!(value instanceof Serializable)) {
-                String exMsg = StringUtil.format("The {0} parameter value must be {1} ({2}).", "SQL", "Serializable", value.getClass().getName()); // $NLX-SqlParameter.The0parametervaluemustbe12-1$ $NON-NLS-2$ $NON-NLS-3$
+                String exMsg = StringUtil.format("The SQL parameter value must be Serializable ({0}).", value.getClass().getName()); // $NLX-SqlParameter.The0parametervaluemustbe12-1$
                 throw new FacesExceptionEx(null,exMsg);
             }
         }

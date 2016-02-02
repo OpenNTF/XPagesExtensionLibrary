@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Designer Relational Tools Plug-in
 Bundle-SymbolicName: com.ibm.xsp.extlib.designer.relational;singleton:=true
-Bundle-Version: 9.0.1.v00_15_qualifier
+Bundle-Version: 9.0.1.v00_16_qualifier
 Bundle-Activator: com.ibm.xsp.extlib.designer.relational.Activator
 Bundle-Vendor: IBM
 Require-Bundle: org.eclipse.ui,

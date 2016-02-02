@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,6 +29,7 @@ import javax.faces.context.ResponseWriter;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
@@ -159,7 +160,7 @@ public class DashboardRenderer extends FacesRendererEx {
         if(StringUtil.isNotEmpty(boardTitle)) {
             w.writeText(boardTitle, null);
         }else{
-            w.writeAttribute("title", "dashboard", null); // $NON-NLS-1$ $NLS-DashboardRenderer.dashboard-2$
+            w.writeAttribute("title", "Dashboard", null); // $NON-NLS-1$ $NLS-DashboardRenderer.dashboard-2$
         }
         String role = "presentation"; // $NON-NLS-1$
         w.writeAttribute("role", role, null); // $NON-NLS-1$
@@ -375,7 +376,7 @@ public class DashboardRenderer extends FacesRendererEx {
             if(StringUtil.isNotEmpty(imageMixinStyle)) {
                 w.writeAttribute("style", imageMixinStyle, null); // $NON-NLS-1$
             }
-            if(StringUtil.isNotEmpty(imageAlt)) {
+            if(ExtLibRenderUtil.isAltPresent(imageAlt)) {
                 w.writeAttribute("alt", imageAlt, null); // $NON-NLS-1$
             }
             if(StringUtil.isNotEmpty(imageSrc)) {

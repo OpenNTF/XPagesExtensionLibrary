@@ -90,7 +90,7 @@ public class ImportJob extends Job {
             DominoDesignerProject ddp = BluemixUtil.getDesignerProjectFromWorkspace(nsfName);
             if (ddp != null) {
                 // Delete the project and NSF 
-                final DeleteResourceAction delAction = new DeleteResourceAction(true, true);
+                final DeleteResourceAction delAction = new DeleteResourceAction(true, new File(targetNsfName).exists());
                 delAction.selectionChanged(new StructuredSelection(ddp));
                 Display.getDefault().syncExec(new Runnable(){
                     public void run() {          

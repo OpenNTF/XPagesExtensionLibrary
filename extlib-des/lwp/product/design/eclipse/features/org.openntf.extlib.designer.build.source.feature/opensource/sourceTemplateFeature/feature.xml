@@ -18,7 +18,7 @@
 <!-- ******************************************************************* -->
 <feature 
 		id="org.openntf.extlib.designer.tooling.feature.opensource"
-		version="9.0.1.v00_15_qualifier"
+		version="9.0.1.v00_16_qualifier"
 		label="%feature.label"
 		provider-name="%feature.provider">
 	<description >
@@ -232,7 +232,7 @@
 	</license>
 	<plugin 
 		id="com.ibm.xsp.extlib.designer.tooling.feature.opensource"
-		version="9.0.1.v00_15_qualifier"
+		version="9.0.1.v00_16_qualifier"
 		download-size="0" 
 		install-size="0"/>
 	<!-- note there is a build fail if that version is set to 0.0.0 -->

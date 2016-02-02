@@ -32,6 +32,7 @@ import xsp.extlib.relational.test.registry.RelationalNamingConventionErrorTest;
 import xsp.extlib.relational.test.registry.RelationalNamingConventionTest;
 import xsp.extlib.relational.test.registry.RelationalNoRunTimeBindingsTest;
 import xsp.extlib.relational.test.registry.RelationalPropertiesHaveSettersTest;
+import xsp.extlib.relational.test.registry.annotate.RelationalSpellCheckTest;
 import xsp.extlib.relational.test.registry.annotate.RelationalTranslatableStringsTest;
 import xsp.extlib.relational.test.render.RelationalRenderPageTest;
 import xsp.extlib.relational.test.render.RelationalRenderThemeControlTest;
@@ -74,7 +75,6 @@ import com.ibm.xsp.test.framework.registry.annotate.BasePropertyCategoryKnownTes
 import com.ibm.xsp.test.framework.registry.annotate.BasePropertyStyleTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseRoleAccessibilityTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseSimpleActionCategoryTest;
-import com.ibm.xsp.test.framework.registry.annotate.BaseSpellCheckTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseTitleAccessibilityTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseTodoTaggedTest;
@@ -194,7 +194,7 @@ public class RelationalTestSuite extends TestSuite {
         // - BaseSimpleActionCategoryTest
         suite.addTestSuite(BaseSimpleActionCategoryTest.class);
         // - BaseSpellCheckTest
-        suite.addTestSuite(BaseSpellCheckTest.class);
+        suite.addTestSuite(RelationalSpellCheckTest.class);
         // - BaseTitleAccessibilityTest
         suite.addTestSuite(BaseTitleAccessibilityTest.class);
         // - BaseTableAccessibilityTest

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2013
+ * © Copyright IBM Corp. 2010, 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,16 +34,16 @@ import com.ibm.xsp.util.TypedUtil;
 
 public class MenuRenderer extends HtmlListRenderer {
     
-    protected static final int PROP_MENU_SECTION	= 0;
-    protected static final int PROP_MENU_SUBSECTION	= 1;
-    protected static final int PROP_MENU_MENU	= 2;
-    protected static final int PROP_MENU_BOTTOMCORNER	= 3;
-    protected static final int PROP_MENU_INNER	= 4;
-    protected static final int PROP_MENU_HEADER	= 5;
-    protected static final int PROP_MENU_SELECTED	= 6;
-    protected static final int PROP_MENU_EXPANDED	= 7;
-    protected static final int PROP_MENU_COLLAPSED	= 8;
-    protected static final int PROP_MENU_SECTION_HEADING	= 9;
+    protected static final int PROP_MENU_SECTION    = 0;
+    protected static final int PROP_MENU_SUBSECTION = 1;
+    protected static final int PROP_MENU_MENU   = 2;
+    protected static final int PROP_MENU_BOTTOMCORNER   = 3;
+    protected static final int PROP_MENU_INNER  = 4;
+    protected static final int PROP_MENU_HEADER = 5;
+    protected static final int PROP_MENU_SELECTED   = 6;
+    protected static final int PROP_MENU_EXPANDED   = 7;
+    protected static final int PROP_MENU_COLLAPSED  = 8;
+    protected static final int PROP_MENU_SECTION_HEADING    = 9;
     protected static final int PROP_MENU_SECTION_LINK_TITLE = 10;
     
     private static final long serialVersionUID = 1L;
@@ -67,6 +67,18 @@ public class MenuRenderer extends HtmlListRenderer {
 
     @Override
     protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap MenuRenderer.
+            String str = "";
+            str = "Navigation menu"; // $NLS-MenuRenderer.Navigationmenu-1$
+            str = "Collapsed section"; // $NLS-MenuRenderer.Collapsedsection-1$
+            str = "Expanded section"; // $NLS-MenuRenderer.Expandedsection-1$
+            str = "Menu"; // $NLS-MenuRenderer.Menu-1$
+            // end xe:navigator strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
         switch(prop) {
             case PROP_MENU_SECTION: return "lotusMenuSection"; // $NON-NLS-1$
             case PROP_MENU_SUBSECTION: return "lotusMenuSubsection"; // $NON-NLS-1$
@@ -183,7 +195,7 @@ public class MenuRenderer extends HtmlListRenderer {
         writer.startElement("div", null); // $NON-NLS-1$
         writer.writeAttribute("class", (String)getProperty(PROP_MENU_INNER),null); // $NON-NLS-1$ $NON-NLS-2$
         if(ThemeUtil.isOneUIVersionAtLeast(context, 2, 1)) {
-        	// Should actually be for OneUI 3.0
+            // Should actually be for OneUI 3.0
             writer.startElement("header", null); // $NON-NLS-1$
             writer.writeAttribute("class", (String)getProperty(PROP_MENU_HEADER),null); // $NON-NLS-1$ $NON-NLS-2$
         }
@@ -212,41 +224,41 @@ public class MenuRenderer extends HtmlListRenderer {
             UIComponent uiTree = tree.getComponent();
             boolean keepState = false;
             if (uiTree instanceof UIOutlineNavigator) {
-            	keepState = ((UIOutlineNavigator)uiTree).isKeepState();
+                keepState = ((UIOutlineNavigator)uiTree).isKeepState();
             }
             String nodeId = tree.getClientId(context, "node", tree.getDepth());//$NON-NLS-1$
             
             boolean userExpanded = false;
             boolean userCollapsed = false;
             if (keepState) {
-	    		Map<String, String> params = TypedUtil.getRequestParameterMap(context.getExternalContext());
-	    		String value = params.get(nodeId);
-	    		if (!StringUtil.isEmpty(value)) {
-	    			if (value.equals("1")) { // $NON-NLS-1$
-	    				userExpanded = true;
-	    			}
-	    			else if (value.equals("0")) { // $NON-NLS-1$
-	    				userCollapsed = true;
-	    			}
-	    		}
+                Map<String, String> params = TypedUtil.getRequestParameterMap(context.getExternalContext());
+                String value = params.get(nodeId);
+                if (!StringUtil.isEmpty(value)) {
+                    if (value.equals("1")) { // $NON-NLS-1$
+                        userExpanded = true;
+                    }
+                    else if (value.equals("0")) { // $NON-NLS-1$
+                        userCollapsed = true;
+                    }
+                }
             }
             if (userExpanded || userCollapsed) {
-            	if (userExpanded) {
-	                writer.writeAttribute("class", (String)getProperty(PROP_MENU_EXPANDED),null); // $NON-NLS-1$
-            	}
-            	else {
-	                writer.writeAttribute("class", (String)getProperty(PROP_MENU_COLLAPSED),null); // $NON-NLS-1$
-	                tree.getNodeContext().setHidden(true);
-            	}
+                if (userExpanded) {
+                    writer.writeAttribute("class", (String)getProperty(PROP_MENU_EXPANDED),null); // $NON-NLS-1$
+                }
+                else {
+                    writer.writeAttribute("class", (String)getProperty(PROP_MENU_COLLAPSED),null); // $NON-NLS-1$
+                    tree.getNodeContext().setHidden(true);
+                }
             }
             else {
-	            boolean expanded = depth<expandLevel && tree.getNode().isExpanded(); 
-	            if(expanded) {
-	                writer.writeAttribute("class", (String)getProperty(PROP_MENU_EXPANDED),null); // $NON-NLS-1$
-	            } else {
-	                writer.writeAttribute("class", (String)getProperty(PROP_MENU_COLLAPSED),null); // $NON-NLS-1$
-	                tree.getNodeContext().setHidden(true);
-	            }
+                boolean expanded = depth<expandLevel && tree.getNode().isExpanded(); 
+                if(expanded) {
+                    writer.writeAttribute("class", (String)getProperty(PROP_MENU_EXPANDED),null); // $NON-NLS-1$
+                } else {
+                    writer.writeAttribute("class", (String)getProperty(PROP_MENU_COLLAPSED),null); // $NON-NLS-1$
+                    tree.getNodeContext().setHidden(true);
+                }
             }
             // OneUI v2.1 looks better with this...
             if(ThemeUtil.isOneUIVersion(context, 2, 1)) {
@@ -255,7 +267,7 @@ public class MenuRenderer extends HtmlListRenderer {
                 writer.writeAttribute("style", "padding: 0px",null); // $NON-NLS-1$ $NON-NLS-2$
             }
             writer.writeAttribute("role", "button",null); // $NON-NLS-1$ $NON-NLS-2$
-            writer.writeAttribute("href", "#",null); // $NON-NLS-1$
+            writer.writeAttribute("href", "javascript:",null); // $NON-NLS-1$ $NON-NLS-2$
             
             StringBuilder b = new StringBuilder();
             b.append("javascript:XSP.oneUIMenuSwap(event,"); //$NON-NLS-1$
@@ -297,20 +309,20 @@ public class MenuRenderer extends HtmlListRenderer {
             
             // Preserve user's Expanded/Collapsed state
             if (keepState) {
-	            writer.startElement("input", uiTree); // $NON-NLS-1$
-	            writer.writeAttribute("type", "hidden", null); // $NON-NLS-1$ $NON-NLS-2$
-	            writer.writeAttribute("id", nodeId, "id"); //$NON-NLS-1$ $NON-NLS-2$
-	            writer.writeAttribute("name", nodeId, "name"); // $NON-NLS-1$ $NON-NLS-2$
-	            if (userExpanded) {
-	            	writer.writeAttribute("value", "1", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-	            }
-	            else if (userCollapsed) {
-	            	writer.writeAttribute("value", "0", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-	            }
-	            else {
-	            	writer.writeAttribute("value", "", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-	            }
-	            writer.endElement("input"); //$NON-NLS-1$
+                writer.startElement("input", uiTree); // $NON-NLS-1$
+                writer.writeAttribute("type", "hidden", null); // $NON-NLS-1$ $NON-NLS-2$
+                writer.writeAttribute("id", nodeId, "id"); //$NON-NLS-1$ $NON-NLS-2$
+                writer.writeAttribute("name", nodeId, "name"); // $NON-NLS-1$ $NON-NLS-2$
+                if (userExpanded) {
+                    writer.writeAttribute("value", "1", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+                }
+                else if (userCollapsed) {
+                    writer.writeAttribute("value", "0", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+                }
+                else {
+                    writer.writeAttribute("value", "", "value"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+                }
+                writer.endElement("input"); //$NON-NLS-1$
             }
         }
         if(section) {

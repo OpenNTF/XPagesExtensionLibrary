@@ -120,7 +120,7 @@ ul.pagination {
 	font-family: 'Glyphicons Halflings';
 	content: '\e022';
 	font-weight: normal;
-	color: #428BCA;
+	color: #337ab7;
 	padding: 0px 8px;
 	font-size:9pt;
 }
@@ -157,12 +157,12 @@ ul.pagination {
 }
 /** Fix arrows for month increment/decrement in DTPs **/
 .xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:first-child:before {
-    color: #428bca;
+    color: #337ab7;
     content: "\e079";
     font-family: "Glyphicons Halflings";
 }
 .xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:last-child:before {
-    color: #428bca;
+    color: #337ab7;
     content: "\e080";
     font-family: "Glyphicons Halflings";
 }

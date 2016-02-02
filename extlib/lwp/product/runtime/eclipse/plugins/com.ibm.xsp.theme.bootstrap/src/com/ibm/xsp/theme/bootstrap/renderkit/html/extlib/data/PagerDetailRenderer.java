@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -71,20 +71,30 @@ public class PagerDetailRenderer extends AbstractPagerRenderer {
     protected void writeShowAll(FacesContext context, ResponseWriter w, UIPagerDetail pager, FacesDataIterator dataIterator) throws IOException {
         String text = pager.getShowText();
         if (StringUtil.isEmpty(text)) {
-            text = "Show details"; // $NLS-PagerDetailRenderer.ShowDetails-1$
+            text = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractDataViewRenderer.Showdetails"); // $NON-NLS-1$
         }
         if (StringUtil.isNotEmpty(text)) {
             w.startElement("li", null); // $NON-NLS-1$
             boolean selected = pager.isShowAll();
             if (selected) {
-                w.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", "active", null); // $NON-NLS-1$ $NON-NLS-2$
             }
             w.startElement("a", null);
             String clientId = pager.getClientId(context);
             String sourceId = clientId + "_sd"; // $NON-NLS-1$
             w.writeAttribute("id", sourceId, null); // $NON-NLS-1$
+            w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            if (selected) {
+                w.writeAttribute("disabled", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-disabled", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                w.writeAttribute("aria-disabled", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
+            
             w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                                                            // $NON-NLS-2$
+            
             setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             w.writeText(text, null);
             w.endElement("a");
@@ -101,20 +111,30 @@ public class PagerDetailRenderer extends AbstractPagerRenderer {
     protected void writeHideAll(FacesContext context, ResponseWriter w, UIPagerDetail pager, FacesDataIterator dataIterator) throws IOException {
         String text = pager.getHideText();
         if (StringUtil.isEmpty(text)) {
-            text = "Hide details"; // $NLS-PagerDetailRenderer.HideDetails-1$
+            text = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractDataViewRenderer.Hidedetails"); // $NON-NLS-1$
         }
         if (StringUtil.isNotEmpty(text)) {
             w.startElement("li", null); // $NON-NLS-1$
             boolean selected = pager.isHideAll();
             if (selected) {
-                w.writeAttribute("class", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("class", "active", null); // $NON-NLS-1$ $NON-NLS-2$
             }
             w.startElement("a", null);
             String clientId = pager.getClientId(context);
             String sourceId = clientId + "_hd"; // $NON-NLS-1$
             w.writeAttribute("id", sourceId, null); // $NON-NLS-1$
+            w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            if (selected) {
+                w.writeAttribute("disabled", "disabled", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-disabled", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                w.writeAttribute("aria-disabled", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
+            
             w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                                                            // $NON-NLS-2$
+            
             setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             w.writeText(text, null);
             w.endElement("a");

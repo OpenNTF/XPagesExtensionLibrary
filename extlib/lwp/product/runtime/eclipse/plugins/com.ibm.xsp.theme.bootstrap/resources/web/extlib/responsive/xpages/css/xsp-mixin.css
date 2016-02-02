@@ -26,6 +26,11 @@ body.xsp {
     margin: 0;
 }
 
+/* fix link font colour that is incorrect in dbootstrap css */
+a {
+	color: #337ab7;
+}
+
 .xspInputFieldEditBox[role="combobox"]{
 	overflow: hidden;
 	position: relative;
@@ -52,6 +57,7 @@ select.form-control {
 	margin-left: -4px;
 }
 
+/* TODO replace these background-image icons with glyphicon font icons*/
 .xspInputFieldDateTimePickerIcon{
 	background-image: url("/xsp/.ibmxspres/.extlib/responsive/xpages/img/glyphicons-halflings.png");
 	background-position: -192px -120px;
@@ -110,32 +116,193 @@ select.form-control {
 .form-inline .control-label{
 	display:inline-block;
 }
-/* extracted css from picker js files */
-.xspPickerBody { margin:0; padding:0; background:#fff;}
-.xspPickerItemSelected {background:#428BCA !important; color: white;}
-.xspPickerItem {margin:0;user-select: none;-moz-user-select: none;-webkit-user-select: none;}
-.xspPickerItem:hover {background:#eeeeee;}
-.xspPickerItemSelected:focus, .xspPickerItem:focus {outline:0px none;}
-.xspPickerBody li {padding:2px 2px 2px 2px;}
-.xspPickerSearchLabel{width: 15%;min-width:70px;}
-.xspmodal .xspPickerSearchOption{width:84%;}
-.xspPickerSearchOption .input-group{width:100%;}
-.xspPickerSearchOption .input-group > input{width:100%;}	
-.xspPickerSearchOption .input-group .input-group-btn{width:1%;}
-.xspPickerBodyWrapper {border:1px solid #b7b7b7;cursor:pointer;overflow:auto;overflow-x:hidden;-moz-scrollbars-horizontal:none}
+
+/* Dialog */
+.modal form{
+    margin: 0;
+}
+
+.dijitDialogUnderlayWrapper {
+    z-index: 1040 !important;
+}
+
+/* picker styles */
+.xspPickerBody {
+	margin:0;
+	padding:0;
+	background:#fff;
+	width: 100%;
+}
+.xspPickerItem {
+	margin:0;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+.xspPickerItem:hover {
+	background:#eeeeee;
+}
+.xspPickerItem.xspPickerItemSelected {
+	background:#337ab7;
+	color: white;
+}
+.xspPickerBody li {
+	padding:2px 2px 2px 2px;
+}
+.xspPickerSearchLabel{
+	width: 15%;
+	min-width:70px;
+}
+.xspPickerSearchOption .input-group{
+	width:100%;
+}
+.xspPickerSearchOption .input-group > input{
+	width:100%;
+}
+.xspPickerSearchOption .input-group .input-group-btn{
+	width:1%;
+}
+
+.xspPickerBodyWrapper {
+    border:1px solid #b7b7b7;
+    cursor:pointer;
+    overflow:auto;
+    overflow-x:hidden;
+    -moz-scrollbars-horizontal:none
+}
+
+.xspPickerItem.xspPickerItemSelected{
+    outline: 1px dotted #555;
+}
+.xspPickerBody:focus {
+    outline:0px none;
+}
+
+/* Responsive picker classes */
+.xsp-responsive-modal {
+    display: block;
+    width: auto;
+    left: 0 !important;
+    top:0 !important;
+    z-index: 1050 !important;
+}
+/* override dojo styles on container element */
+.xsp-responsive-modal .xsp-responsive-modal-container{
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+.xsp-responsive-modal .modal-body,
+.xsp-responsive-modal .modal-footer{
+    padding: 10px;
+}
+.xsp-responsive-modal .xspPickerNameList,
+.xsp-responsive-modal .xspPickerValueList,
+.xsp-responsive-modal .xspPickerCheckboxList{
+    height: 20em;
+}
+.xsp-responsive-modal .xspPickerValueList{
+	margin-bottom:10px;
+}
+.xsp-responsive-modal .xspPickerCheckboxList{
+    padding: 5px;
+}
+.xsp-responsive-modal .xspPickerNameListLeft{
+	padding-right:0px;
+	margin-bottom:10px;
+}
+.xsp-responsive-modal .xspPickerNameListRight{
+    padding-left:0px;
+    margin-bottom:10px;
+}
+.xsp-responsive-modal .xspPickerSearchOption .xspPickerSearchLabel{
+    width: 20%;
+    min-width:78px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+.xsp-responsive-modal .xspPickerSearchOption .xspPickerSearchField{
+    width:75%;
+    float:right;
+    margin-bottom: 6px;
+}
+.xsp-responsive-modal .xspPickerInputText {
+    font-weight: bold;
+    padding: 10px 0px;
+    display: inline-block;
+}
+.xsp-responsive-modal .xspPickerNameAdd .xspPickerButton{
+    margin-top: 9em;
+}
+.xsp-responsive-modal .xspPickerNameAdd {
+    text-align:center;
+}
+.xsp-responsive-modal .xspPickerSearchOption .input-group .input-group-btn{
+    width:1%;
+}
+.xsp-responsive-modal .xspPickerInput {
+    margin: 0;
+    vertical-align:middle;
+}
+
+.xsp-responsive-modal .xspPickerSpan {
+	margin:2px 4px;
+}
+
+.xsp-responsive-modal .xspPickerHr {
+	margin-top:5px;
+	margin-bottom:10px;
+}
+.xsp-responsive-modal .modal-content {
+    max-height: 95vh;
+    overflow: hidden;
+    overflow-y: auto;
+}
+/* responsive picker styles for xs screens */
+@media (max-width: 767px) {
+    .xsp-responsive-modal {
+        margin-left: 0px;
+        left: 0 !important;
+        top: 0 !important;
+    }
+    .xsp-responsive-modal .xspPickerNameList {
+        height: 10em;
+    }
+    .xsp-responsive-modal .xspPickerNameListLeft{
+        padding-right:15px;
+    }
+    .xsp-responsive-modal .xspPickerNameListRight{
+        padding-left:15px;
+        margin-top:10px;
+    }
+    .xsp-responsive-modal .xspPickerSearchOption .xspPickerSearchField{
+        width:70%;
+    }
+    
+    .xsp-responsive-modal .modal-content {
+	    max-width: 95vw;
+    }
+	.xsp-responsive-modal .xspPickerNameAdd .xspPickerButton{
+	    margin-top: 0;
+	}
+}
 
 /** djListTextBox */
-.xspFilter{background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 15px; display: inline-block; padding: 3px 10px;margin:6px 2px;}
+.xspFilter{
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 3px 10px;
+	margin:6px 2px;
+}
 .xspFilter, .xspClose{
-	color: #428BCA;
+	color: #337ab7;
 	text-decoration: none;
 }
 .xspClose {
 	margin-left: 8px;
 	font-weight:bold;
-}
-.xspmodal .xspFilter{
-	margin: 0px 2px;
 }
 
 /***********************************************************************	
@@ -232,7 +399,7 @@ select.form-control {
 	margin-bottom: 0px;
 }
 
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width : 767px) {
 	.applayout-titlebar-name{
 		float: none;
 	}
@@ -277,7 +444,7 @@ input[type="file"].form-control {
 }
 .widget-section-arrow {
 	margin: auto;
-	color: #428BCA;
+	color: #337ab7;
 }
 .xspWidgetContainer.panel{ 
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -340,26 +507,7 @@ re-worked if/when that switch happens */
 	padding: 0;
 	border: 0;
 }
-
-/* Dialog */
-.modal form{
-	margin: 0;
-}
-.xspmodal {
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  z-index: 1050 !important;
-  width: 560px;
-  margin-left: -280px;
-  overflow: none;
-}
-.xspmodal * {
-  z-index: 1050 !important;
-}
-.dijitDialogUnderlayWrapper {
-	z-index: 1040 !important;
-}
+/* form controls */
 .form-control:focus {
 	outline: 0px none;
 }
@@ -449,7 +597,7 @@ span .alert.alert-danger ul{
 	font-size: 11pt;
 	margin-right:6px;
 	width:auto;
-	color: #428bca;
+	color: #337ab7;
 	display: block;
     float: left;
     padding: 12px 0;
@@ -458,6 +606,9 @@ span .alert.alert-danger ul{
 /* padding for menu items */
 .nav.nav-pills > li > a {
 	padding-left: 22px;
+}
+.nav.nav-pills>li.active>a {
+    border: 1px solid #337ab7;
 }
 /* extra padding for items in ContainerNode*/
 .nav.nav-pills li > .nav.nav-pills {
@@ -470,7 +621,7 @@ span .alert.alert-danger ul{
 }
 
 /* data view control 
-	color: #428BCA;*/
+	color: #337ab7;*/
 .xsp *[class*="glyphicon-"] {
 	font-weight: normal;
 }
@@ -479,14 +630,14 @@ span .alert.alert-danger ul{
 	position: relative;
 	top: 2px;
 	font-size: 11pt;
-	color: #428bca;
+	color: #337ab7;
 }
 .dataview .glyphicon-file{
 	position: relative;
 	left: 8px;
 	font-size: 14px;
 	top: 0px;
-	color: #428bca;
+	color: #337ab7;
 }
 .table.dataview .xspFirstCell{
 	padding-left: 20px;
@@ -505,7 +656,7 @@ div.glyphicon.xspReadIcon{
 }
 /* Forum View */
 .forumView .xspForumChildListIcon{
-    border-color: #428BCA;
+    border-color: #337ab7;
     border-style: solid;
     border-width: 0 0 2px 2px;
     width: 16px;
@@ -516,9 +667,26 @@ div.glyphicon.xspReadIcon{
 	padding-left: 10px;
 	margin-top: 0px;
 }
-.xspForumPost {
+.forumView .xspForumPost {
 	padding: 7px;
 	border: 1px solid #DDDDDD;
+}
+.forumView .xspForumPost .media-left{
+	width: 10%;
+}
+/* fix height of no-detail forum view row */
+.forumView .media-list li{
+	line-height: 0px;
+}
+/* override above to make sure show-detail view looks correct */
+.forumView .media-list li .xspForumPost{
+    line-height: 24px;
+}
+.forumView .media {
+    margin-bottom: 10px;
+}
+.forumView .media-heading {
+    display: inline;
 }
 
 /* Icons */
@@ -526,15 +694,12 @@ div.glyphicon.xspReadIcon{
 .forumView [class*="glyphicon-sort"]{
 	display: inline;
 	padding: 0px 8px;
-	color: #428bca;
+	color: #337ab7;
 }
 
 /* tag cloud */
 .xspTagCloud{
 	padding-top: 6px;	
-}
-.xspTagCloudSlider .dijitSliderImageHandle{
-	outline: 0px none;
 }
 .xspTagCloud a.tagCloudSize0, a.tagCloudSize0:visited {
     color: #5bc0de;
@@ -577,9 +742,12 @@ div.glyphicon.xspReadIcon{
     font-size: 150%;
 }
 .xspTagCloud a.tagCloudSize10, a.tagCloudSize10:visited {
-    color: #428bca;
+    color: #337ab7;
     font-size: 180%;
     font-weight: bold;
+}
+.xspTagCloudSlider{
+    border: 1px solid white;
 }
 /***********************************************************************	
 	OneUI like specific styles used by XPages controls
@@ -714,7 +882,7 @@ div.glyphicon.xspReadIcon{
     left: 0;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .sidebar {
     border-bottom: 1px solid #dddddd;
     top:0;
@@ -838,7 +1006,7 @@ div.glyphicon.xspReadIcon{
 	z-index: 998;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	.xspNavbar .navbar-form {
 		margin-left:0px;
 		margin-right:0px;
@@ -872,7 +1040,7 @@ div.glyphicon.xspReadIcon{
 	transition: none;
 	-moz-transition: none;
     -webkit-transition: none;
-    -o-transition: color 0 ease-in;        		
+    -o-transition: color 0 ease-in;
 }
 
 /* text boxes */
@@ -942,7 +1110,7 @@ div.glyphicon.xspReadIcon{
 .dbootstrap .dijitTabCloseButton.dijitTabCloseIcon {
 	font-family: Glyphicons Halflings;
 	font-weight: normal;
-	color: #428BCA;
+	color: #337ab7;
 	font-size: 10pt;
 	opacity: 1;
 }
@@ -973,7 +1141,7 @@ div.glyphicon.xspReadIcon{
 */
 .dbootstrap .dijitTabContainer .dijitTabController .dijitTab.tabStripButton{
     border: 1px solid #DDDDDD;
-    color: #428BCA;
+    color: #337ab7;
     font-family: "Glyphicons Halflings";
     opacity: 1;
     font-size: 9pt;
@@ -1053,7 +1221,7 @@ div.glyphicon.xspReadIcon{
     font-size: 9px;
     left: 1px;
     position: relative;
-    color: #428bca;
+    color: #337ab7;
 }
 
 /** dojo radio button **/
@@ -1096,7 +1264,7 @@ div.glyphicon.xspReadIcon{
     padding-left: 10px;
     position: relative;
     top: -1px;
-    color: #428bca;
+    color: #337ab7;
 }
 .xsp.dbootstrap .dijitMenuArrowCell .dijitMenuCollapse:before,
 .xsp.dbootstrap .dijitTitlePane .dijitOpen .dijitArrowNode:before {
@@ -1106,7 +1274,7 @@ div.glyphicon.xspReadIcon{
     padding-left: 10px;
     position: relative;
     top: -1px;
-    color: #428bca;
+    color: #337ab7;
 }
 .xsp.dbootstrap .dijitInputContainer {
     padding: 4px;
@@ -1118,17 +1286,17 @@ div.glyphicon.xspReadIcon{
 .xsp.dbootstrap .dijitCalendarIncrementControl:before, .xsp.dbootstrap .dijitTreeExpando:before, 
 .xsp.dbootstrap .dijitTitlePane .dijitArrowNode:before, .xsp.dbootstrap .dgrid-sort-arrow:before {
     font-family: "Glyphicons Halflings";
-    color: #428bca;
+    color: #337ab7;
 }
 .xsp .icon-arrow-left:before {
     font-family: "Glyphicons Halflings";
-    color: #428bca;
+    color: #337ab7;
 }
 
 .xsp .icon-arrow-right:before{
     content: "\e080";
     font-family: "Glyphicons Halflings";
-    color: #428bca;
+    color: #337ab7;
 }
 
 /* TODO replace cut and paste icons with glyphicons or other font icons when possible */
@@ -1169,9 +1337,16 @@ div.glyphicon.xspReadIcon{
 	outline: 0px none;
 }
 .xspmodal .modal-header .close{
-	color: #428BCA;
+	color: #337ab7;
 	opacity: 1;
 	font-size: 28px;
+}
+
+/* pager */
+.xsp .pagination > .disabled > a,
+.xsp .pagination > .disabled > a:hover,
+.xsp .pagination > .disabled > a:focus {
+	color: #707070;
 }
 
 /* dojo border container/pane - needs more work

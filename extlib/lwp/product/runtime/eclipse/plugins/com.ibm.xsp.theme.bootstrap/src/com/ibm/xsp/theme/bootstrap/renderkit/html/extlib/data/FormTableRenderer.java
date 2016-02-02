@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -27,6 +27,8 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.component.data.FormLayout;
 import com.ibm.xsp.extlib.component.data.UIFormLayoutRow;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
+import com.ibm.xsp.theme.bootstrap.resources.Resources;
+import com.ibm.xsp.theme.bootstrap.util.Util;
 
 public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.data.FormTableRenderer {
 
@@ -38,7 +40,6 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
           case PROP_TABLESTYLECLASS:          return "form-table"; // $NON-NLS-1$
           
           case PROP_STYLECLASSERRORSUMMARY:   return "alert alert-danger"; // $NON-NLS-1$
-          case PROP_ERRORSUMMARYMAINTEXT:     return "Please check the following:";  // $NLS-FormTableRenderer.Pleasecheckthefollowing-1$
           case PROP_ERRORSUMMARYCLASS:        return "text-error"; // $NON-NLS-1$
           case PROP_WARNSUMMARYMAINTEXT:      return getProperty(PROP_ERRORSUMMARYMAINTEXT);
           case PROP_WARNSUMMARYCLASS:         return "text-warning"; // $NON-NLS-1$
@@ -49,20 +50,11 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
           case PROP_STYLECLASSHEADER:         return "form-title"; // $NON-NLS-1$
           case PROP_STYLECLASSFORMDESC:       return "lotusMeta"; // $NON-NLS-1$
           case PROP_TAGFORMDESC:              return "div"; // $NON-NLS-1$
-          
           case PROP_STYLECLASSFOOTER:         return "form-footer"; // $NON-NLS-1$
-
           case PROP_ERRORROWCLASS:            return "text-error"; // $NON-NLS-1$
-
-          case PROP_ERRORMSGALTTEXT:          return "Error:"; // $NLS-FormTableRenderer.Error-1$
           case PROP_ERRORMSGALTTEXTCLASS:     return "lotusAltText"; // $NON-NLS-1$
-          case PROP_FATALMSGALTTEXT:          return "Fatal:";  // $NLS-FormTableRenderer.Fatal-1$
           case PROP_ERRORROWSTYLE:            return "padding: 6px 25px 0px 25px;"; //$NON-NLS-1$
-
-          case PROP_WARNMSGALTTEXT:           return "Warning:";  // $NLS-FormTableRenderer.Warning-1$
           case PROP_WARNMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
-
-          case PROP_INFOMSGALTTEXT:           return "Information:";  // $NLS-FormTableRenderer.Information-1$
           case PROP_INFOMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
 
           case PROP_FIELDROWCLASS:            return "control-group"; // $NON-NLS-1$
@@ -73,11 +65,17 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
 
           case PROP_HELPIMGCLASS:             return null;
           case PROP_HELPIMGSRC:               return null;
-          case PROP_HELPIMGALT:               return "Help";  // $NLS-FormTableRenderer.Help-1$
-          case PROP_HELPMSGALTTEXT:           return "Help";  // $NLS-FormTableRenderer.Help.1-1$
           case PROP_HELPMSGALTTEXTCLASS:      return "lotusAltText"; // $NON-NLS-1$
-          
           case PROP_CONTAINERSTYLECLASS:      return "xspFormTableContainer"; // $NON-NLS-1$
+
+          case PROP_ERRORIMGSTYLE:            return "margin: 0px 8px;"; // $NON-NLS-1$
+          case PROP_ERRORIMGCLASS:            return Resources.get().getIconClass("remove-sign"); // $NON-NLS-1$
+          
+          case PROP_INFOIMGSTYLE:            return "margin: 0px 8px;"; // $NON-NLS-1$
+          case PROP_INFOIMGCLASS:            return Resources.get().getIconClass("info-sign"); // $NON-NLS-1$
+          
+          case PROP_WARNIMGSTYLE:            return "margin: 0px 8px;"; // $NON-NLS-1$
+          case PROP_WARNIMGCLASS:            return Resources.get().getIconClass("warning-sign"); // $NON-NLS-1$
           
         }
       
@@ -203,5 +201,106 @@ public class FormTableRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
         
         // Then write the children
         writeFormRowData(context, w, c, formData, row, edit, rowData);
+    }
+    
+    @Override
+    protected void writeMainTableTag(FacesContext context, ResponseWriter w, FormLayout c) throws IOException {
+        String ariaLabel = c.getAriaLabel();
+        if (StringUtil.isNotEmpty(ariaLabel)) {
+            w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
+        }
+        //Defect 198008 - a11y fix, need to add aria-labelledby
+        w.writeAttribute("aria-labelledby", c.getClientId(context) + "_title", null); // $NON-NLS-1$ $NON-NLS-2$
+        String tbStyle = (String)getProperty(PROP_TABLESTYLE);
+        if(StringUtil.isNotEmpty(tbStyle)) {
+            w.writeAttribute("style", tbStyle, null); // $NON-NLS-1$
+        }
+        String tbStyleClass = (String)getProperty(PROP_TABLESTYLECLASS);
+        if(StringUtil.isNotEmpty(tbStyleClass)) {
+            w.writeAttribute("class", tbStyleClass, null); // $NON-NLS-1$
+        }
+        String tbRole = (String)getProperty(PROP_TABLEROLE);
+        if(StringUtil.isNotEmpty(tbRole)) {
+            w.writeAttribute("role", tbRole, null); // $NON-NLS-1$
+        }
+        w.writeAttribute("cellpadding", "0", null); // $NON-NLS-1$
+        w.writeAttribute("cellspacing", "0", null); // $NON-NLS-1$
+        w.writeAttribute("border", "0", null); // $NON-NLS-1$
+    }
+    
+    @Override
+    protected void writeFatalMessage(FacesContext context, ResponseWriter w, FormLayout c, String msg) throws IOException {
+        boolean isFatalSeverity = true;
+        this.writeErrorOrFatalMessage(context, w, c, msg, isFatalSeverity);
+    }
+    @Override
+    protected void writeErrorMessage(FacesContext context, ResponseWriter w, FormLayout c, String msg) throws IOException {
+        boolean isFatalSeverity = false;
+        this.writeErrorOrFatalMessage(context, w, c, msg, isFatalSeverity);
+    }
+    protected void writeErrorOrFatalMessage(FacesContext context, ResponseWriter w, FormLayout c, String msg, boolean isFatalSeverity)
+            throws IOException {
+        w.startElement("div", c); // $NON-NLS-1$
+        String style = (String)getProperty(PROP_ERRORIMGSTYLE);
+        if(StringUtil.isNotEmpty(style)) {
+            w.writeAttribute("style", style, null); // $NON-NLS-1$
+        }
+        String cls = (String)getProperty(PROP_ERRORIMGCLASS);
+        if(StringUtil.isNotEmpty(cls)) {
+            w.writeAttribute("class", cls, null); // $NON-NLS-1$
+        }
+        String alt = (String)getProperty(PROP_ERRORIMGALT);
+        if(StringUtil.isNotEmpty(alt)) {
+            w.writeAttribute("aria-label", alt, null); // $NON-NLS-1$
+        }
+        Util.renderIconTextForA11Y(w, alt);
+        w.endElement("div"); // $NON-NLS-1$
+        
+        if( StringUtil.isNotEmpty(msg) ){
+            w.writeText(msg, null);
+        }
+    }
+
+    @Override
+    protected void writeWarnMessage(FacesContext context, ResponseWriter w, FormLayout c, String msg) throws IOException {
+        w.startElement("div", c); // $NON-NLS-1$
+        String style = (String)getProperty(PROP_WARNIMGSTYLE);
+        if(StringUtil.isNotEmpty(style)) {
+            w.writeAttribute("style", style, null); // $NON-NLS-1$
+        }
+        String cls = (String)getProperty(PROP_WARNIMGCLASS);
+        if(StringUtil.isNotEmpty(cls)) {
+            w.writeAttribute("class", cls, null); // $NON-NLS-1$
+        }
+        String alt = (String)getProperty(PROP_WARNIMGALT);
+        if(StringUtil.isNotEmpty(alt)) {
+            w.writeAttribute("aria-label", alt, null); // $NON-NLS-1$
+        }
+        w.endElement("div"); // $NON-NLS-1$
+        
+        if( StringUtil.isNotEmpty(msg) ){
+            w.writeText(msg, null);
+        }
+    }
+    @Override
+    protected void writeInfoMessage(FacesContext context, ResponseWriter w, FormLayout c, String msg) throws IOException {
+        w.startElement("div", c); // $NON-NLS-1$
+        String style = (String)getProperty(PROP_INFOIMGSTYLE);
+        if(StringUtil.isNotEmpty(style)) {
+            w.writeAttribute("style", style, null); // $NON-NLS-1$
+        }
+        String cls = (String)getProperty(PROP_INFOIMGCLASS);
+        if(StringUtil.isNotEmpty(cls)) {
+            w.writeAttribute("class", cls, null); // $NON-NLS-1$
+        }
+        String alt = (String)getProperty(PROP_INFOIMGALT);
+        if(StringUtil.isNotEmpty(alt)) {
+            w.writeAttribute("aria-label", alt, null); // $NON-NLS-1$
+        }
+        w.endElement("div"); // $NON-NLS-1$
+        
+        if( StringUtil.isNotEmpty(msg) ){
+            w.writeText(msg, null);
+        }
     }
 }

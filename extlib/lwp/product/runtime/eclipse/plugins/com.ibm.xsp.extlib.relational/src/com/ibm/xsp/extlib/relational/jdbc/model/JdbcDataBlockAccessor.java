@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2011
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -436,7 +436,9 @@ public class JdbcDataBlockAccessor extends DataBlockAccessor {
                 }
             }
         } catch(Exception ex) {
-            throw new FacesExceptionEx(ex,"Error while reading the relational data"); // $NLX-JdbcDataBlockAccessor.Errorwhilereadingtherelationaldat-1$
+            // Note this NLX key is referenced in other places in this plugin.
+            String msg = "Error while reading the relational data"; // $NLX-JdbcDataBlockAccessor.Errorwhilereadingtherelationaldat-1$
+            throw new FacesExceptionEx(ex,msg);
         }
     }
 
@@ -453,7 +455,11 @@ public class JdbcDataBlockAccessor extends DataBlockAccessor {
         if(StringUtil.isNotEmpty(connectionManager)) {
             return JdbcUtil.createManagedConnection(FacesContext.getCurrentInstance(),getDataSource()!=null?getDataSource().getComponent():null,connectionManager);
         }
-        throw new SQLException(StringUtil.format("No {0}, {1} or {2} is provided", "connectionManager", "connectionName", "connectionUrl")); // $NLX-JdbcDataBlockAccessor.No01or2isprovided-1$ $NON-NLS-2$
+        // Note, this resource key is used in other places in this plugin
+        String msg = "No \"connectionManager\", \"connectionName\" or \"connectionUrl\" is provided"; // $NLX-JdbcDataBlockAccessor.No01or2isprovided-1$
+        // "No \"connectionManager\", \"connectionName\" or \"connectionUrl\" is provided"
+        //String msg = com.ibm.xsp.extlib.relational.ResourceHandler.getSpecialAudienceString("JdbcDataBlockAccessor.No01or2isprovided"); //$NON-NLS-1$
+        throw new SQLException(msg);
     }
 
     protected void readMetaData(ResultSet rs) throws SQLException {

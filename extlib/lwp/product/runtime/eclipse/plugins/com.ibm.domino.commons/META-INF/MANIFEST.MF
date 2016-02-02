@@ -1,6 +1,6 @@
 Bundle-Name: Domino common utilities
 Bundle-SymbolicName: com.ibm.domino.commons;singleton:=true
-Bundle-Version: 9.0.1.v00_15_SNAPSHOT
+Bundle-Version: 9.0.1.v00_16_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ClassPath: .
 Eclipse-ExtensibleAPI: true

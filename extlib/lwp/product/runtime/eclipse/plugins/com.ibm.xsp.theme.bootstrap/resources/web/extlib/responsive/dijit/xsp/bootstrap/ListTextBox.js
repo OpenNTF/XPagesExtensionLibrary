@@ -24,6 +24,7 @@ dojo.declare(
 		listClass: 'xspFilters xspInlineList',
 		linkClass: 'xspFilter',
 		linkRole: 'button',
+		valueRole: 'listitem',
 		closeClass: 'glyphicon glyphicon-remove xspClose',
 		templateString: dojo.cache("extlib.dijit", "templates/ListTextBox.html"),
 		displayLabel:false,
@@ -40,6 +41,7 @@ dojo.declare(
 
 			var choiceItem = dojo.create("span", {
 				val: val,
+                "role": this.valueRole,
 				style: pos>0?'margin-left: 5px':'',
                 tabIndex: -1  // User actions dont happen on this node
 			}, this.list, _pos);
@@ -66,6 +68,11 @@ dojo.declare(
 					"class": this.closeClass,
 					"aria-label": this.msgs.ListBoxAria_Remove
 				}, a, _pos);
+				
+				var a3 = dojo.create("span", {
+					"class": "sr-only"
+				}, a2);
+				a3.appendChild(dojo.doc.createTextNode(this.msgs.ListBoxAria_Remove))
 			}
 			if(this.readOnly) {
 				var ariaReadOnly = dojo.string.substitute(

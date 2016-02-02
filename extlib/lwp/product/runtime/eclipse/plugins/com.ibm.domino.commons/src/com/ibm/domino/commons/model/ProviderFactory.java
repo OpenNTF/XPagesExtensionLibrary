@@ -154,7 +154,7 @@ public class ProviderFactory {
                         for (final Class<?> intf : ext.provides()) {
                             final IProviderExtension oldext = result.put(intf, ext);
                             if (oldext != null) {
-                                Logger.get().info(String.format("Extension %s replaced by %s for interface %s",
+                                Logger.get().info(String.format("Extension %s replaced by %s for interface %s", // $NLI-ProviderFactory.Extensionsreplacedbysforinterface-1$
                                         oldext.toString(),
                                         ext.toString(),
                                         intf.toString()));
@@ -163,7 +163,7 @@ public class ProviderFactory {
                         }
 
                     } catch (final CoreException e) {
-                        Logger.get().error(e, "Unable to create IProviderExtension");
+                        Logger.get().error(e, "Unable to create IProviderExtension"); // $NLE-ProviderFactory.UnabletocreateIProviderExtension-1$
                     }
                 }
             }

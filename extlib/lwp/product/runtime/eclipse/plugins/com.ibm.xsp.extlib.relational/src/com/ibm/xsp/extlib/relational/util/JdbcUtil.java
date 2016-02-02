@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,8 +103,7 @@ public class JdbcUtil {
         }
         final IJdbcConnectionManager manager = findConnectionManager(context, from, name);
         if (manager == null) {
-            throw new FacesExceptionEx(null, StringUtil.format("Unknown {0} {1}", "ConnectionManager", name)); // $NLX-JdbcUtil.Unknown01-1$
-                                                                                                                // $NON-NLS-2$
+            throw new FacesExceptionEx(null, StringUtil.format("Unknown ConnectionManager {0}", name)); // $NLX-JdbcUtil.Unknown01-1$
         }
         return manager.getConnection();
     }
@@ -183,7 +182,7 @@ public class JdbcUtil {
                 if (StringUtil.isEmpty(sc)) {
                     l.add(tb);
                 } else {
-                    l.add(StringUtil.format("{0}.{1}", sc, tb));
+                    l.add(StringUtil.format("{0}.{1}", sc, tb)); // $NON-NLS-1$
                 }
             }
             return l;
@@ -199,12 +198,13 @@ public class JdbcUtil {
         if (StringUtil.isNotEmpty(fileName)) {
             final Application app = Application.get();
             final VFSObjectCache c = app.getVFSCache();
-            try {
                 String fullPath = JDBC_ROOT + VFS.SEPARATOR + fileName;
                 if (!fullPath.endsWith(".sql")) { // $NON-NLS-1$
                     fullPath = fullPath + ".sql"; // $NON-NLS-1$
                 }
-                return (String) c.get(fullPath, new VFSObjectCache.ObjectLoader() { // $NON-NLS-1$
+                final String updatedFilePath = fullPath;
+                try {
+                return (String) c.get(fullPath, new VFSObjectCache.ObjectLoader() {
                     @Override
                     public Object loadObject(VFSFile file) throws VFSException {
                         if (file.exists()) {
@@ -212,17 +212,14 @@ public class JdbcUtil {
                                 final String s = file.loadAsString();
                                 return s;
                             } catch (final Exception ex) {
-                                throw new VFSException(ex, StringUtil.format("Error while reading {0} Query {1}", "SQL", file)); // $NLX-JdbcUtil.Errorwhilereading0Query1-1$
-                                                                                                                                    // $NON-NLS-2$
+                                throw new VFSException(ex, StringUtil.format("Error while reading SQL Query file {0}", updatedFilePath)); // $NLX-JdbcUtil.ErrorwhilereadingSQLQueryfile0-1$[[{0} is like "/WEB-INF/jdbc/query.sql"]]
                             }
                         }
-                        throw new VFSException(null, StringUtil.format("{0) file {1} does not exist", "SQL Query", file)); // $NLX-JdbcUtil.0file1doesnotexist-1$
-                                                                                                                            // $NON-NLS-2$
+                        throw new VFSException(null, StringUtil.format("SQL Query file {0} does not exist", updatedFilePath)); // $NLX-JdbcUtil.0file1doesnotexist-1$[[{0} is like "/WEB-INF/jdbc/query.sql"]]
                     }
                 });
             } catch (final VFSException ex) {
-                throw new FacesExceptionEx(ex, StringUtil.format("Error while loading {0} query file {1}", "SQL", fileName)); // $NLX-JdbcUtil.Errorwhileloading0queryfile1-1$
-                                                                                                                                // $NON-NLS-2$
+                throw new FacesExceptionEx(ex, StringUtil.format("Error while loading SQL Query file {0}", updatedFilePath)); // $NLX-JdbcUtil.Errorwhileloading0queryfile1-1$[[{0} is like "/WEB-INF/jdbc/query.sql"]]
             }
         }
         return null;
@@ -266,8 +263,7 @@ public class JdbcUtil {
         final int sel = StringUtil.indexOfIgnoreCase(q, "select", 0); // $NON-NLS-1$
         final int from = StringUtil.indexOfIgnoreCase(q, "from", 0); // $NON-NLS-1$
         if (sel < 0 || from < sel) {
-            throw new SQLException(StringUtil.format("Unable to create a 'count' query for the {0} {1}", "SQL", q)); // $NLX-JdbcUtil.Unabletocreateacountqueryforthe01-1$
-                                                                                                                        // $NON-NLS-2$
+            throw new SQLException(StringUtil.format("Unable to create a \"count\" query for the SQL statement:\n{0}", q)); // $NLX-JdbcUtil.Unabletocreateacountqueryforthe01-1$[[{0} is some SQL code, like: SELECT * FROM employees;]]
         }
         return q.substring(0, sel + 6) + " count(*) " + q.substring(from); // $NON-NLS-1$
     }

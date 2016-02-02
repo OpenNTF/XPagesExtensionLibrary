@@ -200,6 +200,8 @@ public abstract class AbstractPickerRenderer extends FacesRenderer {
                 if(StringUtil.isNotEmpty(ch)) {
                     boolean trim = iex.isMultipleTrim();
                     json.putString("msep",ch); // $NON-NLS-1$
+                    //Defect 198787 - a11y fix to set aria-multiselectable property
+                    json.putBoolean("allowMultiple",true); // $NON-NLS-1$
                     json.putBoolean("trim",trim); // $NON-NLS-1$
                     allowMultiple = true;
                 }

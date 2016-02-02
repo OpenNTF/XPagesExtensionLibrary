@@ -272,6 +272,7 @@ public abstract class FormLayoutRenderer extends FacesRendererEx {
         if(StringUtil.isNotEmpty(cls)) {
             w.writeAttribute("class", cls, null); // $NON-NLS-1$
         }
+        w.writeAttribute("role", "alert", null); // $NON-NLS-1$ $NON-NLS-2$
     }
     private void writeErrorSummaryMessage(FacesContext context, ResponseWriter w, FormLayout c, FacesMessage.Severity sev) throws IOException {
         String mainText = c.getErrorSummaryText();
@@ -304,6 +305,7 @@ public abstract class FormLayoutRenderer extends FacesRendererEx {
     }
     protected void writeErrorSummaryRow(FacesContext context, ResponseWriter w, FormLayout c, FacesMessage m) throws IOException {
         w.startElement("li", c); // $NON-NLS-1$
+        
         String title = null;
         if(StringUtil.isNotEmpty(title)) {
             // TODO supposed to use the field label here.
@@ -492,6 +494,7 @@ public abstract class FormLayoutRenderer extends FacesRendererEx {
                 w.writeAttribute("class", cls, null); // $NON-NLS-1$
             }
         }
+        w.writeAttribute("id", c.getClientId(context) + "_title", null); // $NON-NLS-1$ $NON-NLS-2$
         if(StringUtil.isNotEmpty(formTitle)) {
             w.writeText(formTitle,null);
         }

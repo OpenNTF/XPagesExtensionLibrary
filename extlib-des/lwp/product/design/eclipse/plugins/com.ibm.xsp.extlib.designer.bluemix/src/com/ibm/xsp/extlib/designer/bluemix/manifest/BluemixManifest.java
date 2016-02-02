@@ -178,48 +178,86 @@ public class BluemixManifest {
         return null;
     }
     
-    public Boolean getNoRoute(String appName) {
-        ManifestAppProps appProps = _appMap.get(appName);
-        if (appProps != null) {
-            return appProps.getNoRoute() != null ? appProps.getNoRoute() : _baseProps.getNoRoute();
-        }
-        return null;
-    }
-    
-    public String getHost(String appName) {
-        ManifestAppProps appProps = _appMap.get(appName);
-        if (appProps != null) {
-            return appProps.getHost() != null ? appProps.getHost() : _baseProps.getHost();
-        }
-        return null;
-    }
-
-    public String getDomain(String appName) {
-        ManifestAppProps appProps = _appMap.get(appName);
-        if (appProps != null) {
-            return appProps.getDomain() != null ? appProps.getDomain() : _baseProps.getDomain();
-        }
-        return null;
-    }
-
-    public List<String> getUris(String appName, String defaultDomain) {
+    // This functions builds a route list for the deploy process
+    // It examines noRoute, host, domain, hosts and domains from the yml to do this
+    public List<String> getRoutes(String appName, String defaultDomain) {
+        List<String> routes = null;
+        
         Boolean noRoute = getNoRoute(appName);
         if ((noRoute != null) && (noRoute == Boolean.TRUE)) {
             // No-route is set
-            return new ArrayList<String>();
+            routes = new ArrayList<String>();
         } else {
-            // Add a route
-            String host = getHost(appName);
-            host = StringUtil.isNotEmpty(host) ? host : appName;
-            String domain = getDomain(appName);
-            domain = StringUtil.isNotEmpty(domain) ? domain : defaultDomain;
-            if (StringUtil.isNotEmpty(host) && StringUtil.isNotEmpty(domain)) {
-                List<String> uris = new ArrayList<String>();
-                uris.add(host + "." + domain);
-                return uris;
+            //-----------------------
+            // Create a list of hosts
+            //-----------------------
+            List<String> hostList = new ArrayList<String>();
+            
+            // Add host to begin with
+            String host =  StringUtil.trim(getHost(appName));
+            if (StringUtil.isNotEmpty(host)) {
+                hostList.add(host);
             }
+            
+            // Add in hosts if any
+            List<String> hosts = getHosts(appName);
+            if (hosts != null) {
+                for (String hostItem:hosts) {
+                    hostItem = StringUtil.trim(hostItem);
+                    if(StringUtil.isNotEmpty(hostItem)) {
+                        hostList.add(hostItem);                        
+                    }
+                }
+            }
+            
+            // If there's still no hosts add the appName
+            if (hostList.size() == 0) {
+                hostList.add(StringUtil.trim(appName));
+            }
+            
+            //-------------------------
+            // Create a list of domains
+            //-------------------------
+            List<String> domainList = new ArrayList<String>();
+            
+            // Add domain to begin with
+            String domain =  StringUtil.trim(getDomain(appName));
+            if (StringUtil.isNotEmpty(domain)) {
+                domainList.add(domain);
+            }
+            
+            // Add in domains if any
+            List<String> domains = getDomains(appName);
+            if (domains != null) {
+                for (String domainItem:domains) {
+                    domainItem = StringUtil.trim(domainItem);
+                    if(StringUtil.isNotEmpty(domainItem)) {
+                        domainList.add(domainItem);                        
+                    }
+                }
+            }
+            
+            // If there's still no domains add the defaultDomain
+            if (domainList.size() == 0) {
+                if (StringUtil.isNotEmpty(StringUtil.trim(defaultDomain))) {
+                    domainList.add(StringUtil.trim(defaultDomain));
+                }
+            }
+            
+            //------------------------
+            // Now create the URI List
+            //------------------------
+            if ((hostList.size() > 0) && (domainList.size() > 0)) {
+                routes = new ArrayList<String>();
+                for (String hostItem:hostList) {
+                    for (String domainItem:domainList) {
+                        routes.add(hostItem + "." + domainItem);
+                    }
+                }
+            }            
         } 
-        return null;
+        
+        return routes;
     }
     
     public Map<String, Object> getEnv(String appName) {
@@ -246,4 +284,66 @@ public class BluemixManifest {
         }
         return null;                
     }
+    
+    // Utility function to get the first host from the yml file
+    // using host and hosts to do this
+    public String getFirstHost(String appName) {
+        String host =  StringUtil.trim(getHost(appName));
+        if (StringUtil.isNotEmpty(host)) {
+            return host;
+        }
+        
+        // Get the first host from hosts if any
+        List<String> hosts = getHosts(appName);
+        if (hosts != null) {
+            for (String hostItem:hosts) {
+                hostItem = StringUtil.trim(hostItem);
+                if(StringUtil.isNotEmpty(hostItem)) {
+                    return hostItem;                        
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    private Boolean getNoRoute(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getNoRoute() != null ? appProps.getNoRoute() : _baseProps.getNoRoute();
+        }
+        return null;
+    }
+    
+    private String getHost(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getHost() != null ? appProps.getHost() : _baseProps.getHost();
+        }
+        return null;
+    }
+
+    private String getDomain(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getDomain() != null ? appProps.getDomain() : _baseProps.getDomain();
+        }
+        return null;
+    }
+    
+    private List<String> getHosts(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getHosts() != null ? appProps.getHosts() : _baseProps.getHosts();
+        }
+        return null;                
+    }
+    
+    private List<String> getDomains(String appName) {
+        ManifestAppProps appProps = _appMap.get(appName);
+        if (appProps != null) {
+            return appProps.getDomains() != null ? appProps.getDomains() : _baseProps.getDomains();
+        }
+        return null;                
+    }        
 }

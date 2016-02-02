@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -18,21 +18,26 @@ package com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.data;
 import java.io.IOException;
 
 import javax.faces.component.NamingContainer;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.ibm.xsp.theme.bootstrap.resources.Resources;
-
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.component.data.AbstractDataView;
+import com.ibm.xsp.extlib.component.data.ExtraColumn;
 import com.ibm.xsp.extlib.component.data.UIDataView;
 import com.ibm.xsp.extlib.component.data.ValueColumn;
 import com.ibm.xsp.extlib.component.image.IconEntry;
+import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.TabularDataModel;
 import com.ibm.xsp.model.domino.DominoViewDataModel;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
+import com.ibm.xsp.renderkit.html_extended.RenderUtil;
+import com.ibm.xsp.theme.bootstrap.resources.Resources;
+import com.ibm.xsp.theme.bootstrap.util.Util;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JSUtil;
 
@@ -123,6 +128,10 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
             w.writeAttribute("aria-label", label, null); // $NON-NLS-1$
         }
         
+        if(detailsOnClient) {
+            writeDetailsOnClientJS(context, w, c, viewDef);
+        }
+
         String clazz = (String)getProperty(viewDef.rowDetailVisible?PROP_HIDEICONDETAILSCLASS:PROP_SHOWICONDETAILSCLASS);
        
         w.startElement("span",c); // $NON-NLS-1$    
@@ -131,23 +140,8 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         String spanId = c.getClientId(context) + "_shChevron"; // $NON-NLS-1$
         w.writeAttribute("id",spanId,null); // $NON-NLS-1$
         
-        if(detailsOnClient) {
-            //TODO Hacky clientId retrieval of the dataView control
-            //replace with a proper getClientId method for the dataview
-            //c.getClientId(context) gives back the id of the row
-            String rowId = c.getClientId(context);
-            String dataViewID = rowId.substring(0, rowId.lastIndexOf(":"+viewDef.dataModel.getRowIndex()));
-            w.writeAttribute("onclick", "javascript:XSP.xbtShowHideDetails('"+ dataViewID + "', '"+ viewDef.dataModel.getRowIndex() + "', '"  // $NON-NLS-2$ $NON-NLS-1$
-                + viewDef.rowPosition + "', " + viewDef.summaryOrDetailVisible + ", '" + getProperty(PROP_SHOWICONDETAILSCLASS)+ "', '" 
-                + getProperty(PROP_HIDEICONDETAILSCLASS) + "', '" + getProperty(PROP_SHOWICONDETAILSTOOLTIP) + "', '" 
-                + getProperty(PROP_HIDEICONDETAILSTOOLTIP) + "')", null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
-        }
-        
-        if( viewDef.rowDetailVisible ){
-            w.writeAttribute("title", "Hide",null); // $NON-NLS-1$ $NLS-DataViewRenderer.Hide-2$
-        }else{
-             w.writeAttribute("title", "Show",null); // $NON-NLS-1$ $NLS-DataViewRenderer.Show-2$
-        }
+        // Defect 195925 - replace unnecessary title attribute with sr-only div containing text
+        Util.renderIconTextForA11Y(w, label);
         w.endElement("span"); // $NON-NLS-1$
         w.endElement("a");
 
@@ -198,6 +192,10 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                 w.endElement("img"); // $NON-NLS-1$
             }
         } else {
+            
+            String categoryId = c.getClientId(context) + "__rowCat:" + viewDef.rowPosition; // $NON-NLS-1$
+            w.writeAttribute("id",categoryId,null); // $NON-NLS-1$
+            
             boolean expanded = isRowExpanded(context, c, viewDef);
             String icon = (String)getProperty(expanded ? PROP_COLLAPSEICON : PROP_EXPANDICON);
             if(icon!=null) {
@@ -210,7 +208,8 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                 String iconAlt = (String) getProperty(expanded? PROP_COLLAPSEICONALT : PROP_EXPANDICONALT);
                 w.writeAttribute("title", iconAlt, null); //$NON-NLS-1$
                 w.writeAttribute("aria-label", iconAlt, null); //$NON-NLS-1$
-
+                w.writeAttribute("aria-expanded", Boolean.toString(expanded), null); // $NON-NLS-1$
+                w.writeAttribute("aria-describedby",categoryId,null); // $NON-NLS-1$
                 w.startElement("span",c); // $NON-NLS-1$
                 w.writeAttribute("title", iconAlt, null); //$NON-NLS-1$
                 String style = (String)getProperty(expanded ? PROP_COLLAPSEICONSTYLE : PROP_EXPANDICONSTYLE);
@@ -221,9 +220,10 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                 if(StringUtil.isNotEmpty(clazz)) {
                     w.writeAttribute("class",clazz,null); // $NON-NLS-1$
                 }
+                //Defect 195918
+                Util.renderIconTextForA11Y(w, iconAlt);
                 w.endElement("span"); // $NON-NLS-1$
                 w.endElement("a"); // $NON-NLS-1$
-                
                 setupSubmitOnClick(context, c, linkId, linkId, null);
             }
         }
@@ -233,7 +233,6 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
     protected void writeIconColumn(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
         w.startElement("td",c); // $NON-NLS-1$
         w.writeAttribute("role", "gridcell", null); // $NON-NLS-1$ $NON-NLS-2$
-
         if(viewDef.iconColumn!=null) {
             String colStyle = viewDef.iconColumn.getStyle();
             if(StringUtil.isNotEmpty(colStyle)) {
@@ -261,7 +260,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     String alt = entry.getAlt();
                     String title = entry.getTitle();
                     if(StringUtil.isEmpty(title)){
-                        if(StringUtil.isEmpty(alt)){
+                        if(StringUtil.isNotEmpty(alt)){
                             w.writeAttribute("title", alt, null); //$NON-NLS-1$
                         }
                     }else{
@@ -277,11 +276,31 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     if(StringUtil.isNotEmpty(iconClass)) {
                         w.writeAttribute("class",iconClass,null); // $NON-NLS-1$
                     }
+                    
+                    String ariaLabel = null;
+                    if(StringUtil.isEmpty(title)){
+                        if(StringUtil.isNotEmpty(alt)){
+                            ariaLabel = alt;
+                        }else{
+                            if( unread ){
+                                ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Unreaddocument"); //$NON-NLS-1$
+                            }else{
+                                ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Readdocument"); //$NON-NLS-1$
+                            }
+                        }
+                    }else{
+                        ariaLabel = title;
+                    }
+                    
+                    //Write accessibility properties
+                    w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
+                    w.writeAttribute("aria-hidden", "true", null); // $NON-NLS-1$ $NON-NLS-2$
                     w.endElement("div"); // $NON-NLS-1$
+                    Util.renderIconTextForA11Y(w, ariaLabel);
                 }
             }
         }
-        w.endElement("td"); // $NON-NLS-1$
+       w.endElement("td"); // $NON-NLS-1$
     }
     
     @Override
@@ -293,25 +312,33 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
 
         w.startElement("td",c); // $NON-NLS-1$
         w.writeAttribute("role", "gridcell", null); // $NON-NLS-1$ $NON-NLS-2$
+        
+        //Add aria-describedby property that references the header id
+        String colTitle = viewDef.summaryColumn.getColumnTitle();
+        if(StringUtil.isNotEmpty(colTitle)) {
+            String thId = c.getNonChildClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
+            if (StringUtil.isNotEmpty(thId)) {
+                w.writeAttribute("aria-describedby", thId, null); // $NON-NLS-1$ $NON-NLS-2$
+            }
+        }
+        
         int width = 100/viewDef.multiColumnCount;
         w.writeAttribute("style","width: "+width+"%",null); // $NON-NLS-1$ $NON-NLS-2$
         if(!viewDef.hasCheckBoxColumn && !viewDef.hasIconColumn) {
             String clazz = (String)getProperty(PROP_TABLEFIRSTCELLCLASS);
             if(StringUtil.isNotEmpty(clazz)) {
                 w.writeAttribute("class",clazz,null); // $NON-NLS-1$
+               
             }
         }
-
-        // Enclosing divs
-        w.startElement("div",c); // $NON-NLS-1$
         
-        if(true) {
-            int level = getColumnIndentLevel(context, c, viewDef);
-            int catLevel = Math.max(0, viewDef.categoryCount-1);
-            String style = getIndentStyle(context, c, viewDef, level+catLevel);
-            if(StringUtil.isNotEmpty(style)) {
-                w.writeAttribute("style",style,null); // $NON-NLS-1$
-            }
+        // Enclosing divsfcol
+        w.startElement("div",c); // $NON-NLS-1$
+        int level = getColumnIndentLevel(context, c, viewDef);
+        int catLevel = Math.max(0, viewDef.categoryCount-1);
+        String indentStyle = getIndentStyle(context, c, viewDef, level+catLevel);
+        if(StringUtil.isNotEmpty(indentStyle)) {
+            w.writeAttribute("style",indentStyle,null); // $NON-NLS-1$
         }
         
         //Remove padding-top when collapse/expand icon is displayed
@@ -322,7 +349,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         }
         // Write the summary data
         writeSummary(context, w, c, viewDef);
-        
+         
         // Write the details
         writeDetail(context, w, c, viewDef);
         
@@ -335,6 +362,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         // Write the summary column
         w.startElement("th",c); // $NON-NLS-1$
         w.writeAttribute("scope", "col", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("role", "columnheader", null); // $NON-NLS-1$ $NON-NLS-2$
 
         String style = ExtLibUtil.concatStyles((String)getProperty(PROP_TABLEHDRCOLSTYLE),vc!=null?vc.getHeaderStyle():null);
         if(StringUtil.isNotEmpty(style)) {
@@ -344,37 +372,62 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         if(StringUtil.isNotEmpty(clazz)) {
             w.writeAttribute("class",clazz,null); // $NON-NLS-1$
         }
+        
         if(vc!=null) {
             String colTitle = vc.getColumnTitle();
             if(StringUtil.isNotEmpty(colTitle)) {
-                w.startElement("span",c); // $NON-NLS-1$
                 String colName = vc.getColumnName();
+                
                 // Kind of hard coded here, which is not clean...
                 boolean dominoStyleIcons = viewDef.dataModel instanceof DominoViewDataModel;
                 boolean sortable = false;
-                if(StringUtil.isNotEmpty(colName)) {
-                    sortable = isColumnSortable(context, c, viewDef, colName);
+                if(StringUtil.isNotEmpty(colTitle)) {
+                    //Add id to the th element
+                    String thId = c.getClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
+                    w.writeAttribute("id", thId, null); //$NON-NLS-1$
+                    
+                    sortable = isColumnSortable(context, c, viewDef, colTitle);
                 }
                 
                 if(sortable) {
+                    // adding aria sort to th element
+                    int sortState = getColumnSortState(context, c, viewDef, colName);
+                    
+                    if (sortState == TabularDataModel.RESORT_ASCENDING) {
+                        w.writeAttribute("aria-sort", "ascending", null); // $NON-NLS-1$ $NON-NLS-2$
+                    }
+                    else if (sortState == TabularDataModel.RESORT_DESCENDING) {
+                        w.writeAttribute("aria-sort", "descending", null); // $NON-NLS-1$ $NON-NLS-2$
+                    }
+                    else if (sortState == TabularDataModel.RESORT_BOTH) {
+                        w.writeAttribute("aria-sort", "other", null); // $NON-NLS-1$ $NON-NLS-2$
+                    }else {
+                        w.writeAttribute("aria-sort", "none", null); // $NON-NLS-1$ $NON-NLS-2$
+                    }
+                    
+                    w.startElement("span",c); // $NON-NLS-1$
+                    
                     String linkId = c.getClientId(context) + SORT_DELIMITER + colName;
                     w.startElement("a",c);
                     w.writeAttribute("id",linkId,null); // $NON-NLS-1$
-                    
                     String headerTitle = vc.getHeaderLinkTitle();
                     if(StringUtil.isEmpty(headerTitle)){
-                        headerTitle = "Click to reverse sort";  // $NLS-DataViewRenderer_SortLinkTooltip_ClickToReverseSort-1$
+                        // "Click to reverse sort";
+                        headerTitle = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer_SortLinkTooltip_ClickToReverseSort"); //$NON-NLS-1$
                     }
                     //adding the Header accessibility title
+                    int dominoSortIconCode = getDominoSortIconCode(context, c, viewDef, colName);
                     w.writeAttribute("title", headerTitle, null); // $NON-NLS-1$
+                    String iconTextDescription = getSortIconDescription(dominoSortIconCode);
+                    w.writeAttribute("aria-label", colName + ", " +  iconTextDescription, null); // $NON-NLS-1$
+                
                     
                     if(!dominoStyleIcons) {
-                        int sortState = getColumnSortState(context, c, viewDef, colName);
                         if(sortState==TabularDataModel.RESORT_ASCENDING) {
                             String clazz2 = (String)getProperty(PROP_TABLEHDRCOLLKASCCLASS);
                             if(StringUtil.isNotEmpty(clazz2)) {
                                 w.writeAttribute("class",clazz2,null); // $NON-NLS-1$
-                            }
+                            }   
                         } else if(sortState==TabularDataModel.RESORT_DESCENDING) {
                             String clazz2 = (String)getProperty(PROP_TABLEHDRCOLLKDESCLASS);
                             if(StringUtil.isNotEmpty(clazz2)) {
@@ -386,10 +439,10 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     //LHEY97CCSZ adding the role=button
                     w.writeAttribute("role", "button", null); // $NON-NLS-1$ // $NON-NLS-2$
                     setupSubmitOnClick(context, c, linkId, linkId, null);
+                }else{
+                    w.startElement("span",c); // $NON-NLS-1$
                 }
-                
-                
-                
+
                 boolean multiColumn = viewDef.multiColumnCount>1;
                 if(!multiColumn || sortable) {
                     w.writeText(colTitle,null);
@@ -402,9 +455,8 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     String sort = getDominoSortIcon(context, c, viewDef, dominoSortIconCode);
                     if(StringUtil.isNotEmpty(sort)) {
                           w.startElement("div",c); // $NON-NLS-1$
-                          if(StringUtil.isNotEmpty(sort)) {
-                              w.writeAttribute("class", sort, null); //$NON-NLS-1$
-                          }
+                          w.writeAttribute("class", sort, null); //$NON-NLS-1$x
+                          w.writeAttribute("aria-hidden", "true", null); // $NON-NLS-1$ $NON-NLS-2$
                           w.endElement("div"); // $NON-NLS-1$
                     }
                 }
@@ -412,5 +464,174 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
             }
         }
         w.endElement("th"); // $NON-NLS-1$
+    }
+    
+    public String getSortIconDescription(int dominoSortIconCode){
+        switch(dominoSortIconCode){
+            case SORT_1_COLUMN_SORTABLE_BOTH_CURRENTLY_NOT_SORTED:
+            case SORT_4_COLUMN_SORTABLE_ASCENDING_CURRENTLY_NOT_SORTED:{
+                // "Sortable column, currently not sorted"
+                return com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Sortablecolumncurrentlynotsorted"); //$NON-NLS-1$
+            }
+            case SORT_2_COLUMN_SORTABLE_BOTH_CURRENTLY_SORTED_ASCENDING:
+            case SORT_5_COLUMN_SORTABLE_ASCENDING_CURRENTLY_SORTED_ASCENDING:{
+                // "Sortable column, currently sorted in ascending order"
+                return com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Sortablecolumncurrentlysortedinas"); //$NON-NLS-1$
+            }
+            case SORT_3_COLUMN_SORTABLE_BOTH_CURRENTLY_SORTED_DESCENDING:
+            case SORT_7_COLUMN_SORTABLE_DESCENDING_CURRENTLY_SORTED_DESCENDING:{
+                // "Sortable column, currently sorted in descending order"
+                return com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Sortablecolumncurrentlysortedinde"); //$NON-NLS-1$
+            }
+            case SORT_6_COLUMN_SORTABLE_DESCENDING_CURRENTLY_NOT_SORTED:{
+                // "Column sortable in descending order, currently not sorted "
+                return com.ibm.xsp.extlib.controls.ResourceHandler.getString("DataViewRenderer.Columnsortableindescendingordercu"); //$NON-NLS-1$
+            }
+        }
+        return "";
+       
+    }
+    
+    @Override
+    protected void writeCheckboxAccessibilityAttributes(FacesContext context, ResponseWriter w, String checkBoxId) throws IOException {
+        //Add aria-checked attribute
+        w.writeAttribute("aria-checked", "false", null);// $NON-NLS-1$ // $NON-NLS-2$
+        
+        //Add JS onclick code to handle toggling aria-checked attribute
+        StringBuilder onclick = new StringBuilder();
+        onclick.append("return XSP.toggleCheckboxAria("); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, checkBoxId); // $NON-NLS-1$
+        onclick.append(")"); // $NON-NLS-1$
+        w.writeAttribute("onclick", onclick.toString(), null); // $NON-NLS-1$
+    }
+    
+    @Override
+    protected void writeHeaderCheckboxAccessibilityAttributes(FacesContext context, ResponseWriter w, String viewId, String headerCheckboxId) throws IOException {
+        w.writeAttribute("aria-checked", "false", null);// $NON-NLS-1$ // $NON-NLS-2$
+
+        //Add JS onclick code to handle toggling aria-checked attribute
+        StringBuilder onclick = new StringBuilder();
+        onclick.append("return XSP.toggleHeaderCheckboxAria("); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, viewId);
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, headerCheckboxId); // $NON-NLS-1$
+        onclick.append(")"); // $NON-NLS-1$
+        w.writeAttribute("onclick", onclick.toString(), null); // $NON-NLS-1$
+    }
+    @Override
+    protected void writeExtraColumn(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, ExtraColumn col, int colIdx) throws IOException {
+        w.startElement("td",c); // $NON-NLS-1$
+        String value = formatColumnValue(context, c, viewDef, col);
+        if(!StringUtil.isEmpty(value)) {
+            w.writeAttribute("role", "gridcell", null); // $NON-NLS-1$ $NON-NLS-2$
+            
+            //Add aria-describedby property that references the header id
+            String colTitle = col.getColumnTitle();
+            if(StringUtil.isNotEmpty(colTitle)) {
+                String thId = c.getNonChildClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
+                if (StringUtil.isNotEmpty(thId)) {
+                    w.writeAttribute("aria-describedby", thId, null); // $NON-NLS-1$ $NON-NLS-2$
+                }
+            }
+        }
+        UIComponent facet = getExtraFacet(c,colIdx);
+        if(facet!=null) {
+            // TODO should use the column complex-type's style, and styleClass
+            // even when using the facet for the column contents.
+            FacesUtil.renderComponent(context, facet);
+        } else {
+            String style = col.getStyle();
+            if(StringUtil.isNotEmpty(style)) {
+                w.writeAttribute("style", style, null); // $NON-NLS-1$
+            }
+            String clazz = col.getStyleClass();
+            if(StringUtil.isEmpty(clazz)) {
+                clazz = (String)getProperty(PROP_TABLEROWEXTRA);
+            }
+            if(StringUtil.isNotEmpty(clazz)) {
+                w.writeAttribute("class", clazz, null); // $NON-NLS-1$
+            }
+            // Write a link if there is an href
+            String href = getColumnUrl(context, c, viewDef, col);
+            if(StringUtil.isNotEmpty(href)) {
+                w.startElement("a",c);
+                RenderUtil.writeLinkAttribute(context,w,href);
+                // Write the title if there is any
+                String title = getTitle(context, c, viewDef, col);
+                
+                if(StringUtil.isNotEmpty(title)) {
+                    w.writeAttribute("title", title,null); // $NON-NLS-1$
+                }
+            }
+            
+            writeColumnValue(context, w, c, viewDef, col);
+            if(StringUtil.isNotEmpty(href)) {
+                
+                w.endElement("a");
+            }
+        }
+        w.endElement("td"); // $NON-NLS-1$
+    }
+    
+    @Override
+    public void encodeBegin(FacesContext context, UIComponent component) throws IOException {
+        // Encode the necessary resource
+        UIViewRootEx rootEx = (UIViewRootEx)context.getViewRoot();
+        ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapCheckbox);
+        ExtLibResources.addEncodeResource(rootEx, ExtLibResources.extlibExtLib);
+
+        super.encodeBegin(context, component);
+    }
+
+    @Override
+    protected void writeShowHide(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+        //Disable superclass client show/hide JS, as bootstrap version implemented below
+        //in writeDetailsOnClientJS and in xsp.mixin.js. But keep the hidden field
+        if(viewDef.detailsOnClient && viewDef.collapsibleDetails) {
+            writeClientShowHideHiddenField(context, w, c, viewDef);
+            //addClientShowHideScript(context, w, c, viewDef);
+        }
+    }
+    
+    protected void writeDetailsOnClientJS(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef) throws IOException {
+        //TODO re-work the hide/show detail on client JS in super classes to make this
+        //a single reusable method across all data views and forum views
+        //TODO Hacky clientId retrieval of the dataView control
+        //replace with a proper getClientId method for the dataview
+        //c.getClientId(context) gives back the id of the row
+        String rowId = c.getClientId(context);
+        String dataViewID = rowId.substring(0, rowId.lastIndexOf(":"+viewDef.dataModel.getRowIndex()));
+        
+        //Add JS onclick code to handle toggling aria-checked attribute
+        StringBuilder onclick = new StringBuilder();
+        onclick.append("return XSP.xbtShowHideDetails("); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, dataViewID);
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, Integer.toString(viewDef.dataModel.getRowIndex()));
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, viewDef.rowPosition);
+        onclick.append(", "); // $NON-NLS-1$
+        onclick.append(viewDef.summaryOrDetailVisible);
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, (String)getProperty(PROP_SHOWICONDETAILSCLASS));
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, (String)getProperty(PROP_HIDEICONDETAILSCLASS));
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, (String)getProperty(PROP_SHOWICONDETAILSTOOLTIP));
+        onclick.append(", "); // $NON-NLS-1$
+        JSUtil.addSingleQuoteString(onclick, (String)getProperty(PROP_HIDEICONDETAILSTOOLTIP));
+        onclick.append(")"); // $NON-NLS-1$
+        w.writeAttribute("onclick", onclick.toString(), null); // $NON-NLS-1$
+        
+        // Build JS for onkeyup event to swap collapse/expand properties
+        // when enter or space are pressed (see ExtLib.js)
+        StringBuilder onkeydown = new StringBuilder();
+        onkeydown.append("var xbtIsTriggerKey = XSP.xbtIsTriggerKey(event);"); // $NON-NLS-1$
+        onkeydown.append("if(xbtIsTriggerKey){"); // $NON-NLS-1$
+        onkeydown.append("event.preventDefault();"); // $NON-NLS-1$
+        onkeydown.append("event.stopPropagation();"); // $NON-NLS-1$
+        onkeydown.append(onclick);
+        onkeydown.append("}"); // $NON-NLS-1$
+        w.writeAttribute("onkeydown", onkeydown.toString(), null); // $NON-NLS-1$
     }
 }

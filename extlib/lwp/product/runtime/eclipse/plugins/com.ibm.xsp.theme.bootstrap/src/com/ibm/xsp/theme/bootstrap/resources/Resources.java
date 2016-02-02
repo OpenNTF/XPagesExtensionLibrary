@@ -59,7 +59,9 @@ public abstract class Resources {
     public static final DojoModuleResource bootstrapPickerList = new DojoModuleResource("extlib.responsive.dijit.xsp.bootstrap.PickerList"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerListSearch = new DojoModuleResource("extlib.responsive.dijit.xsp.bootstrap.PickerListSearch"); // $NON-NLS-1$
     public static final DojoModuleResource bootstrapPickerName = new DojoModuleResource("extlib.responsive.dijit.xsp.bootstrap.PickerName"); // $NON-NLS-1$
-
+    
+    public static final DojoModuleResource bootstrapCheckbox = new DojoModuleResource("extlib.responsive.dijit.xsp.bootstrap.Checkbox");   // $NON-NLS-1$
+    
     public Resources() {
         this.BLANK_GIF = "/.ibmxspres/.extlib/responsive/xpages/img/blank.gif"; // $NON-NLS-1$
         this.VIEW_COLUMN_SORT_NONE = "/.ibmxspres/.extlib/responsive/xpages/img/sort_none.gif"; // $NON-NLS-1$

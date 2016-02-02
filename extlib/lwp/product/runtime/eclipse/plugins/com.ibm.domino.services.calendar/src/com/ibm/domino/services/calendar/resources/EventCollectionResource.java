@@ -132,12 +132,12 @@ public class EventCollectionResource {
             // Validate parameters
             
             if ( StringUtil.isNotEmpty(since) && StringUtil.isNotEmpty(sincenow) ) {
-                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the since and sincenow parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththesince-1$
+                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the \"since\" and \"sincenow\" parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththesince-1$
                         Response.Status.BAD_REQUEST));
             }
 
             if ( StringUtil.isNotEmpty(before) && StringUtil.isNotEmpty(days) ) {
-                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the before and days parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththebefor-1$
+                throw new WebApplicationException(CalendarService.createErrorResponse("A request cannot include both the \"before\" and \"days\" parameters.",  // $NLX-EventCollectionResource.Arequestcannotincludeboththebefor-1$
                         Response.Status.BAD_REQUEST));
             }
 
@@ -166,7 +166,7 @@ public class EventCollectionResource {
                 int iDays = CalendarService.getParameterInt(URL_PARAM_DAYS, days, false);
                 if ( iDays <= 0 ) {
                     throw new WebApplicationException(CalendarService.createErrorResponse(
-                            MessageFormat.format("Invalid days parameter: {0}.  It must be greater than 0.", iDays), // $NLX-EventCollectionResource.Invaliddaysparameter0Itmustbegrea-1$
+                            MessageFormat.format("Invalid \"days\" parameter: {0}. The value must be greater than 0.", iDays), // $NLX-EventCollectionResource.Invaliddaysparameter0Itmustbegrea-1$
                             Response.Status.BAD_REQUEST));
                 }
                 

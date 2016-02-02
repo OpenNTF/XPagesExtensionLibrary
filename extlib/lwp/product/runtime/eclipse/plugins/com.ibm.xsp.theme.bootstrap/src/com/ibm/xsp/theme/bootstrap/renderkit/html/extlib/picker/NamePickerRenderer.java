@@ -26,8 +26,10 @@ import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.extlib.component.picker.AbstractPicker;
 import com.ibm.xsp.extlib.component.picker.data.IPickerData;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
+import com.ibm.xsp.theme.bootstrap.util.Util;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JSUtil;
 
@@ -35,30 +37,30 @@ public class NamePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extend
 
     protected static final int PROP_USERICONCLASS       = 1;
     
-	protected Object getProperty(int prop) {
-	    switch(prop) {
-        	case PROP_USERICONCLASS:             return Resources.get().getIconClass("user"); // $NON-NLS-1$
+    protected Object getProperty(int prop) {
+        switch(prop) {
+            case PROP_USERICONCLASS:             return Resources.get().getIconClass("user"); // $NON-NLS-1$
         }
         return null;
-	}
-	
-	@Override
-	protected String encodeDojoType(String dojoType) {
-		if (StringUtil.equals(dojoType, "extlib.dijit.PickerName")) { // $NON-NLS-1$
-			return "extlib.responsive.dijit.xsp.bootstrap.PickerName"; // $NON-NLS-1$
-		}
-		return super.encodeDojoType(dojoType);
-	}
+    }
+    
+    @Override
+    protected String encodeDojoType(String dojoType) {
+        if (StringUtil.equals(dojoType, "extlib.dijit.PickerName")) { // $NON-NLS-1$
+            return "extlib.responsive.dijit.xsp.bootstrap.PickerName"; // $NON-NLS-1$
+        }
+        return super.encodeDojoType(dojoType);
+    }
 
-	@Override
-	protected void encodeExtraResources(FacesContext context, AbstractPicker picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
-		if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerName")) { // $NON-NLS-1$
-			ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerName);
-		}
-		super.encodeExtraResources(context, picker, data, rootEx, dojoType);
-	}
-	
-	/** Default is to have empty icon image, and use glyphicon instead **/
+    @Override
+    protected void encodeExtraResources(FacesContext context, AbstractPicker picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
+        if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerName")) { // $NON-NLS-1$
+            ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerName);
+        }
+        super.encodeExtraResources(context, picker, data, rootEx, dojoType);
+    }
+    
+    /** Default is to have empty icon image, and use glyphicon instead **/
     @Override
     protected String getImageLink() {
         return "";
@@ -86,9 +88,9 @@ public class NamePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extend
                 w.startElement("a", null);
                 //If custom icon or text supplied, use that, else use glyphicon
                 if(custom) {
-                	w.writeAttribute("class", "xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
+                    w.writeAttribute("class", "xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
                 }else{
-                	w.writeAttribute("class", getProperty(PROP_USERICONCLASS) + " xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
+                    w.writeAttribute("class", ExtLibUtil.concatStyleClasses((String)getProperty(PROP_USERICONCLASS), "xspPickerLink"), null); // $NON-NLS-1$ $NON-NLS-2$
                 }
                 w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
                 if(data!=null) {
@@ -110,14 +112,24 @@ public class NamePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extend
                     onkeydown.append(")}"); // $NON-NLS-1$
                     w.writeAttribute("onkeydown", onkeydown.toString(), null); // $NON-NLS-1$ $NON-NLS-2$
                 }
-                  //LHEY97QME8 adding the role= button
-                    w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                //LHEY97QME8 adding the role= button
+                w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                
+                // "Open name picker"
+                String ariaLabel = getPickerIconAriaLabel();
+                w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$ 
+                if(!custom){
+                    // A11Y fix - Defect 198080 - Need an sr-only span with text for glyphicon
+                    //<span class="sr-only">Open Name Picker Dialog</span>
+                    Util.renderIconTextForA11Y(w, ariaLabel);
+                }
             }
             
             if(StringUtil.isNotEmpty(icon)) {
                 w.startElement("img", null); // $NON-NLS-1$
                 w.writeAttribute("src", HtmlRendererUtil.getImageURL(context,icon), null); // $NON-NLS-1$
-                String iconAlt = "Open picker"; // $NLS-AbstractPickerRenderer.OpenPicker-1$
+                // "Open name picker"
+                String iconAlt = getPickerIconAriaLabel();
                 w.writeAttribute("alt", iconAlt, null); // $NON-NLS-1$
                 w.endElement("img"); // $NON-NLS-1$
             }

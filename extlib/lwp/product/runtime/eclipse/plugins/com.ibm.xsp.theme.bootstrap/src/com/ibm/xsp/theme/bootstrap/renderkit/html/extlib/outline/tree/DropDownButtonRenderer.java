@@ -22,6 +22,7 @@ import javax.faces.context.ResponseWriter;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.tree.ITreeNode;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
@@ -136,7 +137,7 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
                 image = HtmlRendererUtil.getImageURL(context, image);
                 writer.writeAttribute("src",image,null); // $NON-NLS-1$
                 String imageAlt = tree.getNode().getImageAlt();
-                if (StringUtil.isNotEmpty(imageAlt)) {
+                if (ExtLibRenderUtil.isAltPresent(imageAlt)) {
                     writer.writeAttribute("alt",imageAlt,null); // $NON-NLS-1$
                 }
                 String imageHeight = tree.getNode().getImageHeight();

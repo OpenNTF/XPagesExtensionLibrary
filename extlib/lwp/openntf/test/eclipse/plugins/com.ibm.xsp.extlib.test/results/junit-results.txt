@@ -1,7 +1,7 @@
 JUnit results, running against Notes 9.0.1
 using the Notes JVM
-Test ran 2015-09-01T14:53
-Lines in file: 1379
+Test ran 2016-01-26T11:30
+Lines in file: 1372
 
 ~ ExtlibTestSuite
 xsp.extlib.test.ExtlibTestSuite
@@ -252,19 +252,18 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideD
 
 com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest
 testTableAccessibility(com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest)
-junit.framework.AssertionFailedError: 10 fail(s). :
-com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected caption attribute in table tag for accessibility does not exist.
+junit.framework.AssertionFailedError: 9 fail(s). :
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected caption attribute in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected caption attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected <caption> tag in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected <caption> tag in table tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:198)
+	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:209)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -325,7 +324,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expe
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected accesskey attribute in input tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected tabindex attribute in input tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:251)
+	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:252)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -384,7 +383,7 @@ com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected no
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.NameTextBox" readOnly="true" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
-com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.LinkSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.LinkSelect" readOnly="true" controlDisabled="false" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.ImageSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
@@ -1212,8 +1211,8 @@ com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [them
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3_flat] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:blackberry] No output rendered.
@@ -1300,7 +1299,7 @@ com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blac
 
 com.ibm.xsp.test.framework.render.BaseRenderTitleTest
 testRenderTitle(com.ibm.xsp.test.framework.render.BaseRenderTitleTest)
-junit.framework.AssertionFailedError: 52 fail(s). :
+junit.framework.AssertionFailedError: 46 fail(s). :
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:singlePageApp No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:appPage No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView No title property for accessibility.
@@ -1310,7 +1309,6 @@ com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn No title pro
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-redirect.xsp-config xe:redirect No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected title= attribute not present in HTML. 
@@ -1349,7 +1347,7 @@ com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer No tit
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline No title property for accessibility.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:143)
+	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:156)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)

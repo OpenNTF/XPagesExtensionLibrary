@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2013
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -29,9 +29,13 @@ import javax.faces.model.DataModel;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UIViewColumn;
 import com.ibm.xsp.context.FacesContextEx;
-import com.ibm.xsp.extlib.component.data.*;
+import com.ibm.xsp.extlib.component.data.AbstractDataView;
+import com.ibm.xsp.extlib.component.data.CategoryColumn;
+import com.ibm.xsp.extlib.component.data.ExtraColumn;
+import com.ibm.xsp.extlib.component.data.UIDataSourceIterator;
+import com.ibm.xsp.extlib.component.data.UIDataView;
+import com.ibm.xsp.extlib.component.data.ValueColumn;
 import com.ibm.xsp.extlib.component.image.IconEntry;
-import com.ibm.xsp.extlib.renderkit.html_extended.data.AbstractDataViewRenderer.ViewDefinition;
 import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.model.TabularDataModel;
@@ -70,6 +74,19 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
     
     @Override
     protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap DataViewRenderer.
+            String str = "";
+            str = "Unread document";// $NLS-DataViewRenderer.Unreaddocument-1$
+            str = "Read document"; // $NLS-DataViewRenderer.Readdocument-1$
+            str = "Sortable column, currently not sorted"; // $NLS-DataViewRenderer.Sortablecolumncurrentlynotsorted-1$
+            str = "Sortable column, currently sorted in ascending order"; // $NLS-DataViewRenderer.Sortablecolumncurrentlysortedinas-1$
+            str = "Sortable column, currently sorted in descending order"; // $NLS-DataViewRenderer.Sortablecolumncurrentlysortedinde-1$
+            str = "Column sortable in descending order, currently not sorted "; // $NLS-DataViewRenderer.Columnsortableindescendingordercu-1$
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
         switch(prop) {
         }
         return super.getProperty(prop);
@@ -176,7 +193,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
                 }
             }
         }
-        
+      
         super.afterRows(context, w, c, viewDef);
     }
 
@@ -269,7 +286,13 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         super.writeDataView(context, w, c, viewDef);
         if(viewDef.isInfiniteScroll)
         {
-            throw new IOException("infiniteScroll property has limited support for this control on this version. Please check documentation.."); // $NLX-DataViewRenderer.infiniteScrollpropertyhaslimiteds-1$
+            String theme = "?";
+            if( context instanceof FacesContextEx ){
+                theme = ((FacesContextEx)context).getStyleKitId();
+            }
+            String msg = "The \"infiniteScroll\" property is not supported for the current theme ({0})."; // $NLX-DataViewRenderer.infiniteScrollpropertyhaslimiteds-1$
+            msg = StringUtil.format(msg, theme);
+            throw new IOException(msg);
         }
     }
 
@@ -343,6 +366,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         }
         w.startElement("thead",c); // $NON-NLS-1$
         w.startElement("tr",c); // $NON-NLS-1$
+        w.writeAttribute("role", "row", null); // $NON-NLS-1$ $NON-NLS-2$
         String clazz = (String)getProperty(PROP_TABLEHDRROWCLASS);
         if(StringUtil.isNotEmpty(clazz)) {
             w.writeAttribute("class",clazz,null); // $NON-NLS-1$
@@ -353,6 +377,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
             // TODO it seems likely that multiColumn display cannot be made accessible,
             // may need to remove this feature.
             w.startElement("th",c); // $NON-NLS-1$
+            
             int colSpan = (viewDef.nColumns)*(viewDef.multiColumnCount);
             w.writeAttribute("colspan",colSpan,null); // $NON-NLS-1$
             w.startElement("table",c); // $NON-NLS-1$
@@ -425,6 +450,10 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
             // Specify title attribute for accessibility
             String title = "Select all rows"; // $NLS-DataViewRenderer_HeaderCheckboxTitle-1$
             w.writeAttribute("title",title,null); // $NON-NLS-1$
+            w.writeAttribute("role", "checkbox", null);// $NON-NLS-1$ // $NON-NLS-2$
+            
+            //Add JS onclick code to handle toggling aria-checked attribute
+            writeHeaderCheckboxAccessibilityAttributes(context, w, c.getClientId(context), fldName);
             
             StringBuilder sBuf = new StringBuilder(256); //$NON-NLS-1$
             sBuf.append("XSP.attachViewColumnCheckboxToggler("); //$NON-NLS-1$
@@ -464,8 +493,6 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
                 if(StringUtil.isNotEmpty(colName)) {
                     sortable = isColumnSortable(context, c, viewDef, colName);
                 }
-                
-                
                 
                 if(sortable) {
                     String linkId = c.getClientId(context) + SORT_DELIMITER + colName;
@@ -594,7 +621,6 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         w.startElement("th",c); // $NON-NLS-1$
         w.writeAttribute("scope", "row", null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("role", "gridcell", null); // $NON-NLS-1$ $NON-NLS-2$
-        
         int colSpan = (viewDef.nColumns)*(viewDef.multiColumnCount);
         if(colSpan>1) {
             w.writeAttribute("colspan",colSpan,null); // $NON-NLS-1$
@@ -833,13 +859,11 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         // Enclosing divs
         w.startElement("div",c); // $NON-NLS-1$
         
-        if(true) {
-            int level = getColumnIndentLevel(context, c, viewDef);
-            int catLevel = Math.max(0, viewDef.categoryCount-1);
-            String style = getIndentStyle(context, c, viewDef, level+catLevel);
-            if(StringUtil.isNotEmpty(style)) {
-                w.writeAttribute("style",style,null); // $NON-NLS-1$
-            }
+        int level = getColumnIndentLevel(context, c, viewDef);
+        int catLevel = Math.max(0, viewDef.categoryCount-1);
+        String style = getIndentStyle(context, c, viewDef, level+catLevel);
+        if(StringUtil.isNotEmpty(style)) {
+            w.writeAttribute("style",style,null); // $NON-NLS-1$
         }
         
         writeDetail(context, w, c, viewDef);
@@ -867,6 +891,7 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         if(viewDef.dataModel instanceof TabularDataModel) {
             value = ((TabularDataModel)viewDef.dataModel).getRowId();
         }
+     
         if(StringUtil.isNotEmpty(value)) {
             w.startElement("input",c); // $NON-NLS-1$
             w.writeAttribute("type","checkbox",null); // $NON-NLS-1$ $NON-NLS-2$
@@ -881,7 +906,11 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
             // Specify title attribute for accessibility
             String title = "Select the current row"; // $NLS-DataViewRenderer_RowCheckboxTitle-1$
             w.writeAttribute("title",title,null); // $NON-NLS-1$
-
+            w.writeAttribute("aria-label", title, null);// $NON-NLS-1$
+            w.writeAttribute("role", "checkbox", null);// $NON-NLS-1$ // $NON-NLS-2$
+            
+            writeCheckboxAccessibilityAttributes(context, w, id);
+            
             w.startElement("label", null); // $NON-NLS-1$
             w.writeAttribute("for", id, null); // $NON-NLS-1$
             w.writeAttribute("style", "display:none", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -1019,39 +1048,39 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
         return null;
     }
     protected String getIndentStyle(FacesContext context, AbstractDataView c, ViewDefinition viewDef, int level, int sublevel) throws IOException {
-    	// Ref SPR# PHAN9E3FUG Subcategories created from backslashes in Categories need to be handled better in the Data View
-    	FacesContextEx ctx = (context instanceof FacesContextEx) ? (FacesContextEx)context : null; 
-		if (ctx != null) {
-        	boolean doAutoIndent = true;
-			String propAutoIndent = ctx.getProperty("xsp.domino.view.embeddedsubcategories.autoindent"); // $NON-NLS-1$
-			if (!StringUtil.isEmpty(propAutoIndent)) {
-				doAutoIndent = Boolean.parseBoolean(propAutoIndent);
-			}
-			if (doAutoIndent) {
-				if(level>0 || sublevel>0) {
-		            Integer indentPxSub = (Integer)getProperty(PROP_TABLEROWINDENTPX);            
-		            if(indentPxSub>0) {
-		            	// Category column width needs to be wider than the subcategory width
-		            	// These properties (PROP_TABLEROWINDENTPX etc) do not appear to be configurable
-		            	// WITHOUT subclassing Java classes? Should be handled by themes! 
-		            	// Quick remedy is just to increase the width by an arbitrary number of pixels
-		                Integer indentPxCol = indentPxSub + 10; 
-		                int padValue = (indentPxCol * level) + (indentPxSub * sublevel);
-		                String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:"; //$NON-NLS-1$ //$NON-NLS-2$
-		                String style = paddingDir + (padValue) + "px !important"; // $NON-NLS-1$ $NON-NLS-2$
-		                return style;
-		            }
-		        }
-			} else {
-				return getIndentStyle(context, c, viewDef, level);
-			}
-		}
+        // Ref SPR# PHAN9E3FUG Subcategories created from backslashes in Categories need to be handled better in the Data View
+        FacesContextEx ctx = (context instanceof FacesContextEx) ? (FacesContextEx)context : null; 
+        if (ctx != null) {
+            boolean doAutoIndent = true;
+            String propAutoIndent = ctx.getProperty("xsp.domino.view.embeddedsubcategories.autoindent"); // $NON-NLS-1$
+            if (!StringUtil.isEmpty(propAutoIndent)) {
+                doAutoIndent = Boolean.parseBoolean(propAutoIndent);
+            }
+            if (doAutoIndent) {
+                if(level>0 || sublevel>0) {
+                    Integer indentPxSub = (Integer)getProperty(PROP_TABLEROWINDENTPX);            
+                    if(indentPxSub>0) {
+                        // Category column width needs to be wider than the subcategory width
+                        // These properties (PROP_TABLEROWINDENTPX etc) do not appear to be configurable
+                        // WITHOUT subclassing Java classes? Should be handled by themes! 
+                        // Quick remedy is just to increase the width by an arbitrary number of pixels
+                        Integer indentPxCol = indentPxSub + 10; 
+                        int padValue = (indentPxCol * level) + (indentPxSub * sublevel);
+                        String paddingDir = DirLangUtil.isRTL(c) ? "padding-right:" : "padding-left:"; //$NON-NLS-1$ //$NON-NLS-2$
+                        String style = paddingDir + (padValue) + "px !important"; // $NON-NLS-1$ $NON-NLS-2$
+                        return style;
+                    }
+                }
+            } else {
+                return getIndentStyle(context, c, viewDef, level);
+            }
+        }
         return null;
     }
     protected int getIndentLevel(ViewDefinition viewDef) throws IOException {
-    	 // assumes that the caller 
-   	     int level = 0;    	
-    	 TabularDataModel tdm;
+         // assumes that the caller 
+         int level = 0;     
+         TabularDataModel tdm;
          DataModel dm = viewDef.dataModel;
          if(dm instanceof TabularDataModel) {
              tdm = (TabularDataModel)dm;
@@ -1151,5 +1180,13 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
             //super.writeColumnEmptyValue(context, w, c, viewDef, vc);
             w.writeAttribute("style","display:none;",null); // $NON-NLS-1$ $NON-NLS-2
         }
+    }
+    
+    protected void writeCheckboxAccessibilityAttributes(FacesContext context, ResponseWriter w, String checkBoxId) throws IOException {
+        //Empty here to be over-ridden in subclasses
+    }
+    
+    protected void writeHeaderCheckboxAccessibilityAttributes(FacesContext context, ResponseWriter w, String viewId, String headerCheckboxId) throws IOException {
+        //Empty here to be over-ridden in subclasses
     }
 }

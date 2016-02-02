@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2011
+ * © Copyright IBM Corp. 2010, 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -49,6 +49,23 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
     
     @Override
     protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap DataViewRenderer.
+            String str = "";
+            str = "Show all items"; // $NLS-PagerSizesRenderer.Showallitems-1$
+            str = "Show {0} items at once"; // $NLS-PagerSizesRenderer.Show0itemsatonce-1$
+            // Note these strings are used by the xp:pager control, not the xe:pagerSizes control:
+            str = "Pager"; // $NLS-PagerRenderer.Pager-1$
+            str = "First page"; // $NLS-PagerRenderer.Firstpage-1$
+            str = "Previous page"; // $NLS-PagerRenderer.Previouspage-1$
+            str = "Next page"; // $NLS-PagerRenderer.Nextpage-1$
+            str = "Last page"; // $NLS-PagerRenderer.Lastpage-1$
+            str = "Page {0}"; // $NLS-PagerRenderer.Page0-1$
+            // end xp:pager strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
         switch(prop) {
             case PROP_TEXT:             return "Show {0} items per page"; // $NLS-PagerSizesRenderer.Show0itemsperpage-1$
             case PROP_ALLTEXT:          return "All"; // $NLS-PagerSizesRenderer.All-1$

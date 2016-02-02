@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2013
+ * © Copyright IBM Corp. 2010, 2013, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -57,6 +57,18 @@ public class FormTableRenderer extends FormLayoutRenderer {
             case PROP_ERRORROWSTYLE:    return "padding: 0 25px;"; //$NON-NLS-1$
             case PROP_ERRORROWSTYLENESTED: return "padding-left:15px;"; //$NON-NLS-1$ 
             case PROP_ERRORROWSTYLENESTED_RTL: return "padding-right:15px;"; //$NON-NLS-1$ 
+            
+            //Commonly used Strings 
+            case PROP_ERRORSUMMARYMAINTEXT:     return "Please check the following:"; // $NLS-FormTableRenderer.Pleasecheckthefollowing-1$
+            case PROP_ERRORIMGALT:              return "Error"; // $NLS-FormTableRenderer.Error-1$
+            case PROP_ERRORMSGALTTEXT:          return "Error:"; // $NLS-FormTableRenderer.Error.1-1$
+            case PROP_FATALMSGALTTEXT:          return "Fatal:"; // $NLS-FormTableRenderer.Fatal-1$
+            case PROP_WARNIMGALT:               return "Warning"; // $NLS-FormTableRenderer.Warning-1$
+            case PROP_WARNMSGALTTEXT:           return "Warning:"; // $NLS-FormTableRenderer.Warning.1-1$
+            case PROP_INFOIMGALT:               return "Information"; // $NLS-FormTableRenderer.Information-1$
+            case PROP_INFOMSGALTTEXT:           return "Information:"; // $NLS-FormTableRenderer.Information.1-1$
+            case PROP_HELPIMGALT:               return "Help"; // $NLS-FormTableRenderer.Help-1$
+            case PROP_HELPMSGALTTEXT:           return "Help"; // $NLS-FormTableRenderer.Help-1$
         }
         return super.getProperty(prop);
     }

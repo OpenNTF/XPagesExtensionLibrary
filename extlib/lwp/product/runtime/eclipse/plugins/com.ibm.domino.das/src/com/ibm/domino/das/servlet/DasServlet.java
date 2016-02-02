@@ -166,14 +166,17 @@ public class DasServlet extends AbstractRestServlet {
         private boolean _enabled = false;
         private String _version;
         private int _gkf; // Gatekeeper feature #
+        private boolean _allowSstUsers;
         private Application _application;
         private boolean _initialized= false;
         
-        public DasService(String name, String path, String version, int gkf, Application application) {
+        public DasService(String name, String path, String version, int gkf, 
+                    boolean allowSstUsers, Application application) {
             _name = name;
             _path = path;
             _version = version;
             _gkf = gkf;
+            _allowSstUsers = allowSstUsers;
             _application = application;
         }
 
@@ -211,6 +214,10 @@ public class DasServlet extends AbstractRestServlet {
         
         public int getGkf() {
             return _gkf;
+        }
+
+        public boolean isAllowSstUsers() {
+            return _allowSstUsers;
         }
     }
     
@@ -473,7 +480,8 @@ public class DasServlet extends AbstractRestServlet {
             
             // Add the service to our map
             DasService service = new DasService(CORE_SERVICE_NAME, CORE_SERVICE_PATH, 
-                                        CORE_SERVICE_VERSION, CORE_SERVICE_GKF, application);
+                                        CORE_SERVICE_VERSION, CORE_SERVICE_GKF, 
+                                        false, application);
             s_services.put(CORE_SERVICE_PATH, service);
 
             DAS_LOGGER.getLogger().fine("Registered the core DAS service"); // $NON-NLS-1$
@@ -490,7 +498,7 @@ public class DasServlet extends AbstractRestServlet {
             
             // Add the service to our map
             DasService service = new DasService(DATA_SERVICE_NAME, DATA_SERVICE_PATH, 
-                                        DATA_SERVICE_VERSION, 0, application);
+                                        DATA_SERVICE_VERSION, 0, false, application);
             s_services.put(DATA_SERVICE_PATH, service);
 
             DAS_LOGGER.getLogger().fine("Registered the data service"); // $NON-NLS-1$
@@ -555,6 +563,10 @@ public class DasServlet extends AbstractRestServlet {
                             // Ignore parser exception
                         }
                     }
+
+                    // Parse the SST option
+                    String serviceAllowSstUsers = configElement.getAttribute("allowSstUsers"); // $NON-NLS-1$
+                    boolean allowSstUsers = "true".equalsIgnoreCase(serviceAllowSstUsers); // $NON-NLS-1$
                     
                     DAS_LOGGER.getLogger().fine(StringUtil.format("Found a DAS service extension: {0} (/{1})", serviceName, servicePath)); // $NON-NLS-1$
 
@@ -575,7 +587,7 @@ public class DasServlet extends AbstractRestServlet {
                         // Add the service to our map
                         DasService service = new DasService(serviceName, servicePath, 
                                                     (serviceVersion != null) ? serviceVersion : VERSION_ZERO,
-                                                     iGkf, application);
+                                                     iGkf, allowSstUsers, application);
                         s_services.put(servicePath.toLowerCase(), service);
     
                         DAS_LOGGER.getLogger().fine("Registered a DAS service extension"); // $NON-NLS-1$
@@ -660,7 +672,7 @@ public class DasServlet extends AbstractRestServlet {
 
                     // Even if the service is enabled thru gatekeeper, prevent
                     // self service trial customers from making API requests.
-                    if ( enabled && StringUtil.isNotEmpty(customerId) ) {
+                    if ( enabled && StringUtil.isNotEmpty(customerId) && !service.isAllowSstUsers()) {
                         try {
                             ICustomerProvider provider = ProviderFactory.getCustomerProvider();
                             if ( provider != null ) {

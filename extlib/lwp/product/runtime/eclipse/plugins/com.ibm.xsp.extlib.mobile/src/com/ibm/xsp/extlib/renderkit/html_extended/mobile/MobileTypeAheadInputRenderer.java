@@ -97,7 +97,7 @@ public class MobileTypeAheadInputRenderer extends TypeAheadInputRenderer {
         }
         if( separatorDetected ){
             // String left untagged - hoping to support multiple before begin translating strings for next product release
-            String msg = "The mobile xp:typeAhead control does not support entering multiple values in the edit box. Multiple value separator detected: {0}"; // $NLS-MobileTypeAheadInputRenderer.ThemobilexptypeAheadcontroldoesno-1$
+            String msg = "The mobile xp:typeAhead control does not support entering multiple values in the edit box. A multiple value separator has been detected: {0}"; // $NLS-MobileTypeAheadInputRenderer.ThemobilexptypeAheadcontroldoesno-1$
             msg = StringUtil.format(msg, separatorType);
             throw new FacesExceptionEx(msg);
         }

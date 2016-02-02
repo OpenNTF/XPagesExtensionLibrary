@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,35 +17,16 @@ package com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.data;
 
 import java.io.IOException;
 
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.FacesDataIterator;
-import com.ibm.xsp.event.PagerEvent;
 import com.ibm.xsp.extlib.component.data.AbstractPager;
 import com.ibm.xsp.extlib.component.data.UIPagerExpand;
-import com.ibm.xsp.extlib.renderkit.html_extended.data.AbstractPagerRenderer;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
-public class PagerExpandRenderer extends AbstractPagerRenderer {
-
-    @Override
-    protected boolean initPagerEvent(FacesContext context, UIComponent component, PagerEvent pagerEvent, String idSuffix) {
-        try {
-            if (idSuffix.equals("ea")) { // $NON-NLS-1$
-                pagerEvent.setAction(UIPagerExpand.ACTION_EXPANDALL);
-                return true;
-            } else if (idSuffix.equals("ca")) { // $NON-NLS-1$
-                pagerEvent.setAction(UIPagerExpand.ACTION_COLLAPSEALL);
-                return true;
-            }
-        } catch (Exception ex) {
-            //TODO add error logging
-        }
-        return false;
-    }
+public class PagerExpandRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.data.PagerExpandRenderer {
 
     @Override
     protected void writePagerContent(FacesContext context, ResponseWriter w, AbstractPager _pager, FacesDataIterator dataIterator) throws IOException {
@@ -67,10 +48,11 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
         w.endElement("div"); // $NON-NLS-1$
     }
 
+    @Override
     protected void writeCollapseAll(FacesContext context, ResponseWriter w, UIPagerExpand pager, FacesDataIterator dataIterator) throws IOException {
         String text = pager.getCollapseText();
         if (StringUtil.isEmpty(text)) {
-            text = "Collapse all"; // $NLS-PagerExpandRenderer.CollapseAll-1$
+            text = (String)getProperty(PROP_COLLAPSETEXT);
         }
         if (StringUtil.isNotEmpty(text)) {
             w.startElement("li", null); // $NON-NLS-1$
@@ -82,8 +64,13 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
             String clientId = pager.getClientId(context);
             String sourceId = clientId + "_ca"; // $NON-NLS-1$
             w.writeAttribute("id", sourceId, null); // $NON-NLS-1$
+            w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            if (selected) {
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
             w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                                                            // $NON-NLS-2$
             setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             w.writeText(text, null);
             w.endElement("a");
@@ -91,16 +78,18 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
         }
     }
 
+    @Override
     protected void writeSeparator(FacesContext context, ResponseWriter w, UIPagerExpand pager, FacesDataIterator dataIterator) throws IOException {
         // not write any separator text, instead the separator is achieved using
         // CSS styles
         // so there are no character encoding issues in other countries
     }
 
+    @Override
     protected void writeExpandAll(FacesContext context, ResponseWriter w, UIPagerExpand pager, FacesDataIterator dataIterator) throws IOException {
         String text = pager.getExpandText();
         if (StringUtil.isEmpty(text)) {
-            text = "Expand all"; // $NLS-PagerExpandRenderer.ExpandAll-1$
+            text = (String)getProperty(PROP_EXPANDTEXT);
         }
         if (StringUtil.isNotEmpty(text)) {
             w.startElement("li", null); // $NON-NLS-1$
@@ -112,8 +101,13 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
             String clientId = pager.getClientId(context);
             String sourceId = clientId + "_ea"; // $NON-NLS-1$
             w.writeAttribute("id", sourceId, null); // $NON-NLS-1$
+            w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            if (selected) {
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
             w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                                                            // $NON-NLS-2$
             setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             w.writeText(text, null);
             w.endElement("a");

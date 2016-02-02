@@ -95,7 +95,11 @@ public class DeviceBean implements DataObject,
         }
         return null;
     }
-    
+    /**
+     * Note, this only returns true for phones. 
+     * May need to do (isMobile() || isTablet() || isIpod()) to catch all kinds of non-desktop non-laptop devices.
+     * @return
+     */
     public boolean isMobile() {
        return (Boolean)getValue("mobile");//$NON-NLS-1$
     }

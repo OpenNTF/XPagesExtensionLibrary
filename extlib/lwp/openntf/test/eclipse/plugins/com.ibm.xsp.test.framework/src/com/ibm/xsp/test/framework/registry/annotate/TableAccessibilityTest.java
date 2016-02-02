@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2014
+ * © Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -125,8 +125,8 @@ public class TableAccessibilityTest extends AbstractXspTest {
             
             if(actualTablePresentInner || actualTablePresent || isSummaryPresent || isCaptionPresent){
                 //Set the caption and summary values
-                setSummary = "Summary" + (int)(Math.random()*10000);
-                setCaption = "Caption" + (int)(Math.random()*10000);
+                setSummary = "Summary_" + def.getTagName()+"1";
+                setCaption = "Caption_" + def.getTagName()+"1";
             	Map<String, Object> attrsMap = TypedUtil.getAttributes(instance);
                 attrsMap.put("summary", setSummary);
                 attrsMap.put("caption", setCaption);
@@ -163,9 +163,10 @@ public class TableAccessibilityTest extends AbstractXspTest {
                     + " No output rendered.\n";
                     continue;
                 }
+//                System.out.println("TableAccessibilityTest.testTableAccessibility() "+XspTestUtil.loc(def)+" page:\n"+page2);
 
                 String summaryValue = RenderIdTest.findAttributeOnATag(page2, "table", "summary");
-                String captionValue = RenderIdTest.findAttributeOnATag(page2, "table", "caption");
+                String captionValue = RenderIdTest.findTableCaptionText(page2, "table", "caption");
                 boolean summaryExists = (null != summaryValue);
                 boolean captionExists = (null != captionValue);
                 if(summaryExists && captionExists) {
@@ -173,22 +174,32 @@ public class TableAccessibilityTest extends AbstractXspTest {
                     boolean isCaptionCorrect = StringUtil.equals(captionValue, setCaption);
                 
                     if(!isSummaryCorrect) {
-                    	fails += XspTestUtil.loc(def) + " Expected summary=\""+setSummary+"\" attribute in table tag for accessibility. Found \n";
+                    	fails += XspTestUtil.loc(def) + " Expected summary=\""+setSummary+"\" attribute in table tag for accessibility. Found summary=\""+summaryValue+"\"\n";
                     }else{
 //                    	System.out.println("Summary attribute found as expected - " + setSummary);
                     }
                     if(!isCaptionCorrect) {
-                    	fails += XspTestUtil.loc(def) + " Expected caption=\""+setCaption+"\" attribute in table tag for accessibility. Found \n";
+                    	fails += XspTestUtil.loc(def) + " Expected <caption>"+setCaption+"</caption> tag in table tag for accessibility. Found <caption>"+captionValue+"</caption>\n";
                     }else{
 //                    	System.out.println("Caption attribute found as expected - " + setCaption);
                     }
                 }else{
                 	if(!summaryExists) {
-                		fails += XspTestUtil.loc(def) + " Expected summary attribute in table tag for accessibility does not exist.\n";
+                		String msg = XspTestUtil.loc(def) + " Expected summary attribute in table tag for accessibility does not exist.";
+//                		System.err.println("TableAccessibilityTest.testTableAccessibility() "+msg+"\n"+page2);
+                		fails += msg+"\n";
                     }
                 	if(!captionExists) {
-                		fails += XspTestUtil.loc(def) + " Expected caption attribute in table tag for accessibility does not exist.\n";
+                		String msg = XspTestUtil.loc(def) + " Expected <caption> tag in table tag for accessibility does not exist.";
+//                		System.err.println("TableAccessibilityTest.testTableAccessibility() "+msg+"\n"+page2);
+                		fails += msg+"\n";
                     }
+                }
+                String captionAttribute = RenderIdTest.findAttributeOnATag(page2, "table", "caption");
+                if( null != captionAttribute ){
+                    String msg = XspTestUtil.loc(def) + " Found bad caption=\"Caption????\", caption is not a HTML table attribute, use <caption> HTML tag instead.";
+//                    System.err.println("TableAccessibilityTest.testTableAccessibility() "+msg+"\n"+page2);
+                    fails += msg+"\n";
                 }
             }
         }	

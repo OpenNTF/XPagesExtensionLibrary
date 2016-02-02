@@ -180,7 +180,7 @@ public class CarouselRenderer extends FacesRendererEx {
         if(StringUtil.isNotEmpty(carouselTitle)) {
             w.writeText(carouselTitle, null);
         }else{
-            w.writeAttribute("title", "carousel", null); // $NON-NLS-1$ $NLS-CarouselRenderer.carousel-2$
+            w.writeAttribute("title", "Carousel", null); // $NON-NLS-1$ $NLS-CarouselRenderer.carousel-2$
         }
         String role = "presentation"; // $NON-NLS-1$
         w.writeAttribute("role", role, null); // $NON-NLS-1$

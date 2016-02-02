@@ -177,7 +177,7 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
                 UIInputCheckbox.isChecked(context, component)? Boolean.TRUE : Boolean.FALSE, VALUE);
         if( !readonly ){ // when readonly will have written disabled above.
             // check if disabled, and if so, write the disabled attribute
-            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-N$
+            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-1$
         }
         
         encodeHtmlAttributes(writer, component, false);

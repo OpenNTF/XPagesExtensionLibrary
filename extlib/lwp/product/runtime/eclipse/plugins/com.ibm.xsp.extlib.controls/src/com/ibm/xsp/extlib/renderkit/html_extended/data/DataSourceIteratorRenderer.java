@@ -46,6 +46,7 @@ import com.ibm.xsp.renderkit.ContentTypeRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.IteratorAjaxRenderer;
 import com.ibm.xsp.util.AjaxUtilEx;
 import com.ibm.xsp.util.FacesUtil;
+import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JSUtil;
 import com.ibm.xsp.util.JavaScriptUtil;
 
@@ -203,6 +204,7 @@ public abstract class DataSourceIteratorRenderer extends FacesRendererEx impleme
                     child.decode(context);
             }
         }
+        
     }
     private boolean isToggleAction(FacesContext context, UIDataSourceIterator component, String submitterId){
         // The id must be an expand/collapse action 
@@ -227,6 +229,9 @@ public abstract class DataSourceIteratorRenderer extends FacesRendererEx impleme
             ToggleRowEvent ev = new ToggleRowEvent(component);
             ev.setPosition(catRowId.substring(catRowId.lastIndexOf(EXPAND_DELIMITER) + delimiter_len));
             ev.setExpand(true);
+            //>tmg:a11y
+            ev.setClientId(catRowId);
+            //<tmg:a11y
             return ev;
         }
         if (catRowId.lastIndexOf(SHRINK_DELIMITER) != -1) {
@@ -234,18 +239,27 @@ public abstract class DataSourceIteratorRenderer extends FacesRendererEx impleme
             ToggleRowEvent ev = new ToggleRowEvent(component);
             ev.setPosition(catRowId.substring(catRowId.lastIndexOf(SHRINK_DELIMITER) + delimiter_len));
             ev.setExpand(false);
+            //>tmg:a11y
+            ev.setClientId(catRowId);
+            //<tmg:a11y
             return ev;
         }
         if (catRowId.lastIndexOf(SHOW_DELIMITER) != -1) {
             int delimiter_len = SHOW_DELIMITER.length(); 
             ToggleDetailEvent ev = new ToggleDetailEvent(component);
             ev.setTogglePositions(new String[]{catRowId.substring(catRowId.lastIndexOf(SHOW_DELIMITER) + delimiter_len)});
+            //>tmg:a11y
+            ev.setClientId(catRowId);
+            //<tmg:a11y
             return ev;
         }
         if (catRowId.lastIndexOf(HIDE_DELIMITER) != -1) {
             int delimiter_len = HIDE_DELIMITER.length(); 
             ToggleDetailEvent ev = new ToggleDetailEvent(component);
             ev.setTogglePositions(new String[]{catRowId.substring(catRowId.lastIndexOf(HIDE_DELIMITER) + delimiter_len)});
+            //>tmg:a11y
+            ev.setClientId(catRowId);
+            //<tmg:a11y
             return ev;
         }
         if (catRowId.lastIndexOf(SORT_DELIMITER) != -1) {
@@ -253,6 +267,9 @@ public abstract class DataSourceIteratorRenderer extends FacesRendererEx impleme
             ToggleSortColumnEvent ev = new ToggleSortColumnEvent(component);
             String columnName = catRowId.substring(catRowId.lastIndexOf(SORT_DELIMITER) + delimiter_len);
             ev.setColumnName(columnName);
+            //>tmg:a11y
+            ev.setClientId(catRowId);
+            //<tmg:a11y
             return ev;
         }
         return null;
@@ -287,9 +304,28 @@ public abstract class DataSourceIteratorRenderer extends FacesRendererEx impleme
 
     @Override
     public void encodeEnd(FacesContext context, UIComponent component) throws IOException {
+        //>tmg:a11y
+    	super.encodeEnd(context, component);
+
+    	// the regular expand/collapse actionevent and the column sort action event work in here...
+        String _toggleActionClientId = (String)HtmlUtil.readEncodeParameter(context, component, UIDataSourceIterator.TOGGLE_ACTION_CLIENT_ID, /*remove*/ true);
+        if(null != _toggleActionClientId){
+        	// for the expand/collapse action event, flip the client id... expand/collapse vs collapse/expand...
+        	if(_toggleActionClientId.contains(SHRINK_DELIMITER)){
+                _toggleActionClientId = _toggleActionClientId.replaceAll(SHRINK_DELIMITER, EXPAND_DELIMITER);
+            }else if(_toggleActionClientId.contains(EXPAND_DELIMITER)){
+                _toggleActionClientId = _toggleActionClientId.replaceAll(EXPAND_DELIMITER, SHRINK_DELIMITER);
+            }
+
+            StringBuilder js = new StringBuilder();
+            js.append("XSP.setFocus("); //$NON-NLS-1$
+            JavaScriptUtil.addString(js, _toggleActionClientId);
+            js.append(");\n"); //$NON-NLS-1$
+            JavaScriptUtil.addScriptOnLoad(js.toString());
+        }
+        //<tmg:a11y
     }
 
-    
     // ================================================================
     // Ajax Support
     // ================================================================

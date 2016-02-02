@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -25,13 +25,14 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.domino.preferences.DominoPreferenceManager;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class CopyMethodBluemixWizardPage extends AbstractBluemixWizardPage {
+public class CopyMethodBluemixWizardPage extends AbstractWizardPage {
     
     private String       _labelTxt;
     private String       _titleTxt;

@@ -26,9 +26,11 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
+import com.ibm.xsp.context.FacesContextExImpl;
 import com.ibm.xsp.extlib.component.layout.AbstractApplicationConfiguration;
 import com.ibm.xsp.extlib.component.layout.impl.SearchBar;
 import com.ibm.xsp.extlib.tree.ITreeNode;
+import com.ibm.xsp.stylekit.StyleKitImpl;
 import com.ibm.xsp.util.StateHolderUtil;
 
 /**
@@ -61,9 +63,35 @@ public class SimpleResponsiveApplicationConfiguration extends AbstractApplicatio
     protected String layoutRendererType;
 
     public SimpleResponsiveApplicationConfiguration() {
-        setLayoutRendererType("com.ibm.xsp.theme.bootstrap.responsive.SimpleResponsiveAppLayout"); // $NON-NLS-1$
-    }    
-
+        // In the Bootstrap4 ExtlibX theme, we want to overrride the renderer used for the Simple
+        // Responsive Application Layout. But the chosen renderer is set here in this component.
+        // We don't want to have to create a separate component for the Bootstrap4 implementation.
+        
+        // Use facesContext to get the current StyleKit (aka theme)
+        FacesContextExImpl facesContext = (FacesContextExImpl)FacesContext.getCurrentInstance();
+        String rendererSuffix = ""; // $NON-NLS-1$
+        if(facesContext != null) {
+            StyleKitImpl styleKit = (StyleKitImpl)facesContext.getStyleKit();
+        
+            // The theme may be an extension of another theme(s). Below we pull out the root theme
+            // by looping through parents of the StyleKits
+            StyleKitImpl rootTheme = styleKit;
+            while(rootTheme != null && rootTheme.getParent() != null) {
+                rootTheme = rootTheme.getParent();
+            }
+            
+            if(rootTheme == null || rootTheme.getName().startsWith("Bootstrap3")) { // $NON-NLS-1$
+                rendererSuffix = ""; // $NON-NLS-1$
+            }else if(rootTheme != null && rootTheme.getName().startsWith("Bootstrap")) { // $NON-NLS-1$
+                // If the root theme is Bootstrap but not Bootstrap3 theme, use the extlibx renderer
+                rendererSuffix = "_" + rootTheme.getName(); // $NON-NLS-1$
+            }else{
+                rendererSuffix = ""; // $NON-NLS-1$
+            }
+        }
+        setLayoutRendererType("com.ibm.xsp.theme.bootstrap.responsive.SimpleResponsiveAppLayout" + rendererSuffix); // $NON-NLS-1$
+    }
+    
     public void setLayoutRendererType(String layoutRendererType) {
         this.layoutRendererType = layoutRendererType;
     }

@@ -30,7 +30,21 @@ import com.ibm.xsp.extlib.renderkit.html_extended.data.AbstractPagerRenderer;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 
 public class PagerSizesRenderer extends AbstractPagerRenderer {
-
+    
+    //Defect 198729 - Adding String for aria-label
+    protected static final int PROP_SHOWNUMBEROFPAGES  = 10;
+    @Override
+    protected Object getProperty(int prop) {
+        switch(prop) {
+            case PROP_SHOWNUMBEROFPAGES:{
+                // "Show {0} items at once"
+                return com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerSizesRenderer.Show0itemsatonce"); //$NON-NLS-1$
+            }
+            // Note, the extlib.controls PagerSizesRenderer has a string: "Show all items"
+        }
+        return super.getProperty(prop);
+    }
+    
     @Override
     protected boolean initPagerEvent(FacesContext context, UIComponent component, PagerEvent pagerEvent, String idSuffix) {
         try {
@@ -58,7 +72,8 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
 
         String text = pager.getText();
         if (StringUtil.isEmpty(text)) {
-            text = "Show {0} items per page"; // $NLS-PagerSizesRenderer.Show0itemsperpage-1$
+            // "Show {0} items per page";
+            text = com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerSizesRenderer.Show0itemsperpage"); //$NON-NLS-1$
         }
         int pos = text.indexOf("{0}"); //$NON-NLS-1$
         writerStartText(context, w, pager, dataIterator, text, pos);
@@ -130,8 +145,16 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
             String clientId = pager.getClientId(context);
             String sourceId = clientId + "_" + val;
             w.writeAttribute("id", sourceId, null); // $NON-NLS-1$
+            w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+            if (selected) {
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+            }else{
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
+            }
+            //Defect 198729 - Adding aria-label
+            w.writeAttribute("aria-label", StringUtil.format((String)getProperty(PROP_SHOWNUMBEROFPAGES), getItemString(val)), null); // $NON-NLS-1$
             w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
-                                                            // $NON-NLS-2$
+            
             setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             w.writeText(getItemString(val), null);
             w.endElement("a");
@@ -153,7 +176,8 @@ public class PagerSizesRenderer extends AbstractPagerRenderer {
 
     protected String getItemString(int value) throws IOException {
         if (value >= UIPagerSizes.ALL_MAX) {
-            return "All"; // $NLS-PagerSizesRenderer.All-1$
+            // "All"
+            return com.ibm.xsp.extlib.controls.ResourceHandler.getString("PagerSizesRenderer.All"); //$NON-NLS-1$
         }
         return Integer.toString(value);
     }

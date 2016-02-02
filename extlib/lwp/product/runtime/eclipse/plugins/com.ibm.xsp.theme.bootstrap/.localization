@@ -1,6 +1,6 @@
 #Localization file used by Workplace Designer
 #Fri Feb 27 12:37:53 GMT 2015
-resourceHandlerClass=ResourceHandler
+resourceHandlerClass=BootstrapResourceHandler
 propertiesFileName=messages.properties
 resourceHandlerPackage=com.ibm.xsp.theme.bootstrap
 loggingId=CLFAD

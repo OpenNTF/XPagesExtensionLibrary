@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,7 +15,10 @@
  */
 dojo.provide("extlib.responsive.dijit.xsp.bootstrap.Navigator");
 
-XSP.xbtMenuSwap = function(evt,effect,sfid,plusIcon,minusIcon) {
+XSP.xbtMenuSwap = function(evt,effect,sfid,plusIcon,minusIcon,collapsedLabel,expandedLabel,collapsedTitle,expandedTitle) {
+	/* Toggle icon, aria-label, title and screen reader properties
+	 * of an expandable menu node
+	 */
 	var tg = (window.event) ? evt.srcElement : evt.target
 	for(var ct = tg.parentNode.nextSibling; ct && ct.nodeType!=1; ) {
 		ct = ct.nextSibling;
@@ -28,6 +31,9 @@ XSP.xbtMenuSwap = function(evt,effect,sfid,plusIcon,minusIcon) {
 		}		
 		dojo.removeClass(tg, ""+plusIcon)
 		dojo.addClass(tg, ""+minusIcon)
+		dojo.setAttr(tg, "aria-label", expandedLabel)
+		dojo.setAttr(tg, "title", expandedTitle)
+		dojo.query('.sr-only', tg)[0].innerHTML = expandedLabel
 		if (sfid) {
 			var field = XSP.getElementById(sfid);
 			if (field) {
@@ -42,6 +48,9 @@ XSP.xbtMenuSwap = function(evt,effect,sfid,plusIcon,minusIcon) {
 		}		
 		dojo.removeClass(tg, ""+minusIcon)
 		dojo.addClass(tg, ""+plusIcon)
+		dojo.setAttr(tg, "aria-label", collapsedLabel)
+		dojo.setAttr(tg, "title", collapsedTitle)
+		dojo.query('.sr-only', tg)[0].innerHTML = collapsedLabel
 		if (sfid) {
 			var field = XSP.getElementById(sfid);
 			if (field) {

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2014
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -103,7 +103,7 @@ public abstract class DatabaseHelper {
                     try {
                         stmt.execute( sql );
                     } catch(SQLException e) {
-                        e.setNextException(new SQLException( StringUtil.format("Error while executing the following {0} statement:\n{1}","SQL",sql) ));  // $NLX-DatabaseHelper.Errorwhileexecutingthefollowing0s-1$ $NON-NLS-2$
+                        e.setNextException(new SQLException( StringUtil.format("Error while executing the following SQL statement:\n{0}",sql) ));  // $NLX-DatabaseHelper.Errorwhileexecutingthefollowing0s-1$
                         throw e;
                     }
                 }

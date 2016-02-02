@@ -74,13 +74,17 @@ XSP.xbtShowHideDetails = function(id,idx,pos,summaryOrDetail,iconDown,iconUp, ti
 	var ia=dojo.indexOf(a,pos);
 	if(ia>=0) a.splice(ia,1); else a.push(pos); inp.value=a.toString();
 	var vis=dojo.style(det,"display")!="none";
-	dojo.byId(span).className =vis?""+iconDown:""+iconUp;
+	
+	var iconSpan = dojo.byId(span);
+	iconSpan.className =vis?""+iconDown:""+iconUp;
 	var toggleTitle = vis?""+titleShow:""+titleHide;
-	dojo.query(dojo.byId(span).parentNode).attr("aria-label", toggleTitle).attr("title", toggleTitle);
+	dojo.query(iconSpan.parentNode).attr("aria-label", toggleTitle).attr("title", toggleTitle);
+	dojo.query('.sr-only', iconSpan)[0].innerHTML = toggleTitle
+	
 	if(vis){
 		dojo.style(det,"display","none");
 		if(summaryOrDetail) {
-			dojo.style(sum,"display","block"); 
+			dojo.style(sum,"display",""); 
 		}
 	}else{
 		dojo.style(det,{opacity: "0",display:"block"});

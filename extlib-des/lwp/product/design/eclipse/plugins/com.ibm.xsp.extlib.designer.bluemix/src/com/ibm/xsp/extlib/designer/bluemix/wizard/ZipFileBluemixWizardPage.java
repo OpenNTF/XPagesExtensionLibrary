@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -32,13 +32,14 @@ import org.eclipse.swt.widgets.Text;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.domino.navigator.util.NavigatorUtil;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixZipUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class ZipFileBluemixWizardPage extends AbstractBluemixWizardPage implements SelectionListener, ModifyListener {
+public class ZipFileBluemixWizardPage extends AbstractWizardPage implements SelectionListener, ModifyListener {
     
     private static final String _LABEL_TXT  = "This Wizard imports an XPages starter code project downloaded from the \"Start Coding\" page{0}and configures it for deployment.";  // $NLX-ZipFileBluemixWizardPage.ThisWizardimportsanXPagesStart-1$
     private Text                _zipText;

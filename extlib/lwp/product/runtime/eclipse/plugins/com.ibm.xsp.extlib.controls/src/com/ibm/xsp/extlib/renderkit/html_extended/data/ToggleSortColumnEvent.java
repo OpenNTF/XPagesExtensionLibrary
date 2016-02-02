@@ -29,7 +29,11 @@ public class ToggleSortColumnEvent extends ActionEvent {
 	private static final long serialVersionUID = 1L;
 
     private String columnName;
-
+    
+    //>tmg:a11y
+    private String clientId;
+    //<tmg:a11y
+    
     public ToggleSortColumnEvent(UIComponent component) {
         super(component);
     }
@@ -41,4 +45,14 @@ public class ToggleSortColumnEvent extends ActionEvent {
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
 	}
+	
+	//>tmg:a11y
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+    //<tmg:a11y
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -17,19 +17,15 @@
 package com.ibm.xsp.extlib.designer.bluemix.wizard;
 
 import org.cloudfoundry.client.lib.CloudCredentials;
-import org.eclipse.jface.dialogs.IPageChangingListener;
-import org.eclipse.jface.dialogs.PageChangingEvent;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardPage;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.designer.domino.ide.resources.project.IDominoDesignerProject;
 import com.ibm.xsp.extlib.designer.bluemix.BluemixLogger;
 import com.ibm.xsp.extlib.designer.bluemix.BluemixPlugin;
 import com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage;
 import com.ibm.xsp.extlib.designer.bluemix.util.BluemixUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizard;
 
 import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
 
@@ -37,32 +33,18 @@ import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
  * @author Gary Marjoram
  *
  */
-public abstract class AbstractBluemixWizard extends Wizard implements IPageChangingListener {    
+public abstract class AbstractBluemixWizard extends AbstractWizard {    
     
-    public IDominoDesignerProject    project    = null;
-    public boolean                   advancing  = true;
-
-    protected final ImageDescriptor  _image;
     protected final CloudCredentials _credentials;
-
     private Exception                _jobException;
 
     public AbstractBluemixWizard() {
-        super();
-      
-        _image = BluemixPlugin.getImageDescriptor("wizban_bluemix.png"); // $NON-NLS-1$
-        
+        super(BluemixPlugin.getImageDescriptor("wizban_bluemix.png")); // $NON-NLS-1$
         String user = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_USERNAME, "");
         String password = PreferencePage.getSecurePreference(KEY_BLUEMIX_SERVER_PASSWORD, "");
         _credentials = new CloudCredentials(user, password);
     }
     
-    @Override
-    public void addPages() {
-        super.addPages();
-        setWindowTitle(getTitle());        
-    }
-
     @Override
     public boolean needsProgressMonitor() {
         return true;
@@ -96,10 +78,4 @@ public abstract class AbstractBluemixWizard extends Wizard implements IPageChang
     public void setJobException(Exception e) {
         _jobException = e;
     }
-
-    @Override
-    public void handlePageChanging(PageChangingEvent event) {
-    }    
-    
-    protected abstract String getTitle();
 }

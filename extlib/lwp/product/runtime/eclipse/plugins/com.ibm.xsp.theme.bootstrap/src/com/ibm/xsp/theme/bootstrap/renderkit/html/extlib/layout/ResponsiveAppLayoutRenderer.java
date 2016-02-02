@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,15 +22,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.ApplicationLinksRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.FooterLinksRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.PlaceBarActionsRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.SearchOptionsRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.TitleBarTabsRenderer;
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.UtilityLinksRenderer;
-import com.ibm.xsp.theme.bootstrap.resources.Resources;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.component.UICallback;
 import com.ibm.xsp.component.xp.XspEventHandler;
@@ -43,8 +34,17 @@ import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.AbstractTreeRende
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.ComboBoxRenderer;
 import com.ibm.xsp.extlib.tree.ITree;
 import com.ibm.xsp.extlib.tree.impl.TreeImpl;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
+import com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.ApplicationLinksRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.FooterLinksRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.PlaceBarActionsRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.SearchOptionsRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.TitleBarTabsRenderer;
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.layout.tree.UtilityLinksRenderer;
+import com.ibm.xsp.theme.bootstrap.resources.Resources;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.HtmlUtil;
 import com.ibm.xsp.util.JSUtil;
@@ -65,7 +65,23 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
     public static final int PROP_BANNER_FIXEDTOP_PADDING       = 20;
     public static final int PROP_BANNER_FIXEDBOTTOM_PADDING    = 21;
     public static final int PROP_BANNER_COLLAPSE_CLASS         = 22;
+    public static final int PROP_BANNER_ROLE                   = 24;
+    public static final int PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL = 25;
     
+    public static final int PROP_TITLEBARTAG                   = 30;
+    public static final int PROP_TITLEBARCLASS                 = 31;
+    public static final int PROP_TITLEBARARIALABEL             = 32;
+    public static final int PROP_TITLEBARNAVTAG                = 33;
+    public static final int PROP_TITLEBARNAVARIALABEL          = 34;
+    public static final int PROP_TITLEBARNAVROLE               = 35;
+    public static final int PROP_TITLEBARNAVCLASS              = 36;
+    
+    // Place bar
+    public static final int PROP_PLACEBARNAMETAG               = 40;
+    public static final int PROP_PLACEBARCLASS                 = 41;
+    public static final int PROP_PLACEBARARIALABEL             = 42;
+    public static final int PROP_PLACEBARACTIONSROLE           = 43;
+    public static final int PROP_PLACEBARACTIONSARIALABEL      = 44;
 
     @Override
     protected Object getProperty(int prop) {
@@ -76,12 +92,31 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             case PROP_COLUMN_MEDIUM:                 return "col-md-"; // $NON-NLS-1$
             case PROP_COLUMN_LARGE:                  return "col-lg-"; // $NON-NLS-1$
             // Collapsible Menu
-            case PROP_DEFAULT_MENU_LABEL:            return "Menu"; // $NON-NLS-1$
+            case PROP_DEFAULT_MENU_LABEL:            return com.ibm.xsp.extlib.controls.ResourceHandler.getString("MenuRenderer.Menu"); // $NON-NLS-1$
             case PROP_DEFAULT_MENU_TARGET:           return ".applayout-column-left"; // $NON-NLS-1$
             //Fixed banner padding
             case PROP_BANNER_FIXEDTOP_PADDING:       return "body {padding-top:51px;} @media (min-width: 768px) {.applayout-main .sidebar{top:52px;bottom:0px;}}"; // $NON-NLS-1$
             case PROP_BANNER_FIXEDBOTTOM_PADDING:    return "body {padding-bottom:51px;}  @media (min-width: 768px) {.applayout-main .sidebar{top:0px;bottom:52px;}}"; // $NON-NLS-1$
             case PROP_BANNER_COLLAPSE_CLASS:         return "navbar-collapse-target"; // $NON-NLS-1$
+            case PROP_BANNER_ROLE:                   return "banner"; // $NON-NLS-1$
+            //Title bar
+            case PROP_TITLEBARTAG:                   return "div"; // $NON-NLS-1$
+            case PROP_TITLEBARCLASS:                 return "navbar navbar-static-top applayout-titlebar"; // $NON-NLS-1$
+            // "Title bar"
+            case PROP_TITLEBARARIALABEL:             return com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Titlebar"); // $NON-NLS-1$
+            case PROP_TITLEBARNAVTAG:                return "div"; // $NON-NLS-1$
+            case PROP_TITLEBARNAVCLASS:              return "col-sm-12 col-md-12 applayout-titlebar-tabsarea"; // $NON-NLS-1$
+            // "Title bar tabs"
+            case PROP_TITLEBARNAVARIALABEL:          return com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Titlebartabs"); // $NON-NLS-1$
+            case PROP_TITLEBARNAVROLE:               return "navigation"; // $NON-NLS-1$
+            //Place bar
+            case PROP_PLACEBARNAMETAG:               return "h3"; // $NON-NLS-1$
+            case PROP_PLACEBARCLASS:                 return "navbar navbar-static-top applayout-placebar"; // $NON-NLS-1$
+            case PROP_PLACEBARARIALABEL:             return com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Placebar"); // $NON-NLS-1$
+            case PROP_PLACEBARACTIONSROLE:           return "navigation"; // $NON-NLS-1$
+            case PROP_PLACEBARACTIONSARIALABEL:      return com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Placebartabs"); // $NON-NLS-1$
+            
+            case PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL: return "Toggle navigation menu"; // $NLS-NavbarRenderer.Togglenavigationmenu-1$
         }
         return null;
     }
@@ -259,7 +294,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
                 (navbarInverted ? "navbar-inverse " : "navbar-default ") + navbarFixedClass; // $NON-NLS-1$ $NON-NLS-2$
         
         w.writeAttribute("class", navClass, null); // $NON-NLS-1$
-        newLine(w);
+        w.writeAttribute("role", (String)getProperty(PROP_BANNER_ROLE), null); // $NON-NLS-1$ $NON-NLS-2$
         
         //container div
         w.startElement("div",c); // $NON-NLS-1$
@@ -318,12 +353,14 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         
         w.startElement("button", c); // $NON-NLS-1$
         w.writeAttribute("type",  "button",  null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeAttribute("aria-label", (String)getProperty(PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL),  null); // $NON-NLS-1$
         w.writeAttribute("class", "navbar-toggle", null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("data-toggle", "collapse", null); // $NON-NLS-1$ $NON-NLS-2$
         w.writeAttribute("data-target", "." + getProperty(PROP_BANNER_COLLAPSE_CLASS), null); // $NON-NLS-1$
         
         w.startElement("span", c); // $NON-NLS-1$
         w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$
+        w.writeText((String)getProperty(PROP_BANNER_COLLAPSE_BUTTON_ARIALABEL),  null); // $NON-NLS-1$
         w.endElement("span"); // $NON-NLS-1$
         
         w.startElement("span", c); // $NON-NLS-1$
@@ -359,8 +396,8 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             w.startElement("img",c); // $NON-NLS-1$
             w.writeURIAttribute("src",imgSrc,null); // $NON-NLS-1$
    
-            if(!isAltNotEmpty(logoAlt)) {
-                logoAlt = "Banner product logo"; // $NLS-AbstractApplicationLayoutRenderer.BannerProductLogo-1$
+            if(!ExtLibRenderUtil.isAltPresent(logoAlt)) {
+                logoAlt = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.BannerProductLogo"); // $NON-NLS-1$
             }
             w.writeAttribute("alt",logoAlt,null); // $NON-NLS-1$
             String width = configuration.getProductLogoWidth();
@@ -415,16 +452,37 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         String titleBarName = configuration.getTitleBarName();
         
         //If there is no titleBarName, seachbar or tabs to be displayed, dont render the titleBar
-        if (StringUtil.isNotEmpty(titleBarName) || tree != null || (searchBar != null && searchBar.isRendered())) {     
-            w.startElement("div", c); // $NON-NLS-1$
+        if (StringUtil.isNotEmpty(titleBarName) || tree != null || (searchBar != null && searchBar.isRendered())) {
+            String titleBarTag = (String)getProperty(PROP_TITLEBARTAG);
+            w.startElement(titleBarTag,c); // $NON-NLS-1$
+            w.writeAttribute("role", "region", null); // $NON-NLS-1$ $NON-NLS-2$
+            
+            // Set A11y properties for the title bar
+            String tbName_id = StringUtil.format("{0}_tbName", c.getClientId(context)); // $NON-NLS-1$
+            if( StringUtil.isNotEmpty(titleBarName) ) {
+                // if titleBarName has been set = add aria-labelledby prop with id of titleBarName
+                w.writeAttribute("aria-labelledby", tbName_id, null); // $NON-NLS-1$
+            }
+            
+            String titleBarLabel = configuration.getTitleBarLabel();
+            // if aria label has been set on title bar = add aria-label prop
+            // if no aria label set, but titleBarName is set = add aria-label prop with titleBarName text value
+            // if no aira label set, and no titleBarName set = add aria-label prop with default value
+            String titleBarAriaLabel = (StringUtil.isNotEmpty(titleBarLabel) ? titleBarLabel 
+                                          : (StringUtil.isNotEmpty(titleBarName) ? ""
+                                              : (String)getProperty(PROP_TITLEBARARIALABEL)));
+            if( StringUtil.isNotEmpty(titleBarAriaLabel)) {
+                w.writeAttribute("aria-label", titleBarAriaLabel, null); // $NON-NLS-1$
+            }
             
             //Check if the titlebar has tabs. If none, add bottom border
-            if (tree != null) {
-                w.writeAttribute("class", "navbar navbar-static-top applayout-titlebar", null); // $NON-NLS-1$ $NON-NLS-2$
-            }else{
-                w.writeAttribute("class", "navbar navbar-static-top applayout-titlebar applayout-titlebar-border", null); // $NON-NLS-1$ $NON-NLS-2$
+            String titleBarClass = (String)getProperty(PROP_TITLEBARCLASS);
+            if(tree == null){
+                titleBarClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_TITLEBARCLASS), "applayout-titlebar-border"); // $NON-NLS-1$
             }
-            newLine(w);
+            if( StringUtil.isNotEmpty(titleBarClass) ){
+                w.writeAttribute("class",titleBarClass,null); // $NON-NLS-1$
+            }
             
             //container div
             w.startElement("div", c); // $NON-NLS-1$
@@ -435,6 +493,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             
             if( StringUtil.isNotEmpty(titleBarName)) {
                 w.startElement("h4",c); //$NON-NLS-1$
+                w.writeAttribute("id", tbName_id, null); // $NON-NLS-1$
                 if (tree != null) {
                     w.writeAttribute("class","applayout-titlebar-name",null); // $NON-NLS-1$ $NON-NLS-2$
                 }else{
@@ -461,11 +520,20 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             AbstractTreeRenderer renderer = new TitleBarTabsRenderer();
             if (renderer != null) {
                 //Write containing div
-                w.startElement("div", c); // $NON-NLS-1$
-                w.writeAttribute("class", "col-sm-12 col-md-12 applayout-titlebar-tabsarea", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.startElement((String)getProperty(PROP_TITLEBARNAVTAG), c);
+                w.writeAttribute("class", (String)getProperty(PROP_TITLEBARNAVCLASS), null); // $NON-NLS-1$
+                
+                String titleBarNavAriaLabel = (String)getProperty(PROP_TITLEBARNAVARIALABEL);
+                if( StringUtil.isNotEmpty(titleBarNavAriaLabel) ){
+                    w.writeAttribute("aria-label", titleBarNavAriaLabel, null); // $NON-NLS-1$
+                }
+                String titleBarNavRole = (String)getProperty(PROP_TITLEBARNAVROLE);
+                if( StringUtil.isNotEmpty(titleBarNavRole) ){
+                    w.writeAttribute("role", titleBarNavRole, null); // $NON-NLS-1$
+                }
                 // Write the tabs
                 writeTitleBarTabs(context, w, c, configuration, tree, renderer);
-                w.endElement("div"); // $NON-NLS-1$
+                w.endElement((String)getProperty(PROP_TITLEBARNAVTAG));
             }
         }
     }
@@ -600,7 +668,10 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
          w.startElement("button",c); // $NON-NLS-1$
          w.writeAttribute("class","btn btn-default applayout-searchbtn",null); // $NON-NLS-1$ $NON-NLS-2$
          w.writeAttribute("onclick","javascript:"+submitSearch+"(); return false;",null); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+         String searchLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Search.1"); // $NON-NLS-1$
+         w.writeAttribute("aria-label", searchLabel,null); // $NON-NLS-1$ 
          w.startElement("span",c); // $NON-NLS-1$
+         w.writeAttribute("aria-hidden","true",null); // $NON-NLS-1$ $NON-NLS-2$
          w.writeAttribute("class", Resources.get().getIconClass("search"),null); // $NON-NLS-1$ $NON-NLS-2$
          w.endElement("span"); // $NON-NLS-1$
          w.endElement("button"); // $NON-NLS-1$
@@ -674,15 +745,34 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
     protected void writePlaceBar(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration, String pageWidthClass) throws IOException {
         w.startElement("div", c); // $NON-NLS-1$
-        w.writeAttribute("class", "navbar navbar-static-top applayout-placebar", null); // $NON-NLS-1$ $NON-NLS-2$
-        newLine(w);
-
+        w.writeAttribute("class", (String)getProperty(PROP_PLACEBARCLASS), null); // $NON-NLS-1$ $NON-NLS-2$
+        
+        // Set A11y properties for the title bar
+        w.writeAttribute("role", "region", null); // $NON-NLS-1$ $NON-NLS-2$
+        String placeBarName = configuration.getPlaceBarName();
+        if(StringUtil.isNotEmpty(placeBarName)) {
+            // if titleBarName has been set = add aria-labelledby prop with id of titleBarName
+            String pbName_id = StringUtil.format("{0}_pbName", c.getClientId(context)); // $NON-NLS-1$
+            w.writeAttribute("aria-labelledby", pbName_id, null); // $NON-NLS-1$
+        }
+        
+        String placeBarLabel = configuration.getPlaceBarLabel();
+        // if aria label has been set on place bar = add aria-label prop
+        // if no aria label set, but placeBarName is set = add aria-label prop with placeBarName value
+        // if no aria label set, and no placeBarName set = add aria-label prop with default value
+        String placeBarAriaLabel = (StringUtil.isNotEmpty(placeBarLabel) ? placeBarLabel 
+                                      : (StringUtil.isNotEmpty(placeBarName) ? ""
+                                          : (String)getProperty(PROP_PLACEBARARIALABEL)));
+        if (StringUtil.isNotEmpty(placeBarAriaLabel)) {
+            w.writeAttribute("aria-label", placeBarAriaLabel, null); // $NON-NLS-1$
+        }
+        
         //container div
         w.startElement("div", c); // $NON-NLS-1$
         if(StringUtil.isNotEmpty(pageWidthClass)) {
             w.writeAttribute("class", pageWidthClass, null); // $NON-NLS-1$
         }
-
+        
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("class", "applayout-placebar-title", null); // $NON-NLS-1$ $NON-NLS-2$
         writePlaceBarName(context, w, c, configuration);
@@ -698,6 +788,16 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
         w.startElement("div", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar navbar-right applayout-placebar-actions", null); // $NON-NLS-1$ $NON-NLS-2$
+        
+        String placeBarNavAriaLabel = (String)getProperty(PROP_PLACEBARACTIONSARIALABEL);
+        if( StringUtil.isNotEmpty(placeBarNavAriaLabel) ){
+            w.writeAttribute("aria-label", placeBarNavAriaLabel, null); // $NON-NLS-1$
+        }
+        String placeBarNavRole = (String)getProperty(PROP_PLACEBARACTIONSROLE);
+        if( StringUtil.isNotEmpty(placeBarNavRole) ){
+            w.writeAttribute("role", placeBarNavRole, null); // $NON-NLS-1$
+        }
+        
         writePlaceBarActions(context, w, c, configuration);
         UIComponent cPlaceBarActions = c.getPlaceBarActions();
         if (!isEmptyComponent(cPlaceBarActions)) {
@@ -720,8 +820,10 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
     protected void writePlaceBarName(FacesContext context, ResponseWriter w, UIApplicationLayout c, BasicApplicationConfigurationImpl configuration) throws IOException {
         String placeName = configuration.getPlaceBarName();
         if (StringUtil.isNotEmpty(placeName)) {
-            String placeBarNameTag = "h3"; // $NON-NLS-1$
+            String placeBarNameTag =  (String)getProperty(PROP_PLACEBARNAMETAG);
             w.startElement(placeBarNameTag, c);
+            String id = StringUtil.format("{0}_pbName", c.getClientId(context)); // $NON-NLS-1$
+            w.writeAttribute("id", id, null); // $NON-NLS-1$
             w.writeText(placeName, null);
             w.endElement(placeBarNameTag);
             newLine(w);
@@ -747,6 +849,7 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             String collapseLeftColumnButtonLabel) throws IOException {
         
         w.startElement("div", c); // $NON-NLS-1$
+        w.writeAttribute("role", "main", null); // $NON-NLS-1$ $NON-NLS-2$
         
         // Empty pageWidthClass means pageWidth=none, therefore add no container class or row
         if (StringUtil.isNotEmpty(pageWidthClass)) {
@@ -879,9 +982,12 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
 
     protected void writeFooter(FacesContext context, ResponseWriter w, UIApplicationLayout c, 
             BasicApplicationConfigurationImpl configuration, String pageWidthClass) throws IOException {
-    	w.startElement("footer", c); // $NON-NLS-1$
+        w.startElement("footer", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar navbar-bottom applayout-footer", null); // $NON-NLS-1$ $NON-NLS-2$
-        newLine(w);
+        w.writeAttribute("role", "navigation", null); // $NON-NLS-1$ $NON-NLS-2$
+        // "Footer links"
+        String footerAriaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Footerlinks"); // $NON-NLS-1$
+        w.writeAttribute("aria-label", footerAriaLabel, null); // $NON-NLS-1$
         
         //container div
         w.startElement("div", c); // $NON-NLS-1$
@@ -916,7 +1022,10 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             BasicApplicationConfigurationImpl configuration, String pageWidthClass) throws IOException {
         w.startElement("footer", c); // $NON-NLS-1$
         w.writeAttribute("class", "navbar navbar-bottom applayout-legal", null); // $NON-NLS-1$ $NON-NLS-2$
-        newLine(w);
+        w.writeAttribute("role", "contentinfo", null); // $NON-NLS-1$ $NON-NLS-2$
+        // "Legal footer"
+        String legalAriaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.Legalfooter"); // $NON-NLS-1$
+        w.writeAttribute("aria-label", legalAriaLabel, null); // $NON-NLS-1$
         
         //container div
         w.startElement("div", c); // $NON-NLS-1$
@@ -956,8 +1065,8 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             w.startElement("img", c); // $NON-NLS-1$
             w.writeURIAttribute("src", imgSrc, null); // $NON-NLS-1$
             String logoAlt=configuration.getLegalLogoAlt();
-            if(!isAltNotEmpty(logoAlt)) {
-                logoAlt="Legal logo";  // $NLS-ResponsiveAppLayoutRenderer.LegalLogo-1$
+            if(!ExtLibRenderUtil.isAltPresent(logoAlt)) {
+                logoAlt = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractApplicationLayoutRenderer.LegalLogo"); // $NON-NLS-1$
             }
             w.writeAttribute("alt", logoAlt, null); // $NON-NLS-1$
             String width=configuration.getLegalLogoWidth();
@@ -1115,12 +1224,4 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
         // No children, so the list is empty
         return true;
     }
-
-    private boolean isAltNotEmpty(String alt) {
-        // Note, do not use StringUtil.isNotEmpty for alt text
-        // because for accessibility reasons there's a difference
-        // between alt="" and no alt attribute set,
-        // so we treat null and "" as different for alt.
-        return null != alt;
-    }   
 }

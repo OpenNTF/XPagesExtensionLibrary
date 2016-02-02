@@ -582,7 +582,7 @@
 		</property>
 		<property>
 			<!-- key: property.preventFiltering. -->
-			<description>Prevents the filtering of the list of values using the value submitted by the browser. This defaults to false.</description>
+			<description>Prevents the filtering of the list of values using the value submitted by the browser. The default value is false.</description>
 			<display-name>Prevent Filtering</display-name>
 			<property-name>preventFiltering</property-name>
 			<property-class>boolean</property-class>

@@ -26,11 +26,13 @@ dojo.declare(
 	[extlib.dijit.TemplateDialog],
 	{
 		msep: "",
+		allowMultiple: false,
 		trim: false,
 		listWidth: "270px",
 		listHeight: "25em",
 		PickerList_OK: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerList_OK,
         PickerList_Cancel: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerList_Cancel,
+        PickerName_unSelectedListLabel:dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_unSelectedListLabel,
 		templateString: dojo.cache("extlib.dijit","templates/PickerList.html"),
 		controlValues: "",
 		firstNode: null,
@@ -110,7 +112,7 @@ dojo.declare(
 			}
 			this._setCurrent(this.firstNode)
 			this._updateResult()
-			setTimeout(dojo.hitch(this,function(){(this.currentNode||this.containerNode).focus()}),100);
+			setTimeout(dojo.hitch(this,function(){(this.firstNode||this.containerNode).focus()}),100);
 		},
 		_setCurrent: function(node) {
 			this.currentNode = node
@@ -122,7 +124,6 @@ dojo.declare(
 			if(node && node.nodeName.toLowerCase() == "li") {
 				if(!this.msep) {
 					dojo.query("li.xspPickerItemSelected",this.containerNode).removeClass("xspPickerItemSelected");
-					dojo.setAttr(node, "aria-selected", "false");
 				}
 				dojo.toggleClass(node,"xspPickerItemSelected");
 				this._toggleAttribute(node, "aria-selected", "true", "false");
@@ -142,37 +143,51 @@ dojo.declare(
 				}
 		},
 		_handleClick: function(e){
-			this._select(e.target)
-			this._setCurrent(e.target)
+			// Key presses on arrows can trigger click events
+			// In such cases xspPickerBody is the target element class. If that element
+			// is set as the current node it breaks keyboard navigation
+			// Ignoring such events fixes the problem
+			if(e.target && null != e.target.className && e.target.className != "xspPickerBody" && e.target.className != "xspPickerBodyWrapper") {
+				this._select(e.target)
+				this._setCurrent(e.target)
+			}
 			e.target.focus();
 		},
 		_handleDblClick: function(e) {
 			this._handleClick(e)
 			this.ok();
 		},
-		_handleKeyPress: function(e){
-			if(e.charOrCode){
+		_handleKeyPress: function(evt){
+			var key = evt.keyCode ? evt.keyCode : evt.which
+			if(key){
 				if(!this.currentNode) return;
 				var dk = dojo.keys;
-				if(e.charOrCode === dk.UP_ARROW){
-					this._mv(e,1,true)
-				} else if(e.charOrCode === dk.DOWN_ARROW){
-					this._mv(e,1,false)
-				} else if(e.charOrCode === dk.PAGE_UP){
-					this._mv(e,Math.floor(this.bodyWrapper.offsetHeight/this.currentNode.offsetHeight),true)
-				} else if(e.charOrCode === dk.PAGE_DOWN){
-					this._mv(e,Math.floor(this.bodyWrapper.offsetHeight/this.currentNode.offsetHeight),false)
-				} else if(e.charOrCode === dk.HOME){
-					this._mv(e,99999,true)
-				} else if(e.charOrCode === dk.END){
-					this._mv(e,99999,false)
-				} else if(e.charOrCode === dk.ENTER || e.charOrCode === ' '){
-					dojo.stopEvent(e)
+				if(key === dk.UP_ARROW){
+					this._moveFocus(evt,1,true)
+				} else if(key === dk.DOWN_ARROW){
+					this._moveFocus(evt,1,false)
+				} else if(key === dk.PAGE_UP){
+					this._moveFocus(evt,Math.floor(this.bodyWrapper.offsetHeight/this.currentNode.offsetHeight),true)
+				} else if(key === dk.PAGE_DOWN){
+					this._moveFocus(evt,Math.floor(this.bodyWrapper.offsetHeight/this.currentNode.offsetHeight),false)
+				} else if(key === dk.HOME){
+					this._moveFocus(evt,99999,true)
+				} else if(key === dk.END){
+					this._moveFocus(evt,99999,false)
+				} else if(key === dk.ENTER || key === dk.SPACE || key === " "){
 					if(this.msep) {
 						this._select(this.currentNode)
 					} else {
 						this.ok();
 					}
+					evt.preventDefault()
+					evt.stopPropagation()
+					dojo.stopEvent(evt)
+				} else if(key === dk.ESCAPE){
+					this.cancel();
+					evt.preventDefault()
+					evt.stopPropagation()
+					dojo.stopEvent(evt)
 				}
 			}
 		},
@@ -190,23 +205,25 @@ dojo.declare(
 				}
 			}
 		},
-		_mv: function(e,n,d) {
-			var nc = this.currentNode
-			for(;n;n--) {
-				var p = d ? nc.previousSibling : nc.nextSibling
-				if(p) nc=p; else break;
+		_moveFocus: function(evt, start, prevDir) {
+			var curNode = this.currentNode
+			for(; start > 0 ;start--) {
+				var newNode = prevDir ? curNode.previousSibling : curNode.nextSibling
+				if(null != newNode) curNode = newNode; else break;
 			}
-			if(nc!==this.currentNode) {
+			if(curNode !== this.currentNode) {
 				if(!this.msep) {
-					this._toggleAttribute(this.currentNode, "aria-selected", "true", "false")
+					dojo.setAttr(this.currentNode, "aria-selected", "false");
 				}
-				this._setCurrent(nc)
+				this._setCurrent(curNode)
 				if(!this.msep) {
-					this._select(nc)
+					this._select(curNode)
 				}
-				if(this.currentNode) this.currentNode.focus()
+				if(this.currentNode) {
+					this.currentNode.focus()
+				}
 			}
-			dojo.stopEvent(e)
+			dojo.stopEvent(evt)
 		},
 		_getResult: function(){
 			var _selected = dojo.query("li.xspPickerItemSelected", this.containerNode);

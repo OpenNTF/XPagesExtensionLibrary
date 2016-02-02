@@ -47,11 +47,11 @@ public class MutedThreadUpdate {
 				this._action = Action.REMOVE;
 				this._unid = unid;
 			} else {
-				final String msg = StringUtil.format("Invalid action: {0}", action); // TODO
+                final String msg = StringUtil.format("Invalid action: {0}", action); // $NLX-MutedThreadUpdate.Invalidaction0-1$
 				throw new ModelException(msg);
 			}
 		} else {
-			final String msg = StringUtil.format("Multiple actions not supported."); // TODO
+            final String msg = StringUtil.format("Multiple actions not supported."); // $NLX-MutedThreadUpdate.Multipleactionsnotsupported-1$
 			throw new ModelException(msg);
 		}
 
