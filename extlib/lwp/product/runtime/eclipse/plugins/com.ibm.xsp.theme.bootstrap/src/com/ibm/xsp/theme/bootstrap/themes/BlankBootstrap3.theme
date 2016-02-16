@@ -29,11 +29,7 @@
     <!-- bootstrap core styles -->
 		<!-- Default Bootstrap css files are not included -->
 		<!-- Supply your own bootstrap css by extending this theme-->
-
-		<content-type>text/css</content-type>
-		<href>/.ibmxspres/.extlib/responsive/bootstrap3/css/bootstrap-theme.min.css</href>
-	</resource>
-
+	
 	<!-- dbootstrap styles -->
  	<resource dojoTheme="true">
 		<content-type>text/css</content-type>
