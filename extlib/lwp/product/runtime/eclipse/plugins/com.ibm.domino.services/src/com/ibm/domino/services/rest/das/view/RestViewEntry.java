@@ -33,6 +33,7 @@ public interface RestViewEntry {
 	public abstract int getDescendants() throws ServiceException;
 	public abstract int getChildren() throws ServiceException;
 	public abstract int getIndent() throws ServiceException;
+	public abstract int getScore() throws ServiceException;
 	
 	// Column values
 	public abstract int getColumnCount() throws ServiceException;

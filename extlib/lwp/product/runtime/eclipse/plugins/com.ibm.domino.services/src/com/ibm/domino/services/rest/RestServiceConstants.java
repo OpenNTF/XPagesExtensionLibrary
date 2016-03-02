@@ -32,6 +32,7 @@ public class RestServiceConstants {
     public static final String ATTR_CONTENT = "content"; //$NON-NLS-1$
     public static final String ATTR_MESSAGE = "message"; //$NON-NLS-1$
     public static final String ATTR_TYPE = "type"; //$NON-NLS-1$
+    public static final String ATTR_SCORE = "@score"; //$NON-NLS-1$
 
     // View service attributes names used in JsonWriter
     public static final String ATTR_ENTRYID = "@entryid"; //$NON-NLS-1$
@@ -144,6 +145,7 @@ public class RestServiceConstants {
     public static final String ATTR_XML_COLUMNNUMBER = "columnnumber"; //$NON-NLS-1$
     public static final String ATTR_XML_NAME = "name"; //$NON-NLS-1$
     public static final String ATTR_XML_VIEWENTRIES = "viewentries"; //$NON-NLS-1$
+    public static final String ATTR_XML_SCORE = "score"; //$NON-NLS-1$
     public static final String ATTR_XML_VIEWENTRY = ATTR_VIEWENTRY; //$NON-NLS-1$
     public static final String ATTR_XML_ENTRYDATA = ATTR_ENTRYDATA; //$NON-NLS-1$
     public static final String ATTR_XML_TEXT = ATTR_TEXT; //$NON-NLS-1$

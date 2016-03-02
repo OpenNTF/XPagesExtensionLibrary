@@ -75,7 +75,8 @@ public abstract class RestViewLegacyService extends RestViewService {
 		public abstract void writeSystemDescendants(int count) throws IOException;
 		public abstract void writeSystemChildren(int count) throws IOException;
 		public abstract void writeSystemIndent(int indent) throws IOException;
-
+		public abstract void writeSystemScore(int score) throws IOException;
+			
 		public abstract void startEntryData() throws IOException;
 		public abstract void endEntryData() throws IOException;
 
@@ -182,8 +183,13 @@ public abstract class RestViewLegacyService extends RestViewService {
 				g.writeSystemIndent(indent);
 			}
 		}
-		
-		
+		if((syscol & ViewParameters.SYSCOL_SCORE)!=0) {
+			int score = nav.getScore();
+			if(forceDefaultAttributes || score>0) {
+				g.writeSystemScore(score);
+			}
+		}
+
 		g.startEntryData();
 		// Read the default columns
 		int colidx = 0;
