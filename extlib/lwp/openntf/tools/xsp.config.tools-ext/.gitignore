@@ -1,2 +1,4 @@
 /bin/
 .copyarea.db
+/extlibConfigFlattener.xml
+/flattenFile.xml

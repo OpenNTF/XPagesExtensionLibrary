@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -26,6 +26,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.component.outline.AbstractOutline;
 import com.ibm.xsp.extlib.renderkit.html_extended.outline.tree.AbstractTreeRenderer;
 import com.ibm.xsp.extlib.tree.ITreeNode;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 
@@ -39,9 +40,9 @@ public class AccordionRenderer extends AbstractTreeRenderer {
     public AccordionRenderer(String accordionClientId) {
         this.accordionClientId = accordionClientId;
         if(StringUtil.isNotEmpty(accordionInnerId)) {
-        	this.accordionInnerId = StringUtil.replace(this.accordionClientId, ':', '_');
+            this.accordionInnerId = StringUtil.replace(this.accordionClientId, ':', '_');
         } else {
-        	this.accordionInnerId = Util.computeUniqueId();
+            this.accordionInnerId = Util.computeUniqueId();
         }
     }
     
@@ -62,6 +63,7 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         if(StringUtil.isNotEmpty(id)) {
             writer.writeAttribute("id",id,null); // $NON-NLS-1$
         }
+        writer.writeAttribute("role", "tablist", null);  // $NON-NLS-1$ $NON-NLS-2$
         String style = outline.getStyle();
         if(StringUtil.isNotEmpty(style)) {
             writer.writeAttribute("style",style,null); // $NON-NLS-1$
@@ -73,7 +75,7 @@ public class AccordionRenderer extends AbstractTreeRenderer {
 
         writer.startElement("div", null); // $NON-NLS-1$
         writer.writeAttribute("id",getInnerId(),null); // $NON-NLS-1$
-        writer.writeAttribute("class","xspAccordion panel-group",null); // $NON-NLS-1$
+        writer.writeAttribute("class","xspAccordion panel-group",null); // $NON-NLS-1$ $NON-NLS-2$
         
         writer.write('\n');
     }
@@ -87,12 +89,12 @@ public class AccordionRenderer extends AbstractTreeRenderer {
 
     @Override
     protected void preRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
     protected void postRenderList(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
-    	// Don't need to perform any output here
+        // Don't need to perform any output here
     }
 
     @Override
@@ -131,36 +133,43 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         if(StringUtil.isNotEmpty(style)) {
             writer.writeAttribute("style",style,null); // $NON-NLS-1$
         }
-        styleClass = ExtLibUtil.concatStyleClasses("panel panel-default",styleClass);
+        styleClass = ExtLibUtil.concatStyleClasses("panel panel-default",styleClass); // $NON-NLS-1$
         writer.writeAttribute("class",styleClass,null); // $NON-NLS-1$
-        
+
         if(hasLink) {
             if (StringUtil.isNotEmpty(onclick)) {
-            	// What to do here?
+                // What to do here?
                 //attrs.put("onClick", onclick); // $NON-NLS-1$ $NON-NLS-2$
             }           
         }
 
         writer.startElement("div", null); // $NON-NLS-1$
-        writer.writeAttribute("class","panel-heading",null); // $NON-NLS-1$
-
+        writer.writeAttribute("class","panel-heading",null); // $NON-NLS-1$ $NON-NLS-2$
+ 
         writer.startElement("h4", null); // $NON-NLS-1$
-        writer.writeAttribute("class","panel-title",null); // $NON-NLS-1$
+        writer.writeAttribute("class","panel-title",null); // $NON-NLS-1$ $NON-NLS-2$
 
         writer.startElement("a", null); // $NON-NLS-1$
-        writer.writeAttribute("class","accordion-toggle",null); // $NON-NLS-1$
-        writer.writeAttribute("data-toggle","collapse",null); // $NON-NLS-1$
+        writer.writeAttribute("class","accordion-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
+        writer.writeAttribute("data-toggle","collapse",null); // $NON-NLS-1$ $NON-NLS-2$
         writer.writeAttribute("data-parent","#"+getInnerId(),null); // $NON-NLS-1$
         writer.writeAttribute("href","#"+bodyId,null); // $NON-NLS-1$
+        writer.writeAttribute("role","tab",null); // $NON-NLS-1$ $NON-NLS-2$
+        writer.writeAttribute("aria-controls", bodyId, null); // $NON-NLS-1$
+        
+        if(hasImage) {
+            writer.startElement("img", null); // $NON-NLS-1$
+            if(StringUtil.isNotEmpty(image)) {
+                image=HtmlRendererUtil.getImageURL(context, image);
+                writer.writeAttribute("src", image, null); // $NON-NLS-1$
+            }
 
-		if(hasImage) {
-			writer.startElement("img", null);
-			if(StringUtil.isNotEmpty(image)) {
-				image=HtmlRendererUtil.getImageURL(context, image);
-				writer.writeAttribute("src", image, null);
-			}
-			writer.endElement("img");
-		}
+            String imageAlt = tree.getNode().getImageAlt();
+            if(ExtLibRenderUtil.isAltPresent(imageAlt)) {
+                writer.writeAttribute("alt", imageAlt, null); // $NON-NLS-1$
+            }
+            writer.endElement("img"); // $NON-NLS-1$
+        }
         
         if(StringUtil.isNotEmpty(label)) {
             writer.writeText(label, null); // $NON-NLS-1$
@@ -173,18 +182,30 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         writer.write('\n');
         
         writer.startElement("div", null); // $NON-NLS-1$
+        writer.writeAttribute("role", "tabpanel", null); // $NON-NLS-1$ $NON-NLS-2$
+        // "Accordion tab panel"
+        String accordionAriaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DojoAccordionRenderer.Accordiontabpanel"); // $NON-NLS-1$
+        writer.writeAttribute("aria-label", accordionAriaLabel, null); // $NON-NLS-1$
         writer.writeAttribute("id",bodyId,null); // $NON-NLS-1$
-        String bodyClass = "panel-collapse collapse";
+        String bodyClass = "panel-collapse collapse"; // $NON-NLS-1$
         if(tree.getNode().isSelected()) {
-        	bodyClass = ExtLibUtil.concatStyleClasses(bodyClass,"in");
+            bodyClass = ExtLibUtil.concatStyleClasses(bodyClass,"in"); // $NON-NLS-1$
         }
         writer.writeAttribute("class",bodyClass,null); // $NON-NLS-1$
         
         writer.startElement("div", null); // $NON-NLS-1$
         //TODO remove this if com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.outline.tree.AccordionListRenderer is used in getChildrenRenderer
         //writer.writeAttribute("class","panel-body",null); // $NON-NLS-1$
-
+        writer.writeAttribute("role", "presentation", null); // $NON-NLS-1$ $NON-NLS-2$
+        writer.writeAttribute("aria-hidden", !tree.getNode().isExpanded(), null); // $NON-NLS-1$
+       
+        writer.startElement("ul", null); // $NON-NLS-1$
+        writer.writeAttribute("class","list-group",null); // $NON-NLS-1$ $NON-NLS-2$
+        //writer.writeAttribute("role", "presentation", null); // $NON-NLS-1$ $NON-NLS-2$
+        writer.writeAttribute("aria-hidden", !tree.getNode().isExpanded(), null); // $NON-NLS-1$
         renderChildren(context, writer, tree);
+
+        writer.endElement("ul"); // $NON-NLS-1$ 
         
         writer.endElement("div"); // panel-body // $NON-NLS-1$
         writer.endElement("div"); // panel-collapse // $NON-NLS-1$

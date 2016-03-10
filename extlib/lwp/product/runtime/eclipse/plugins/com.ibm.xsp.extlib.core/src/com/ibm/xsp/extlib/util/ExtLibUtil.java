@@ -199,13 +199,34 @@ public class ExtLibUtil {
     public static XSPContext getXspContext() {
         return XSPContext.getXSPContext(FacesContext.getCurrentInstance());
     }
-    
+    //PR35 - Erik McCormick
+    //https://github.com/OpenNTF/XPagesExtensionLibrary/pull/35/files
+    /**
+     * Returns a XSP property value
+     */
+    public static String getXspProperty(String name) {
+    	XSPContext context = getXspContext();
+    	if(context!=null)
+    		return context.getProperty(name);
+    	else
+    		return null;
+    }
     /**
      * Resolve the specified variable.
      */
     public static Object resolveVariable(FacesContext facesContext, String name) {
         Object value =  facesContext.getApplication().getVariableResolver().resolveVariable(facesContext, name);
         return value;
+    }
+    
+    /**
+     * Resolve the specified variable using the current {@link FacesContext} instance.
+     */
+    public static Object resolveVariable(String name) {
+    	// Note calling getCurrentInstance may have performance issues due to the multi thread handling.
+    	// method contributed bt Jesse Gallagher 
+    	// https://github.com/OpenNTF/XPagesExtensionLibrary/pull/27
+        return resolveVariable(FacesContext.getCurrentInstance(), name);
     }
 
     /**

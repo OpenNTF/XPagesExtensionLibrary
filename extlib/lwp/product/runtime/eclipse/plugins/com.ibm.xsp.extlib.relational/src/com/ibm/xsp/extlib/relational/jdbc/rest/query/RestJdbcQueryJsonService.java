@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -78,7 +78,9 @@ public class RestJdbcQueryJsonService extends RestJdbcQueryService {
 //        } else if (HTTP_DELETE.equalsIgnoreCase(method)) {
 //            renderServiceJSONUpdate(DELETE);
         } else {
-            throw new ServiceException(null, ResponseCode.METHOD_NOT_ALLOWED, StringUtil.format("Method {0} is not allowed with {1} Rest Service", method, "JSON")); // $NLX-RestJdbcQueryJsonService.Method0isnotallowedwith1RestServi-1$ $NON-NLS-2$
+            String msg = "Method {0} is not allowed with JSON REST Service"; // $NLX-RestJdbcQueryJsonService.Method0isnotallowedwithJSONRestSe-1$[[{0} will be "POST" or "PUT" or "DELETE"]]
+            msg = StringUtil.format(msg, method);
+            throw new ServiceException(null, ResponseCode.METHOD_NOT_ALLOWED, msg);
         }
     }
 

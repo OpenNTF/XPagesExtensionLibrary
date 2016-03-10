@@ -91,4 +91,10 @@ public class StyleKitExtLibDefault extends StyleKitDefault {
     public static final String MOBILE_FORM = MOBILE + ".Form"; //$NON-NLS-1$
     public static final String MOBILE_FORM_TOGGLESWITCH = MOBILE_FORM + ".ToggleSwitch"; //$NON-NLS-1$
     public static final String MOBILE_PAGER = MOBILE + ".Pager"; //$NON-NLS-1$
+    
+    // ResponsiveControls
+    public static final String RESPONSIVE           = "Responsive"; //$NON-NLS-1$
+    public static final String RESPONSIVE_NAVBAR    = RESPONSIVE + ".Navbar"; //$NON-NLS-1$
+    public static final String RESPONSIVE_DASHBOARD = RESPONSIVE + ".Dashboard"; //$NON-NLS-1$
+    public static final String RESPONSIVE_CAROUSEL  = RESPONSIVE + ".Carousel"; //$NON-NLS-1$
 }

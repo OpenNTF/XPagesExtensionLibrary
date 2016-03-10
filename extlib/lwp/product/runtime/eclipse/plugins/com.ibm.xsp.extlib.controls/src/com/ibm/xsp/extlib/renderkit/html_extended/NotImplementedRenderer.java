@@ -38,8 +38,10 @@ import com.ibm.xsp.context.FacesContextEx;
  * @author Maire Kehoe (mkehoe@ie.ibm.com)
  */
 public class NotImplementedRenderer extends Renderer {
-
-    private NotImplementedException createNotImplementedEx(FacesContext context){
+    
+    private static final String oneuiTheme = "oneui"; //$NON-NLS-1$
+    
+    protected NotImplementedException createNotImplementedEx(FacesContext context){
         String theme = null;
         if( context instanceof FacesContextEx ){
             theme = ((FacesContextEx)context).getStyleKitId();
@@ -50,9 +52,14 @@ public class NotImplementedRenderer extends Renderer {
             renderKitId = viewRoot.getRenderKitId();
         }
         String msg = "This control is not implemented for the current theme ({0}) and render-kit({1}), try a different theme, perhaps {2}."; // $NLX-NotImplementedRenderer_ThisControlIsNotImplemented-1$
-        msg = StringUtil.format(msg, theme, renderKitId, "oneui"); //$NON-NLS-1$
+        msg = StringUtil.format(msg, theme, renderKitId, getSuggestedTheme());
         throw new NotImplementedException(msg);
     }
+
+    protected String getSuggestedTheme() {
+        return oneuiTheme;
+    }
+    
     @Override
     public String convertClientId(FacesContext context, String clientId) {
         throw createNotImplementedEx(context);

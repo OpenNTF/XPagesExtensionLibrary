@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,15 @@ dojo.declare(
 	'extlib.responsive.dijit.xsp.bootstrap.PickerName',
 	[extlib.dijit.PickerName],
 	{
-        listWidth: "100%",
-		templateString: dojo.cache("extlib.responsive.dijit.xsp.bootstrap", "templates/PickerName.html")
+		templateString: dojo.cache("extlib.responsive.dijit.xsp.bootstrap", "templates/PickerName.html"),
+		
+		postCreate: function() {
+			this.inherited(arguments)
+			
+			if(!dojo._isBodyLtr())
+			{
+				this.btRemove.parentNode.className = "pull-left";
+			}
+		}
 	}
 );

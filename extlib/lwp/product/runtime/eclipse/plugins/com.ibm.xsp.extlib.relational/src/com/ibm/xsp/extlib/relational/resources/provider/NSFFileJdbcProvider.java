@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -50,7 +50,7 @@ public class NSFFileJdbcProvider extends AbstractFileJdbcProvider {
             }
             return null;
         } catch(Exception ex) {
-            throw new ResourceFactoriesException(ex,StringUtil.format("Error while reading {0} resource list", "JDBC")); // $NLX-NSFFileJdbcProvider.Errorwhilereading0resourcelist-1$ $NON-NLS-2$
+            throw new ResourceFactoriesException(ex,"Error while reading JDBC resource list"); // $NLX-NSFFileJdbcProvider.Errorwhilereading0resourcelist-1$
         }
     }
     
@@ -64,7 +64,7 @@ public class NSFFileJdbcProvider extends AbstractFileJdbcProvider {
                 return file.getInputStream();
             }
         } catch(Exception ex) {
-            throw new ResourceFactoriesException(ex,StringUtil.format("Error while reading {0} resource {1}", "JDBC", name)); // $NLX-NSFFileJdbcProvider.Errorwhilereading0resource1-1$ $NON-NLS-2$
+            throw new ResourceFactoriesException(ex,StringUtil.format("Error while reading JDBC resource {0}", name)); // $NLX-NSFFileJdbcProvider.Errorwhilereading0resource1-1$ $NON-NLS-2$
         }
         
         // Not available yet

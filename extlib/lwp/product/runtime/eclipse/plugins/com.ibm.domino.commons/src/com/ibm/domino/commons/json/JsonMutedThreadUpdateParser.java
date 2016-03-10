@@ -24,22 +24,22 @@ public class JsonMutedThreadUpdateParser {
 
 	private String validateUNID(final Object val) throws ModelException {
 		if (val == null) {
-			final String msg = StringUtil.format("Null UNID"); // TODO - message string
+            final String msg = StringUtil.format("Null UNID"); // $NLX-JsonMutedThreadUpdateParser.NullUNID-1$
 			throw new ModelException(msg);
 		}
 		if (!(val instanceof String)) {
-			final String msg = StringUtil.format("Bad Type UNID"); // TODO - message string
+            final String msg = StringUtil.format("Bad Type UNID"); // $NLX-JsonMutedThreadUpdateParser.BadTypeUNID-1$
 			throw new ModelException(msg);
 		}
 		final String unid = val.toString().trim().toUpperCase();
 		if (unid.length() != UNID_SIZE) {
-			final String msg = StringUtil.format("Invalid UNID {0}", unid); // TODO - message string
+            final String msg = StringUtil.format("Invalid UNID {0}", unid); // $NLX-JsonMutedThreadUpdateParser.InvalidUNID0-1$
 			throw new ModelException(msg);
 		}
 		for (final char c : unid.toCharArray()) {
 			final boolean ok = ((c >= 'A' && c <= 'F') || (c >= '0' && c <= '9'));
 			if (!ok) {
-				final String msg = StringUtil.format("Invalid UNID {0}", unid); // TODO - messagestring
+                final String msg = StringUtil.format("Invalid UNID {0}", unid); // $NLX-JsonMutedThreadUpdateParser.InvalidUNID0.1-1$
 				throw new ModelException(msg);
 			}
 		}

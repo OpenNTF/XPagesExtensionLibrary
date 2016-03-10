@@ -30,6 +30,7 @@ import com.ibm.xsp.extlib.resources.ExtLibResources;
  */
 public class NamePickerRenderer extends AbstractPickerRenderer {
 
+    
     @Override
     protected String getDefaultDojoType() {
         return "extlib.dijit.PickerName"; // $NON-NLS-1$
@@ -49,6 +50,10 @@ public class NamePickerRenderer extends AbstractPickerRenderer {
         return "Select One Or More Names";  // $NLS-NamePickerRenderer.SelectOneOrMoreNames-1$
     }
 
+    protected String getPickerIconAriaLabel() {
+        return "Open name picker"; // $NLS-NamePickerRenderer.Opennamepicker-1$
+    }
+    
     @Override
     protected void encodeExtraResources(FacesContext context, AbstractPicker picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
         if(StringUtil.equals(dojoType, "extlib.dijit.PickerName")) { // $NON-NLS-1$

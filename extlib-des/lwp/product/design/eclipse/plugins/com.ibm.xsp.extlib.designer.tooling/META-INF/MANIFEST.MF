@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XPages Extension Library Designer Extensions Plug-in
 Bundle-SymbolicName: com.ibm.xsp.extlib.designer.tooling;singleton:=true
-Bundle-Version: 9.0.1.v00_11_qualifier
+Bundle-Version: 9.0.1.v00_16_qualifier
 Bundle-Activator: com.ibm.xsp.extlib.designer.tooling.ExtLibToolingPlugin
 Bundle-Vendor: IBM
 Bundle-Localization: plugin

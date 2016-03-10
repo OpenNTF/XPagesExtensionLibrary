@@ -26,12 +26,12 @@ public class SearchOptionsRenderer extends HtmlComboBoxRenderer {
         
     @Override
     public String getStyle() {
-        return "border-width: 1px; border-style: solid;";
+        return "border-width: 1px; border-style: solid;"; // $NON-NLS-1$
 //      return "border-style: none;";
     }
     
     @Override
     public String getStyleClass() {
-        return "form-control search-options applayout-search-options";
+        return "form-control search-options applayout-search-options"; // $NON-NLS-1$
     }
 }

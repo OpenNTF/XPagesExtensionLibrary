@@ -26,21 +26,21 @@ public class FooterLinksRenderer extends HtmlListRenderer {
     }
 
     @Override
-	protected String getContainerStyleClass(TreeContextImpl node) {
-    	if(node.getDepth()==1) {
-        	return "nav nav-pills applayout-footerlinks";
-    	}
-    	return super.getContainerStyleClass(node);
+    protected String getContainerStyleClass(TreeContextImpl node) {
+        if(node.getDepth()==1) {
+            return "nav nav-pills applayout-footerlinks"; // $NON-NLS-1$
+        }
+        return super.getContainerStyleClass(node);
     }
 
     @Override
     protected String getContainerStyle(TreeContextImpl node) {
-    	String style = super.getContainerStyle(node);
-    	return ExtLibUtil.concatStyles(style, "margin-left:2em; margin-right:2em");
+        String style = super.getContainerStyle(node);
+        return ExtLibUtil.concatStyles(style, "margin-left:2em; margin-right:2em"); // $NON-NLS-1$
     }
 
     @Override
     protected String getItemStyle(TreeContextImpl tree, boolean enabled, boolean selected) {
-    	return "list-style-type: none;";
+        return "list-style-type: none;"; // $NON-NLS-1$
     }
 }

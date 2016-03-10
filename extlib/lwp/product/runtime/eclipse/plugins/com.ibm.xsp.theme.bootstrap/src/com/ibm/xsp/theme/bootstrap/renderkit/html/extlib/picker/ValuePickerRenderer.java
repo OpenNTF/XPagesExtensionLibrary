@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -28,63 +28,64 @@ import com.ibm.xsp.extlib.component.picker.data.IPickerData;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
+import com.ibm.xsp.theme.bootstrap.util.Util;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JSUtil;
 
 public class ValuePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.picker.ValuePickerRenderer {
-	
+    
 
     protected static final int PROP_SEARCHICONCLASS       = 1;
     
-	protected Object getProperty(int prop) {
-	    switch(prop) {
-        	case PROP_SEARCHICONCLASS:             return Resources.get().getIconClass("search"); // $NON-NLS-1$
+    protected Object getProperty(int prop) {
+        switch(prop) {
+            case PROP_SEARCHICONCLASS:             return Resources.get().getIconClass("search"); // $NON-NLS-1$
         }
         return null;
-	}
-	
-	@Override
-	protected String getDefaultDojoType() {
-		return "extlib.responsive.dijit.xsp.bootstrap.PickerList"; // $NON-NLS-1$
-	}
+    }
+    
+    @Override
+    protected String getDefaultDojoType() {
+        return "extlib.responsive.dijit.xsp.bootstrap.PickerList"; // $NON-NLS-1$
+    }
 
-	@Override
-	protected String encodeDojoType(String dojoType) {
-		if (StringUtil.equals(dojoType, "extlib.dijit.PickerCheckbox")) { // $NON-NLS-1$
-			return "extlib.responsive.dijit.xsp.bootstrap.PickerCheckbox"; // $NON-NLS-1$
-		}
-		if (StringUtil.equals(dojoType, "extlib.dijit.PickerList")) { // $NON-NLS-1$
-			return "extlib.responsive.dijit.xsp.bootstrap.PickerList"; // $NON-NLS-1$
-		}
-		if (StringUtil.equals(dojoType, "extlib.dijit.PickerListSearch")) { // $NON-NLS-1$
-			return "extlib.responsive.dijit.xsp.bootstrap.PickerListSearch"; // $NON-NLS-1$
-		}
-		return super.encodeDojoType(dojoType);
-	}
+    @Override
+    protected String encodeDojoType(String dojoType) {
+        if (StringUtil.equals(dojoType, "extlib.dijit.PickerCheckbox")) { // $NON-NLS-1$
+            return "extlib.responsive.dijit.xsp.bootstrap.PickerCheckbox"; // $NON-NLS-1$
+        }
+        if (StringUtil.equals(dojoType, "extlib.dijit.PickerList")) { // $NON-NLS-1$
+            return "extlib.responsive.dijit.xsp.bootstrap.PickerList"; // $NON-NLS-1$
+        }
+        if (StringUtil.equals(dojoType, "extlib.dijit.PickerListSearch")) { // $NON-NLS-1$
+            return "extlib.responsive.dijit.xsp.bootstrap.PickerListSearch"; // $NON-NLS-1$
+        }
+        return super.encodeDojoType(dojoType);
+    }
 
-	@Override
-	protected void encodeExtraResources(FacesContext context, AbstractPicker picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
-		if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerCheckbox")) { // $NON-NLS-1$
-			ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerCheckbox);
-		}
-		if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerList")) { // $NON-NLS-1$
-			ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerList);
-		}
-		if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerListSearch")) { // $NON-NLS-1$
-			ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerListSearch);
-		}
-		super.encodeExtraResources(context, picker, data, rootEx, dojoType);
-	}
-	
-	
-	/** Default is to have empty icon image, and use glyphicon instead **/
+    @Override
+    protected void encodeExtraResources(FacesContext context, AbstractPicker picker, IPickerData data, UIViewRootEx rootEx, String dojoType) {
+        if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerCheckbox")) { // $NON-NLS-1$
+            ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerCheckbox);
+        }
+        if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerList")) { // $NON-NLS-1$
+            ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerList);
+        }
+        if (StringUtil.equals(dojoType, "extlib.responsive.dijit.xsp.bootstrap.PickerListSearch")) { // $NON-NLS-1$
+            ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapPickerListSearch);
+        }
+        super.encodeExtraResources(context, picker, data, rootEx, dojoType);
+    }
+    
+    
+    /** Default is to have empty icon image, and use glyphicon instead **/
     @Override
     protected String getImageLink() {
         return "";
     }
     
-	@Override
-	protected void writeLink(FacesContext context, ResponseWriter w, AbstractPicker picker, IPickerData data, String dojoType) throws IOException {
+    @Override
+    protected void writeLink(FacesContext context, ResponseWriter w, AbstractPicker picker, IPickerData data, String dojoType) throws IOException {
         UIComponent _for = getFor(context,picker);
         
         boolean readOnly = _for!=null ? FacesUtil.isComponentReadOnly(context, _for) : false;
@@ -105,13 +106,13 @@ public class ValuePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_exten
             if(disabled) {
                 w.startElement("span", null); // $NON-NLS-1$
             } else {
-                w.startElement("a", null);
+                w.startElement("a", null); // $NON-NLS-1$
                 
                 //If custom icon or text supplied, use that, else use glyphicon
                 if(custom) {
-                	w.writeAttribute("class", "xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
+                    w.writeAttribute("class", "xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
                 }else{
-                	w.writeAttribute("class", getProperty(PROP_SEARCHICONCLASS) + " xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
+                    w.writeAttribute("class", getProperty(PROP_SEARCHICONCLASS) + " xspPickerLink", null); // $NON-NLS-1$ $NON-NLS-2$
                 }
                 w.writeAttribute("href", "javascript:;", null); // $NON-NLS-1$ $NON-NLS-2$
                 if(data!=null) {
@@ -135,12 +136,22 @@ public class ValuePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_exten
                 }
                 //LHEY97QME8 adding the role= button
                 w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+
+                // "Open picker"
+                String ariaLabel = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractPickerRenderer.OpenPicker"); // $NON-NLS-1$
+                w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$ 
+                if(!custom) {
+                    // A11Y fix - Defect 198080 - Need an sr-only span with text for glyphicons
+                    // <span class="sr-only">Open picker</span>
+                    Util.renderIconTextForA11Y(w, ariaLabel);
+                }
             }
             
             if(StringUtil.isNotEmpty(icon)) {
                 w.startElement("img", null); // $NON-NLS-1$
                 w.writeAttribute("src", HtmlRendererUtil.getImageURL(context,icon), null); // $NON-NLS-1$
-                String iconAlt = "Open Picker"; // $NLS-AbstractPickerRenderer.OpenPicker-1$
+                // "Open picker"
+                String iconAlt = com.ibm.xsp.extlib.controls.ResourceHandler.getString("AbstractPickerRenderer.OpenPicker"); // $NON-NLS-1$
                 w.writeAttribute("alt", iconAlt, null); // $NON-NLS-1$
                 w.endElement("img"); // $NON-NLS-1$
             }
@@ -152,7 +163,7 @@ public class ValuePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_exten
             if(disabled) {
                 w.endElement("span"); // $NON-NLS-1$
             } else {
-                w.endElement("a");
+                w.endElement("a"); // $NON-NLS-1$
             }
         }
     }

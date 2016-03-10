@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -69,7 +69,7 @@ public  class DbcpPoolDataSource implements IJdbcResourceFactory {
 
                     Properties properties = new Properties();
                     properties.setProperty("user", username); // $NON-NLS-1$
-                    properties.setProperty("password", password); // $NON-NLS-1$
+                    properties.setProperty("password", (StringUtil.isEmpty(password) ? "":password)); // $NON-NLS-1$
 
                     ConnectionFactory connectionFactory = new DriverConnectionFactory(driver, url, properties);
 
@@ -92,7 +92,11 @@ public  class DbcpPoolDataSource implements IJdbcResourceFactory {
             });
 
         } catch (Exception e) {
-            throw new PoolException( e, StringUtil.format("Unable to initialize the shared pool {0}", "DataSource")); // $NLX-DbcpPoolDataSource.Unabletoinitializethesharedpool0-1$ $NON-NLS-2$
+            String msg = "Unable to initialize the shared connection pool DataSource"; // $NLX-DbcpPoolDataSource.Unabletoinitializethesharedconnec-1$[["connection pool" is a technical term related to databases]]
+            // Note, this resource key is used elsewhere in this plugin
+            // "Unable to initialize the shared connection pool DataSource"
+            //String msg = com.ibm.xsp.extlib.relational.ResourceHandler.getSpecialAudienceString("DbcpPoolDataSource.Unabletoinitializethesharedconnec");//$NON-NLS-1$
+            throw new PoolException( e, msg);
         }
     }
 

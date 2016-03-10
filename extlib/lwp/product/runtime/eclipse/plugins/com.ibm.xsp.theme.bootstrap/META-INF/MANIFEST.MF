@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XPages Responsive Bootstrap Theme
 Bundle-SymbolicName: com.ibm.xsp.theme.bootstrap;singleton:=true
-Bundle-Version: 9.0.1.v00_11_SNAPSHOT
+Bundle-Version: 9.0.1.v00_16_SNAPSHOT
 Bundle-Vendor: IBM
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.commons.xml,
  com.ibm.xsp.core,
  com.ibm.xsp.extsn,
- com.ibm.xsp.domino,
  com.ibm.xsp.designer,
+ com.ibm.xsp.domino,
  com.ibm.xsp.extlib.core,
  com.ibm.xsp.extlib.controls,
  com.ibm.designer.runtime,
@@ -20,11 +20,13 @@ Require-Bundle: org.eclipse.core.runtime,
  com.ibm.designer.runtime.directory
 Export-Package: com.ibm.xsp.theme.bootstrap,
  com.ibm.xsp.theme.bootstrap.components.layout,
+ com.ibm.xsp.theme.bootstrap.components.responsive,
  com.ibm.xsp.theme.bootstrap.config,
  com.ibm.xsp.theme.bootstrap.plugin,
  com.ibm.xsp.theme.bootstrap.minifier,
  com.ibm.xsp.theme.bootstrap.renderkit.html.extlib,
  com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers,
+ com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.containers.tree,
  com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.data,
  com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.dialog,
  com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.dojoext.form,

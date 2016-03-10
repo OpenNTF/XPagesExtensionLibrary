@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -60,7 +60,7 @@ public class JndiRegistry {
                         String jndiName = JndiRegistry.getJNDIBindName(name);
                         ctx.bind( jndiName, new JndiDataSourceProxy(name) );
                     } catch(NamingException ex) {
-                        throw new ResourceFactoriesException(ex,StringUtil.format("Error while binding {0} name {1}","JNDI",name)); // $NLX-JndiRegistry.Errorwhilebinding0name1-1$ $NON-NLS-2$
+                        throw new ResourceFactoriesException(ex,StringUtil.format("Error while binding JNDI name {0}",name)); // $NLX-JndiRegistry.Errorwhilebinding0name1-1$ $NON-NLS-2$
                     }
                 } else {
                     n = n+1;

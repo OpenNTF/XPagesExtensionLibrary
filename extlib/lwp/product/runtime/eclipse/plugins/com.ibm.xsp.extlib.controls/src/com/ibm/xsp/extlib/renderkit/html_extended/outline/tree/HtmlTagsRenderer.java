@@ -235,9 +235,15 @@ public abstract class HtmlTagsRenderer extends AbstractTreeRenderer {
             if(StringUtil.isNotEmpty(styleClass)) {
                 writer.writeAttribute("class",styleClass,null); // $NON-NLS-1$
             }
+            renderContainerRole(context, writer, tree);
             JSUtil.writeln(writer);
         }
     }
+
+    protected void renderContainerRole(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+        // Overridden in subclasses
+    }
+    
     protected void endRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
         String containerTag = getContainerTag();
         if(StringUtil.isNotEmpty(containerTag)) {

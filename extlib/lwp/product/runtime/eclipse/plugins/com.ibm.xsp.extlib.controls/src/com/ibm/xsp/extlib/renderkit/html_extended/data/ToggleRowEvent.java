@@ -31,6 +31,10 @@ public class ToggleRowEvent extends ActionEvent {
     private boolean expand;
     private String position;
 
+	//>tmg:a11y
+    private String clientId;
+	//<tmg:a11y
+
     public ToggleRowEvent(UIComponent component) {
         super(component);
     }
@@ -50,4 +54,14 @@ public class ToggleRowEvent extends ActionEvent {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+	//>tmg:a11y
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+	//<tmg:a11y
 }

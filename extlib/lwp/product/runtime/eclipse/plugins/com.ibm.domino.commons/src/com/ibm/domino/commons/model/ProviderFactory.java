@@ -16,8 +16,20 @@
 
 package com.ibm.domino.commons.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lotus.domino.NotesException;
 import lotus.domino.Session;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
+
+import com.ibm.domino.commons.internal.Logger;
 
 /**
  * Factory for Out of Office provider.
@@ -97,6 +109,78 @@ public class ProviderFactory {
         return provider;
     }
     
+    private static Map<Class<?>, IProviderExtension> s_extensions = null;
+    private final static String PROVIDER_EXTENSION_ID = "com.ibm.domino.commons.provider"; // $NON-NLS-1$
+    private final static String PROVIDER_DEFINITION = "providerDefinition"; // $NON-NLS-1$
+    private final static String CLASS_NAME_ATTR = "className"; // $NON-NLS-1$
+
+    /**
+     * Loads all the provider extensions available. All extensions use the same extension id
+     * and they must implement the @see {@link IProviderExtension} interface. 
+     * 
+     * @return 
+     */
+    private static Map<Class<?>, IProviderExtension> loadExtensions() {
+        final HashMap<Class<?>, IProviderExtension> result = new HashMap<Class<?>, IProviderExtension>();
+
+        // Get a list of all registered provider extensions
+        IExtension extensions[] = null;
+        final IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+        if (extensionRegistry != null) {
+            final IExtensionPoint extensionPoint = extensionRegistry.getExtensionPoint(PROVIDER_EXTENSION_ID);
+            if (extensionPoint != null) {
+                extensions = extensionPoint.getExtensions();
+            }
+        }
+
+        if (extensions != null) {
+            // Walk through each extension in the list
+            for (final IExtension extension : extensions) {
+                final IConfigurationElement configElements[] = extension.getConfigurationElements();
+                if (configElements == null) {
+                    continue;
+                }
+
+                for (final IConfigurationElement configElement : configElements) {
+                    // We only handle providerDefinition elements for now
+                    if (!(PROVIDER_DEFINITION.equalsIgnoreCase(configElement.getName()))) {
+                        continue;
+                    }
+
+                    // The cast is safe because the extension point definition requires that the
+                    // class implements this interface.
+                    try {
+                        final IProviderExtension ext = (IProviderExtension) configElement.createExecutableExtension(CLASS_NAME_ATTR);
+                        for (final Class<?> intf : ext.provides()) {
+                            final IProviderExtension oldext = result.put(intf, ext);
+                            if (oldext != null) {
+                                Logger.get().info(String.format("Extension %s replaced by %s for interface %s", // $NLI-ProviderFactory.Extensionsreplacedbysforinterface-1$
+                                        oldext.toString(),
+                                        ext.toString(),
+                                        intf.toString()));
+                            }
+                            
+                        }
+
+                    } catch (final CoreException e) {
+                        Logger.get().error(e, "Unable to create IProviderExtension"); // $NLE-ProviderFactory.UnabletocreateIProviderExtension-1$
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Gets a provider instance from an extension point
+     */
+    private static IProviderExtension getExtension(final Class<? extends IProviderExtension> clazz) {
+        if (s_extensions == null)
+            s_extensions = loadExtensions();
+        return s_extensions.get(clazz);
+    }
+
     public static IOooStatusProvider getOooStatusProvider() {
         if ( s_oooProvider == null ) {
             s_oooProvider = (IOooStatusProvider)loadFromFragment(IOooStatusProvider.class);
@@ -257,5 +341,12 @@ public class ProviderFactory {
 
         return s_mutedThreadsProvider;
         
+    }
+    
+    public static IThreadListProvider getThreadListProvider() {
+        final IProviderExtension result = getExtension(IThreadListProvider.class);  
+        if (result != null)
+            return (IThreadListProvider) result;
+        return null;
     }
 }

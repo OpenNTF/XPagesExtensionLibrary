@@ -93,7 +93,8 @@ public class JdbcDebugUtil {
 
         // And compose the result array
         if( result.size()>0 ) {
-            return (Object[][])result.toArray(new Object[result.size()][]);
+            Object[][] resultsArr = result.toArray(new Object[result.size()][]);
+            return resultsArr;
         }
         return new Object[0][];
     }
@@ -286,7 +287,7 @@ public class JdbcDebugUtil {
             b.append( '+' );
             b.append(pad("-", sz) );
         }
-        b.append( "+\n" );
+        b.append( "+\n" ); //$NON-NLS-1$
         return b.toString();
     }
     private static String prtHeader( ResultSetMetaData meta ) throws Exception {
@@ -297,7 +298,7 @@ public class JdbcDebugUtil {
             b.append( '|' );
             b.append( pad(meta.getColumnLabel(i), sz) );
         }
-        b.append( "|\n" );
+        b.append( "|\n" ); //$NON-NLS-1$
         return b.toString();
     }
     private static String prtRow( ResultSetMetaData meta, ResultSet result ) throws Exception {
@@ -308,7 +309,7 @@ public class JdbcDebugUtil {
             b.append( '|' );
             b.append( pad(colString(meta,result,i), sz) );
         }
-        b.append( "|\n" );
+        b.append( "|\n" ); //$NON-NLS-1$
         return b.toString();
     }
     private static String colString( ResultSetMetaData meta, ResultSet result, int col ) throws Exception {
@@ -369,12 +370,12 @@ public class JdbcDebugUtil {
 	        }
     	}
     }
-    private static void dumpColumns( Connection con, String cat, String schem, String name ) throws SQLException {
-        // Dump the columns for that table
-        ResultSet cols = con.getMetaData().getColumns(cat,schem,name,"%"); //$NON-NLS-1$
-        dumpResultSet(cols);
-        cols.close();
-    }
+//    private static void dumpColumns( Connection con, String cat, String schem, String name ) throws SQLException {
+//        // Dump the columns for that table
+//        ResultSet cols = con.getMetaData().getColumns(cat,schem,name,"%"); //$NON-NLS-1$
+//        dumpResultSet(cols);
+//        cols.close();
+//    }
     private static void dumpPrimaryKey( Connection con, String cat, String schem, String name ) throws SQLException {
         // Dump the primary key for that table
         ResultSet keys = con.getMetaData().getPrimaryKeys(cat,schem,name);

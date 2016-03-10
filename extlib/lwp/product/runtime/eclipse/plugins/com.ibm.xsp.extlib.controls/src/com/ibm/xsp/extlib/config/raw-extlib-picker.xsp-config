@@ -366,6 +366,7 @@
 			</property-extension>
 		</property>
   		<property>
+			<!-- key: property.caseInsensitive. -->
 			<description>Specifies if the key being used should be treated as case insensitive</description>
 			<display-name>Case Insensitive Key</display-name>
 			<property-name>caseInsensitive</property-name>
@@ -516,4 +517,159 @@
         </validator-extension>
     </validator>
     
+	
+	<complex-type>
+		<!--  #  "java.util.Map&lt;String,String&gt;" should not be translated-->
+		<description>A Value Picker Data Provider that takes its content from a java.util.Map&lt;String,String&gt;. The map has multiple entries, each containing a text label key and a text data value. The key is the label that is displayed to the user, and the data value is saved in the document field if the entry is selected.</description>
+		<display-name>Map Picker Data Provider</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.MapValuePickerData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.MapValuePickerData</complex-class>
+		<property>
+			<!--  #  "java.util.Map" and "LinkedHashMap" should not be translated-->
+			<description>The map containing the data, an implementation of java.util.Map (e.g. LinkedHashMap). The map keys are labels. The values are data.</description>
+			<display-name>Options Map</display-name>
+			<property-name>options</property-name>
+			<property-class>java.util.Map</property-class>
+			<property-extension>
+				<required>true</required>
+				<!-- Only allow load-time or runtime bindings, not complex-type tags nor inline Strings -->
+				<allow-non-binding>false</allow-non-binding>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- key:property.searchType. -->
+			<!-- # "startsWith" "equals" and "contains" should not be translated -->
+			<description>Defines the type of comparison used when searching for entries whose label matches a submitted search value. The options are "startsWith", which selects entries that begin with the search value, "equals", which selects entries that are the same as the search value or that are considered the same when doing a case insensitive comparison, and "contains", which selects entries that contain the search value within entry label. The default is "startsWith".</description>
+			<display-name>Search Type</display-name>
+			<property-name>searchType</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						startsWith
+						equals
+						contains
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- key: property.searchRange. -->
+			<description>Defines the range of search results to be displayed. The default is "restrictToSearch", showing only those entries that match the search criteria. The other option is "jumpTo", which shows the first entry that matches the search criteria and all remaining entries, even where the remaining entries do not match the search criteria.</description>
+			<display-name>Search Results Range</display-name>
+			<property-name>searchRange</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						jumpTo
+						restrictToSearch
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!-- using the translations from simpleValuePicker above -->
+			<description>%property.caseInsensitive.descr%</description>
+			<display-name>%property.caseInsensitive.name%</display-name>
+			<property-name>caseInsensitive</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		<property>
+			<!-- key: property.preventFiltering. -->
+			<description>Prevents the filtering of the list of values using the value submitted by the browser. The default value is false.</description>
+			<display-name>Prevent Filtering</display-name>
+			<property-name>preventFiltering</property-name>
+			<property-class>boolean</property-class>
+			<!--  Note, the description is different from the description of xp:typeAhead.preventFiltering, so not reusing description-->
+		</property>
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+			<since>9.0.1.v00_12</since>
+			<tag-name>mapValuePicker</tag-name>
+		</complex-extension>
+	</complex-type>
+	
+	
+	
+	<complex-type>
+		<!-- # Do not translate "java.util.Collection", "List", "Set", "Vector"  -->
+		<description>A Value Picker Data Provider that takes its content from a java.util.Collection object which contains multiple items, e.g. List, Set, Vector. Each item is a text value that is used as both the label displayed to the user and as the data value that is saved to a document field.</description>
+		<display-name>Collection Picker Data Provider</display-name>
+		<complex-id>com.ibm.xsp.extlib.component.picker.data.CollectionValuePickerData</complex-id>
+		<complex-class>com.ibm.xsp.extlib.component.picker.data.CollectionValuePickerData</complex-class>
+		<property>
+			<!-- # Do not translate "java.util.Collection", "java.util.TreeSet" or "java.util.ArrayList" -->
+			<description>The java.util.Collection object containing the multiple items to be shown in the Value Picker dialog. For example the object might be a java.util.TreeSet or java.util.ArrayList.</description>
+			<display-name>Collection</display-name>
+			<property-name>collection</property-name>
+			<property-class>java.util.Collection</property-class>
+			<property-extension>
+				<required>true</required>
+				<!-- Only allow load-time or runtime bindings, not complex-type tags nor inline Strings -->
+				<allow-non-binding>false</allow-non-binding>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!--  using the translations from mapValuePicker above -->
+			<description>%property.searchType.descr%</description>
+			<display-name>%property.searchType.name%</display-name>
+			<property-name>searchType</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						startsWith
+						equals
+						contains
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!--  using the translations from mapValuePicker above -->
+			<description>%property.searchRange.descr%</description>
+			<display-name>%property.searchRange.name%</display-name>
+			<property-name>searchRange</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						jumpTo
+						restrictToSearch
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		<property>
+			<!--  using the translations from mapValuePicker above -->
+			<description>%property.preventFiltering.descr%</description>
+			<display-name>%property.preventFiltering.name%</display-name>
+			<property-name>preventFiltering</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		<property>
+			<!-- using the translations from simpleValuePicker above -->
+			<description>%property.caseInsensitive.descr%</description>
+			<display-name>%property.caseInsensitive.name%</display-name>
+			<property-name>caseInsensitive</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		<complex-extension>
+			<base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
+			<since>9.0.1.v00_12</since>
+			<tag-name>collectionValuePicker</tag-name>
+		</complex-extension>
+	 </complex-type>
+
 </faces-config>

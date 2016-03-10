@@ -75,6 +75,10 @@ import com.ibm.xsp.extlib.tree.complex.ViewEntryTreeNode;
 import com.ibm.xsp.extlib.tree.complex.ViewListTreeNode;
 import com.ibm.xsp.extlib.validator.PickerValidator;
 import com.ibm.xsp.test.framework.registry.BaseNoRunTimeBindingsTest;
+import com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration;
+import com.ibm.xsp.theme.bootstrap.components.responsive.UICarousel;
+import com.ibm.xsp.theme.bootstrap.components.responsive.UIDashboard;
+import com.ibm.xsp.theme.bootstrap.components.responsive.UINavbar;
 
 /**
  * 
@@ -189,6 +193,14 @@ public class ExtlibNoRunTimeBindingsTest extends BaseNoRunTimeBindingsTest {
             new Object[]{UIDojoDateTextBox.class, new String[]{"constraints"}},
             new Object[]{UIDojoTimeTextBox.class, new String[]{"constraints"}},
             new Object[]{UIDojoSliderRuleLabels.class, new String[]{"constraints"}},
+            // /extlib-bootstrap.xsp-config
+            new Object[]{SimpleResponsiveApplicationConfiguration.class, new String[]{"navbarUtilityLinks"}},
+            new Object[]{SimpleResponsiveApplicationConfiguration.class, new String[]{"navbarAppLinks"}},
+            new Object[]{SimpleResponsiveApplicationConfiguration.class, new String[]{"searchBar"}},
+            new Object[]{UIDashboard.class, new String[]{"dashNodes"}},
+            new Object[]{UINavbar.class, new String[]{"navbarBeforeLinks"}},
+            new Object[]{UINavbar.class, new String[]{"navbarAfterLinks"}},
+            new Object[]{UICarousel.class, new String[]{"slideNodes"}},
             // === end disallow because: property-class corresponds to complex-type class
     };
     private String[] skips = new String[]{

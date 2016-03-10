@@ -131,4 +131,5 @@ public class ScnContext {
     public void setUserId(String userId) {
         _userId = userId;
     }
+
 }

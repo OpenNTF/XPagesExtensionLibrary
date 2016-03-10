@@ -30,6 +30,7 @@ import com.ibm.commons.Platform;
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.FacesExceptionEx;
 import com.ibm.xsp.complex.ValueBindingObjectImpl;
+import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.model.domino.DominoUtils;
 import com.ibm.xsp.model.domino.wrapped.DominoViewEntry;
 
@@ -195,7 +196,22 @@ public abstract class AbstractDominoViewPickerData extends ValueBindingObjectImp
                 }
                 
                 if(StringUtil.equals(searchType, SEARCH_MATCH)) {
-                    ViewEntryCollection vc = view.getAllEntriesByKey(key);
+                    ViewEntryCollection vc;
+                    if (!StringUtil.isEmpty(key)) {
+                        vc = view.getAllEntriesByKey(key);
+                    } else {
+                        // key is empty, default to return all, but check option
+                        String optionName = "xsp.extlib.dominoViewPicker.searchMatch.emptyKey.all"; //$NON-NLS-1$
+                        String optionValue = FacesContextEx.getCurrentInstance().getProperty(optionName);
+                        if( "false".equals(optionValue) ){ //$NON-NLS-1$
+                            // when explicitly set to "false" then revert to the old pre-901v14 behavior,
+                            // match to empty key, returns none. [Change for SPR#MKEE9ZKDJR, and for 
+                            // GitPR#14,PartD3: https://github.com/OpenNTF/XPagesExtensionLibrary/pull/14 ]
+                            vc = view.getAllEntriesByKey(key);
+                        }else{ // default
+                            vc = view.getAllEntries();
+                        }
+                    }
                     ViewEntry ve = start>0 ? vc.getNthEntry(start) : vc.getFirstEntry();
                     for(int i=0; i<count && ve!=null; i++) {
                         entries.add(meta.createEntry(ve));
@@ -203,7 +219,7 @@ public abstract class AbstractDominoViewPickerData extends ValueBindingObjectImp
                     }
                     int nEntries = vc.getCount();
                     return new Result(entries,nEntries);
-                } if(StringUtil.equals(searchType, SEARCH_FTSEARCH)) {
+                } else if(StringUtil.equals(searchType, SEARCH_FTSEARCH)) {
                 	applyFTSearch(options, view, key);
                     ViewEntryCollection vc = view.getAllEntries();
                     ViewEntry ve = start>0 ? vc.getNthEntry(start) : vc.getFirstEntry();

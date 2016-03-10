@@ -35,6 +35,7 @@ public class BaseExtlibControlCategoryKnownTest extends BaseControlCategoryKnown
      */
     protected String[] getExtensionLibraryKnownCategories(){
         return new String[]{
+                "Responsive", // translated in com.ibm.xsp.extlib.designer.tooling
                 "Mobile", // translated in com.ibm.xsp.extlib.designer.tooling
                 "Data Access", // translated in com.ibm.xsp.extlib.designer.tooling
                 "iNotes", // translated in com.ibm.xsp.extlib.designer.tooling

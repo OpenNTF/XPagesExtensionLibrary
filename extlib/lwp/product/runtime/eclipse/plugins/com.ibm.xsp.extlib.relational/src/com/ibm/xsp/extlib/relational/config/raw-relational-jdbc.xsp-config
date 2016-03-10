@@ -228,8 +228,8 @@
             </property-extension>
         </property>
         <property>
-            <!-- # The "Transaction Isolation" in quotes should not be translated. Transaction Isolation is a technical term. -->
-            <description>Sets the Transaction Isolation mode to one of the pre-defined options. For more details, see the JDBC documentation for "Transaction Isolation".</description>
+            <!-- # "API" and "java.sql.Connection#setTransactionIsolation" should not be translated, as they are technical terms. -->
+            <description>Sets the Transaction Isolation mode to one of the pre-defined options. For more details, see the API documentation for java.sql.Connection#setTransactionIsolation</description>
             <display-name>Transaction Isolation</display-name>
             <property-name>transactionIsolation</property-name>
             <property-class>java.lang.String</property-class>
@@ -379,7 +379,7 @@
             </property-extension>
         </property>
   		<property>
-			<description>Defines the maximum number of rows retrieved by the RowSet. Default to 0, which means all the rows. -1 means no rows.</description>
+			<description>Defines the maximum number of rows retrieved by the RowSet. Defaults to 0, which means all the rows. -1 means no rows.</description>
 			<display-name>Maximum Number of Rows</display-name>
 			<property-name>maxRows</property-name>
 			<property-class>int</property-class>

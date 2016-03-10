@@ -25,7 +25,7 @@ dojo.declare(
 		iframePost: false,
 		
 		show: function() {
-            this.inherited(arguments);
+            var promise = this.inherited(arguments);
             if(this.iframePost) {
             	this.xhrPost = dojo.xhrPost;
         		dojo.xhrPost = function(o) {
@@ -38,6 +38,7 @@ dojo.declare(
         			dojo.io.iframe.send(o)
         		}		
             }
+    		return promise;
 		},
 		hide: function() {
             if(this.iframePost) {

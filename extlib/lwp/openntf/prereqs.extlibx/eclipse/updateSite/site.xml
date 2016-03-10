@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <feature id="org.openntf.extlibx.build.source" patch="false" url="features/org.openntf.extlibx.build.source_9.0.1.v00_10_20141105-0922.jar" version="9.0.1.v00_10_20141105-0922">
+   <feature id="org.openntf.extlibx.build.source" patch="false" url="features/org.openntf.extlibx.build.source_9.0.1.v00_16_20160119-2239.jar" version="9.0.1.v00_16_20160119-2239">
     <category name="OpenNTF Builds" />
   </feature>
-  <feature id="org.openntf.extlibx.feature" patch="false" url="features/org.openntf.extlibx.feature_9.0.1.v00_10_20141105-0922.jar" version="9.0.1.v00_10_20141105-0922">
+   <feature id="org.openntf.extlibx.feature" patch="false" url="features/org.openntf.extlibx.feature_9.0.1.v00_16_20160119-2239.jar" version="9.0.1.v00_16_20160119-2239">
     <category name="OpenNTF Builds" />
   </feature>
-  <feature id="org.openntf.extlibx.source" patch="false" url="features/org.openntf.extlibx.source_9.0.1.v00_10_20141105-0922.jar" version="9.0.1.v00_10_20141105-0922">
+   <feature id="org.openntf.extlibx.source" patch="false" url="features/org.openntf.extlibx.source_9.0.1.v00_16_20160119-2239.jar" version="9.0.1.v00_16_20160119-2239">
     <category name="OpenNTF Builds" />
   </feature>
-  <category-def label="OpenNTF Builds" name="OpenNTF Builds">
-    <description>Extension Library Update Site</description>
+   <category-def name="OpenNTF Builds" label="OpenNTF Builds">
+      <description>
+         Experimental Components for Extension Library Update Site
+      </description>
   </category-def>
 </site>

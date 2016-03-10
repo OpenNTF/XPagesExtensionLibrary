@@ -244,7 +244,7 @@ public class ErrorHelper {
                 data = getExceptionSummary(throwable);
             }
             else {
-                data = MessageFormat.format("{0} caused by {1}",  // $NLX-ErrorHelper.0causedby1-1$
+                data = MessageFormat.format("{0} caused by {1}",  // $NLX-ErrorHelper.0causedby1-1$[[{0} is an exception class and message, {1} the class and message from a different exception]]
                         getExceptionSummary(throwable), getExceptionSummary(cause));
             }
             jwriter.outStringLiteral(data);

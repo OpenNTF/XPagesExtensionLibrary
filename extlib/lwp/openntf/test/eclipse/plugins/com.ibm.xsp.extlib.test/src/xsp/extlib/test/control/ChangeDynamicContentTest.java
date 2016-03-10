@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2013
+ * © Copyright IBM Corp. 2013, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.application.Application;
-import javax.faces.component.UICommand;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
@@ -55,11 +54,11 @@ public class ChangeDynamicContentTest extends AbstractXspTest {
 	private Object[][] expectedArr = new Object[][]{
 			// String submitId, expectField1, expectField2, expectField3, Boolean expectActionFoo
 			new Object[]{"",              false, false, false, null}, /*first GET request*/ 
-			new Object[]{"view:_id1:evt", true,  false, false, false},
-			new Object[]{"view:_id2:evt", false, true,  false, null},
-			new Object[]{"view:_id3:evt", false, false, true , null},
-			new Object[]{"view:_id4:evt", false, false, false, null},
-			new Object[]{"view:_id5:evt", true,  false, false, true},
+			new Object[]{"view:_id1:evt1", true,  false, false, false},
+			new Object[]{"view:_id1:evt2", false, true,  false, null},
+			new Object[]{"view:_id1:evt3", false, false, true , null},
+			new Object[]{"view:_id1:evt4", false, false, false, null},
+			new Object[]{"view:_id1:evt5", true,  false, false, true},
 	};
 	public void testChangeDynamicContent() throws Exception {
 		
@@ -96,10 +95,6 @@ public class ChangeDynamicContentTest extends AbstractXspTest {
             root.processUpdates(contextForPost);
             root.processApplication(contextForPost);
             
-            // TODO how to generically ensure the action gets invoked?
-            UICommand eventHandler = (UICommand)findComponent(root, "evt"+requestNum);
-            eventHandler.getAction().invoke(contextForPost, null);
-            
             if( contextForPost.getMessages().hasNext() ) fail("messages found");
             
             fails += checkComputedFieldPresence(root, requestNum);
@@ -107,6 +102,10 @@ public class ChangeDynamicContentTest extends AbstractXspTest {
             Boolean expectActionFoo = (Boolean) expectedArr[requestNum][4];
             if( null != expectActionFoo ){
                 UIComponent actionDiv = findComponent(root, "actionDiv");
+                if( null == actionDiv ){
+                    fails += "[" +requestNum+"] unexpected absence of actionDiv in control tree.\n";
+                    continue;
+                }
                 String pageSnippet = ResponseBuffer.encode(actionDiv, contextForPost);
                 String actionValue = expectActionFoo?"foo":"";
                 AssertUtil.assertContains(

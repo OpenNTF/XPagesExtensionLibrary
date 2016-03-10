@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -97,6 +97,8 @@ public class DojoExtLinkSelectRenderer extends DojoFormWidgetRenderer {
             DojoRendererUtil.addDojoHtmlAttributes(attrs,"enabledLinkClass",(String)getProperty(PROP_ENABLEDLINKCLASS)); // $NON-NLS-1$
             DojoRendererUtil.addDojoHtmlAttributes(attrs,"disabledLinkStyle",(String)getProperty(PROP_DISABLEDLINKSTYLE)); // $NON-NLS-1$
             DojoRendererUtil.addDojoHtmlAttributes(attrs,"disabledLinkClass",(String)getProperty(PROP_DISABLEDLINKCLASS)); // $NON-NLS-1$
+            DojoRendererUtil.addDojoHtmlAttributes(attrs,"controlDisabled", (c.isDisabled() ? "true" : "false")); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
+            DojoRendererUtil.addDojoHtmlAttributes(attrs,"tabindex", (c.isDisabled() ? -1 : c.getTabIndex())); // $NON-NLS-1$
             
             // Generate the list of options as JSON
             StringBuilder b = new StringBuilder();

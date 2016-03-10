@@ -1,4 +1,4 @@
 ({
-ListBoxAria_Remove: "\u79fb\u9664",
+ListBoxAria_Remove: "\u9078\u53d6\u4ee5\u5f9e\u6e05\u55ae\u4e2d\u79fb\u9664\u6b64\u9805\u76ee",
 ListBoxAria_ReadOnly: "${0}\u3002\u552f\u8b80"
 })

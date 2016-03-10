@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.ibm.xsp.bluemix.util
+Bundle-SymbolicName: com.ibm.xsp.bluemix.util;singleton:=true
+Bundle-Version: 9.0.1.v00_16_SNAPSHOT
+Bundle-Vendor: IBM
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.ibm.commons;bundle-version="9.0.1",
+ com.ibm.jscript;bundle-version="9.0.1",
+ com.ibm.xsp.core;bundle-version="9.0.1",
+ com.ibm.designer.runtime;bundle-version="9.0.1",
+ com.ibm.xsp.extlib.core;bundle-version="9.0.1"
+Export-Package: com.ibm.xsp.bluemix.util.context,
+ com.ibm.xsp.bluemix.util.contribute

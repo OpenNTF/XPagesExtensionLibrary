@@ -20,8 +20,8 @@ import lotus.domino.Database;
 
 public interface IMutedThreadsProvider {
 
-	public void muteThread(final Database db, final String uThreadID) throws ModelException;
+	public void muteThread(final Database db, final String uThreadID, final int[] notesInThread) throws ModelException;
 
-	public void unmuteThread(final Database db, final String uThreadID) throws ModelException;
+	public void unmuteThread(final Database db, final String uThreadID, final int[] notesInThread) throws ModelException;
 
 }

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -97,7 +97,7 @@ public class MobileTypeAheadInputRenderer extends TypeAheadInputRenderer {
         }
         if( separatorDetected ){
             // String left untagged - hoping to support multiple before begin translating strings for next product release
-            String msg = "The mobile xp:typeAhead control does not support entering multiple values in the edit box. Multiple value separator detected: {0}";
+            String msg = "The mobile xp:typeAhead control does not support entering multiple values in the edit box. A multiple value separator has been detected: {0}"; // $NLS-MobileTypeAheadInputRenderer.ThemobilexptypeAheadcontroldoesno-1$
             msg = StringUtil.format(msg, separatorType);
             throw new FacesExceptionEx(msg);
         }

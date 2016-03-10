@@ -56,7 +56,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
      *      javax.faces.component.UIComponent)
      */
     @Override
-	public void encodeEnd(FacesContext context, UIComponent component)
+    public void encodeEnd(FacesContext context, UIComponent component)
             throws IOException {
         // validate the context and component
         if (context == null || component == null) {
@@ -80,7 +80,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
         String name = UIInputRadio.getClientGroupName(context, radio);
         
         // start the wrapping div tag
-        writer.startElement("div", component);
+        writer.startElement("div", component); // $NON-NLS-1$
         encodeHtmlStyleAttributes(writer, component);
         
         // start the label
@@ -142,7 +142,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
         writer.writeAttribute(VALUE, getSelectedValue(radio), CHECKEDVALUE);
         if( !readonly ){ // when readonly will have written disabled above.
             // check if disabled, and if so, write the disabled attribute
-            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-N$
+            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-1$
         }
         encodeHtmlAttributes(writer, component, false);
         
@@ -169,7 +169,7 @@ public class RadioRenderer extends com.ibm.xsp.renderkit.html_extended.RadioRend
         }
        
         //end the div
-        writer.endElement("div");
+        writer.endElement("div"); // $NON-NLS-1$
         
         InputRendererUtil.encodeValidation(context, context.getResponseWriter(), (UIInput)component);
         

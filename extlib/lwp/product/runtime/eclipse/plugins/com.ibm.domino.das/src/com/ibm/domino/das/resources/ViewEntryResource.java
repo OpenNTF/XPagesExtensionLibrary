@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_VIEW_ENTRY;
+import static com.ibm.domino.das.service.DataService.STAT_VIEW_ENTRY;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.rest.RestParameterConstants.PARAM_VIEW_COMPUTEWITHFORM;
 import static com.ibm.domino.services.rest.RestParameterConstants.PARAM_VIEW_FORM;
@@ -45,6 +47,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.commons.util.io.json.JsonJavaFactory;
 import com.ibm.commons.util.io.json.JsonJavaObject;
 import com.ibm.commons.util.io.json.JsonParser;
+import com.ibm.domino.das.service.DataService;
 import com.ibm.domino.das.utils.ErrorHelper;
 import com.ibm.domino.services.Loggers;
 import com.ibm.domino.services.ServiceException;
@@ -72,8 +75,8 @@ public class ViewEntryResource extends ViewBaseResource {
             @QueryParam(PARAM_VIEW_PARENTID) String parentId) {
 
         DAS_LOGGER.traceEntry(this, "postViewEntry");        // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_ENTRY, STAT_VIEW_ENTRY);
         
-//      String jsonEntity = null;
         View view = null;
         
         try { 
@@ -185,6 +188,7 @@ public class ViewEntryResource extends ViewBaseResource {
             @PathParam("docunid") String docUnid) { // $NON-NLS-1$
 
         DAS_LOGGER.traceEntry(this, "deleteViewEntry"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_ENTRY, STAT_VIEW_ENTRY);
 
         View view = null;
         Document document = null;

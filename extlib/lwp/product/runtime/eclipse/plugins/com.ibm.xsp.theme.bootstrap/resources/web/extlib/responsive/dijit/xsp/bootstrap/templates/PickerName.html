@@ -1,65 +1,60 @@
-<div>
-	<style>
-	.xspPicker .dijitBorderContainer { width: auto; height: auto;}
-	.xspPicker { height:100%; width:100%; }
-	.xspPickerButton{margin-top: 5px;}
-	</style>
-	<div style="padding:10px">
-		<table style="width:100%">
-			<tr>
-				<td colspan="3" style="padding-bottom:10px">
-					<div dojoAttachPoint="pnSources" style="padding:6px 0px;">
-						<div class="form-inline">
-							<div class="control-label xspPickerSearchLabel" dojoAttachPoint="tdSearchIn"></div>
-							<select dojoAttachPoint="cbSources" dojoAttachEvent="onchange: _onSrcChange" class="form-control xspPickerSearchOption"></select>
-						</div>
-					</div>
-					<div class="form-inline">
-						<div class="control-label xspPickerSearchLabel" dojoAttachPoint="tdSearchFor"></div>
-						<div class="form-group xspPickerSearchOption">
-							<div class="input-group">
-								<input dojoAttachPoint="edSearch" type="text" class="form-control"></input>
-								<div class="input-group-btn">
-									<button dojoAttachPoint="btSearch" class="btn btn-default">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td style="width:45%">
-					<div class="list1">
-						<div dojoAttachPoint="list1Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list1Set, onmouseout: _list1Unset, onclick:_list1Click, ondblclick:_list1DblClick, onkeypress:_list1KeyPress, onscroll:_list1OnScroll, onfocus:_list1OnFocus">
-							<ul dojoAttachPoint="list1Container" class="xspPickerBody" style="width:99%"></ul>
-						</div>
-					</div>
-				</td>
-				<td style="text-align: center">
-					<button dojoAttachPoint="btAdd" class="btn btn-default btn-sm xspPickerButton">${PickerName_Add}</button>
-				</td>
-				<td style="width:45%">
-					<div class="list2">
-						<div dojoAttachPoint="list2Body" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onmouseover: _list2Set, onmouseout: _list2Unset, onclick:_list2Click, ondblclick:_list2DblClick, onkeypress:_list2KeyPress, onfocus:_list1OnFocus">
-							<ul dojoAttachPoint="list2Container" class="xspPickerBody" style="width: 100%"></ul>
-						</div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3" align="right">
-					<div style="text-align:right">
-						<button dojoAttachPoint="btRemove" class="btn btn-default btn-sm xspPickerButton">${PickerName_Remove}</button>
-						<button dojoAttachPoint="btRemoveAll" class="btn btn-default btn-sm xspPickerButton">${PickerName_RemoveAll}</button>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div class="modal-footer">
-		<button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerName_Cancel}</button>
-		<button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerName_OK}</button>
-	</div>
+<div> <!-- Template must be contained in a single div -->
+    <div class="modal-body container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div dojoAttachPoint="pnSources">
+                    <div class="form-inline xspPickerSearchOption">
+                        <label dojoAttachPoint="tdSearchIn" id="${id}_searchLabel" class="xspPickerSearchLabel"></label>
+                        <select dojoAttachPoint="cbSources" dojoAttachEvent="onchange: _onSrcChange" class="form-control xspPickerSearchField" role="combobox" aria-labelledby="${id}_searchLabel"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-inline xspPickerSearchOption">
+                    <label dojoAttachPoint="tdSearchFor" class="xspPickerSearchLabel"></label>
+                    <div class="input-group xspPickerSearchField">
+                        <input dojoAttachPoint="edSearch" type="text" class="form-control" aria-label="${PickerName_SearchFor}"></input>
+                        <div class="input-group-btn">
+                            <button dojoAttachPoint="btSearch" class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"><span class="sr-only">${PickerName_Search}</span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row xspPickerMainContent">
+            <div class="col-xs-12 col-sm-5 xspPickerNameListLeft">
+                <div class="list1">
+                    <div dojoAttachPoint="list1Body" class="xspPickerBodyWrapper xspPickerNameList" dojoAttachEvent="onmouseover: _list1Set, onmouseout: _list1Unset, onclick:_list1Click, ondblclick:_list1DblClick, onkeypress:_list1KeyPress">
+                        <ul dojoAttachPoint="list1Container" class="xspPickerBody" role="listbox" tabindex="0" aria-label="${PickerName_unSelectedListLabel}" tabindex="0" aria-multiselectable="${allowMultiple}" dojoAttachEvent="onfocus:_list1OnFocus"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-2 xspPickerNameAdd">
+                <button dojoAttachPoint="btAdd" class="btn btn-default xspPickerButton" aria-label="${PickerName_AddSelection}" tabindex="0" type="button">${PickerName_Add}</button>
+            </div>
+            <div class="col-xs-12 col-sm-5 xspPickerNameListRight">
+                <div class="list2">
+                    <div dojoAttachPoint="list2Body" class="xspPickerBodyWrapper xspPickerNameList" dojoAttachEvent="onmouseover: _list2Set, onmouseout: _list2Unset, onclick:_list2Click, ondblclick:_list2DblClick, onkeypress:_list2KeyPress">
+                        <ul dojoAttachPoint="list2Container" class="xspPickerBody" style="width: 100%" role="listbox" tabindex="0" aria-label="${PickerName_selectedListLabel}" aria-multiselectable="${allowMultiple}" dojoAttachEvent="onfocus:_list2OnFocus"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row xspPickerRemoveBtns">
+            <div class="col-xs-12 col-md-12">
+                <div class="pull-right">
+                    <button dojoAttachPoint="btRemove" class="btn btn-default btn-sm xspPickerButton" type="button">${PickerName_Remove}</button>
+                    <button dojoAttachPoint="btRemoveAll" class="btn btn-default btn-sm xspPickerButton" type="button">${PickerName_RemoveAll}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button dojoAttachPoint="pkCancel" class="btn btn-default" type="button">${PickerName_Cancel}</button>
+        <button dojoAttachPoint="pkOk" class="btn btn-primary" type="button">${PickerName_OK}</button>
+    </div>
 </div>

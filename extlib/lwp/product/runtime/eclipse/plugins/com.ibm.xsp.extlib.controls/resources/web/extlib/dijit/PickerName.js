@@ -27,13 +27,16 @@ dojo.declare(
 	[extlib.dijit.TemplateDialog],
 	{
 		msep: "",
+		allowMultiple: false,
 		trim: false,
 		sources: "",
 		maxRowCount: 50,
 		listWidth: "230px",
 		listHeight: "22em",
 		PickerName_Search: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_Search,
+		PickerName_SearchFor: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_SearchFor,
         PickerName_Add: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_Add,
+        PickerName_AddSelection: dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_AddSelection,
         PickerName_Remove:dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_Remove,
         PickerName_RemoveAll:dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_RemoveAll,
         PickerName_OK:dojo.i18n.getLocalization("extlib.dijit","pickers",this.lang).PickerName_OK,
@@ -60,7 +63,7 @@ dojo.declare(
             this.list1={body:this.list1Body,container:this.list1Container,current:null}
 			this.list2={body:this.list2Body,container:this.list2Container,current:null}
 			if(!this.msep) {
-				dojo.style(this.btRemove,{display:'none'})
+				dojo.style(this.btRemoveAll,{display:'none'})
 			}
 
 			var controlValue=this.getControlValue(this.control);
@@ -126,15 +129,11 @@ dojo.declare(
         	{
         		dojo.setAttr(this.list2.container, "tabindex", 0);
         		dojo.removeClass(this.list2.container,"xspPickerBodyEmpty");
-    			dojo.setAttr(this.btRemoveAll, "tabindex", 0);
-    			dojo.setAttr(this.btRemove, "tabindex", 0);
         	}
         	else
         	{
         		dojo.setAttr(this.list2.container, "tabindex", -1);
         		dojo.addClass(this.list2.container,"xspPickerBodyEmpty");
-    			dojo.setAttr(this.btRemoveAll, "tabindex", -1);
-    			dojo.setAttr(this.btRemove, "tabindex", -1);	
         	}
         	
         },
@@ -257,16 +256,21 @@ dojo.declare(
 				this.ok();
 			}
 		},
-		_list1KeyPress: function(e){
-			this._listKeyPress(this.list1,e)
-			if(e.charOrCode === dojo.keys.ENTER || e.charOrCode === ' '){
-				dojo.stopEvent(e)
-				this._addNode(e.target)
-			} else if(e.charOrCode === dojo.keys.TAB){
-				(e.shiftKey ? this.btSearch : this.btAdd).focus();
-				dojo.stopEvent(e)
+		_list1KeyPress: function(evt){
+			var key = evt.keyCode ? evt.keyCode : evt.which
+			this._listKeyPress(this.list1,evt,key)
+			if(key === dojo.keys.ENTER || key === dojo.keys.SPACE || key === " "){
+				this._addNode(evt.target)
+				evt.preventDefault()
+				evt.stopPropagation()
+				dojo.stopEvent(evt)
+			} else if(key === dojo.keys.ESCAPE){
+				this.cancel();
+				evt.preventDefault()
+				evt.stopPropagation()
+				dojo.stopEvent(evt)
 			}
-		},		
+		},
 		_list1OnScroll: function(e){
 			
 		},
@@ -287,15 +291,19 @@ dojo.declare(
 		_list2DblClick: function(e) {
 			this._removeNode(e.target);
 		},
-		_list2KeyPress: function(e){
-			this._listKeyPress(this.list2,e)
-			if(e.charOrCode === dojo.keys.ENTER || e.charOrCode === ' '){
-				this._removeNode(e.target);
-				dojo.stopEvent(e)
-			} else if(e.charOrCode === dojo.keys.TAB){
-				var remButton = this.msep ? this.btRemove : this.btRemoveAll;
-				(e.shiftKey ? this.btAdd : remButton).focus();
-				dojo.stopEvent(e)
+		_list2KeyPress: function(evt){
+			var key = evt.keyCode ? evt.keyCode : evt.which
+			this._listKeyPress(this.list2,evt,key)
+			if(key === dojo.keys.ENTER || key === dojo.keys.SPACE || key === " "){
+				this._removeNode(evt.target);
+				evt.preventDefault()
+				evt.stopPropagation()
+				dojo.stopEvent(evt)
+			} else if(key === dojo.keys.ESCAPE){
+				this.cancel();
+				evt.preventDefault()
+				evt.stopPropagation()
+				dojo.stopEvent(evt)
 			}
 		},
 		_list2OnFocus: function(e){
@@ -313,6 +321,7 @@ dojo.declare(
 			if(node && node.nodeName.toLowerCase() == "li") {
 				dojo.query("li.xspPickerItemSelected",list.container).removeClass("xspPickerItemSelected");
 				dojo.toggleClass(node,"xspPickerItemSelected");
+				this._toggleAttribute(node, "aria-selected", "true", "false")
 			}
 		},
 		_toggleAttribute:function(node,attribute,val1,val2)
@@ -343,16 +352,11 @@ dojo.declare(
 		_setCurrent: function(list,node) {
 			prevCurrent = list.current
 			if(prevCurrent) {
-				dojo.setAttr(prevCurrent, "tabindex", -1);
 				this._toggleAttribute(prevCurrent, "aria-selected", "true", "false")
 			}
 			list.current = node
 			if(node) {
 				this.listScrollTo(list,list.current);
-				dojo.setAttr(node, "tabindex", 0);
-				this._toggleAttribute(node, "aria-selected", "true", "false")
-				this._select(list,node);
-				node.focus();
 			}
 		},
 		_clear: function(list){
@@ -366,8 +370,8 @@ dojo.declare(
 				var node = this.listFirstItem(list.container)
 				if(node) { 
 					this._setCurrent(list, node);
-					node.focus();
 					this._select(list,node);
+					node.focus()
 				}
 			}
 		},
@@ -383,38 +387,40 @@ dojo.declare(
 			this._select(list,e.target)
 			this._setCurrent(list,e.target)
 		},
-		_listKeyPress: function(list,e){
-			if(e.charOrCode){
+		_listKeyPress: function(list, evt, key){
+			if(key){
 				if(!list.current) return;
 				var dk = dojo.keys;
-				if(e.charOrCode === dk.UP_ARROW){
-					this._mv(list,e,1,true)
-				} else if(e.charOrCode === dk.DOWN_ARROW){
-					this._mv(list,e,1,false)
-				} else if(e.charOrCode === dk.PAGE_UP){
-					this._mv(list,e,Math.floor(list.body.offsetHeight/list.current.offsetHeight),true)
-				} else if(e.charOrCode === dk.PAGE_DOWN){
-					this._mv(list,e,Math.floor(list.body.offsetHeight/list.current.offsetHeight),false)
-				} else if(e.charOrCode === dk.HOME){
-					this._mv(list,e,99999,true)
-				} else if(e.charOrCode === dk.END){
-					this._mv(list,e,99999,false)
+				if(key === dk.UP_ARROW){
+					this._moveFocus(list, evt, 1, true)
+				} else if(key === dk.DOWN_ARROW){
+					this._moveFocus(list, evt, 1, false)
+				} else if(key === dk.PAGE_UP){
+					this._moveFocus(list, evt, Math.floor(list.body.offsetHeight/list.current.offsetHeight),true)
+				} else if(key === dk.PAGE_DOWN){
+					this._moveFocus(list, evt, Math.floor(list.body.offsetHeight/list.current.offsetHeight),false)
+				} else if(key === dk.HOME){
+					this._moveFocus(list, evt, 99999, true)
+				} else if(key === dk.END){
+					this._moveFocus(list, evt, 99999, false)
 				}
 			}
-		},				
-		_mv: function(list,e,n,d) {
-			var nc = list.current
-			for(;n;n--) {
-				var p = d ? nc.previousSibling : nc.nextSibling
-				if(p) nc=p; else break;
+		},
+		_moveFocus: function(list, evt, start, prevDir) {
+			var curNode = list.current
+			for(; start > 0 ;start--) {
+				var newNode = prevDir ? curNode.previousSibling : curNode.nextSibling
+				if(null != newNode) curNode = newNode; else break;
 			}
-			if(nc!==list.current) {
+			if(curNode !== list.current) {
+				this._setCurrent(list, curNode)
+				this._select(list, curNode)
 				
-				this._setCurrent(list,nc)
-				this._select(list,nc)
-				if(list.current) list.current.focus()
+				if(list.current) {
+					list.current.focus()
+				}
 			}
-			dojo.stopEvent(e)
+			dojo.stopEvent(evt)
 		}
 	}
 );

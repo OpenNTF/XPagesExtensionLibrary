@@ -462,7 +462,7 @@
         </property>
         
         <property>
-            <description>Activates the data view to fetch new rows when the bottom of the list is reached (a.k.a. infiniteScroll). Acceptable values are: "enable", "disable" or "auto"; default value is "auto". If set to "auto", the application setting xsp.progressive.enhancement=[enable|disable] will be used.</description>
+            <description>Configures the Data View control to fetch new rows when the bottom of the list is reached, also known as infinite scroll. Acceptable values are: "enable", "disable" or "auto"; default value is "auto". If set to "auto", the application setting xsp.progressive.enhancement=[enable|disable] will determine whether the infinite scroll is enabled.</description>
             <display-name>Enable Infinite Scroll</display-name>
             <property-name>infiniteScroll</property-name>
             <property-class>java.lang.String</property-class>

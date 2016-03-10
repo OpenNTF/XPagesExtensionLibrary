@@ -1,13 +1,15 @@
-<div style="max-width:none; margin-left: inherit;" class="xspmodal lotusDialogBorder" tabindex="-1" waiRole="dialog" waiState="labelledby-${id}_title">
-<div class="xspmodal-dialog">
-<div class="modal-content">
-	<div dojoAttachPoint="titleBar" class="modal-header">
-		<span dojoAttachPoint="closeButtonNode">
-		    <button type="button" title="${buttonCancel}" class="close" aria-hidden="true" dojoAttachEvent="onclick: onCancel">&times;</button>
-		</span>
-		<h4 class='modal-title' dojoAttachPoint="titleNode" id="${id}_title"></h4>
-	</div>
-	<div dojoAttachPoint="containerNode"></div>
-</div>
-</div>
+<div class="modal xsp-responsive-modal" tabindex="-1" role="dialog" aria-labelledby="${id}_title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div dojoAttachPoint="titleBar" class="modal-header">
+                <span dojoAttachPoint="closeButtonNode" tabindex="0">
+                    <button type="button" title="${buttonCancel}" class="close" dojoAttachEvent="onclick: onCancel" aria-label="Close">
+                        <span dojoAttachPoint="closeText" aria-hidden="true">&times;</span>
+                    </button>
+                </span>
+                <h4 class="modal-title" dojoAttachPoint="titleNode" id="${id}_title"></h4>
+            </div>
+            <div dojoAttachPoint="containerNode" class="xsp-responsive-modal-container"></div>
+        </div>
+    </div>
 </div>

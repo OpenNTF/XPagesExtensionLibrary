@@ -15,11 +15,26 @@
  */
 package com.ibm.xsp.theme.bootstrap.util;
 
+import java.io.IOException;
+
+import javax.faces.context.ResponseWriter;
+
+import com.ibm.commons.util.StringUtil;
+
 public class Util {
 
-	private static int uniqueId;
+    private static int uniqueId;
 
-	public static String computeUniqueId() {
-		return "xbt_" + Integer.toString(uniqueId++, 36);
-	}
+    public static String computeUniqueId() {
+        return "xbt_" + Integer.toString(uniqueId++, 36); // $NON-NLS-1$
+    }
+    
+    public static void renderIconTextForA11Y(ResponseWriter w, String iconText) throws IOException {
+        if(StringUtil.isNotEmpty(iconText)) {
+            w.startElement("span", null); // $NON-NLS-1$
+            w.writeAttribute("class", "sr-only", null); // $NON-NLS-1$ $NON-NLS-2$
+            w.writeText(iconText, null);
+            w.endElement("span"); // $NON-NLS-1$
+        }
+    }
 }

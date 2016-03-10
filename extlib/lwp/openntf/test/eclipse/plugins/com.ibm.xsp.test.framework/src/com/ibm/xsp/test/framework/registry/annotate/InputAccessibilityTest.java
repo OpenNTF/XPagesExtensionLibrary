@@ -171,6 +171,7 @@ public class InputAccessibilityTest extends AbstractXspTest {
             	//Setup the control instance in the <p> instance
             	XspRenderUtil.resetContainerChild(root, p, instance);
                 XspRenderUtil.initControl(this, instance, context);
+                postInitControl(instance, context);
             	
                 //Render the xpage with the control in a paragraph
                 String page2;
@@ -251,7 +252,13 @@ public class InputAccessibilityTest extends AbstractXspTest {
             fail( XspTestUtil.getMultilineFailMessage(fails));
         }
     }
-	
+    
+    /**
+     * Available to override in subclasses.
+     */
+    protected void postInitControl(UIComponent instance, FacesContext context) {
+    }
+
 	protected String[] getSkipFails(){
         return StringUtil.EMPTY_STRING_ARRAY;
     }

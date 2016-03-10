@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- Copyright IBM Corp. 2014, 2016                                      -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     -->
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        -->
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
 <faces-config>
 	<faces-config-extension>
 		<namespace-uri>http://www.ibm.com/xsp/coreex</namespace-uri>
 		<default-prefix>xe</default-prefix>
+	    <designer-extension>
+	      <control-subpackage-name>theme.bootstrap.components.responsive</control-subpackage-name>
+	    </designer-extension>
 	</faces-config-extension>
     
 	<!-- RESPONSIVE LAYOUT -->
@@ -14,8 +34,8 @@
     	<complex-class>com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration</complex-class>
 		
   		<property>
-	   		<!-- # "navbar" should not be translated -->
-			<description>Indicates if the navbar is inverted, using the style navbar-inverse. False by default.</description>
+	   		<!-- # "Navbar" should not be translated anywhere in this file -->
+			<description>Indicates if the Navbar should use an inverted color styling. The inverted style gives the Navbar a dark background with light colored text. False by default.</description>
 			<display-name>Inverted Navigation Bar</display-name>
 			<property-name>invertedNavbar</property-name>
 			<property-class>boolean</property-class>
@@ -23,10 +43,10 @@
 		
 		<property>
 	   		<!-- # "navbar", "fixed-top", "fixed-bottom", "unfixed-top" should not be translated -->
-			<description>Indicates the position of the navbar. There are three options: fixed-top, fixed-bottom, unfixed-top. Unfixed to top is the default.</description>
+			<description>Indicates the position of the Navbar. There are three options: fixed-top (the Navbar is fixed to the top of the page), fixed-bottom (the Navbar is fixed to the bottom of the page), unfixed-top (the Navbar is positioned at the top of the application, but not fixed in place). When fixed, the Navbar will remain in place at the top or bottom of the browser window when scrolling. The default is unfixed-top.</description>
 			<display-name>Fixed Navigation Bar</display-name>
 			<property-name>fixedNavbar</property-name>
-			<property-class>string</property-class>
+			<property-class>java.lang.String</property-class>
 			<property-extension>
 				<localizable>false</localizable>
 		        <designer-extension>
@@ -48,10 +68,10 @@
 		
 		<property>
 	   		<!-- # "jQuery", "CSS" should not be translated -->
-			<description>By default the dropdown button for a collapsed left column is attached to the left column. Optionally you can enter a selector here (jQuery syntax, see http://api.jquery.com/category/selectors/) to which the button should be attached. Sample values: ".applayout-column-left" (place the menu button after the element with the CSS class "applayout-column-left"), or ".navbar-brand" (place the menu in the banner next to the element with CSS class "navbar-brand"), or ".applayout .applayout-titlebar-inner" (place the menu inside the footer)</description>
+			<description>By default the dropdown button for a collapsed left column is attached to the left column. Optionally you can enter a selector here (jQuery syntax, see http://api.jquery.com/category/selectors/) to which the button should be attached. Sample values: ".applayout-column-left" (place the menu button after the element with the CSS class "applayout-column-left"), or ".navbar-brand" (place the menu in the Navbar next to the element with CSS class "navbar-brand"), or ".applayout .applayout-titlebar-inner" (place the menu inside the footer)</description>
 			<display-name>Collapse Left Column Target</display-name>
 			<property-name>collapseLeftTarget</property-name>
-			<property-class>string</property-class>
+			<property-class>java.lang.String</property-class>
 			<property-extension>
 				<localizable>false</localizable>
 				<designer-extension>
@@ -65,21 +85,22 @@
 		</property>
 		
 		<property>
-			<description>Label on the menu button shown when the left column is collapsed. "Menu" by default.</description>
+			<description>Label on the menu button shown when the left column is collapsed. "Menu" is the default value.</description>
 			<display-name>Collapsed Left Column Menu Label</display-name>
 			<property-name>collapseLeftMenuLabel</property-name>
-			<property-class>string</property-class>
+			<property-class>java.lang.String</property-class>
 			<property-extension>
 				<localizable>true</localizable>
 			</property-extension>
 		</property>
 		
 		<property>
-			<!-- # When inside quotes: "full", "fluid", "fixed" should not be translated -->
-			<description>Determines the width of the page: "full" means full width, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width.</description>
+			<!--  key: property.pageWidth.complex-type.bootstrapResponsiveConfiguration. -->
+			<!-- # When inside quotes: "full", "fluid", "fixed", "none" should not be translated -->
+			<description>Determines the width of the page: "full" means full width container, "fluid" means use Bootstraps fluid container (almost full width), "fixed" means use fixed width container and "none" means no container setting. "fluid" is the default.</description>
 			<display-name>Page Width</display-name>
 			<property-name>pageWidth</property-name>
-			<property-class>string</property-class>
+			<property-class>java.lang.String</property-class>
 			<property-extension>
 				<localizable>false</localizable>
 				<designer-extension>
@@ -87,6 +108,7 @@
 					<editor-parameter>full
 						fluid
 						fixed
+						none
 					</editor-parameter>
 				</designer-extension>
 			</property-extension>
@@ -102,4 +124,1452 @@
 			<since>9.0.1.v00_10</since>
     	</complex-extension>
   	</complex-type>
+  	
+  	
+  	<!-- SIMPLE RESPONSIVE LAYOUT -->
+	<complex-type>	
+    	<description>The Simple Responsive Application Layout Configuration is a simplified configuration for the application layout control, with a focus on responsive features.</description>
+    	<display-name>Simple Responsive Configuration</display-name>
+    	<complex-id>com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration</complex-id>
+    	<complex-class>com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration</complex-class>
+
+  		<property>
+			<description>Indicates if the Navbar should use an inverted color styling. The inverted style gives the Navbar a dark background with light colored text. False by default.</description>
+			<display-name>Inverted Navbar</display-name>
+			<property-name>invertedNavbar</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		
+		<property>
+			<description>Indicates the position of the Navbar. There are three options: fixed-top (the Navbar is fixed to the top of the page), fixed-bottom (the Navbar is fixed to the bottom of the page), unfixed-top (the Navbar is positioned at the top of the application, but not fixed in place). When fixed, the Navbar will remain in place at the top or bottom of the browser window when scrolling. The default is unfixed-top.</description>
+			<display-name>Fixed Navbar</display-name>
+			<property-name>fixedNavbar</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+		        <designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>fixed-top
+						fixed-bottom
+						unfixed-top
+					</editor-parameter>
+		        </designer-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Indicates if the left column should be collapsed on smaller screens.</description>
+			<display-name>Collapse Left Column</display-name>
+			<property-name>collapseLeftColumn</property-name>
+			<property-class>boolean</property-class>
+		</property>
+		
+		<property>
+			<description>By default the Menu dropdown button for a collapsed left column menu is attached to the left column. Optionally you can enter a selector here to which the menu should be attached (jQuery syntax, see http://api.jquery.com/category/selectors/). Sample values: .applayout-column-left (after the element with the applayout-column-left class) or .applayout-banner-collapse</description>
+			<display-name>Collapse Left Column Target</display-name>
+			<property-name>collapseLeftTarget</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>false</localizable>
+		        <designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>.applayout-column-left
+						.applayout-banner-collapse
+					</editor-parameter>
+		        </designer-extension>
+			</property-extension>
+		</property>
+		
+		<property>
+			<description>Label on the menu button shown when the left column is collapsed. "Menu" is the default value.</description>
+			<display-name>Collapsed Left Column Menu Label</display-name>
+			<property-name>collapsedLeftMenuLabel</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+		
+		<property>
+			<!-- Reuse descr/name from above -->
+			<description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+			<display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
+			<property-name>pageWidth</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>full
+						fluid
+						fixed
+						none
+					</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>
+		
+  		<property>
+			<description>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/defaultNavigationPath/descr%</description>
+			<display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/defaultNavigationPath/name%</display-name>
+			<property-name>defaultNavigationPath</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+			     <designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						/tab1/link1
+						/tab1/link2
+						/tab2/link1
+						/tab2/link2
+					</editor-parameter>
+			     </designer-extension>
+			</property-extension>
+		</property>
+  		
+  		<property>
+  			<!-- # "true" should not be translated -->
+			<description>Indicates if the Navbar should be displayed. The Navbar is an area at the top of the simple responsive application layout control. It contains the application logo and application links. This defaults to "true", displaying the Navbar.</description>
+			<display-name>Navbar Visible</display-name>
+			<property-name>navbar</property-name>
+			<property-class>boolean</property-class>
+			<property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it as Navbar defaulting to true, 
+                     instead of as disableNavbar defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The Navbar logo is a logo or branding image that appears in the Navbar, before the links and content area. This property supplies a path to an image for the logo.</description>
+			<display-name>Navbar Logo</display-name>
+			<property-name>navbarLogo</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <designer-extension>
+                     <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+                 </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Similar to the Navbar Logo Style this can provide the Navbar logo as a background image, in this case using a CSS style class reference, rather than a style directly in the page.</description>
+			<display-name>Navbar Logo Style Class</display-name>
+			<property-name>navbarLogoStyleClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+                    <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+                </designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The Navbar logo can be provided here as a background image, as an alternative to using an image tag which would be generated when using the "navbarLogo" property.</description>
+			<display-name>Navbar Logo Style</display-name>
+			<property-name>navbarLogoStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+	      		</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>Alternate text for the "navbarLogo" image, used by screen reading software</description>
+			<display-name>Navbar Logo Alternate Text</display-name>
+			<property-name>navbarLogoAlt</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+		<property>
+			<description>The Navbar text appears as a label in the Navbar at the top of the application layout.</description>
+			<display-name>Navbar Text</display-name>
+			<property-name>navbarText</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<localizable>true</localizable>
+			</property-extension>
+		</property>
+  		<property>
+			<description>A CSS class or space-separated classes for the Navbar text.</description>
+			<display-name>Navbar Text Style Class</display-name>
+			<property-name>navbarTextStyleClass</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+	          		<tags>
+			          not-localizable
+			        </tags>
+	      		</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>A CSS style or styles for the Navbar text.</description>
+			<display-name>Navbar Text Style</display-name>
+			<property-name>navbarTextStyle</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+	      		<designer-extension>
+	          		<editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+	          		<tags>
+			          not-localizable
+			        </tags>
+	      		</designer-extension>
+			</property-extension>
+		</property>
+  		<property>
+			<description>The utility links are a set of links or menus that appear in the Navbar, before the Navbar content area.</description>
+			<display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/bannerUtilityLinks/name%</display-name>
+			<property-name>navbarUtilityLinks</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addNavbarUtilityLink</property-add-method>
+        	</property-extension>
+		</property>
+		<property>
+			<description>The application links are a set of links or menus that appear in the Navbar, after the Navbar content area.</description>
+			<display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/bannerApplicationLinks/name%</display-name>
+			<property-name>navbarAppLinks</property-name>
+            <property-class>java.util.List</property-class>
+        	<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+          		<collection-property>true</collection-property>
+          		<property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+            	<property-add-method>addNavbarAppLink</property-add-method>
+        	</property-extension>
+		</property>
+  		<property>
+			<!-- # "SearchBar" should not be translated -->
+			<description>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/searchBar/descr%</description>
+			<display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/searchBar/name%</display-name>
+			<property-name>searchBar</property-name>
+			<property-class>com.ibm.xsp.extlib.component.layout.impl.SearchBar</property-class>
+			<property-extension>
+                <allow-run-time-binding>false</allow-run-time-binding>
+            </property-extension>
+        </property>
+        <property>
+            <description>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/leftColumnLabel/descr%</description>
+            <display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/leftColumnLabel/name%</display-name>
+            <property-name>leftColumnLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+        <property>
+            <description>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/rightColumnLabel/descr%</description>
+            <display-name>%/com.ibm.xsp.extlib.component.layout.impl.BasicApplicationConfigurationImpl/rightColumnLabel/name%</display-name>
+            <property-name>rightColumnLabel</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>true</localizable>
+            </property-extension>
+        </property>
+
+        <complex-extension>
+            <layout-extension>
+                <responsive>true</responsive>
+                <sample-url>http://getbootstrap.com/examples/dashboard/</sample-url>
+                <layout-image>extlib/designer/wizard/layout/respAppLayout.png</layout-image>
+            </layout-extension>
+            <base-complex-id>com.ibm.xsp.extlib.component.layout.ApplicationConfiguration</base-complex-id>
+            <tag-name>simpleResponsiveConfiguration</tag-name>
+            <since>9.0.1.v00_12</since>
+        </complex-extension>
+    </complex-type>
+    
+    <!-- DASHBOARD CONTROL -->
+    <component>
+      <description>A dashboard for displaying modular data nodes</description>
+      <display-name>Dashboard</display-name>
+      <component-type>com.ibm.xsp.theme.bootstrap.components.responsive.Dashboard</component-type>
+      <component-class>com.ibm.xsp.theme.bootstrap.components.responsive.UIDashboard</component-class>
+      <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.title</group-type-ref>
+      
+      <property>
+        <description>The heading of the dashboard, which will appear as text at the top of the dashboard.</description>
+        <display-name>Heading</display-name>
+        <property-name>heading</property-name>
+        <property-class>java.lang.String</property-class>
+        <property-extension>
+         <designer-extension>
+            <category>basics</category>
+            <localizable>true</localizable>
+         </designer-extension>
+       </property-extension>
+      </property>
+      <property>
+       <description>A CSS style or styles for the dashboard heading.</description>
+       <display-name>Heading Style</display-name>
+       <property-name>headingStyle</property-name>
+       <property-class>java.lang.String</property-class>
+       <property-extension>
+         <localizable>false</localizable>
+         <designer-extension>
+            <category>styling</category>
+            <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+            <tags>
+              not-localizable
+            </tags>
+         </designer-extension>
+       </property-extension>
+     </property>
+    <property>
+      <description>A CSS style class or classes for the dashboard heading.</description>
+      <display-name>Heading Style Class</display-name>
+      <property-name>headingStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The list of Dashboard nodes that define the individual nodes of the dashboard</description>
+      <display-name>Dashboard Nodes</display-name>
+      <property-name>dashNodes</property-name>
+      <property-class>java.util.List</property-class>
+      <property-extension>
+        <allow-run-time-binding>false</allow-run-time-binding>
+        <collection-property>true</collection-property>
+        <property-item-class>com.ibm.xsp.theme.bootstrap.components.responsive.DashNode</property-item-class>
+        <property-add-method>addDashNode</property-add-method>
+        <designer-extension>
+          <category>basics</category>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <component-extension>
+      <base-component-type>javax.faces.Panel</base-component-type>
+      <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented</renderer-type>
+      <tag-name>dashboard</tag-name>
+      <designer-extension>
+        <in-palette>true</in-palette>
+        <category>Responsive</category>
+      </designer-extension>
+      <since>9.0.1.v00_12</since>
+    </component-extension>
+  </component>
+  
+  <!-- Dash Node -->
+  <complex-type>
+    <description>A node that is displayed in the dashboard.</description>
+    <display-name>Dash Node</display-name>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+    
+    <complex-id>com.ibm.xsp.theme.bootstrap.components.responsive.DashNode</complex-id>
+    <complex-class>com.ibm.xsp.theme.bootstrap.components.responsive.DashNode</complex-class>
+    
+    <property>
+      <description>Defines the width in number of columns of the dash node for large-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for large displays, over 1200px wide.</description>
+        <display-name>Large Column Size</display-name>
+        <property-name>sizeLarge</property-name>
+        <property-class>int</property-class>
+      	<property-extension>
+        	<designer-extension>
+				<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+				<editor-parameter>
+					1
+					2
+					3
+					4
+					5
+					6
+					7
+					8
+					9
+					10
+					11
+					12
+				</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Defines the width in number of columns of the dash node for medium-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for medium displays, over 990px and under 1200px wide.</description>
+        <display-name>Medium Column Size</display-name>
+        <property-name>sizeMedium</property-name>
+        <property-class>int</property-class>
+      	<property-extension>
+        	<designer-extension>
+				<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+				<editor-parameter>
+					1
+					2
+					3
+					4
+					5
+					6
+					7
+					8
+					9
+					10
+					11
+					12
+				</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Defines the width in number of columns of the dash node for small-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for small displays, such as tablets, over 768px and under 990px wide.</description>
+        <display-name>Small Column Size</display-name>
+        <property-name>sizeSmall</property-name>
+        <property-class>int</property-class>
+      	<property-extension>
+        	<designer-extension>
+				<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+				<editor-parameter>
+					1
+					2
+					3
+					4
+					5
+					6
+					7
+					8
+					9
+					10
+					11
+					12
+				</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Defines the width in number of columns of the dash node for extra-small-sized displays. This is a Bootstrap grid setting, defining how many columns of a container to use for this element, between 1 and 12. This setting is applied for extra small displays, such as mobile phones, under 768px wide.</description>
+        <display-name>Extra Small Column Size</display-name>
+        <property-name>sizeExtraSmall</property-name>
+        <property-class>int</property-class>
+      	<property-extension>
+        	<designer-extension>
+				<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+				<editor-parameter>
+					1
+					2
+					3
+					4
+					5
+					6
+					7
+					8
+					9
+					10
+					11
+					12
+				</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The URL value to which the label of the dash node links. If the label text is empty, no link will be added.</description>
+      <display-name>Label Link</display-name>
+      <property-name>labelHref</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+          <localizable>false</localizable>
+          <designer-extension>
+            <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+            <tags>
+              not-localizable
+            </tags>
+          </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The text value to use for the label of the node. This label appears on a button at the bottom of the dash node. If the label text is empty, no button will appear.</description>
+      <display-name>Label Text</display-name>
+      <property-name>labelText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+          <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the dash node label.</description>
+      <display-name>Label Style</display-name>
+      <property-name>labelStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the dash node label.</description>
+      <display-name>Label Style Class</display-name>
+      <property-name>labelStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Description text displayed underneath the label.</description>
+      <display-name>Description</display-name>
+      <property-name>description</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+         <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the dash node description.</description>
+      <display-name>Description Style</display-name>
+      <property-name>descriptionStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the dash node description.</description>
+      <display-name>Description Style Class</display-name>
+      <property-name>descriptionStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The image to be displayed in the dash node</description>
+      <display-name>Image Src</display-name>
+      <property-name>imageSrc</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Alternate text for the dash node image, used by assistive technologies.</description>
+      <display-name>Image Alternate Text</display-name>
+      <property-name>imageAlt</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+         <localizable>true</localizable>
+         <designer-extension>
+          <tags>
+            not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Title text to add to the font icon, used by assistive technologies.</description>
+      <display-name>Icon Title</display-name>
+      <property-name>iconTitle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+          <localizable>true</localizable>
+          <designer-extension>
+          	<tags>
+          		is-accessibility-title
+          		not-image-path
+          	</tags>
+          </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the image in the dash node.</description>
+      <display-name>Image Style</display-name>
+      <property-name>imageStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+            not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the image in the dash node.</description>
+      <display-name>Image Style Class</display-name>
+      <property-name>imageStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+            not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The width of the image in the dash node</description>
+      <display-name>Image Width</display-name>
+      <property-name>imageWidth</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+			<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+			<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+			for a new CSS dimension editor to replace this comboParam -->
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>
+				50%
+				30px
+				10em
+				2cm
+				auto
+				inherit
+			</editor-parameter>
+			<!-- This is not actually an image path, 
+			it just refers to an image in the description, 
+			so the tag not-image-path 
+			prevents a fail in ImageEditorTest -->
+            <tags>
+                not-image-path
+            </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The height of the image in the dash node</description>
+      <display-name>Image Height</display-name>
+      <property-name>imageHeight</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+			<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+			<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+			for a new CSS dimension editor to replace this comboParam -->
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>
+				50%
+				30px
+				10em
+				2cm
+				auto
+				inherit
+			</editor-parameter>
+			<!-- This is not actually an image path, 
+			it just refers to an image in the description, 
+			so the tag not-image-path 
+			prevents a fail in ImageEditorTest -->
+            <tags>
+			not-image-path
+            </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the font icon.</description>
+      <display-name>Icon Style</display-name>
+      <property-name>iconStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+			not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+		<description>Indicates if a font icon should be used instead of an image. Font icons are a set of icons provided in a font file that are built into Bootstrap. False by default. When enabled the image properties will be ignored.</description>
+		<display-name>Icon Enabled</display-name>
+		<property-name>iconEnabled</property-name>
+		<property-class>boolean</property-class>
+	</property>
+	<property>
+      <description>The font icon to use in the dash node.</description>
+      <display-name>Icon</display-name>
+      <property-name>icon</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+		  <!--  note, this allows values "glyphicon-ok" -->
+		  <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+		  <editor-parameter>
+				glyphicon-ok
+				glyphicon-home
+				glyphicon-star
+		  </editor-parameter>
+          <tags>
+            not-image-path
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+	<property>
+      <description>The HTML tag to use for the font icon. "div" tag used by default</description>
+      <display-name>Icon Tag</display-name>
+      <property-name>iconTag</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <tags>
+            not-localizable
+			not-image-path
+          </tags>
+			<!--  note, this allows values like "div" or "h2", html tags -->
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>div
+				p
+				span
+				h2
+			</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+		<description>The font size of the font icon. "72pt" is the default size.</description>
+		<display-name>Icon Size</display-name>
+		<property-name>iconSize</property-name>
+		<property-class>java.lang.String</property-class>
+		<property-extension>
+            <designer-extension>
+              <tags>
+                not-localizable
+				not-image-path
+              </tags>
+			  <!--  note, this allows values like "30px" or "30pt", i.e. not an integer -->
+			  <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			  <editor-parameter>
+				  30px
+				  10em
+				  30pt
+			  </editor-parameter>
+            </designer-extension>
+		</property-extension>
+	</property>
+    <property>
+		<description>Indicates if a badge should be used. A badge can display contextual information for the dash node, such as a number. False by default. When enabled the badge appears next to the title text.</description>
+		<display-name>Badge Enabled</display-name>
+		<property-name>badgeEnabled</property-name>
+		<property-class>boolean</property-class>
+	</property>
+	<property>
+        <description>Label that will be displayed in the badge.</description>
+        <display-name>Badge Label</display-name>
+        <property-name>badgeLabel</property-name>
+        <property-class>java.lang.String</property-class>
+        <property-extension>
+            <localizable>true</localizable>
+        </property-extension>
+    </property>
+    <property>
+		<description>Specify a CSS style class for the badge.</description>
+		<display-name>Badge Style Class</display-name>
+		<property-name>badgeStyleClass</property-name>
+		<property-class>java.lang.String</property-class>
+		<property-extension>
+          <designer-extension>
+              <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          </designer-extension>
+		</property-extension>
+	</property>
+	<property>
+      <description>CSS style or styles for the badge.</description>
+      <display-name>Badge Style</display-name>
+      <property-name>badgeStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <complex-extension>
+      <tag-name>dashNode</tag-name>
+      <since>9.0.1.v00_12</since>
+    </complex-extension>
+  </complex-type>
+  
+  
+  <!-- NAVBAR CONTROL -->
+    <component>
+      <description>A navigation bar that can be displayed at the top or bottom of an application</description>
+      <display-name>Navigation Bar</display-name>
+      <component-type>com.ibm.xsp.theme.bootstrap.components.responsive.Navbar</component-type>
+      <component-class>com.ibm.xsp.theme.bootstrap.components.responsive.UINavbar</component-class>
+      <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.title</group-type-ref>
+      
+        <property>
+			<description>Indicates if the Navbar uses an inverted color style. False by default.</description>
+			<display-name>Inverted Navigation Bar</display-name>
+			<property-name>inverted</property-name>
+			<property-class>boolean</property-class>
+		    <property-extension>
+		        <designer-extension>
+		            <category>basics</category>
+		        </designer-extension>
+		    </property-extension>
+		</property>
+		
+		<property>
+			<!-- # "navbar", "fixed-top", "fixed-bottom", "unfixed-top" should not be translated -->
+			<description>Indicates the position of the Navbar: fixed-top (the Navbar is fixed to the top of the page), fixed-bottom (the Navbar is fixed to the bottom of the page), unfixed-top (the Navbar is positioned at the top of the application, but not fixed in place). When fixed, the Navbar will remain in place at the top or bottom of the browser window when scrolling. If left blank, the Navbar will be positioned amidst the page content.</description>
+			<display-name>Fixed Navbar</display-name>
+			<property-name>fixed</property-name>
+			<property-class>java.lang.String</property-class>
+		    <property-extension>
+		        <designer-extension>
+		            <category>basics</category>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>fixed-top
+						fixed-bottom
+						unfixed-top
+					</editor-parameter>
+		        </designer-extension>
+			</property-extension>
+		</property>
+		
+    
+      <property>
+        <!-- Reuse descr/name from above -->
+        <description>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.descr%</description>
+        <display-name>%property.pageWidth.complex-type.bootstrapResponsiveConfiguration.name%</display-name>
+        <property-name>pageWidth</property-name>
+            <property-class>java.lang.String</property-class>
+            <property-extension>
+                <localizable>false</localizable>
+                <designer-extension>
+                    <category>basics</category>
+                    <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+                    <editor-parameter>fluid
+                        fixed
+                        full
+                        none
+                    </editor-parameter>
+               </designer-extension>
+           </property-extension>
+      </property>
+      
+      <property>
+          <description>The Heading Text appears as a label in the Navbar, before the links and content area.</description>
+          <display-name>Heading Text</display-name>
+          <property-name>headingText</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+              <localizable>true</localizable>
+              <designer-extension>
+                 <category>basics</category>
+              </designer-extension>
+          </property-extension>
+      </property>
+      <property>
+        <description>Specify a CSS style class for the Navbar heading.</description>
+        <display-name>Heading Style Class</display-name>
+        <property-name>headingStyleClass</property-name>
+        <property-class>java.lang.String</property-class>
+        <property-extension>
+            <designer-extension>
+                <category>styling</category>
+                <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+            </designer-extension>
+        </property-extension>
+      </property>
+      <property>
+      <description>CSS style or styles for the Navbar heading.</description>
+      <display-name>Heading Style</display-name>
+      <property-name>headingStyle</property-name>
+      <property-class>java.lang.String</property-class>
+        <property-extension>
+         <designer-extension>
+            <localizable>false</localizable>
+            <category>styling</category>
+            <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+            <tags>
+              not-localizable
+            </tags>
+         </designer-extension>
+        </property-extension>
+      </property>
+    
+      <property>
+          <description>The before links are a set of links or menus that appear in the Navbar, before the Navbar content area.</description>
+          <display-name>Before Links</display-name>
+          <property-name>navbarBeforeLinks</property-name>
+          <property-class>java.util.List</property-class>
+          <property-extension>
+              <allow-run-time-binding>false</allow-run-time-binding>
+              <collection-property>true</collection-property>
+              <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+              <property-add-method>addNavbarBeforeLink</property-add-method>
+              <designer-extension>
+                  <category>basics</category>
+              </designer-extension>
+          </property-extension>
+      </property>
+      <property>
+          <description>The after links are a set of links or menus that appear in the Navbar, after the Navbar content area.</description>
+          <display-name>After Links</display-name>
+          <property-name>navbarAfterLinks</property-name>
+          <property-class>java.util.List</property-class>
+          <property-extension>
+              <allow-run-time-binding>false</allow-run-time-binding>
+              <collection-property>true</collection-property>
+              <property-item-class>com.ibm.xsp.extlib.tree.ITreeNode</property-item-class>
+              <property-add-method>addNavbarAfterLink</property-add-method>
+              <designer-extension>
+                  <category>basics</category>
+              </designer-extension>
+          </property-extension>
+      </property>
+
+      <component-extension>
+        <base-component-type>javax.faces.Panel</base-component-type>
+        <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented</renderer-type>
+        <tag-name>navbar</tag-name>
+        <designer-extension>
+          <in-palette>true</in-palette>
+          <category>Responsive</category>
+        </designer-extension>
+        <since>9.0.1.v00_12</since>
+      </component-extension>
+    </component>
+    
+    
+    <!-- CAROUSEL CONTROL -->
+    <component>
+      <description>A carousel for presenting informational slides on a page. Supports cycling through slides, moving from one to the next, both automatically and by manual user interaction.</description>
+      <display-name>Carousel</display-name>
+      <component-type>com.ibm.xsp.theme.bootstrap.components.responsive.Carousel</component-type>
+      <component-class>com.ibm.xsp.theme.bootstrap.components.responsive.UICarousel</component-class>
+      <group-type-ref>com.ibm.xsp.group.core.prop.style</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.styleClass</group-type-ref>
+      <group-type-ref>com.ibm.xsp.group.core.prop.title</group-type-ref>
+      
+      <property>
+        <description>The list of Carousel slide nodes that display the individual slides of the carousel</description>
+        <display-name>Carousel Slide Nodes</display-name>
+        <property-name>slideNodes</property-name>
+        <property-class>java.util.List</property-class>
+        <property-extension>
+          <allow-run-time-binding>false</allow-run-time-binding>
+          <collection-property>true</collection-property>
+          <property-item-class>com.ibm.xsp.theme.bootstrap.components.responsive.SlideNode</property-item-class>
+          <property-add-method>addSlideNode</property-add-method>
+          <designer-extension>
+            <category>basics</category>
+          </designer-extension>
+        </property-extension>
+      </property>
+      <property>
+        <description>The height of the carousel on large devices.</description>
+        <display-name>Large Carousel Height</display-name>
+			<property-name>heightLarge</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+            		<category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                </designer-extension>
+			</property-extension>
+	  </property>
+	  <property>
+        <description>The height of the carousel on medium size devices.</description>
+        <display-name>Medium Carousel Height</display-name>
+			<property-name>heightMedium</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+            		<category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                </designer-extension>
+			</property-extension>
+	  </property>
+	  <property>
+        <description>The height of the carousel on small devices.</description>
+        <display-name>Small Carousel Height</display-name>
+			<property-name>heightSmall</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+            		<category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                </designer-extension>
+			</property-extension>
+	  </property>
+	  <property>
+        <description>The height of the carousel on extra small devices.</description>
+        <display-name>Extra Small Carousel Height</display-name>
+			<property-name>heightExtraSmall</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                <designer-extension>
+            		<category>basics</category>
+					<!--  note, this allows values like "30px" or "50%", i.e. not an integer -->
+					<!-- xe:applicationConfiguration.legalLogoHeight has a TODO asking
+					for a new CSS dimension editor to replace this comboParam -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						50%
+						30px
+						10em
+						2cm
+						auto
+						inherit
+					</editor-parameter>
+                </designer-extension>
+			</property-extension>
+	  </property>
+	  <property>
+        <description>The interval between changing slides of the carousel, in milliseconds, when auto cycling is enabled.</description>
+        <display-name>Carousel Slide Interval</display-name>
+			<property-name>slideInterval</property-name>
+			<property-class>int</property-class>
+			<property-extension>
+                <designer-extension>
+            		<category>basics</category>
+                </designer-extension>
+			</property-extension>
+      </property>
+      <property>
+          <description>Indicates if the carousel should automatically cycle once loaded. When enabled, the carousel will automatically move from one slide to the next, with a delay equal to the value of the slideInterval property. True by default.</description>
+          <display-name>Auto Cycle</display-name>
+          <property-name>autoCycle</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+                <default-value>true</default-value>
+                <designer-extension>
+                    <category>basics</category>
+                    <!-- Note, this defaults to true at runtime,
+                    so it will be difficult to set this property
+                    value using a theme file - the mechanism described
+                    in SPR#MKEE8EEMS2 would have to be used. 
+                    The decision to name it as autoCycle defaulting to true, 
+                    instead of as disableAutoCycle defaulting to false, 
+                    was in line with instructions from the UI designer 
+                    to not name properties with negative names. 
+                    The runtime-default-true tag prevents 
+                    a junit fail in BooleanPropertyDefaultTest. -->
+                    <tags>
+                        runtime-default-true
+                    </tags>
+                </designer-extension>
+		  </property-extension>
+      </property>
+      <property>
+          <description>Indicates if the carousel should cycle continuously, wrapping back to the first slide after the last slide. True by default.</description>
+          <display-name>Wrap Carousel</display-name>
+          <property-name>wrapped</property-name>
+          <property-class>boolean</property-class>
+          <property-extension>
+                 <default-value>true</default-value>
+                 <designer-extension>
+                     <category>basics</category>
+                     <!-- Note, this defaults to true at runtime,
+                     so it will be difficult to set this property
+                     value using a theme file - the mechanism described
+                     in SPR#MKEE8EEMS2 would have to be used. 
+                     The decision to name it as wrapped defaulting to true, 
+                     instead of as disableWrapped defaulting to false, 
+                     was in line with instructions from the UI designer 
+                     to not name properties with negative names. 
+                     The runtime-default-true tag prevents 
+                     a junit fail in BooleanPropertyDefaultTest. -->
+                     <tags>
+                         runtime-default-true
+                     </tags>
+                 </designer-extension>
+			</property-extension>
+      </property>
+      <property>
+          <description>Indicates if the carousel should pause when the mouse cursor hovers over it, when auto-cycle is enabled. Default value is "hover", which indicates that the pause feature is enabled.</description>
+          <display-name>Pause</display-name>
+          <property-name>pause</property-name>
+          <property-class>java.lang.String</property-class>
+          <property-extension>
+              <designer-extension>
+                  <category>basics</category>
+                  <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>hover
+						true
+						false
+					</editor-parameter>
+              </designer-extension>
+          </property-extension>
+      </property>
+      <property>
+      <description>A CSS style or styles for the slide indicators of the carousel. The slide indicators are a set of small buttons at the bottom of the carousel, each button representing a slide. Each button can be clicked to take the user to that particular slide. The currently active slide is indicated by a solid circle in the set of indicators.</description>
+      <display-name>Carousel Indicator Style</display-name>
+      <property-name>indicatorStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+            not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the image in the dash node.</description>
+      <display-name>Carousel Indicator Style Class</display-name>
+      <property-name>indicatorStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <category>styling</category>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+            not-image-path
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+      <component-extension>
+        <base-component-type>javax.faces.Panel</base-component-type>
+        <renderer-type>com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented</renderer-type>
+        <tag-name>carousel</tag-name>
+        <designer-extension>
+          <in-palette>true</in-palette>
+          <category>Responsive</category>
+        </designer-extension>
+        <since>9.0.1.v00_12</since>
+      </component-extension>
+    </component>
+  
+  <!-- Slide -->
+  <complex-type>
+    <description>A slide node displayed in a carousel. Each slide consists of a background, as well as textual information and an optional link.</description>
+    <display-name>Carousel Slide</display-name>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.style</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.styleClass</group-type-ref>
+    <group-type-ref>com.ibm.xsp.extlib.group.core_complex.prop.title</group-type-ref>
+    
+    <complex-id>com.ibm.xsp.theme.bootstrap.components.responsive.SlideNode</complex-id>
+    <complex-class>com.ibm.xsp.theme.bootstrap.components.responsive.SlideNode</complex-class>
+    
+    <property>
+      <description>The HTML tag used to display the Heading of the slide. The "h2" tag is used by default.</description>
+      <display-name>Heading Tag</display-name>
+      <property-name>headingTag</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <tags>
+            not-localizable
+          </tags>
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>h2
+				h3
+				div
+			</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Heading text displayed in the slide.</description>
+      <display-name>Heading Text</display-name>
+      <property-name>headingText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+         <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the slide heading.</description>
+      <display-name>Heading Style</display-name>
+      <property-name>headingStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the slide heading.</description>
+      <display-name>Heading Style Class</display-name>
+      <property-name>headingStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Label for the button that appears at the bottom of the slide. If left empty, no button will be displayed.</description>
+      <display-name>Button Label</display-name>
+      <property-name>buttonLabel</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+         <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>The URL value for the "href" property of the button on the slide. If the button label is empty, no link will be added.</description>
+      <display-name>Button URL Reference</display-name>
+      <property-name>buttonHref</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+          <localizable>false</localizable>
+          <designer-extension>
+            <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.FilePicker</editor>
+            <tags>
+              not-localizable
+            </tags>
+          </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the slide button.</description>
+      <display-name>Button Style</display-name>
+      <property-name>buttonStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the slide button.</description>
+      <display-name>Button Style Class</display-name>
+      <property-name>buttonStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>Description text displayed underneath the caption.</description>
+      <display-name>Description Text</display-name>
+      <property-name>descriptionText</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+         <localizable>true</localizable>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style or styles for the slide description.</description>
+      <display-name>Description Style</display-name>
+      <property-name>descriptionStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>A CSS style class or classes for the slide description.</description>
+      <display-name>Description Style Class</display-name>
+      <property-name>descriptionStyleClass</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The background color to be used for the slide. This will be over-ridden if a backgroundSrc is specified.</description>
+      <display-name>Background Color</display-name>
+      <property-name>backgroundColor</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <pass-through>true</pass-through>
+		<localizable>false</localizable>
+        <designer-extension>
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>#ffffff
+				white
+				rgb(255,255,255)
+			</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>The background image to be displayed in the slide</description>
+      <display-name>Background Image Source</display-name>
+      <property-name>backgroundSrc</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.ImagePicker</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>HTML tag used to display the Caption of the slide. "h3" tag used by default</description>
+      <display-name>Caption Tag</display-name>
+      <property-name>captionTag</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <localizable>false</localizable>
+        <designer-extension>
+          <tags>
+            not-localizable
+          </tags>
+			<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+			<editor-parameter>h4
+				h5
+				div
+			</editor-parameter>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+        <description>Caption text that will be displayed in the slide.</description>
+        <display-name>Caption Text</display-name>
+        <property-name>captionText</property-name>
+        <property-class>java.lang.String</property-class>
+        <property-extension>
+            <localizable>true</localizable>
+        </property-extension>
+    </property>
+    <property>
+		<description>Specify a CSS style class for the caption.</description>
+		<display-name>Caption Style Class</display-name>
+		<property-name>captionStyleClass</property-name>
+		<property-class>java.lang.String</property-class>
+		<property-extension>
+          <designer-extension>
+              <editor>com.ibm.workplace.designer.property.editors.StyleClassEditor</editor>
+              <tags>
+                  not-localizable
+              </tags>
+          </designer-extension>
+		</property-extension>
+	</property>
+	<property>
+      <description>CSS style or styles for the caption.</description>
+      <display-name>Caption Style</display-name>
+      <property-name>captionStyle</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.StylesEditor</editor>
+          <tags>
+            not-localizable
+          </tags>
+        </designer-extension>
+      </property-extension>
+    </property>
+    
+    <complex-extension>
+      <tag-name>slide</tag-name>
+      <since>9.0.1.v00_12</since>
+    </complex-extension>
+  </complex-type>
 </faces-config>

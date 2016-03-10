@@ -43,10 +43,12 @@ import org.apache.james.mime4j.message.Multipart;
 import org.apache.james.mime4j.message.TextBody;
 import org.apache.james.mime4j.parser.Field;
 
+import com.ibm.commons.util.StringUtil;
 import com.ibm.domino.commons.model.ModelException;
 
 public class MimeMessageParser {
     
+    private static final String ITEM_BODY = "Body"; //$NON-NLS-1$
     private static final String ITEM_SUBJECT = "Subject"; //$NON-NLS-1$
     private static final String ITEM_FORM = "Form"; //$NON-NLS-1$
     private static final String ITEM_SEND_TO = "SendTo"; //$NON-NLS-1$
@@ -56,6 +58,7 @@ public class MimeMessageParser {
     private static final String ITEM_RETURN_RECEIPT = "ReturnReceipt"; //$NON-NLS-1$
     private static final String ITEM_DISPOSITION_NOTIFICATION_TO = "Disposition_Notification_To"; //$NON-NLS-1$
     
+    private static final String HEADER_CONTENT_TYPE = "Content-Type"; //$NON-NLS-1$
     private static final String HEADER_IN_REPLY_TO = "In-Reply-To"; //$NON-NLS-1$
     private static final String HEADER_DISPOSITION_NOTIFICATION_TO = "Disposition-Notification-To"; //$NON-NLS-1$
     
@@ -72,11 +75,19 @@ public class MimeMessageParser {
             if ( fields == null || fields.size() == 0 ) {
                 throw new ModelException("Message is empty", ModelException.ERR_INVALID_INPUT); // $NLX-MimeMessageParser.Messageisempty-1$
             }
-        
+            
             document.replaceItemValue(ITEM_FORM, "Memo"); //$NON-NLS-1$
             
+            // PLEASE READ if you are adding code that writes items to the note.
+            // This code can execute either when the document is new or when an existing 
+            // document is being updated.  In the latter case, it's important to remove
+            // items that are not represented in the MIME input.
+            
+            document.removeItem(ITEM_SUBJECT);
             String subject = mimeMsg.getSubject();
-            document.replaceItemValue(ITEM_SUBJECT, subject);
+            if ( StringUtil.isNotEmpty(subject) ) {
+                document.replaceItemValue(ITEM_SUBJECT, subject);
+            }
             
             AddressList to = mimeMsg.getTo();
             writeAddresses(document, ITEM_SEND_TO, to);
@@ -87,6 +98,7 @@ public class MimeMessageParser {
             AddressList bcc = mimeMsg.getBcc();
             writeAddresses(document, ITEM_BLINDCOPY_TO, bcc);
             
+            document.removeItem(ITEM_IN_REPLY_TO);
             Header header = mimeMsg.getHeader();
             Field inReplyTo = header.getField(HEADER_IN_REPLY_TO);
             if ( inReplyTo != null ) {
@@ -94,6 +106,8 @@ public class MimeMessageParser {
                 document.replaceItemValue(ITEM_IN_REPLY_TO, value);
             }
             
+            document.removeItem(ITEM_DISPOSITION_NOTIFICATION_TO);
+            document.removeItem(ITEM_RETURN_RECEIPT);
             Field receiptTo = header.getField(HEADER_DISPOSITION_NOTIFICATION_TO);
             if ( receiptTo != null ) {
                 String value = receiptTo.getBody();
@@ -111,6 +125,11 @@ public class MimeMessageParser {
     private static void writeEntity(Document document, MIMEEntity parent, Entity entity) throws IOException, NotesException {  
         MIMEEntity notesEntity = null;
         if ( parent == null ) {
+            if (document.hasItem(ITEM_BODY)) {
+                // SPR #BBRL9RECLY: Remove existing body or createMIMEEntity 
+                // will fail.
+                document.removeItem(ITEM_BODY);
+            }
             notesEntity = document.createMIMEEntity();
         }
         else {
@@ -124,7 +143,7 @@ public class MimeMessageParser {
 
             // Set the content type
             
-            MIMEHeader notesHeader = notesEntity.createHeader("Content-Type"); //$NON-NLS-1$
+            MIMEHeader notesHeader = notesEntity.createHeader(HEADER_CONTENT_TYPE); //$NON-NLS-1$
             notesHeader.setHeaderVal(mediaType);
             
             Multipart multipart = (Multipart)body;
@@ -163,9 +182,24 @@ public class MimeMessageParser {
                 Stream stream = session.createStream();
                 readerToNotesStream(stream, reader);
                 
-                // TODO: Handle character set
+                // Write the part's content
                 
                 notesEntity.setContentFromText(stream, mediaType, MIMEEntity.ENC_NONE);
+                
+                // SPR# WJBJ9SP4TD: Preserve the char set parameter on the Content-Type header
+                
+                String ctValue = null;
+                Field ct = header.getField(HEADER_CONTENT_TYPE);
+                if ( ct != null ) {
+                    ctValue = ct.getBody();
+                }
+                
+                if ( ctValue != null && !ctValue.equalsIgnoreCase(mediaType) ) {
+                    MIMEHeader notesHeader = getNotesHeader(notesEntity, HEADER_CONTENT_TYPE);
+                    if ( notesHeader != null ) {
+                        notesHeader.setHeaderValAndParams(ctValue);
+                    }
+                }
             }
             else if ( body instanceof BinaryBody ) {
                 InputStream is = ((BinaryBody)body).getInputStream();
@@ -178,9 +212,39 @@ public class MimeMessageParser {
                 // TODO: Is this an error condition?
             }
         }
+        
+        // If this is a top level entity, flush the MIME contents to the
+        // in-memory note.
+        if ( parent == null ) {
+            try {
+                document.closeMIMEEntities(true, ITEM_BODY);
+            }
+            catch (NotesException e) {
+                // Special case when the MIME input has no content:  closeMIMEEntities throws
+                // an exception with an error code of 546.  It's safe to ignore that, but
+                // rethrow all other exceptions.
+                if ( e.id != 546 ) {
+                    throw e;
+                }
+            }
+        }
+    }
+    
+    private static MIMEHeader getNotesHeader(MIMEEntity entity, String headerName) throws NotesException {
+        MIMEHeader header = null;
+        Vector<MIMEHeader> headers = entity.getHeaderObjects();
+        for ( MIMEHeader thisHeader : headers ) {
+            if ( thisHeader.getHeaderName().equalsIgnoreCase(headerName) ) {
+                header = thisHeader;
+                break;
+            }
+        }
+        return header;
     }
     
     private static void writeAddresses(Document document, String itemName, AddressList addresses) throws NotesException {
+
+        document.removeItem(itemName);
         
         if ( addresses != null && addresses.size() > 0 ) {
             Vector<String> values = new Vector<String>();

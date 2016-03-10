@@ -19,7 +19,7 @@
 <feature
       id="com.ibm.domino.services.samples.feature"
       label="%feature.name"
-      version="9.0.1.v00_11_qualifier"
+      version="9.0.1.v00_16_qualifier"
       provider-name="%feature.provider">
 
    <description>
@@ -35,7 +35,7 @@
    </license>
 
    <requires>
-      <import feature="com.ibm.domino.das.feature"/>
+      <import feature="org.openntf.extlib.domino.das.feature"/>
    </requires>
 
    <plugin

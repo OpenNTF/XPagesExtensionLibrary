@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -46,6 +46,17 @@ public class Loader extends ExtLibLoaderExtension {
 		if (aliases != null) {
 			// CAREFULLY MAKE SURE THAT THERE IS NO CONFLICT WITH ANOTHER
 			// LIBRARY
+		    aliases.put("@B3a","extlib.responsive.dijit.xsp.bootstrap.AccorionContainer"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3b","extlib.responsive.dijit.xsp.bootstrap.AccordionPane"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3c","extlib.responsive.dijit.xsp.bootstrap.Dialog"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3d","extlib.responsive.dijit.xsp.bootstrap.ListTextBox"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3e","extlib.responsive.dijit.xsp.bootstrap.NameTextBox"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3f","extlib.responsive.dijit.xsp.bootstrap.Navigator"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3g","extlib.responsive.dijit.xsp.bootstrap.PickerCheckbox"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3h","extlib.responsive.dijit.xsp.bootstrap.PickerList"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3i","extlib.responsive.dijit.xsp.bootstrap.PickerListSearch"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3j","extlib.responsive.dijit.xsp.bootstrap.PickerName"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3k","extlib.responsive.dijit.xsp.bootstrap.Tooltip"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// / PREFIXES
@@ -66,27 +77,37 @@ public class Loader extends ExtLibLoaderExtension {
 			// CAREFULLY MAKE SURE THAT THERE IS NO CONFLICT WITH ANOTHER
 			// LIBRARY
 			//aliases.put("@Ea","/.ibmxspres/.extlib/css/tagcloud.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3l","/.ibmxspres/.extlib/responsive/bootstrap3/css/bootstrap-theme.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3m","/.ibmxspres/.extlib/responsive/bootstrap3/css/bootstrap-theme.min.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3n","/.ibmxspres/.extlib/responsive/bootstrap3/css/bootstrap.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3o","/.ibmxspres/.extlib/responsive/bootstrap3/css/bootstrap.min.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3p","/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme/dbootstrap/dbootstrap.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3q","/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme/dbootstrap/dijit.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3r","/.ibmxspres/.extlib/responsive/xpages/css/xsp-core.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3s","/.ibmxspres/.extlib/responsive/xpages/css/xsp-mixin.css"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3t","/.ibmxspres/.extlib/responsive/xpages/css/xsp-ie11.css"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// / PREFIXES
 		if (prefixes != null) {
 			// CAREFULLY MAKE SURE THAT THERE IS NO CONFLICT WITH ANOTHER
 			// LIBRARY
-			prefixes.put("3B3a", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3B3b", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/js"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3B3c", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/css"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3B3d", "/.ibmxspres/.extlib/responsive/bootstrap-3.2.0-dist/fonts"); //$NON-NLS-1$ //$NON-NLS-2$
+		    prefixes.put("3B3a", "/.ibmxspres/.extlib/responsive/bootstrap3"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3B3b", "/.ibmxspres/.extlib/responsive/bootstrap3/js"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3B3c", "/.ibmxspres/.extlib/responsive/bootstrap3/css"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3B3d", "/.ibmxspres/.extlib/responsive/bootstrap3/fonts"); //$NON-NLS-1$ //$NON-NLS-2$
 
-			prefixes.put("3Dba", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3Dbb", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3Dbc", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme/dbootstrap"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3Dba", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3Dbb", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3Dbc", "/.ibmxspres/.extlib/responsive/dijit/dbootstrap-0.1.1/theme/dbootstrap"); //$NON-NLS-1$ //$NON-NLS-2$
 
-			prefixes.put("3JQa", "/.ibmxspres/.extlib/responsive/jquery/jquery-2.1.1"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3JQa", "/.ibmxspres/.extlib/responsive/jquery/"); //$NON-NLS-1$ //$NON-NLS-2$
 
-			prefixes.put("3XPa", "/.ibmxspres/.extlib/responsive/xpages"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3XPb", "/.ibmxspres/.extlib/responsive/xpages/css"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3XPc", "/.ibmxspres/.extlib/responsive/xpages/img"); //$NON-NLS-1$ //$NON-NLS-2$
-			prefixes.put("3XPd", "/.ibmxspres/.extlib/responsive/xpages/js"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3XPa", "/.ibmxspres/.extlib/responsive/xpages"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3XPb", "/.ibmxspres/.extlib/responsive/xpages/css"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3XPc", "/.ibmxspres/.extlib/responsive/xpages/img"); //$NON-NLS-1$ //$NON-NLS-2$
+            prefixes.put("3XPd", "/.ibmxspres/.extlib/responsive/xpages/js"); //$NON-NLS-1$ //$NON-NLS-2$
+        
 		}
 	}
 

@@ -120,7 +120,7 @@ ul.pagination {
 	font-family: 'Glyphicons Halflings';
 	content: '\e022';
 	font-weight: normal;
-	color: #428BCA;
+	color: #337ab7;
 	padding: 0px 8px;
 	font-size:9pt;
 }
@@ -157,12 +157,12 @@ ul.pagination {
 }
 /** Fix arrows for month increment/decrement in DTPs **/
 .xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:first-child:before {
-    color: #428bca;
+    color: #337ab7;
     content: "\e079";
     font-family: "Glyphicons Halflings";
 }
 .xsp.dbootstrap .dijitCalendarContainer thead .dijitCalendarMonthContainer th:last-child:before {
-    color: #428bca;
+    color: #337ab7;
     content: "\e080";
     font-family: "Glyphicons Halflings";
 }
@@ -181,4 +181,14 @@ ul.pagination {
 .bootstrap-theme .btn-default.btn-danger,
 .bootstrap-theme .btn-default.btn-warning{
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+/* Type Ahead Styling */
+.dijitComboBoxMenuPopup .dijitComboBoxMenu .dijitMenuItem pre {
+	background-color: inherit;
+	border-radius: 0px;
+	border: 0px none;
+	padding: 0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: 0px;
+	font-size: 14px;
 }

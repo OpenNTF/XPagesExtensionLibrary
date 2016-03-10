@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ******************************************************************* -->
+<!--                                                                     -->
+<!-- © Copyright IBM Corp. 2015                                          -->
+<!--                                                                     -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
+<!-- you may not use this file except in compliance with the License.    -->
+<!-- You may obtain a copy of the License at:                            -->
+<!--                                                                     -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                          -->
+<!--                                                                     --> 
+<!-- Unless required by applicable law or agreed to in writing, software -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,   --> 
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or     -->
+<!-- implied. See the License for the specific language governing        --> 
+<!-- permissions and limitations under the License.                      -->
+<!--                                                                     -->
+<!-- ******************************************************************* -->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension 
+        point="org.eclipse.ui.actionSets">
+        <actionSet
+            id="com.ibm.xsp.extlib.designer.bluemix.actionSet"
+            label="%bluemix.actionset"
+            visible="false">
+            <menu
+                id="com.ibm.rcp.ui.toolsmenu"
+                label="%tools.menu" 
+                path="navigate"> 
+                <separator name="slot1"/>
+                <separator name="slot2"/>
+                <separator name="slot3"/>
+                <separator name="slot4"/>
+                <separator name="additions"/>
+                <separator name="relational"/>
+                <separator name="bluemix"/>
+            </menu> 
+            <action
+                id="com.ibm.xsp.extlib.designer.bluemix.action.import"
+                class="com.ibm.xsp.extlib.designer.bluemix.action.ImportAction"
+                label="%bluemix.import.starter.code"
+                menubarPath="com.ibm.rcp.ui.toolsmenu/bluemix"/>
+            <action
+                id="com.ibm.xsp.extlib.designer.bluemix.action.deploy"
+                class="com.ibm.xsp.extlib.designer.bluemix.action.ToolbarAction"
+                icon="images\cloud_obj.png"
+                label="%bluemix.menu"
+                menubarPath="org.eclipse.wst.xml.ui.designMenuId/slot2"
+                retarget="false"
+                style="pulldown"
+                toolbarPath="com.ibm.dominodesigner/Bluemix"
+                tooltip="%deploy.to.bluemix"/>                                                      
+        </actionSet>
+    </extension>
+   
+    <extension 
+        point="org.eclipse.ui.perspectiveExtensions">
+        <perspectiveExtension 
+            targetID="com.ibm.designer.domino.perspective">
+            <actionSet id="com.ibm.xsp.extlib.designer.bluemix.actionSet"/>
+        </perspectiveExtension>
+        <perspectiveExtension 
+            targetID="com.ibm.designer.domino.xsp.perspective">
+            <actionSet id="com.ibm.xsp.extlib.designer.bluemix.actionSet"/>
+        </perspectiveExtension>
+    </extension>
+   
+    <extension
+        point="org.eclipse.ui.preferencePages">
+        <page
+            category="domino.prefs.page.root"
+            class="com.ibm.xsp.extlib.designer.bluemix.preference.PreferencePage"
+            id="com.ibm.xsp.extlib.designer.bluemix.preferences.BluemixPreferencePage"
+            name="%bluemix">
+        </page>
+    </extension>
+    
+    <extension
+        point="org.eclipse.ui.editors">
+        <editor
+            class="com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestMultiPageEditor"
+            contributorClass="com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestEditorContributor"
+            default="true"
+            icon="images/cloud_obj.png"
+            id="com.ibm.xsp.extlib.designer.bluemix.manifest.editor"
+            name="%bluemix.manifest">
+        </editor>
+    </extension>
+       
+    <extension
+        point="com.ibm.designer.domino.ide.resources.metamodel">
+        <metamodel
+            category="com.ibm.designer.domino.ide.metamodel.dbconfig"
+            customDefinitionClass="com.ibm.xsp.extlib.designer.bluemix.manifest.editor.ManifestMetaModel"
+            id="metamodel.bluemix.manifest"
+            name="%bluemix.manifest"
+            isEfsFile="true"
+            path="manifest.yml">
+        </metamodel>
+    </extension>
+    
+    <extension
+        point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+            <menu
+                id="com.ibm.xsp.extlib.designer.popup.bluemix"
+                label="%bluemix.menu">
+                <command
+                    commandId="com.ibm.xsp.extlib.designer.bluemix.command.deploy"
+                    label="%deploy.application"
+                    style="push">
+                </command>
+                <command
+                    commandId="com.ibm.xsp.extlib.designer.bluemix.command.configure"
+                    label="%configure.for.deployment"
+                    style="push">
+                </command>
+                <command
+                    commandId="com.ibm.xsp.extlib.designer.bluemix.command.open"
+                    label="%open.in.browser"
+                    style="push">
+                </command>             
+                <visibleWhen
+                    checkEnabled="false">
+                    <and>                    
+                        <with variable="activePartId">
+                            <equals
+                                value="com.ibm.designer.domino.navigator">
+                            </equals>
+                        </with>
+                        <or>
+                            <with variable="selection">
+                                <iterate ifEmpty="false">
+                                    <instanceof value="com.ibm.designer.domino.ui.commons.IDesignerSelection"/>
+                                </iterate>
+                            </with>
+                            <with variable="selection">
+                                <iterate ifEmpty="false">
+                                    <instanceof value="org.eclipse.core.resources.IProject"/>
+                                </iterate>
+                            </with>
+                            <with variable="selection">
+                                <iterate ifEmpty="false">
+                                    <instanceof value="org.eclipse.core.resources.IFile"/>
+                                </iterate>
+                            </with>
+                        </or>
+                    </and>
+                </visibleWhen>
+            </menu>
+        </menuContribution>
+    </extension>
+    
+    <extension
+          point="org.eclipse.ui.commands">
+       <command
+             id="com.ibm.xsp.extlib.designer.bluemix.command.deploy"
+             name="%deploy.application">
+       </command>
+       <command
+             id="com.ibm.xsp.extlib.designer.bluemix.command.configure"
+             name="%configure.for.deployment">
+       </command>
+       <command
+             id="com.ibm.xsp.extlib.designer.bluemix.command.open"
+             name="%open.in.browser">
+       </command>
+    </extension>
+    
+    <extension
+          point="org.eclipse.ui.handlers">
+       <handler
+             class="com.ibm.xsp.extlib.designer.bluemix.action.DeployAction"
+             commandId="com.ibm.xsp.extlib.designer.bluemix.command.deploy">
+       </handler>
+       <handler
+             class="com.ibm.xsp.extlib.designer.bluemix.action.ConfigAction"
+             commandId="com.ibm.xsp.extlib.designer.bluemix.command.configure">
+       </handler>
+       <handler
+             class="com.ibm.xsp.extlib.designer.bluemix.action.OpenAction"
+             commandId="com.ibm.xsp.extlib.designer.bluemix.command.open">
+       </handler>
+    </extension>
+    
+    <extension 
+        point="com.ibm.designer.domino.preferences.initializer">
+            <initializer class="com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceInitializer"/>
+    </extension> 
+    
+</plugin>

@@ -1,18 +1,13 @@
 <div>
-<style>
-.xspPickerList .dijitBorderContainer { width: auto; height: auto;}
-.xspPickerList { height:100%; width:100%; }
-.xspPickerInput {margin:4px 2px 4px 4px!important;vertical-align:middle;}
-.xspPickerSpan {padding:1px 1px 1px 1px!important; display: inline; margin:4px 4px 4px 4px}
-</style>
-<div style="padding:10px">
-	<div class="xspPickerList" id="${id}">
-		<div dojoAttachPoint="containerNode" style="width:${listWidth};height:${listHeight}" class="xspPickerBodyWrapper" dojoAttachEvent="onclick:_handleClick"></div>
-	</div>
-</div>
-<div class="modal-footer">
-  <button dojoAttachPoint="pkCancel" class="btn btn-default">${PickerCheckBox_Cancel}</button>
-  <button dojoAttachPoint="pkOk" class="btn btn-primary">${PickerCheckBox_OK}</button>
-</div>
-
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div dojoAttachPoint="containerNode" class="xspPickerBodyWrapper xspPickerCheckboxList" dojoAttachEvent="onclick:_handleClick"></div>
+            </div>
+       </div>
+    </div>
+    <div class="modal-footer">
+        <button dojoAttachPoint="pkCancel" class="btn btn-default" type="button">${PickerCheckBox_Cancel}</button>
+        <button dojoAttachPoint="pkOk" class="btn btn-primary" type="button">${PickerCheckBox_OK}</button>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -23,7 +23,6 @@ dojo.declare(
 	'extlib.responsive.dijit.xsp.bootstrap.PickerListSearch',
 	[extlib.dijit.PickerListSearch],
 	{
-        listWidth: "100%",
 		templateString: dojo.cache("extlib.responsive.dijit.xsp.bootstrap", "templates/PickerListSearch.html")
 	}
 );

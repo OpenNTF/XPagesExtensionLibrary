@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,7 +34,23 @@ public class DropDownButtonRenderer extends HtmlDivSpanRenderer {
 
     public DropDownButtonRenderer() {
     }
-
+    
+    protected Object getProperty(int prop) {
+        {
+            // translating some extra strings that are unused here in the extlib.control plugin,
+            // but are used in the other themes - e.g. the bootstrap DataViewRenderer.
+            String str = "";
+            str = "Click for actions";  // $NLS-DropDownButtonRenderer.Clickforactions-1$
+            str = "Action button";  // $NLS-DropDownButtonRenderer.Actionbutton-1$
+            str = "Actions";  // $NLS-DropDownButtonRenderer.Actions-1$
+            // end strings
+            str.getClass(); // prevent unused variable warning
+        }// end translating extra string
+        
+        return null;
+    }
+    
+    
     @Override
     protected void renderEntryItemContent(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
         boolean leaf = tree.getNode().getType() == ITreeNode.NODE_LEAF;
@@ -53,6 +69,16 @@ public class DropDownButtonRenderer extends HtmlDivSpanRenderer {
         String clientId = tree.getClientId(context,"ab",1); // $NON-NLS-1$
         if(StringUtil.isNotEmpty(clientId)) {
             writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
+        }
+        
+        String style = tree.getNode().getStyle();
+        if(StringUtil.isNotEmpty(style)) {
+            writer.writeAttribute("style", style, null); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
+        String styleClass = tree.getNode().getStyleClass();
+        if(StringUtil.isNotEmpty(styleClass)) {
+            writer.writeAttribute("class", styleClass, null); // $NON-NLS-1$ $NON-NLS-2$
         }
 
         String image = tree.getNode().getImage();

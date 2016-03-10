@@ -301,7 +301,7 @@ public class JdbcRowSetSource extends DataAccessorSource implements TabularDataS
                     Class<?> c = FacesContextEx.getCurrentInstance().getContextClassLoader().loadClass(rsClass);
                     return (RowSet)c.newInstance();
                 } catch(Exception ex) {
-                    throw new FacesExceptionEx(ex,StringUtil.format("Error while instanciating {0} of class {1}", "RowSet", rsClass)); // $NLX-JdbcRowSetSource.Errorwhileinstanciating0ofclass1-1$ $NON-NLS-2$
+                    throw new FacesExceptionEx(ex,StringUtil.format("Error while creating a RowSet object with class {0}", rsClass)); // $NLX-JdbcRowSetSource.Errorwhileinstanciating0ofclass1-1$ $NON-NLS-2$
                 }
             } else {
                 CachedRowSet rs = new CachedRowSetImpl();

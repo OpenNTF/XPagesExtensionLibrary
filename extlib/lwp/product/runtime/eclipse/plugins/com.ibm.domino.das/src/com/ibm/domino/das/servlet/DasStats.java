@@ -123,7 +123,9 @@ public class DasStats {
      * @param key
      * @param value
      */
-    public void addInteger(String key, int value) {
+    public int addInteger(String key, int value) {
+        
+        int newValue = value;
         
         // TODO: Handle the race condition where two threads
         // are creating the same new stat at the same time.
@@ -131,13 +133,15 @@ public class DasStats {
         Object current = statsMap.get(key);
         if ( current instanceof MutableInteger ) {
             synchronized(current) {
-                int newValue = ((MutableInteger)current).getValue() + value;
+                newValue = ((MutableInteger)current).getValue() + value;
                 ((MutableInteger)current).setValue(newValue);
             }
         }
         else {
             setInteger(key, value);
         }
+        
+        return newValue;
     }
     
     /**
@@ -193,7 +197,9 @@ public class DasStats {
      * @param key
      * @param value
      */
-    public void addNumber(String key, double value) {
+    public double addNumber(String key, double value) {
+        
+        double newValue = value;
         
         // TODO: Handle the race condition where two threads
         // are creating the same new stat at the same time.
@@ -201,13 +207,31 @@ public class DasStats {
         Object current = statsMap.get(key);
         if ( current instanceof MutableDouble ) {
             synchronized(current) {
-                double newValue = ((MutableDouble)current).getValue() + value;
+                newValue = ((MutableDouble)current).getValue() + value;
                 ((MutableDouble)current).setValue(newValue);
             }
         }
         else {
             setNumber(key, value);
         }
+        
+        return newValue;
+    }
+    
+    /**
+     * Reads a number stat.
+     * 
+     * @param key
+     * @return
+     */
+    public double getNumber(String key) {
+        double value = 0;
+        Object current = statsMap.get(key);
+        if ( current instanceof MutableDouble ) {
+            value = ((MutableDouble)current).getValue();
+        }
+        
+        return value;
     }
     
     /**

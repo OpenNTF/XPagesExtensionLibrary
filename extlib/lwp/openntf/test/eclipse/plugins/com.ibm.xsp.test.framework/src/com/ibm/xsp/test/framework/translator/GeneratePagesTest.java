@@ -401,9 +401,9 @@ public class GeneratePagesTest extends AbstractXspTest{
         	// array copied from ControlClassUtil.initCache(Translator, Map<String, Object>)
         	String[] keys = {"text","tag","custom-base","include-page","property-map-instance"};
         	for (String transKey : keys) {
-        		Object value = projectObjs.get(transKey);
+        		Class<?> value = (Class<?>) projectObjs.get(transKey);
         		if( value != null ){
-        			options.put(transKey, (Class<?>) value);
+        			options.put(transKey, value);
         		}
         	}
         }

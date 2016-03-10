@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_DOCUMENT;
+import static com.ibm.domino.das.service.DataService.STAT_DOCUMENT;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.HttpServiceConstants.*;
 import static com.ibm.domino.services.rest.RestParameterConstants.*;
@@ -83,6 +85,7 @@ public class DocumentResource extends AbstractDasResource {
             @QueryParam(PARAM_DOC_FIELDS) final String items){
 
         DAS_LOGGER.traceEntry(this, "getDocumentByUnid"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOCUMENT, STAT_DOCUMENT);
 
         final ResponseBuilder builder = Response.ok();
         
@@ -199,6 +202,7 @@ public class DocumentResource extends AbstractDasResource {
             @QueryParam(PARAM_DOC_COMPUTEWITHFORM) String computeWithForm) {
 
         DAS_LOGGER.traceEntry(this, "putDocumentByUnid"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOCUMENT, STAT_DOCUMENT);
 
         Response response = updateDocumentByUnid(requestEntity, ifUnmodifiedSince, unid, form, computeWithForm, true);
 
@@ -217,6 +221,7 @@ public class DocumentResource extends AbstractDasResource {
             @QueryParam(PARAM_DOC_COMPUTEWITHFORM) String computeWithForm) {
 
         DAS_LOGGER.traceEntry(this, "patchDocumentByUnid"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOCUMENT, STAT_DOCUMENT);
 
         Response response = updateDocumentByUnid(requestEntity, ifUnmodifiedSince, unid, form, computeWithForm, false);
 
@@ -231,6 +236,7 @@ public class DocumentResource extends AbstractDasResource {
     		@PathParam(PARAM_UNID) String unid) {
 
         DAS_LOGGER.traceEntry(this, "deleteDocumentByUnid"); // $NON-NLS-1$
+        DataService.beforeRequest(FEATURE_REST_API_DATA_DOCUMENT, STAT_DOCUMENT);
 
         // String jsonEntity = null;
 

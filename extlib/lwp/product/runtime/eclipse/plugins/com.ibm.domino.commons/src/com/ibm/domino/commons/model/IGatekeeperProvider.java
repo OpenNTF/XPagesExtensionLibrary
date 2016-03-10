@@ -45,7 +45,22 @@ public interface IGatekeeperProvider {
     public static final int FEATURE_REST_API_FREEBUSY_DIRECTORIES     = 505;
     public static final int FEATURE_REST_API_FREEBUSY_SITES           = 506;
 
-    public static final int TEST_MUTED_THREADS                        = 537;
+    public static final int TEST_MUTED_THREADS                        = 544;
+
+    public static final int FEATURE_REST_API_DATA_DB_COLLECTION         = 673;
+    public static final int FEATURE_REST_API_DATA_DOCUMENT              = 674;
+    public static final int FEATURE_REST_API_DATA_DOC_COLLECTION        = 675;
+    public static final int FEATURE_REST_API_DATA_VIEW_COLLECTION       = 676;
+    public static final int FEATURE_REST_API_DATA_VIEW_DESIGN           = 677;
+    public static final int FEATURE_REST_API_DATA_VIEW_ENTRIES          = 678;
+    public static final int FEATURE_REST_API_DATA_VIEW_ENTRY            = 679;
     
+    public static final int FEATURE_REST_API_CONTACTS_ROOT              = 746;
+    public static final int FEATURE_REST_API_CONTACTS_PEOPLE            = 747;
+    public static final int FEATURE_REST_API_CONTACTS_PERSON            = 748;
+    public static final int FEATURE_REST_API_CONTACTS_GROUPS            = 749;
+    public static final int FEATURE_REST_API_CONTACTS_GROUP             = 750;
+    public static final int FEATURE_REST_API_CONTACTS_RECENT            = 751;
+
     public boolean isFeatureEnabled(int feature, String CustomerID, String userID);
 }

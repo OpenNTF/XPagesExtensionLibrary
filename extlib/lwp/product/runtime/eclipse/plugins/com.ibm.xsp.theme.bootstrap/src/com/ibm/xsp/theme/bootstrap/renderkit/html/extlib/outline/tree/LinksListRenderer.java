@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -31,10 +31,10 @@ public class LinksListRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
 
     @Override
     protected Object getProperty(int prop) {
-    	// Should we rename these styles?
+        // Should we rename these styles?
         switch(prop) {
-            case PROP_LINKSLIST_INLINELIST:   	return "lotusInlinelist"; // $NON-NLS-1$
-            case PROP_LINKSLIST_FIRST:  		return "lotusFirst"; // $NON-NLS-1$
+            case PROP_LINKSLIST_INLINELIST:     return "lotusInlinelist"; // $NON-NLS-1$
+            case PROP_LINKSLIST_FIRST:          return "lotusFirst"; // $NON-NLS-1$
         }
         return null;
     }
@@ -55,8 +55,10 @@ public class LinksListRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
             writer.startElement("img",null); // $NON-NLS-1$
             writer.writeAttribute("class","lotusArrow lotusDropDownSprite",null); // $NON-NLS-1$ $NON-NLS-2$
             writer.writeAttribute("src",HtmlRendererUtil.getImageURL(context,Resources.get().BLANK_GIF),null); // $NON-NLS-1$
-            writer.writeAttribute("aria-label","Show Menu",null);  // $NON-NLS-1$ // $NLS-OneUILinksListRenderer_AriaLabel_ShowMenu-2$ 
-            writer.writeAttribute("alt","Show Menu",null);  // $NON-NLS-1$ // $NLS-OneUILinksListRenderer_Alt_ShowMenu-2$
+            // "Show menu"
+            String altText = com.ibm.xsp.extlib.controls.ResourceHandler.getString("DojoDropDownButtonRenderer_ImageLabelShowMenu"); // $NON-NLS-1$
+            writer.writeAttribute("aria-label",altText,null);  // $NON-NLS-1$
+            writer.writeAttribute("alt",altText,null);  // $NON-NLS-1$
             writer.endElement("img"); // $NON-NLS-1$
             writer.startElement("span",null); // $NON-NLS-1$
             writer.writeAttribute("class","lotusAltText",null); // $NON-NLS-1$ $NON-NLS-2$

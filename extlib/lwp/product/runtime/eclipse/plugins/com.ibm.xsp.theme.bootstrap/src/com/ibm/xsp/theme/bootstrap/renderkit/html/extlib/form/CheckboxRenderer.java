@@ -50,14 +50,14 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
     static final String[] ATTRS = { "tabindex", "accesskey" }; // $NON-NLS-1$ $NON-NLS-2$
     static final String DIR = "dir"; //$NON-NLS-1$
     
-	/*
+    /*
      * (non-Javadoc)
      * 
      * @see javax.faces.render.Renderer#encodeEnd(javax.faces.context.FacesContext,
      *      javax.faces.component.UIComponent)
      */
     @Override
-	public void encodeEnd(FacesContext context, UIComponent component)
+    public void encodeEnd(FacesContext context, UIComponent component)
             throws IOException {
         // validate the context and component
         if (context == null || component == null) {
@@ -77,11 +77,11 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
         String customHtmlValue = null;
         XspInputCheckbox checkbox = (component instanceof XspInputCheckbox) ? (XspInputCheckbox)component : null;    
         if(null != checkbox && checkbox.useCustomHtmlValue()) {
-        	customHtmlValue = checkbox.getCustomHtmlValue();
-        	if (StringUtil.isEmpty(customHtmlValue)) {
-        		return; // we need a custom value and we don't have it - return
-        	}  // if non-null, the customHtmlValue is rendered further down 
-        	// but we need to check here first in case we need to bale...
+            customHtmlValue = checkbox.getCustomHtmlValue();
+            if (StringUtil.isEmpty(customHtmlValue)) {
+                return; // we need a custom value and we don't have it - return
+            }  // if non-null, the customHtmlValue is rendered further down 
+            // but we need to check here first in case we need to bale...
         }
         
         // start the label
@@ -102,11 +102,11 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
         }
         
         // start the wrapping div tag
-        writer.startElement("div", component);
+        writer.startElement("div", component); // $NON-NLS-1$
         if(checkbox.getDojoType()==null) {
-        	writer.writeAttribute("class", CHECKBOX, "class");
+            writer.writeAttribute("class", CHECKBOX, "class"); // $NON-NLS-1$ $NON-NLS-2$
         }else{
-        	writer.writeAttribute("style", "display: inline;", "style");
+            writer.writeAttribute("style", "display: inline;", "style"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
         }
         encodeHtmlStyleAttributes(writer, component);
         
@@ -170,14 +170,14 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
         
         // add the customHtmlValue if non-null (typically the note id)
         if (StringUtil.isNotEmpty(customHtmlValue)) {
-    		writer.writeAttribute(VALUE, customHtmlValue, VALUE);
-    	}
+            writer.writeAttribute(VALUE, customHtmlValue, VALUE);
+        }
         
         writer.writeAttribute(CHECKED, 
                 UIInputCheckbox.isChecked(context, component)? Boolean.TRUE : Boolean.FALSE, VALUE);
         if( !readonly ){ // when readonly will have written disabled above.
             // check if disabled, and if so, write the disabled attribute
-            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-N$
+            writeBooleanAttribute(writer, component, "disabled"); // //$NON-NLS-1$
         }
         
         encodeHtmlAttributes(writer, component, false);
@@ -206,7 +206,7 @@ public class CheckboxRenderer extends com.ibm.xsp.renderkit.html_extended.Checkb
         }
         
         //end the div
-        writer.endElement("div");
+        writer.endElement("div"); // $NON-NLS-1$
         
         InputRendererUtil.encodeValidation(context, context.getResponseWriter(), (UIInput)component);
         

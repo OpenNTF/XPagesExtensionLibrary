@@ -106,7 +106,6 @@ public class DasServlet extends AbstractRestServlet {
     private static final String DATA_SERVICE_PATH = "data";//$NON-NLS-1$
     private static final String VERSION_ZERO = "0.0.0";  //$NON-NLS-1$
     private static final String DATA_SERVICE_VERSION = "9.0.1"; //$NON-NLS-1$
-    private static final int DATA_SERVICE_GKF = 426; // Defined by core SAAS code
     
     private static final String CORE_SERVICE_NAME = "Core";//$NON-NLS-1$
     private static final String CORE_SERVICE_PATH = "core";//$NON-NLS-1$
@@ -117,8 +116,10 @@ public class DasServlet extends AbstractRestServlet {
     private static final String STATS_FACILITY = "API"; //$NON-NLS-1$
     private static final String STATS_REQUESTS = "Requests"; //$NON-NLS-1$
     private static final String STATS_TIME = "RequestTime"; //$NON-NLS-1$
+    private static final String STATS_AVG_TIME = "AvgRequestTime"; //$NON-NLS-1$
     private static final String STATS_TOTAL_REQUESTS = "Total." + STATS_REQUESTS; //$NON-NLS-1$
     private static final String STATS_TOTAL_TIME = "Total." + STATS_TIME; //$NON-NLS-1$
+    private static final String STATS_TOTAL_AVG_TIME = "Total." + STATS_AVG_TIME; //$NON-NLS-1$
 
     private static Boolean s_initialized = new Boolean(false);
     
@@ -165,14 +166,17 @@ public class DasServlet extends AbstractRestServlet {
         private boolean _enabled = false;
         private String _version;
         private int _gkf; // Gatekeeper feature #
+        private boolean _allowSstUsers;
         private Application _application;
         private boolean _initialized= false;
         
-        public DasService(String name, String path, String version, int gkf, Application application) {
+        public DasService(String name, String path, String version, int gkf, 
+                    boolean allowSstUsers, Application application) {
             _name = name;
             _path = path;
             _version = version;
             _gkf = gkf;
+            _allowSstUsers = allowSstUsers;
             _application = application;
         }
 
@@ -210,6 +214,10 @@ public class DasServlet extends AbstractRestServlet {
         
         public int getGkf() {
             return _gkf;
+        }
+
+        public boolean isAllowSstUsers() {
+            return _allowSstUsers;
         }
     }
     
@@ -333,18 +341,32 @@ public class DasServlet extends AbstractRestServlet {
             DasStats stats = DasStats.get();
             Date now = new Date();
             long elapsed = now.getTime() - StatsContext.getCurrentInstance().getStartTime().getTime();
-            stats.addInteger(STATS_TOTAL_REQUESTS, 1);
-            stats.addNumber(STATS_TOTAL_TIME, elapsed);
+            int requests = stats.addInteger(STATS_TOTAL_REQUESTS, 1);
+            double requestTime = stats.addNumber(STATS_TOTAL_TIME, elapsed);
+
+            // The average time is an approximation because we are not synchronizing threads.
+            // When multiple threads update the same stat at the same time, the calculation could
+            // be off, but it's not worth keeping a thread waiting for better precision.
+            
+            if ( requests != 0 ) {
+                stats.setInteger(STATS_TOTAL_AVG_TIME, (int)(requestTime/requests));
+            }
             
             String serviceName = StatsContext.getCurrentInstance().getServiceName();
             if ( StringUtil.isNotEmpty(serviceName) ) {
-                stats.addInteger(serviceName + "." + STATS_TOTAL_REQUESTS, 1);
-                stats.addNumber(serviceName + "." + STATS_TOTAL_TIME, elapsed);
+                requests = stats.addInteger(serviceName + "." + STATS_TOTAL_REQUESTS, 1);
+                requestTime = stats.addNumber(serviceName + "." + STATS_TOTAL_TIME, elapsed);
+                if ( requests != 0 ) {
+                    stats.setInteger(serviceName + "." + STATS_TOTAL_AVG_TIME, (int)(requestTime/requests));
+                }
                 
                 String category = StatsContext.getCurrentInstance().getRequestCategory();
                 if ( StringUtil.isNotEmpty(category) ) {
-                    stats.addInteger(serviceName + "." + category + "." + STATS_REQUESTS, 1);
-                    stats.addNumber(serviceName + "." + category + "." + STATS_TIME, elapsed);
+                    requests = stats.addInteger(serviceName + "." + category + "." + STATS_REQUESTS, 1);
+                    requestTime = stats.addNumber(serviceName + "." + category + "." + STATS_TIME, elapsed);
+                    if ( requests != 0 ) {
+                        stats.setInteger(serviceName + "." + category + "." + STATS_AVG_TIME, (int)(requestTime/requests));
+                    }
                 }
             }
         }
@@ -458,7 +480,8 @@ public class DasServlet extends AbstractRestServlet {
             
             // Add the service to our map
             DasService service = new DasService(CORE_SERVICE_NAME, CORE_SERVICE_PATH, 
-                                        CORE_SERVICE_VERSION, CORE_SERVICE_GKF, application);
+                                        CORE_SERVICE_VERSION, CORE_SERVICE_GKF, 
+                                        false, application);
             s_services.put(CORE_SERVICE_PATH, service);
 
             DAS_LOGGER.getLogger().fine("Registered the core DAS service"); // $NON-NLS-1$
@@ -475,7 +498,7 @@ public class DasServlet extends AbstractRestServlet {
             
             // Add the service to our map
             DasService service = new DasService(DATA_SERVICE_NAME, DATA_SERVICE_PATH, 
-                                        DATA_SERVICE_VERSION, DATA_SERVICE_GKF, application);
+                                        DATA_SERVICE_VERSION, 0, false, application);
             s_services.put(DATA_SERVICE_PATH, service);
 
             DAS_LOGGER.getLogger().fine("Registered the data service"); // $NON-NLS-1$
@@ -540,6 +563,10 @@ public class DasServlet extends AbstractRestServlet {
                             // Ignore parser exception
                         }
                     }
+
+                    // Parse the SST option
+                    String serviceAllowSstUsers = configElement.getAttribute("allowSstUsers"); // $NON-NLS-1$
+                    boolean allowSstUsers = "true".equalsIgnoreCase(serviceAllowSstUsers); // $NON-NLS-1$
                     
                     DAS_LOGGER.getLogger().fine(StringUtil.format("Found a DAS service extension: {0} (/{1})", serviceName, servicePath)); // $NON-NLS-1$
 
@@ -560,7 +587,7 @@ public class DasServlet extends AbstractRestServlet {
                         // Add the service to our map
                         DasService service = new DasService(serviceName, servicePath, 
                                                     (serviceVersion != null) ? serviceVersion : VERSION_ZERO,
-                                                     iGkf, application);
+                                                     iGkf, allowSstUsers, application);
                         s_services.put(servicePath.toLowerCase(), service);
     
                         DAS_LOGGER.getLogger().fine("Registered a DAS service extension"); // $NON-NLS-1$
@@ -645,7 +672,7 @@ public class DasServlet extends AbstractRestServlet {
 
                     // Even if the service is enabled thru gatekeeper, prevent
                     // self service trial customers from making API requests.
-                    if ( enabled && StringUtil.isNotEmpty(customerId) ) {
+                    if ( enabled && StringUtil.isNotEmpty(customerId) && !service.isAllowSstUsers()) {
                         try {
                             ICustomerProvider provider = ProviderFactory.getCustomerProvider();
                             if ( provider != null ) {

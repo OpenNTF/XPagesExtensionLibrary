@@ -20,35 +20,48 @@ import java.io.IOException;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.util.NavButtonRenderer;
-
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.tree.ITreeNode;
+import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
+import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
 import com.ibm.xsp.util.JSUtil;
+
+import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.util.NavButtonRenderer;
 
 
 public class DropDownButtonRenderer extends NavButtonRenderer {
     
     private static final long serialVersionUID = 1L;
+    
+    protected static final int PROP_DROPDOWN_BUTTON_CLASS       = 0;
 
     public DropDownButtonRenderer() {
     }
- 
-	@Override
-	protected boolean buttonGroup() {
-		return false;
-	}
-	
+
     @Override
-	protected void startRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+    protected Object getProperty(int prop) {
+        switch(prop) {
+            case PROP_DROPDOWN_BUTTON_CLASS:   return "btn btn-default"; // $NON-NLS-1$
+        }
+        return null;
+    }
+    
+    
+    @Override
+	protected boolean buttonGroup() {
+        return false;
+    }
+    
+    @Override
+    protected void startRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
         int depth = tree.getDepth();
         if(depth==1) {
-            writer.startElement("div",null);
-            writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$
+            writer.startElement("div",null); // $NON-NLS-1$
+            writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$ $NON-NLS-2$
         } else {
-        	super.startRenderContainer(context, writer, tree);
+            super.startRenderContainer(context, writer, tree);
         }
     }
     
@@ -56,22 +69,22 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
     protected void endRenderContainer(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
         int depth = tree.getDepth();
         if(depth==1) {
-            writer.endElement("div");
+            writer.endElement("div"); // $NON-NLS-1$
             writer.write('\n');
         } else {
-        	super.endRenderContainer(context, writer, tree);
+            super.endRenderContainer(context, writer, tree);
         }
     }
 
     @Override
-	protected void renderEntryNode(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
+    protected void renderEntryNode(FacesContext context, ResponseWriter writer, TreeContextImpl tree) throws IOException {
         int depth = tree.getDepth();
         if(depth==2) {
             boolean enabled = tree.getNode().isEnabled(); 
             boolean selected = tree.getNode().isSelected();
             renderPopupButton(context, writer, tree, enabled, selected);
         } else {
-        	super.renderEntryNode(context, writer, tree);
+            super.renderEntryNode(context, writer, tree);
         }
     }
 
@@ -79,35 +92,43 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
     protected String getItemTag() {
         return "li"; // $NON-NLS-1$
     }
-	@Override
-	protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
-    	if(tree.getDepth()==2) {
-			return "btn-group";
-    	}
-		return super.getItemStyleClass(tree, enabled, selected);
-	}
+    @Override
+    protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
+        if(tree.getDepth()==2) {
+            return "btn-group"; // $NON-NLS-1$
+        }
+        return super.getItemStyleClass(tree, enabled, selected);
+    }
 
     protected void renderPopupButton(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
-    	boolean popup = tree.getNode().getType()==ITreeNode.NODE_CONTAINER; 
+        boolean popup = tree.getNode().getType()==ITreeNode.NODE_CONTAINER; 
 
-    	writer.startElement("div",null); //$NON-NLS-1$
-        writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$
-    	
-        writer.startElement("button",null); //$NON-NLS-1$
-        writer.writeAttribute("type", "button", null); // $NON-NLS-1$
+        writer.startElement("div",null); //$NON-NLS-1$
+        writer.writeAttribute("class", "btn-group", null); // $NON-NLS-1$ $NON-NLS-2$
         
+        writer.startElement("button",null); //$NON-NLS-1$
+        writer.writeAttribute("type", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+        
+        String style = tree.getNode().getStyle();
+        if(StringUtil.isNotEmpty(style)) {
+            writer.writeAttribute("style", style, "style"); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
+        String styleClass = ExtLibUtil.concatStyleClasses(tree.getNode().getStyleClass(),(String)getProperty(PROP_DROPDOWN_BUTTON_CLASS));
+       
         if(popup) {
             // A popup button requires an id
             String clientId = tree.getClientId(context,"ab",1); // $NON-NLS-1$
             if(StringUtil.isNotEmpty(clientId)) {
                 writer.writeAttribute("id", clientId, null); // $NON-NLS-1$
             }
-        	writer.writeAttribute("class","btn btn-default dropdown-toggle",null); // $NON-NLS-1$ $NON-NLS-2$
-        	writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
-        } else {
-        	writer.writeAttribute("class","btn btn-default",null); // $NON-NLS-1$ $NON-NLS-2$
+            styleClass = ExtLibUtil.concatStyleClasses(styleClass, "dropdown-toggle"); //$NON-NLS-1$
+            writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
         }
-
+        if(StringUtil.isNotEmpty(styleClass)) {
+            writer.writeAttribute("class", styleClass, "class"); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
         String image = tree.getNode().getImage();
         boolean hasImage = StringUtil.isNotEmpty(image);
         if(hasImage) {
@@ -116,7 +137,7 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
                 image = HtmlRendererUtil.getImageURL(context, image);
                 writer.writeAttribute("src",image,null); // $NON-NLS-1$
                 String imageAlt = tree.getNode().getImageAlt();
-                if (StringUtil.isNotEmpty(imageAlt)) {
+                if (ExtLibRenderUtil.isAltPresent(imageAlt)) {
                     writer.writeAttribute("alt",imageAlt,null); // $NON-NLS-1$
                 }
                 String imageHeight = tree.getNode().getImageHeight();
@@ -153,7 +174,7 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
         }
 
         if(popup) {
-        	writePopupImage(context, writer, tree);
+            writePopupImage(context, writer, tree);
         }
 
         writer.endElement("button");//$NON-NLS-1$
@@ -167,12 +188,26 @@ public class DropDownButtonRenderer extends NavButtonRenderer {
     }
     
     @Override
-	protected void renderEntryItemLinkAttributes(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
-    	boolean popup = tree.getNode().getType()==ITreeNode.NODE_CONTAINER;
-    	if(popup) {
-            writer.writeAttribute("class", "dropdown-toggle", null); // $NON-NLS-1$
-            writer.writeAttribute("data-toggle", "dropdown", null); // $NON-NLS-1$
-            writer.writeAttribute("href", "#", null); // $NON-NLS-1$
+    protected void renderEntryItemLinkAttributes(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
+        String clazz = null;
+        String styleClass = tree.getNode().getStyleClass();
+        if(StringUtil.isNotEmpty(styleClass)) {
+            clazz = ExtLibUtil.concatStyleClasses(clazz, styleClass);
         }
-   }
+        
+        String itemStyle = tree.getNode().getStyle();
+        if(StringUtil.isNotEmpty(itemStyle)) {
+            writer.writeAttribute("style",itemStyle,null); // $NON-NLS-1$
+        }
+        
+        if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
+            clazz = ExtLibUtil.concatStyleClasses(clazz, "dropdown-toggle");// $NON-NLS-1$ 
+            writer.writeAttribute("data-toggle","dropdown",null); // $NON-NLS-1$ $NON-NLS-2$
+            writer.writeAttribute("href", "#",  null); // $NON-NLS-1$ $NON-NLS-2$
+        }
+        
+        if(StringUtil.isNotEmpty(clazz)) {
+            writer.writeAttribute("class",clazz,null); // $NON-NLS-1$
+        }
+    }
 }

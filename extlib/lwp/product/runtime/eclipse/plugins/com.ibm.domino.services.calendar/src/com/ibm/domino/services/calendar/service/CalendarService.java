@@ -76,6 +76,9 @@ public class CalendarService extends RestService {
     public static final String URL_PARAM_START = "start"; // $NON-NLS-1$
     public static final String URL_PARAM_FIELDS = "fields"; // $NON-NLS-1$
 
+    public static final String URL_PARAM_SINCE_NOW = "sincenow"; // $NON-NLS-1$
+    public static final String URL_PARAM_DAYS = "days"; // $NON-NLS-1$
+
     public static final String PATH_SEGMENT_API = "api"; // $NON-NLS-1$
     public static final String PATH_SEGMENT_CALENDAR = "calendar"; // $NON-NLS-1$
     public static final String PATH_SEGMENT_INVITATIONS = "invitations"; // $NON-NLS-1$

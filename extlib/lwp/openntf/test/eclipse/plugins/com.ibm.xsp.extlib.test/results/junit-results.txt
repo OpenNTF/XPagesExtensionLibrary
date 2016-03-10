@@ -1,7 +1,7 @@
 JUnit results, running against Notes 9.0.1
 using the Notes JVM
-Test ran 2014-12-11T11:45
-Lines in file: 1268
+Test ran 2016-01-26T11:30
+Lines in file: 1372
 
 ~ ExtlibTestSuite
 xsp.extlib.test.ExtlibTestSuite
@@ -96,8 +96,20 @@ com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:viewIconColumn va
 
 xsp.extlib.test.registry.ExtlibNamingConventionErrorTest
 testNamingConventions(xsp.extlib.test.registry.ExtlibNamingConventionErrorTest)
-junit.framework.AssertionFailedError: 1 fail(s). :
+junit.framework.AssertionFailedError: 13 fail(s). :
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:simpleResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UIDashboard does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Dashboard does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashNode [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.responsive.DashNode does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UINavbar does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Navbar does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UICarousel does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Carousel does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:slide [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.responsive.SlideNode does not begin with com.ibm.xsp.extlib
 	at junit.framework.Assert.fail(Assert.java:47)
 	at com.ibm.xsp.test.framework.registry.NamingConventionTest.testNamingConventions(NamingConventionTest.java:704)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -123,9 +135,22 @@ com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapRespo
 
 xsp.extlib.test.registry.ExtlibNamingConventionTest
 testNamingConventions(xsp.extlib.test.registry.ExtlibNamingConventionTest)
-junit.framework.AssertionFailedError: 2 fail(s). :
+junit.framework.AssertionFailedError: 15 fail(s). :
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
 com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:bootstrapResponsiveConfiguration [Rule13c] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.ResponsiveApplicationConfiguration, expect subpackage [layout], was [theme.bootstrap.components.layout]
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:simpleResponsiveConfiguration [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:simpleResponsiveConfiguration [Rule13c] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.layout.SimpleResponsiveApplicationConfiguration, expect subpackage [layout], was [theme.bootstrap.components.layout]
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UIDashboard does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Dashboard does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashboard [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:dashNode [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.responsive.DashNode does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UINavbar does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Navbar does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:navbar [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule1] Bad package name com.ibm.xsp.theme.bootstrap.components.responsive.UICarousel does not begin with com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule5a] Bad component-type com.ibm.xsp.theme.bootstrap.components.responsive.Carousel does not begin with common-prefix com.ibm.xsp.extlib, has prefix-package "com.ibm.xsp"
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:carousel [Rule12a] Bad renderer-type com.ibm.xsp.theme.bootstrap.components.responsive.NotImplemented does not have the common-prefix com.ibm.xsp.extlib
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config/xe:slide [Rule13a] Bad complex-class package name com.ibm.xsp.theme.bootstrap.components.responsive.SlideNode does not begin with com.ibm.xsp.extlib
 	at junit.framework.Assert.fail(Assert.java:47)
 	at com.ibm.xsp.test.framework.registry.NamingConventionTest.testNamingConventions(NamingConventionTest.java:704)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -225,48 +250,20 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoSliderBase.getSlideD
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
 
-xsp.extlib.test.registry.annotate.ExtlibDisplayNameDuplicateTest
-testDisplayNameDuplicate(xsp.extlib.test.registry.annotate.ExtlibDisplayNameDuplicateTest)
-junit.framework.AssertionFailedError: 1 fail(s). :
-com/ibm/xsp/extlib/config/extlib-dojo-base.xsp-config xe:com.ibm.xsp.extlib.dojo.WidgetBase  Duplicate def description/display-name. Existing: com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:com.ibm.xsp.extlib.dojo.WidgetBaseEx(Dojo Widget Base|"The base Dojo widget that all widgets inherit from")
-	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.DisplayNameDuplicateTest.testDisplayNameDuplicate(DisplayNameDuplicateTest.java:140)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
-	at java.lang.reflect.Method.invoke(Method.java:611)
-	at junit.framework.TestCase.runTest(TestCase.java:164)
-	at junit.framework.TestCase.runBare(TestCase.java:130)
-	at junit.framework.TestResult$1.protect(TestResult.java:106)
-	at junit.framework.TestResult.runProtected(TestResult.java:124)
-	at junit.framework.TestResult.run(TestResult.java:109)
-	at junit.framework.TestCase.run(TestCase.java:120)
-	at junit.framework.TestSuite.runTest(TestSuite.java:230)
-	at junit.framework.TestSuite.run(TestSuite.java:225)
-	at junit.framework.TestSuite.runTest(TestSuite.java:230)
-	at junit.framework.TestSuite.run(TestSuite.java:225)
-	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:130)
-	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
-	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
-
 com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest
 testTableAccessibility(com.ibm.xsp.test.framework.registry.annotate.BaseTableAccessibilityTest)
-junit.framework.AssertionFailedError: 10 fail(s). :
-com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected caption attribute in table tag for accessibility does not exist.
+junit.framework.AssertionFailedError: 9 fail(s). :
+com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-layout.xsp-config xe:applicationLayout Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-dynamicview.xsp-config xe:dynamicViewPanel Expected caption attribute in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected caption attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formTable Expected <caption> tag in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView Expected <caption> tag in table tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected summary attribute in table tag for accessibility does not exist.
-com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected caption attribute in table tag for accessibility does not exist.
+com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGrid Expected <caption> tag in table tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:198)
+	at com.ibm.xsp.test.framework.registry.annotate.TableAccessibilityTest.testTableAccessibility(TableAccessibilityTest.java:209)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -327,7 +324,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djHorizontalSlider Expe
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected accesskey attribute in input tag for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djVerticalSlider Expected tabindex attribute in input tag for accessibility does not exist.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:251)
+	at com.ibm.xsp.test.framework.registry.annotate.InputAccessibilityTest.testInputAccessibility(InputAccessibilityTest.java:252)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)
@@ -386,7 +383,7 @@ com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextListTextBox Expected no
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextNameTextBox Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.NameTextBox" readOnly="true" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
-com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.LinkSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
+com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextLinkSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.LinkSelect" readOnly="true" controlDisabled="false" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
 com/ibm/xsp/extlib/config/extlib-form.xsp-config xe:djextImageSelect Expected no input tag as "showReadonlyAsDisabled="false". But input tag was found: <p><input type="text" dojoType="extlib.dijit.ImageSelect" readOnly="true" valueList="[]" id="view:_id1:_id101" name="view:_id1:_id101"></input></p>
 com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djTextBox readOnly property is re-defined in input control properties. It should not be. [readOnly property inherited from xe:com.ibm.xsp.extlib.dojo.form.FormWidgetBase]
@@ -455,7 +452,7 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config xe:djToggleButton Expected
 
 xsp.extlib.test.registry.annotate.ExtlibRoleAccessibilityTest
 testRoleAccessibility(xsp.extlib.test.registry.annotate.ExtlibRoleAccessibilityTest)
-junit.framework.AssertionFailedError: 90 fail(s). :
+junit.framework.AssertionFailedError: 93 fail(s). :
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:singlePageApp Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmHeading Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:djxmRoundRectList Expected role property for accessibility does not exist.
@@ -471,6 +468,9 @@ com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn Expected rol
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore Expected role property for accessibility does not exist.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard Expected role property for accessibility does not exist.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar Expected role property for accessibility does not exist.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite Expected role property for accessibility does not exist.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected role property for accessibility does not exist.
@@ -877,12 +877,15 @@ com/ibm/xsp/extlib/config/extlib-dojo-form.xsp-config UIDojoRadioButton Expected
 
 com.ibm.xsp.test.framework.render.BaseRenderControlTest
 testRenderId(com.ibm.xsp.test.framework.render.BaseRenderControlTest)
-junit.framework.AssertionFailedError: 20 fail(s). :
+junit.framework.AssertionFailedError: 23 fail(s). :
 com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewStore Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
 com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:notesListViewDesign Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
 com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn No output rendered.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore Problem rendering page: java.lang.IllegalStateException: NotesContext not initialized for the thread
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore Problem rendering page: com.ibm.xsp.FacesExceptionEx: No URL specified for iCalReadStoreRenderer
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive No output rendered.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite No output rendered.
 com/ibm/xsp/extlib/config/extlib-dynamiccontent.xsp-config xe:switchFacet No output rendered.
@@ -1096,14 +1099,120 @@ com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer Unexpe
 
 xsp.extlib.test.render.ExtlibRenderThemeControlTest
 testRenderControlsInThemes(xsp.extlib.test.render.ExtlibRenderThemeControlTest)
-junit.framework.AssertionFailedError: 19 fail(s). :
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
+junit.framework.AssertionFailedError: 125 fail(s). :
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:null] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:notes] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneui] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_gen1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2.1_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2_metal] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:webstandard] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:android] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:iphone] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:blackberry] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_gen2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneuiv3.0.2_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneui_idx_v1.3] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:dashboard [theme:oneui_idx_v1.3_base] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:null] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:notes] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneui] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_gen1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2.1_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2_metal] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:webstandard] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:android] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:iphone] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:blackberry] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_gen2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneuiv3.0.2_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneui_idx_v1.3] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:navbar [theme:oneui_idx_v1.3_base] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:null] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:notes] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneui] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_gen1] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2.1_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2_metal] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:webstandard] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:android] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:iphone] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:blackberry] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_blue] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_gen2] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_gold] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_green] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_onyx] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_orange] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_pink] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_purple] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_red] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneuiv3.0.2_silver] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneui_idx_v1.3] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
+com/ibm/xsp/theme/bootstrap/config/extlib-bootstrap.xsp-config xe:carousel [theme:oneui_idx_v1.3_base] Problem rendering page: com.ibm.commons.util.NotImplementedException: This control is not implemented for the current theme (null) and render-kit(HTML_BASIC), try a different theme, perhaps bootstrap.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:blackberry] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0] No output rendered.
-com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3.2.0_flat] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3] No output rendered.
+com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:navigator [theme:Bootstrap3_flat] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:android] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:iphone] No output rendered.
 com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:accordion [theme:blackberry] No output rendered.
@@ -1190,7 +1299,7 @@ com/ibm/xsp/extlib/config/extlib-outline.xsp-config xe:listSeparator [theme:blac
 
 com.ibm.xsp.test.framework.render.BaseRenderTitleTest
 testRenderTitle(com.ibm.xsp.test.framework.render.BaseRenderTitleTest)
-junit.framework.AssertionFailedError: 52 fail(s). :
+junit.framework.AssertionFailedError: 46 fail(s). :
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:singlePageApp No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-mobile.xsp-config xe:appPage No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listView No title property for accessibility.
@@ -1200,7 +1309,6 @@ com/ibm/xsp/extlib/config/dwa-listview.xsp-config xe:listViewColumn No title pro
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:calendarView No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:notesCalendarStore No title property for accessibility.
 com/ibm/xsp/extlib/config/dwa-calendar.xsp-config xe:iCalReadStore No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-redirect.xsp-config xe:redirect No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:keepSessionAlive No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:firebugLite No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-misc.xsp-config xe:dumpObject Expected title= attribute not present in HTML. 
@@ -1233,18 +1341,13 @@ com/ibm/xsp/extlib/config/extlib-data-formlayout.xsp-config xe:formColumn No tit
 com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:dataView No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumView No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-data-viewpanels.xsp-config xe:forumPost No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSizes No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerExpand No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerDetail No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerAddRows No title property for accessibility.
-com/ibm/xsp/extlib/config/extlib-data-pagers.xsp-config xe:pagerSaveState No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridRow No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-dojox-grid.xsp-config xe:djxDataGridColumn No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:widgetContainer No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:list No title property for accessibility.
 com/ibm/xsp/extlib/config/extlib-containers.xsp-config xe:listInline No title property for accessibility.
 	at junit.framework.Assert.fail(Assert.java:47)
-	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:143)
+	at com.ibm.xsp.test.framework.render.RenderTitleTest.testRenderTitle(RenderTitleTest.java:156)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:60)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:37)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Â© Copyright IBM Corp. 2010, 2011                                    -->
+<!-- Â© Copyright IBM Corp. 2010, 2015                                    -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -378,6 +378,7 @@ else{
 		<complex-id>com.ibm.xsp.extlib.actions.server.ChangeDynamicContent</complex-id>
 		<complex-class>com.ibm.xsp.extlib.actions.server.ChangeDynamicContentAction</complex-class>
 		<property>
+			<!-- key: property.for. -->
 			<description>The ID of the Dynamic Content control whose state will be changed by this action. If empty, it uses the closest Dynamic Content Control in the parent hierarchy.</description>
 			<display-name>For</display-name>
 			<property-name>for</property-name>
@@ -446,5 +447,51 @@ else{
 				<tags>todo</tags>
 			</designer-extension>
 		</complex-extension>
+	</complex-type>
+	
+	<complex-type>
+		<description>An action to change the state of an In Place Form control so that it will show or hide the control or toggle its state.</description>
+		<display-name>In Place Form Action</display-name>
+		<complex-id>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-id>
+		<complex-class>com.ibm.xsp.extlib.actions.server.InPlaceFormAction</complex-class>
+		<property>
+			<description>ID of the In Place Form control whose state will be changed by this action. If empty, it uses the closest In Place Form control in the parent hierarchy.</description>
+			<display-name>Target Control</display-name>
+			<property-name>for</property-name>
+			<property-class>java.lang.String</property-class>
+				<property-extension>
+					<designer-extension>
+						<editor>com.ibm.xsp.extlib.designer.tooling.editor.XPageControlIDEditor</editor>
+							<editor-parameter>
+						http://www.ibm.com/xsp/coreex|inPlaceForm
+							</editor-parameter>
+					</designer-extension>
+				</property-extension>
+		</property>
+		<property>
+		     <!--# Do not translate "show", "hide" or "toggle"  -->
+			<description>The action to perform on the In Place Form. The options are "show", which displays the form, "hide" which hides the form or "toggle" which changes its state to either show or hide the form.</description>
+			<display-name>Form Action</display-name>
+			<property-name>formAction</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+				<designer-extension>
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+						<editor-parameter>
+								toggle
+								show
+								hide
+						</editor-parameter>
+				</designer-extension>
+			</property-extension>
+		</property>		
+			<complex-extension>
+			<tag-name>inPlaceFormAction</tag-name>
+			<since>9.0.1.v00_12</since>
+			<base-complex-id>simpleActionInterface</base-complex-id>
+			<designer-extension>
+				<category>%complex-category.basic%</category>
+			</designer-extension>
+			</complex-extension>
 	</complex-type>
 </faces-config>

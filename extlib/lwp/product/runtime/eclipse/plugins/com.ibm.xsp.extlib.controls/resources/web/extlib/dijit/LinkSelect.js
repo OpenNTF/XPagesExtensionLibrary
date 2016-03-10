@@ -1,5 +1,5 @@
 /*
-* © Copyright IBM Corp. 2010
+* © Copyright IBM Corp. 2010, 2015
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -37,6 +37,8 @@ dojo.declare(
 		enabledLinkClass: '',
 		disabledLinkStyle: '',
 		disabledLinkClass: '',
+		tabindex: '',
+		controlDisabled: '',
 		valueList: {},
 		templateString: dojo.cache("extlib.dijit", "templates/LinkSelect.html"),
 		postCreate: function() {
@@ -47,19 +49,14 @@ dojo.declare(
 				var cl = this.itemClass;
 				if(i==0) {st=XSP.concatStyle(st,this.firstItemStyle);cl=XSP.concatClass(cl,this.firstItemClass);} 
 				if(i==this.valueList.length-1) {st=XSP.concatStyle(st,this.lastItemStyle);cl=XSP.concatClass(cl,this.lastItemClass);}
-				var c = dojo.create("li", {
-					role: 'presentation'
-				}, this.list);
+				var c = dojo.create("li", {}, this.list);
 				if(cl) dojo.attr(c,"className",cl);
 				if(st) c.style.cssText = st;
 				var a = dojo.create("a", {
 					href: 'javascript:;',
 					val:val,
-					role:'option'
+					role:'button'
 				}, c);
-				if(this.disabled){
-					dojo.attr(a, "tabIndex", "-1");
-				}
 				if(!this.readOnly) {
 					a.onclick = dojo.hitch(this,this._setCurrent,i,a);
 				}
@@ -80,7 +77,9 @@ dojo.declare(
 				n.style.cssText = dis?this.disabledLinkStyle:this.enabledLinkStyle;
 				dojo.attr(n,"class",dis?this.disabledLinkClass:this.enabledLinkClass);
 				//Mark list node (the anchor's parent) as selected/unselected
-				dojo.attr(n,"aria-selected",dis?"true":"false");
+				dojo.attr(n,"aria-pressed",dis?"true":"false");
+				dojo.attr(n,"aria-disabled",dis?"true":"false");
+				dojo.attr(n,"tabindex",dis?"-1":this.tabindex);
 			},this);
 		},
 		_setCurrent: function(idx,a){

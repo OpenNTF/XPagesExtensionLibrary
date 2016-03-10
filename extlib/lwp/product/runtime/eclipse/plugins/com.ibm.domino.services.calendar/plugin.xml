@@ -24,6 +24,7 @@
             class="com.ibm.domino.services.calendar.service.CalendarService"
             name="Calendar"
             path="calendar"
+            allowSstUsers="true"
             version="9.0.1">
         </serviceResources>         
    </extension>

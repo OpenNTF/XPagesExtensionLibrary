@@ -35,10 +35,16 @@
 
 		<!-- === Set up the classpath === -->
 		<!-- set up the location of the xpages core -->
-		<!-- XSP plugin version should match eg:com.ibm.xsp.core_9.0.1.20131206-1400 would be 9.0.1.20131206-1400-->
-		<property name="xsp.plugin.version" value="" />
-		<!-- WCT install directory should be <Notes_dir>/IBM/Notes/framework/shared/eclipse/plugins -->
-		<property name="wct.install.dir" value="" />
+		<!-- XSP plugin version eg:com.ibm.xsp.core_9.0.1.20131206-1400 would be 9.0.1.20131206-1400-->
+		<property name="xsp.plugin.version" value="version-not-configured" />
+		<!--<property name="xsp.plugin.version" value="9.0.1.20130926-2000" />-->
+		
+		<!-- WCT install directory should be <Notes-dir>/framework/shared/eclipse/plugins -->
+		<property name="wct.install.dir" value="folder-not-configured" />
+		<!--<property name="wct.install.dir" value="C:/Notes/framework/shared/eclipse/plugins" />-->
+		
+		<available property="wct.install.dir.exists" file="${wct.install.dir}" type="dir" />
+		<fail unless="wct.install.dir.exists" message="The folder pointing to the Notes-dir/framework/shared/eclipse/plugins does not exist: ${wct.install.dir}" />
 
 		<property name="xsp.lib.jsf" value="${wct.install.dir}/com.ibm.designer.lib.jsf_${xsp.plugin.version}" />				
 		<property name="xsp.core" value="${wct.install.dir}/com.ibm.xsp.core_${xsp.plugin.version}" />
@@ -47,7 +53,7 @@
 		<property name="xsp.commons.xml" value="${wct.install.dir}/com.ibm.commons.xml_${xsp.plugin.version}" />
 					
 		<available property="xsp.core.exists" file="${xsp.core}" type="dir" />
-		<fail unless="xsp.core.exists" message="The folder pointing to the lwp04.wct-des/lwp/Source does not exist: ${xsp.core}" />
+		<fail unless="xsp.core.exists" message="The folder pointing to Notes-dir/framework/shared/eclipse/plugins/com.ibm.xsp.core_version.datestamp does not exist: ${xsp.core}" />
 		<!-- check jsf-api.jar exists -->
 		<property name="lib.jsf" value="${xsp.lib.jsf}/lib" />
 		<available property="lib.jsf.exists" file="${lib.jsf}" type="dir" />

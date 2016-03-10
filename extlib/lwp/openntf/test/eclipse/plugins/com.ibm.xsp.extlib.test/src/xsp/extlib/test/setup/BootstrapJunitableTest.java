@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -20,14 +20,13 @@
 */
 package xsp.extlib.test.setup;
 
-import com.ibm.xsp.core.Version;
-import com.ibm.xsp.extlib.version.ExtlibVersion;
+import java.io.InputStream;
+
 import com.ibm.xsp.theme.bootstrap.themes.StyleKitFactory;
 import com.ibm.xsp.test.framework.AbstractXspTest;
 
 /**
  *
- * @author Maire Kehoe (mkehoe@ie.ibm.com)
  */
 public class BootstrapJunitableTest extends AbstractXspTest {
     @Override
@@ -35,33 +34,11 @@ public class BootstrapJunitableTest extends AbstractXspTest {
         return "that the bootstrap theme can be tested in junit tests";
     }
     public void testBootstrapJunitTestable() throws Exception {
-        // Note, ExtlibRenderThemeControlTest used to fail with fail messages
-        //Problem setting theme to TwitterBootstrap, current theme is: <empty>
-        // until the xsp.extlib.test.setup.BootstrapTestThemeFactory class
-        // was added to work around the problems in the class:
-        // com.ibm.xsp.theme.twitter.bootstrap.ThemeStyleKitFactory
-        // that was preventing junit testing of those themes.
-        
-        if( /*currentVersion < 9.0.2*/ compareVersions(ExtlibVersion.getCurrentVersionString(), "9.0.2") < 0){
-            // current version is 9.0.1 or 9.0.1 openNTF release
-            // So will be using the OneUITestThemeFactory to work around the problem
-            Class<?> workaroundClass = BootstrapTestThemeFactory.class;
-            workaroundClass.toString();
-            return;
-        }
-        String msg = "ThemeStyleKitFactory still not working in junit tests";
-        assertNotNull(msg, (new com.ibm.xsp.theme.bootstrap.themes.StyleKitFactory()).getThemeAsStream("TwitterBootstrap", StyleKitFactory.STYLEKIT_GLOBAL) );
-        try{
-            Class.forName("xsp.extlib.test.setup.BootstrapTestThemeFactory");
-            fail("Expect to remove the BootstrapTestThemeFactory class once the theme factories are fixed, " 
-                    + "and remove the reference to it in " 
-                    + "com.ibm.xsp.extlib.test/src/META-INF/services/com.ibm.xsp.stylekit.StyleKitFactory");
-        }catch(ClassNotFoundException ex){
-            // expected, pass
-        }
+        // Note, some of the other themes had problems loading in junit tests (see OneUIJunitableTest).
+        // This test verifies that the bootstrap theme file can be loaded in the junits
+        String themeId = "Bootstrap3.2.0";
+        com.ibm.xsp.theme.bootstrap.themes.StyleKitFactory themeFactory = new com.ibm.xsp.theme.bootstrap.themes.StyleKitFactory();
+        InputStream bootstrapThemeFileStream = themeFactory.getThemeAsStream(themeId, StyleKitFactory.STYLEKIT_GLOBAL);
+        assertNotNull("Bootstrap3.2.0 not loading in junit tests", bootstrapThemeFileStream );
     }
-    private int compareVersions(String first, String second) {
-        return (new Version(first)).compareToWithQualifier(new Version(second));
-    }
-
 }

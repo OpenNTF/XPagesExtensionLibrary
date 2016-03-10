@@ -85,7 +85,7 @@ public class PickerValidator extends AbstractValidator  {
         }
         
         List<IPickerEntry> val = dp.loadEntries(new Object[]{value}, null);
-        if(val!=null && val.get(0)!=null) {
+        if(val!=null && val.size() > 0 && val.get(0)!=null) {
             return;
         }
 

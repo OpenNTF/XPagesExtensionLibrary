@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -240,14 +240,26 @@ public class XSPEditorUtil {
         DCText ourText = new DCText(parent, SWT.BORDER, attrName);
         ourText.setAttributeName(attrName);
         if (cols > 0)
-        	ourText.setCols(cols);
+            ourText.setCols(cols);
         GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, horzSpan, 1);
         if (horzIndent > 0)
-        	gd.horizontalIndent = horzIndent;
+            gd.horizontalIndent = horzIndent;
         ourText.setLayoutData(gd);
-    	return ourText;
+        return ourText;
     }
     
+    static public DCText createPasswordText(Composite parent, String attrName, int horzSpan, int horzIndent, int cols) {
+        DCText ourText = new DCText(parent, SWT.BORDER | SWT.PASSWORD, attrName);
+        ourText.setAttributeName(attrName);
+        if (cols > 0)
+            ourText.setCols(cols);
+        GridData gd = new GridData(GridData.FILL, GridData.CENTER, true, false, horzSpan, 1);
+        if (horzIndent > 0)
+            gd.horizontalIndent = horzIndent;
+        ourText.setLayoutData(gd);
+        return ourText;
+    }
+
     static public DCText createTextNoFill(Composite parent, String attrName, int horzSpan, int horzIndent, int cols) {
         DCText ourText = new DCText(parent, SWT.BORDER, attrName);
         ourText.setAttributeName(attrName);

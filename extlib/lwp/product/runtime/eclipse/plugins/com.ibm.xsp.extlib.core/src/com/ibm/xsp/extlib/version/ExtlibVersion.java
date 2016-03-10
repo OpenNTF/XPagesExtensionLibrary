@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2012, 2014
+ * © Copyright IBM Corp. 2012, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -125,7 +125,22 @@ import com.ibm.xsp.registry.FacesDefinition;
  * 9.0.1.v00_10 is an OpenNTF 9.0.1 release
  *              ExtensionLibraryOpenNTF-901v00_10.20141105-0922.zip
  *              Released on: 10 Nov 2014.
- * 9.0.1.v00_11 this will be the eleventh OpenNTF 9.0.1 release.
+ * 9.0.1.v00_11 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_11.20141217-1000.zip
+ *              Released on: 19 Dec 2014.
+ * 9.0.1.v00_12 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_12.20150311-1316.zip
+ *              Released on: 25 Mar 2015.
+ * 9.0.1.v00_13 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_13.20150611-0803.zip
+ *              Released on: 10 Jul 2015.
+ * 9.0.1.v00_14 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_14.20150831-1301.zip
+ *              Released on: 31 Aug 2015.
+ * 9.0.1.v00_15 is an OpenNTF 9.0.1 release
+ *              ExtensionLibraryOpenNTF-901v00_15.20151016-0827.zip
+ *              Released on: 27 Oct 2015.
+ * 9.0.1.v00_16 this will be the 16th OpenNTF 9.0.1 release.
  * 
  * @author Maire Kehoe (mkehoe@ie.ibm.com)
  */
@@ -144,7 +159,7 @@ public class ExtlibVersion {
          * from Notes/Domino in-development stream. */
         boolean isOpenNTFRelease = true;
         if( isOpenNTFRelease ){
-            versionStr = "9.0.1.v00_11"; // $NON-NLS-1$
+            versionStr = "9.0.1.v00_16"; // $NON-NLS-1$
             if( ExtlibCoreLogger.COMPONENT_DATA.isTraceDebugEnabled() ){
                 ExtlibCoreLogger.COMPONENT_DATA.traceDebugp(ExtlibVersion.class, "computeCurrentVersion", //$NON-NLS-1$ 
                         "Current Extlib version is "+versionStr); //$NON-NLS-1$ //$NON-NLS-2$

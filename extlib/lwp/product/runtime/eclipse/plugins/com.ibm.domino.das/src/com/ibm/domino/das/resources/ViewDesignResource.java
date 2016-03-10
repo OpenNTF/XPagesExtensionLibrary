@@ -16,6 +16,8 @@
 
 package com.ibm.domino.das.resources;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DATA_VIEW_DESIGN;
+import static com.ibm.domino.das.service.DataService.STAT_VIEW_DESIGN;
 import static com.ibm.domino.das.servlet.DasServlet.DAS_LOGGER;
 import static com.ibm.domino.services.rest.RestParameterConstants.PARAM_COMPACT;
 
@@ -38,6 +40,7 @@ import lotus.domino.Database;
 import lotus.domino.NotesException;
 import lotus.domino.View;
 
+import com.ibm.domino.das.service.DataService;
 import com.ibm.domino.das.utils.ErrorHelper;
 import com.ibm.domino.services.ServiceException;
 import com.ibm.domino.services.content.JsonViewDesignContent;
@@ -53,7 +56,7 @@ public class ViewDesignResource extends ViewBaseResource {
             @QueryParam(PARAM_COMPACT) final boolean compact) {
         
         DAS_LOGGER.traceEntry(this, "getViewDesign"); // $NON-NLS-1$
-        
+        DataService.beforeRequest(FEATURE_REST_API_DATA_VIEW_DESIGN, STAT_VIEW_DESIGN);
         
         final Database database = getDatabase(DB_ACCESS_VIEWS);
         if ( database == null ) {

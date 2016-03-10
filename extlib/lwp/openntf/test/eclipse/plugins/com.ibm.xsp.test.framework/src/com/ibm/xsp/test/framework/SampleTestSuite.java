@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2014
+ * © Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,7 +16,7 @@
 /*
 * Author: Maire Kehoe (mkehoe@ie.ibm.com)
 * Date: 13 May 2011
-* ExampleTestSuite.java
+* SampleTestSuite.java
 */
 package com.ibm.xsp.test.framework;
 
@@ -25,8 +25,26 @@ import java.util.List;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import com.ibm.xsp.test.framework.lifecycle.RegisteredDecodeTest;
-import com.ibm.xsp.test.framework.registry.*;
+import com.ibm.xsp.test.framework.lifecycle.BaseRegisteredDecodeTest;
+import com.ibm.xsp.test.framework.registry.BaseBooleanPropertyDefaultTest;
+import com.ibm.xsp.test.framework.registry.BaseComplexCheckTest;
+import com.ibm.xsp.test.framework.registry.BaseComplexNotRunTimeBindingTest;
+import com.ibm.xsp.test.framework.registry.BaseComponentRendererTest;
+import com.ibm.xsp.test.framework.registry.BaseComponentTypeTest;
+import com.ibm.xsp.test.framework.registry.BaseGroupReuseTest;
+import com.ibm.xsp.test.framework.registry.BaseInheritRendererTypeGetterTest;
+import com.ibm.xsp.test.framework.registry.BaseKnownPropertyRedefinitionTest;
+import com.ibm.xsp.test.framework.registry.BaseLabelsLocalizableTest;
+import com.ibm.xsp.test.framework.registry.BaseMultiValuePropsUseListTest;
+import com.ibm.xsp.test.framework.registry.BaseNamingConventionErrorTest;
+import com.ibm.xsp.test.framework.registry.BaseNamingConventionTest;
+import com.ibm.xsp.test.framework.registry.BaseNoRunTimeBindingsTest;
+import com.ibm.xsp.test.framework.registry.BasePropertiesHaveSettersTest;
+import com.ibm.xsp.test.framework.registry.BasePropertyAllowsValueTest;
+import com.ibm.xsp.test.framework.registry.BasePropertyDefaultValueTest;
+import com.ibm.xsp.test.framework.registry.BasePropertyNameCamelCaseTest;
+import com.ibm.xsp.test.framework.registry.CollectionNotRunTimeBindingsTest;
+import com.ibm.xsp.test.framework.registry.NoTransientPropertyTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseControlCategoryKnownTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseDefinitionsHaveDisplayNamesTest;
 import com.ibm.xsp.test.framework.registry.annotate.BaseDisplayNameDuplicateTest;
@@ -76,7 +94,7 @@ import com.ibm.xsp.test.framework.version.BaseSinceVersionsSetTest;
  */
 public class SampleTestSuite extends TestSuite {
     
-    public static final long SUITE_VERSION = 41;
+    public static final long SUITE_VERSION = 42;
     
     public static List<Class<?>> getTestClassList() { 
         TestClassList suite = new TestClassList();
@@ -98,7 +116,7 @@ public class SampleTestSuite extends TestSuite {
         
         // .lifecycle tests
         // - RegisteredDecodeTest
-        suite.addTestSuite(RegisteredDecodeTest.class);
+        suite.addTestSuite(BaseRegisteredDecodeTest.class);
         // (end .lifecycle)
         
         // .registry

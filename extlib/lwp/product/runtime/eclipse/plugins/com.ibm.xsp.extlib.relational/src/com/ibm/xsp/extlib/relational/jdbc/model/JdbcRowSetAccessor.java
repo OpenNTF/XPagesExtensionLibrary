@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2011
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -248,9 +248,21 @@ public class JdbcRowSetAccessor extends DataAccessor implements Externalizable, 
                 return getRowSet().getObject((String)key);
             }
         } catch (SQLException e) {
-            throw new FacesExceptionEx(e,StringUtil.format("Error while accessing {0} column, key={1}","RowSet",key)); // $NLX-JdbcRowSetAccessor.Errorwhileaccessing0columnkey1-1$
+            String msg = "Error while accessing RowSet column, key={0}"; // $NLX-JdbcRowSetAccessor.Errorwhileaccessing0columnkey1-1$
+            msg = StringUtil.format(msg,key);
+            // Note, this key is used elsewhere in this plugin
+            // "Error while accessing RowSet column, key={0}"
+            //String msg = com.ibm.xsp.extlib.relational.ResourceHandler.getSpecialAudienceString("JdbcRowSetAccessor.Errorwhileaccessing0columnkey1"); //$NON-NLS-1$
+            //msg = StringUtil.format(msg,key);
+            throw new FacesExceptionEx(e,msg);
         }
-        throw new FacesExceptionEx(StringUtil.format("Invalid {0} key {1}","RowSet",key)); // $NLX-JdbcRowSetAccessor.Invalid0key1-1$
+        String msg = "Invalid RowSet key {0}"; // $NLX-JdbcRowSetAccessor.Invalid0key1-1$
+        msg = StringUtil.format(msg,key);
+        // Note, this key is used elsewhere in this plugin
+        // "Invalid RowSet key {0}"
+        //String msg = com.ibm.xsp.extlib.relational.ResourceHandler.getSpecialAudienceString("JdbcRowSetAccessor.Invalid0key1"); //$NON-NLS-1$
+        //msg = StringUtil.format(msg,key);
+        throw new FacesExceptionEx(msg);
     }
 
     public void setValue(Object key, Object value) {
@@ -264,9 +276,16 @@ public class JdbcRowSetAccessor extends DataAccessor implements Externalizable, 
                 return;
             }
         } catch (SQLException e) {
-            throw new FacesExceptionEx(e,StringUtil.format("Error while accessing {0} column, key={1}","RowSet",key)); // $NLX-JdbcRowSetAccessor.Errorwhileaccessing0columnkey1.1-1$
+            // Note, this key is used elsewhere in this plugin
+            // "Error while accessing RowSet column, key={0}"
+            String msg = com.ibm.xsp.extlib.relational.RelationalResourceHandler.getSpecialAudienceString("JdbcRowSetAccessor.Errorwhileaccessing0columnkey1"); //$NON-NLS-1$
+            msg = StringUtil.format(msg,key);
+            throw new FacesExceptionEx(e,msg); // $NLX-JdbcRowSetAccessor.Errorwhileaccessing0columnkey1.1-1$ $NON-NLS-2$
         }
-        throw new FacesExceptionEx(StringUtil.format("Invalid {0} key {1}","RowSet",key)); // $NLX-JdbcRowSetAccessor.Invalid0key1.1-1$
+        // "Invalid RowSet key {0}"
+        String msg = com.ibm.xsp.extlib.relational.RelationalResourceHandler.getSpecialAudienceString("JdbcRowSetAccessor.Invalid0key1"); //$NON-NLS-1$
+        msg = StringUtil.format(msg,key);
+        throw new FacesExceptionEx(msg);
     }
 
     public Class<?> getType(Object key) {
@@ -452,7 +471,10 @@ public class JdbcRowSetAccessor extends DataAccessor implements Externalizable, 
 
             return rowSet;
         } catch(Exception ex) {
-            throw new FacesExceptionEx(ex,"Error while reading the relational data"); // $NLX-JdbcRowSetAccessor.Errorwhilereadingtherelationaldat-1$
+            // "Error while reading the relational data"
+            String msg = com.ibm.xsp.extlib.relational.RelationalResourceHandler.getSpecialAudienceString(
+                    "JdbcDataBlockAccessor.Errorwhilereadingtherelationaldat"); //$NON-NLS-1$ 
+            throw new FacesExceptionEx(ex,msg);
         }
     }
     
@@ -466,6 +488,8 @@ public class JdbcRowSetAccessor extends DataAccessor implements Externalizable, 
         if(StringUtil.isNotEmpty(connectionManager)) {
             return JdbcUtil.createManagedConnection(FacesContext.getCurrentInstance(),getDataSource()!=null?getDataSource().getComponent():null,connectionManager);
         }
-        throw new SQLException(StringUtil.format("No {0}, {1} or {2} is provided", "connectionManager", "connectionName", "connectionUrl")); // $NLX-JdbcRowSetAccessor.No01or2isprovided-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ 
+        // "No \"connectionManager\", \"connectionName\" or \"connectionUrl\" is provided"
+        String msg = com.ibm.xsp.extlib.relational.RelationalResourceHandler.getSpecialAudienceString("JdbcDataBlockAccessor.No01or2isprovided"); //$NON-NLS-1$
+        throw new SQLException(msg); // $NLX--1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ 
     }    
 }

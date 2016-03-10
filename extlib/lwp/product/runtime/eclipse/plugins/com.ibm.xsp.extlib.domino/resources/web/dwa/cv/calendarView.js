@@ -286,7 +286,7 @@ dojo.declare(
 		this.nMinDaysInFirstWeek = this.nMinDaysInFirstWeek;
 	
 		this.bCanCreate = !this.bIsArchive;
-
+		
 		if(this.enableDnD){
 			this.connect(dojo.doc, "onmousedown", "handleDrag"); // kami
 		}
@@ -309,6 +309,9 @@ dojo.declare(
 			}
 			this.oCalendarDataStore.unregisterViewWidget(this);
 		}
+		//ASHH9UB5RH
+		dwa.cv.calendarDataStore.clearInstance();
+		
 		dwa.common.commonProperty.get('p-contentarea-width').detach(this);
 		dwa.common.commonProperty.get('p-body-height').detach(this);
 		dwa.common.commonProperty.get('p-e-calendarview-currentselected').detach(this);

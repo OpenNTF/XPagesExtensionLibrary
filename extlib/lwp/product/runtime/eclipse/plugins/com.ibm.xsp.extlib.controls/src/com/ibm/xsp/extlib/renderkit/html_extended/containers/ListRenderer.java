@@ -53,6 +53,8 @@ public class ListRenderer extends FacesRendererEx {
     protected static final int PROP_LASTITEMSTYLE       = 9;
     protected static final int PROP_LASTITEMSTYLECLASS  = 10;
     protected static final int PROP_ITEMDISPLAYNONESTYLE = 11;
+    protected static final int PROP_LISTROLE             = 12;
+    protected static final int PROP_ITEMROLE             = 13;
     
     @Override
     protected Object getProperty(int prop) {
@@ -60,6 +62,8 @@ public class ListRenderer extends FacesRendererEx {
             case PROP_LISTTAG:          return "ul"; // $NON-NLS-1$
             case PROP_ITEMTAG:          return "li"; // $NON-NLS-1$
             case PROP_ITEMDISPLAYNONESTYLE:          return "display: none;"; // $NON-NLS-1$
+            case PROP_LISTROLE:          return "list"; // $NON-NLS-1$
+            case PROP_ITEMROLE:          return "listitem"; // $NON-NLS-1$
         }
         return super.getProperty(prop);
     }
@@ -127,6 +131,10 @@ public class ListRenderer extends FacesRendererEx {
         String styleClass = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_LISTSTYLECLASS),c.getStyleClass());
         if(StringUtil.isNotEmpty(styleClass)) {
             w.writeAttribute("class",styleClass,null); // $NON-NLS-1$
+        }
+        String role = (String)getProperty(PROP_LISTROLE);
+        if(StringUtil.isNotEmpty(role)) {
+            w.writeAttribute("role",role,null); // $NON-NLS-1$
         }
     }
 
@@ -236,6 +244,11 @@ public class ListRenderer extends FacesRendererEx {
         }
         if(StringUtil.isNotEmpty(styleClass)) {
             w.writeAttribute("class",styleClass,null); // $NON-NLS-1$
+        }
+        
+        String role = (String)getProperty(PROP_ITEMROLE);
+        if(StringUtil.isNotEmpty(role)) {
+            w.writeAttribute("role",role,null); // $NON-NLS-1$
         }
     }
 }

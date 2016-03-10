@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -313,7 +313,7 @@ public class WizardSubPageMain extends WizardSubPage {
                         WizardUtils.setXspEventHandlerAttrs(eventHandler, "onClick", "true", "complete"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
                         
                         // this.action
-                        Element action = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, EventsXSPDefinitions.ACTION_TAG);
+                        Element action = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, EventsXSPDefinitions.ACTION_TAG);
                         
                         // moveTo
                         Element moveTo = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, IExtLibAttrNames.EXT_LIB_ATTR_MOVE_TO);
@@ -378,7 +378,7 @@ public class WizardSubPageMain extends WizardSubPage {
                         WizardUtils.setXspEventHandlerAttrs(eventHandler, "onClick", "true", "complete"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
                         
                         // this.action
-                        Element action = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, EventsXSPDefinitions.ACTION_TAG);
+                        Element action = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, EventsXSPDefinitions.ACTION_TAG);
                         
                         // change document mode
                         Element changeMode = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, "changeDocumentMode"); // $NON-NLS-1$
@@ -407,7 +407,7 @@ public class WizardSubPageMain extends WizardSubPage {
                         WizardUtils.setXspEventHandlerAttrs(eventHandler, "onClick", "true", "complete"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
                                                 
                         // this.action
-                        action = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, EventsXSPDefinitions.ACTION_TAG);
+                        action = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, EventsXSPDefinitions.ACTION_TAG);
                         
                         // moveTo
                         Element moveTo = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, IExtLibAttrNames.EXT_LIB_ATTR_MOVE_TO);
@@ -433,7 +433,7 @@ public class WizardSubPageMain extends WizardSubPage {
                         WizardUtils.setXspEventHandlerAttrs(eventHandler, "onClick", "true", "complete"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
                         
                         // this.action
-                        Element action = FormModelUtil.createElement(doc, registry, IExtLibTagLib.EXT_LIB_NAMESPACE_URI, EventsXSPDefinitions.ACTION_TAG);                        
+                        Element action = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, EventsXSPDefinitions.ACTION_TAG);                        
                         
                         // this.actionGroup
                         Element actionGroup = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, "actionGroup");         // $NON-NLS-1$
@@ -442,7 +442,7 @@ public class WizardSubPageMain extends WizardSubPage {
                         Element deleteDoc = FormModelUtil.createElement(doc, registry, AbstractCommonControlVisualizer.XP_CORE_NAMESPACE, "deleteDocument"); // $NON-NLS-1$
                         deleteDoc.setAttribute(XSPAttributeNames.XSP_ATTR_NAME, "");
     
-                        FormModelUtil.setAttribute(deleteDoc, XSPAttributeNames.XSP_ATTR_VALIDATOR_MESSAGE, "Are you sure you want to delete this Document?"); // $NLX-WizardSubPageMain.AreyousureyouwanttodeletethisDocu-1$
+                        FormModelUtil.setAttribute(deleteDoc, XSPAttributeNames.XSP_ATTR_VALIDATOR_MESSAGE, "Are you sure you want to delete this document?"); // $NLX-WizardSubPageMain.AreyousureyouwanttodeletethisDocu-1$
                         if (!StringUtil.isEmpty(dsName)) {
                             FormModelUtil.setAttribute(deleteDoc, XSPAttributeNames.XSP_ATTR_VAR, dsName);
                         }

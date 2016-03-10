@@ -43,7 +43,7 @@ public class ExtlibResourceProvider extends URLResourceProvider {
 
     public static final String DWA_RES_PATH = "/resources/web/"; // $NON-NLS-1$
 
-    public static final String EXTLIB_PREFIX = ".extlib";
+    public static final String EXTLIB_PREFIX = ".extlib"; // $NON-NLS-1$
     
     // Resource Path
     public static final String RESOURCE_PATH =    FacesResourceServlet.RESOURCE_PREFIX  // "/.ibmxspres/" 
@@ -82,7 +82,7 @@ public class ExtlibResourceProvider extends URLResourceProvider {
 				else if(name.startsWith("/"+EXTLIB_PREFIX+"-")){ // $NON-NLS-1$ // $NON-NLS-2$
 					if(ExtlibCoreLogger.COMPONENT_DATA.isWarnEnabled()){
 						// warnMessage = "Cannot find URL "+ name +". Version "+ name.substring(name.indexOf("-"), name.indexOf("/", 1))+" is not available. The current version is "+ExtlibVersion.getCurrentVersionString()+".";
-						String warnMessage = "Cannot find URL {0}. Version {1} is not available. The current version is {2}.";
+						String warnMessage = "Cannot find URL {0}. Version {1} is not available. The current version is {2}."; // $NLW-ExtlibResourceProvider.CannotfindURL0Version1isnotavaila-1$
 						String urlVersion = name.substring(name.indexOf("-"), name.indexOf("/", 1));
 						warnMessage = StringUtil.format(warnMessage, name, urlVersion, ExtlibVersion.getCurrentVersionString());
 						ExtlibCoreLogger.COMPONENT_DATA.warnp(this, "getResource", // $NON-NLS-1$

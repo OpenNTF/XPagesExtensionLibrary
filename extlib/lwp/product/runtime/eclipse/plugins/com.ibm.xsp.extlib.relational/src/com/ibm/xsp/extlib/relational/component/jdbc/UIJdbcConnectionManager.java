@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010, 2014
+ * © Copyright IBM Corp. 2010, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -198,7 +198,7 @@ public class UIJdbcConnectionManager extends UIComponentBase implements IJdbcCon
             initConnection(context,c);
             return c;
         }
-        throw new SQLException(StringUtil.format("No connection name nor URL is provided in the {0}", "ConnectionManager")); // $NLX-UIJdbcConnectionManager.NoconnectionnamenorURLisprovidedi-1$ $NON-NLS-2$
+        throw new SQLException("No connection name nor URL is provided in the ConnectionManager"); // $NLX-UIJdbcConnectionManager.NoconnectionnamenorURLisprovidedi-1$
     }
     
     protected void initConnection(FacesContext context, Connection c) throws SQLException {
