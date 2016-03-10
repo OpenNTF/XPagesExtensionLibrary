@@ -10,6 +10,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <module>/product/runtime/eclipse/plugins</module>
 <module>/product/runtime/eclipse/features</module>
 <module>/product/runtime/updatesite/org.openntf.extlib.updatesite</module>
+<module>/product/runtime/updatesite/org.openntf.extlib.p2</module>
 </modules>
 
 <properties>
