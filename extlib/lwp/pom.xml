@@ -171,7 +171,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<includeAllDependencies>true</includeAllDependencies>
+					<includeAllDependencies>false</includeAllDependencies>
 				</configuration>
 			</plugin>
 			
