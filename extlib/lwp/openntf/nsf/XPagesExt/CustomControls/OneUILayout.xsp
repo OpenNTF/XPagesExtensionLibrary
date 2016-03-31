@@ -142,8 +142,8 @@ return "XPages ExtLib version: "+v}]]></xe:this.label>
 							<xe:basicLeafNode label="PlanetLotus">
 								<xe:this.href><![CDATA[http://planetlotus.org/search.php?search=xpages&sort=1]]></xe:this.href>
 							</xe:basicLeafNode>
-							<xe:basicLeafNode href="http://xpagesblog.com/"
-								label="XPages Blog">
+							<xe:basicLeafNode href="http://stackoverflow.com/questions/tagged/xpages"
+								label="stackoverflow">
 							</xe:basicLeafNode>
 
 						</xe:this.children>
