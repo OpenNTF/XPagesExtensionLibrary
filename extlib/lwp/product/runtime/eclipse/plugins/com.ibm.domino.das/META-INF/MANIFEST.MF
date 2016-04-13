@@ -17,9 +17,11 @@ Require-Bundle: com.ibm.notes.java.api,
 Import-Package: javax.servlet;version="2.5.0",
  javax.servlet.http;version="2.5.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: com.ibm.domino.das.servlet,
- com.ibm.domino.das.service,
+Export-Package: com.ibm.domino.das,
  com.ibm.domino.das.resources,
- com.ibm.domino.das.utils
+ com.ibm.domino.das.service,
+ com.ibm.domino.das.servlet,
+ com.ibm.domino.das.utils,
+ com.ibm.domino.httpmethod
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ManifestVersion: 2
