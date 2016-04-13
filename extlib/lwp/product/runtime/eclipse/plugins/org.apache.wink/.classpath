@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/httpcore-4.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jaxb-api-2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jaxb-impl-2.2.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsr311-api-1.1.1.jar" sourcepath="C:/Users/Nathan T. Freeman/.m2/repository/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-simple-1.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/stax-api-1.0-2.jar"/>
