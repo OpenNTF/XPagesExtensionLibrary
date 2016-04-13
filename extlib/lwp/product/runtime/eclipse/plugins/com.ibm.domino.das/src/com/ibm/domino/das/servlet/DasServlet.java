@@ -76,6 +76,7 @@ import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.das.service.CoreService;
 import com.ibm.domino.das.service.DataService;
 import com.ibm.domino.das.service.RestService;
+import com.ibm.domino.das.service.IRestServiceExt;
 import com.ibm.domino.das.servlet.DasStats.MutableDouble;
 import com.ibm.domino.das.servlet.DasStats.MutableInteger;
 import com.ibm.domino.das.utils.ErrorHelper;
@@ -320,22 +321,31 @@ public class DasServlet extends AbstractRestServlet {
                 responseWrapper.setPreventCache(preventCache);
             }
             
-            try {
-                super.doService(requestWrapper, responseWrapper);
-            }
-            catch (ServletException e) {
-                Throwable cause = e.getCause();
-                if ( cause instanceof NoAccessSignal ) {
-                    throw (NoAccessSignal)cause;
-                }
-                else {
-                    handleUnknownException(responseWrapper, e);
-                }
-            }
-            catch (Throwable e) {
-                // Avoid throwing unknown exceptions to the container
-                handleUnknownException(responseWrapper, e);
-            }
+            Application app = getService(request);
+			try {
+				if (app instanceof IRestServiceExt) {
+					if (((IRestServiceExt) app).beforeDoService(request)) {
+						super.doService(requestWrapper, responseWrapper);
+						((IRestServiceExt) app).afterDoService(request);
+					}
+				} else {
+					super.doService(requestWrapper, responseWrapper);
+				}
+			} catch (ServletException e) {
+				if (app instanceof IRestServiceExt) {
+					((IRestServiceExt) app).onError(request, e);
+				}
+				Throwable cause = e.getCause();
+				if (cause instanceof NoAccessSignal) {
+					throw (NoAccessSignal) cause;
+				} else {
+					handleUnknownException(responseWrapper, e);
+				}
+			} catch (Throwable e) {
+				((IRestServiceExt) app).onError(request, e);
+				// Avoid throwing unknown exceptions to the container
+				handleUnknownException(responseWrapper, e);
+			}
         }
         finally {
             DasStats stats = DasStats.get();
@@ -710,6 +720,31 @@ public class DasServlet extends AbstractRestServlet {
         
         return enabled;
     }
+	
+	protected Application getService(HttpServletRequest request) {
+		String requestPath = null;
+		Application app = null;
+		if (request.getPathInfo() != null) {
+			StringTokenizer tokenizer = new StringTokenizer(request.getPathInfo(), "/");
+			try {
+				requestPath = tokenizer.nextToken();
+				if (requestPath != null) {
+					requestPath.toLowerCase();
+				}
+			} catch (NoSuchElementException e) {
+				// Ignore this
+			}
+		}
+
+		if (requestPath != null) {
+			refreshServiceMap();
+			DasService service = s_services.get(requestPath);
+			if (service != null) {
+				app = service.getApplication();
+			}
+		}
+		return app;
+	}
     
     /**
      * Refreshes the service map.
