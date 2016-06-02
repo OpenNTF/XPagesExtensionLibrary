@@ -30,6 +30,8 @@ public class StyleKitFactory implements com.ibm.xsp.stylekit.StyleKitFactory, co
                 return getThemeFromBundle(folderPath + "/Bootstrap3.theme"); //$NON-NLS-1$
             }else if(themeId.equalsIgnoreCase("Bootstrap3_flat")) { //$NON-NLS-1$
                 return getThemeFromBundle(folderPath + "/Bootstrap3_flat.theme"); //$NON-NLS-1$
+            }else if(themeId.equalsIgnoreCase("Bootstrap3_blank")) { //$NON-NLS-1$
+                return getThemeFromBundle(folderPath + "/Bootstrap3_blank.theme"); //$NON-NLS-1$
             }
             // Any time an old theme name was used, provide the renamed theme.
             // There will only ever be one v3 version of Bootstrap in the ExtLib.

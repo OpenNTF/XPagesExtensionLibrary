@@ -210,7 +210,7 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
         }
 
         public String getDialogButtonAltText(CompositeEditor parent) {
-            return "Choose Domino Application from list";   // $NON-NLS-1$
+            return "Choose Domino Application from list"; // $NLX-AbstractDominoWizardPanel.ChooseDominoApplicationfromlist-1$
         }
     }
 
@@ -264,10 +264,10 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
         _controlDataNode = binding.getDataNode();
         initComputedFields();
         
-        createLabel("A&pplication:", createSpanGD(getNumRightColumns() - 1),   // $NON-NLS-1$
+        createLabel("A&pplication:", createSpanGD(getNumRightColumns() - 1),    // $NLX-AbstractDominoWizardPanel.Application-1$
                 getLabelToolTipText(XSPAttributeNames.XSP_ATTR_DATABASE_NAME));
 
-        String cRadioLabel = "C&urrent";  // $NON-NLS-1$
+        String cRadioLabel = "C&urrent";   // $NLX-AbstractDominoWizardPanel.Current-1$
         if(isPropsPanel()){
             cRadioLabel = StringUtil.removeMnemonics(cRadioLabel);
         }
@@ -280,9 +280,9 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
         currentDb.setDefaultValue(true);
         currentDbNameLabel = createLabel(currentName,  createControlGDBigWidth(getNumRightColumns() - 2));
         
-        otherDb = createDCRadioButton(XSPAttributeNames.XSP_ATTR_TYPE, " ", // $NON-NLS-1$ 
+        otherDb = createDCRadioButton(XSPAttributeNames.XSP_ATTR_TYPE, " ",
               " ", createSpanGD(getNumRightColumns() - 2));
-        String oRadioButtonLabel = "&Other";  // $NON-NLS-1$
+        String oRadioButtonLabel = "&Other";  // $NLX-AbstractDominoWizardPanel.Other-1$
         if(isPropsPanel()){
             oRadioButtonLabel = StringUtil.removeMnemonics(oRadioButtonLabel);
         }
@@ -344,7 +344,7 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
         if (!isFormPanel()) {
             attrName = XSPAttributeNames.XSP_ATTR_VIEW_NAME;
         }
-        _deCombo = createComboComputed(attrName, new StringLookup(new String[]{"", ""}),  createControlGDBigWidth(1), false, true, "DataSourcePanelFormCombo"); // $NON-NLS-1$ 
+        _deCombo = createComboComputed(attrName, new StringLookup(new String[]{"", ""}),  createControlGDBigWidth(1), false, true, "DataSourcePanelFormCombo"); // $NON-NLS-1$
 
         // wrap the combo box in a deferred viewer
         if (_deCombo.getEditorControl() instanceof Combo) {
@@ -363,17 +363,21 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
         
         if (showCalendarUI()) {
             WizardUtils.createLabel(parent, "", 1);
-            _calendarCheckbox = WizardUtils.createCheckBox(parent, "Show only calendar type views", 1, false); // $NON-NLS-1$
+            _calendarCheckbox = WizardUtils.createCheckBox(parent, "Only include &calendar style views", 1, false);  // $NLX-AbstractDominoWizardPanel.Onlyincludecalendarstyleviews-1$
             _calendarCheckbox.setLayoutData(createControlGDBigWidth(1));
             _calendarCheckbox.addSelectionListener(new SelectionAdapter() {
                 @Override
                 public void widgetSelected(SelectionEvent event) {
                     super.widgetSelected(event);
                     if (_deViewer != null) {
-                        _deViewer.setInput(getDesignElementLookupInput());
+                        try {
+                            _controlDataNode.setValue((IAttribute)_controlDataNode.getMember(XSPAttributeNames.XSP_ATTR_VIEW_NAME), "", null);
+                        } catch (NodeException e) {
+                            // Ignore Exception
+                        }
+                        refreshComboViewer();
                     }
-                }
-                
+                }                
             });
         }        
         
@@ -429,11 +433,11 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
     }
     
     protected void createDSNameArea(){
-        createLabel("Da&ta source name:", createSpanGD(getNumRightColumns() - 2));  // $NON-NLS-1$
+        createLabel("Da&ta source name:", createSpanGD(getNumRightColumns() - 2)); // $NLX-AbstractDominoWizardPanel.Datasourcename-1$
 
         _nameText = createDCTextComputed(XSPAttributeNames.XSP_ATTR_VAR, createControlGDBigWidth(getNumRightColumns() - 2));
         _nameText.setIsComputable(false);
-        _nameText.setValidator(new UniqueXmlNameValidator(_data.getNode(), XSPAttributeNames.XSP_ATTR_VAR, "Data source name", !isPropsPanel() && !isNewDesignElementDialog()));  // $NON-NLS-1$
+        _nameText.setValidator(new UniqueXmlNameValidator(_data.getNode(), XSPAttributeNames.XSP_ATTR_VAR, "Data source name", !isPropsPanel() && !isNewDesignElementDialog()));  // $NLX-AbstractDominoWizardPanel.Datasourcename.1-1$
         final Combo viewCombo = getDesignElementPicker();
         if (viewCombo != null) {
             _lastViewName = viewCombo.getText();
@@ -457,7 +461,7 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
                 }
             });
         }
-        String tip = "Use the data source name when referring to this data source\nprogrammatically. Use caution when changing this name.";  // $NON-NLS-1$
+        String tip = "Use the data source name when referring to this data source\nprogrammatically. Use caution when changing this name.";   // $NLX-AbstractDominoWizardPanel.Usethedatasourcenamewhenreferring-1$
         _nameText.setToolTipText(tip); 
         _nameText.getEditorControl().setToolTipText(tip);
         if(isPropsPanel()) {
@@ -599,7 +603,7 @@ public abstract class AbstractDominoWizardPanel extends DynamicPanel implements 
             dbName = _dbNameText.getValue();
             // disable lookup if the dbname is computed
             if (ComputedValueUtils.isStringComputed(dbName)) {
-                dbName = ""; // $NON-NLS-1$
+                dbName = "";
             }
             else{
                 int serverIndex = _dbNameText.getValue().indexOf(DominoUtil.DB_SERVER_SEPARATOR);

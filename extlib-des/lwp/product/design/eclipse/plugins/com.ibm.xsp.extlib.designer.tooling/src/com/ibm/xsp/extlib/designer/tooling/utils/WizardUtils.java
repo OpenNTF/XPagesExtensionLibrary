@@ -19,6 +19,7 @@ package com.ibm.xsp.extlib.designer.tooling.utils;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Vector;
 
 import lotus.domino.Database;
@@ -450,7 +451,7 @@ public class WizardUtils {
         gd.grabExcessVerticalSpace = true;
         gd.horizontalAlignment = GridData.FILL;
         gd.grabExcessHorizontalSpace = true;
-        gd.horizontalIndent = indent;
+        gd.horizontalIndent = indent;       
         table.getTable().setLayoutData(gd);
         
         table.getTable().setHeaderVisible(true);
@@ -937,5 +938,15 @@ public class WizardUtils {
     public static void setVerticalIndent(Control control, int indent) {
         ((GridData)(control).getLayoutData()).verticalIndent = indent;        
     }
+    
+    //
+    // Make the first letter of a String a capital
+    //    
+    public static String capitalizeFirstLetter(String str) {
+        if (str == null || str.length() == 0) {
+            return str;
+        }
+        return str.substring(0, 1).toUpperCase(Locale.getDefault()) + str.substring(1);
+    } 
 }
 

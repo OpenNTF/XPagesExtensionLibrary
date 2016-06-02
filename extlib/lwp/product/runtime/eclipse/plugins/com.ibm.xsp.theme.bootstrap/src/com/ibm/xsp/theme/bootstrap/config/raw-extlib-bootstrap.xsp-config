@@ -141,6 +141,31 @@
 		</property>
 		
 		<property>
+			<!-- # These examples should not be translated: "/tab2/link3" selection="/tab2/.*" selection="/tab2/link3" "/tab2/link1"  -->
+			<description>The nagivation path can be used to control the selection appearance of any Navigator control on the page. Navigation paths are typically in the format of "/tab2/link3". For example, if there is a Navigator control with a Page Link Node configured with selection="/tab2/link3". Then if the navigation path property is set to "/tab2/link1", the Navigator item link will not appear selected. If the navigation path is changed to "/tab2/link3", the Navigator item link will then appear as selected.</description>
+			<display-name>Navigation Path</display-name>
+			<property-name>navigationPath</property-name>
+			<property-class>java.lang.String</property-class>
+			<property-extension>
+                 <designer-extension>
+					<!--  Note xe:simpleResponsiveConfiguration navigationPath
+					inherits the tag since version of <since>9.0.1.v00_12</
+					But the property declaration was actually new in 9.0.1.v00_17.
+					It is OK to retroactively declare this property as having been present in R12
+					because the setter was present in the R12 initial release,
+					and the property will work OK when running on a R12 server.  -->
+					<editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+					<editor-parameter>
+						/tab1/link1
+						/tab1/link2
+						/tab2/link1
+						/tab2/link2
+					</editor-parameter>
+                 </designer-extension>
+			</property-extension>
+		</property>
+		
+		<property>
 			<description>Indicates the position of the Navbar. There are three options: fixed-top (the Navbar is fixed to the top of the page), fixed-bottom (the Navbar is fixed to the bottom of the page), unfixed-top (the Navbar is positioned at the top of the application, but not fixed in place). When fixed, the Navbar will remain in place at the top or bottom of the browser window when scrolling. The default is unfixed-top.</description>
 			<display-name>Fixed Navbar</display-name>
 			<property-name>fixedNavbar</property-name>
@@ -820,6 +845,16 @@
 			not-image-path
           </tags>
         </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+	  <!-- # "labelHref" should not be translated -->
+      <description>Wrap the dash node with a link that surrounds both the label and the image or icon. This property requires that a value is set for labelHref. False by default.</description>
+      <display-name>Display Node As Link</display-name>
+      <property-name>displayNodeAsLink</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>9.0.1.v00_17</since>
       </property-extension>
     </property>
     <property>

@@ -57,6 +57,7 @@ public class Loader extends ExtLibLoaderExtension {
             aliases.put("@B3i","extlib.responsive.dijit.xsp.bootstrap.PickerListSearch"); //$NON-NLS-1$ //$NON-NLS-2$
             aliases.put("@B3j","extlib.responsive.dijit.xsp.bootstrap.PickerName"); //$NON-NLS-1$ //$NON-NLS-2$
             aliases.put("@B3k","extlib.responsive.dijit.xsp.bootstrap.Tooltip"); //$NON-NLS-1$ //$NON-NLS-2$
+            aliases.put("@B3l","extlib.responsive.dijit.xsp.bootstrap.Checkbox"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// / PREFIXES

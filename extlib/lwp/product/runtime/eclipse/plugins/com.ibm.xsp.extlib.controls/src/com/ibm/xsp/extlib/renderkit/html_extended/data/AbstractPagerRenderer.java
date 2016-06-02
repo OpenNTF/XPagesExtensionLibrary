@@ -27,6 +27,7 @@ import com.ibm.xsp.component.FacesDataIterator;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.event.PagerEvent;
 import com.ibm.xsp.extlib.component.data.AbstractPager;
+import com.ibm.xsp.extlib.event.ExtlibPagerEvent;
 import com.ibm.xsp.extlib.renderkit.html_extended.FacesRendererEx;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.util.AjaxUtilEx;
@@ -67,7 +68,12 @@ public abstract class AbstractPagerRenderer extends FacesRendererEx {
             if (pos==currentClientId.length()) {
                 String idSuffix = hiddenValue.substring(pos+1);
                 try {
-                    PagerEvent pagerEvent = new PagerEvent(component);
+                    ExtlibPagerEvent pagerEvent = new ExtlibPagerEvent(component);
+
+                	//>tmg:a11y
+                    pagerEvent.setClientId(hiddenValue);
+                    //<tmg:a11y
+                    
                     if(initPagerEvent(context, component, pagerEvent, idSuffix)) {
                         component.queueEvent(pagerEvent);
                     }
@@ -91,6 +97,17 @@ public abstract class AbstractPagerRenderer extends FacesRendererEx {
         if(dataIterator!=null) {
             writeMain(context, w, pager, dataIterator);
         }
+
+        //>tmg:a11y
+        String _pagerClientId = (String)HtmlUtil.readEncodeParameter(context, pager, AbstractPager.PAGER_CLIENT_ID, /*remove*/ true);
+        if(null != _pagerClientId){
+            StringBuilder js = new StringBuilder();
+            js.append("XSP.setFocus("); //$NON-NLS-1$
+            JavaScriptUtil.addString(js, _pagerClientId); // $NON-NLS-1$
+            js.append(");\n"); //$NON-NLS-1$
+            JavaScriptUtil.addScriptOnLoad(js.toString());
+        }
+        //<tmg:a11y
     }
 
     protected void writeMain(FacesContext context, ResponseWriter w, AbstractPager pager, FacesDataIterator dataIterator) throws IOException {

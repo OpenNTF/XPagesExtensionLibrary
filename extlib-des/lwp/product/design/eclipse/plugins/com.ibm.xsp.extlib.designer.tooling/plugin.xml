@@ -2987,13 +2987,12 @@
                 tagName="calendarView"
                 visualizationFactory="com.ibm.xsp.extlib.designer.tooling.visualizations.inotes.CalendarViewVisualizer">
                 <paletteItem
+                    action="com.ibm.xsp.extlib.designer.tooling.palette.calendarview.CalendarViewDropAction"
                     description="%palette.entry.control.inotes.calendarView.description"
                     label="%palette.entry.control.inotes.calendarView.label"
                     visible="true"
                     iconLarge="images/palette/ExtensionLibraryIcon_24.png"
                     iconSmall="images/palette/ExtensionLibraryIcon_16.png"/>
-                    <!--This drop action displays the iNotes Calendar Wizard-->
-                    <!--action="com.ibm.xsp.extlib.designer.tooling.palette.calendarview.CalendarViewDropAction"-->                             
                 <panels>
                     <panel
                         id="core.lib.basics.panel"
@@ -3555,11 +3554,11 @@
                 tagName="applicationConfiguration">
             </panel>
             <!--The following panel is used by the iNotes Calendar Wizard-->
-            <!--panel
+            <panel
                 namespace="http://www.ibm.com/xsp/coreex/wizard/panels"
                 panelClass="com.ibm.xsp.extlib.designer.tooling.panels.complex.wizard.ChooseCalendarViewPanel"
                 tagName="chooseCalendarView">
-            </panel-->
+            </panel>
         </panels>
     </extension>
    

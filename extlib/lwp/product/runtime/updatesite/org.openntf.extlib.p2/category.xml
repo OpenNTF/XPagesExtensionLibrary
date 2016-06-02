@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.openntf.extlib.apache.wink.feature_9.0.1.v00_17_SNAPSHOT.jar" id="org.openntf.extlib.apache.wink.feature" version="9.0.1.v00_17_SNAPSHOT"/>
+   <feature url="features/org.openntf.extlib.domino.das.feature_9.0.1.v00_17_SNAPSHOT.jar" id="org.openntf.extlib.domino.das.feature" version="9.0.1.v00_17_SNAPSHOT"/>
+   <feature url="features/org.openntf.extlib.feature_9.0.1.v00_17_SNAPSHOT.jar" id="org.openntf.extlib.feature" version="9.0.1.v00_17_SNAPSHOT"/>
+   <feature url="features/org.openntf.extlib.relational.feature_9.0.1.v00_17_SNAPSHOT.jar" id="org.openntf.extlib.relational.feature" version="9.0.1.v00_17_SNAPSHOT"/>
+   <feature url="features/org.openntf.extlib.wink.feature_9.0.1.v00_17_SNAPSHOT.jar" id="org.openntf.extlib.wink.feature" version="9.0.1.v00_17_SNAPSHOT"/>
+</site>

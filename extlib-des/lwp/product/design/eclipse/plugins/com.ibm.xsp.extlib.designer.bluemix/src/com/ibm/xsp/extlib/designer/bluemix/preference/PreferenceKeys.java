@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2015
+ * © Copyright IBM Corp. 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -44,6 +44,6 @@ public class PreferenceKeys {
     // Wizard preferences
     public static final String KEY_BLUEMIX_CLOUDSPACE_ORG               = "domino.prefs.keys.bluemix.cloudspace.org";               // $NON-NLS-1$    
     public static final String KEY_BLUEMIX_CLOUDSPACE_SPACE             = "domino.prefs.keys.bluemix.cloudspace.space";             // $NON-NLS-1$    
-    public static final String KEY_BLUEMIX_DEPLOY_COPY_METHOD       = "domino.prefs.keys.bluemix.deploy.copy.method";        // $NON-NLS-1$
-    public static final String KEY_BLUEMIX_IMPORT_COPY_METHOD       = "domino.prefs.keys.bluemix.import.copy.method";        // $NON-NLS-1$
+    public static final String KEY_BLUEMIX_DEPLOY_COPY_METHOD           = "domino.prefs.keys.bluemix.deploy.copy.method";           // $NON-NLS-1$    
+    public static final String KEY_BLUEMIX_IMPORT_COPY_METHOD           = "domino.prefs.keys.bluemix.import.copy.method";           // $NON-NLS-1$    
 }

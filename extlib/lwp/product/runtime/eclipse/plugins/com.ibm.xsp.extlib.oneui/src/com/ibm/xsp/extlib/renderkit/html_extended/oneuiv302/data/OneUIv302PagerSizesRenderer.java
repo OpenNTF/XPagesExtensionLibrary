@@ -98,15 +98,26 @@ public class OneUIv302PagerSizesRenderer extends OneUIPagerSizesRenderer {
                     w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
                     w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
                     setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
-                }else{
-                    w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                }
+                //>tmg:a11y
+                else{
+                    w.startElement("a", null);
+                    String clientId = pager.getClientId(context);
+                    String sourceId = clientId+"_"+val;
+                    w.writeAttribute("id", sourceId,null); // $NON-NLS-1$
+                    String role = (String)getProperty(PROP_ITEMROLE);
+                    if(StringUtil.isNotEmpty(role)){
+                        w.writeAttribute("role", role, null); // $NON-NLS-1$
+                    }
+                    w.writeAttribute("style", "pointer-events:none;cursor:default;color:inherit;text-decoration:none;",null); // $NON-NLS-1$ $NON-NLS-2$
                     w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
                     w.writeAttribute("aria-disabled", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+                    w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
                 }
+                
                 w.writeText(getItemString(val),null);
-                if(!selected) {
-                    w.endElement("a");
-                }
+                w.endElement("a");
+                //<tmg:a11y
             }
         }
         

@@ -474,7 +474,10 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
                 }
 
                 //>tmg:a11y
-                HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+                String focusClientId = ev.getClientId();
+                if( null != focusClientId ){
+                    HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, focusClientId);
+                }
                 //<tmg:a11y
             }
             
@@ -496,7 +499,14 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
             }
 
             //>tmg:a11y
-            HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+            String focusClientId = ev.getClientId();
+            if( null != focusClientId ){
+                HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, focusClientId);
+            }
+            // else (SPR # GCUNA6LJST) can be null when detailsOnClient=true, 
+            // as the state toggle action may have been some time ago on the client,
+            // and so it shouldn't output the script to cause focus to move 
+            // to the show/hide details icon.
             //<tmg:a11y
             
             // Tell JSF to switch to render response, like regular commands
@@ -528,7 +538,10 @@ public class UIDataSourceIterator extends UIDataIterator implements FacesDataIte
                     tbm.setResortOrder(ev.getColumnName(), TabularDataModel.SORT_TOGGLE);
 
                 //>tmg:a11y
-                HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, ev.getClientId());
+                String focusClientId = ev.getClientId();
+                if( null != focusClientId ){
+                    HtmlUtil.storeEncodeParameter(context, this, TOGGLE_ACTION_CLIENT_ID, focusClientId);
+                }
                 //<tmg:a11y
             }
             

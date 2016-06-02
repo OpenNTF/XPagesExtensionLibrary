@@ -19,7 +19,7 @@
 <feature
       id="org.openntf.extlib.designer.tooling.feature"
       label="%feature.label"
-      version="9.0.1.v00_16_qualifier"
+      version="9.0.1.v00_17_qualifier"
       provider-name="%feature.provider">
 
    <description>

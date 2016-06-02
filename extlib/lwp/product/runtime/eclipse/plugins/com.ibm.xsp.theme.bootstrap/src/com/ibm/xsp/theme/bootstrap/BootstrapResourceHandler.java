@@ -10,8 +10,8 @@ public class BootstrapResourceHandler {
     private static ExtLibResourceHandlerImpl impl(){
         if (s_impl == null) {
             s_impl = AccessController.doPrivileged(new PrivilegedAction<ExtLibResourceHandlerImpl>() {
-            	@Override
-                public ExtLibResourceHandlerImpl run() {
+                @Override
+				public ExtLibResourceHandlerImpl run() {
                     // privileged code goes here:
                     return new ExtLibResourceHandlerImpl(BootstrapResourceHandler.class, 
                             "messages", //$NON-NLS-1$

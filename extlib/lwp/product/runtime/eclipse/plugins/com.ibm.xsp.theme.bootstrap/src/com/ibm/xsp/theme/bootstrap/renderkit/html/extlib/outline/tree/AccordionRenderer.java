@@ -20,7 +20,7 @@ import java.io.IOException;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.extlib.component.outline.AbstractOutline;
@@ -42,7 +42,7 @@ public class AccordionRenderer extends AbstractTreeRenderer {
         if(StringUtil.isNotEmpty(accordionInnerId)) {
             this.accordionInnerId = StringUtil.replace(this.accordionClientId, ':', '_');
         } else {
-            this.accordionInnerId = Util.computeUniqueId();
+            this.accordionInnerId = BootstrapUtil.computeUniqueId();
         }
     }
     

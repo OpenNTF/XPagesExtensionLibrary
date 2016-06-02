@@ -17,6 +17,7 @@
 package com.ibm.xsp.extlib.component.dojo.layout;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.FacesException;
@@ -325,8 +326,16 @@ public class UIDojoTabContainer extends UIDojoStackContainer implements FacesCom
                         if(c instanceof UIDojoTabPane) {
                             UIDojoTabPane pane = (UIDojoTabPane)c;
                             if(StringUtil.equals(pane.getTabUniqueKey(), uniqueKey)) {
-                                setSelectedTab(pane.getTabUniqueKey());
-                                return null;
+                            
+                                if( pane.isDelayedRemoveTab() ){
+                                    // remove the old closed tab before creating 
+                                    // a new tab with the same key.
+                                    pane.delayedRemove();
+                                }else{
+                                    // switch to the existing tab
+                                    setSelectedTab(pane.getTabUniqueKey());
+                                    return null;
+                                }
                             }
                         }
                     }
@@ -418,4 +427,48 @@ public class UIDojoTabContainer extends UIDojoStackContainer implements FacesCom
         
         return errorCode;
     }
+    @Override
+    public void _xspCleanTransientData() {
+        super._xspCleanTransientData();
+        
+        delayedRemoveChildren();
+    }
+
+	/* (non-Javadoc)
+	 * @see javax.faces.component.UIComponentBase#processRestoreState(javax.faces.context.FacesContext, java.lang.Object)
+	 */
+    @Override
+    public void processRestoreState(FacesContext context, Object state) {
+        super.processRestoreState(context, state);
+        // TODO shouldn't need this here as _xspCleanTransientData should have occurred, but persist mode file is not cleaning.
+        // Note if the control tree is being serialized containing delayed remove children
+        // there's no opportunity in the saveState phase to delete the child,
+        // because the control tree structure is saved before the individual control states
+        // and changing the child count would lead to invalid array indexes in the control state trees.
+        // However, here, after the children's structure and state have been restored,
+        // here there's an opportunity to remove the delayed-remove children.
+        // Note, if the clean starts to occur then the tabPane 
+        // will no longer need to serialize the delayedRemoveTab boolean.
+        delayedRemoveChildren();
+    }
+    private void delayedRemoveChildren() {
+        if( this.getChildCount() > 0 ){
+            List<UIComponent> kids = TypedUtil.getChildren(this);
+            // give the child an opportunity to remove itself from the children list.
+            // note getChildCount will be changing.
+            for (int i = 0; i < this.getChildCount(); i++) {
+                UIComponent child = kids.get(i);
+                if(child instanceof UIDojoTabPane){
+                    UIDojoTabPane pane = (UIDojoTabPane) child;
+                    if( pane.isDelayedRemoveTab() ){
+                        pane.delayedRemove();
+                        if( (i < this.getChildCount()) && pane != kids.get(i) ){
+                            i--;
+                        }
+                    }
+                }// else probably xp:eventHandler
+            }
+        }
+    }
+    
 }

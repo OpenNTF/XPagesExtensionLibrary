@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2010
+ * © Copyright IBM Corp. 2010, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -34,6 +34,7 @@ import com.ibm.xsp.ajax.AjaxUtil;
 import com.ibm.xsp.component.FacesAjaxComponent;
 import com.ibm.xsp.component.FacesComponent;
 import com.ibm.xsp.context.FacesContextEx;
+import com.ibm.xsp.event.FacesContextListener;
 import com.ibm.xsp.extlib.component.dojo.layout.UIDojoTabContainer.Action;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.page.FacesComponentBuilder;
@@ -54,6 +55,9 @@ public class UIDojoTabPane extends UIDojoContentPane implements NamingContainer,
     private Boolean partialEvents;
     private Boolean closable;
     private String tabUniqueKey;
+    
+    // TODO should change to transient when persist mode file does a _xspCleanTransientData, so won't need to serialize this.
+    private boolean isDelayedRemoveTab;
 
     private transient String indexedClientId;
 
@@ -227,15 +231,17 @@ public class UIDojoTabPane extends UIDojoContentPane implements NamingContainer,
         this.partialEvents = (Boolean)_values[1];
         this.closable = (Boolean)_values[2];
         this.tabUniqueKey = (String)_values[3];
+        this.isDelayedRemoveTab = (Boolean) _values[4];
     }
     
     @Override
     public Object saveState(FacesContext _context) {
-        Object _values[] = new Object[4];
+        Object _values[] = new Object[5];
         _values[0] = super.saveState(_context);
         _values[1] = partialEvents;
         _values[2] = closable;
         _values[3] = tabUniqueKey;
+        _values[4] = Boolean.valueOf(isDelayedRemoveTab);
         return _values;
     }
 
@@ -252,14 +258,61 @@ public class UIDojoTabPane extends UIDojoContentPane implements NamingContainer,
     }
     public void closeTab(String refreshId, Map<String,Object> refreshParams) {
         FacesContextEx context = FacesContextEx.getCurrentInstance();
+        
+        // For SPR#LHEYA76KAS: button in tab area closing tab when partial updating said tab
+        //   gives server-side CLFAD0376E error in env where SPR#MKEE9UNMT6 fixed,
+        //   as it fails validation that the update area corresponds to an known control,
+        //   because the control ID becomes unknown when the tab control is removed.
+        // Change from inline deleting the pane here:
+        //getParent().getChildren().remove(this)
+        // To instead set the tab pane to non-visible, and schedule it for
+        // removal after the renderResponse phase.
+        this.setRendered(false); // not render this tab pane
+        // Do remove the children of the content panel now though.
+        PopupContent contentPanel = (PopupContent) TypedUtil.getChildren(this).get(0);
+        contentPanel.getChildren().clear();
+        isDelayedRemoveTab = true;
+        // When xsp.persistence.mode=basic will remove in beforeContextReleased:
+        FacesContextListener contextListener = new FacesContextListener() {
+            @Override
+            public void beforeContextReleased(FacesContext facesContext) {
+                delayedRemove();
+            }
+            @Override
+            public void beforeRenderingPhase(FacesContext facesContext) {
+                // do nothing here, only in beforeContextReleased
+            }
+        };
+        context.addRequestListener(contextListener);
+        // When xsp.persistence.mode=fileex will remove in UIDojoTabContainer._xspCleanTransientData()
+        // When xsp.persistence.mode=file will remove in UIDojoTabContainer.processRestoreState
+        // With any persist mode, if attempting to create another tabPane with the same key
+        // as this tabPane then will remove in UIDojoTabContainer.createTab.
+        
+        // add client-side script to remove the dojo tab pane dijit.
         UIDojoTabContainer parent = (UIDojoTabContainer)getParent(); 
-        parent.getChildren().remove(this);
-        //Action
         Action pendingAction = new Action(context,parent,this,refreshId,refreshParams);
         ExtLibUtil.postScript(context, pendingAction.generateClientScript());
     }
-
+    public void delayedRemove() {
+        if( isDelayedRemoveTab() ){
+            UIDojoTabContainer parent = (UIDojoTabContainer)getParent();
+            if( null != parent ){
+                parent.getChildren().remove(this);
+            }
+        }
+    }
     
+
+	/**
+	 * True if this tabPane has been closed and is scheduled to be removed 
+	 * from the control tree after the renderResponse phase.
+	 * @return the isDelayedRemoveTab
+	 */
+	public boolean isDelayedRemoveTab() {
+		return isDelayedRemoveTab;
+	}
+
     // =============================================================
     // Control construction 
     // =============================================================

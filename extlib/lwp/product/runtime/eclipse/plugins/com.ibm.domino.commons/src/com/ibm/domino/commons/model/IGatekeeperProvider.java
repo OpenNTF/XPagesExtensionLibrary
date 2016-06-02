@@ -61,6 +61,7 @@ public interface IGatekeeperProvider {
     public static final int FEATURE_REST_API_CONTACTS_GROUPS            = 749;
     public static final int FEATURE_REST_API_CONTACTS_GROUP             = 750;
     public static final int FEATURE_REST_API_CONTACTS_RECENT            = 751;
+    public static final int FEATURE_REST_API_DEBUG_IN_ERROR_RESPONSE    = 1121;
 
     public boolean isFeatureEnabled(int feature, String CustomerID, String userID);
 }

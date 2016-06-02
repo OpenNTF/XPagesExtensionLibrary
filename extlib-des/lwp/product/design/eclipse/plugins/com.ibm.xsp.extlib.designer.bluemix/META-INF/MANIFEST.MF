@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Designer Bluemix Tooling
 Bundle-SymbolicName: com.ibm.xsp.extlib.designer.bluemix;singleton:=true
-Bundle-Version: 9.0.1.v00_16_qualifier
+Bundle-Version: 9.0.1.v00_17_qualifier
 Bundle-Activator: com.ibm.xsp.extlib.designer.bluemix.BluemixPlugin
 Bundle-Vendor: IBM
 Bundle-Localization: plugin

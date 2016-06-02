@@ -696,10 +696,15 @@ public class MobileViewRenderer extends DataViewRenderer {
             if (StringUtil.isNotEmpty(href)) {
                 w.startElement("a", c);
                 RenderUtil.writeLinkAttribute(context, w, href);
+            }else{
+                w.startElement("div",c); // $NON-NLS-1$
             }
+            
             writeColumnValue(context, w, c, viewDef, col);
             if (StringUtil.isNotEmpty(href)) {
                 w.endElement("a");
+            }else{
+                w.endElement("div"); // $NON-NLS-1$
             }
         }
         w.endElement("div"); // $NON-NLS-1$

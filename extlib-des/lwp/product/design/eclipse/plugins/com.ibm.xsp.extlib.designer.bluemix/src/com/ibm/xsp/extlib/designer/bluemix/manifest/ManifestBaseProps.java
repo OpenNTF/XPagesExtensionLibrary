@@ -49,6 +49,11 @@ public class ManifestBaseProps {
     public final static String       APP_JVM_HEAPSIZE                   = "APP_JVM_HEAPSIZE";               // $NON-NLS-1$
     public final static String       APP_VERBOSE_STAGING                = "APP_VERBOSE_STAGING";            // $NON-NLS-1$
     public final static String       APP_JAVA_POLICY_ALL_PERMISSION     = "APP_JAVA_POLICY_ALL_PERMISSION"; // $NON-NLS-1$
+    public final static String       APP_REDIRECT_TO_SSL                = "APP_REDIRECT_TO_SSL";            // $NON-NLS-1$
+    public final static String       APP_DEBUG_DIRECTORY_ASSISTANCE     = "APP_DEBUG_DIRECTORY_ASSISTANCE"; // $NON-NLS-1$
+    public final static String       APP_DEBUG_NAMELOOKUP               = "APP_DEBUG_NAMELOOKUP";           // $NON-NLS-1$
+    public final static String       APP_DEBUG_THREADS                  = "APP_DEBUG_THREADS";              // $NON-NLS-1$
+    public final static String       APP_DEBUG_STAGING                  = "APP_DEBUG_STAGING";              // $NON-NLS-1$
     public final static String       APP_REMOTE_DATA_SERVER_ADDRESS     = "APP_REMOTE_DATA_SERVER_ADDRESS"; // $NON-NLS-1$
     public final static String       APP_REMOTE_DATA_SERVER_NAME        = "APP_REMOTE_DATA_SERVER_NAME";    // $NON-NLS-1$
     public final static String       APP_RUNTIME_SERVER_NAME            = "APP_RUNTIME_SERVER_NAME";        // $NON-NLS-1$
@@ -82,6 +87,11 @@ public class ManifestBaseProps {
     private Integer                  _appJvmHeapsize;
     private Boolean                  _appVerboseStaging;
     private Boolean                  _appJavaPolicyAllPermission;
+    private Boolean                  _appRedirectToSSL;
+    private Boolean                  _appDebugDa;
+    private Boolean                  _appDebugNameLookup;
+    private Boolean                  _appDebugThreads;
+    private Boolean                  _appDebugStaging;
     private String                   _appRemoteDataServerAddress;
     private String                   _appRemoteDataServerName;
     private String                   _appRuntimeServerName;
@@ -90,7 +100,7 @@ public class ManifestBaseProps {
     private Boolean                  _appDaEnabled;
     private String                   _appDaDomain;
     private String                   _appDaAddressBook;
-    
+
     public ManifestBaseProps() {
     }
 
@@ -235,6 +245,11 @@ public class ManifestBaseProps {
         ManifestUtil.setMemoryValue(newMap, APP_JVM_HEAPSIZE, _appJvmHeapsize, "MB", null); // $NON-NLS-1$
         ManifestUtil.setZeroOneBooleanValue(newMap, APP_VERBOSE_STAGING, _appVerboseStaging);
         ManifestUtil.setZeroOneBooleanValue(newMap, APP_JAVA_POLICY_ALL_PERMISSION, _appJavaPolicyAllPermission);
+        ManifestUtil.setZeroOneBooleanValue(newMap, APP_REDIRECT_TO_SSL, _appRedirectToSSL);
+        ManifestUtil.setZeroOneBooleanValue(newMap, APP_DEBUG_DIRECTORY_ASSISTANCE, _appDebugDa);
+        ManifestUtil.setZeroOneBooleanValue(newMap, APP_DEBUG_NAMELOOKUP, _appDebugNameLookup);
+        ManifestUtil.setZeroOneBooleanValue(newMap, APP_DEBUG_THREADS, _appDebugThreads);
+        ManifestUtil.setZeroOneBooleanValue(newMap, APP_DEBUG_STAGING, _appDebugStaging);
 
         ManifestUtil.setStringValue(newMap, APP_REMOTE_DATA_SERVER_ADDRESS, _appRemoteDataServerAddress, true);
         ManifestUtil.setStringValue(newMap, APP_REMOTE_DATA_SERVER_NAME, _appRemoteDataServerName, true);
@@ -323,6 +338,49 @@ public class ManifestBaseProps {
 
     public void setAppJavaPolicyAllPermission(Boolean appJavaPolicyAllPermission) {
         _appJavaPolicyAllPermission = appJavaPolicyAllPermission;
+    }
+
+    public Boolean getAppRedirectToSSL() {
+        if (_appRedirectToSSL == null) {
+            return true;
+        }
+        return _appRedirectToSSL;
+    }
+
+    public void setAppRedirectToSSL(Boolean appRedirectToSSL) {
+        _appRedirectToSSL = appRedirectToSSL;
+    }
+
+    public Boolean getAppDebugDa() {
+        return _appDebugDa;
+    }
+
+    public void setAppDebugDa(Boolean appDebugDa) {
+        _appDebugDa = appDebugDa;
+    }
+
+    public Boolean getAppDebugNameLookup() {
+        return _appDebugNameLookup;
+    }
+
+    public void setAppDebugNameLookup(Boolean appDebugNameLookup) {
+        _appDebugNameLookup = appDebugNameLookup;
+    }
+
+    public Boolean getAppDebugThreads() {
+        return _appDebugThreads;
+    }
+
+    public void setAppDebugThreads(Boolean appDebugThreads) {
+        _appDebugThreads = appDebugThreads;
+    }
+
+    public Boolean getAppDebugStaging() {
+        return _appDebugStaging;
+    }
+
+    public void setAppDebugStaging(Boolean appDebugStaging) {
+        _appDebugStaging = appDebugStaging;
     }
 
     public String getAppRemoteDataServerAddress() {
@@ -429,6 +487,21 @@ public class ManifestBaseProps {
             val = ManifestUtil.getZeroOneBooleanValue(_env, APP_JAVA_POLICY_ALL_PERMISSION);
             if (val != null) _appJavaPolicyAllPermission = (Boolean)val;
             
+            val = ManifestUtil.getZeroOneBooleanValue(_env, APP_REDIRECT_TO_SSL);
+            if (val != null) _appRedirectToSSL = (Boolean)val;
+
+            val = ManifestUtil.getZeroOneBooleanValue(_env, APP_DEBUG_DIRECTORY_ASSISTANCE);
+            if (val != null) _appDebugDa = (Boolean)val;
+
+            val = ManifestUtil.getZeroOneBooleanValue(_env, APP_DEBUG_NAMELOOKUP);
+            if (val != null) _appDebugNameLookup = (Boolean)val;
+            
+            val = ManifestUtil.getZeroOneBooleanValue(_env, APP_DEBUG_THREADS);
+            if (val != null) _appDebugThreads = (Boolean)val;
+            
+            val = ManifestUtil.getZeroOneBooleanValue(_env, APP_DEBUG_STAGING);
+            if (val != null) _appDebugStaging = (Boolean)val;
+
             val = ManifestUtil.getStringValue(_env, APP_REMOTE_DATA_SERVER_ADDRESS);
             if (val != null) _appRemoteDataServerAddress = (String)val;
             
@@ -460,6 +533,11 @@ public class ManifestBaseProps {
             _env.remove(APP_JVM_HEAPSIZE);
             _env.remove(APP_VERBOSE_STAGING);
             _env.remove(APP_JAVA_POLICY_ALL_PERMISSION);                 
+            _env.remove(APP_REDIRECT_TO_SSL);                 
+            _env.remove(APP_DEBUG_DIRECTORY_ASSISTANCE);                 
+            _env.remove(APP_DEBUG_NAMELOOKUP);                 
+            _env.remove(APP_DEBUG_THREADS);                 
+            _env.remove(APP_DEBUG_STAGING);                 
             _env.remove(APP_REMOTE_DATA_SERVER_ADDRESS);
             _env.remove(APP_REMOTE_DATA_SERVER_NAME);
             _env.remove(APP_RUNTIME_SERVER_NAME);

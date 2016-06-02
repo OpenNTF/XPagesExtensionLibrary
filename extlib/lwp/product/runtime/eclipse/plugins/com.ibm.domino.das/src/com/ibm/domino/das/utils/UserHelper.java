@@ -113,18 +113,23 @@ public class UserHelper {
 			// Digest the results of the lookup
 			
 			Vector<String> value = null;
+            String fullName = null;
+			
 			value = dirNav.getFirstItemValue();
-			String fullName = value.elementAt(0);
-			userName = session.createName(fullName);
+            if ( value != null && value.size() > 0 ) {
+    			fullName = value.elementAt(0);
+    			userName = session.createName(fullName);
+            }
+            
+			value = dirNav.getNextItemValue();
+			if ( value != null && value.size() > 0 ) {
+			    mailFile = value.elementAt(0);
+			}
 			
 			value = dirNav.getNextItemValue();
-			String shortName = value.elementAt(0);
-			
-			value = dirNav.getNextItemValue();
-			mailFile = value.elementAt(0);
-			
-			value = dirNav.getNextItemValue();
-			mailServer = value.elementAt(0);
+            if ( value != null && value.size() > 0 ) {
+                mailServer = value.elementAt(0);
+            }
 			
             try {
                 if ( mailServer != null ) {
@@ -135,11 +140,10 @@ public class UserHelper {
             }
 
 			value = dirNav.getNextItemValue();
-			String mailSystem = value.elementAt(0);
-			
-			value = dirNav.getNextItemValue();
-			EmailAddress = value.elementAt(0);
-			
+            if ( value != null && value.size() > 0 ) {
+                EmailAddress = value.elementAt(0);
+            }
+            
 			// Lookup the user's mail server.
 			//
 			// Re: SPR# NRBY99VSC3 -- We used to throw an exception when we couldn't find
@@ -162,15 +166,19 @@ public class UserHelper {
 			    // Digest the results of the server lookup
 
 	            value = dirNav.getFirstItemValue();
-	            serverName = value.elementAt(0);
+	            if ( value != null && value.size() > 0 ) {
+	                serverName = value.elementAt(0);
+	            }
 	            
 	            Vector<String> ports = dirNav.getNextItemValue();
 	            value = dirNav.getNextItemValue();
-	            for ( int i = 0; i < ports.size(); i++) {
-	                if ( "TCPIP".equals(ports.elementAt(i)) ) { //$NON-NLS-1$
-	                    internetAddress = value.elementAt(i);
-	                    break;
-	                }
+	            if ( ports != null && value != null ) {
+    	            for ( int i = 0; i < ports.size(); i++) {
+    	                if ( "TCPIP".equals(ports.elementAt(i)) && i < value.size()) { //$NON-NLS-1$
+    	                    internetAddress = value.elementAt(i);
+    	                    break;
+    	                }
+    	            }
 	            }
 			}
 			
@@ -233,10 +241,8 @@ public class UserHelper {
 		Vector<String> lookupItems = new Vector<String>();
 		
 		lookupItems.addElement("FullName");			//$NON-NLS-1$
-		lookupItems.addElement("ShortName");		//$NON-NLS-1$
 		lookupItems.addElement("MailFile");			//$NON-NLS-1$
 		lookupItems.addElement("MailServer");		//$NON-NLS-1$
-		lookupItems.addElement("MailSystem");		//$NON-NLS-1$
 		lookupItems.addElement("InternetAddress");	//$NON-NLS-1$
 		
 		return lookupItems;

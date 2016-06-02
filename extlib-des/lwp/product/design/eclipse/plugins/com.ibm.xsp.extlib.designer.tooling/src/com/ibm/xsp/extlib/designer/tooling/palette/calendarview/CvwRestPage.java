@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,166 +16,310 @@
 
 package com.ibm.xsp.extlib.designer.tooling.palette.calendarview;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.wizard.WizardPage;
+import java.util.Arrays;
+import java.util.List;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
+import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-
-import static com.ibm.xsp.extlib.designer.tooling.constants.IExtLibAttrNames.*;
-
+import org.eclipse.swt.widgets.Table;
 
 import com.ibm.commons.util.StringUtil;
+import com.ibm.designer.domino.navigator.NavigatorPlugin;
+import com.ibm.designer.domino.xsp.utils.PropertyPanelTooltipUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
+import com.ibm.xsp.registry.FacesDefinition;
+import com.ibm.xsp.registry.FacesRegistry;
+
+import static com.ibm.xsp.extlib.designer.tooling.constants.IExtLibAttrNames.*;
+import static com.ibm.xsp.extlib.designer.tooling.constants.IExtLibTagLib.*;
+import static com.ibm.xsp.extlib.designer.tooling.constants.IExtLibTagNames.*;
+
 
 /**
  * @author Gary Marjoram
  *
  */
-public class CvwRestPage extends WizardPage implements SelectionListener {
-    private static final String PAGE_NAME   = "WizardRestPage"; // $NON-NLS-1$
-    private static final String PAGE_TITLE  = "REST Service"; // $NON-NLS-1$
-    private static final String INITIAL_MSG = "Configure the columns for the REST Service"; // $NON-NLS-1$
+public class CvwRestPage extends AbstractWizardPage implements ControlListener {
 
-    private Button      _notStandardCheckbox;
-    private Composite   _container;
-    private Group       _colGroup;
-    private String[]    _colNames;
-    
-    public static final String[][] restCols = {{Calendar.ATTR_COL_CALENDAR_DATE, "$134"}, 
-                                               {Calendar.ATTR_COL_START_TIME,    "$144"},
-                                               {Calendar.ATTR_COL_END_TIME,      "$146"},
-                                               {Calendar.ATTR_COL_SUBJECT,       "$147"},
-                                               {Calendar.ATTR_COL_CHAIR,         "$153"},
-                                               {Calendar.ATTR_COL_ENTRY_ICON,    "$149"},
-                                               {Calendar.ATTR_COL_ALT_SUBJECT,   "$151"},
-                                               {Calendar.ATTR_COL_CONFIDENTIAL,  "$154"},
-                                               {Calendar.ATTR_COL_CUSTOM_DATA,   "$UserData"}, // $NON-NLS-1$
-                                               {Calendar.ATTR_COL_ENTRY_TYPE,    "$152"},
-                                               {Calendar.ATTR_COL_STATUS,        "$160"}};
-    
-    private Map<String,ColumnCombo> _colMap = new HashMap<String,ColumnCombo>();
+    private static final Image  _WARNING_ICON = NavigatorPlugin.getImage("design/error_column.png"); // $NON-NLS-1$
 
-    public CvwRestPage() {
-        super(PAGE_NAME);
+    private final RestColumn[]  _restCols = {new RestColumn("Calendar Date", Calendar.ATTR_COL_CALENDAR_DATE, "$134",        true),   // $NLX-CvwRestPage.CalendarDate-1$
+                                             new RestColumn("Start Time",    Calendar.ATTR_COL_START_TIME,    "$144",        false),  // $NLX-CvwRestPage.StartTime-1$
+                                             new RestColumn("End Time",      Calendar.ATTR_COL_END_TIME,      "$146",        false),  // $NLX-CvwRestPage.EndTime-1$
+                                             new RestColumn("Subject",       Calendar.ATTR_COL_SUBJECT,       "$147",        true),   // $NLX-CvwRestPage.Subject-1$
+                                             new RestColumn("Chair",         Calendar.ATTR_COL_CHAIR,         "$153",        false),  // $NLX-CvwRestPage.Chair-1$
+                                             new RestColumn("Entry Icon",    Calendar.ATTR_COL_ENTRY_ICON,    "$149",        false),  // $NLX-CvwRestPage.EntryIcon-1$
+                                             new RestColumn("Alt Subject",   Calendar.ATTR_COL_ALT_SUBJECT,   "$151",        false),  // $NLX-CvwRestPage.AltSubject-1$
+                                             new RestColumn("Confidential",  Calendar.ATTR_COL_CONFIDENTIAL,  "$154",        false),  // $NLX-CvwRestPage.Confidential-1$
+                                             new RestColumn("Custom Data",   Calendar.ATTR_COL_CUSTOM_DATA,   "$UserData",   false),  // $NON-NLS-2$ $NLX-CvwRestPage.CustomData-1$
+                                             new RestColumn("Entry Type",    Calendar.ATTR_COL_ENTRY_TYPE,    "$152",        false),  // $NLX-CvwRestPage.EntryType-1$
+                                             new RestColumn("Status",        Calendar.ATTR_COL_STATUS,        "$160",        false)}; // $NLX-CvwRestPage.Status-1$
+
+    private TableViewer         _tableViewer;
+    private TableViewerColumn   _editCol;
+    private String[][]          _viewColumns; 
+
+    public CvwRestPage(String pageName) {
+        super(pageName);
+    }
+    
+    @Override
+    protected String getPageTitle() {
+        return "Calendar REST Service"; // $NLX-CvwRestPage.CalendarRESTService-1$
     }
 
     @Override
-    public void createControl(Composite parent) {
-        setTitle(PAGE_TITLE);
-        setMessage(INITIAL_MSG, IMessageProvider.INFORMATION);
+    protected String getPageMsg() {
+        return "Choose the view columns containing the required calendar data items"; // $NLX-CvwRestPage.Choosetheviewcolumnscontainingthe-1$
+    }    
 
-        _container = new Composite(parent, SWT.NONE);
-        _container.setLayout(WizardUtils.createGridLayout(1, 0));
+    @Override
+    public void createControl(Composite parent) {
+        super.createControl(parent);
         
-        _colGroup = WizardUtils.createGroup(_container, 1, 2);
-        String txt = "This is not a standard Notes Domino calendar view"; // $NON-NLS-1$
-        _notStandardCheckbox = WizardUtils.createCheckBox(_colGroup, txt, 2, false);
-        _notStandardCheckbox.addSelectionListener(this);
-        for (String[] column: restCols) {
-            WizardUtils.createLabel(_colGroup, column[0] + " :", 1);            
-            _colMap.put(column[0], new ColumnCombo(_colGroup, column[1]));
-        }
+        Composite container = new Composite(parent, SWT.NONE);
+        container.setLayout(WizardUtils.createGridLayout(2, 5));
         
-        setControl(_container);
+        // Create the Table Viewer
+        int[] colWeights = {5, 40, 55};
+        _tableViewer = WizardUtils.createTableViewer(container, 2, 3, colWeights);
+        _tableViewer.setContentProvider(new ArrayContentProvider());
+        _tableViewer.getTable().addControlListener(this);
+
+        GridData gd = (GridData) _tableViewer.getTable().getLayoutData();
+        gd.heightHint = (_tableViewer.getTable().getItemHeight() * _restCols.length) + _tableViewer.getTable().getHeaderHeight();       
+        ColumnViewerToolTipSupport.enableFor(_tableViewer, ToolTip.NO_RECREATE);         
+        
+        // Create the Warning column
+        TableViewerColumn col = new TableViewerColumn(_tableViewer, SWT.LEFT);
+        col.getColumn().setText("");  
+        col.getColumn().setResizable(false);
+        col.setLabelProvider(new ColumnLabelProvider() {
+            @Override
+            public String getText(Object element) {
+                return null;
+            }
+            
+            @Override
+            public Image getImage(Object element) {
+                if (((RestColumn)element).showWarning()) {
+                    return _WARNING_ICON;
+                } 
+                return null;
+            }
+            
+            @Override
+            public String getToolTipText(Object element) {
+                if (((RestColumn)element).showWarning()) {
+                    return "It is recommended to set a view column for this data item"; // $NLX-CvwRestPage.Itisrecommendedtosetaviewcolumnfo-1$
+                }
+                return null;
+            }
+        });
+
+        // Create the Data Item column
+        col = new TableViewerColumn(_tableViewer, SWT.LEFT);
+        col.getColumn().setText("Data Item"); // $NLX-CvwRestPage.DataItem-1$
+        col.getColumn().setResizable(false);
+        col.setLabelProvider(new ColumnLabelProvider() {
+            @Override
+            public String getText(Object element) {
+              return ((RestColumn)element).getLabel();
+            }
+            
+            @Override
+            public String getToolTipText(Object element) {
+                return (((RestColumn)element).getTooltip());
+            }            
+          });
+        
+        // Create the View Column column
+        _editCol = new TableViewerColumn(_tableViewer, SWT.LEFT);
+        _editCol.getColumn().setText("View Column"); // $NLX-CvwRestPage.ViewColumn-1$
+        _editCol.getColumn().setResizable(false);
+        _editCol.setLabelProvider(new ColumnLabelProvider() {
+            @Override
+            public String getText(Object element) {
+                return ((RestColumn)element).getTextValue();
+            }
+        });
+        
+        setControl(container);
         setPageComplete(true);        
     }
     
     @Override
-    public void setVisible(boolean visible) {
-        super.setVisible(visible);
+    protected void initialisePageState() {     
+        // load the view data
+        loadViewData();
         
+        // Initialise the table viewer
+        _editCol.setEditingSupport(new CellEditingSupport());            
+        _tableViewer.setInput(_restCols);             
+    }    
+        
+    public void loadViewData() {
+        // Get the view column information
+        // Column names are in the first array
+        // Column titles in the second
         CvwViewPage viewPage = ((CalendarViewDropWizard)this.getWizard()).getViewPage();
-        if (visible) {
-            // Column names are in the first array
-            // Column titles in the second
-            String [][] columns = viewPage.getViewColumns();
-            if (columns == null) {
-                _colNames = null;               
-                for (ColumnCombo combo : _colMap.values()) {
-                    combo.setChoices(null, null);
-                }
+        String[][] cols  = viewPage.getViewColumns();
+        int colLen = cols == null ? 0 : cols[0].length;
+        
+        // Copy the arrays leaving an empty string in the first position
+        _viewColumns = new String[2][colLen+1];
+        _viewColumns[0][0] = "";
+        _viewColumns[1][0] = "";
+        for (int i=0; i < colLen; i++) {
+            _viewColumns[0][i+1] = cols[0][i];
+            // check if title and name are the same
+            if (StringUtil.equals(cols[0][i], cols[1][i])) {
+                _viewColumns[1][i+1] = cols[1][i];
             } else {
-                if(_colNames != columns[0]) {
-                    // View has changed - Reload the combos
-                    _colNames = columns[0];
-                    for (ColumnCombo combo : _colMap.values()) {
-                        combo.setChoices(columns[0], columns[1]);
-                    }
-                }
+                _viewColumns[1][i+1] = StringUtil.format("{0} ({1})", cols[1][i], cols[0][i]);
             }
         }
-        WizardUtils.setCheckGroupEnabledState(_colGroup);
-    }    
-    
-    public String getCalendarCol(final String colName) {
-        ColumnCombo combo = _colMap.get(colName);
-        if (combo != null) {
-            return combo.getValue();
-        }
-        return "";
+        
+        // Setup _restCols
+        List<String> colNames = Arrays.asList(_viewColumns[0]);
+        for(RestColumn col:_restCols) {
+            col.setValue(colNames.indexOf(col.getDefaultCol()));
+        }        
     }
     
+    public int getRestColCount() {
+        return _restCols.length;
+    }
+    
+    public String getRestColAttr(int idx) {
+        return _restCols[idx].getAttr();
+    }
+    
+    public String getRestColViewCol(int idx) {
+        if (_viewColumns != null) {
+            int val = _restCols[idx].getValue();
+            if (val >= 0 && val < _viewColumns[0].length) {
+                return _viewColumns[0][val];
+            }
+        }
+        return "";
+    }    
+    
     @Override
-    public void widgetDefaultSelected(SelectionEvent event) {
+    public void controlMoved(ControlEvent arg0) {
     }
 
     @Override
-    public void widgetSelected(SelectionEvent event) {
-        if (event.widget == _notStandardCheckbox) {
-            WizardUtils.setCheckGroupEnabledState(_colGroup);
+    public void controlResized(ControlEvent event) {
+        if (event.widget == _tableViewer.getTable()) {
+            Table table = (Table) event.widget;
+            table.getColumn(2).setWidth(table.getClientArea().width - table.getColumn(0).getWidth() - table.getColumn(1).getWidth());
         }
-    }    
+    }   
     
-    
-    private class ColumnCombo {
-        private final String _def;
-        private final Combo _combo;
-        private String[] _values;
+    private class RestColumn {
+        private final String  _label;
+        private final String  _attr;
+        private final String  _defaultCol;
+        private final boolean _required;
+        private int           _value;
         
-        public ColumnCombo(final Composite parent, final String def) {
-            _def = def;
-            _combo = WizardUtils.createEditCombo(parent, 1, null);
+        public RestColumn(String label, String attr, String defaultCol, boolean required) {
+            _label = label;
+            _attr = attr;
+            _defaultCol = defaultCol;
+            _required = required;
+            _value = -1;
         }
         
-        public void setChoices(final String[] values, final String[] choices) {
-            _values = values;
-            if (choices == null) {
-                _combo.removeAll();
-            } else {
-                _combo.setItems(choices);
-            }            
-            setDefaultIfPresent();
+        public String getLabel() {
+            return _label;
+        }
+
+        public String getAttr() {
+            return _attr;
+        }
+
+        public String getDefaultCol() {
+            return _defaultCol;
         }
         
-        public String getValue() {
-            if (_values != null) {
-                int idx = WizardUtils.getComboIndex(_combo, -1);
-                if (idx >= 0) {
-                    return _values[idx];
-                }
-                return _combo.getText();
-            }
-            
-            return "";
-        }
-        
-        private void setDefaultIfPresent() {
-            if (_values != null) {
-                for (int i=0; i<_values.length;i++) {
-                    if (StringUtil.equals(_values[i], _def)) {
-                        _combo.select(i);
-                        break;
-                    }
+        public String getTooltip() {
+            // Get the tooltip from the FacesRegistry
+            FacesRegistry fr = _wiz.project.getFacesRegistry();
+            if (fr != null) {
+                FacesDefinition fd = fr.findDef(EXT_LIB_NAMESPACE_URI, EXT_LIB_TAG_CALENDAR_JSON_LEGACY_SERVICE);
+                if (fd != null) {
+                    return StringUtil.format("{0}\n{1}", _attr, PropertyPanelTooltipUtil.getTooltipString(fd, _attr)); // $NON-NLS-1$
                 }
             }
-        } 
+            return _attr;
+        }
+
+        public int getValue() {
+            return _value;
+        }
+        
+        public String getTextValue() {
+            if (_value >= 0 && (_value < _viewColumns[1].length)) {
+                return _viewColumns[1][_value];
+            } 
+            return "";    
+        }
+
+        public void setValue(int value) {
+            _value = value;
+        }
+        
+        public boolean showWarning() {
+            if (_required && _value <= 0) {
+                return true;
+            }
+            return false;
+        }
     }
+    
+    private class CellEditingSupport extends EditingSupport {
+        public CellEditingSupport() {
+            super(_tableViewer);
+        }
+
+        @Override
+        protected CellEditor getCellEditor(Object element) {
+            ComboBoxCellEditor ce = new ComboBoxCellEditor(_tableViewer.getTable(), _viewColumns[1], SWT.READ_ONLY);
+            ((CCombo)ce.getControl()).setVisibleItemCount(10);
+            return ce;
+        }
+
+        @Override
+        protected boolean canEdit(Object element) {
+            return true;
+        }
+
+        @Override
+        protected Object getValue(Object element) {
+            return ((RestColumn)element).getValue();
+        }
+
+        @Override
+        protected void setValue(Object element, Object value) {
+            ((RestColumn)element).setValue((Integer) value);
+            _tableViewer.refresh();
+        }
+    }
+
 }

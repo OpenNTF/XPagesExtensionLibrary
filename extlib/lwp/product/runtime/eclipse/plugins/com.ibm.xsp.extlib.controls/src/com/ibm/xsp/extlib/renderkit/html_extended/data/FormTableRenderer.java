@@ -116,6 +116,39 @@ public class FormTableRenderer extends FormLayoutRenderer {
             }
             return true;
         }
+        public boolean hasLabelControl(){
+            String pos = getLabelPosition();
+            if( "none".equals(pos) ){ // $NON-NLS-1$
+                return false;
+            }
+            
+            String labelValue = rowControl.getLabel();
+            UIComponent labelFacet = rowControl.getFacet("label"); // $NON-NLS-1$
+            if(StringUtil.isEmpty(labelValue) && null == labelFacet){
+                return false;
+            }
+            
+            return true;
+        }
+        public boolean hasHelpControl(){
+            if(!formControl.isFieldHelp()){
+                return false;
+            }
+            
+            String helpId = rowControl.getHelpId();
+            UIComponent helpFacet = rowControl.getFacet("help"); // $NON-NLS-1$
+            if(StringUtil.isEmpty(helpId) && null == helpFacet){
+                return false;
+            }
+            
+            return true;
+        }
+        public boolean isFormNested(){
+            if(this.formData != null) {
+                return this.formData.isNested();
+            }
+            return false;
+        }
     }
     protected ComputedRowData createRowData(FacesContext context, FormLayout formControl, ComputedFormData formData, UIFormLayoutRow rowControl){
         return new ComputedRowData(formControl, formData, rowControl);
@@ -396,12 +429,14 @@ public class FormTableRenderer extends FormLayoutRenderer {
         int count = children.size();
         
         // Calculate if the layout has multiple columns
-        formData.colCount = 0; int colCount = 0;
+        formData.colCount = 0;
+        int colCount = 0;
         for(int i=0; i<count; i++) {
             UIComponent child = children.get(i);
             if(child instanceof UIFormLayoutColumn) {
                 int colspan = Math.max(1,((UIFormLayoutColumn)child).getColSpan());
-                colCount+=colspan; formData.colCount=Math.max(colCount, formData.colCount);
+                colCount+=colspan;
+                formData.colCount=Math.max(colCount, formData.colCount);
             } else if(child instanceof UIFormLayoutRow) {
                 colCount=0;
             }

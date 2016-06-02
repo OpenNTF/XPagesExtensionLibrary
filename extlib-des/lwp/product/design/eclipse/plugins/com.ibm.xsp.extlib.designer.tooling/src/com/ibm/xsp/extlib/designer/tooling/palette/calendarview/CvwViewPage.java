@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,16 +16,17 @@
 
 package com.ibm.xsp.extlib.designer.tooling.palette.calendarview;
 
-import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.w3c.dom.Element;
+
+import com.ibm.commons.iloader.node.DataChangeListener;
 import com.ibm.commons.iloader.node.DataNode;
 import com.ibm.commons.iloader.node.IClassDef;
 import com.ibm.commons.iloader.node.ILoader;
+import com.ibm.commons.iloader.node.IMember;
 import com.ibm.commons.iloader.node.NodeException;
 import com.ibm.commons.iloader.node.collections.SingleCollection;
 import com.ibm.commons.swt.SWTLayoutUtils;
@@ -43,6 +44,7 @@ import com.ibm.designer.domino.xsp.api.util.XPagesDOMUtil;
 import com.ibm.designer.domino.xsp.api.util.XPagesPropertiesViewUtils;
 import com.ibm.designer.domino.xsp.dominoutils.DominoImportException;
 import com.ibm.designer.domino.xsp.dominoutils.DominoUtil;
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.ExtLibToolingLogger;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
@@ -50,28 +52,29 @@ import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
  * @author Gary Marjoram
  *
  */
-public class CvwViewPage extends WizardPage {
+public class CvwViewPage extends AbstractWizardPage implements DataChangeListener{
     
-    private static final String PAGE_NAME       = "WizardViewPage"; // $NON-NLS-1$
-    private static final String PAGE_TITLE      = "REST Service"; // $NON-NLS-1$
-    private static final String INITIAL_MSG     = "Choose the View for the REST Service"; // $NON-NLS-1$
-
     private PanelExtraData      _panelData      = null;
     private Element             _dominoViewNode = null;
 
-    private String              savedServerName = "";
-    private String              savedDbName     = "";
-    private String              savedViewName   = "";
-    private String[][]          savedViewColumns;
-    
-    public CvwViewPage() {
-        super(PAGE_NAME);
+    public CvwViewPage(String pageName) {
+        super(pageName);
     }
 
     @Override
+    protected String getPageTitle() {
+        return "Calendar REST Service"; // $NLX-CvwViewPage.CalendarRESTService-1$
+    }
+
+    @Override
+    protected String getPageMsg() {
+        return "Choose the view containing the calendar data you want to use"; // $NLX-CvwViewPage.Choosetheviewcontainingthecalenda-1$
+    }
+    
+    @Override
     public void createControl(Composite parent) {
-        setTitle(PAGE_TITLE);
-        setMessage(INITIAL_MSG, IMessageProvider.INFORMATION);
+        super.createControl(parent);
+        
         _panelData = ((CalendarViewDropWizard) this.getWizard()).getPanelData();
         
         // Create the main panel
@@ -109,8 +112,8 @@ public class CvwViewPage extends WizardPage {
                 classDef = xpagesDOMLoader.loadClass(XSPTagLibs.XSP_NAMESPACE_URI, XSPTagNames.XSP_TAG_DATASOURCE_DOMINO_VIEW);
             } catch (NodeException e) {
                 if(ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.isErrorEnabled()){
-                    String msg = "Failed to load dataView class";  // $NON-NLS-1$
-                    ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.errorp(this, "initData", e, msg);   // $NON-NLS-1$
+                    String msg = "Failed to load dataView class"; // $NLE-CvwViewPage.FailedtoloaddataViewclass-1$
+                    ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.errorp(this, "initData", e, msg); // $NON-NLS-1$
                 }
                 return;
             }
@@ -123,18 +126,39 @@ public class CvwViewPage extends WizardPage {
     
                 // Link the data node to the dummy dominoView
                 dn.setDataProvider(new SingleCollection(_dominoViewNode));
+                
+                // Listen for changes
+                dn.getDataChangeNotifier().addDataChangeListener(this);
             } catch (NodeException e) {
                 if(ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.isErrorEnabled()){
-                    String msg = "Failed to create dummy dataView element";  // $NON-NLS-1$
+                    String msg = "Failed to create dummy dataView element"; // $NLE-CvwViewPage.FailedtocreatedummydataViewelemen-1$
                     ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.errorp(this, "initData", e, msg); // $NON-NLS-1$
-                    return;
                 }
+                return;
             }
         }
     }    
     
+    public String getFullDbName() {
+        return StringUtil.getNonNullString(getDominoViewAttr(XSPAttributeNames.XSP_ATTR_DATABASE_NAME));
+    }
+    
     public String getDbName() {
-        return getDominoViewAttr(XSPAttributeNames.XSP_ATTR_DATABASE_NAME);
+        String fullDbName = getFullDbName();
+        if (fullDbName.contains("!!")) {
+            return fullDbName.split("!!")[1];
+        }
+        
+        return fullDbName;
+    }
+
+    public String getServerName() {
+        String fullDbName = getFullDbName();
+        if (fullDbName.contains("!!")) {
+            return fullDbName.split("!!")[0];
+        }
+        
+        return "";
     }
 
     public String getViewName() {
@@ -153,7 +177,7 @@ public class CvwViewPage extends WizardPage {
     // Gets column Titles and Names for the selected View
     //
     public String [][] getViewColumns() {
-        String dbName = getDbName();
+        String dbName = getFullDbName();
 
         DesignerProject prj = _panelData.getDesignerProject();
         if (StringUtil.isEmpty(dbName)) {
@@ -179,41 +203,20 @@ public class CvwViewPage extends WizardPage {
             return null;
         }
 
-        if (!hasDataSourceChanged(serverName, dbName, "", viewName)) {
-            return savedViewColumns;
-        }
-        
-        savedServerName = serverName;
-        savedDbName = dbName;
-        savedViewName = viewName;
-        savedViewColumns = null;
-        
         try {
-            String[][] columns = WizardUtils.getViewColumns(serverName, dbName, viewName, false, false);
-            if (columns != null && columns.length > 0) {
-                savedViewColumns = columns;
-            }
+            return WizardUtils.getViewColumns(serverName, dbName, viewName, false, false);
         }
         catch (DominoImportException e) {
+            if(ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.isErrorEnabled()){                        
+                ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.error(e, e.toString());
+            }
         }
         
-        return savedViewColumns;
+        return null;
     }
     
-
-    //
-    // Checks has the DataSource changed
-    //
-    public boolean hasDataSourceChanged(String serverName, String dbName, String formName, String viewName) {
-        if (StringUtil.compareToIgnoreCase(serverName, savedServerName) != 0) {
-            return true;
-        }
-        if (StringUtil.compareToIgnoreCase(dbName, savedDbName) != 0) {
-            return true;
-        }
-        if (StringUtil.compareToIgnoreCase(viewName, savedViewName) != 0) {
-            return true;
-        }
-        return (false);
+    @Override
+    public void onValueChanged(Object object, int operation, IMember member, int position) {
+        setHasChanged(true);
     }
 }

@@ -449,10 +449,11 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
             BasicApplicationConfigurationImpl configuration, String pageWidthClass) throws IOException {
         ITree tree = TreeImpl.get(configuration.getTitleBarTabs());
         SearchBar searchBar = configuration.getSearchBar();
+        UIComponent searchBarFacet = c.getSearchBar();
         String titleBarName = configuration.getTitleBarName();
         
         //If there is no titleBarName, seachbar or tabs to be displayed, dont render the titleBar
-        if (StringUtil.isNotEmpty(titleBarName) || tree != null || (searchBar != null && searchBar.isRendered())) {
+        if (StringUtil.isNotEmpty(titleBarName) || tree != null || (searchBar != null && searchBar.isRendered()) || null != searchBarFacet) {
             String titleBarTag = (String)getProperty(PROP_TITLEBARTAG);
             w.startElement(titleBarTag,c); // $NON-NLS-1$
             w.writeAttribute("role", "region", null); // $NON-NLS-1$ $NON-NLS-2$
@@ -939,13 +940,20 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
                 newLine(w);
             }
             w.startElement("div", c); // $NON-NLS-1$
-            w.writeAttribute("class", getColumnPrefix()+size+" applayout-column-right", null); // $NON-NLS-1$ $NON-NLS-2$
-
+            String mdCol = (String)getProperty(PROP_COLUMN_MEDIUM) + size;
+            String smCol = (String)getProperty(PROP_COLUMN_SMALL) + (size+1);
+            String rightColClass = "applayout-column-right"; // $NON-NLS-1$
+            String colClass = ExtLibUtil.concatStyleClasses(mdCol, smCol);
+            colClass        = ExtLibUtil.concatStyleClasses(colClass, rightColClass);
+            
+            if (StringUtil.isNotEmpty(colClass)) {
+                w.writeAttribute("class", colClass, null); // $NON-NLS-1$
+            }
             FacesUtil.renderComponent(context, right);
-
+            
             w.endElement("div"); // $NON-NLS-1$
             newLine(w);
-
+            
             if (DEBUG) {
                 w.writeComment("End Right Column"); // $NON-NLS-1$
                 newLine(w);
@@ -960,15 +968,25 @@ public class ResponsiveAppLayoutRenderer extends FacesRendererEx {
                 newLine(w);
             }
             w.startElement("div", c); // $NON-NLS-1$
-            String mdCol = (String)getProperty(PROP_COLUMN_MEDIUM);
-            String smCol = (String)getProperty(PROP_COLUMN_SMALL);
-            w.writeAttribute("class",  mdCol + size + " " + smCol + (size-1) + " applayout-content", null); // $NON-NLS-1$ $NON-NLS-2$ $NLS-NLS-3$
-
+            
+            boolean left = !isEmptyComponent(c.getLeftColumn());
+            boolean right = !isEmptyComponent(c.getRightColumn());
+            
+            String mdCol = (String)getProperty(PROP_COLUMN_MEDIUM) + size;
+            String smCol = (String)getProperty(PROP_COLUMN_SMALL) + (size + (left ? -1 : 0) + (right ? -1 : 0)) ;
+            String contentColClass = "applayout-content"; // $NON-NLS-1$
+            String colClass = ExtLibUtil.concatStyleClasses(mdCol, smCol);
+            colClass        = ExtLibUtil.concatStyleClasses(colClass, contentColClass);
+            
+            if (StringUtil.isNotEmpty(colClass)) {
+                w.writeAttribute("class", colClass, null); // $NON-NLS-1$
+            }
+            
             renderChildren(context, c);
-
+            
             w.endElement("div"); // $NON-NLS-1$
             newLine(w); // $NON-NLS-1$
-
+            
             if (DEBUG) {
                 w.writeComment("End Content Column"); // $NON-NLS-1$
                 newLine(w);

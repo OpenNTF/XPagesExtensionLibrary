@@ -123,10 +123,21 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
                 w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
                 setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             }
-            w.writeText(text,null);
-            if(!selected) {
-                w.endElement("a");
+            //>tmg:a11y
+            else{
+                w.startElement("a", null);
+                w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                String clientId = pager.getClientId(context);
+                String sourceId = clientId+"_ca"; // $NON-NLS-1$
+                w.writeAttribute("id", sourceId,null); // $NON-NLS-1$
+                w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("style", "pointer-events:none;cursor:default;color:inherit;text-decoration:none;",null); // $NON-NLS-1$ $NON-NLS-2$
             }
+            
+            w.writeText(text,null);
+            w.endElement("a");
+            //<tmg:a11y
+
             if(StringUtil.isNotEmpty(tag)) {
                 w.endElement(tag);
             }
@@ -164,12 +175,25 @@ public class PagerExpandRenderer extends AbstractPagerRenderer {
                 String sourceId = clientId+"_ea"; // $NON-NLS-1$
                 w.writeAttribute("id", sourceId,null); // $NON-NLS-1$
                 w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "false", null); // $NON-NLS-1$ $NON-NLS-2$
                 setupSubmitOnClick(context, w, pager, dataIterator, clientId, sourceId);
             }
-            w.writeText(text,null);
-            if(!selected) {
-                w.endElement("a");
+            //>tmg:a11y
+            else{
+                w.startElement("a", null);
+                w.writeAttribute("role", "button", null); // $NON-NLS-1$ $NON-NLS-2$
+                String clientId = pager.getClientId(context);
+                String sourceId = clientId+"_ea"; // $NON-NLS-1$
+                w.writeAttribute("id", sourceId,null); // $NON-NLS-1$
+                w.writeAttribute("href", "javascript:;",null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("style", "pointer-events:none;cursor:default;color:inherit;text-decoration:none;",null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-pressed", "true", null); // $NON-NLS-1$ $NON-NLS-2$
+                w.writeAttribute("aria-disabled", "true", null); // $NON-NLS-1$ $NON-NLS-2$
             }
+            
+            w.writeText(text,null);
+            w.endElement("a");
+            //<tmg:a11y
             if(StringUtil.isNotEmpty(tag)) {
                 w.endElement(tag);
             }

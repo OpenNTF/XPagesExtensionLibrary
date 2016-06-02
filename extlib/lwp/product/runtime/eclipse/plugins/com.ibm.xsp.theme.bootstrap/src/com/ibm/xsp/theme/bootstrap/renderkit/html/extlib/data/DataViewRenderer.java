@@ -37,7 +37,7 @@ import com.ibm.xsp.model.domino.DominoViewDataModel;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.renderkit.html_extended.RenderUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JSUtil;
 
@@ -141,7 +141,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         w.writeAttribute("id",spanId,null); // $NON-NLS-1$
         
         // Defect 195925 - replace unnecessary title attribute with sr-only div containing text
-        Util.renderIconTextForA11Y(w, label);
+        BootstrapUtil.renderIconTextForA11Y(w, label);
         w.endElement("span"); // $NON-NLS-1$
         w.endElement("a");
 
@@ -221,7 +221,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     w.writeAttribute("class",clazz,null); // $NON-NLS-1$
                 }
                 //Defect 195918
-                Util.renderIconTextForA11Y(w, iconAlt);
+                BootstrapUtil.renderIconTextForA11Y(w, iconAlt);
                 w.endElement("span"); // $NON-NLS-1$
                 w.endElement("a"); // $NON-NLS-1$
                 setupSubmitOnClick(context, c, linkId, linkId, null);
@@ -296,7 +296,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     w.writeAttribute("aria-label", ariaLabel, null); // $NON-NLS-1$
                     w.writeAttribute("aria-hidden", "true", null); // $NON-NLS-1$ $NON-NLS-2$
                     w.endElement("div"); // $NON-NLS-1$
-                    Util.renderIconTextForA11Y(w, ariaLabel);
+                    BootstrapUtil.renderIconTextForA11Y(w, ariaLabel);
                 }
             }
         }
@@ -314,11 +314,13 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         w.writeAttribute("role", "gridcell", null); // $NON-NLS-1$ $NON-NLS-2$
         
         //Add aria-describedby property that references the header id
-        String colTitle = viewDef.summaryColumn.getColumnTitle();
-        if(StringUtil.isNotEmpty(colTitle)) {
-            String thId = c.getNonChildClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
-            if (StringUtil.isNotEmpty(thId)) {
-                w.writeAttribute("aria-describedby", thId, null); // $NON-NLS-1$ $NON-NLS-2$
+        if (null != viewDef.summaryColumn) {
+            String colTitle = viewDef.summaryColumn.getColumnTitle();
+            if(StringUtil.isNotEmpty(colTitle)) {
+                String thId = c.getNonChildClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
+                if (StringUtil.isNotEmpty(thId)) {
+                    w.writeAttribute("aria-describedby", thId, null); // $NON-NLS-1$
+                }
             }
         }
         
@@ -343,10 +345,13 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         
         //Remove padding-top when collapse/expand icon is displayed
         if(viewDef.collapsibleRows) {
-            String summaryStyle = viewDef.summaryColumn.getStyle();
-            String style = ExtLibUtil.concatStyles("padding-top:0px;", summaryStyle); // $NON-NLS-1$
-            viewDef.summaryColumn.setStyle(style);
+            if (null != viewDef.summaryColumn) {
+                String summaryStyle = viewDef.summaryColumn.getStyle();
+                String style = ExtLibUtil.concatStyles("padding-top:0px;", summaryStyle); // $NON-NLS-1$
+                viewDef.summaryColumn.setStyle(style);
+            }
         }
+        
         // Write the summary data
         writeSummary(context, w, c, viewDef);
          
@@ -386,7 +391,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                     String thId = c.getClientId(context) + "_th_" + colTitle; //$NON-NLS-1$
                     w.writeAttribute("id", thId, null); //$NON-NLS-1$
                     
-                    sortable = isColumnSortable(context, c, viewDef, colTitle);
+                    sortable = isColumnSortable(context, c, viewDef, colName);
                 }
                 
                 if(sortable) {
@@ -518,8 +523,9 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         onclick.append(")"); // $NON-NLS-1$
         w.writeAttribute("onclick", onclick.toString(), null); // $NON-NLS-1$
     }
+    
     @Override
-    protected void writeExtraColumn(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, ExtraColumn col, int colIdx) throws IOException {
+	protected void writeExtraColumn(FacesContext context, ResponseWriter w, AbstractDataView c, ViewDefinition viewDef, ExtraColumn col, int colIdx) throws IOException {
         w.startElement("td",c); // $NON-NLS-1$
         String value = formatColumnValue(context, c, viewDef, col);
         if(!StringUtil.isEmpty(value)) {
@@ -562,12 +568,15 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
                 if(StringUtil.isNotEmpty(title)) {
                     w.writeAttribute("title", title,null); // $NON-NLS-1$
                 }
+            }else{
+                w.startElement("div",c); // $NON-NLS-1$
             }
             
             writeColumnValue(context, w, c, viewDef, col);
             if(StringUtil.isNotEmpty(href)) {
-                
                 w.endElement("a");
+            }else{
+                w.endElement("div"); // $NON-NLS-1$
             }
         }
         w.endElement("td"); // $NON-NLS-1$
@@ -600,6 +609,7 @@ public class DataViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended
         //replace with a proper getClientId method for the dataview
         //c.getClientId(context) gives back the id of the row
         String rowId = c.getClientId(context);
+        
         String dataViewID = rowId.substring(0, rowId.lastIndexOf(":"+viewDef.dataModel.getRowIndex()));
         
         //Add JS onclick code to handle toggling aria-checked attribute

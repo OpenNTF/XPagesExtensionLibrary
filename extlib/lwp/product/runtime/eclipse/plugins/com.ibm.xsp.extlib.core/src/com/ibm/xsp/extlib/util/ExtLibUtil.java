@@ -373,7 +373,9 @@ public class ExtLibUtil {
         }
         return null;
     }
-
+    public static UIViewRootEx getViewRoot() {
+        return (UIViewRootEx) ExtLibUtil.resolveVariable("view"); // $NON-NLS-1$
+    }
     
     // ==============================================================================
     // Data conversion 

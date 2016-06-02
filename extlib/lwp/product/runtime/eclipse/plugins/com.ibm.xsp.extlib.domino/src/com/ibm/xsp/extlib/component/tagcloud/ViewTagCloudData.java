@@ -26,6 +26,7 @@ import javax.faces.el.ValueBinding;
 import com.ibm.commons.util.ArrayIterator;
 import com.ibm.commons.util.IteratorWrapper;
 import com.ibm.commons.util.StringUtil;
+import com.ibm.xsp.application.ApplicationEx;
 import com.ibm.xsp.complex.ValueBindingObjectImpl;
 import com.ibm.xsp.domino.app.tagcloud.TagCloud;
 import com.ibm.xsp.domino.app.tagcloud.TagCloudEntry;
@@ -279,14 +280,13 @@ public class ViewTagCloudData extends ValueBindingObjectImpl implements ITagClou
                             return this;
                         }
                     } break;
-                    // External database access not supported as of 8.5.3!
-                    // Core will throw an exception if this case is enabled
-                    // Needs a secure and performant means to access external db
-//                  case 'd': {
-//                      if(key.equals("database")) {
-//                          return getDatabase();
-//                      }
-//                  } break;
+                  case 'd': {
+            		  if(key.equals("database")) {	  
+            			String databaseName = ApplicationEx.getInstance().getApplicationProperty("xsp.tag.cloud.database",null);
+            			if(StringUtil.isNotEmpty(databaseName))                       	  
+                           	  return databaseName;                 
+            		  }                      
+                  } break;
                     case 'l': {
                         if(key.equals("links")) { // $NON-NLS-1$
                             return this;

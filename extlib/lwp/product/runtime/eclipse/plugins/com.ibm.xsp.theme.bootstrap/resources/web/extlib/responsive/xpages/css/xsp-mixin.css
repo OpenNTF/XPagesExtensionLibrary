@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -22,7 +22,7 @@ body.xsp {
     color: #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 1.42857143;
     margin: 0;
 }
 
@@ -423,13 +423,11 @@ select.form-control {
 	margin-left: 8px;
 }
 
-/* file upload */
+/* file upload/download */
+/* fix browse button in file upload on Firefox */
 input[type="file"].form-control {
 	height: auto;
-	width: auto;
 }
-
-/* file download */
 .table.xspDataTableFileDownload img{
 	margin: 0px 4px;
 }
@@ -468,35 +466,53 @@ input[type="file"].form-control {
 	padding-top 2px;
 }
 
-/* Form Table - Need to switch to div based form table
-instead of table based. These styles may need to be
-re-worked if/when that switch happens */
-.form-table .form-title h2 {
-	line-height: 30px;
-	margin-bottom: 12px;
-	margin-top:-20px;
-}
+/* Form Table */
 .xspFormTableContainer {
+	margin: 8px 0px;
+}
+.xspFormTableContainer .form-table-legend {
+	margin: 0px;
+	border-bottom: 1px solid #ccc;
+}
+.xspFormTableContainer .row .row,
+.xspFormTableContainer .form-group {
+	margin-bottom: 8px;
+}
+@media (min-width: 768px) {
+	.xspFormTableContainer .form-group label,
+	.xspFormTableContainer .xspFormTableRowData,
+	.xspFormTableContainer .xspFormTableRowHelp{
+		padding-top: 7px;
+	}
+	.xspFormTableContainer .xspFormTableRowData > input[type="text"],
+	.xspFormTableContainer .xspFormTableRowData > input[type="password"],
+	.xspFormTableContainer .xspFormTableRowData > input[type="file"]{
+		margin-top: -7px;
+	}
+}
+.xspFormTableContainer .xspFormTableRowData .radio,
+.xspFormTableContainer .xspFormTableRowData .radio label,
+.xspFormTableContainer .xspFormTableRowData .checkbox,
+.xspFormTableContainer .xspFormTableRowData .checkbox label{
 	padding-top: 0px;
 }
-.xspFormTableContainer .xspFormTableRowData {
-	padding: 6px 12px;
+.xspFormTableContainer .form-title .form-title-meta,
+.xspFormTableContainer .form-title .form-alt-text{
+	color: #666;
 }
-.xspFormTableContainer .form-table .control-label{
-	padding-left: 25px;
+.xspFormTableContainer .form-title .form-title-meta{
+	font-size: 14px;
+	margin-top: 4px;
 }
-.xspFormTableContainer .form-table .control-label > label{
+.xspFormTableContainer .alert{
 	margin-bottom: 0px;
 }
-.xspFormTableContainer .form-table .form-title .lotusMeta{
-	font-size: 14px;
-}
-.form-table .alert{
-	margin-top: -20px;
-}
-.form-table .alert .text-error {
+.xspFormTableContainer .alert .text-error {
 	font-weight: bold;
 	margin-left: -10px;
+}
+.xspFormTableContainer .form-horizontal .control-label {
+	text-align: left;
 }
 .has-error .text-error {
 	color: #A94442;
@@ -601,7 +617,6 @@ span .alert.alert-danger ul{
 	display: block;
     float: left;
     padding: 12px 0;
-    width: auto;
 }
 /* padding for menu items */
 .nav.nav-pills > li > a {
@@ -756,7 +771,8 @@ div.glyphicon.xspReadIcon{
 ***********************************************************************/
 
 /* Common utilities coming from OneUI */
-.lotusAltText {
+.lotusAltText,
+.xspAltText {
     display: none;
 }
 .lotusNowrap {
@@ -781,15 +797,6 @@ div.glyphicon.xspReadIcon{
 .table h4, .lotusForum h4 {
     font-size: 1.1em; /* For DataView main topic, ForumView main topic */
 }
-
-
-/*table-based form - use the div one moving forward*/
-.form-table{margin:0;padding:0;zoom:1}
-.form-table .form-title h2{font-size:1.3em;}
-.form-table .form-footer{padding:10px 25px !important;}
-.form-table legend {padding-bottom:5px !important;}
-.form-table .form-footer{padding:10px 25px !important;}
-
 
 /* list of names */
 .lotusFilters {
@@ -1373,4 +1380,11 @@ div.glyphicon.xspReadIcon{
     position: absolute;
     top: 49%;
 }*/
+
+/* Correct the glyphicon font references */
+@font-face{
+	font-family:'Glyphicons Halflings';
+	src:url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.eot);
+	src:url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.woff2) format('woff2'),url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.woff) format('woff'),url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(/xsp/.ibmxspres/.extlib/responsive/bootstrap3/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+}
 /*eof*/

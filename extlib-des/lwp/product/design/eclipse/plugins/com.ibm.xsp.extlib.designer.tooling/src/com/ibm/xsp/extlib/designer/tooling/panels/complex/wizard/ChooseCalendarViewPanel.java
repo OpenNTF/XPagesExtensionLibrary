@@ -36,6 +36,7 @@ import com.ibm.commons.util.StringUtil;
 import com.ibm.designer.domino.ide.resources.extensions.NotesPlatform;
 import com.ibm.designer.domino.xsp.api.util.XPagesDataUtil;
 import com.ibm.designer.domino.xsp.dominoutils.DominoImportException;
+import com.ibm.xsp.extlib.designer.tooling.utils.ExtLibToolingLogger;
 
 /**
  * @author Gary Marjoram
@@ -49,7 +50,7 @@ public class ChooseCalendarViewPanel extends AbstractDominoWizardPanel {
 
     @Override
     public String getDesignElementLabel() {
-        return "View"; // $NON-NLS-1$
+        return "&View"; // $NLX-ChooseCalendarViewPanel.View-1$
     }
 
     @Override
@@ -110,13 +111,20 @@ public class ChooseCalendarViewPanel extends AbstractDominoWizardPanel {
                 lookup = getDatabaseCalendarViews(inputArray[SERVER_INDEX], inputArray[DB_INDEX], inputArray[VIEW_TYPE_INDEX]);                                
             }
             catch (DominoImportException e) {
-                e.printStackTrace();  // TODO: log exception
-                String fmt = "Error getting {0} from database {1} on server {2}." + e.getLocalizedMessage();  // $NON-NLS-1$
-                String msg = StringUtil.format(fmt,
-                                    "views", // $NON-NLS-1$
-                                    inputArray[1], inputArray[0]);
+                if(ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.isErrorEnabled()){                        
+                    ExtLibToolingLogger.EXT_LIB_TOOLING_LOGGER.error(e, e.toString());
+                }
+                String localizedMsg = e.getLocalizedMessage();
+                if (StringUtil.isEmpty(localizedMsg)) {
+                    localizedMsg = e.getMessage();
+                    if (StringUtil.isEmpty(localizedMsg)) {
+                        localizedMsg = e.toString();
+                    }
+                }
+                String fmt = "Error getting views from database {0} on server {1}: {2}";  // $NLX-ChooseCalendarViewPanel.Errorgettingviewsfromdatabase0ons-1$
+                String msg = StringUtil.format(fmt, inputArray[1], inputArray[0], localizedMsg);
                 return new Status(IStatus.ERROR, 
-                                  "domino Plugin",  // $NON-NLS-1$
+                                  "Error",  // $NLX-ChooseCalendarViewPanel.Error-1$
                                   0,
                                   msg, 
                                   e);
@@ -163,9 +171,8 @@ public class ChooseCalendarViewPanel extends AbstractDominoWizardPanel {
         public String getJobDisplayName(Object input) {
             String[] inputArray = (String[])input;
             
-            String fmt = "Fetching Domino {2} from {0} on server {1}";  // $NON-NLS-1$
-            return StringUtil.format(fmt, inputArray[DB_INDEX], 
-                    inputArray[SERVER_INDEX], "views"); // $NON-NLS-1$
+            String fmt = "Fetching Domino views from {0} on server {1}";   // $NLX-ChooseCalendarViewPanel.FetchingDominoviewsfrom0onserver1-1$
+            return StringUtil.format(fmt, inputArray[DB_INDEX], inputArray[SERVER_INDEX]);
         }      
         
         public StringLookup getDatabaseCalendarViews(final String server, final String database, final String viewType) throws DominoImportException {
@@ -232,11 +239,10 @@ public class ChooseCalendarViewPanel extends AbstractDominoWizardPanel {
                             }
                         }
                         catch (NotesException e) {
-                            die[0] = new DominoImportException(e, "Unable to find Views in the database: "  // $NON-NLS-1$
-                                    + database);
+                            die[0] = new DominoImportException(e, "Unable to find Views in the database: " + database); // $NLX-ChooseCalendarViewPanel.UnabletofindViewsinthedatabase-1$
                         }
                         catch (Throwable e) {
-                            die[0] = new DominoImportException(null, "Notes client not found");  // $NON-NLS-1$
+                            die[0] = new DominoImportException(null, "Error getting Views from the database"); // $NLX-ChooseCalendarViewPanel.ErrorgettingViewsfromthedatabase-1$
                         }
                         finally{
                             if(db != null){
@@ -251,7 +257,7 @@ public class ChooseCalendarViewPanel extends AbstractDominoWizardPanel {
                 });
             }
             catch (Throwable e) {
-                die[0] = new DominoImportException(null, "Notes client not found"); // $NON-NLS-1$
+                die[0] = new DominoImportException(null, "Error getting Views from the database"); // $NLX-ChooseCalendarViewPanel.ErrorgettingViewsfromthedatabase-1$
             }
 
             if (die[0] != null) {

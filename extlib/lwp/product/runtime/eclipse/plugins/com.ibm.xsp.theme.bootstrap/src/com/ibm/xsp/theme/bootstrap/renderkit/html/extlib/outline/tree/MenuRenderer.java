@@ -30,7 +30,7 @@ import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.tree.ITreeNode;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 import com.ibm.xsp.util.JSUtil;
 import com.ibm.xsp.util.TypedUtil;
 
@@ -115,7 +115,7 @@ public class MenuRenderer extends HtmlListRenderer {
     
     @Override
     protected String getItemStyleClass(TreeContextImpl tree, boolean enabled, boolean selected) {
-        String clazz=null;
+        String clazz = super.getItemStyleClass(tree, enabled, selected);
         if(tree.getNode().getType()==ITreeNode.NODE_CONTAINER) {
             //clazz = "nav-header";
         } else if(tree.getNode().getType()==ITreeNode.NODE_SEPARATOR) {
@@ -127,6 +127,7 @@ public class MenuRenderer extends HtmlListRenderer {
         if(selected) {
             clazz = ExtLibUtil.concatStyleClasses(clazz, "active"); // $NON-NLS-1$
         }
+        
         return clazz;
     }
     
@@ -138,8 +139,6 @@ public class MenuRenderer extends HtmlListRenderer {
             UIViewRootEx rootEx = (UIViewRootEx) context.getViewRoot();
             rootEx.setDojoTheme(true);
             ExtLibResources.addEncodeResource(rootEx, Resources.bootstrapNavigator);
-            
-            
             ExtLibResources.addEncodeResource(rootEx, ExtLibResources.extlibExtLib);
             // Specific dojo effects
             String effect = getExpandEffect();
@@ -161,9 +160,8 @@ public class MenuRenderer extends HtmlListRenderer {
             
             //Containing div element with icon class
             writer.startElement("div", null); // $NON-NLS-1$
-            
             int depth = tree.getDepth()-2;
-
+            
             UIComponent uiTree = tree.getComponent();
             boolean keepState = false;
             if (uiTree instanceof UIOutlineNavigator) {
@@ -252,13 +250,7 @@ public class MenuRenderer extends HtmlListRenderer {
             onkeydown.append("}"); // $NON-NLS-1$
             writer.writeAttribute("onkeydown", onkeydown.toString(), null); // $NON-NLS-1$
             
-//            // Build JS for onkeydown event to suppress default browser action
-//            // when space is pressed (see Navigator.js)
-//            StringBuilder onkeydown = new StringBuilder();
-//            onkeydown.append("XSP.xbtSuppressSpaceEvent(event);"); // $NON-NLS-1$
-//            writer.writeAttribute("onkeydown", onkeydown.toString(), null); // $NON-NLS-1$
-            
-            Util.renderIconTextForA11Y(writer, twistyLabel);
+            BootstrapUtil.renderIconTextForA11Y(writer, twistyLabel);
             
             writer.endElement("div"); //$NON-NLS-1$
             

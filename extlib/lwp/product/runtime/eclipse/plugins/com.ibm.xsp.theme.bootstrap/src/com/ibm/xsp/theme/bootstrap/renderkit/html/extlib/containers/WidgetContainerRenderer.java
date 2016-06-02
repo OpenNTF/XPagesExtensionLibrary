@@ -26,7 +26,7 @@ import com.ibm.xsp.extlib.component.containers.UIWidgetContainer;
 import com.ibm.xsp.extlib.util.ExtLibRenderUtil;
 import com.ibm.xsp.theme.bootstrap.renderkit.html.extlib.outline.tree.WidgetDropDownRenderer;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 import com.ibm.xsp.util.FacesUtil;
 
 public class WidgetContainerRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.containers.WidgetContainerRenderer {
@@ -212,7 +212,7 @@ public class WidgetContainerRenderer extends com.ibm.xsp.extlib.renderkit.html_e
         w.writeAttribute("aria-controls", c.getClientId(context) + "_body",null); // $NON-NLS-1$ $NON-NLS-2$
         if(StringUtil.isNotEmpty(alt)) {
             w.writeAttribute("aria-label",alt,null); // $NON-NLS-1$
-            Util.renderIconTextForA11Y(w, alt);
+            BootstrapUtil.renderIconTextForA11Y(w, alt);
         }
     }
 
@@ -223,7 +223,7 @@ public class WidgetContainerRenderer extends com.ibm.xsp.extlib.renderkit.html_e
         w.writeAttribute("aria-controls", c.getClientId(context) + "_body",null); // $NON-NLS-1$ $NON-NLS-2$
         if(StringUtil.isNotEmpty(alt)) {
             w.writeAttribute("aria-label",alt,null); // $NON-NLS-1$
-            Util.renderIconTextForA11Y(w, alt);
+            BootstrapUtil.renderIconTextForA11Y(w, alt);
         }
     }
     

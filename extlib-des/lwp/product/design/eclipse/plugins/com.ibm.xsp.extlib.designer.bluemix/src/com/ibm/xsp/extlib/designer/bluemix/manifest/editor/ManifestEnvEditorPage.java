@@ -64,6 +64,7 @@ public class ManifestEnvEditorPage extends AbstractManifestEditorPage implements
     @Override
     protected void createLeftArea(Composite parent) {
         createRuntimeArea(parent);
+        createDebugArea(parent);
     }
 
     @Override
@@ -96,11 +97,33 @@ public class ManifestEnvEditorPage extends AbstractManifestEditorPage implements
         Button btn = XSPEditorUtil.createCheckboxTF(container, "Enable full Java security permissions for code contained in NSFs", "appJavaPolicyAllPermission", 3); //  $NON-NLS-2$ $NLX-ManifestEnvEditorPage.EnablefullJavasecuritypermissions-1$
         btn.setToolTipText("APP_JAVA_POLICY_ALL_PERMISSION\nUse to enable or disable unrestricted execution of Java code in your application.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_JAVA_POLICY_ALL_PERMISSIONnUs-1$
         
-        btn = XSPEditorUtil.createCheckboxTF(container, "Include XPages Toolbox", "appIncludeXPagesToolbox", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.IncludeXPagesToolbox-1$
+        btn = XSPEditorUtil.createCheckboxTF(container, "Redirect to SSL", "appRedirectToSSL", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.RedirecttoSSL-1$
+        btn.setToolTipText("APP_REDIRECT_TO_SSL\nWhen enabled, application requests are always processed using HTTPS protocol. When disabled, regular HTTP protocol\nis normally used but programmatic switching to HTTPS protocol is still possible for specific requests.\nEnabled by default. "); // $NLX-ManifestEnvEditorPage.APP_REDIRECT_TO_SSLnWhenenabled-1$
+
+        section.setClient(container);        
+    }
+
+    private void createDebugArea(Composite parent) {
+        Section section = XSPEditorUtil.createSection(_toolkit, parent, "Debug Environment Variables", 1, 1); // $NLX-ManifestEnvEditorPage.DebugEnvironmentVariables-1$
+        Composite container = XSPEditorUtil.createSectionChild(section, 3);
+        
+        Button btn = XSPEditorUtil.createCheckboxTF(container, "Include XPages Toolbox", "appIncludeXPagesToolbox", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.IncludeXPagesToolbox-1$
         btn.setToolTipText("APP_INCLUDE_XPAGES_TOOLBOX\nWhen enabled, the XPages Toolbox will be pushed along with your application to facilitate debugging.\nDisabled by default.");  // $NLX-ManifestEnvEditorPage.APP_INCLUDE_XPAGES_TOOLBOXnWhenen-1$
 
-        btn = XSPEditorUtil.createCheckboxTF(container, "Enable verbose staging", "appVerboseStaging", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Enableverbosestaging-1$
+        btn = XSPEditorUtil.createCheckboxTF(container, "Verbose staging", "appVerboseStaging", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Verbosestaging-1$
         btn.setToolTipText("APP_VERBOSE_STAGING\nWhen enabled, the command-line interface (CLI) will show full logging details when staging your application.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_VERBOSE_STAGINGnWhenenabledth-1$
+        
+        btn = XSPEditorUtil.createCheckboxTF(container, "Debug staging", "appDebugStaging", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Debugstaging-1$ 
+        btn.setToolTipText("APP_DEBUG_STAGING\nWhen enabled, detailed debug information generated during application staging will be collected into\nthe console log file in the IBM_TECHNICAL_SUPPORT directory.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_DEBUG_STAGINGnWhenenableddeta-1$
+
+        btn = XSPEditorUtil.createCheckboxTF(container, "Debug threads", "appDebugThreads", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Debugthreads-1$ 
+        btn.setToolTipText("APP_DEBUG_THREADS\nWhen enabled, detailed thread request and response information will be collected into separate thread\nlog files in the IBM_TECHNICAL_SUPPORT directory.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_DEBUG_THREADSnWhenenableddeta-1$
+
+        btn = XSPEditorUtil.createCheckboxTF(container, "Debug directory assistance", "appDebugDa", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Debugdirectoryassistance-1$ 
+        btn.setToolTipText("APP_DEBUG_DIRECTORY_ASSISTANCE\nWhen enabled, detailed directory assistance debug information will be collected into\nthe console log file in the IBM_TECHNICAL_SUPPORT directory.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_DEBUG_DIRECTORY_ASSISTANCEnWh-1$
+
+        btn = XSPEditorUtil.createCheckboxTF(container, "Debug name lookup", "appDebugNameLookup", 3); // $NON-NLS-2$ $NLX-ManifestEnvEditorPage.Debugnamelookup-1$ 
+        btn.setToolTipText("APP_DEBUG_NAMELOOKUP\nWhen enabled, detailed name lookup information will be collected into the console log file in\nthe IBM_TECHNICAL_SUPPORT directory.\nDisabled by default."); // $NLX-ManifestEnvEditorPage.APP_DEBUG_NAMELOOKUPnWhenenabledd-1$
         
         section.setClient(container);        
     }

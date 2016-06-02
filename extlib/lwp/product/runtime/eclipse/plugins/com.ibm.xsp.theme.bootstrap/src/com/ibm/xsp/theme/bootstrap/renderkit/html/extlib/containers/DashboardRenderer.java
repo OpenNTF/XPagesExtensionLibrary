@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014, 2015
+ * © Copyright IBM Corp. 2014, 2015, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -229,6 +229,18 @@ public class DashboardRenderer extends FacesRendererEx {
             w.writeAttribute("style", containerMixinStyle, null); // $NON-NLS-1$
         }
         
+        //Start the enclosing link if a href exists
+        String labelLink = node.getLabelHref();
+        boolean isLink = StringUtil.isNotEmpty(labelLink);
+        boolean isDisplayAsLink = node.isDisplayNodeAsLink();
+        
+        //Add link tag is href exists and node is set to be wrapped in a link
+        if(isDisplayAsLink && isLink) {
+            //add anchor tag for title link
+            w.startElement("a", c);
+            RenderUtil.writeLinkAttribute(context,w, labelLink);
+        }
+        
         //write the image or the glyphicon instead
         //write image + alt text + width + height
         if(useGlyph) {
@@ -239,6 +251,11 @@ public class DashboardRenderer extends FacesRendererEx {
         //write title
         writeNodeLabel(context, w, c, node);
         
+        //Close link
+        if(isDisplayAsLink && isLink) {
+            w.endElement("a");
+        }
+        
         //write description
         writeNodeDescription(context, w, c, node);
         
@@ -247,15 +264,18 @@ public class DashboardRenderer extends FacesRendererEx {
     }
     
     public void writeNodeLabel(FacesContext context, ResponseWriter w, UIDashboard c, DashNode node) throws IOException{
-        String labelLink = node.getLabelHref();
         String labelText = node.getLabelText();
-        String labelStyle = node.getLabelStyle();
-        String labelClass = node.getLabelStyleClass();
-        boolean badgeEnabled = node.isBadgeEnabled();
         
         if(StringUtil.isNotEmpty(labelText)) {
+            String labelLink = node.getLabelHref();
+            String labelStyle = node.getLabelStyle();
+            String labelClass = node.getLabelStyleClass();
+            boolean badgeEnabled = node.isBadgeEnabled();
             boolean isLink = StringUtil.isNotEmpty(labelLink);
-            if(isLink) {
+            boolean isDisplayAsLink = node.isDisplayNodeAsLink();
+            
+            //Add link tag if href is set and node is not wrapped in a link
+            if(!isDisplayAsLink && isLink) {
                 //add anchor tag for title link
                 w.startElement("a", c);
                 RenderUtil.writeLinkAttribute(context,w, labelLink);
@@ -276,7 +296,8 @@ public class DashboardRenderer extends FacesRendererEx {
             }
             
             w.endElement((String)getProperty(PROP_NODE_TITLE_TAG));
-            if(isLink) {
+            
+            if(!isDisplayAsLink && isLink) {
                 w.endElement("a");
             }
         }
@@ -323,15 +344,17 @@ public class DashboardRenderer extends FacesRendererEx {
     }
     
     public void writeGlyphicon(FacesContext context, ResponseWriter w, UIDashboard c, DashNode node) throws IOException{
-        String glyphiconTag = node.getIconTag();
         String glyphicon = node.getIcon();
-        String glyphSize = node.getIconSize();
-        String glyphStyle = node.getIconStyle();
-        String glyphTitle = node.getIconTitle();
         
-        String tag = StringUtil.isNotEmpty(glyphiconTag) ? glyphiconTag : (String)getProperty(PROP_NODE_DEFAULT_GLYPH_TAG);
-        String size = StringUtil.isNotEmpty(glyphSize) ? (glyphSize.contains("font-size:") ? glyphSize : "font-size:"+glyphSize) : (String)getProperty(PROP_NODE_DEFAULT_GLYPH_SIZE); // $NON-NLS-1$ $NON-NLS-2$
         if(StringUtil.isNotEmpty(glyphicon)) {
+            String glyphiconTag = node.getIconTag();
+            String glyphSize = node.getIconSize();
+            String glyphStyle = node.getIconStyle();
+            String glyphTitle = node.getIconTitle();
+            
+            String tag = StringUtil.isNotEmpty(glyphiconTag) ? glyphiconTag : (String)getProperty(PROP_NODE_DEFAULT_GLYPH_TAG);
+            String size = StringUtil.isNotEmpty(glyphSize) ? (glyphSize.contains("font-size:") ? glyphSize : "font-size:"+glyphSize) : (String)getProperty(PROP_NODE_DEFAULT_GLYPH_SIZE); // $NON-NLS-1$ $NON-NLS-2$
+            
             w.startElement(tag, c);
             String glyphClazz = ExtLibUtil.concatStyleClasses((String)getProperty(PROP_NODE_DEFAULT_GLYPH_CLASS), glyphicon);
             if(StringUtil.isNotEmpty(glyphClazz)) {

@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Domino Designer Bluemix Tooling Libraries
 Bundle-SymbolicName: com.ibm.xsp.extlib.designer.bluemix.lib;singleton:=true
-Bundle-Version: 9.0.1.v00_16_qualifier
+Bundle-Version: 9.0.1.v00_17_qualifier
 Bundle-Vendor: IBM
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: lib/aopalliance-1.0.jar,
- lib/cloudfoundry-client-lib-1.0.2.jar,
+ lib/cloudfoundry-client-lib-1.0.2b.jar,
  lib/commons-codec-1.3.jar,
  lib/commons-io-2.1.jar,
  lib/commons-logging-1.1.1.jar,

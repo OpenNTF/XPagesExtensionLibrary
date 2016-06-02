@@ -57,7 +57,7 @@ public class ManifestUtil {
         application.put(ManifestAppProps.NAME_TAG, config.appName);
         application.put(ManifestAppProps.HOST_TAG, config.host);
         application.put(ManifestAppProps.INSTANCES_TAG, new Integer(1));
-        application.put(ManifestAppProps.MEMORY_TAG, "256M"); // $NON-NLS-1$
+        application.put(ManifestAppProps.MEMORY_TAG, "512M"); // $NON-NLS-1$
         application.put(ManifestAppProps.TIMEOUT_TAG, new Integer(180));
         application.put(ManifestAppProps.BUILD_PACK_TAG, "xpages_buildpack"); // $NON-NLS-1$
         application.put(ManifestAppProps.COMMAND_TAG, "/app/launch_xpages_webcontainer"); // $NON-NLS-1$

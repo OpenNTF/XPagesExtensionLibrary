@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Copyright IBM Corp. 2010, 2015                                      -->
+<!-- Copyright IBM Corp. 2010, 2016                                      -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -120,6 +120,23 @@
       <display-name>%property.invertedNavbar.complex-type.simpleResponsiveConfiguration.name%</display-name>
       <property-name>invertedNavbar</property-name>
       <property-class>boolean</property-class>
+    </property>
+    <property>
+      <description>%property.navigationPath.descr%</description>
+      <display-name>%property.navigationPath.name%</display-name>
+      <property-name>navigationPath</property-name>
+      <property-class>java.lang.String</property-class>
+      <property-extension>
+        <designer-extension>
+          <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
+          <editor-parameter>
+						/tab1/link1
+						/tab1/link2
+						/tab2/link1
+						/tab2/link2
+					</editor-parameter>
+        </designer-extension>
+      </property-extension>
     </property>
     <property>
       <description>%property.fixedNavbar.complex-type.simpleResponsiveConfiguration.descr%</description>
@@ -759,6 +776,15 @@
 			not-image-path
           </tags>
         </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <description>%property.displayNodeAsLink.descr%</description>
+      <display-name>%property.displayNodeAsLink.name%</display-name>
+      <property-name>displayNodeAsLink</property-name>
+      <property-class>boolean</property-class>
+      <property-extension>
+        <since>9.0.1.v00_17</since>
       </property-extension>
     </property>
     <property>

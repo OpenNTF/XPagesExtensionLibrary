@@ -3,13 +3,14 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <modelVersion>4.0.0</modelVersion>
 <artifactId>com.ibm.xsp.extlib.parent</artifactId>
 <packaging>pom</packaging>
-<version>9.0.1.v00_16-SNAPSHOT</version>
+<version>9.0.1.v00_17-SNAPSHOT</version>
 <groupId>com.ibm.xsp.extlib</groupId>
 
 <modules>
 <module>/product/runtime/eclipse/plugins</module>
 <module>/product/runtime/eclipse/features</module>
 <module>/product/runtime/updatesite/org.openntf.extlib.updatesite</module>
+<module>/product/runtime/updatesite/org.openntf.extlib.p2</module>
 </modules>
 
 <properties>
@@ -27,6 +28,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <layout>p2</layout>
 <url>file:///C:\updateSite</url>
 </repository>
+<!--<repository>
+	<id>notes</id>
+	<layout>p2</layout>
+	<url>${notes-platform}</url>
+	</repository>
+	-->
 </repositories>
 
 <profiles>
@@ -170,7 +177,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<includeAllDependencies>true</includeAllDependencies>
+					<includeAllDependencies>false</includeAllDependencies>
 				</configuration>
 			</plugin>
 			

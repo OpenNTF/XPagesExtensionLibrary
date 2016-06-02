@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -55,7 +55,8 @@ public class DashNode extends ValueBindingObjectImpl {
     private Integer _sizeMedium;
     private Integer _sizeSmall;
     private Integer _sizeExtraSmall;
-    
+
+    private Boolean _displayNodeAsLink;
     private Boolean _iconEnabled;
     private String _icon;
     private String _iconTag;
@@ -525,13 +526,33 @@ public class DashNode extends ValueBindingObjectImpl {
         }
         return 0;
     }
+    
+    
 	/**
 	 * @param extraSmallSize the size to set
 	 */
 	public void setSizeExtraSmall(int sizeExtraSmall) {
 		this._sizeExtraSmall = sizeExtraSmall;
 	}
-	
+	   
+    public boolean isDisplayNodeAsLink() {
+        if(_displayNodeAsLink != null) {
+            return _displayNodeAsLink;
+        }
+        ValueBinding vb = getValueBinding("displayNodeAsLink"); // $NON-NLS-1$
+        if(vb!=null) {
+            Boolean b = (Boolean)vb.getValue(getFacesContext());
+            if(b!=null) {
+                return b;
+            }
+        }
+        return false;
+    }
+
+    public void setDisplayNodeAsLink(boolean displayAsLink) {
+        this._displayNodeAsLink = displayAsLink;
+    }
+    
     public boolean isIconEnabled() {
         if(_iconEnabled != null) {
             return _iconEnabled;
@@ -717,7 +738,7 @@ public class DashNode extends ValueBindingObjectImpl {
      */
     @Override
     public Object saveState(FacesContext context) {
-        Object values[] = new Object[31];
+        Object values[] = new Object[32];
         
         values[0] = super.saveState(context);
         values[1] = _style;
@@ -750,6 +771,7 @@ public class DashNode extends ValueBindingObjectImpl {
         values[28] = _badgeStyle;
         values[29] = _badgeClass;
         values[30] = _title;
+        values[31] = _displayNodeAsLink;
          return values;
     }
 
@@ -792,5 +814,6 @@ public class DashNode extends ValueBindingObjectImpl {
         _badgeStyle = (String) values[28];
         _badgeClass = (String) values[29];
         _title = (String) values[30];
+        _displayNodeAsLink = (Boolean) values[31];
     }
 }

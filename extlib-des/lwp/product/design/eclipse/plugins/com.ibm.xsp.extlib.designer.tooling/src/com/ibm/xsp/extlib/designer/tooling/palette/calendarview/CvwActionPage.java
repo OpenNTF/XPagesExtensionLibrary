@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -16,65 +16,77 @@
 
 package com.ibm.xsp.extlib.designer.tooling.palette.calendarview;
 
-import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
-
+import com.ibm.xsp.extlib.designer.tooling.utils.AbstractWizardPage;
 import com.ibm.xsp.extlib.designer.tooling.utils.WizardUtils;
 
 /**
  * @author Gary Marjoram
  *
  */
-public class CvwActionPage extends WizardPage implements SelectionListener {
-    private static final String PAGE_NAME   = "WizardActionPage"; // $NON-NLS-1$
-    private static final String PAGE_TITLE  = "Actions"; // $NON-NLS-1$
-    private static final String INITIAL_MSG = "Configure the actions for the Calendar"; // $NON-NLS-1$
+public class CvwActionPage extends AbstractWizardPage implements SelectionListener {
 
-    private Button              _dateRangeCheckbox;
-    private Button              _todayCheckbox;
-    private Button              _todayTomorrowCheckbox;
-    private Button              _workWeekCheckbox;
-    private Button              _fullWeekCheckbox;
-    private Button              _twoWeeksCheckbox;
-    private Button              _monthCheckbox;
-    private Button              _yearCheckbox;
-    private Button              _summaryCheckbox;
-    
-    private Group               _dateRangeGroup;
+    private Button  _dateRangeCheckbox;
+    private Button  _todayCheckbox;
+    private Button  _todayTomorrowCheckbox;
+    private Button  _workWeekCheckbox;
+    private Button  _fullWeekCheckbox;
+    private Button  _twoWeeksCheckbox;
+    private Button  _monthCheckbox;
+    private Button  _yearCheckbox;
+    private Button  _displayFormatCheckbox;
+    private Combo   _initialDateRangeCombo;
 
-    public CvwActionPage() {
-        super(PAGE_NAME);
+    public CvwActionPage(String pageName) {
+        super(pageName);
     }
 
     @Override
+    protected String getPageTitle() {
+        return "Date Range and Display Format Icons"; // $NLX-CvwActionPage.DateRangeandDisplayFormatIcons-1$
+    }
+
+    @Override
+    protected String getPageMsg() {
+        return "Configure the date range and display format icons for this calendar"; // $NLX-CvwActionPage.Configurethedaterangeanddisplayfo-1$
+    }
+    
+    @Override
     public void createControl(Composite parent) {
-        setTitle(PAGE_TITLE);
-        setMessage(INITIAL_MSG, IMessageProvider.INFORMATION);
-
-        Composite container = new Composite(parent, SWT.NONE);
-        container.setLayout(WizardUtils.createGridLayout(1, 5));
+        super.createControl(parent);
         
-        _dateRangeGroup = WizardUtils.createGroup(container, 1, 2);
-
-        _dateRangeCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Include date-range actions",2, true); // $NON-NLS-1$
+        Composite container = new Composite(parent, SWT.NONE);
+        container.setLayout(WizardUtils.createGridLayout(2, 5));
+        
+        Composite comp = new Composite(container, SWT.NONE);
+        GridLayout gl = WizardUtils.createGridLayout(2, 0);
+        gl.marginWidth = 0;
+        comp.setLayout(gl);
+        GridData gd = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
+        gd.horizontalSpan = 2;
+        comp.setLayoutData(gd);
+        WizardUtils.createLabel(comp, "Initial date range: ", 1); // $NLX-CvwActionPage.Initialdaterange-1$
+        _initialDateRangeCombo = WizardUtils.createCombo(comp, 1, CalendarFormat.getLabels(), CalendarFormat.WORK_WEEK.getIndex(), null);
+        
+        _dateRangeCheckbox = WizardUtils.createCheckBox(container, "Include date range icons",2, true); // $NLX-CvwActionPage.Includedaterangeicons-1$
         _dateRangeCheckbox.addSelectionListener(this);
         
-        _todayCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Today", 1, true, 20); // $NON-NLS-1$
-        _todayTomorrowCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Today and tomorrow", 1, true, 20); // $NON-NLS-1$
-        _workWeekCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Work week", 1, true, 20); // $NON-NLS-1$
-        _fullWeekCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Full week", 1, true, 20); // $NON-NLS-1$
-        _twoWeeksCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Two weeks", 1, true, 20); // $NON-NLS-1$
-        _monthCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Month", 1, true, 20); // $NON-NLS-1$
-        _yearCheckbox = WizardUtils.createCheckBox(_dateRangeGroup, "Year", 1, true, 20); // $NON-NLS-1$
+        _todayCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.TODAY.getLabel(), 1, true, 20);
+        _todayTomorrowCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.TODAY_TOMORROW.getLabel(), 1, true, 20);
+        _workWeekCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.WORK_WEEK.getLabel(), 1, true, 20);
+        _fullWeekCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.FULL_WEEK.getLabel(), 1, true, 20);
+        _twoWeeksCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.TWO_WEEKS.getLabel(), 1, true, 20);
+        _monthCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.MONTH.getLabel(), 1, true, 20);
+        _yearCheckbox = WizardUtils.createCheckBox(container, CalendarFormat.YEAR.getLabel(), 1, true, 20);
                 
-        Group group = WizardUtils.createGroup(container, 1, 2);
-        _summaryCheckbox = WizardUtils.createCheckBox(group, "Include summary actions", 1, true); // $NON-NLS-1$
+        _displayFormatCheckbox = WizardUtils.createCheckBox(container, "Include display format icons", 2, true); // $NLX-CvwActionPage.Includedisplayformaticons-1$
         
         setControl(container);
         setPageComplete(true);        
@@ -87,12 +99,18 @@ public class CvwActionPage extends WizardPage implements SelectionListener {
     @Override
     public void widgetSelected(SelectionEvent event) {
         if (event.widget == _dateRangeCheckbox) {
-            WizardUtils.setCheckGroupEnabledState(_dateRangeGroup);
+            _todayCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _todayTomorrowCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _workWeekCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _fullWeekCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _twoWeeksCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _monthCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
+            _yearCheckbox.setEnabled(_dateRangeCheckbox.getSelection());
         }
     }    
     
     public boolean isActionMarkupRequired() {
-        return (isDateRangeMarkupRequired() || getSummary());
+        return (isDateRangeMarkupRequired() || getDisplayFormat());
     }
     
     public boolean isDateRangeMarkupRequired() {
@@ -139,9 +157,16 @@ public class CvwActionPage extends WizardPage implements SelectionListener {
         return WizardUtils.getCheckBoxValue(_yearCheckbox, true); 
     }
     
-    public boolean getSummary() {
-        return WizardUtils.getCheckBoxValue(_summaryCheckbox, true); 
+    public boolean getDisplayFormat() {
+        return WizardUtils.getCheckBoxValue(_displayFormatCheckbox, true); 
     }
     
-    
+    public CalendarFormat getInitialDateRange() {
+        int index = WizardUtils.getComboIndex(_initialDateRangeCombo, -1);
+        if (index != -1) {
+            return CalendarFormat.getFromIndex(index);
+        }
+        
+        return CalendarFormat.WORK_WEEK;
+    }
 }

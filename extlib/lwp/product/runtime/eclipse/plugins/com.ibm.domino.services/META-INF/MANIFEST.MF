@@ -32,5 +32,5 @@ Export-Package: com.ibm.domino.services,
  com.ibm.domino.services.util
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.ibm.domino.services.Activator
-Bundle-Version: 9.0.1.v00_16_SNAPSHOT
+Bundle-Version: 9.0.1.v00_17_SNAPSHOT
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

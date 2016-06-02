@@ -212,7 +212,15 @@ public interface IExtLibAttrNames {
     public final static String EXT_LIB_ATTR_SAVE_DOCUMENT         = "saveDocument";          // $NON-NLS-1$
 
     public final static String EXT_LIB_ATTR_PATH_INFO             = "pathInfo";              // $NON-NLS-1$
+
+    public final static String EXT_LIB_ATTR_REFRESH_ID            = "refreshId";             // $NON-NLS-1$
     
+    public final static String EXT_LIB_ATTR_SELECTED_IMAGE        = "selectedImage";         // $NON-NLS-1$
+
+    public final static String EXT_LIB_ATTR_IMAGE_ALT             = "imageAlt";              // $NON-NLS-1$
+
+    public final static String EXT_LIB_ATTR_SELECTED_VALUE        = "selectedValue";         // $NON-NLS-1$
+
     public static interface Calendar {
         public final static String ATTR_COL_CALENDAR_DATE         = "colCalendarDate";       // $NON-NLS-1$
         public final static String ATTR_COL_START_TIME            = "colStartTime";          // $NON-NLS-1$

@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2014
+ * © Copyright IBM Corp. 2014, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -49,12 +49,11 @@ public class CalendarViewDropAction extends XPagesPaletteDropActionDelegate {
         CalendarViewDropWizard wiz = new CalendarViewDropWizard(shell, panelData);
         WizardDialog dialog = new WizardDialog(shell, wiz);
         dialog.addPageChangingListener(wiz);
-        dialog.addPageChangedListener(wiz);
         if (WizardDialog.OK != dialog.open()) {
             return null;
         }
         
-        // Return the calendarView or panel
+        // Return the root element
         return (Element) panelData.getNode();
     }        
 }

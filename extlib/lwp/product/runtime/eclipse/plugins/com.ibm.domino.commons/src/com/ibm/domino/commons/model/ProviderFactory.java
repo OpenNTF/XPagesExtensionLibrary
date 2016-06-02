@@ -16,6 +16,8 @@
 
 package com.ibm.domino.commons.model;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DEBUG_IN_ERROR_RESPONSE;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -316,8 +318,13 @@ public class ProviderFactory {
                 s_gatekeeperProvider = new IGatekeeperProvider() {
 
                     public boolean isFeatureEnabled(int feature, String CustomerID, String userID) {
-                        // By default everything is enabled
-                        return true;
+                        if ( feature == FEATURE_REST_API_DEBUG_IN_ERROR_RESPONSE ) {
+                            return false;
+                        }
+                        else {
+                            // Everything else is enabled
+                            return true;
+                        }
                     }
                 };
             }

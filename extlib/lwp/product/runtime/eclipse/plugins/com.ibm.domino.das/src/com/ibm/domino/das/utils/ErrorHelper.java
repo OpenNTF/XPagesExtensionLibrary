@@ -1,5 +1,5 @@
  /*
- * © Copyright IBM Corp. 2012
+ * © Copyright IBM Corp. 2012, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -15,6 +15,7 @@
  */
 package com.ibm.domino.das.utils;
 
+import static com.ibm.domino.commons.model.IGatekeeperProvider.FEATURE_REST_API_DEBUG_IN_ERROR_RESPONSE;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_CODE;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_DATA;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_MESSAGE;
@@ -38,6 +39,8 @@ import lotus.domino.NotesException;
 
 import com.ibm.commons.log.Log;
 import com.ibm.commons.log.LogMgr;
+import com.ibm.domino.commons.model.IGatekeeperProvider;
+import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.services.util.JsonWriter;
 
 
@@ -232,30 +235,36 @@ public class ErrorHelper {
         
         jwriter.endProperty();
         
-        // type
-        writeProperty(jwriter, ATTR_TYPE, ATTR_TEXT);
-        
-        // data
-        jwriter.startProperty(ATTR_DATA);
-        if ( ScnContext.getCurrentInstance().isScn() ) {
-            Throwable cause = throwable.getCause();
-            String data = null;
-            if ( cause == null ) {
-                data = getExceptionSummary(throwable);
+        // Should we write a stack trace?
+        boolean writeStack = false;
+        ScnContext ctx = ScnContext.getCurrentInstance();
+        if ( ctx.isScn() ) {
+            IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
+            if ( provider != null ) {
+                writeStack = provider.isFeatureEnabled(FEATURE_REST_API_DEBUG_IN_ERROR_RESPONSE, 
+                                            ctx.getCustomerId(), ctx.getUserId());
             }
-            else {
-                data = MessageFormat.format("{0} caused by {1}",  // $NLX-ErrorHelper.0causedby1-1$[[{0} is an exception class and message, {1} the class and message from a different exception]]
-                        getExceptionSummary(throwable), getExceptionSummary(cause));
-            }
-            jwriter.outStringLiteral(data);
         }
         else {
+            writeStack = true;
+        }
+
+        // Write data and type properties
+        if ( writeStack ) {
+            
+            // type
+            writeProperty(jwriter, ATTR_TYPE, ATTR_TEXT);
+            
+            // data
+            jwriter.startProperty(ATTR_DATA);
+
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             throwable.printStackTrace(pw);      
             jwriter.outStringLiteral(sw.toString());
+
+            jwriter.endProperty();
         }
-        jwriter.endProperty();
     }
 
     private static void writeExtraProperties(JsonWriter jWriter, Map<String, Object> extraProps) throws IOException {

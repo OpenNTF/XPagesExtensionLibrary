@@ -29,7 +29,7 @@ import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.renderkit.html_basic.HtmlRendererUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 import com.ibm.xsp.util.FacesUtil;
 import com.ibm.xsp.util.JSUtil;
 
@@ -121,7 +121,7 @@ public class NamePickerRenderer extends com.ibm.xsp.extlib.renderkit.html_extend
                 if(!custom){
                     // A11Y fix - Defect 198080 - Need an sr-only span with text for glyphicon
                     //<span class="sr-only">Open Name Picker Dialog</span>
-                    Util.renderIconTextForA11Y(w, ariaLabel);
+                    BootstrapUtil.renderIconTextForA11Y(w, ariaLabel);
                 }
             }
             

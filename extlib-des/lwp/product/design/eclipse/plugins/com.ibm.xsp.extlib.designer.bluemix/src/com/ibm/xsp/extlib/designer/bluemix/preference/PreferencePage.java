@@ -67,8 +67,9 @@ import static com.ibm.xsp.extlib.designer.bluemix.preference.PreferenceKeys.*;
  */
 public class PreferencePage extends DominoPreferencePage implements IWorkbenchPreferencePage, SelectionListener, IDoubleClickListener {
     
-    public static final String BLUEMIX_SERVERS[]    = {"https://api.ng.bluemix.net",     // $NON-NLS-1$
-                                                       "https://api.eu-gb.bluemix.net"}; // $NON-NLS-1$
+    public static final String BLUEMIX_SERVERS[]    = {"https://api.ng.bluemix.net",      // $NON-NLS-1$
+                                                       "https://api.eu-gb.bluemix.net",   // $NON-NLS-1$
+													   "https://api.au-syd.bluemix.net"}; // $NON-NLS-1$
     public static final String BLUEMIX_PREF_PAGE    = "com.ibm.xsp.extlib.designer.bluemix.preferences.BluemixPreferencePage"; // $NON-NLS-1$
  
     private Combo  _serverCombo;

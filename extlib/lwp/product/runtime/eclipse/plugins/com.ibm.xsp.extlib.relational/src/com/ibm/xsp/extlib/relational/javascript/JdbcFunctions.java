@@ -113,7 +113,7 @@ public class JdbcFunctions extends FBSDefaultObject {
         addFunction(FCT_GETCONNECTION, "@JdbcGetConnection", "(data:T):Ljava.sql.Connection;"); // $NON-NLS-1$ $NON-NLS-2$
         addFunction(FCT_DBCOLUMN, "@JdbcDbColumn", "(connection:Wtable:Tcolumn:T):A", "(connection:Wtable:Tcolumn:Twhere:T):A", "(connection:Wtable:Tcolumn:Twhere:TorderBy:T):A","(connection:Wtable:Tcolumn:Twhere:TorderBy:Tparams:A):A"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ $NON-NLS-5$
         addFunction(FCT_EXECUTEQUERY, "@JdbcExecuteQuery", "(connection:Wsql:T):Ljava.sql.ResultSet;", "(connection:Wsql:Tparams:A):Ljava.sql.ResultSet;"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-        addFunction(FCT_INSERT, "@JdbcInsert", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:WcolumnNames:A):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:AcolToUpperCase:Z):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
+        addFunction(FCT_INSERT, "@JdbcInsert", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:WcolumnNames:A):I", "(connection:Wtable:Tvalues:WcolumnNames:AcolToUpperCase:Z):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$
         addFunction(FCT_UPDATE, "@JdbcUpdate", "(connection:Wtable:Tvalues:W):I", "(connection:Wtable:Tvalues:Wwhere:T):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:A):I", "(connection:Wtable:Tvalues:Wwhere:Tparams:AcolToUpperCase:Z):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$ $NON-NLS-4$ $NON-NLS-5$
         addFunction(FCT_DELETE, "@JdbcDelete", "(connection:Wtable:Twhere:T):I", "(connection:Wtable:Twhere:Tparams:A):I"); // $NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
     }
@@ -222,9 +222,9 @@ public class JdbcFunctions extends FBSDefaultObject {
                             Connection c = getConnection(args.get(0));
                             String tbName = args.get(1).stringValue();
                             String colName = args.get(2).stringValue();
-                            String where = args.size()>3 && !args.get(3).isNull() ? args.get(3).stringValue() : null;
-                            String orderBy = args.size()>4 && !args.get(4).isNull()? args.get(4).stringValue() : null;
-                            FBSValue params = args.size()>5 && !args.get(5).isNull()? args.get(5) : null;
+                            String where = args.size() > 3 && !args.get(3).isNull() ? args.get(3).stringValue() : null;
+                            String orderBy = args.size() > 4 && !args.get(4).isNull()? args.get(4).stringValue() : null;
+                            FBSValue params = args.size() > 5 && !args.get(5).isNull()? args.get(5) : null;
                             
                             String sql = StringUtil.format("SELECT {0} FROM {1}",colName,tbName); // $NON-NLS-1$
                             if(StringUtil.isNotEmpty(where)) {
@@ -264,7 +264,7 @@ public class JdbcFunctions extends FBSDefaultObject {
                         if(args.size()>=2) {
                             Connection c = getConnection(args.get(0));
                             String sql = args.get(1).stringValue();
-                            FBSValue params = args.size()>2 && !args.get(2).isNull()? args.get(2) : null;
+                            FBSValue params = args.size() > 2 && !args.get(2).isNull()? args.get(2) : null;
                             
                             PreparedStatement st = c.prepareStatement(sql);
                             initParameters(st, params);
@@ -291,8 +291,8 @@ public class JdbcFunctions extends FBSDefaultObject {
                         if(args.size()>=2) {
                             Connection c = getConnection(args.get(0));
                             String tbName = args.get(1).stringValue();
-                            String where = args.size()>=2 && !args.get(2).isNull()? args.get(2).stringValue() : null;
-                            FBSValue params = args.size()>=3 && !args.get(3).isNull()? args.get(3) : null;
+                            String where = args.size() > 2 && !args.get(2).isNull()? args.get(2).stringValue() : null;
+                            FBSValue params = args.size() > 3 && !args.get(3).isNull()? args.get(3) : null;
                             
                             StringBuilder b = new StringBuilder();
                             b.append("DELETE FROM  "); // $NON-NLS-1$
@@ -513,10 +513,10 @@ public class JdbcFunctions extends FBSDefaultObject {
             Connection c = getConnection(args.get(0));
             String tbName = args.get(1).stringValue();
             FBSValue values = args.get(2);
-            String where = args.size() >= 3 && !args.get(3).isNull() ? args.get(3).stringValue() : null;
-            FBSValue params = args.size() >= 4 && !args.get(4).isNull() ? args.get(4) : null;
-            Boolean colToUpperCase = args.size() >= 5 && !args.get(5).isNull() ? args.get(5).booleanValue() : true;
-
+            String where = args.size() > 3 && !args.get(3).isNull() ? args.get(3).stringValue() : null;
+            FBSValue params = args.size() > 4 && !args.get(4).isNull() ? args.get(4) : null;
+            Boolean colToUpperCase = args.size() > 5 && !args.get(5).isNull() ? args.get(5).booleanValue() : true;
+            
             StringBuilder b = new StringBuilder();
             b.append("UPDATE "); // $NON-NLS-1$
             JdbcUtil.appendTableName(b, tbName);

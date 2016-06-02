@@ -1145,12 +1145,16 @@ public class DataViewRenderer extends AbstractWebDataViewRenderer {
                 if(StringUtil.isNotEmpty(title)) {
                     w.writeAttribute("title", title,null); // $NON-NLS-1$
                 }
+            }else{
+                w.startElement("div",c); // $NON-NLS-1$
             }
             
             writeColumnValue(context, w, c, viewDef, col);
             if(StringUtil.isNotEmpty(href)) {
                 
                 w.endElement("a");
+            }else{
+                w.endElement("div"); // $NON-NLS-1$
             }
         }
         w.endElement("td"); // $NON-NLS-1$

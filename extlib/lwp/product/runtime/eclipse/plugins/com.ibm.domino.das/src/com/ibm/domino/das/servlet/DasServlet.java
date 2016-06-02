@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011
+ * © Copyright IBM Corp. 2011, 2016
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -75,6 +75,7 @@ import com.ibm.domino.commons.model.IStatisticsProvider;
 import com.ibm.domino.commons.model.ProviderFactory;
 import com.ibm.domino.das.service.CoreService;
 import com.ibm.domino.das.service.DataService;
+import com.ibm.domino.das.service.IRestServiceExt;
 import com.ibm.domino.das.service.RestService;
 import com.ibm.domino.das.servlet.DasStats.MutableDouble;
 import com.ibm.domino.das.servlet.DasStats.MutableInteger;
@@ -298,8 +299,16 @@ public class DasServlet extends AbstractRestServlet {
             // Set the SCN context
             setScnContext(request);
             
+            // Get an instance of DasService for this request.  The
+            // instance may be null.
+            DasService service = getService(request);
+            Application app = null;
+            if ( service != null ) {
+                app = service.getApplication();
+            }
+            
             // Make sure the service is enabled for this server or internet site
-            if ( ! serviceEnabled(request) ) {
+            if ( ! serviceEnabled(service) ) {
                 handleError(response, Response.Status.FORBIDDEN, null);
                 return;             
             }
@@ -321,7 +330,18 @@ public class DasServlet extends AbstractRestServlet {
             }
             
             try {
-                super.doService(requestWrapper, responseWrapper);
+                if (app instanceof IRestServiceExt) {
+                    if (((IRestServiceExt) app).beforeDoService(request)) {
+                        super.doService(requestWrapper, responseWrapper);
+                        ((IRestServiceExt) app).afterDoService(request);
+                    }
+                    else {
+                        handleError(responseWrapper, Response.Status.FORBIDDEN, null);
+                    }
+                } 
+                else {
+                    super.doService(requestWrapper, responseWrapper);
+                }
             }
             catch (ServletException e) {
                 Throwable cause = e.getCause();
@@ -329,12 +349,12 @@ public class DasServlet extends AbstractRestServlet {
                     throw (NoAccessSignal)cause;
                 }
                 else {
-                    handleUnknownException(responseWrapper, e);
+                    handleUnknownException(app, request, responseWrapper, e);
                 }
             }
             catch (Throwable e) {
                 // Avoid throwing unknown exceptions to the container
-                handleUnknownException(responseWrapper, e);
+                handleUnknownException(app, request, responseWrapper, e);
             }
         }
         finally {
@@ -608,102 +628,87 @@ public class DasServlet extends AbstractRestServlet {
      * @param request
      * @return
      */
-    private boolean serviceEnabled(HttpServletRequest request) {
+    private boolean serviceEnabled(DasService service) {
         if ( !isDominoServer() ) {
             // We only handle requests on the domino server
             return false;
         }
 
-        boolean enabled = true;
-        String requestPath = null;
-        
-        if ( request.getPathInfo() != null ) {
-            StringTokenizer tokenizer = new StringTokenizer(request.getPathInfo(), "/");
-            try {
-                requestPath = tokenizer.nextToken();
-                if ( requestPath != null ) {
-                    requestPath.toLowerCase();
-                }
-            }
-            catch (NoSuchElementException e) {
-                // Ignore this
-            }
+        if ( service == null ) {
+            // We don't have an instance of DasService.  Let
+            // Wink handle the request.
+            return true;
         }
         
-        if ( requestPath != null ) {
-            refreshServiceMap();
-            
-            DasService service = s_services.get(requestPath);
-            if ( service != null ) {
-                StatsContext.getCurrentInstance().setServiceName(service.getName());
+        // Initialize stats context for the request
+        
+        StatsContext.getCurrentInstance().setServiceName(service.getName());
 
-                // Make sure service is enabled on this server
-                
-                enabled = service.isEnabled();
-                if ( !enabled ) {
-                    if ( DAS_LOGGER.getLogger().isLoggable(Level.FINE)) {
-                        DAS_LOGGER.getLogger().fine(StringUtil.format(
-                                "The {0} service is disabled on this server.", // $NON-NLS-1$ 
-                                service.getName()));                        
-                    }
+        // Make sure service is enabled on this server
+        
+        boolean enabled = service.isEnabled();
+        if ( !enabled ) {
+            if ( DAS_LOGGER.getLogger().isLoggable(Level.FINE)) {
+                DAS_LOGGER.getLogger().fine(StringUtil.format(
+                        "The {0} service is disabled on this server.", // $NON-NLS-1$ 
+                        service.getName()));                        
+            }
+        }
+
+        // Do some SAAS-only checks
+        
+        if ( enabled && ScnContext.getCurrentInstance().isScn() ) {
+            String customerId = ScnContext.getCurrentInstance().getCustomerId();
+
+            // Service is enabled on this server.  Now check the 
+            // gatekeeper feature.  When running in SAAS, this makes sure
+            // the service is enabled for the customer.
+            if ( service.getGkf() != 0 ) {
+                String userId = ScnContext.getCurrentInstance().getUserId();
+                IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
+                enabled = provider.isFeatureEnabled(service.getGkf(), 
+                            customerId, userId);
+
+                if ( !enabled && DAS_LOGGER.getLogger().isLoggable(Level.FINE)) {
+                    DAS_LOGGER.getLogger().fine(StringUtil.format(
+                            "The {0} service is disabled by the gatekeeper for customer {1}.", // $NON-NLS-1$ 
+                            service.getName(), 
+                            customerId));                        
                 }
+            }
 
-                // Do some SAAS-only checks
-                
-                if ( enabled && ScnContext.getCurrentInstance().isScn() ) {
-                    String customerId = ScnContext.getCurrentInstance().getCustomerId();
-
-                    // Service is enabled on this server.  Now check the 
-                    // gatekeeper feature.  When running in SAAS, this makes sure
-                    // the service is enabled for the customer.
-                    if ( service.getGkf() != 0 ) {
-                        String userId = ScnContext.getCurrentInstance().getUserId();
-                        IGatekeeperProvider provider = ProviderFactory.getGatekeeperProvider();
-                        enabled = provider.isFeatureEnabled(service.getGkf(), 
-                                    customerId, userId);
-
-                        if ( !enabled && DAS_LOGGER.getLogger().isLoggable(Level.FINE)) {
-                            DAS_LOGGER.getLogger().fine(StringUtil.format(
-                                    "The {0} service is disabled by the gatekeeper for customer {1}.", // $NON-NLS-1$ 
-                                    service.getName(), 
-                                    customerId));                        
-                        }
-                    }
-
-                    // Even if the service is enabled thru gatekeeper, prevent
-                    // self service trial customers from making API requests.
-                    if ( enabled && StringUtil.isNotEmpty(customerId) && !service.isAllowSstUsers()) {
-                        try {
-                            ICustomerProvider provider = ProviderFactory.getCustomerProvider();
-                            if ( provider != null ) {
-                                Customer customer = provider.getCustomer(customerId);
-                                if ( customer.isSelfTrial() ) {
-                                    enabled = false;
-                                }
-                            }
-                        }
-                        catch (Throwable e) {
-                            // Do nothing.  Assume the request is NOT for a self service trial customer.
-                        }
-                    }
-                }
-
-                // Just in time initialization
-
-                if (enabled && !service.isInitialized()) {
-                    synchronized(service) {
-                        try {
-                            RegistrationUtils.registerApplication(service.getApplication(), getServletContext());
-                            service.setInitialized(true);
-                        }
-                        catch (Throwable e) {
+            // Even if the service is enabled thru gatekeeper, prevent
+            // self service trial customers from making API requests.
+            if ( enabled && StringUtil.isNotEmpty(customerId) && !service.isAllowSstUsers()) {
+                try {
+                    ICustomerProvider provider = ProviderFactory.getCustomerProvider();
+                    if ( provider != null ) {
+                        Customer customer = provider.getCustomer(customerId);
+                        if ( customer.isSelfTrial() ) {
                             enabled = false;
-                            service.setEnabled(false);
-                            DAS_LOGGER.warn(e, StringUtil.format(
-                                    "Automatically disabling {0} service because there was an error registering its resources.", // $NLW-DasServlet.Automaticallydisablingaservicebec-1$ 
-                                    service.getName()));
                         }
                     }
+                }
+                catch (Throwable e) {
+                    // Do nothing.  Assume the request is NOT for a self service trial customer.
+                }
+            }
+        }
+
+        // Just in time initialization
+
+        if (enabled && !service.isInitialized()) {
+            synchronized(service) {
+                try {
+                    RegistrationUtils.registerApplication(service.getApplication(), getServletContext());
+                    service.setInitialized(true);
+                }
+                catch (Throwable e) {
+                    enabled = false;
+                    service.setEnabled(false);
+                    DAS_LOGGER.warn(e, StringUtil.format(
+                            "Automatically disabling {0} service because there was an error registering its resources.", // $NLW-DasServlet.Automaticallydisablingaservicebec-1$ 
+                            service.getName()));
                 }
             }
         }
@@ -711,6 +716,37 @@ public class DasServlet extends AbstractRestServlet {
         return enabled;
     }
     
+    /**
+     * Gets an instance of <code>DasService</code> from a request
+     * 
+     * @param request
+     * @return
+     */
+    private DasService getService(HttpServletRequest request) {
+        String requestPath = null;
+        DasService service = null;
+        
+        if (request.getPathInfo() != null) {
+            StringTokenizer tokenizer = new StringTokenizer(request.getPathInfo(), "/");
+            try {
+                requestPath = tokenizer.nextToken();
+                if (requestPath != null) {
+                    requestPath.toLowerCase();
+                }
+            } 
+            catch (NoSuchElementException e) {
+                // Ignore this
+            }
+        }
+
+        if (requestPath != null) {
+            refreshServiceMap();
+            service = s_services.get(requestPath);
+        }
+
+        return service;
+    }
+
     /**
      * Refreshes the service map.
      * 
@@ -778,7 +814,35 @@ public class DasServlet extends AbstractRestServlet {
         return isServer;
     }
     
-    private void handleUnknownException(HttpServletResponse response, Throwable t) throws ServletException, IOException {
+    /**
+     * Handles an unknown exception.
+     * 
+     * <p>When a service throws <code>WebApplicationException</code>, the Wink
+     * framework catches it and creates the correct error response.  This method
+     * handles unexpected excecptions (e.g. NullPointerException).
+     * 
+     * @param app
+     * @param request
+     * @param response
+     * @param t
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void handleUnknownException(Application app, HttpServletRequest request, 
+                    HttpServletResponse response, Throwable t) 
+                    throws ServletException, IOException {
+        
+        // Share exception with the relevant service
+        if (app instanceof IRestServiceExt) {
+            try {
+                ((IRestServiceExt) app).onUnknownError(request, t);
+            }
+            catch (Throwable e) {
+                // Ignore exceptions
+            }
+        }
+
+        // Create an error response
         handleError(response, Response.Status.INTERNAL_SERVER_ERROR, t);
     }
     

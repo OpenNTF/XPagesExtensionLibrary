@@ -114,4 +114,8 @@ public abstract class AbstractWizardPage extends WizardPage {
     public void setAlwaysShowError(boolean alwaysShowError) {
         _alwaysShowError = alwaysShowError;
     } 
+    
+    public boolean isPageCurrent() {
+        return isCurrentPage();
+    }
 }

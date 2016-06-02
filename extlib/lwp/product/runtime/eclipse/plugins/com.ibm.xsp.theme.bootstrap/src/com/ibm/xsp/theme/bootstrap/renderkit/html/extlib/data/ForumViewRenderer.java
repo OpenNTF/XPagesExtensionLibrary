@@ -29,7 +29,7 @@ import com.ibm.xsp.extlib.component.data.UIDataView;
 import com.ibm.xsp.extlib.resources.ExtLibResources;
 import com.ibm.xsp.extlib.util.ExtLibUtil;
 import com.ibm.xsp.theme.bootstrap.resources.Resources;
-import com.ibm.xsp.theme.bootstrap.util.Util;
+import com.ibm.xsp.theme.bootstrap.util.BootstrapUtil;
 import com.ibm.xsp.util.JSUtil;
 
 public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extended.data.ForumViewRenderer {
@@ -173,7 +173,7 @@ public class ForumViewRenderer extends com.ibm.xsp.extlib.renderkit.html_extende
         w.writeAttribute("id",spanId,null); // $NON-NLS-1$
         
         // Defect 198012 - replace unnecessary title attribute with sr-only div containing text
-        Util.renderIconTextForA11Y(w, label);
+        BootstrapUtil.renderIconTextForA11Y(w, label);
         
         w.endElement("span"); // $NON-NLS-1$
         w.endElement("a");
