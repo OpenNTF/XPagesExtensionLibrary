@@ -1,56 +1,36 @@
 /**
- * (not-IBM-owned-copyright)
  * 
- * Licensed under the Apache License, Version 2.0 (the "License"); 
- * you may not use this file except in compliance with the License. 
- * You may obtain a copy of the License at:
- * 
- * http://www.apache.org/licenses/LICENSE-2.0 
- * 
- * Unless required by applicable law or agreed to in writing, software 
- * distributed under the License is distributed on an "AS IS" BASIS, 
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
- * implied. See the License for the specific language governing 
- * permissions and limitations under the License.
- * 
- * --- 
- * The first version of this file in this source control project 
- * was contributed through
- * https://github.com/OpenNTF/XPagesExtensionLibrary/pull/14
- * by Paul S Withers (https://github.com/paulswithers)
- * It was previously located in the other project:
- * https://github.com/OpenNTF/org.openntf.domino
  */
 package com.ibm.xsp.extlib.component.picker.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
+import java.util.logging.Logger;
 
+import javax.activation.UnsupportedDataTypeException;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
 import com.ibm.commons.util.StringUtil;
 import com.ibm.xsp.complex.ValueBindingObjectImpl;
-import com.ibm.xsp.context.FacesContextEx;
-import com.ibm.xsp.util.DataPublisher;
-import com.ibm.xsp.util.DataPublisher.ShadowedObject;
 
 /**
  * @author Paul Withers
  * 
  *         MapValuePickerData, for use with the ValuePicker control
  */
-public class MapValuePickerData extends ValueBindingObjectImpl implements IValuePickerData {
-	
-	private String searchType;
-	private String searchRange;
-	private Boolean caseInsensitive;
-	private Map<String, String> options;
-	private Boolean preventFiltering;
+public class MapValuePickerData extends ValueBindingObjectImpl implements IValuePickerData, Serializable {
+	@SuppressWarnings("unused")
+	private static final Logger log_ = Logger.getLogger(MapValuePickerData.class.getName());
+	private static final long serialVersionUID = 1L;
+	public String searchType;
+	public String searchStyle;
+	public Boolean caseInsensitive;
+	public Map<String, String> options;
 
 	/**
 	 * Enum for easy and consistent access to search type options
@@ -58,7 +38,7 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 * @since org.openntf.domino.xsp 5.0.0
 	 */
 	private static enum SearchType {
-		SEARCH_STARTSWITH("startsWith"), SEARCH_EQUALS("equals"), SEARCH_CONTAINS("contains"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		SEARCH_STARTFROM("startFrom"), SEARCH_MATCH("match"), SEARCH_FTSEARCH("ftSearch");
 
 		private final String value_;
 
@@ -73,13 +53,15 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 
 	/**
 	 * Enum for easy access to the search styles - jumpTo and restrictToSearch
+	 * 
+	 * @since org.openntf.domino.xsp 5.0.0
 	 */
-	private static enum SearchRange {
-		SEARCH_RESTRICTTOSEARCH("restrictToSearch"), SEARCH_JUMPTO("jumpTo"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static enum SearchStyle {
+		SEARCH_JUMPTO("jumpTo"), SEARCH_RESTRICTTOSEARCH("restrictToSearch");
 
 		private final String value_;
 
-		private SearchRange(final String value) {
+		private SearchStyle(final String value) {
 			value_ = value;
 		}
 
@@ -98,7 +80,7 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 * @return Map<String, String> of values
 	 * @since org.openntf.domino.xsp 4.5.0
 	 */
-	@SuppressWarnings("unchecked") //$NON-NLS-1$
+	@SuppressWarnings("unchecked")
 	public Map<String, String> getOptions() {
 		if (options != null) {
 			return options;
@@ -106,21 +88,18 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 		ValueBinding vb = getValueBinding("options"); //$NON-NLS-1$
 		if (vb != null) {
 			Object vbVal = vb.getValue(getFacesContext());
-			if( null != vbVal ){
+			if (vbVal instanceof Map) {
 				return (Map<String, String>) vbVal;
+			} else {
+				try {
+					throw new UnsupportedDataTypeException("Value is not a map");
+				} catch (UnsupportedDataTypeException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
 		return null;
-	}
-
-	/**
-	 * By default delegates to {@link #getOptions()}, but available to override in subclasses.
-	 * 
-	 * @return Map<String, String> of values
-	 */
-	public Map<String, String> getOptionsMap() {
-	    return getOptions();
 	}
 
 	/**
@@ -164,20 +143,22 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	}
 
 	/**
-	 * Gets the search style, from the "searchRange" property
+	 * Gets the search style, from the "searchStyle" property
 	 * 
 	 * @return String search style
 	 * @since org.openntf.domino.xsp 5.0.0
 	 */
-	public String getSearchRange() {
-		if (searchRange != null) {
-			return searchRange;
+	public String getSearchStyle() {
+		if (searchStyle != null) {
+			return searchStyle;
 		}
-		ValueBinding vb = getValueBinding("searchRange"); //$NON-NLS-1$
+		ValueBinding vb = getValueBinding("searchStyle"); //$NON-NLS-1$
 		if (vb != null) {
 			return (String) vb.getValue(getFacesContext());
+		} else {
+			return SearchStyle.SEARCH_JUMPTO.getValue();
 		}
-		return null;
+
 	}
 
 	/**
@@ -187,8 +168,8 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 *            String search style
 	 * @since org.openntf.domino.xsp 5.0.0
 	 */
-	public void setSearchRange(final String searchStyle) {
-		this.searchRange = searchStyle;
+	public void setSearchStyle(final String searchStyle) {
+		this.searchStyle = searchStyle;
 	}
 
 	/**
@@ -221,39 +202,6 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	public void setCaseInsensitive(final boolean caseInsensitive) {
 		this.caseInsensitive = caseInsensitive;
 	}
-
-    /**
-     * <p>
-     * Return the value of the <code>preventFiltering</code> property.
-     * </p>
-     * <p>
-     * Indicate if the list of values should be filtered with the value sent by the browser.
-     * </p>
-     * @designer.publicmethod
-     */
-    public boolean isPreventFiltering() {
-        if (null != preventFiltering) {
-            return preventFiltering.booleanValue();
-        }
-        ValueBinding binding = getValueBinding("preventFiltering"); // $NON-NLS-1$
-        if (binding != null) {
-            Boolean result = (Boolean) binding.getValue(getFacesContext());
-            if( null != result ){
-                return result.booleanValue();
-            }
-        }
-        return false;
-    }
-    /**
-     * <p>
-     * Set the value of the <code>ignoreCase</code> property.
-     * </p>
-     * @designer.publicmethod
-     */
-    public void setPreventFiltering(boolean preventFiltering) {
-        this.preventFiltering = preventFiltering;
-    }
-
 
 	/*
 	 * (non-Javadoc)
@@ -323,108 +271,75 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 * @since org.openntf.domino.xsp 4.5.0
 	 */
 	private LinkedHashMap<String, String> filteredOptions(final String key, final String startKey, final int start, final int searchIndex) {
-		
-		boolean isPreventFiltering = isPreventFiltering();
-		String submittedKey = (null != key)? /*typeAhead submitted*/ key 
-				: /*PickerListSearch submitted*/startKey;
-		
 		LinkedHashMap<String, String> retVal = new LinkedHashMap<String, String>();
+		String searchType = getSearchType();
 
-		// Note, this pickerData is unusual in that most of them 
-		// do a startsWith filter for typeAheads  but this is honoring the searchType option.
-		if (!isPreventFiltering && StringUtil.isNotEmpty(submittedKey)) {
-			
-			// We've got a search key passed in, so search and add all remaining entries
-			
-			boolean isCaseInsensitive = isCaseInsensitive();
-			// Note, for case insensitive matching, it is not safe to do .toLowerCase 
-			// on the whole string, because of the Turkish dotless-i character.
-			// Instead use the algorithm described in String.equalsIgnoreCase and
-			// see http://www.i18nguy.com/unicode/turkish-i18n.html
-			String computedSearchRange = getSearchRange();
-			// note, the org.openntf.domino.xsp implementation defaulted to searchTo, but this defaults to restrictToSearch
-			SearchRange searchRangeEnum = SearchRange.SEARCH_JUMPTO.getValue().equals(computedSearchRange)? 
-					SearchRange.SEARCH_JUMPTO: /*default*/SearchRange.SEARCH_RESTRICTTOSEARCH;
-			
-			String searchType = getSearchType();
-			SearchType searchTypeEnum;
-			if( SearchType.SEARCH_EQUALS.getValue().equals(searchType) ){
-				searchTypeEnum = SearchType.SEARCH_EQUALS;
-			}else if(SearchType.SEARCH_CONTAINS.getValue().equals(searchType)){
-				searchTypeEnum = SearchType.SEARCH_CONTAINS;
-			}else{ // startsWith (or old startsFrom value)
-				searchTypeEnum = SearchType.SEARCH_STARTSWITH;
+		if (StringUtil.isNotEmpty(key)) {
+			// We've got a typeahead key passed in, filter to entries beginning
+			// with that key
+			String tmpKey = key;
+			if (isCaseInsensitive()) {
+				tmpKey = tmpKey.toLowerCase();
 			}
-			
-			boolean doContainsLowerCaseCompare = false;
-			String keyLowerCase = null;
-			Pattern keyInsensitivePattern = null;
-			if( isCaseInsensitive && SearchType.SEARCH_CONTAINS == searchTypeEnum){
-				// Note, defaulting to doing the slower Turkish-compliant search,
-				// but there's an option to use the faster not-Turkish-compliant lowerCase compare.
-				doContainsLowerCaseCompare = "false".equals( //$NON-NLS-1$
-						FacesContextEx.getCurrentInstance().getApplicationEx()
-				        .getProperty("xsp.picker.case_insensitive.locale.aware", /* defaultValue */"true")); //$NON-NLS-1$  //$NON-NLS-2$
-				if( doContainsLowerCaseCompare ){
-					keyLowerCase = submittedKey.toLowerCase();
-				}else{ // default
-					String escapedKey = Pattern.quote(submittedKey);
-					keyInsensitivePattern = Pattern.compile(escapedKey, Pattern.CASE_INSENSITIVE);
+
+			Iterator<String> it = getOptions().keySet().iterator();
+			while (it.hasNext()) {
+				String mapKey = it.next();
+				String tmpMapKey = mapKey;
+				if (isCaseInsensitive()) {
+					tmpMapKey = tmpMapKey.toLowerCase();
+				}
+				if (tmpMapKey.startsWith(tmpKey)) {
+					retVal.put(mapKey, getOptions().get(mapKey));
 				}
 			}
+		} else if (StringUtil.isNotEmpty(startKey)) {
+			// startKey is actually a search key
+			// We've got a search key passed in, so search and add all remaining
+			// entries
+			String tmpSearchKey = startKey;
+			if (isCaseInsensitive()) {
+				tmpSearchKey = tmpSearchKey.toLowerCase();
+			}
 
-			Map<String, String> computedOptions = getOptionsMap();
-			Iterator<String> it = computedOptions.keySet().iterator();
+			Iterator<String> it = getOptions().keySet().iterator();
 			boolean found = false;
 			while (it.hasNext()) {
 				String mapKey = it.next();
+				String tmpMapKey = mapKey;
+				if (isCaseInsensitive()) {
+					tmpMapKey = tmpMapKey.toLowerCase();
+				}
 				if (found) {
-					retVal.put(mapKey, computedOptions.get(mapKey));
+					retVal.put(mapKey, getOptions().get(mapKey));
 					found = true;
 				} else {
-					boolean match;
-					if (SearchType.SEARCH_EQUALS == searchTypeEnum ) {
-						match =  (!isCaseInsensitive)?StringUtil.equals(mapKey, submittedKey)
-								: StringUtil.equalsIgnoreCase(mapKey, submittedKey);
-					} else if (SearchType.SEARCH_CONTAINS == searchTypeEnum ) {
-						if( !isCaseInsensitive ){
-							match = mapKey.contains(submittedKey);
-						}else if( doContainsLowerCaseCompare ){
-							match = mapKey.toLowerCase().contains(keyLowerCase);
-						}else{ // default case insensitive handling that can match the Turkish dotless-i
-							match = keyInsensitivePattern.matcher(mapKey).find();
+					if (SearchType.SEARCH_MATCH.getValue().equals(searchType)) {
+						if (StringUtil.equals(tmpMapKey, tmpSearchKey)) {
+							retVal.put(mapKey, getOptions().get(mapKey));
+							if (SearchStyle.SEARCH_JUMPTO.getValue().equals(getSearchStyle())) {
+								found = true;
+							}
 						}
-					} else { // SearchType.SEARCH_STARTFROM == searchTypeEnum
-						match = (!isCaseInsensitive)? mapKey.startsWith(submittedKey)
-								: mapKey.regionMatches(/* ignoreCase */true,
-									0, submittedKey,0,submittedKey.length());
-					}
-					if (match) {
-						retVal.put(mapKey, computedOptions.get(mapKey));
-						if (SearchRange.SEARCH_JUMPTO == searchRangeEnum ) {
-							found = true;
+					} else if (SearchType.SEARCH_FTSEARCH.getValue().equals(searchType)) {
+						if (tmpMapKey.contains(tmpSearchKey)) {
+							retVal.put(mapKey, getOptions().get(mapKey));
+							if (SearchStyle.SEARCH_JUMPTO.getValue().equals(getSearchStyle())) {
+								found = true;
+							}
+						}
+					} else {
+						if (tmpMapKey.startsWith(tmpSearchKey)) {
+							retVal.put(mapKey, getOptions().get(mapKey));
+							if (SearchStyle.SEARCH_JUMPTO.getValue().equals(getSearchStyle())) {
+								found = true;
+							}
 						}
 					}
 				}
 			}
-		} else { // initial display without filtering, or filtering disabled
-			
-			List<ShadowedObject> shadowed = null;
-			DataPublisher dataPublisher = null;
-			if( isPreventFiltering ){ 
-				// computed options can reference requestScope.startValue to access the submittedKey.
-				dataPublisher = FacesContextEx.getCurrentInstance().getDataPublisher();
-				shadowed = new ArrayList<DataPublisher.ShadowedObject>();
-				dataPublisher.pushObject(shadowed, "startValue", /*may be null*/submittedKey); //$NON-NLS-1$
-			}
-			try{
-				Map<String, String> computedOptions = getOptionsMap();
-				retVal.putAll(computedOptions);
-			}finally{
-				if( isPreventFiltering ){
-					dataPublisher.popObjects(shadowed);
-				}
-			}
+		} else {
+			retVal.putAll(getOptions());
 		}
 		return retVal;
 	}
@@ -443,26 +358,17 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 */
 	@Override
 	public List<IPickerEntry> loadEntries(final Object[] values, final String[] attributes) {
-		// Note, this is method used by the PickerValidator,
-		// and is checking against the values, not the keys, so it wouldn't be a caseInsensitive search.
-		// Initially the list has a null entry for each of the values array,
-		// and each index value will be replaced with an Entry if some map value 
-		// is found that matches that value. 
-		int length = (null == values)? 0 : values.length;
-		List<IPickerEntry> entries = new ArrayList<IPickerEntry>(length);
+		List<IPickerEntry> entries = new ArrayList<IPickerEntry>();
 		if (null != values) {
-			Map<String, String> computedOptions = getOptionsMap();
 			for (int i = 0; i < values.length; i++) {
 				String checkStr = values[i].toString();
-				entries.add(i, null);
 				if (StringUtil.isNotEmpty(checkStr)) {
-					Iterator<String> it = computedOptions.keySet().iterator();
+					Iterator<String> it = getOptions().keySet().iterator();
 					while (it.hasNext()) {
 						String mapKey = it.next();
-						String mapValue = computedOptions.get(mapKey);
-						if (StringUtil.equals(checkStr, mapValue)) {
-							entries.set(i, new SimplePickerResult.Entry(mapValue, mapKey));
-							break; // found for this value, continue the for loop to find for next value
+						if (StringUtil.equals(checkStr, getOptions().get(mapKey))) {
+							entries.add(new SimplePickerResult.Entry(getOptions().get(mapKey), mapKey));
+							break;
 						}
 					}
 				}
@@ -478,16 +384,15 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 * com.ibm.xsp.complex.ValueBindingObjectImpl#restoreState(javax.faces.context
 	 * .FacesContext, java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked") //$NON-NLS-1$
+	@SuppressWarnings("unchecked")
 	@Override
-	public void restoreState(final FacesContext context, final Object state) {
-		Object values[] = (Object[]) state;
-		super.restoreState(context, values[0]);
-		options = (Map<String, String>) values[1];
-		searchType = (String) values[2];
-		caseInsensitive = (Boolean) values[3];
-		searchRange = (String) values[4];
-		preventFiltering = (Boolean) values[5];
+	public void restoreState(final FacesContext _context, final Object _state) {
+		Object _values[] = (Object[]) _state;
+		super.restoreState(_context, _values[0]);
+		options = (Map<String, String>) _values[1];
+		searchType = (String) _values[2];
+		caseInsensitive = (Boolean) _values[3];
+		searchStyle = (String) _values[4];
 	}
 
 	/*
@@ -498,15 +403,14 @@ public class MapValuePickerData extends ValueBindingObjectImpl implements IValue
 	 * .FacesContext)
 	 */
 	@Override
-	public Object saveState(final FacesContext context) {
-		Object values[] = new Object[6];
-		values[0] = super.saveState(context);
-		values[1] = options;
-		values[2] = searchType;
-		values[3] = caseInsensitive;
-		values[4] = searchRange;
-		values[5] = preventFiltering;
-		return values;
+	public Object saveState(final FacesContext _context) {
+		Object _values[] = new Object[5];
+		_values[0] = super.saveState(_context);
+		_values[1] = options;
+		_values[2] = searchType;
+		_values[3] = caseInsensitive;
+		_values[4] = searchStyle;
+		return _values;
 	}
 
 }

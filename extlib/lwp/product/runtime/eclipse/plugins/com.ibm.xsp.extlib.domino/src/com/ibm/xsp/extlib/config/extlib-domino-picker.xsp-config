@@ -144,19 +144,17 @@
       </property-extension>
     </property>
     <property>
-      <description>%property.valueNameFormat.descr%</description>
-      <display-name>%property.valueNameFormat.name%</display-name>
-      <property-name>valueNameFormat</property-name>
+      <description>%property.returnNameFormat.descr%</description>
+      <display-name>%property.returnNameFormat.name%</display-name>
+      <property-name>returnNameFormat</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
-        <since>9.0.1.v00_14</since>
         <designer-extension>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
-						abbreviated
-						common
-						canonical
-						unformatted
+						Abbreviated
+						Common
+						Canonical
 					</editor-parameter>
         </designer-extension>
       </property-extension>
@@ -167,7 +165,7 @@
       <property-name>searchType</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
-        <since>9.0.1.v00_14</since>
+        <since>8.5.32003</since>
         <designer-extension>
           <tags>
                         not-localizable

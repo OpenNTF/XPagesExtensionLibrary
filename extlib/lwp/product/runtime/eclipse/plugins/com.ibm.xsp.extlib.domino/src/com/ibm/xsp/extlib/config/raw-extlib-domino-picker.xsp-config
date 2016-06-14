@@ -48,7 +48,6 @@
             </property-extension>
         </property>
         <property>
-            <!-- key: property.searchType. -->
             <!-- # "match" "ftSearch" and "startFrom" should not be translated -->
             <description>Define the type of search to be applied. The options are "match", meaning the search value is matched to a key or keys in the view, "ftSearch" meaning the value is found in a full text search of the entry and "startFrom", the default search type, which matches the value as a key and then returns that entry and all subsequent entries.</description>
             <display-name>Type of Search</display-name>
@@ -171,32 +170,30 @@
 			</property-extension>
 		</property>
     <property>
-      <!-- # These should not be translated: "unformatted", "abbreviated", "canonical", "common". -->
-      <description>Specifies the format to use for the name values. The names have a label which is displayed in the dialog, and a value which is saved as data when the dialog closes. When the property is absent or set to "unformatted" then the exact value from the Domino view will be used, without any change to the format. The other options will change the value to the specified format: "abbreviated" uses the abbreviated format, e.g. "Alan Jones/Sales/Acme", "canonical" uses the canonical format, e.g. "cn=Alan Jones,ou=Sales,o=Acme", and "common" uses the common format, e.g. "Alan Jones".</description>
-      <display-name>Value Name Format</display-name>
-      <property-name>valueNameFormat</property-name>
+      <description>%property.returnNameFormat.descr%</description>
+      <display-name>%property.returnNameFormat.name%</display-name>
+      <property-name>returnNameFormat</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
-        <since>9.0.1.v00_14</since>
+        <since>9.0.12015</since>
         <designer-extension>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
-						abbreviated
-						common
-						canonical
-						unformatted
+						Abbreviated
+						Common
+						Canonical
 					</editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
         <property>
-            <!--  reuse existing description from above -->
-            <description>%property.searchType.descr%</description>
-            <display-name>%property.searchType.name%</display-name>
+            <!-- # "match" "ftSearch" and "startFrom" should not be translated -->
+            <description>Define the type of search to be applied. The options are "match", meaning the search value is matched to a key or keys in the view, "ftSearch" meaning the value is found in a full text search of the entry and "startFrom", the default search type, which matches the value as a key and then returns that entry and all subsequent entries.</description>
+            <display-name>Type of Search</display-name>
             <property-name>searchType</property-name>
             <property-class>java.lang.String</property-class>
             <property-extension>
-                <since>9.0.1.v00_14</since>
+                <since>9.0.12015</since>
                 <designer-extension>
                     <!-- This is a non-translatable search type, 
                     not translatable label text. -->

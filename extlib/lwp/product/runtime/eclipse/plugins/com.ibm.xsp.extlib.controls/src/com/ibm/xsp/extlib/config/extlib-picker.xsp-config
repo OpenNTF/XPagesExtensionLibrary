@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ******************************************************************* -->
 <!--                                                                     -->
-<!-- Copyright IBM Corp. 2010, 2015                                      -->
+<!-- Copyright IBM Corp. 2010, 2014                                      -->
 <!--                                                                     -->
 <!-- Licensed under the Apache License, Version 2.0 (the "License");     -->
 <!-- you may not use this file except in compliance with the License.    -->
@@ -402,52 +402,57 @@
       <tag-name>pickerValidator</tag-name>
     </validator-extension>
   </validator>
+  
   <complex-type>
-    <description>%complex-type.mapValuePicker.descr%</description>
-    <display-name>%complex-type.mapValuePicker.name%</display-name>
+    <description>%complex-type.mapPicker.descr%</description>
+    <display-name>%complex-type.mapPicker.name%</display-name>
     <complex-id>com.ibm.xsp.extlib.component.picker.data.MapValuePickerData</complex-id>
     <complex-class>com.ibm.xsp.extlib.component.picker.data.MapValuePickerData</complex-class>
     <property>
-      <description>%property.options.descr%</description>
-      <display-name>%property.options.name%</display-name>
+      <description>%property.map.complex-type.mapPicker.descr%</description>
+      <display-name>%property.map.complex-type.mapPicker.name%</display-name>
       <property-name>options</property-name>
       <property-class>java.util.Map</property-class>
       <property-extension>
-        <required>true</required>
-        <allow-non-binding>false</allow-non-binding>
         <designer-extension>
           <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
         </designer-extension>
       </property-extension>
     </property>
-    <property>
+        <property>
       <description>%property.searchType.descr%</description>
       <display-name>%property.searchType.name%</display-name>
       <property-name>searchType</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
         <designer-extension>
+          <tags>
+                        not-localizable
+                    </tags>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
-						startsWith
-						equals
-						contains
-					</editor-parameter>
+						startFrom
+						match
+						ftSearch
+                    </editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
-    <property>
-      <description>%property.searchRange.descr%</description>
-      <display-name>%property.searchRange.name%</display-name>
-      <property-name>searchRange</property-name>
+        <property>
+      <description>%property.searchStyle.descr%</description>
+      <display-name>%property.searchStyle.name%</display-name>
+      <property-name>searchStyle</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
         <designer-extension>
+          <tags>
+                        not-localizable
+                    </tags>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
 						jumpTo
 						restrictToSearch
-					</editor-parameter>
+                    </editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
@@ -456,84 +461,80 @@
       <display-name>%property.caseInsensitive.name%</display-name>
       <property-name>caseInsensitive</property-name>
       <property-class>boolean</property-class>
-    </property>
-    <property>
-      <description>%property.preventFiltering.descr%</description>
-      <display-name>%property.preventFiltering.name%</display-name>
-      <property-name>preventFiltering</property-name>
-      <property-class>boolean</property-class>
+      <property-extension/>
     </property>
     <complex-extension>
       <base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
-      <since>9.0.1.v00_12</since>
       <tag-name>mapValuePicker</tag-name>
     </complex-extension>
   </complex-type>
-  <complex-type>
-    <description>%complex-type.collectionValuePicker.descr%</description>
-    <display-name>%complex-type.collectionValuePicker.name%</display-name>
+  
+  
+  
+   <complex-type>
+    <description>%complex-type.collectionPicker.descr%</description>
+    <display-name>%complex-type.collectionPicker.name%</display-name>
     <complex-id>com.ibm.xsp.extlib.component.picker.data.CollectionValuePickerData</complex-id>
     <complex-class>com.ibm.xsp.extlib.component.picker.data.CollectionValuePickerData</complex-class>
     <property>
-      <description>%property.collection.descr%</description>
-      <display-name>%property.collection.name%</display-name>
+      <description>%property.collection.complex-type.collectionPicker.descr%</description>
+      <display-name>%property.collection.complex-type.collectionPicker.name%</display-name>
       <property-name>collection</property-name>
       <property-class>java.util.Collection</property-class>
       <property-extension>
-        <required>true</required>
-        <allow-non-binding>false</allow-non-binding>
         <designer-extension>
           <editor>com.ibm.workplace.designer.ide.xfaces.internal.editors.MethodBindingEditor</editor>
         </designer-extension>
       </property-extension>
     </property>
-    <property>
+        <property>
       <description>%property.searchType.descr%</description>
       <display-name>%property.searchType.name%</display-name>
       <property-name>searchType</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
         <designer-extension>
+          <tags>
+                        not-localizable
+                    </tags>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
-						startsWith
-						equals
-						contains
-					</editor-parameter>
+						startFrom
+						match
+						ftSearch
+                    </editor-parameter>
         </designer-extension>
       </property-extension>
     </property>
-    <property>
-      <description>%property.searchRange.descr%</description>
-      <display-name>%property.searchRange.name%</display-name>
-      <property-name>searchRange</property-name>
+        <property>
+      <description>%property.searchStyle.descr%</description>
+      <display-name>%property.searchStyle.name%</display-name>
+      <property-name>searchStyle</property-name>
       <property-class>java.lang.String</property-class>
       <property-extension>
         <designer-extension>
+          <tags>
+                        not-localizable
+                    </tags>
           <editor>com.ibm.workplace.designer.property.editors.comboParameterEditor</editor>
           <editor-parameter>
 						jumpTo
 						restrictToSearch
-					</editor-parameter>
+                    </editor-parameter>
         </designer-extension>
       </property-extension>
-    </property>
-    <property>
-      <description>%property.preventFiltering.descr%</description>
-      <display-name>%property.preventFiltering.name%</display-name>
-      <property-name>preventFiltering</property-name>
-      <property-class>boolean</property-class>
     </property>
     <property>
       <description>%property.caseInsensitive.descr%</description>
       <display-name>%property.caseInsensitive.name%</display-name>
       <property-name>caseInsensitive</property-name>
       <property-class>boolean</property-class>
+      <property-extension/>
     </property>
     <complex-extension>
       <base-complex-id>com.ibm.xsp.extlib.component.picker.data.IValuePickerData</base-complex-id>
-      <since>9.0.1.v00_12</since>
       <tag-name>collectionValuePicker</tag-name>
     </complex-extension>
   </complex-type>
+  
 </faces-config>
