@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="3.0" replicaid="802579200044DE14" version="8.5" xmlns="http://www.lotus.com/dxl">
-<noteinfo noteid="3b2" sequence="14" unid="D25ECCCC791B8D378025792000451FFB">
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.5" replicaid="C1257F87004E6FDF" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="36a" sequence="10" unid="D25ECCCC791B8D378025792000451FFB">
 <created><datetime dst="true">20111005T133501,71+01</datetime></created>
-<modified><datetime dst="true">20111006T185217,63+01</datetime></modified>
-<revised><datetime dst="true">20111006T185217,62+01</datetime></revised>
-<lastaccessed><datetime dst="true">20111006T185217,63+01</datetime></lastaccessed>
-<addedtofile><datetime dst="true">20111005T133501,72+01</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name></updatedby>
-<wassignedby><name>CN=Lorcan McDonald/OU=Ireland/O=IBM</name></wassignedby>
+<modified><datetime dst="true">20160331T161744,25+02</datetime></modified>
+<revised><datetime dst="true">20160331T161744,24+02</datetime></revised>
+<lastaccessed><datetime dst="true">20160331T161744,25+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20160331T161653,42+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Patrick Kwinten/O=quintessens</name></updatedby>
+<wassignedby><name>CN=Patrick Kwinten/O=quintessens</name></wassignedby>
 <item name="$Flags"><text>gC~4;</text></item>
 <item name="$TITLE" sign="true"><text>OneUILayout.xsp</text></item>
+<item name="$DesignerVersion"><text>8.5</text></item>
+
+
+
 
 
 
 
 <item name="$FileNames" sign="true"><text>OneUILayout.xsp</text></item>
-
-<item name="$DesignerVersion"><text>8.5</text></item>
-
-
 
 </note>
