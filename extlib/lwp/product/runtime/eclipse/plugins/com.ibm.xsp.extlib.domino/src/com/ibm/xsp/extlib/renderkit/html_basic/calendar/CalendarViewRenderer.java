@@ -27,8 +27,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import com.ibm.commons.util.StringUtil;
-import com.ibm.xsp.application.ApplicationEx;
-import com.ibm.xsp.application.XspPropertyConstants;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.context.FacesContextEx;
 import com.ibm.xsp.extlib.component.calendar.UICalendarView;
