@@ -14,8 +14,8 @@ Require-Bundle: com.ibm.notes.java.api,
  com.ibm.domino.services,
  com.ibm.domino.commons,
  com.ibm.xsp.core
-Import-Package: javax.servlet;version="2.5.0",
- javax.servlet.http;version="2.5.0"
+Import-Package: javax.servlet;version="[2.5.0,3.0.0)",
+ javax.servlet.http;version="[2.5.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: com.ibm.domino.das.servlet,
  com.ibm.domino.das.service,
