@@ -1,7 +1,11 @@
-  ---
-title: 'Feature Request'
+---
+name: Feature request
+about: Suggest an idea for this project
+title: FEATURE REQUEST
 labels: enhancement
-  ---
+assignees: ''
+
+---
 
 Remember, an issue is not the place to ask questions. StackOverflow should be used for questions. We have a Slack channel on OpenNTF Slack workspace for discussions.
 

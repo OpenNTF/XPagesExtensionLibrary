@@ -1,7 +1,11 @@
-  ---
-title: 'Bug Report'
+---
+name: Bug report
+about: Create a report to help us improve
+title: BUG
 labels: bug
-  ---
+assignees: ''
+
+---
 
 Remember, an issue is not the place to ask questions. StackOverflow should be used for questions. We have a Slack channel on OpenNTF Slack workspace for discussions.
 
