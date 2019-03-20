@@ -1,0 +1,1 @@
+This is a "best efforts" project at this time. The project will need adoption as both consumers and providers by the XPages community. Reliance on a small number of providers is unsustainable. If there is strong adoption and a broad team contributing a variety of fixes / features, it will increase the likelihood of our efforts being adopted into the core product.

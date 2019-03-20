@@ -1,0 +1,15 @@
+  ---
+title: 'Feature Request'
+labels: enhancement
+  ---
+
+Remember, an issue is not the place to ask questions. StackOverflow should be used for questions. We have a Slack channel on OpenNTF Slack workspace for discussions.
+
+Before you open an issue, please check if a similar issue already exists or has been closed.
+
+### When you open an issue for a feature request, please add as much detail as possible:
+- [ ] A descriptive title starting with the service name
+- [ ] A description of the problem you're trying to solve
+- [ ] A suggested solution if possible
+
+**Bootstrap 4 is out of scope for this project at this time and will remain so until the developer team is of an appropriate size. Any feature request raising that will be immediately closed.**
