@@ -46,6 +46,7 @@ public interface ViewParameters extends DominoParameters {
 	public static final int SYSCOL_RESPONSE = 0x0400;
 	public static final int SYSCOL_HREF = 0x0800;
 	public static final int SYSCOL_LINK = 0x1000;
+	public static final int SYSCOL_SCORE = 0x2000;
 	//public static final int SYSCOL_ENTRYID = 0x2000;
 		
 	public static final int SYSCOL_ALL = 0xFFFFFFFF;

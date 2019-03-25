@@ -30,6 +30,7 @@ import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_HREF;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_MODIFIED;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_NOTEID;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_PARENTID;
+import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_SCORE;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_TYPE;
 import static com.ibm.domino.services.rest.RestServiceConstants.ATTR_UNID;
 import static com.ibm.domino.services.rest.RestServiceConstants.ITEM_FILE;
@@ -174,6 +175,13 @@ public class JsonDocumentContent extends JsonContent {
         }
         if ((sysItem & DocumentParameters.SYS_ITEM_AUTHORS)!=0) {
             writeProperty(jsonWriter, ATTR_AUTHORS, document.getAuthors());         
+        }
+        if ((sysItem & DocumentParameters.SYS_ITEM_SCORE)!=0) {
+        	int score = document.getFTSearchScore();
+        	// As this is always a new request/session, score seems always to be 0?
+        	if (score != 0) {
+        		writeProperty(jsonWriter, ATTR_SCORE, document.getFTSearchScore());
+        	}
         }
         if ((sysItem & DocumentParameters.SYS_ITEM_FORM)!=0) {
             String form = document.getItemValueString(ITEM_FORM);

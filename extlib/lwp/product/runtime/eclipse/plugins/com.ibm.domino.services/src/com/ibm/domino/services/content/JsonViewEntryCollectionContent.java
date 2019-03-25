@@ -301,6 +301,16 @@ public class JsonViewEntryCollectionContent extends JsonContent {
                 jsonWriter.endProperty();
             }
         }
+        if((syscol & ViewParameters.SYSCOL_SCORE)!=0) {
+            int score = navigator.getScore();
+            if(forceDefaultAttributes || score>0) {
+                jsonWriter.startProperty(ATTR_SCORE);
+                jsonWriter.outIntLiteral(score);
+                jsonWriter.endProperty();
+            }
+        }
+
+        
     }
     
     protected void writeColumn(JsonWriter jsonWriter, RestViewNavigator navigator, int colIdx, String colName, Object colValue) throws IOException, ServiceException {
