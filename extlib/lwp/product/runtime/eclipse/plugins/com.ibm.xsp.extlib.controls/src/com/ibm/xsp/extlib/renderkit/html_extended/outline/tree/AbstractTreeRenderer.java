@@ -331,6 +331,9 @@ public abstract class AbstractTreeRenderer extends ValueBindingObjectImpl implem
     public boolean isNodeSelected(ITreeNode node) {
         return false;
     }
+    public boolean isNodeEscape(ITreeNode node) {
+    	return true;
+    }
 
     
     // ===================================================================

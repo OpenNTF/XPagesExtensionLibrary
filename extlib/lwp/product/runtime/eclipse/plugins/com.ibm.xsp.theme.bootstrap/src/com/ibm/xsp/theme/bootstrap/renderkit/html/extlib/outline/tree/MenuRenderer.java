@@ -300,7 +300,11 @@ public class MenuRenderer extends HtmlListRenderer {
                 divStyle = "padding:10px;cursor:default;"; // $NON-NLS-1$
                 writer.writeAttribute("style", divStyle, null); // $NON-NLS-1$
             }
-            writer.writeText(label, "label"); // $NON-NLS-1$
+            if(tree.getNode().isEscape()) {
+            	writer.writeText(label, "label"); // $NON-NLS-1$
+            } else {
+            	writer.write(label);
+            }
             if(addDiv) {
                 writer.endElement("div"); // $NON-NLS-1$
             }

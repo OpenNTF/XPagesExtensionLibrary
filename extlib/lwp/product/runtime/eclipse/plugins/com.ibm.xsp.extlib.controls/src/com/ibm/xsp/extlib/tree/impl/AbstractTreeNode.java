@@ -178,4 +178,13 @@ public abstract class AbstractTreeNode implements ITreeNode {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean isEscape() {
+		ITreeNodeDefaultValues tree = getTreeNodeDefault();
+		if(tree != null) {
+			return tree.isNodeEscape(this);
+		}
+		return true;
+	}
 }

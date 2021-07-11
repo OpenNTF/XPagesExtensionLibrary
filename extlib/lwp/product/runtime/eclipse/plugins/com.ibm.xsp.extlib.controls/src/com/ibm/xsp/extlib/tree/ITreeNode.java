@@ -188,6 +188,10 @@ public interface ITreeNode extends Serializable {
      */
     public String getTitle();
 	
+    /**
+     * Check if the entry's label should be HTML-escaped.
+     */
+    public boolean isEscape();
 	
 	// =====================================================
 	// Event management

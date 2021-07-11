@@ -425,7 +425,11 @@ public abstract class HtmlTagsRenderer extends AbstractTreeRenderer {
     protected void renderEntryItemLabel(FacesContext context, ResponseWriter writer, TreeContextImpl tree, boolean enabled, boolean selected) throws IOException {
     	String label = tree.getNode().getLabel();
         if(StringUtil.isNotEmpty(label)) {
-            writer.writeText(label, "label"); // $NON-NLS-1$
+        	if(tree.getNode().isEscape()) {
+        		writer.writeText(label, "label"); //$NON-NLS-1$
+        	} else {
+        		writer.write(label);
+        	}
         }
     }
     

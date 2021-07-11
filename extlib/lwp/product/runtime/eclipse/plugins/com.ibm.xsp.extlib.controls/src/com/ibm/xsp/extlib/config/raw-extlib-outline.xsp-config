@@ -580,6 +580,14 @@
 			<property-extension>
 			</property-extension>
 		</property>
+		<property>
+			<description>Flag indicating that characters in the label that are sensitive in HTML and XML markup must be escaped. This flag is set to "true" by default.</description>
+			<display-name>Escape Characters</display-name>
+			<property-name>escape</property-name>
+			<property-class>boolean</property-class>
+			<property-estension>
+			</property-estension>
+		</property>
 
     	<complex-extension>
     		<base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>

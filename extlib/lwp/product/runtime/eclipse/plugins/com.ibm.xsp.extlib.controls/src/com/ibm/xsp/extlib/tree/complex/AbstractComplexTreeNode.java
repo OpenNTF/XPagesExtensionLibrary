@@ -175,4 +175,12 @@ public abstract class AbstractComplexTreeNode extends ValueBindingObjectImpl imp
 		}
 		return false;
 	}
+	
+	public boolean isEscape() {
+		ITreeNodeDefaultValues tree = getTreeNodeDefault();
+		if(tree!=null) {
+			return tree.isNodeEscape(this);
+		}
+		return true;
+	}
 }

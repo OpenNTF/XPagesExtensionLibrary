@@ -76,4 +76,7 @@ public abstract class AbstractTreeNodeDefault implements ITreeNodeDefaultValues{
 		return false;
 	}
 
+	public boolean isNodeEscape(ITreeNode node) {
+		return true;
+	}
 }

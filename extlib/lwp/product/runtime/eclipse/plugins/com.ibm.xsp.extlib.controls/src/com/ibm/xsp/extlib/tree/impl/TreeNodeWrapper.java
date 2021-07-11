@@ -340,4 +340,17 @@ public class TreeNodeWrapper implements ITreeNode {
         }
         return delegate.isSelected();
     }
+    
+    public boolean isEscape() {
+    	if(var != null) {
+    		FacesContext context = FacesContext.getCurrentInstance();
+    		push(context);
+    		try {
+    			return delegate.isEscape();
+    		} finally {
+    			pop(context);
+    		}
+    	}
+    	return delegate.isEscape();
+    }
 }

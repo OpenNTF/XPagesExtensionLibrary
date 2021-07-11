@@ -44,6 +44,7 @@ public abstract class BasicTreeNode extends AbstractTreeNode {
 	private Boolean expanded;
 	private Boolean rendered;
 	private Boolean selected;
+	private Boolean escape;
 	
 	public BasicTreeNode() {
 		this.rendered = true;
@@ -247,5 +248,17 @@ public abstract class BasicTreeNode extends AbstractTreeNode {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+	
+	@Override
+	public boolean isEscape() {
+		if(escape != null) {
+			return escape;
+		}
+		return super.isEscape();
+	}
+	
+	public void setEscape(boolean escape) {
+		this.escape = escape;
 	}
 }

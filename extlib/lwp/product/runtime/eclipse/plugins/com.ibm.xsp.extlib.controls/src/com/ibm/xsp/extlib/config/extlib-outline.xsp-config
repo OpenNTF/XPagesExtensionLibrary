@@ -458,6 +458,13 @@
       <property-class>boolean</property-class>
       <property-extension/>
     </property>
+    <property>
+    	<description>%property.escape.descr%</description>
+    	<display-name>%property.escape.name%</display-name>
+    	<property-name>escape</property-name>
+    	<property-class>boolean</property-class>
+    	<property-extension/>
+    </property>
     <complex-extension>
       <base-complex-id>com.ibm.xsp.extlib.tree.ITreeNode</base-complex-id>
     </complex-extension>

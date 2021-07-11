@@ -82,22 +82,22 @@ public interface ITreeNodeDefaultValues {
     public String getNodeTitle(ITreeNode node);
 	
 	/**
-	 * Check if an node is selected.
+	 * Check if a node is selected.
 	 */
 	public boolean isNodeSelected(ITreeNode node);
 	
 	/**
-	 * Check if an node is enabled.
+	 * Check if a node is enabled.
 	 */
 	public boolean isNodeEnabled(ITreeNode node);
 	
 	/**
-	 * Check if an node is rendered.
+	 * Check if a node is rendered.
 	 */
 	public boolean isNodeRendered(ITreeNode node);
 	
 	/**
-	 * Check if an node is expanded.
+	 * Check if a node is expanded.
 	 */
 	public boolean isNodeExpanded(ITreeNode node);
 	
@@ -110,4 +110,9 @@ public interface ITreeNodeDefaultValues {
 	 * Value submitted as part of the event.
 	 */
 	public String getNodeSubmitValue(ITreeNode node);
+	
+	/**
+     * Check if the entry's label should be HTML-escaped.
+     */
+    public boolean isNodeEscape(ITreeNode node);
 }

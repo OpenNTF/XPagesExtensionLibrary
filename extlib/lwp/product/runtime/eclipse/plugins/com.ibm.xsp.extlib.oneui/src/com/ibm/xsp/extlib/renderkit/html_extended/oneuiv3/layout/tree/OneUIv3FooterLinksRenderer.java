@@ -52,7 +52,11 @@ public class OneUIv3FooterLinksRenderer extends HtmlListRenderer {
                 if(!it.hasNext()) {
                     writer.writeAttribute("class","lotusLast",null); // $NON-NLS-1$ $NON-NLS-2$
                 }
-                writer.writeText(tree.getNode().getLabel(),null);
+                if(tree.getNode().isEscape()) {
+                	writer.writeText(tree.getNode().getLabel(),null);
+                } else {
+                	writer.write(tree.getNode().getLabel());
+                }
                 writer.endElement("th"); // $NON-NLS-1$
                 tree.pop();
             }

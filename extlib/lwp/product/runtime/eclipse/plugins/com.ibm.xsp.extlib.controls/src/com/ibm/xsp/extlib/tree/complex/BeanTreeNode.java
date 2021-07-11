@@ -170,4 +170,8 @@ public class BeanTreeNode extends ValueBindingObjectImpl implements ITreeNode {
     public boolean isSelected() {
         return getBeanInstance().isSelected();
     }
+    
+    public boolean isEscape() {
+    	return getBeanInstance().isEscape();
+    }
 }
