@@ -1,5 +1,5 @@
 /*
- * © Copyright IBM Corp. 2011, 2015
+ * Â© Copyright IBM Corp. 2011, 2015
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); 
  * you may not use this file except in compliance with the License. 
@@ -235,7 +235,11 @@ public class JsonJdbcQueryContent extends JsonContent {
                                         writeProperty(jwriter, columnDefs[i].getName(), 
                                             (Boolean)columnValue);
                                     }
-                                    else {
+                                    else if (columnValue == null) {
+                                        jwriter.startProperty(columnDefs[i].getName());
+                                        jwriter.outNull();
+                                        jwriter.endProperty();
+                                    } else {
                                         writeProperty(jwriter, columnDefs[i].getName(), 
                                             columnValue.toString());
                                     }
