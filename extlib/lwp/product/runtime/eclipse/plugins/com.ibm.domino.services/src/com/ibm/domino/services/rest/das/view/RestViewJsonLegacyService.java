@@ -185,6 +185,16 @@ public class RestViewJsonLegacyService extends RestViewLegacyService {
             }
             g.endProperty();
         }
+        @Override
+        public void writeSystemScore(int score) throws IOException {
+            g.startProperty(ATTR_SCORE);
+            if(jsonTyped) {
+                g.outIntLiteral(score);
+            } else {
+                g.outStringLiteral(Integer.toString(score));
+            }
+            g.endProperty();
+        }
         
         @Override
         public void startEntryData() throws IOException {

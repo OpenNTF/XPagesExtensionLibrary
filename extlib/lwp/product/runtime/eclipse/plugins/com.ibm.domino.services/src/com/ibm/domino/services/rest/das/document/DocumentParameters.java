@@ -41,6 +41,7 @@ public interface DocumentParameters extends DominoParameters {
 	public static final int SYS_ITEM_AUTHORS = 0x0020;
 	public static final int SYS_ITEM_HIDDEN = 0x0040;
 	public static final int SYS_ITEM_FORM = 0x0080;
+	public static final int SYS_ITEM_SCORE = 0x0100;
 	public static final int SYS_ITEM_ALL = 0xFFFFFFFF;
 
 	// Check

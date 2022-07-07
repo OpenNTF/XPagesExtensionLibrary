@@ -210,6 +210,14 @@ public class RestViewNavigatorFactory {
             }
         }
         @Override
+        public int getScore() throws ServiceException {
+            try {
+                return entry.getFTSearchScore();
+            } catch(NotesException ex) {
+                throw new ServiceException(ex,""); // $NON-NLS-1$
+            }
+        }
+        @Override
         public boolean isDocument() throws ServiceException {
             try {
                 return entry.isDocument();
@@ -375,6 +383,8 @@ public class RestViewNavigatorFactory {
         public int getChildren() throws ServiceException {throw new IllegalStateException();}
         @Override
         public int getIndent() throws ServiceException {throw new IllegalStateException();}
+        @Override
+        public int getScore() throws ServiceException {throw new IllegalStateException();}
         @Override
         public int getColumnCount() throws ServiceException {throw new IllegalStateException();}
         @Override

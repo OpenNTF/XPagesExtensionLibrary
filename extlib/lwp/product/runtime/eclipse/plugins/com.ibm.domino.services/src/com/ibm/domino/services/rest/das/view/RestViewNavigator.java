@@ -67,6 +67,7 @@ public abstract class RestViewNavigator implements RestViewEntry {
 	public abstract int getDescendants() throws ServiceException;
 	public abstract int getChildren() throws ServiceException;
 	public abstract int getIndent() throws ServiceException;
+	public abstract int getScore() throws ServiceException;
 	public abstract String getForm() throws ServiceException;
 	
 	// Column values

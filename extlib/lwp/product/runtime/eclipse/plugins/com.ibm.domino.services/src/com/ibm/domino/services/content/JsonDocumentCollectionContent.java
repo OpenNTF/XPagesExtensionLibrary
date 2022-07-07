@@ -125,6 +125,10 @@ public class JsonDocumentCollectionContent extends JsonContent {
             writeProperty(jwriter, RestServiceConstants.ATTR_UNID, unid);
             String link = _uri + unid;
             writeProperty(jwriter, RestServiceConstants.ATTR_HREF, link);
+            int score = document.getFTSearchScore();
+            if (score != 0) {
+            	writeProperty(jwriter, RestServiceConstants.ATTR_SCORE, score);
+            }
         } finally {
             jwriter.endArrayItem();     
             jwriter.endObject();

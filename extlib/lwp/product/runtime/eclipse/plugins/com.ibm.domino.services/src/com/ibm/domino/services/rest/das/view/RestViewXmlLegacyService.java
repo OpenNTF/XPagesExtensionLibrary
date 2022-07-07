@@ -124,6 +124,10 @@ public class RestViewXmlLegacyService extends RestViewLegacyService {
         public void writeSystemIndent(int indent) throws IOException {
             g.writeAttribute(ATTR_XML_INDENT,indent);
         }
+        @Override
+        public void writeSystemScore(int score) throws IOException {
+            g.writeAttribute(ATTR_XML_SCORE,score);
+        }
         
         @Override
         public void startEntryData() throws IOException {
