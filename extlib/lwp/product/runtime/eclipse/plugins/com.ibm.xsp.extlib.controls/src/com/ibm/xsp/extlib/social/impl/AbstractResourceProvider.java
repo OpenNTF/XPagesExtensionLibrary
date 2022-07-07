@@ -285,9 +285,9 @@ public abstract class AbstractResourceProvider implements ResourceDataProvider {
             case ResourceDataProvider.SCOPE_APPLICATION: {
                 Map<String, Object> map = getApplicationMap(FacesContext.getCurrentInstance().getExternalContext());
                 SystemCache c = (SystemCache)map.get(CACHE_KEY);
-                if(c==null) {
-                    synchronized(map) {
-                        map.remove(CACHE_KEY);
+                if(c!=null) {
+                    synchronized(c) {                   	
+                    	c.remove(id);
                     }
                 }
                 return;
@@ -295,9 +295,9 @@ public abstract class AbstractResourceProvider implements ResourceDataProvider {
             case ResourceDataProvider.SCOPE_SESSION: {
                 Map<String, Object> map = TypedUtil.getSessionMap(FacesContext.getCurrentInstance().getExternalContext());
                 SystemCache c = (SystemCache)map.get(CACHE_KEY);
-                if(c==null) {
-                    synchronized(map) {
-                        map.remove(CACHE_KEY);
+                if(c!=null) {
+                    synchronized(c) {                  	
+                    	c.remove(id);
                     }
                 }
                 return;
@@ -305,9 +305,9 @@ public abstract class AbstractResourceProvider implements ResourceDataProvider {
             case ResourceDataProvider.SCOPE_REQUEST: {
                 Map<String, Object> map = TypedUtil.getRequestMap(FacesContext.getCurrentInstance().getExternalContext());
                 SystemCache c = (SystemCache)map.get(CACHE_KEY);
-                if(c==null) {
-                    synchronized(map) {
-                        map.remove(CACHE_KEY);
+                if(c!=null) {
+                    synchronized(c) {
+                        c.remove(id);
                     }
                 }
                 return;
